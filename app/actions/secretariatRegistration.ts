@@ -12,6 +12,7 @@ import {
   INTAKE_FILE_TYPES,
   MAX_INTAKE_FILE_BYTES,
   SECRETARIAT_FEATURE_KEYS,
+  formatCommitteeTopicsForDisplay,
   parseCommitteesJson,
   sanitizeFileName,
   secretariatRegistrationSchema,
@@ -185,9 +186,10 @@ export async function submitSecretariatRegistrationAction(
 
   const committeeLines = committeesWithLogos
     .map((c, i) => {
+      const topics = formatCommitteeTopicsForDisplay(c.topics);
       const parts = [
         `${i + 1}. ${c.name}`,
-        c.topic ? `topic: ${c.topic}` : null,
+        topics ? `topics: ${topics}` : null,
         c.delegateCount != null ? `delegates: ${c.delegateCount}` : null,
         c.chairCount != null ? `chairs: ${c.chairCount}` : null,
         c.logoStoragePath ? "logo: uploaded" : null,

@@ -11,11 +11,14 @@ import {
   type SecretariatRegistrationState,
 } from "@/app/actions/secretariatRegistration";
 import {
+  MAX_COMMITTEE_TOPICS,
   SECRETARIAT_FEATURE_KEYS,
+  formatCommitteeTopicsForDisplay,
   type SecretariatCommitteeDraft,
   type SecretariatFeatureKey,
 } from "@/lib/secretariat-registration";
 import { cn } from "@/lib/utils";
+import { EventDateRangeField } from "@/components/registration/EventDateRangeField";
 
 const INPUT_CLASS =
   "w-full rounded-xl border border-[var(--hairline)] bg-white px-3 py-2.5 text-sm text-brand-navy placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--accent)_35%,transparent)] [color-scheme:light]";
@@ -54,7 +57,7 @@ const INITIAL_FORM: FormState = {
   delegateCount: "",
   chairCount: "",
   selectedFeatures: ["floor_control", "delegate_prep", "allocations_matrix"],
-  committees: [{ name: "", topic: "" }],
+  committees: [{ name: "", topics: [""] }],
   awardCriteriaDeferred: true,
   matrixDeferred: true,
   notes: "",
@@ -65,7 +68,7 @@ const INITIAL_FORM: FormState = {
 };
 
 function emptyCommittee(): SecretariatCommitteeDraft {
-  return { name: "", topic: "" };
+  return { name: "", topics: [""] };
 }
 
 export function SecretariatRegistrationWizard({ className }: { className?: string }) {
@@ -99,6 +102,42 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
         logos.pop();
       }
       return { ...prev, committeeCount: count, committees, committeeLogoFiles: logos };
+    });
+  }
+
+  function updateCommitteeTopic(committeeIndex: number, topicIndex: number, value: string) {
+    setForm((prev) => {
+      const committees = [...prev.committees];
+      const committee = committees[committeeIndex];
+      if (!committee) return prev;
+      const topics = [...committee.topics];
+      topics[topicIndex] = value;
+      committees[committeeIndex] = { ...committee, topics };
+      return { ...prev, committees };
+    });
+  }
+
+  function addCommitteeTopic(committeeIndex: number) {
+    setForm((prev) => {
+      const committees = [...prev.committees];
+      const committee = committees[committeeIndex];
+      if (!committee || committee.topics.length >= MAX_COMMITTEE_TOPICS) return prev;
+      committees[committeeIndex] = { ...committee, topics: [...committee.topics, ""] };
+      return { ...prev, committees };
+    });
+  }
+
+  function removeCommitteeTopic(committeeIndex: number, topicIndex: number) {
+    setForm((prev) => {
+      const committees = [...prev.committees];
+      const committee = committees[committeeIndex];
+      if (!committee) return prev;
+      const topics = committee.topics.filter((_, index) => index !== topicIndex);
+      committees[committeeIndex] = {
+        ...committee,
+        topics: topics.length > 0 ? topics : [""],
+      };
+      return { ...prev, committees };
     });
   }
 
@@ -183,9 +222,9 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
     payload.set(
       "committeesJson",
       JSON.stringify(
-        form.committees.map((c, i) => ({
+        form.committees.map((c) => ({
           name: c.name.trim(),
-          topic: c.topic?.trim() ?? "",
+          topics: c.topics.map((topic) => topic.trim()).filter(Boolean),
           delegateCount: c.delegateCount,
           chairCount: c.chairCount,
         }))
@@ -277,12 +316,13 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
               />
             </div>
             <div className="sm:col-span-2">
-              <label className={LABEL_CLASS}>{t("eventDatesLabel")}</label>
-              <input
-                className={INPUT_CLASS}
+              <EventDateRangeField
+                label={t("eventDatesLabel")}
+                labelClassName={LABEL_CLASS}
                 value={form.eventDates}
-                onChange={(e) => setForm({ ...form, eventDates: e.target.value })}
+                onChange={(eventDates) => setForm({ ...form, eventDates })}
                 placeholder={t("eventDatesPlaceholder")}
+                inputClassName={INPUT_CLASS}
               />
             </div>
           </div>
@@ -371,17 +411,36 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
                       }}
                     />
                   </div>
-                  <div>
-                    <label className={LABEL_CLASS}>{t("committeeTopicLabel")}</label>
-                    <input
-                      className={INPUT_CLASS}
-                      value={committee.topic ?? ""}
-                      onChange={(e) => {
-                        const committees = [...form.committees];
-                        committees[i] = { ...committees[i]!, topic: e.target.value };
-                        setForm({ ...form, committees });
-                      }}
-                    />
+                  <div className="sm:col-span-2 space-y-2">
+                    <label className={LABEL_CLASS}>{t("committeeTopicsLabel")}</label>
+                    {committee.topics.map((topic, topicIndex) => (
+                      <div key={topicIndex} className="flex gap-2">
+                        <input
+                          className={INPUT_CLASS}
+                          value={topic}
+                          placeholder={t("committeeTopicPlaceholder", { number: topicIndex + 1 })}
+                          onChange={(e) => updateCommitteeTopic(i, topicIndex, e.target.value)}
+                        />
+                        {committee.topics.length > 1 ? (
+                          <button
+                            type="button"
+                            onClick={() => removeCommitteeTopic(i, topicIndex)}
+                            className="shrink-0 rounded-xl border border-[var(--hairline)] px-3 text-xs font-semibold text-brand-muted transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700"
+                          >
+                            {t("committeeRemoveTopic")}
+                          </button>
+                        ) : null}
+                      </div>
+                    ))}
+                    {committee.topics.length < MAX_COMMITTEE_TOPICS ? (
+                      <button
+                        type="button"
+                        onClick={() => addCommitteeTopic(i)}
+                        className="text-xs font-semibold text-[var(--accent)] transition hover:underline"
+                      >
+                        {t("committeeAddTopic")}
+                      </button>
+                    ) : null}
                   </div>
                   <div>
                     <label className={LABEL_CLASS}>{t("committeeDelegatesLabel")}</label>
@@ -529,12 +588,15 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
               {form.selectedFeatures.map((k) => t(`feature_${k}`)).join(", ")}
             </p>
             <ul className="list-disc pl-5 space-y-1">
-              {form.committees.map((c, i) => (
-                <li key={i}>
-                  {c.name}
-                  {c.topic ? ` — ${c.topic}` : ""}
-                </li>
-              ))}
+              {form.committees.map((c, i) => {
+                const topics = formatCommitteeTopicsForDisplay(c.topics);
+                return (
+                  <li key={i}>
+                    {c.name}
+                    {topics ? ` — ${topics}` : ""}
+                  </li>
+                );
+              })}
             </ul>
             <p className="text-xs text-brand-muted">{t("reviewManualNote")}</p>
           </div>

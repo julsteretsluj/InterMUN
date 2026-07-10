@@ -19,7 +19,7 @@ export type SecretariatFeatureKey = (typeof SECRETARIAT_FEATURE_KEYS)[number];
 
 export type SecretariatCommitteeDraft = {
   name: string;
-  topic: string;
+  topics: string[];
   delegateCount?: number;
   chairCount?: number;
   logoStoragePath?: string;
@@ -27,12 +27,28 @@ export type SecretariatCommitteeDraft = {
 
 export type IntakeItemStatus = "not_submitted" | "deferred" | "pending_review" | "complete";
 
-export const committeeDraftSchema = z.object({
+export const MAX_COMMITTEE_TOPICS = 12;
+
+const committeeDraftRawSchema = z.object({
   name: z.string().trim().min(1).max(120),
-  topic: z.string().trim().max(500).optional().default(""),
+  topic: z.string().trim().max(500).optional(),
+  topics: z.array(z.string().trim().max(500)).max(MAX_COMMITTEE_TOPICS).optional(),
   delegateCount: z.number().int().min(0).max(9999).optional(),
   chairCount: z.number().int().min(0).max(99).optional(),
   logoStoragePath: z.string().trim().max(500).optional(),
+});
+
+export const committeeDraftSchema = committeeDraftRawSchema.transform((data) => {
+  const fromList = (data.topics ?? []).map((topic) => topic.trim()).filter(Boolean);
+  const legacy = data.topic?.trim();
+  const topics = fromList.length > 0 ? fromList : legacy ? [legacy] : [];
+  return {
+    name: data.name,
+    topics,
+    delegateCount: data.delegateCount,
+    chairCount: data.chairCount,
+    logoStoragePath: data.logoStoragePath,
+  } satisfies SecretariatCommitteeDraft;
 });
 
 export const secretariatRegistrationSchema = z.object({
@@ -82,4 +98,15 @@ export function parseCommitteesJson(raw: string): SecretariatCommitteeDraft[] {
 
 export function sanitizeFileName(name: string): string {
   return name.replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 120) || "upload";
+}
+
+export function normalizeCommitteeTopics(topics: string[]): string[] {
+  return topics.map((topic) => topic.trim()).filter(Boolean);
+}
+
+export function formatCommitteeTopicsForDisplay(topics: string[]): string | null {
+  const cleaned = normalizeCommitteeTopics(topics);
+  if (cleaned.length === 0) return null;
+  if (cleaned.length === 1) return cleaned[0]!;
+  return cleaned.map((topic, index) => `${index + 1}. ${topic}`).join("; ");
 }
