@@ -285,7 +285,7 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
         ))}
       </ol>
 
-      <div className="mun-card space-y-5 border-slate-200 p-6 dark:border-white/10">
+      <div className="mun-card space-y-5 overflow-visible border-slate-200 p-6 dark:border-white/10">
         {step === "contact" ? (
           <div className="grid gap-4 sm:grid-cols-2">
             <div>

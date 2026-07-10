@@ -3,7 +3,8 @@
 
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -27,6 +28,12 @@ type EventDateRangeFieldProps = {
   id?: string;
 };
 
+type PopoverBox = {
+  top: number;
+  left: number;
+  width: number;
+};
+
 export function EventDateRangeField({
   value,
   onChange,
@@ -38,25 +45,74 @@ export function EventDateRangeField({
 }: EventDateRangeFieldProps) {
   const locale = useLocale();
   const t = useTranslations("secretariatRegistration");
-  const fieldId = id ?? useId();
+  const generatedId = useId();
+  const fieldId = id ?? generatedId;
   const containerRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [popoverBox, setPopoverBox] = useState<PopoverBox | null>(null);
   const [viewDate, setViewDate] = useState(() => startOfDay(new Date()));
   const [draftStart, setDraftStart] = useState<Date | null>(null);
   const [draftEnd, setDraftEnd] = useState<Date | null>(null);
 
   useEffect(() => {
-    if (!open) return;
-    const onDocClick = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        if (draftStart && !draftEnd) {
-          onChange(formatEventDateRange(draftStart, draftStart, locale));
-        }
-        setOpen(false);
-      }
+    const frame = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setPopoverBox(null);
+      return;
+    }
+
+    function syncPopoverPosition() {
+      const anchor = anchorRef.current;
+      if (!anchor) return;
+      const rect = anchor.getBoundingClientRect();
+      const width = Math.min(rect.width, window.innerWidth - 24);
+      const left = Math.min(Math.max(12, rect.left), window.innerWidth - width - 12);
+      setPopoverBox({
+        top: rect.bottom + 8,
+        left,
+        width,
+      });
+    }
+
+    syncPopoverPosition();
+    window.addEventListener("resize", syncPopoverPosition);
+    window.addEventListener("scroll", syncPopoverPosition, true);
+    return () => {
+      window.removeEventListener("resize", syncPopoverPosition);
+      window.removeEventListener("scroll", syncPopoverPosition, true);
     };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onDocClick(event: MouseEvent) {
+      const target = event.target as Node;
+      if (containerRef.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      if (draftStart && !draftEnd) {
+        onChange(formatEventDateRange(draftStart, draftStart, locale));
+      }
+      setOpen(false);
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
     document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [draftEnd, draftStart, locale, onChange, open]);
 
   const monthLabel = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(
@@ -100,6 +156,104 @@ export function EventDateRangeField({
     setOpen(false);
   }
 
+  const calendarPanel =
+    open && popoverBox ? (
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-label={t("eventDatesCalendarAria")}
+        className="fixed z-[200] rounded-2xl border border-[var(--hairline)] bg-white p-4 text-[#18181b] shadow-[0_16px_40px_-20px_rgba(11,11,15,0.35)]"
+        style={{
+          top: popoverBox.top,
+          left: popoverBox.left,
+          width: popoverBox.width,
+        }}
+      >
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={() => setViewDate((current) => addMonths(current, -1))}
+            className="rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
+            aria-label={t("calendarPreviousMonth")}
+          >
+            <ChevronLeft className="h-4 w-4" aria-hidden />
+          </button>
+          <p className="text-sm font-semibold text-[#18181b]">{monthLabel}</p>
+          <button
+            type="button"
+            onClick={() => setViewDate((current) => addMonths(current, 1))}
+            className="rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
+            aria-label={t("calendarNextMonth")}
+          >
+            <ChevronRight className="h-4 w-4" aria-hidden />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-7 gap-1 text-center text-[0.65rem] font-semibold uppercase tracking-wide text-[#71717a]">
+          {weekdays.map((name) => (
+            <div key={name} className="py-1">
+              {name}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-1 space-y-1">
+          {weeks.map((week, weekIndex) => (
+            <div key={weekIndex} className="grid grid-cols-7 gap-1">
+              {week.map((day, dayIndex) => {
+                if (!day) {
+                  return <div key={`empty-${weekIndex}-${dayIndex}`} className="h-9" aria-hidden />;
+                }
+
+                const inDraftRange =
+                  draftStart && draftEnd
+                    ? isBetweenInclusive(day, draftStart, draftEnd)
+                    : draftStart
+                      ? isSameDay(day, draftStart)
+                      : false;
+                const isStart = draftStart ? isSameDay(day, draftStart) : false;
+                const isEnd = draftEnd ? isSameDay(day, draftEnd) : false;
+                const isToday = isSameDay(day, today);
+
+                return (
+                  <button
+                    key={`${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`}
+                    type="button"
+                    onClick={() => handleDayClick(day)}
+                    className={cn(
+                      "flex h-9 w-full items-center justify-center rounded-full text-sm font-medium text-[#18181b] transition",
+                      inDraftRange && "bg-[color-mix(in_srgb,var(--accent)_14%,#fff)]",
+                      (isStart || isEnd) &&
+                        "bg-[color-mix(in_srgb,var(--accent)_88%,#fff)] text-white hover:bg-[color-mix(in_srgb,var(--accent)_88%,#fff)]",
+                      !inDraftRange && !(isStart || isEnd) && "hover:bg-black/5",
+                      isToday && !inDraftRange && "ring-1 ring-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
+                    )}
+                  >
+                    {day.getDate()}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-3 flex items-center justify-between gap-2 border-t border-[var(--hairline)] pt-3">
+          <p className="text-xs text-[#71717a]">
+            {draftStart && !draftEnd ? t("calendarSelectEnd") : t("calendarSelectStart")}
+          </p>
+          {value ? (
+            <button
+              type="button"
+              onClick={clearDates}
+              className="text-xs font-semibold text-[#71717a] transition hover:text-[#18181b]"
+            >
+              {t("calendarClearDates")}
+            </button>
+          ) : null}
+        </div>
+      </div>
+    ) : null;
+
   return (
     <div ref={containerRef} className="relative">
       {label ? (
@@ -107,7 +261,7 @@ export function EventDateRangeField({
           {label}
         </label>
       ) : null}
-      <div className="relative">
+      <div ref={anchorRef} className="relative">
         <input
           id={fieldId}
           readOnly
@@ -134,97 +288,7 @@ export function EventDateRangeField({
         </button>
       </div>
 
-      {open ? (
-        <div
-          role="dialog"
-          aria-label={t("eventDatesCalendarAria")}
-          className="absolute left-0 right-0 z-50 mt-2 rounded-2xl border border-[var(--hairline)] bg-white p-4 shadow-[0_16px_40px_-20px_rgba(11,11,15,0.35)]"
-        >
-          <div className="mb-3 flex items-center justify-between gap-2">
-            <button
-              type="button"
-              onClick={() => setViewDate((current) => addMonths(current, -1))}
-              className="rounded-lg p-1.5 text-brand-muted transition hover:bg-black/5 hover:text-brand-navy"
-              aria-label={t("calendarPreviousMonth")}
-            >
-              <ChevronLeft className="h-4 w-4" aria-hidden />
-            </button>
-            <p className="text-sm font-semibold text-brand-navy">{monthLabel}</p>
-            <button
-              type="button"
-              onClick={() => setViewDate((current) => addMonths(current, 1))}
-              className="rounded-lg p-1.5 text-brand-muted transition hover:bg-black/5 hover:text-brand-navy"
-              aria-label={t("calendarNextMonth")}
-            >
-              <ChevronRight className="h-4 w-4" aria-hidden />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-7 gap-1 text-center text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
-            {weekdays.map((name) => (
-              <div key={name} className="py-1">
-                {name}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-1 space-y-1">
-            {weeks.map((week, weekIndex) => (
-              <div key={weekIndex} className="grid grid-cols-7 gap-1">
-                {week.map((day, dayIndex) => {
-                  if (!day) {
-                    return <div key={dayIndex} className="h-9" aria-hidden />;
-                  }
-
-                  const inDraftRange =
-                    draftStart && draftEnd
-                      ? isBetweenInclusive(day, draftStart, draftEnd)
-                      : draftStart
-                        ? isSameDay(day, draftStart)
-                        : false;
-                  const isStart = draftStart ? isSameDay(day, draftStart) : false;
-                  const isEnd = draftEnd ? isSameDay(day, draftEnd) : false;
-                  const isToday = isSameDay(day, today);
-
-                  return (
-                    <button
-                      key={day.toISOString()}
-                      type="button"
-                      onClick={() => handleDayClick(day)}
-                      className={cn(
-                        "h-9 rounded-full text-sm font-medium transition",
-                        inDraftRange
-                          ? "bg-[color-mix(in_srgb,var(--accent)_14%,#fff)] text-brand-navy"
-                          : "text-brand-navy hover:bg-black/5",
-                        (isStart || isEnd) &&
-                          "bg-[color-mix(in_srgb,var(--accent)_88%,#fff)] text-white hover:bg-[color-mix(in_srgb,var(--accent)_88%,#fff)]",
-                        isToday && !inDraftRange && "ring-1 ring-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-                      )}
-                    >
-                      {day.getDate()}
-                    </button>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-3 flex items-center justify-between gap-2 border-t border-[var(--hairline)] pt-3">
-            <p className="text-xs text-brand-muted">
-              {draftStart && !draftEnd ? t("calendarSelectEnd") : t("calendarSelectStart")}
-            </p>
-            {value ? (
-              <button
-                type="button"
-                onClick={clearDates}
-                className="text-xs font-semibold text-brand-muted transition hover:text-brand-navy"
-              >
-                {t("calendarClearDates")}
-              </button>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
+      {mounted && calendarPanel ? createPortal(calendarPanel, document.body) : null}
     </div>
   );
 }
