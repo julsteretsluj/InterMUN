@@ -16,7 +16,7 @@ const ROLE_PATH: Record<MarketingFeatureRole, string> = {
 const FEATURE_PAGE_CTA_HREF: Record<MarketingFeatureRole, string> = {
   chairs: "/#contact",
   delegates: "/signup",
-  secretariat: "/#contact",
+  secretariat: "/register/secretariat",
 };
 
 export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRole }) {

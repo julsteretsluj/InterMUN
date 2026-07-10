@@ -29,6 +29,23 @@ export function getPartnershipContactEmail(): string {
   );
 }
 
+/** Staff inbox(es) for new secretariat registration submissions. */
+export function getSecretariatRegistrationNotifyEmails(): string[] {
+  const emails = new Set<string>();
+  const addList = (raw?: string) => {
+    for (const part of (raw ?? "").split(",")) {
+      const email = part.trim();
+      if (email) emails.add(email);
+    }
+  };
+
+  addList(process.env.SECRETARIAT_REGISTRATION_NOTIFY_EMAIL);
+  addList(getPartnershipContactEmail());
+  emails.add("juleskittoastrop@gmail.com");
+
+  return [...emails];
+}
+
 /** @deprecated Use getPartnershipContactEmail() */
 export function getInquiryEmail(): string {
   return getPartnershipContactEmail();

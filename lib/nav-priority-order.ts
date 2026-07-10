@@ -200,7 +200,7 @@ export const ADMIN_NAV_HREF_ORDER = [
 ] as const;
 
 /** Admin dashboard tabs. */
-export const ADMIN_DASHBOARD_TAB_ORDER = ["setup", "checklist", "portal"] as const;
+export const ADMIN_DASHBOARD_TAB_ORDER = ["setup", "registrations", "checklist", "portal"] as const;
 
 /** SMT committee detail tabs. */
 export const SMT_COMMITTEE_DETAIL_TAB_ORDER = ["overview", "floor", "room", "history"] as const;

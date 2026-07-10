@@ -320,7 +320,7 @@ export async function MarketingHome() {
               <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/#contact"
+                  href="/register/secretariat"
                   className="mun-btn-primary rounded-full px-6 py-3 text-base font-semibold shadow-[0_12px_32px_-12px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
                 >
                   {t("hero.ctaStart")} →
@@ -482,6 +482,12 @@ export async function MarketingHome() {
               <ConferenceInquiryForm />
             </div>
             <p className="mt-6 text-center text-sm text-brand-muted">
+              {t("contact.registerSecretariat")}{" "}
+              <Link href="/register/secretariat" className="font-semibold text-[var(--accent)] hover:underline">
+                {t("contact.registerSecretariatLink")} →
+              </Link>
+            </p>
+            <p className="mt-4 text-center text-sm text-brand-muted">
               {t("contact.directEmail")}{" "}
               {partnershipEmail ? (
                 <a

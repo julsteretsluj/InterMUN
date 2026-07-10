@@ -1,4 +1,5 @@
 import { AdminDashboardClient } from "./AdminDashboardClient";
+import SecretariatIntakeBoard from "./SecretariatIntakeBoard";
 import StatusPortalBoard from "./StatusPortalBoard";
 import { PriorityTabLink } from "@/components/PriorityTabLink";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
@@ -21,7 +22,7 @@ export default async function AdminPage({
   const adminInviteConfigured = isAdminInviteConfigured();
   const t = await getTranslations("adminPage");
   const activeTab =
-    tab === "portal" || tab === "checklist" || tab === "setup"
+    tab === "portal" || tab === "checklist" || tab === "setup" || tab === "registrations"
       ? tab
       : "setup";
 
@@ -46,6 +47,7 @@ export default async function AdminPage({
           sortByKeyPriority(
             [
               { id: "setup", label: t("tabs.setup") },
+              { id: "registrations", label: t("tabs.registrations") },
               { id: "checklist", label: t("tabs.checklist") },
               { id: "portal", label: t("tabs.portal") },
             ],
@@ -66,6 +68,7 @@ export default async function AdminPage({
       </div>
       <div className="mt-6" role="tabpanel">
         {activeTab === "setup" ? <AdminDashboardClient adminInviteConfigured={adminInviteConfigured} /> : null}
+        {activeTab === "registrations" ? <SecretariatIntakeBoard /> : null}
         {activeTab === "checklist" ? <RoleSetupChecklist role="admin" /> : null}
         {activeTab === "portal" ? <StatusPortalBoard /> : null}
       </div>
