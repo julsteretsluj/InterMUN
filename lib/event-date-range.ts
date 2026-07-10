@@ -79,3 +79,18 @@ export function getWeekdayLabels(locale: string): string[] {
     return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(d);
   });
 }
+
+export function getMonthNames(locale: string): string[] {
+  return Array.from({ length: 12 }, (_, month) =>
+    new Intl.DateTimeFormat(locale, { month: "long" }).format(new Date(2024, month, 1))
+  );
+}
+
+export function getCalendarYearRange(yearsBehind = 2, yearsAhead = 12): number[] {
+  const current = new Date().getFullYear();
+  const years: number[] = [];
+  for (let year = current - yearsBehind; year <= current + yearsAhead; year++) {
+    years.push(year);
+  }
+  return years;
+}

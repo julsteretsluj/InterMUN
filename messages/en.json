@@ -1909,6 +1909,8 @@
     "eventDatesCalendarAria": "Choose event dates",
     "calendarPreviousMonth": "Previous month",
     "calendarNextMonth": "Next month",
+    "calendarMonthLabel": "Month",
+    "calendarYearLabel": "Year",
     "calendarSelectStart": "Select a start date",
     "calendarSelectEnd": "Select an end date",
     "calendarClearDates": "Clear dates",

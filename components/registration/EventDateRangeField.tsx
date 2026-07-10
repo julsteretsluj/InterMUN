@@ -3,14 +3,16 @@
 
 "use client";
 
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   addMonths,
   formatEventDateRange,
+  getCalendarYearRange,
   getMonthGrid,
+  getMonthNames,
   getWeekdayLabels,
   isBetweenInclusive,
   isSameDay,
@@ -35,6 +37,9 @@ type PopoverBox = {
   maxHeight: number;
 };
 
+const SELECT_CLASS =
+  "min-w-0 flex-1 rounded-xl border border-[var(--hairline)] bg-white px-2.5 py-2 text-sm font-medium text-[#18181b] focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--accent)_35%,transparent)] [color-scheme:light]";
+
 export function EventDateRangeField({
   value,
   onChange,
@@ -58,6 +63,9 @@ export function EventDateRangeField({
   const [draftStart, setDraftStart] = useState<Date | null>(null);
   const [draftEnd, setDraftEnd] = useState<Date | null>(null);
 
+  const monthNames = useMemo(() => getMonthNames(locale), [locale]);
+  const years = useMemo(() => getCalendarYearRange(), []);
+
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => setMounted(true));
     return () => window.cancelAnimationFrame(frame);
@@ -75,30 +83,15 @@ export function EventDateRangeField({
       const rect = anchor.getBoundingClientRect();
       const viewportMargin = 12;
       const gap = 8;
-      const width = Math.min(rect.width, window.innerWidth - viewportMargin * 2);
+      const width = Math.min(Math.max(rect.width, 280), window.innerWidth - viewportMargin * 2);
       const left = Math.min(
         Math.max(viewportMargin, rect.left),
         window.innerWidth - width - viewportMargin
       );
+      const top = rect.bottom + gap;
+      const maxHeight = Math.max(220, window.innerHeight - top - viewportMargin);
 
-      const belowTop = rect.bottom + gap;
-      const maxBelow = window.innerHeight - belowTop - viewportMargin;
-      const maxAbove = rect.top - gap - viewportMargin;
-
-      let top = belowTop;
-      let maxHeight = maxBelow;
-
-      if (maxBelow < 280 && maxAbove > maxBelow) {
-        maxHeight = maxAbove;
-        top = Math.max(viewportMargin, rect.top - gap - maxHeight);
-      }
-
-      setPopoverBox({
-        top,
-        left,
-        width,
-        maxHeight: Math.max(200, maxHeight),
-      });
+      setPopoverBox({ top, left, width, maxHeight });
     }
 
     syncPopoverPosition();
@@ -135,9 +128,6 @@ export function EventDateRangeField({
     };
   }, [draftEnd, draftStart, locale, onChange, open]);
 
-  const monthLabel = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(
-    viewDate
-  );
   const weeks = getMonthGrid(viewDate.getFullYear(), viewDate.getMonth());
   const weekdays = getWeekdayLabels(locale);
   const today = startOfDay(new Date());
@@ -146,6 +136,14 @@ export function EventDateRangeField({
     setDraftStart(null);
     setDraftEnd(null);
     setOpen(true);
+  }
+
+  function setViewMonth(month: number) {
+    setViewDate(new Date(viewDate.getFullYear(), month, 1));
+  }
+
+  function setViewYear(year: number) {
+    setViewDate(new Date(year, viewDate.getMonth(), 1));
   }
 
   function handleDayClick(day: Date) {
@@ -182,7 +180,7 @@ export function EventDateRangeField({
         ref={panelRef}
         role="dialog"
         aria-label={t("eventDatesCalendarAria")}
-        className="fixed z-[200] flex flex-col overflow-hidden rounded-2xl border border-[var(--hairline)] bg-white text-[#18181b] shadow-[0_16px_40px_-20px_rgba(11,11,15,0.35)]"
+        className="fixed z-[200] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--hairline)] bg-white text-[#18181b] shadow-[0_16px_40px_-20px_rgba(11,11,15,0.35)]"
         style={{
           top: popoverBox.top,
           left: popoverBox.left,
@@ -190,21 +188,44 @@ export function EventDateRangeField({
           maxHeight: popoverBox.maxHeight,
         }}
       >
-        <div className="shrink-0 px-4 pt-4">
-          <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="space-y-3 px-4 py-4">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setViewDate((current) => addMonths(current, -1))}
-              className="rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
+              className="shrink-0 rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
               aria-label={t("calendarPreviousMonth")}
             >
               <ChevronLeft className="h-4 w-4" aria-hidden />
             </button>
-            <p className="text-sm font-semibold text-[#18181b]">{monthLabel}</p>
+            <select
+              className={SELECT_CLASS}
+              value={viewDate.getMonth()}
+              onChange={(event) => setViewMonth(Number(event.target.value))}
+              aria-label={t("calendarMonthLabel")}
+            >
+              {monthNames.map((name, index) => (
+                <option key={name} value={index}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <select
+              className={cn(SELECT_CLASS, "max-w-[5.5rem] flex-none")}
+              value={viewDate.getFullYear()}
+              onChange={(event) => setViewYear(Number(event.target.value))}
+              aria-label={t("calendarYearLabel")}
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
             <button
               type="button"
               onClick={() => setViewDate((current) => addMonths(current, 1))}
-              className="rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
+              className="shrink-0 rounded-lg p-1.5 text-[#71717a] transition hover:bg-black/5 hover:text-[#18181b]"
               aria-label={t("calendarNextMonth")}
             >
               <ChevronRight className="h-4 w-4" aria-hidden />
@@ -218,10 +239,8 @@ export function EventDateRangeField({
               </div>
             ))}
           </div>
-        </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-1">
-          <div className="mt-1 space-y-1">
+          <div className="space-y-1">
             {weeks.map((week, weekIndex) => (
               <div key={weekIndex} className="grid grid-cols-7 gap-1">
                 {week.map((day, dayIndex) => {
@@ -260,10 +279,8 @@ export function EventDateRangeField({
               </div>
             ))}
           </div>
-        </div>
 
-        <div className="shrink-0 border-t border-[var(--hairline)] px-4 py-3">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-2 border-t border-[var(--hairline)] pt-3">
             <p className="text-xs text-[#71717a]">
               {draftStart && !draftEnd ? t("calendarSelectEnd") : t("calendarSelectStart")}
             </p>
