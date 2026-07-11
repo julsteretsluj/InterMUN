@@ -2,6 +2,9 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 export const THEME_STORAGE_KEY = "intermun-theme";
+/** User-selected accent swatch (#rrggbb) — full spectrum, not limited to presets. */
+export const THEME_ACCENT_STORAGE_KEY = "intermun-theme-accent";
+/** Legacy preset key — migrated to `THEME_ACCENT_STORAGE_KEY` on read. */
 export const THEME_HUE_STORAGE_KEY = "intermun-theme-hue";
 export const DYSLEXIC_FONT_STORAGE_KEY = "intermun-dyslexic-font";
 export const COLORBLIND_MODE_STORAGE_KEY = "intermun-colorblind-mode";

@@ -5,15 +5,16 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ALargeSmall, Check, Moon, Palette, Sun } from "lucide-react";
+import { ALargeSmall, Moon, Palette, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { nearestThemeHue, themeHueToHex } from "@/lib/apple-color-picker";
+import { AppleColorPicker } from "@/components/ui/AppleColorPicker";
 import {
   TEXT_SIZE_STEP_MAX,
   TEXT_SIZE_STEP_MIN,
   textSizeStepToRootPct,
   THEME_HUES,
   type TextSizeStep,
-  type ThemeHue,
   type ThemePreference,
 } from "@/lib/theme-storage";
 import {
@@ -25,24 +26,7 @@ import {
 } from "@/lib/theme-document";
 import { useTranslations } from "next-intl";
 
-/** Display + accessibility names; picker shows swatches only. */
-const HUE_META: Record<
-  ThemeHue,
-  { name: string; swatch: string; swatchDark?: string }
-> = {
-  blue: { name: "Blue", swatch: "bg-[#00509d]" },
-  green: { name: "Green", swatch: "bg-emerald-600" },
-  red: { name: "Red", swatch: "bg-red-600" },
-  orange: { name: "Orange", swatch: "bg-orange-500" },
-  yellow: { name: "Yellow", swatch: "bg-yellow-500" },
-  purple: { name: "Purple", swatch: "bg-violet-600" },
-  pink: { name: "Pink", swatch: "bg-pink-600" },
-  neutral: {
-    name: "Neutral",
-    swatch: "bg-zinc-500 ring-1 ring-zinc-400",
-    swatchDark: "bg-zinc-600 ring-1 ring-zinc-500",
-  },
-};
+const THEME_HUE_PRESETS = THEME_HUES.map((hue) => themeHueToHex(hue));
 
 export function ThemeSelector({
   className,
@@ -54,7 +38,7 @@ export function ThemeSelector({
   const t = useTranslations("themeSelector");
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
-  const [hue, setHue] = useState<ThemeHue>(() => readThemeFromStorage().hue);
+  const [accentHex, setAccentHex] = useState(() => readThemeFromStorage().accentHex);
   const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
@@ -111,18 +95,29 @@ export function ThemeSelector({
   const setAppearance = useCallback(
     (next: ThemePreference) => {
       setMode(next);
-      persistAndApplyTheme(next, hue);
+      persistAndApplyTheme(next, accentHex);
     },
-    [hue]
+    [accentHex]
   );
 
-  const setColorHue = useCallback(
-    (next: ThemeHue) => {
-      setHue(next);
-      persistAndApplyTheme(mode, next);
+  const setAccentColor = useCallback(
+    (nextHex: string) => {
+      setAccentHex(nextHex);
+      persistAndApplyTheme(mode, nextHex);
     },
     [mode]
   );
+
+  const onAccentColorChange = useCallback(
+    (hex: string) => {
+      setAccentColor(hex);
+    },
+    [setAccentColor]
+  );
+
+  const accentLabelHue = nearestThemeHue(accentHex);
+  const accentIsPreset =
+    themeHueToHex(accentLabelHue).toLowerCase() === accentHex.toLowerCase();
 
   const onTextSizeSliderChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     const v = clampTextSizeStep(Number(e.currentTarget.value));
@@ -179,7 +174,7 @@ export function ThemeSelector({
                 right: popoverBox.right,
                 zIndex: 300,
               }}
-              className="mun-popover w-[min(100vw-1.5rem,18.5rem)] p-3"
+              className="mun-popover w-[min(100vw-1.5rem,22rem)] p-3"
             >
           <p className="tag tag-neutral mb-0.5">{t("appearance")}</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
@@ -212,58 +207,17 @@ export function ThemeSelector({
           </div>
 
           <p className="tag tag-accent mt-4 mb-1.5">{t("accentColour")}</p>
-          <div
-            className="grid grid-cols-4 gap-2"
-            role="radiogroup"
-            aria-label={t("accentColour")}
-          >
-            {THEME_HUES.map((h) => {
-              const meta = HUE_META[h];
-              const hueLabel = t(`hues.${h}`);
-              const active = hue === h;
-              return (
-                <button
-                  key={h}
-                  type="button"
-                  role="radio"
-                  aria-checked={active}
-                  aria-label={hueLabel}
-                  title={hueLabel}
-                  onClick={() => setColorHue(h)}
-                  className={cn(
-                    "flex items-center justify-center rounded-[var(--radius-md)] p-1.5 transition-apple",
-                    active
-                      ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_55%,transparent)]"
-                      : "ring-0 ring-transparent"
-                  )}
-                >
-                  <span
-                    className={cn(
-                      "relative flex size-9 items-center justify-center rounded-full ring-2 ring-white/90 shadow-sm dark:ring-white/25",
-                      h === "neutral"
-                        ? mode === "dark"
-                          ? meta.swatchDark
-                          : meta.swatch
-                        : meta.swatch
-                    )}
-                  >
-                    {active ? (
-                      <Check
-                        className={cn(
-                          "absolute size-4 drop-shadow-sm",
-                          h === "yellow" && "text-zinc-900",
-                          h === "neutral" && "text-zinc-900 dark:text-white",
-                          h !== "yellow" && h !== "neutral" && "text-white"
-                        )}
-                        strokeWidth={2.5}
-                        aria-hidden
-                      />
-                    ) : null}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <AppleColorPicker
+            embedded
+            color={accentHex}
+            opacity={100}
+            presets={THEME_HUE_PRESETS}
+            title={t("colorsTitle")}
+            onColorChange={(hex) => onAccentColorChange(hex)}
+          />
+          <p className="mt-2 text-center text-[0.65rem] font-medium text-brand-muted">
+            {accentIsPreset ? t(`hues.${accentLabelHue}`) : t("customAccent", { hex: accentHex.toUpperCase() })}
+          </p>
 
           <p className="tag tag-neutral mt-4 mb-1.5">{t("typography")}</p>
           <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">

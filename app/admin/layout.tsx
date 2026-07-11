@@ -13,6 +13,8 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { isAdminRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { getAppName } from "@/lib/branding";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -32,6 +34,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   const eventId = await getActiveEventId();
+  const appName = getAppName();
   const { data: activeEvent } = eventId
     ? await supabase
         .from("conference_events")
@@ -56,11 +59,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   );
 
   return (
-    <div className="min-h-screen bg-brand-cream text-brand-navy">
-      <header className="flex flex-col border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95">
+    <AppleAppFrame appName={appName}>
+    <div className="min-h-screen text-brand-navy">
+      <header className="mun-apple-material mun-apple-material-thin flex flex-col border-b-0">
         <div className="orbit-rail-h" aria-hidden />
         <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <span className="font-display text-lg font-semibold tracking-tight text-brand-navy">Welcome Admin</span>
+          <span className="mun-apple-text mun-apple-text-headline !mb-0">Welcome Admin</span>
           <nav className="flex flex-wrap items-center gap-1 text-sm sm:gap-3">
             {adminNav.map((item) => (
               <Link
@@ -91,8 +95,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           key.
         </div>
       </header>
-      <main className="w-full px-4 py-6">{children}</main>
+      <main className="w-full px-4 py-6">
+        <AppleLayoutWrapper appName={appName} mode="minimal">
+          {children}
+        </AppleLayoutWrapper>
+      </main>
       <PaperSavedWidget />
     </div>
+    </AppleAppFrame>
   );
 }

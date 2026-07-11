@@ -38,7 +38,7 @@ function MilestoneTile({ progress }: { progress: MilestoneProgress }) {
             className={cn(
               "inline-flex items-center rounded-full px-2 py-0.5 text-[0.7rem] font-semibold tabular-nums",
               tier.achieved
-                ? "bg-[color:color-mix(in_srgb,var(--gold)_22%,transparent)] text-[var(--gold-bright,#caa64a)] ring-1 ring-[color:color-mix(in_srgb,var(--gold)_45%,transparent)]"
+                ? "bg-[color:color-mix(in_srgb,var(--accent)_22%,transparent)] text-[var(--gold-text-bright)] ring-1 ring-[color:color-mix(in_srgb,var(--accent)_45%,transparent)]"
                 : "bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)] text-brand-muted"
             )}
             title={tier.achieved ? t("achieved") : t("locked")}
@@ -64,7 +64,7 @@ function MilestoneTile({ progress }: { progress: MilestoneProgress }) {
         <div
           className={cn(
             "h-full rounded-full transition-[width] duration-500",
-            maxed ? "bg-[var(--gold,#caa64a)]" : "bg-[var(--accent)]"
+            maxed ? "bg-[var(--accent-bright)]" : "bg-[var(--accent)]"
           )}
           style={{ width: `${maxed ? 100 : pct}%` }}
         />
@@ -121,7 +121,7 @@ function DelegateLeaderboard({ delegates }: { delegates: DelegateMilestoneRow[] 
                   <span className="font-mono font-semibold tabular-nums text-brand-navy">{p.count}</span>
                   <span className="hidden sm:inline">{t(`metric.${p.metricId}`)}</span>
                   {highest != null ? (
-                    <span className="rounded-full bg-[color:color-mix(in_srgb,var(--gold)_20%,transparent)] px-1.5 py-0.5 text-[0.65rem] font-semibold text-[var(--gold-bright,#caa64a)]">
+                    <span className="rounded-full bg-[color:color-mix(in_srgb,var(--accent)_20%,transparent)] px-1.5 py-0.5 text-[0.65rem] font-semibold text-[var(--gold-text-bright)]">
                       {p.nextThreshold == null ? t("tierPlus", { n: highest }) : highest}
                     </span>
                   ) : null}

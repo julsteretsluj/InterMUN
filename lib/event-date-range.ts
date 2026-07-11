@@ -72,11 +72,19 @@ export function formatEventDateRange(start: Date, end: Date, locale: string): st
   return `${fullFmt.format(lo)} – ${fullFmt.format(hi)}`;
 }
 
+export function formatMonthYear(date: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(date);
+}
+
 export function getWeekdayLabels(locale: string): string[] {
   const base = new Date(2024, 0, 7); // Sunday
   return Array.from({ length: 7 }, (_, i) => {
     const d = new Date(base.getFullYear(), base.getMonth(), base.getDate() + i);
-    return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(d);
+    return new Intl.DateTimeFormat(locale, { weekday: "short" })
+      .format(d)
+      .replace(/\./g, "")
+      .toUpperCase()
+      .slice(0, 3);
   });
 }
 

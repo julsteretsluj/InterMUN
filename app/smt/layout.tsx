@@ -10,6 +10,7 @@ import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos"
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
+import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { getTranslations } from "next-intl/server";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
@@ -52,9 +53,10 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const hubLabel = activeEvent?.name?.trim() || t("hubEnterConferenceCode");
 
   return (
-    <div className="min-h-screen bg-[var(--desktop-bg)] text-brand-navy lg:p-3">
-      <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--window-shadow)] lg:flex-row">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--sidebar-material)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
+    <AppleAppFrame appName={appName}>
+    <div className="min-h-screen text-brand-navy lg:p-3">
+      <div className="flex min-h-screen w-full min-w-0 flex-col lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--apple-material-shadow)] lg:flex-row mun-apple-material mun-apple-material-regular lg:!bg-[var(--apple-material-regular-bg)]">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--apple-material-thick-bg)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-[var(--apple-material-thick-blur)] backdrop-saturate-[var(--apple-material-saturate)] transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
           href="/smt"
           aria-label={`${appName} home`}
@@ -70,7 +72,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         </div>
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] backdrop-blur-xl backdrop-saturate-150 lg:min-h-0">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-transparent backdrop-blur-xl backdrop-saturate-150 lg:min-h-0">
         <DashboardTopBar
           userName={topBarUserName}
           userEmail={user.email ?? ""}
@@ -101,7 +103,9 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           </div>
         )}
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
-          {children}
+          <AppleLayoutWrapper appName={appName} mode="minimal">
+            {children}
+          </AppleLayoutWrapper>
         </main>
       </div>
       </div>
@@ -112,5 +116,6 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
       <PaperSavedWidget />
     </div>
+    </AppleAppFrame>
   );
 }

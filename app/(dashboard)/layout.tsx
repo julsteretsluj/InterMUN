@@ -35,6 +35,7 @@ import {
 } from "@/lib/i18n/committee-topic-labels";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
+import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 
 export default async function DashboardLayout({
   children,
@@ -178,9 +179,10 @@ export default async function DashboardLayout({
 
 
   return (
-    <div className="min-h-screen bg-[var(--desktop-bg)]">
-      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-screen lg:flex-row">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--sidebar-material)] transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex dark:shadow-[inset_-1px_0_0_0_var(--hairline)] dark:backdrop-blur-2xl dark:backdrop-saturate-150">
+    <AppleAppFrame appName={appName}>
+    <div className="min-h-screen text-brand-navy lg:p-3">
+      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--apple-material-shadow)] lg:flex-row mun-apple-material mun-apple-material-regular lg:!bg-[var(--apple-material-regular-bg)]">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--apple-material-thick-bg)] shadow-[var(--apple-material-shadow)] backdrop-blur-[var(--apple-material-thick-blur)] backdrop-saturate-[var(--apple-material-saturate)] transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
           href={
             isChairRole(effectiveRole) ? "/chair" : isAdvisorRole(effectiveRole) ? "/advisor" : "/delegate"
@@ -236,7 +238,7 @@ export default async function DashboardLayout({
         ) : null}
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] lg:min-h-0 dark:backdrop-blur-xl dark:backdrop-saturate-150">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-transparent lg:min-h-0">
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}
@@ -253,6 +255,7 @@ export default async function DashboardLayout({
         />
         <DashboardAnnouncementPopup />
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
+          <AppleLayoutWrapper appName={appName} mode="minimal">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
             <div className="mun-rise mb-6 overflow-hidden rounded-2xl border border-[var(--hairline)] border-l-[3px] border-l-[color:var(--gold)] bg-[var(--dashboard-card)] px-4 py-4 shadow-[var(--dashboard-shadow)] sm:px-6 dark:bg-[var(--material-thick)] dark:backdrop-blur-xl">
 
@@ -266,6 +269,7 @@ export default async function DashboardLayout({
             </div>
           ) : null}
           {children}
+        </AppleLayoutWrapper>
         </main>
       </div>
       </div>
@@ -290,5 +294,6 @@ export default async function DashboardLayout({
 
       <PaperSavedWidget />
     </div>
+    </AppleAppFrame>
   );
 }

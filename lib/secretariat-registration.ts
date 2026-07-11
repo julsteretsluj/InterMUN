@@ -100,6 +100,12 @@ export function sanitizeFileName(name: string): string {
   return name.replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 120) || "upload";
 }
 
+export function isAllowedLogoFile(file: File): boolean {
+  if (!file.size || file.size > MAX_INTAKE_FILE_BYTES) return false;
+  const type = file.type || "application/octet-stream";
+  return type.startsWith("image/") && (INTAKE_FILE_TYPES as readonly string[]).includes(type);
+}
+
 export function normalizeCommitteeTopics(topics: string[]): string[] {
   return topics.map((topic) => topic.trim()).filter(Boolean);
 }

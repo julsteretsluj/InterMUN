@@ -15,7 +15,7 @@ export type SecretariatRegistrationAdminState = {
   success?: boolean;
 };
 
-type FulfillmentField = "rop" | "schedule" | "award_criteria";
+type FulfillmentField = "rop" | "schedule" | "award_criteria" | "conference_logo";
 
 async function requireStaff() {
   const supabase = await createClient();
@@ -45,7 +45,7 @@ export async function markSecretariatIntakeCompleteAction(
 
   const requestId = String(formData.get("requestId") ?? "").trim();
   const field = String(formData.get("field") ?? "").trim() as FulfillmentField;
-  if (!requestId || !["rop", "schedule", "award_criteria"].includes(field)) {
+  if (!requestId || !["rop", "schedule", "award_criteria", "conference_logo"].includes(field)) {
     return { error: t("errorInvalid") };
   }
 
@@ -67,6 +67,7 @@ export async function markSecretariatIntakeCompleteAction(
   if (field === "rop") patch.rop_status = "complete";
   if (field === "schedule") patch.schedule_status = "complete";
   if (field === "award_criteria") patch.award_criteria_status = "complete";
+  if (field === "conference_logo") patch.conference_logo_status = "complete";
 
   const { error: updateError } = await admin
     .from("secretariat_registration_requests")
@@ -81,7 +82,9 @@ export async function markSecretariatIntakeCompleteAction(
       ? t("itemRop")
       : field === "schedule"
         ? t("itemSchedule")
-        : t("itemAwardCriteria");
+        : field === "award_criteria"
+          ? t("itemAwardCriteria")
+          : t("itemConferenceLogo");
 
   await sendTransactionalEmail({
     to: row.contact_email,
@@ -101,6 +104,10 @@ export async function markSecretariatIntakeCompleteAction(
 
   revalidatePath("/admin");
   return { success: true };
+}
+
+export async function markSecretariatIntakeCompleteFormAction(formData: FormData): Promise<void> {
+  await markSecretariatIntakeCompleteAction(null, formData);
 }
 
 export async function archiveSecretariatIntakeAction(

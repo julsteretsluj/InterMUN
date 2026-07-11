@@ -3,37 +3,109 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { Copy, FileText, Link2, Mail, Share2, UserPlus, Ellipsis, Trash2, User, Users, Sparkles, Building2, Upload, Grid3x3, CheckCircle2, Check } from "lucide-react";
 import {
   submitSecretariatRegistrationAction,
   type SecretariatRegistrationState,
 } from "@/app/actions/secretariatRegistration";
 import {
   MAX_COMMITTEE_TOPICS,
+  MAX_INTAKE_FILE_BYTES,
   SECRETARIAT_FEATURE_KEYS,
   formatCommitteeTopicsForDisplay,
+  isAllowedLogoFile,
   type SecretariatCommitteeDraft,
   type SecretariatFeatureKey,
 } from "@/lib/secretariat-registration";
+import {
+  buildSecretariatRegistrationShareText,
+  copyTextToClipboard,
+  openMailto,
+  shareTextNative,
+} from "@/lib/secretariat-registration-share";
 import { cn } from "@/lib/utils";
 import { EventDateRangeField } from "@/components/registration/EventDateRangeField";
+import { AppleActivityView } from "@/components/ui/AppleActivityView";
+import { AppleConfirmSheet } from "@/components/ui/AppleSheet";
+import { AppleListRow, AppleListSection, AppleListSwitchRow } from "@/components/ui/AppleList";
+import {
+  AppleMenu,
+  AppleMenuContent,
+  AppleMenuItem,
+  AppleMenuTrigger,
+} from "@/components/ui/AppleMenu";
+import { AppleWindow, AppleWindowWithSidebar } from "@/components/ui/AppleWindow";
+import { GlassPanel } from "@/components/ui/GlassPanel";
+import {
+  useAppleNotifications,
+} from "@/components/ui/AppleNotification";
+import { ApplePageControl } from "@/components/ui/ApplePageControl";
+import { AppleFileField } from "@/components/ui/AppleFileField";
+import { AppleHelpPopover } from "@/components/ui/ApplePopover";
+import { AppleSegmentedControl } from "@/components/ui/AppleSegmentedControl";
+import { AppleStepper, AppleStepperField } from "@/components/ui/AppleStepper";
+import { AppleTabBar } from "@/components/ui/AppleTabBar";
+import {
+  AppleToolbarBackButton,
+  AppleToolbarBottom,
+  AppleToolbarButton,
+} from "@/components/ui/AppleToolbar";
+import {
+  AppleTextAreaField,
+  AppleTextField,
+  AppleTextFieldGroup,
+} from "@/components/ui/AppleTextField";
+import {
+  AppleSidebar,
+  AppleSidebarRow,
+  AppleSidebarSection,
+} from "@/components/ui/AppleSidebar";
 
-const INPUT_CLASS =
-  "w-full rounded-xl border border-[var(--hairline)] bg-white px-3 py-2.5 text-sm text-brand-navy placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--accent)_35%,transparent)] [color-scheme:light]";
-
-const LABEL_CLASS = "mb-1.5 block text-xs font-semibold uppercase tracking-wide text-brand-muted";
 
 const STEPS = ["contact", "scale", "features", "committees", "uploads", "matrix", "review"] as const;
 
 type StepId = (typeof STEPS)[number];
+
+const STEP_GROUPS = [
+  { id: "basics", labelKey: "sidebarSectionBasics", steps: ["contact", "scale"] as const },
+  { id: "setup", labelKey: "sidebarSectionSetup", steps: ["features", "committees"] as const },
+  { id: "files", labelKey: "sidebarSectionFiles", steps: ["uploads", "matrix"] as const },
+  { id: "finish", labelKey: "sidebarSectionFinish", steps: ["review"] as const },
+] as const;
+
+const STEP_ICONS: Record<StepId, ReactNode> = {
+  contact: <User className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  scale: <Users className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  features: <Sparkles className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  committees: <Building2 className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  uploads: <Upload className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  matrix: <Grid3x3 className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  review: <CheckCircle2 className="h-4 w-4" strokeWidth={2} aria-hidden />,
+};
+
+const GROUP_ICONS: Record<(typeof STEP_GROUPS)[number]["id"], ReactNode> = {
+  basics: <User className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  setup: <Sparkles className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  files: <Upload className="h-4 w-4" strokeWidth={2} aria-hidden />,
+  finish: <CheckCircle2 className="h-4 w-4" strokeWidth={2} aria-hidden />,
+};
+
+const STEP_HELP_KEYS: Partial<Record<StepId, "featuresHelp" | "committeesHelp" | "ropUploadHelp" | "matrixHelp">> = {
+  features: "featuresHelp",
+  committees: "committeesHelp",
+  uploads: "ropUploadHelp",
+  matrix: "matrixHelp",
+};
 
 type FormState = {
   contactName: string;
   contactEmail: string;
   conferenceName: string;
   eventDates: string;
+  conferenceLogoFile: File | null;
   committeeCount: number;
   delegateCount: string;
   chairCount: string;
@@ -53,6 +125,7 @@ const INITIAL_FORM: FormState = {
   contactEmail: "",
   conferenceName: "",
   eventDates: "",
+  conferenceLogoFile: null,
   committeeCount: 1,
   delegateCount: "",
   chairCount: "",
@@ -71,13 +144,61 @@ function emptyCommittee(): SecretariatCommitteeDraft {
   return { name: "", topics: [""] };
 }
 
-export function SecretariatRegistrationWizard({ className }: { className?: string }) {
+function parseOptionalCountString(raw: string): number {
+  const trimmed = raw.trim();
+  if (!trimmed) return 0;
+  const value = Number(trimmed);
+  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : 0;
+}
+
+function optionalCountToString(value: number): string {
+  return value === 0 ? "" : String(value);
+}
+
+function optionalCountDisplay(raw: string): string {
+  const value = parseOptionalCountString(raw);
+  return value === 0 ? "—" : String(value);
+}
+
+function getActiveGroupId(currentStep: StepId) {
+  return STEP_GROUPS.find((group) => group.steps.some((stepId) => stepId === currentStep))?.id ?? STEP_GROUPS[0]!.id;
+}
+
+function getGroupMinStepIndex(group: (typeof STEP_GROUPS)[number]) {
+  return Math.min(...group.steps.map((stepId) => STEPS.indexOf(stepId)));
+}
+
+export function SecretariatRegistrationWizard({
+  className,
+  appName = "InterMUN",
+}: {
+  className?: string;
+  appName?: string;
+}) {
+  return <SecretariatRegistrationWizardInner className={className} appName={appName} />;
+}
+
+function SecretariatRegistrationWizardInner({
+  className,
+  appName,
+}: {
+  className?: string;
+  appName: string;
+}) {
   const t = useTranslations("secretariatRegistration");
+  const tCommon = useTranslations("common");
   const [stepIndex, setStepIndex] = useState(0);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<SecretariatRegistrationState | null>(null);
   const [stepError, setStepError] = useState<string | null>(null);
+  const [removeTopicTarget, setRemoveTopicTarget] = useState<{
+    committeeIndex: number;
+    topicIndex: number;
+  } | null>(null);
+  const [submitSheetOpen, setSubmitSheetOpen] = useState(false);
+  const [activityOpen, setActivityOpen] = useState(false);
+  const { push: pushNotification, dismiss: dismissNotification } = useAppleNotifications();
 
   const step = STEPS[stepIndex]!;
   const features = useMemo(
@@ -88,6 +209,72 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
       })),
     [t]
   );
+  const featureLabelMap = useMemo(
+    () => Object.fromEntries(features.map((feature) => [feature.key, feature.label])),
+    [features]
+  );
+  const shareText = useMemo(
+    () =>
+      buildSecretariatRegistrationShareText(
+        {
+          conferenceName: form.conferenceName,
+          contactName: form.contactName,
+          contactEmail: form.contactEmail,
+          eventDates: form.eventDates,
+          committeeCount: form.committeeCount,
+          delegateCount: form.delegateCount,
+          chairCount: form.chairCount,
+          selectedFeatures: form.selectedFeatures,
+          committees: form.committees.map((committee) => ({
+            name: committee.name,
+            topics: committee.topics,
+          })),
+          requestId: result?.requestId,
+        },
+        {
+          heading: t("activityShareHeading"),
+          contactName: t("contactNameLabel"),
+          contactEmail: t("contactEmailLabel"),
+          eventDates: t("eventDatesLabel"),
+          committeeCount: t("committeeCountLabel"),
+          delegateCount: t("delegateCountLabel"),
+          chairCount: t("chairCountLabel"),
+          features: t("fieldFeatures"),
+          committees: t("fieldCommittees"),
+          requestId: t("activityShareRequestId"),
+        },
+        featureLabelMap
+      ),
+    [form, result?.requestId, featureLabelMap, t]
+  );
+
+  useEffect(() => {
+    if (!stepError) {
+      dismissNotification("wizard-error");
+      return;
+    }
+
+    pushNotification({
+      id: "wizard-error",
+      group: "registration",
+      variant: "error",
+      title: t("notificationErrorTitle"),
+      message: stepError,
+      durationMs: null,
+      onDismiss: () => setStepError(null),
+      actions: [
+        {
+          id: "dismiss-error",
+          label: t("notificationDismiss"),
+          onSelect: () => setStepError(null),
+        },
+      ],
+    });
+  }, [dismissNotification, pushNotification, stepError, t]);
+
+  function getSignupUrl() {
+    return `${window.location.origin}/signup`;
+  }
 
   function syncCommitteeRows(count: number) {
     setForm((prev) => {
@@ -168,6 +355,14 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
         setStepError(t("errorConferenceName"));
         return false;
       }
+      if (!form.conferenceLogoFile) {
+        setStepError(t("errorConferenceLogo"));
+        return false;
+      }
+      if (!isAllowedLogoFile(form.conferenceLogoFile)) {
+        setStepError(t("errorConferenceLogoInvalid"));
+        return false;
+      }
     }
     if (current === "scale") {
       if (form.committeeCount < 1 || form.committeeCount > 64) {
@@ -194,14 +389,77 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
     setStepIndex((i) => Math.min(i + 1, STEPS.length - 1));
   }
 
-  function goBack() {
+  function goToStep(index: number) {
     setStepError(null);
-    setStepIndex((i) => Math.max(i - 1, 0));
+    setStepIndex(index);
   }
 
+  function goBack() {
+    goToStep(Math.max(stepIndex - 1, 0));
+  }
+
+  function goToGroup(groupId: string) {
+    const group = STEP_GROUPS.find((entry) => entry.id === groupId);
+    if (!group) return;
+    const indices = group.steps.map((stepId) => STEPS.indexOf(stepId));
+    const accessible = indices.filter((index) => index <= stepIndex);
+    const targetIndex = accessible.length > 0 ? Math.max(...accessible) : Math.min(...indices);
+    goToStep(targetIndex);
+  }
+
+  const activeGroupId = getActiveGroupId(step);
+  const tabBarItems = useMemo(
+    () =>
+      STEP_GROUPS.map((group) => ({
+        id: group.id,
+        label: t(group.labelKey),
+        icon: GROUP_ICONS[group.id],
+        disabled: getGroupMinStepIndex(group) > stepIndex,
+      })),
+    [t, stepIndex]
+  );
+  const stepHelpKey = STEP_HELP_KEYS[step];
+  const toolbarTrailing = stepHelpKey ? (
+    <AppleHelpPopover label={t("popoverHelpLabel")}>{t(stepHelpKey)}</AppleHelpPopover>
+  ) : undefined;
+  const toolbarBottomProps = {
+    "aria-label": t("toolbarNavigationLabel"),
+    leading:
+      stepIndex > 0 ? (
+        <AppleToolbarBackButton label={t("back")} onClick={goBack} disabled={pending} />
+      ) : undefined,
+    center: (
+      <ApplePageControl
+        className="md:hidden"
+        pageCount={STEPS.length}
+        currentPage={stepIndex}
+        onPageChange={(page) => {
+          if (page <= stepIndex) goToStep(page);
+        }}
+        aria-label={t("pageControlLabel")}
+      />
+    ),
+    trailing:
+      step !== "review" ? (
+        <AppleToolbarButton label={t("next")} onClick={goNext} variant="filled" />
+      ) : (
+        <AppleToolbarButton
+          label={pending ? t("submitting") : t("submit")}
+          onClick={() => setSubmitSheetOpen(true)}
+          disabled={pending}
+          variant="filled"
+        />
+      ),
+  };
+
   async function submit() {
-    if (!validateStep("committees") || form.selectedFeatures.length === 0) {
+    if (!validateStep("contact") || !validateStep("committees") || form.selectedFeatures.length === 0) {
       setStepError(t("errorValidation"));
+      return;
+    }
+
+    if (!form.conferenceLogoFile || !isAllowedLogoFile(form.conferenceLogoFile)) {
+      setStepError(t("errorConferenceLogo"));
       return;
     }
 
@@ -233,6 +491,7 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
     for (const feature of form.selectedFeatures) {
       payload.append("selectedFeatures", feature);
     }
+    payload.set("conferenceLogoFile", form.conferenceLogoFile);
     if (form.ropFile) payload.set("ropFile", form.ropFile);
     if (form.scheduleFile) payload.set("scheduleFile", form.scheduleFile);
     if (!form.awardCriteriaDeferred && form.awardCriteriaFile) {
@@ -249,186 +508,341 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
   }
 
   if (result?.success) {
+    const contactInitials = form.contactName
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() ?? "")
+      .join("");
+
     return (
-      <div className={cn("mun-card space-y-4 border-slate-200 p-6 dark:border-white/10", className)}>
-        <h2 className="font-display text-xl font-semibold text-brand-navy">{t("successTitle")}</h2>
-        <p className="text-sm leading-relaxed text-brand-muted">{t("successBody")}</p>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/signup" className="mun-btn-primary rounded-full px-5 py-2 text-sm font-semibold">
-            {t("successCreateAccount")}
-          </Link>
-          <Link href="/" className="mun-btn rounded-full px-5 py-2 text-sm font-semibold">
-            {t("successBackHome")}
-          </Link>
-        </div>
-      </div>
+      <>
+        <AppleWindow title={t("successTitle")} resizable={false} className={className}>
+          <div className="space-y-5 p-6 md:p-8">
+          <p className="mun-apple-text mun-apple-text-body mun-vibrancy-secondary">{t("successBody")}</p>
+          <div className="flex flex-wrap gap-3 pt-1">
+            <AppleToolbarButton
+              label={t("successShare")}
+              onClick={() => setActivityOpen(true)}
+              variant="filled"
+            />
+            <Link href="/signup" className="mun-apple-btn mun-apple-btn-glass-blue">
+              {t("successCreateAccount")}
+            </Link>
+            <Link href="/" className="mun-apple-btn mun-apple-btn-tinted-gray">
+              {t("successBackHome")}
+            </Link>
+          </div>
+          </div>
+        </AppleWindow>
+
+        <AppleActivityView
+          open={activityOpen}
+          onOpenChange={setActivityOpen}
+          title={form.conferenceName || t("title")}
+          subtitle={t("activitySubtitle")}
+          metaLabel={t("activityMetaLabel")}
+          metaHint={t("activityMetaHint")}
+          closeLabel={tCommon("cancel")}
+          contacts={[
+            {
+              id: "contact",
+              name: form.contactName || t("contactNameLabel"),
+              initials: contactInitials || undefined,
+              badge: <Mail className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden />,
+              onSelect: () =>
+                openMailto(t("activityShareHeading"), shareText, form.contactEmail || undefined),
+            },
+          ]}
+          shortcuts={[
+            {
+              id: "mail",
+              label: t("activityShortcutMail"),
+              tint: "var(--system-green)",
+              icon: <Mail className="h-7 w-7" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => openMailto(t("activityShareHeading"), shareText),
+            },
+            {
+              id: "copy",
+              label: t("activityShortcutCopy"),
+              tint: "var(--system-gray)",
+              icon: <Copy className="h-7 w-7" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => void copyTextToClipboard(shareText),
+            },
+            {
+              id: "share",
+              label: t("activityShortcutShare"),
+              tint: "var(--system-blue)",
+              icon: <Share2 className="h-7 w-7" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => {
+                void shareTextNative(form.conferenceName || t("title"), shareText, getSignupUrl());
+              },
+            },
+          ]}
+          quickActions={[
+            {
+              id: "copy-link",
+              label: t("activityQuickCopyLink"),
+              icon: <Link2 className="h-5 w-5" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => void copyTextToClipboard(getSignupUrl()),
+            },
+            {
+              id: "copy-summary",
+              label: t("activityQuickCopySummary"),
+              icon: <FileText className="h-5 w-5" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => void copyTextToClipboard(shareText),
+            },
+          ]}
+          listActions={[
+            {
+              id: "copy-summary-list",
+              label: t("activityListCopySummary"),
+              icon: <Copy className="h-4 w-4" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => void copyTextToClipboard(shareText),
+            },
+            {
+              id: "email-team",
+              label: t("activityListEmailTeam"),
+              icon: <Mail className="h-4 w-4" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => openMailto(t("activityShareHeading"), shareText),
+            },
+            {
+              id: "open-signup",
+              label: t("activityListOpenSignup"),
+              icon: <UserPlus className="h-4 w-4" strokeWidth={1.75} aria-hidden />,
+              onSelect: () => {
+                window.open(getSignupUrl(), "_blank", "noopener,noreferrer");
+              },
+            },
+          ]}
+        />
+      </>
     );
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
-      <ol className="flex flex-wrap gap-2 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
-        {STEPS.map((id, i) => (
-          <li
-            key={id}
-            className={cn(
-              "rounded-full border px-2.5 py-1",
-              i === stepIndex
-                ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_10%,#fff)] text-brand-navy"
-                : i < stepIndex
-                  ? "border-[var(--hairline)] bg-white text-brand-navy"
-                  : "border-[var(--hairline)] bg-white/60"
-            )}
-          >
-            {t(`step_${id}`)}
-          </li>
-        ))}
-      </ol>
+    <div className={cn("gap-8", className)}>
+    <AppleWindowWithSidebar
+      title={t(`step_${step}`)}
+      subtitle={t("toolbarStepSubtitle", { current: stepIndex + 1, total: STEPS.length })}
+      trailing={toolbarTrailing}
+      sidebarClassName="hidden md:flex"
+      sidebar={
+        <AppleSidebar className="h-full min-h-0 w-full" aria-label={t("menuStepsSection")}>
+          {STEP_GROUPS.map((group) => (
+              <AppleSidebarSection
+                key={group.id}
+                heading={t(group.labelKey)}
+                detail={String(group.steps.length)}
+                collapsible
+              >
+                {group.steps.map((id) => {
+                  const index = STEPS.indexOf(id);
+                  const completed = index < stepIndex;
+                  return (
+                    <AppleSidebarRow
+                      key={id}
+                      title={t(`step_${id}`)}
+                      leading={STEP_ICONS[id]}
+                      detail={
+                        completed ? (
+                          <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />
+                        ) : (
+                          String(index + 1)
+                        )
+                      }
+                      selected={id === step}
+                      disabled={index > stepIndex}
+                      onClick={() => goToStep(index)}
+                    />
+                  );
+                })}
+              </AppleSidebarSection>
+            ))}
+        </AppleSidebar>
+      }
+    >
+      <div className="min-w-0 flex-1 space-y-4 p-4 pb-[calc(9.5rem+env(safe-area-inset-bottom,0px))] md:space-y-5 md:p-6 md:pb-6">
 
-      <div className="mun-card space-y-5 overflow-visible border-slate-200 p-6 dark:border-white/10">
+      <GlassPanel className="space-y-6 overflow-visible" material="regular" interactive={false}>
         {step === "contact" ? (
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className={LABEL_CLASS}>{t("contactNameLabel")}</label>
-              <input
-                className={INPUT_CLASS}
-                value={form.contactName}
-                onChange={(e) => setForm({ ...form, contactName: e.target.value })}
-                autoComplete="name"
-              />
-            </div>
-            <div>
-              <label className={LABEL_CLASS}>{t("contactEmailLabel")}</label>
-              <input
-                type="email"
-                className={INPUT_CLASS}
-                value={form.contactEmail}
-                onChange={(e) => setForm({ ...form, contactEmail: e.target.value })}
-                autoComplete="email"
-              />
-            </div>
-            <div className="sm:col-span-2">
-              <label className={LABEL_CLASS}>{t("conferenceNameLabel")}</label>
-              <input
-                className={INPUT_CLASS}
-                value={form.conferenceName}
-                onChange={(e) => setForm({ ...form, conferenceName: e.target.value })}
-              />
-            </div>
-            <div className="sm:col-span-2">
-              <EventDateRangeField
-                label={t("eventDatesLabel")}
-                labelClassName={LABEL_CLASS}
-                value={form.eventDates}
-                onChange={(eventDates) => setForm({ ...form, eventDates })}
-                placeholder={t("eventDatesPlaceholder")}
-                inputClassName={INPUT_CLASS}
-              />
-            </div>
-          </div>
+          <AppleTextFieldGroup>
+            <AppleTextField
+              placeholder={t("contactNameLabel")}
+              label={t("contactNameLabel")}
+              value={form.contactName}
+              onChange={(contactName) => setForm({ ...form, contactName })}
+              autoComplete="name"
+              clearLabel={tCommon("clear")}
+            />
+            <AppleTextField
+              type="email"
+              placeholder={t("contactEmailLabel")}
+              label={t("contactEmailLabel")}
+              value={form.contactEmail}
+              onChange={(contactEmail) => setForm({ ...form, contactEmail })}
+              autoComplete="email"
+              clearLabel={tCommon("clear")}
+            />
+            <AppleTextField
+              placeholder={t("conferenceNameLabel")}
+              label={t("conferenceNameLabel")}
+              value={form.conferenceName}
+              onChange={(conferenceName) => setForm({ ...form, conferenceName })}
+              clearLabel={tCommon("clear")}
+            />
+            <EventDateRangeField
+              grouped
+              label={t("eventDatesLabel")}
+              value={form.eventDates}
+              onChange={(eventDates) => setForm({ ...form, eventDates })}
+              placeholder={t("eventDatesPlaceholder")}
+            />
+            <AppleFileField
+              grouped={false}
+              label={t("conferenceLogoLabel")}
+              help={t("conferenceLogoHelp")}
+              accept="image/png,image/jpeg,image/webp"
+              required
+              value={form.conferenceLogoFile}
+              onChange={(conferenceLogoFile) => setForm({ ...form, conferenceLogoFile })}
+              chooseLabel={tCommon("chooseFile")}
+              emptyLabel={tCommon("noFileChosen")}
+              clearLabel={tCommon("clear")}
+              error={
+                form.conferenceLogoFile && form.conferenceLogoFile.size > MAX_INTAKE_FILE_BYTES
+                  ? t("errorConferenceLogoTooLarge")
+                  : null
+              }
+            />
+          </AppleTextFieldGroup>
         ) : null}
 
         {step === "scale" ? (
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div>
-              <label className={LABEL_CLASS}>{t("committeeCountLabel")}</label>
-              <input
-                type="number"
-                min={1}
-                max={64}
-                className={INPUT_CLASS}
-                value={form.committeeCount}
-                onChange={(e) => syncCommitteeRows(Math.max(1, Math.min(64, Number(e.target.value) || 1)))}
-              />
-            </div>
-            <div>
-              <label className={LABEL_CLASS}>{t("delegateCountLabel")}</label>
-              <input
-                className={INPUT_CLASS}
-                inputMode="numeric"
-                value={form.delegateCount}
-                onChange={(e) => setForm({ ...form, delegateCount: e.target.value })}
-                placeholder={t("delegateCountPlaceholder")}
-              />
-            </div>
-            <div>
-              <label className={LABEL_CLASS}>{t("chairCountLabel")}</label>
-              <input
-                className={INPUT_CLASS}
-                inputMode="numeric"
-                value={form.chairCount}
-                onChange={(e) => setForm({ ...form, chairCount: e.target.value })}
-                placeholder={t("chairCountPlaceholder")}
-              />
-            </div>
-          </div>
+          <AppleListSection>
+            <AppleListRow
+              title={t("committeeCountLabel")}
+              detail={String(form.committeeCount)}
+              trailing={
+                <AppleStepper
+                  value={form.committeeCount}
+                  min={1}
+                  max={64}
+                  onChange={(count) => syncCommitteeRows(count)}
+                  decreaseLabel={t("stepperDecrease")}
+                  increaseLabel={t("stepperIncrease")}
+                  aria-label={t("committeeCountLabel")}
+                />
+              }
+            />
+            <AppleListRow
+              title={t("delegateCountLabel")}
+              detail={optionalCountDisplay(form.delegateCount)}
+              trailing={
+                <AppleStepper
+                  value={parseOptionalCountString(form.delegateCount)}
+                  min={0}
+                  max={99999}
+                  onChange={(count) =>
+                    setForm({ ...form, delegateCount: optionalCountToString(count) })
+                  }
+                  decreaseLabel={t("stepperDecrease")}
+                  increaseLabel={t("stepperIncrease")}
+                  aria-label={t("delegateCountLabel")}
+                />
+              }
+            />
+            <AppleListRow
+              title={t("chairCountLabel")}
+              detail={optionalCountDisplay(form.chairCount)}
+              trailing={
+                <AppleStepper
+                  value={parseOptionalCountString(form.chairCount)}
+                  min={0}
+                  max={9999}
+                  onChange={(count) => setForm({ ...form, chairCount: optionalCountToString(count) })}
+                  decreaseLabel={t("stepperDecrease")}
+                  increaseLabel={t("stepperIncrease")}
+                  aria-label={t("chairCountLabel")}
+                />
+              }
+            />
+          </AppleListSection>
         ) : null}
 
         {step === "features" ? (
-          <div className="space-y-3">
-            <p className="text-sm text-brand-muted">{t("featuresHelp")}</p>
-            <div className="flex flex-wrap gap-2">
-              {features.map((item) => (
-                <button
-                  key={item.key}
-                  type="button"
-                  onClick={() => toggleFeature(item.key)}
-                  className={cn(
-                    "rounded-full border px-3 py-1.5 text-xs font-medium transition",
-                    form.selectedFeatures.includes(item.key)
-                      ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_10%,#fff)] text-brand-navy"
-                      : "border-[var(--hairline)] bg-white text-brand-muted"
-                  )}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+          <div className="space-y-4">
+            <p className="sr-only">{t("featuresHelp")}</p>
+            <AppleListSection>
+              {features.map((item) => {
+                const active = form.selectedFeatures.includes(item.key);
+                return (
+                  <AppleListSwitchRow
+                    key={item.key}
+                    label={item.label}
+                    checked={active}
+                    onChange={(checked) => {
+                      if (checked !== active) toggleFeature(item.key);
+                    }}
+                  />
+                );
+              })}
+            </AppleListSection>
           </div>
         ) : null}
 
         {step === "committees" ? (
-          <div className="space-y-4">
-            <p className="text-sm text-brand-muted">{t("committeesHelp")}</p>
+          <div className="space-y-5">
+            <p className="sr-only">{t("committeesHelp")}</p>
             {form.committees.map((committee, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-[var(--hairline)] bg-white/80 p-4 space-y-3"
-              >
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
-                  {t("committeeHeading", { number: i + 1 })}
-                </p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div>
-                    <label className={LABEL_CLASS}>{t("committeeNameLabel")}</label>
-                    <input
-                      className={INPUT_CLASS}
+              <GlassPanel key={i} dense material="thin" interactive className="space-y-4">
+                <p className="mun-apple-text mun-apple-text-headline !mb-0">{t("committeeHeading", { number: i + 1 })}</p>
+                <div className="space-y-3">
+                  <AppleTextFieldGroup>
+                    <AppleTextField
+                      placeholder={t("committeeNameLabel")}
+                      label={t("committeeNameLabel")}
                       value={committee.name}
-                      onChange={(e) => {
+                      onChange={(name) => {
                         const committees = [...form.committees];
-                        committees[i] = { ...committees[i]!, name: e.target.value };
+                        committees[i] = { ...committees[i]!, name };
                         setForm({ ...form, committees });
                       }}
+                      clearLabel={tCommon("clear")}
                     />
-                  </div>
-                  <div className="sm:col-span-2 space-y-2">
-                    <label className={LABEL_CLASS}>{t("committeeTopicsLabel")}</label>
+                  </AppleTextFieldGroup>
+                  <div className="space-y-2">
+                    <p className="mun-apple-text-field-section-header !px-0 !normal-case">
+                      {t("committeeTopicsLabel")}
+                    </p>
                     {committee.topics.map((topic, topicIndex) => (
                       <div key={topicIndex} className="flex gap-2">
-                        <input
-                          className={INPUT_CLASS}
-                          value={topic}
-                          placeholder={t("committeeTopicPlaceholder", { number: topicIndex + 1 })}
-                          onChange={(e) => updateCommitteeTopic(i, topicIndex, e.target.value)}
-                        />
+                        <AppleTextFieldGroup className="min-w-0 flex-1">
+                          <AppleTextField
+                            placeholder={t("committeeTopicPlaceholder", { number: topicIndex + 1 })}
+                            label={t("committeeTopicPlaceholder", { number: topicIndex + 1 })}
+                            value={topic}
+                            onChange={(value) => updateCommitteeTopic(i, topicIndex, value)}
+                            clearLabel={tCommon("clear")}
+                          />
+                        </AppleTextFieldGroup>
                         {committee.topics.length > 1 ? (
-                          <button
-                            type="button"
-                            onClick={() => removeCommitteeTopic(i, topicIndex)}
-                            className="shrink-0 rounded-xl border border-[var(--hairline)] px-3 text-xs font-semibold text-brand-muted transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700"
-                          >
-                            {t("committeeRemoveTopic")}
-                          </button>
+                          <AppleMenu>
+                            <AppleMenuTrigger
+                              aria-label={t("menuTopicActions")}
+                              className="mun-apple-btn mun-apple-btn-tinted-gray mun-apple-btn-compact shrink-0 px-2.5"
+                            >
+                              <Ellipsis className="h-4 w-4" strokeWidth={2} aria-hidden />
+                            </AppleMenuTrigger>
+                            <AppleMenuContent align="end">
+                              <AppleMenuItem
+                                icon={<Trash2 className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />}
+                                label={t("menuRemoveTopic")}
+                                destructive
+                                onSelect={() => setRemoveTopicTarget({ committeeIndex: i, topicIndex })}
+                              />
+                            </AppleMenuContent>
+                          </AppleMenu>
                         ) : null}
                       </div>
                     ))}
@@ -436,61 +850,73 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
                       <button
                         type="button"
                         onClick={() => addCommitteeTopic(i)}
-                        className="text-xs font-semibold text-[var(--accent)] transition hover:underline"
+                        className="mun-apple-btn mun-apple-btn-plain-blue mun-apple-btn-compact !px-0"
                       >
                         {t("committeeAddTopic")}
                       </button>
                     ) : null}
                   </div>
-                  <div>
-                    <label className={LABEL_CLASS}>{t("committeeDelegatesLabel")}</label>
-                    <input
-                      className={INPUT_CLASS}
-                      inputMode="numeric"
-                      value={committee.delegateCount ?? ""}
-                      onChange={(e) => {
-                        const committees = [...form.committees];
-                        const v = e.target.value.trim();
-                        committees[i] = {
-                          ...committees[i]!,
-                          delegateCount: v ? Number(v) : undefined,
-                        };
-                        setForm({ ...form, committees });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label className={LABEL_CLASS}>{t("committeeChairsLabel")}</label>
-                    <input
-                      className={INPUT_CLASS}
-                      inputMode="numeric"
-                      value={committee.chairCount ?? ""}
-                      onChange={(e) => {
-                        const committees = [...form.committees];
-                        const v = e.target.value.trim();
-                        committees[i] = {
-                          ...committees[i]!,
-                          chairCount: v ? Number(v) : undefined,
-                        };
-                        setForm({ ...form, committees });
-                      }}
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className={LABEL_CLASS}>{t("committeeLogoLabel")}</label>
-                    <input
-                      type="file"
+                  <div className="grid gap-3 sm:grid-cols-2">
+                  <AppleStepperField
+                    layout="stacked"
+                    label={t("committeeDelegatesLabel")}
+                    valueLabel={
+                      (committee.delegateCount ?? 0) === 0 ? "—" : String(committee.delegateCount)
+                    }
+                    value={committee.delegateCount ?? 0}
+                    min={0}
+                    max={9999}
+                    onChange={(count) => {
+                      const committees = [...form.committees];
+                      committees[i] = {
+                        ...committees[i]!,
+                        delegateCount: count === 0 ? undefined : count,
+                      };
+                      setForm({ ...form, committees });
+                    }}
+                    decreaseLabel={t("stepperDecrease")}
+                    increaseLabel={t("stepperIncrease")}
+                    aria-label={t("committeeDelegatesLabel")}
+                  />
+                  <AppleStepperField
+                    layout="stacked"
+                    label={t("committeeChairsLabel")}
+                    valueLabel={(committee.chairCount ?? 0) === 0 ? "—" : String(committee.chairCount)}
+                    value={committee.chairCount ?? 0}
+                    min={0}
+                    max={99}
+                    onChange={(count) => {
+                      const committees = [...form.committees];
+                      committees[i] = {
+                        ...committees[i]!,
+                        chairCount: count === 0 ? undefined : count,
+                      };
+                      setForm({ ...form, committees });
+                    }}
+                    decreaseLabel={t("stepperDecrease")}
+                    increaseLabel={t("stepperIncrease")}
+                    aria-label={t("committeeChairsLabel")}
+                  />
+                  <AppleTextFieldGroup className="sm:col-span-2">
+                    <p className="mun-apple-text-field-section-header !px-0 !normal-case">
+                      {t("committeeLogoLabel")}
+                    </p>
+                    <AppleFileField
                       accept="image/png,image/jpeg,image/webp"
-                      className={INPUT_CLASS}
-                      onChange={(e) => {
-                        const logos = [...form.committeeLogoFiles];
-                        logos[i] = e.target.files?.[0] ?? null;
-                        setForm({ ...form, committeeLogoFiles: logos });
+                      value={form.committeeLogoFiles[i] ?? null}
+                      onChange={(file) => {
+                        const committeeLogoFiles = [...form.committeeLogoFiles];
+                        committeeLogoFiles[i] = file;
+                        setForm({ ...form, committeeLogoFiles });
                       }}
+                      chooseLabel={tCommon("chooseFile")}
+                      emptyLabel={tCommon("noFileChosen")}
+                      clearLabel={tCommon("clear")}
                     />
+                  </AppleTextFieldGroup>
                   </div>
                 </div>
-              </div>
+              </GlassPanel>
             ))}
           </div>
         ) : null}
@@ -498,145 +924,191 @@ export function SecretariatRegistrationWizard({ className }: { className?: strin
         {step === "uploads" ? (
           <div className="space-y-5">
             <div>
-              <label className={LABEL_CLASS}>{t("ropUploadLabel")}</label>
-              <p className="mb-2 text-xs text-brand-muted">{t("ropUploadHelp")}</p>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx,application/pdf"
-                className={INPUT_CLASS}
-                onChange={(e) => setForm({ ...form, ropFile: e.target.files?.[0] ?? null })}
-              />
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <p className="mun-apple-text-field-section-header !px-0">{t("ropUploadLabel")}</p>
+                <AppleHelpPopover label={t("popoverHelpLabel")}>{t("ropUploadHelp")}</AppleHelpPopover>
+              </div>
+              <p className="sr-only">{t("ropUploadHelp")}</p>
+              <AppleTextFieldGroup>
+                <AppleFileField
+                  accept=".pdf,.doc,.docx,application/pdf"
+                  value={form.ropFile}
+                  onChange={(ropFile) => setForm({ ...form, ropFile })}
+                  chooseLabel={tCommon("chooseFile")}
+                  emptyLabel={tCommon("noFileChosen")}
+                  clearLabel={tCommon("clear")}
+                />
+              </AppleTextFieldGroup>
             </div>
             <div>
-              <label className={LABEL_CLASS}>{t("scheduleUploadLabel")}</label>
-              <p className="mb-2 text-xs text-brand-muted">{t("scheduleUploadHelp")}</p>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx,.csv,.xlsx,.xls"
-                className={INPUT_CLASS}
-                onChange={(e) => setForm({ ...form, scheduleFile: e.target.files?.[0] ?? null })}
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <p className="mun-apple-text-field-section-header !px-0">{t("scheduleUploadLabel")}</p>
+                <AppleHelpPopover label={t("popoverHelpLabel")}>{t("scheduleUploadHelp")}</AppleHelpPopover>
+              </div>
+              <p className="sr-only">{t("scheduleUploadHelp")}</p>
+              <AppleTextFieldGroup>
+                <AppleFileField
+                  accept=".pdf,.doc,.docx,.csv,.xlsx,.xls"
+                  value={form.scheduleFile}
+                  onChange={(scheduleFile) => setForm({ ...form, scheduleFile })}
+                  chooseLabel={tCommon("chooseFile")}
+                  emptyLabel={tCommon("noFileChosen")}
+                  clearLabel={tCommon("clear")}
+                />
+              </AppleTextFieldGroup>
+            </div>
+            <AppleListSection
+              footer={form.awardCriteriaDeferred ? t("awardCriteriaDeferHelp") : undefined}
+            >
+              <AppleListSwitchRow
+                label={t("awardCriteriaDeferLabel")}
+                checked={form.awardCriteriaDeferred}
+                onChange={(checked) =>
+                  setForm({ ...form, awardCriteriaDeferred: checked, awardCriteriaFile: null })
+                }
               />
-            </div>
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm text-brand-navy">
-                <input
-                  type="checkbox"
-                  checked={form.awardCriteriaDeferred}
-                  onChange={(e) =>
-                    setForm({ ...form, awardCriteriaDeferred: e.target.checked, awardCriteriaFile: null })
-                  }
-                />
-                {t("awardCriteriaDeferLabel")}
-              </label>
-              {!form.awardCriteriaDeferred ? (
-                <input
-                  type="file"
+            </AppleListSection>
+            {!form.awardCriteriaDeferred ? (
+              <AppleTextFieldGroup>
+                <AppleFileField
                   accept=".pdf,.doc,.docx,application/pdf"
-                  className={INPUT_CLASS}
-                  onChange={(e) =>
-                    setForm({ ...form, awardCriteriaFile: e.target.files?.[0] ?? null })
-                  }
+                  value={form.awardCriteriaFile}
+                  onChange={(awardCriteriaFile) => setForm({ ...form, awardCriteriaFile })}
+                  chooseLabel={tCommon("chooseFile")}
+                  emptyLabel={tCommon("noFileChosen")}
+                  clearLabel={tCommon("clear")}
                 />
-              ) : (
-                <p className="text-xs text-brand-muted">{t("awardCriteriaDeferHelp")}</p>
-              )}
-            </div>
+              </AppleTextFieldGroup>
+            ) : null}
           </div>
         ) : null}
 
         {step === "matrix" ? (
-          <div className="space-y-4">
-            <p className="text-sm text-brand-muted">{t("matrixHelp")}</p>
-            <label className="flex items-start gap-2 text-sm text-brand-navy">
-              <input
-                type="checkbox"
+          <div className="space-y-5">
+            <p className="sr-only">{t("matrixHelp")}</p>
+            <AppleListSection>
+              <AppleListSwitchRow
+                label={t("matrixDeferLabel")}
                 checked={form.matrixDeferred}
-                onChange={(e) => setForm({ ...form, matrixDeferred: e.target.checked })}
-                className="mt-1"
+                onChange={(checked) => setForm({ ...form, matrixDeferred: checked })}
               />
-              <span>{t("matrixDeferLabel")}</span>
-            </label>
-            <div>
-              <label className={LABEL_CLASS}>{t("notesLabel")}</label>
-              <textarea
-                rows={4}
-                className={cn(INPUT_CLASS, "min-h-[6rem] resize-y")}
-                value={form.notes}
-                onChange={(e) => setForm({ ...form, notes: e.target.value })}
+            </AppleListSection>
+            <AppleTextFieldGroup>
+              <AppleTextAreaField
                 placeholder={t("notesPlaceholder")}
+                label={t("notesLabel")}
+                value={form.notes}
+                onChange={(notes) => setForm({ ...form, notes })}
+                clearLabel={tCommon("clear")}
               />
-            </div>
+            </AppleTextFieldGroup>
           </div>
         ) : null}
 
         {step === "review" ? (
-          <div className="space-y-3 text-sm text-brand-navy">
-            <p>
-              <span className="font-semibold">{t("contactNameLabel")}:</span> {form.contactName}
-            </p>
-            <p>
-              <span className="font-semibold">{t("contactEmailLabel")}:</span> {form.contactEmail}
-            </p>
-            <p>
-              <span className="font-semibold">{t("conferenceNameLabel")}:</span> {form.conferenceName}
-            </p>
-            <p>
-              <span className="font-semibold">{t("committeeCountLabel")}:</span> {form.committeeCount}
-            </p>
-            <p>
-              <span className="font-semibold">{t("fieldFeatures")}:</span>{" "}
-              {form.selectedFeatures.map((k) => t(`feature_${k}`)).join(", ")}
-            </p>
-            <ul className="list-disc pl-5 space-y-1">
+          <div className="space-y-4">
+            <AppleSegmentedControl
+              className="w-full min-w-0 overflow-x-auto"
+              aria-label={t("menuEditSection")}
+              value={null}
+              items={STEPS.filter((id) => id !== "review").map((id) => ({
+                id,
+                label: t(`step_${id}`),
+              }))}
+              onValueChange={(id) => goToStep(STEPS.indexOf(id as StepId))}
+            />
+
+            <AppleListSection header={t("step_contact")}>
+              <AppleListRow title={t("contactNameLabel")} detail={form.contactName} />
+              <AppleListRow title={t("contactEmailLabel")} detail={form.contactEmail} />
+              <AppleListRow title={t("conferenceNameLabel")} detail={form.conferenceName} />
+              <AppleListRow
+                title={t("conferenceLogoLabel")}
+                detail={form.conferenceLogoFile?.name ?? t("errorConferenceLogo")}
+              />
+              {form.eventDates ? <AppleListRow title={t("eventDatesLabel")} detail={form.eventDates} /> : null}
+            </AppleListSection>
+
+            <AppleListSection header={t("step_scale")}>
+              <AppleListRow title={t("committeeCountLabel")} detail={String(form.committeeCount)} />
+              {form.delegateCount ? (
+                <AppleListRow title={t("delegateCountLabel")} detail={form.delegateCount} />
+              ) : null}
+              {form.chairCount ? (
+                <AppleListRow title={t("chairCountLabel")} detail={form.chairCount} />
+              ) : null}
+            </AppleListSection>
+
+            <AppleListSection header={t("step_features")}>
+              {form.selectedFeatures.map((key) => (
+                <AppleListRow key={key} title={t(`feature_${key}`)} selected />
+              ))}
+            </AppleListSection>
+
+            <AppleListSection header={t("step_committees")}>
               {form.committees.map((c, i) => {
                 const topics = formatCommitteeTopicsForDisplay(c.topics);
                 return (
-                  <li key={i}>
-                    {c.name}
-                    {topics ? ` — ${topics}` : ""}
-                  </li>
+                  <AppleListRow
+                    key={i}
+                    title={c.name || t("committeeHeading", { number: i + 1 })}
+                    subtitle={topics || undefined}
+                  />
                 );
               })}
-            </ul>
-            <p className="text-xs text-brand-muted">{t("reviewManualNote")}</p>
+            </AppleListSection>
+
+            <p className="mun-apple-text mun-apple-text-footnote mun-vibrancy-secondary px-1">
+              {t("reviewManualNote")}
+            </p>
           </div>
         ) : null}
 
-        {stepError ? (
-          <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800" role="alert">
-            {stepError}
-          </p>
-        ) : null}
+      </GlassPanel>
 
-        <div className="flex flex-wrap justify-between gap-3 pt-2">
-          <button
-            type="button"
-            onClick={goBack}
-            disabled={stepIndex === 0 || pending}
-            className="mun-btn rounded-full px-5 py-2 text-sm font-semibold disabled:opacity-50"
-          >
-            {t("back")}
-          </button>
-          {step !== "review" ? (
-            <button
-              type="button"
-              onClick={goNext}
-              className="mun-btn-primary rounded-full px-5 py-2 text-sm font-semibold"
-            >
-              {t("next")}
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => void submit()}
-              disabled={pending}
-              className="mun-btn-primary rounded-full px-5 py-2 text-sm font-semibold disabled:opacity-60"
-            >
-              {pending ? t("submitting") : t("submit")}
-            </button>
-          )}
-        </div>
+      <AppleToolbarBottom {...toolbarBottomProps} floating className="mt-4 md:mt-5" />
+
+      <AppleConfirmSheet
+        open={removeTopicTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setRemoveTopicTarget(null);
+        }}
+        title={t("actionSheetRemoveTopicTitle")}
+        message={t("actionSheetRemoveTopicMessage")}
+        confirmLabel={t("actionSheetRemoveTopicConfirm")}
+        cancelLabel={tCommon("cancel")}
+        confirmRole="destructive"
+        onConfirm={() => {
+          if (!removeTopicTarget) return;
+          removeCommitteeTopic(removeTopicTarget.committeeIndex, removeTopicTarget.topicIndex);
+          setRemoveTopicTarget(null);
+        }}
+      />
+
+      <AppleConfirmSheet
+        open={submitSheetOpen}
+        onOpenChange={setSubmitSheetOpen}
+        title={t("actionSheetSubmitTitle")}
+        message={t("actionSheetSubmitMessage")}
+        confirmLabel={t("actionSheetSubmitConfirm")}
+        cancelLabel={tCommon("cancel")}
+        pending={pending}
+        onConfirm={() => {
+          void submit();
+        }}
+      />
       </div>
+    </AppleWindowWithSidebar>
+
+    <AppleTabBar
+      variant="iphone"
+      floating
+      className="md:hidden"
+      items={tabBarItems}
+      value={activeGroupId}
+      onValueChange={goToGroup}
+      aria-label={t("tabBarLabel")}
+    />
     </div>
   );
 }

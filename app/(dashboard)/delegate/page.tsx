@@ -139,7 +139,7 @@ export default async function DelegateDashboardPage({
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--gold)] via-[var(--gold-bright)] to-transparent"
           />
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[color:color-mix(in_srgb,var(--gold)_72%,var(--color-text))] dark:text-[var(--gold-bright)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold-text)] dark:text-[var(--gold-text-bright)]">
             {line}
           </p>
           <h1 className="font-display mt-1.5 text-2xl font-semibold tracking-tight text-brand-navy md:text-[1.75rem]">

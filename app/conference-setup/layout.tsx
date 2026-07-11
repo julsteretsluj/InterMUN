@@ -1,10 +1,5 @@
-import { PublicPageControls } from "@/components/PublicPageControls";
+import { AppleGateLayout } from "@/components/ui/AppleGateLayout";
 
 export default function ConferenceSetupLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <PublicPageControls className="fixed right-4 top-4 z-30" />
-      {children}
-    </>
-  );
+  return <AppleGateLayout title="Conference setup">{children}</AppleGateLayout>;
 }

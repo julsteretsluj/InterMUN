@@ -3,6 +3,7 @@ import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
 import { openingOrbUrl } from "@/lib/opening-orb";
+import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
 
 export default async function MarketingLayout({
@@ -14,9 +15,10 @@ export default async function MarketingLayout({
   const appName = getAppName();
 
   return (
-    <div className="marketing-shell relative min-h-screen text-brand-navy dark:bg-[var(--color-bg-page)]">
+    <AppleAppFrame appName={appName}>
+    <div className="marketing-shell mun-apple-site relative min-h-screen text-brand-navy">
       <link rel="preload" href={openingOrbUrl(0)} as="image" />
-      <header className="marketing-header relative z-10 border-b backdrop-blur-md">
+      <header className="marketing-header mun-apple-material mun-apple-material-thin relative z-10 border-b-0">
         <div className="mun-marketing-rainbow-bar" aria-hidden />
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2 md:gap-3 md:px-5">
           <div className="flex shrink-0 items-center gap-2">
@@ -38,11 +40,11 @@ export default async function MarketingLayout({
             </div>
             <Link
               href="/login"
-              className="mun-btn mun-btn-outline hidden rounded-full px-3 py-1.5 text-xs font-semibold sm:inline-flex"
+              className="mun-apple-btn mun-apple-btn-tinted-gray hidden text-xs sm:inline-flex"
             >
               {t("nav.signIn")}
             </Link>
-            <Link href="/signup" className="mun-btn-primary rounded-full px-3 py-1.5 text-xs font-semibold">
+            <Link href="/signup" className="mun-apple-btn mun-apple-btn-filled-blue text-xs">
               {t("nav.getStarted")}
             </Link>
           </div>
@@ -51,7 +53,12 @@ export default async function MarketingLayout({
           <PublicPageControls compact />
         </div>
       </header>
-      <main className="relative z-10">{children}</main>
+      <main className="relative z-10">
+        <AppleLayoutWrapper appName={appName} mode="minimal">
+          {children}
+        </AppleLayoutWrapper>
+      </main>
     </div>
+    </AppleAppFrame>
   );
 }

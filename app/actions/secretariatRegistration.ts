@@ -13,6 +13,7 @@ import {
   MAX_INTAKE_FILE_BYTES,
   SECRETARIAT_FEATURE_KEYS,
   formatCommitteeTopicsForDisplay,
+  isAllowedLogoFile,
   parseCommitteesJson,
   sanitizeFileName,
   secretariatRegistrationSchema,
@@ -114,6 +115,14 @@ export async function submitSecretariatRegistrationAction(
   const ropFile = formData.get("ropFile");
   const scheduleFile = formData.get("scheduleFile");
   const awardFile = formData.get("awardCriteriaFile");
+  const conferenceLogoFile = formData.get("conferenceLogoFile");
+
+  if (!(conferenceLogoFile instanceof File) || conferenceLogoFile.size === 0) {
+    return { error: t("errorConferenceLogo") };
+  }
+  if (!isAllowedLogoFile(conferenceLogoFile)) {
+    return { error: t("errorConferenceLogoInvalid") };
+  }
 
   const hasRop = ropFile instanceof File && ropFile.size > 0;
   const hasSchedule = scheduleFile instanceof File && scheduleFile.size > 0;
@@ -133,6 +142,7 @@ export async function submitSecretariatRegistrationAction(
       committees: data.committees,
       award_criteria_deferred: awardCriteriaDeferred,
       matrix_deferred: matrixDeferred,
+      conference_logo_status: "pending_review",
       rop_status: hasRop ? "pending_review" : "not_submitted",
       award_criteria_status: awardCriteriaDeferred
         ? "deferred"
@@ -166,11 +176,22 @@ export async function submitSecretariatRegistrationAction(
     ? await uploadIntakeFile(requestId, "schedule", scheduleFile as File)
     : null;
   const awardPath = hasAward ? await uploadIntakeFile(requestId, "award-criteria", awardFile as File) : null;
+  const conferenceLogoPath = await uploadIntakeFile(
+    requestId,
+    "conference-logo",
+    conferenceLogoFile as File
+  );
+
+  if (!conferenceLogoPath) {
+    await admin.from("secretariat_registration_requests").delete().eq("id", requestId);
+    return { error: t("errorConferenceLogoUpload") };
+  }
 
   await admin
     .from("secretariat_registration_requests")
     .update({
       committees: committeesWithLogos,
+      conference_logo_storage_path: conferenceLogoPath,
       rop_storage_path: ropPath,
       schedule_storage_path: schedulePath,
       award_criteria_storage_path: awardPath,
@@ -204,6 +225,7 @@ export async function submitSecretariatRegistrationAction(
     `${t("fieldContactName")}: ${data.contactName}`,
     `${t("fieldContactEmail")}: ${data.contactEmail}`,
     `${t("fieldConference")}: ${data.conferenceName}`,
+    `${t("fieldConferenceLogo")}: ${t("statusPendingReview")}`,
     `${t("fieldEventDates")}: ${data.eventDates || "—"}`,
     `${t("fieldCommitteeCount")}: ${data.committeeCount}`,
     `${t("fieldDelegateCount")}: ${data.delegateCount ?? "—"}`,
@@ -242,6 +264,7 @@ export async function submitSecretariatRegistrationAction(
   const submitterLines = [
     t("confirmEmailIntro", { app: appName, conference: data.conferenceName }),
     "",
+    t("confirmEmailLogoReceived"),
     hasRop || hasSchedule
       ? t("confirmEmailManualProcessing")
       : t("confirmEmailNoUploads"),

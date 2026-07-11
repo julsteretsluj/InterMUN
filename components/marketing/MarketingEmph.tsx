@@ -4,7 +4,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Gold cursive emphasis line — Momo Signature via `.mun-emph` in globals.css. */
+/** Theme-accent cursive emphasis — Momo Signature via `.mun-emph` in globals.css. */
 export function MarketingEmph({
   children,
   className,

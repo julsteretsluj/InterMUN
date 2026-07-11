@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AdvisorDelegateSubnav } from "@/components/advisor/AdvisorDelegateSubnav";
 import { requireAdvisorDelegateContext } from "@/lib/advisor-delegate-page";
+import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { getAppName } from "@/lib/branding";
 
 type PageProps = {
   params: Promise<{ userId: string }>;
@@ -20,7 +22,9 @@ export default async function AdvisorDelegateLayout({ children, params }: PagePr
   return (
     <>
       <AdvisorDelegateSubnav assignment={assignment} delegateUserId={userId} />
-      {children}
+      <AppleLayoutWrapper appName={getAppName()} mode="minimal">
+        {children}
+      </AppleLayoutWrapper>
     </>
   );
 }

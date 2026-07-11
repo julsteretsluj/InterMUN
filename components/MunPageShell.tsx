@@ -9,7 +9,7 @@ export function MunPageShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mun-shell">
+    <div className="mun-shell mun-apple-material mun-apple-material-regular">
       <h2 className="mun-shell-title">{title}</h2>
       {children}
     </div>

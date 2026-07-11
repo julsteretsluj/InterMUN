@@ -343,8 +343,8 @@ export async function MarketingHome() {
               <Image
                 src="/marketing/hero-laptop.png"
                 alt=""
-                width={986}
-                height={986}
+                width={975}
+                height={975}
                 priority
                 aria-hidden
                 className="mun-marketing-hero-accent w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"

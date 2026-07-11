@@ -8,7 +8,7 @@ export default async function SecretariatIntakeBoard() {
   const { data, error } = await supabase
     .from("secretariat_registration_requests")
     .select(
-      "id, contact_name, contact_email, conference_name, committee_count, delegate_count, chair_count, rop_status, schedule_status, award_criteria_status, matrix_deferred, submitted_at, selected_features"
+      "id, contact_name, contact_email, conference_name, committee_count, delegate_count, chair_count, conference_logo_status, rop_status, schedule_status, award_criteria_status, matrix_deferred, submitted_at, selected_features"
     )
     .eq("status", "pending")
     .order("submitted_at", { ascending: false });

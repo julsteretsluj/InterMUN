@@ -1,6 +1,14 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
+import { themeHueToHex } from "@/lib/apple-color-picker";
+import {
+  applyAccentCssVars,
+  clearAccentCssVars,
+  deriveThemeAccentPair,
+  normalizeAccentHex,
+  parseThemeHueFromStorage,
+} from "@/lib/theme-accent";
 import {
   DEFAULT_TEXT_SIZE_STEP,
   DYSLEXIC_FONT_STORAGE_KEY,
@@ -13,27 +21,29 @@ import {
   TEXT_SIZE_STEP_MAX,
   TEXT_SIZE_STEP_MIN,
   TEXT_SIZE_STORAGE_KEY,
-  THEME_HUES,
+  THEME_ACCENT_STORAGE_KEY,
   THEME_HUE_STORAGE_KEY,
+  THEME_HUES,
   THEME_STORAGE_KEY,
   type ColorblindType,
   type TextSizeStep,
-  type ThemeHue,
   type ThemePreference,
 } from "@/lib/theme-storage";
 
-export function parseHueFromStorage(raw: string | null): ThemeHue {
-  if (raw && (THEME_HUES as readonly string[]).includes(raw)) return raw as ThemeHue;
-  return DEFAULT_THEME_HUE;
+export function readAccentHexFromStorage(): string {
+  if (typeof window === "undefined") return themeHueToHex(DEFAULT_THEME_HUE);
+  const accentRaw = localStorage.getItem(THEME_ACCENT_STORAGE_KEY);
+  if (accentRaw) return normalizeAccentHex(accentRaw);
+  const legacyHue = parseThemeHueFromStorage(localStorage.getItem(THEME_HUE_STORAGE_KEY));
+  return themeHueToHex(legacyHue ?? DEFAULT_THEME_HUE);
 }
 
-export function readThemeFromStorage(): { mode: ThemePreference; hue: ThemeHue } {
+export function readThemeFromStorage(): { mode: ThemePreference; accentHex: string } {
   if (typeof window === "undefined") {
-    return { mode: "light", hue: DEFAULT_THEME_HUE };
+    return { mode: "light", accentHex: themeHueToHex(DEFAULT_THEME_HUE) };
   }
   const mode: ThemePreference = localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
-  const hue = parseHueFromStorage(localStorage.getItem(THEME_HUE_STORAGE_KEY));
-  return { mode, hue };
+  return { mode, accentHex: readAccentHexFromStorage() };
 }
 
 export function readDyslexicFontFromStorage(): boolean {
@@ -81,7 +91,6 @@ export function persistAndApplyColorblindMode(enabled: boolean, type?: Colorblin
 
 export function persistAndApplyColorblindType(type: ColorblindType) {
   localStorage.setItem(COLORBLIND_TYPE_STORAGE_KEY, type);
-  // Only re-applies the filter if the mode is currently on.
   const enabled = readColorblindModeFromStorage();
   applyColorblindModeToDocument(enabled, type);
 }
@@ -97,7 +106,6 @@ export function parseTextSizeFromStorage(raw: string | null): TextSizeStep {
   if (raw === "small") return -6;
   if (raw === "medium") return 0;
   if (raw === "large") return 13;
-  // Legacy numeric presets 0..6 from previous slider model.
   if (raw === "0") return -6;
   if (raw === "1") return -4;
   if (raw === "2") return -2;
@@ -117,18 +125,24 @@ export function readTextSizeFromStorage(): TextSizeStep {
 
 const LEGACY_TEXT_SIZE_CLASSES = ["text-size-small", "text-size-large"] as const;
 
-export function applyThemeToDocument(mode: ThemePreference, hue: ThemeHue) {
+export function applyThemeToDocument(mode: ThemePreference, accentHex: string) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
+  const hex = normalizeAccentHex(accentHex);
+
   if (mode === "dark") root.classList.add("dark");
   else root.classList.remove("dark");
+
   for (const h of THEME_HUES) {
     root.classList.remove(`theme-${h}`);
   }
   for (const h of LEGACY_THEME_HUE_CLEANUP) {
     root.classList.remove(`theme-${h}`);
   }
-  root.classList.add(`theme-${hue}`);
+  root.classList.add("theme-custom");
+
+  clearAccentCssVars(root);
+  applyAccentCssVars(root, deriveThemeAccentPair(hex, mode));
 }
 
 export function applyDyslexicFontToDocument(enabled: boolean) {
@@ -147,10 +161,11 @@ export function applyTextSizeToDocument(step: TextSizeStep) {
   root.style.setProperty("--text-scale-step", String(clampTextSizeStep(step)));
 }
 
-export function persistAndApplyTheme(mode: ThemePreference, hue: ThemeHue) {
+export function persistAndApplyTheme(mode: ThemePreference, accentHex: string) {
+  const hex = normalizeAccentHex(accentHex);
   localStorage.setItem(THEME_STORAGE_KEY, mode);
-  localStorage.setItem(THEME_HUE_STORAGE_KEY, hue);
-  applyThemeToDocument(mode, hue);
+  localStorage.setItem(THEME_ACCENT_STORAGE_KEY, hex);
+  applyThemeToDocument(mode, hex);
 }
 
 export function persistAndApplyDyslexicFont(enabled: boolean) {
@@ -162,4 +177,9 @@ export function persistAndApplyTextSize(step: number) {
   const s = clampTextSizeStep(step);
   localStorage.setItem(TEXT_SIZE_STORAGE_KEY, String(s));
   applyTextSizeToDocument(s);
+}
+
+/** @deprecated Use `readThemeFromStorage().accentHex` — kept for preset label lookup. */
+export function parseHueFromStorage(raw: string | null) {
+  return parseThemeHueFromStorage(raw);
 }
