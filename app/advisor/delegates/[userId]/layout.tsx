@@ -22,7 +22,7 @@ export default async function AdvisorDelegateLayout({ children, params }: PagePr
   return (
     <>
       <AdvisorDelegateSubnav assignment={assignment} delegateUserId={userId} />
-      <AppleLayoutWrapper appName={getAppName()} mode="minimal">
+      <AppleLayoutWrapper appName={getAppName()} mode="minimal" contentClassName="space-y-6">
         {children}
       </AppleLayoutWrapper>
     </>

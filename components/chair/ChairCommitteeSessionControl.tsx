@@ -18,6 +18,7 @@ import { HelpButton } from "@/components/HelpButton";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
+import { useNowMs } from "@/lib/hooks/useNowMs";
 
 type EndMode = "none" | "duration" | "until";
 
@@ -84,7 +85,6 @@ export function ChairCommitteeSessionControl({
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
   const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
-  const [sessionUiTick, setTick] = useState(0);
 
   function isSessionColumnCacheError(message: string | null | undefined): boolean {
     const m = String(message ?? "");
@@ -104,10 +104,13 @@ export function ChairCommitteeSessionControl({
     );
   }
 
-  function friendlySessionColumnError(message: string | null | undefined): string | null {
-    if (!isSessionColumnCacheError(message)) return null;
-    return t("migrationUnavailable");
-  }
+  const friendlySessionColumnError = useCallback(
+    (message: string | null | undefined): string | null => {
+      if (!isSessionColumnCacheError(message)) return null;
+      return t("migrationUnavailable");
+    },
+    [t]
+  );
 
   const refresh = useCallback(async () => {
     const { data, error } = await supabase
@@ -192,7 +195,7 @@ export function ChairCommitteeSessionControl({
         setTitleSaveStatus((prev) => (prev === "saved" ? "idle" : prev));
       }, 2000);
     },
-    [supabase, conferenceId, supportsSessionStartColumn]
+    [supabase, conferenceId, supportsSessionStartColumn, friendlySessionColumnError]
   );
 
   function schedulePersistSessionTitle(raw: string) {
@@ -254,12 +257,6 @@ export function ChairCommitteeSessionControl({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, refresh]);
-
-  useEffect(() => {
-    if (!startedAt) return;
-    const id = window.setInterval(() => setTick((n) => n + 1), 1000);
-    return () => window.clearInterval(id);
-  }, [startedAt]);
 
   function buildTimingPayload(): {
     committee_session_duration_seconds: number | null;
@@ -365,19 +362,19 @@ export function ChairCommitteeSessionControl({
   }
 
   const live = Boolean(startedAt);
-  const nowMs = Date.now();
+  const nowMs = useNowMs(live);
   const activeDurationSeconds = endMode === "duration" ? clampDurationSeconds(durHours, durMinutes) : null;
   const activeEndsAtIso = endMode === "until" ? (endsAtLocal.trim() ? new Date(endsAtLocal).toISOString() : null) : null;
   const endMs = live && startedAt
     ? committeeSessionEndTimestampMs(startedAt, activeDurationSeconds, activeEndsAtIso)
     : null;
-  const elapsedText = live && startedAt ? formatSessionElapsed(startedAt, nowMs) : null;
-  const countdown = endMs != null ? formatCountdownOrElapsed(endMs, nowMs) : null;
+  const elapsedText = live && startedAt && nowMs > 0 ? formatSessionElapsed(startedAt, nowMs) : null;
+  const countdown = endMs != null && nowMs > 0 ? formatCountdownOrElapsed(endMs, nowMs) : null;
 
   useTimerExpiryAlarmWhenEndMsCrosses({
     endMs,
     watch: Boolean(live && endMs != null),
-    clockTick: sessionUiTick,
+    clockTick: nowMs,
   });
 
   const fieldWrap =

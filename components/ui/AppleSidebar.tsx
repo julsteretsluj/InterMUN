@@ -3,6 +3,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { ChevronDown, ChevronRight, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -119,6 +120,7 @@ type AppleSidebarRowProps = {
   chevron?: boolean;
   indent?: boolean;
   className?: string;
+  href?: string;
   onClick?: () => void;
 };
 
@@ -132,30 +134,55 @@ export function AppleSidebarRow({
   chevron = false,
   indent = false,
   className,
+  href,
   onClick,
 }: AppleSidebarRowProps) {
-  const Component = onClick ? "button" : "div";
+  const rowClassName = cn(
+    "mun-apple-sidebar-row",
+    selected && "is-selected",
+    disabled && "is-disabled",
+    indent && "is-indented",
+    (onClick || href) && "is-interactive",
+    className
+  );
 
-  return (
-    <Component
-      type={onClick ? "button" : undefined}
-      role="listitem"
-      disabled={disabled}
-      onClick={onClick}
-      className={cn(
-        "mun-apple-sidebar-row",
-        selected && "is-selected",
-        disabled && "is-disabled",
-        indent && "is-indented",
-        onClick && "is-interactive",
-        className
-      )}
-    >
+  const content = (
+    <>
       {leading ? <span className="mun-apple-sidebar-row-leading">{leading}</span> : null}
       <span className="mun-apple-sidebar-row-title">{title}</span>
       {detail ? <span className="mun-apple-sidebar-row-detail">{detail}</span> : null}
       {trailing ? <span className="mun-apple-sidebar-row-trailing">{trailing}</span> : null}
-      {chevron ? <ChevronRight className="mun-apple-sidebar-row-chevron h-3.5 w-3.5" strokeWidth={2.25} aria-hidden /> : null}
-    </Component>
+      {chevron ? (
+        <ChevronRight className="mun-apple-sidebar-row-chevron h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
+      ) : null}
+    </>
+  );
+
+  if (href && !disabled) {
+    return (
+      <Link
+        href={href}
+        role="listitem"
+        className={rowClassName}
+        aria-current={selected ? "page" : undefined}
+        onClick={onClick}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <button type="button" role="listitem" disabled={disabled} onClick={onClick} className={rowClassName}>
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div role="listitem" className={rowClassName}>
+      {content}
+    </div>
   );
 }

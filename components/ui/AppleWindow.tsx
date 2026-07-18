@@ -114,7 +114,7 @@ export function AppleWindow({
         />
       ) : null}
       <div className={cn("mun-apple-window-content", contentClassName)}>{children}</div>
-      {footer ? <footer className="mun-apple-window-footer">{footer}</footer> : null}
+      {footer ? <div className="mun-apple-window-footer">{footer}</div> : null}
       {resizable ? <span className="mun-apple-window-resize" aria-hidden /> : null}
     </section>
   );
@@ -137,7 +137,9 @@ export function AppleWindowWithSidebar({
 }: AppleWindowWithSidebarProps) {
   return (
     <AppleWindow {...windowProps} contentClassName={cn("mun-apple-window-content-split", contentClassName)}>
-      {showSidebar ? <aside className={cn("mun-apple-window-sidebar", sidebarClassName)}>{sidebar}</aside> : null}
+      {showSidebar ? (
+        <div className={cn("mun-apple-window-sidebar flex flex-col", sidebarClassName)}>{sidebar}</div>
+      ) : null}
       <div className="mun-apple-window-main">{children}</div>
     </AppleWindow>
   );

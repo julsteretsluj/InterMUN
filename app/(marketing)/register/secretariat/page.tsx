@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { SecretariatRegistrationPageClient } from "@/components/registration/SecretariatRegistrationPageClient";
 import { getAppName } from "@/lib/branding";
 

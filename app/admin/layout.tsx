@@ -1,20 +1,16 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
-import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import {
   ADMIN_NAV_HREF_ORDER,
   sortNavByHrefPriority,
   withSequentialPriority,
 } from "@/lib/nav-priority-order";
 import { createClient } from "@/lib/supabase/server";
-import { SignOutButton } from "@/components/SignOutButton";
-import { AccessibilitySelector } from "@/components/AccessibilitySelector";
-import { ThemeSelector } from "@/components/ThemeSelector";
 import { isAdminRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { getActiveEventId } from "@/lib/active-event-cookie";
-import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { AppleAppFrame } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
+import { AdminAppChrome } from "@/components/admin/AdminAppChrome";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -60,48 +56,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <AppleAppFrame appName={appName}>
-    <div className="min-h-screen text-brand-navy">
-      <header className="mun-apple-material mun-apple-material-thin flex flex-col border-b-0">
-        <div className="orbit-rail-h" aria-hidden />
-        <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <span className="mun-apple-text mun-apple-text-headline !mb-0">Welcome Admin</span>
-          <nav className="flex flex-wrap items-center gap-1 text-sm sm:gap-3">
-            {adminNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-label={`${item.priority}. ${item.label}`}
-                className="nav-priority-link relative rounded-md px-2 py-1 pl-8 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
-              >
-                <NavPriorityBadge priority={item.priority} />
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <AccessibilitySelector />
-            <ThemeSelector />
-            <SignOutButton className="text-brand-muted hover:text-brand-diplomatic dark:hover:text-brand-accent-bright" />
-          </div>
-        </div>
-        {activeEvent ? (
-          <div className="w-full border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">
-            Active event: <span className="font-medium text-brand-navy">{activeEvent.name}</span> · code{" "}
-            <span className="font-mono text-brand-accent-bright">{activeEvent.event_code}</span>
-          </div>
-        ) : null}
-        <div className="w-full border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">
-          First admin account is assigned in the database (see migration comments). Never share the service role
-          key.
-        </div>
-      </header>
-      <main className="w-full px-4 py-6">
-        <AppleLayoutWrapper appName={appName} mode="minimal">
-          {children}
-        </AppleLayoutWrapper>
-      </main>
+      <AdminAppChrome
+        appName={appName}
+        navItems={adminNav}
+        activeEventName={activeEvent?.name ?? null}
+        activeEventCode={activeEvent?.event_code ?? null}
+      >
+        {children}
+      </AdminAppChrome>
       <PaperSavedWidget />
-    </div>
     </AppleAppFrame>
   );
 }

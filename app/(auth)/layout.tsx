@@ -3,7 +3,9 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
-import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { AppleAppFrame } from "@/components/ui/AppleAppShell";
+import { AppleProductPage } from "@/components/ui/AppleProductPage";
+import { AppleWindow } from "@/components/ui/AppleWindow";
 import { getAppName } from "@/lib/branding";
 import { openingOrbUrl } from "@/lib/opening-orb";
 
@@ -17,25 +19,32 @@ export default async function AuthLayout({
 
   return (
     <MarketingOpening>
-      <div className="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-10">
-        <link rel="preload" href={openingOrbUrl(0)} as="image" />
-        <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
-        <div className="relative w-full max-w-5xl space-y-6">
-          <div className="flex items-center justify-between gap-3">
-            <Link
-              href="/"
-              className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm"
+      <AppleAppFrame appName={appName}>
+        <AppleProductPage width="narrow" className="relative min-h-screen py-8 md:py-12">
+          <link rel="preload" href={openingOrbUrl(0)} as="image" />
+          <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
+          <div className="relative space-y-6">
+            <div className="flex items-center justify-between gap-3">
+              <Link
+                href="/"
+                className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm"
+              >
+                <ChevronLeft className="size-4 shrink-0" aria-hidden />
+                {t("backToHome")}
+              </Link>
+              <PublicPageControls compact />
+            </div>
+            <AppleWindow
+              title={appName}
+              showControls
+              resizable={false}
+              contentClassName="mun-apple-page-body p-4 md:p-6"
             >
-              <ChevronLeft className="size-4 shrink-0" aria-hidden />
-              {t("backToHome")}
-            </Link>
-            <PublicPageControls />
+              {children}
+            </AppleWindow>
           </div>
-          <AppleLayoutWrapper appName={appName} mode="chrome" title={appName}>
-            {children}
-          </AppleLayoutWrapper>
-        </div>
-      </div>
+        </AppleProductPage>
+      </AppleAppFrame>
     </MarketingOpening>
   );
 }

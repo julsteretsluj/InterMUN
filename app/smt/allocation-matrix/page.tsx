@@ -100,7 +100,7 @@ export default async function SmtAllocationMatrixPage({
     );
   }
 
-  let { data: conferences } = await supabase
+  const { data: conferences } = await supabase
     .from("conferences")
     .select("id, name, committee, committee_code")
     .eq("event_id", eventId)

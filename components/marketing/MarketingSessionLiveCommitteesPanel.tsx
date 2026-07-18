@@ -115,9 +115,11 @@ export function MarketingSessionLiveCommitteesPanel({
     [tNames]
   );
 
-  let priority = 0;
-
   const sections = useMemo(() => FIXTURE_SECTIONS, []);
+  const itemPriorityById = useMemo(() => {
+    const items = sections.flatMap((section) => section.items);
+    return new Map(items.map((item, index) => [item.id, index + 1] as const));
+  }, [sections]);
 
   return (
     <section
@@ -154,8 +156,7 @@ export function MarketingSessionLiveCommitteesPanel({
             </div>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {section.items.map((item) => {
-                priority += 1;
-                const cardPriority = priority;
+                const cardPriority = itemPriorityById.get(item.id) ?? 1;
                 const selected = selectedId === item.id;
                 const tags = resolveCommitteeDisplayTags(item.committee);
                 const localizedFull = localizeKnownCommitteeFullName(

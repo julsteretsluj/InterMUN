@@ -19,6 +19,7 @@ import {
   formatCountdownOrElapsed,
 } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
+import { useNowMs } from "@/lib/hooks/useNowMs";
 import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
 
 type Announcement = {
@@ -92,8 +93,6 @@ export function FloorStatusBar({
   const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
   const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
   const [activeTopicLabel, setActiveTopicLabel] = useState<string | null>(null);
-  /** Bumps once per second while a session is running (or a limit is set) so timers update. */
-  const [sessionTick, setSessionTick] = useState(0);
 
   const loadProcedureSession = useCallback(() => {
     return supabase
@@ -258,17 +257,13 @@ export function FloorStatusBar({
       ? committeeSessionEndTimestampMs(sessionStartedAt, sessionDurationSeconds, sessionEndsAt)
       : null;
 
+  const nowMs = useNowMs(Boolean(sessionStartedAt));
+
   useTimerExpiryAlarmWhenEndMsCrosses({
     endMs: sessionEndMs,
     watch: Boolean(sessionStartedAt && sessionEndMs != null),
-    clockTick: sessionTick,
+    clockTick: nowMs,
   });
-
-  useEffect(() => {
-    if (!sessionStartedAt) return;
-    const id = window.setInterval(() => setSessionTick((n) => n + 1), 1000);
-    return () => window.clearInterval(id);
-  }, [sessionStartedAt]);
 
   useEffect(() => {
     const t = window.setInterval(() => {
@@ -361,10 +356,9 @@ export function FloorStatusBar({
     ? "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy"
     : "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy";
 
-  const limitNow = Date.now();
   const limitFmt =
-    sessionStartedAt != null && sessionEndMs != null
-      ? formatCountdownOrElapsed(sessionEndMs, limitNow)
+    sessionStartedAt != null && sessionEndMs != null && nowMs > 0
+      ? formatCountdownOrElapsed(sessionEndMs, nowMs)
       : null;
   const quickLinkLabel = useCallback(
     (
@@ -414,7 +408,9 @@ export function FloorStatusBar({
     >
       <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
       <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
-        {sessionStartedAt ? formatSessionElapsed(sessionStartedAt, limitNow) : t("sessionNotStarted")}
+        {sessionStartedAt && nowMs > 0
+          ? formatSessionElapsed(sessionStartedAt, nowMs)
+          : t("sessionNotStarted")}
       </span>
       {sessionStartedAt && limitFmt ? (
         <>

@@ -49,7 +49,7 @@ export function AppleTabBar({
       className={cn(
         "mun-apple-tab-bar",
         variant === "iphone" ? "mun-apple-tab-bar-iphone" : "mun-apple-tab-bar-ipad",
-        className
+        !floating && className
       )}
       aria-label={ariaLabel}
     >
@@ -102,7 +102,11 @@ export function AppleTabBar({
 
   if (!floating) return bar;
 
-  return <div className="mun-apple-tab-bar-host mun-apple-tab-bar-host-floating">{bar}</div>;
+  return (
+    <div className={cn("mun-apple-tab-bar-host mun-apple-tab-bar-host-floating", className)}>
+      {bar}
+    </div>
+  );
 }
 
 type AppleTabBarAccessoryProps = {

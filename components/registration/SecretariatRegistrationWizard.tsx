@@ -26,7 +26,6 @@ import {
   openMailto,
   shareTextNative,
 } from "@/lib/secretariat-registration-share";
-import { cn } from "@/lib/utils";
 import { EventDateRangeField } from "@/components/registration/EventDateRangeField";
 import { AppleActivityView } from "@/components/ui/AppleActivityView";
 import { AppleConfirmSheet } from "@/components/ui/AppleSheet";
@@ -47,7 +46,6 @@ import { AppleFileField } from "@/components/ui/AppleFileField";
 import { AppleHelpPopover } from "@/components/ui/ApplePopover";
 import { AppleSegmentedControl } from "@/components/ui/AppleSegmentedControl";
 import { AppleStepper, AppleStepperField } from "@/components/ui/AppleStepper";
-import { AppleTabBar } from "@/components/ui/AppleTabBar";
 import {
   AppleToolbarBackButton,
   AppleToolbarBottom,
@@ -84,13 +82,6 @@ const STEP_ICONS: Record<StepId, ReactNode> = {
   uploads: <Upload className="h-4 w-4" strokeWidth={2} aria-hidden />,
   matrix: <Grid3x3 className="h-4 w-4" strokeWidth={2} aria-hidden />,
   review: <CheckCircle2 className="h-4 w-4" strokeWidth={2} aria-hidden />,
-};
-
-const GROUP_ICONS: Record<(typeof STEP_GROUPS)[number]["id"], ReactNode> = {
-  basics: <User className="h-4 w-4" strokeWidth={2} aria-hidden />,
-  setup: <Sparkles className="h-4 w-4" strokeWidth={2} aria-hidden />,
-  files: <Upload className="h-4 w-4" strokeWidth={2} aria-hidden />,
-  finish: <CheckCircle2 className="h-4 w-4" strokeWidth={2} aria-hidden />,
 };
 
 const STEP_HELP_KEYS: Partial<Record<StepId, "featuresHelp" | "committeesHelp" | "ropUploadHelp" | "matrixHelp">> = {
@@ -160,30 +151,19 @@ function optionalCountDisplay(raw: string): string {
   return value === 0 ? "—" : String(value);
 }
 
-function getActiveGroupId(currentStep: StepId) {
-  return STEP_GROUPS.find((group) => group.steps.some((stepId) => stepId === currentStep))?.id ?? STEP_GROUPS[0]!.id;
-}
-
-function getGroupMinStepIndex(group: (typeof STEP_GROUPS)[number]) {
-  return Math.min(...group.steps.map((stepId) => STEPS.indexOf(stepId)));
-}
-
 export function SecretariatRegistrationWizard({
   className,
-  appName = "InterMUN",
 }: {
   className?: string;
   appName?: string;
 }) {
-  return <SecretariatRegistrationWizardInner className={className} appName={appName} />;
+  return <SecretariatRegistrationWizardInner className={className} />;
 }
 
 function SecretariatRegistrationWizardInner({
   className,
-  appName,
 }: {
   className?: string;
-  appName: string;
 }) {
   const t = useTranslations("secretariatRegistration");
   const tCommon = useTranslations("common");
@@ -398,26 +378,6 @@ function SecretariatRegistrationWizardInner({
     goToStep(Math.max(stepIndex - 1, 0));
   }
 
-  function goToGroup(groupId: string) {
-    const group = STEP_GROUPS.find((entry) => entry.id === groupId);
-    if (!group) return;
-    const indices = group.steps.map((stepId) => STEPS.indexOf(stepId));
-    const accessible = indices.filter((index) => index <= stepIndex);
-    const targetIndex = accessible.length > 0 ? Math.max(...accessible) : Math.min(...indices);
-    goToStep(targetIndex);
-  }
-
-  const activeGroupId = getActiveGroupId(step);
-  const tabBarItems = useMemo(
-    () =>
-      STEP_GROUPS.map((group) => ({
-        id: group.id,
-        label: t(group.labelKey),
-        icon: GROUP_ICONS[group.id],
-        disabled: getGroupMinStepIndex(group) > stepIndex,
-      })),
-    [t, stepIndex]
-  );
   const stepHelpKey = STEP_HELP_KEYS[step];
   const toolbarTrailing = stepHelpKey ? (
     <AppleHelpPopover label={t("popoverHelpLabel")}>{t(stepHelpKey)}</AppleHelpPopover>
@@ -451,6 +411,10 @@ function SecretariatRegistrationWizardInner({
         />
       ),
   };
+
+  const wizardFooter = (
+    <AppleToolbarBottom {...toolbarBottomProps} />
+  );
 
   async function submit() {
     if (!validateStep("contact") || !validateStep("committees") || form.selectedFeatures.length === 0) {
@@ -621,12 +585,15 @@ function SecretariatRegistrationWizardInner({
   }
 
   return (
-    <div className={cn("gap-8", className)}>
+    <>
     <AppleWindowWithSidebar
+      className={className}
+      resizable={false}
       title={t(`step_${step}`)}
       subtitle={t("toolbarStepSubtitle", { current: stepIndex + 1, total: STEPS.length })}
       trailing={toolbarTrailing}
-      sidebarClassName="hidden md:flex"
+      footer={wizardFooter}
+      sidebarClassName="hidden md:flex flex-col"
       sidebar={
         <AppleSidebar className="h-full min-h-0 w-full" aria-label={t("menuStepsSection")}>
           {STEP_GROUPS.map((group) => (
@@ -662,9 +629,7 @@ function SecretariatRegistrationWizardInner({
         </AppleSidebar>
       }
     >
-      <div className="min-w-0 flex-1 space-y-4 p-4 pb-[calc(9.5rem+env(safe-area-inset-bottom,0px))] md:space-y-5 md:p-6 md:pb-6">
-
-      <GlassPanel className="space-y-6 overflow-visible" material="regular" interactive={false}>
+      <div className="mun-apple-wizard-step min-w-0 flex-1 space-y-6 p-4 md:p-6">
         {step === "contact" ? (
           <AppleTextFieldGroup>
             <AppleTextField
@@ -1063,12 +1028,10 @@ function SecretariatRegistrationWizardInner({
             </p>
           </div>
         ) : null}
+      </div>
+    </AppleWindowWithSidebar>
 
-      </GlassPanel>
-
-      <AppleToolbarBottom {...toolbarBottomProps} floating className="mt-4 md:mt-5" />
-
-      <AppleConfirmSheet
+    <AppleConfirmSheet
         open={removeTopicTarget !== null}
         onOpenChange={(open) => {
           if (!open) setRemoveTopicTarget(null);
@@ -1097,18 +1060,6 @@ function SecretariatRegistrationWizardInner({
           void submit();
         }}
       />
-      </div>
-    </AppleWindowWithSidebar>
-
-    <AppleTabBar
-      variant="iphone"
-      floating
-      className="md:hidden"
-      items={tabBarItems}
-      value={activeGroupId}
-      onValueChange={goToGroup}
-      aria-label={t("tabBarLabel")}
-    />
-    </div>
+    </>
   );
 }

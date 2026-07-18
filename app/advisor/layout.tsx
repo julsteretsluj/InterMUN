@@ -109,7 +109,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
             </div>
           )}
           <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
-            <AppleLayoutWrapper appName={appName} mode="minimal">
+            <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="space-y-6">
               {children}
             </AppleLayoutWrapper>
           </main>

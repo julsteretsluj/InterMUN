@@ -303,40 +303,38 @@ export async function MarketingHome() {
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10">
-        <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
+      <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10 pb-16 md:pb-20">
         <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
-        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 md:px-6 md:py-14 lg:py-16">
           <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
             <div className="mun-marketing-hero-copy order-2 lg:order-1">
-              <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[3.25rem] xl:text-6xl">
+              <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
+              <h1 className="mun-apple-text mun-apple-text-large-title-emphasized mt-4 text-white md:text-[2.75rem] lg:text-[3.25rem]">
                 <span className="block">{t("hero.title")}</span>
-                <MarketingEmph className="mt-2 block text-[1.35em] leading-none md:mt-3">
+                <MarketingEmph className="mt-2 block text-[1.2em] leading-none md:mt-3">
                   {t("hero.titleEmphasis")}
                 </MarketingEmph>
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/register/secretariat"
-                  className="mun-btn-primary rounded-full px-6 py-3 text-base font-semibold shadow-[0_12px_32px_-12px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
-                >
-                  {t("hero.ctaStart")} →
-                </Link>
-                <Link
-                  href="/login"
-                  className="rounded-full border border-white/20 bg-white/8 px-6 py-3 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/12"
-                >
-                  {t("hero.ctaJoin")} →
-                </Link>
+              <p className="mun-apple-text mun-apple-text-body mt-5 max-w-xl text-white/70">{t("hero.subtitle")}</p>
+              <div className="mun-marketing-hero-actions mt-8 flex flex-col items-start gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link href="/register/secretariat" className="mun-apple-btn mun-apple-btn-filled-blue px-6 py-2.5 text-base">
+                    {t("hero.ctaStart")} →
+                  </Link>
+                  <Link
+                    href="/login"
+                    className="mun-apple-btn mun-apple-btn-glass-gray px-6 py-2.5 text-base text-white"
+                  >
+                    {t("hero.ctaJoin")} →
+                  </Link>
+                </div>
+                <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
+                  <li className="mun-procedure-chip">{t("hero.chip1")}</li>
+                  <li className="mun-procedure-chip">{t("hero.chip2")}</li>
+                  <li className="mun-procedure-chip">{t("hero.chip3")}</li>
+                </ul>
               </div>
-              <ul className="mt-8 flex flex-wrap gap-2">
-                <li className="mun-procedure-chip">{t("hero.chip1")}</li>
-                <li className="mun-procedure-chip">{t("hero.chip2")}</li>
-                <li className="mun-procedure-chip">{t("hero.chip3")}</li>
-              </ul>
             </div>
 
             <div className="mun-marketing-hero-visual order-1 flex justify-center lg:order-2 lg:justify-end">

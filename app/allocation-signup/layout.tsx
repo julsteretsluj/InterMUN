@@ -1,10 +1,23 @@
-import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { AppleAppFrame } from "@/components/ui/AppleAppShell";
+import { AppleProductPage } from "@/components/ui/AppleProductPage";
+import { AppleWindow } from "@/components/ui/AppleWindow";
 import { getAppName } from "@/lib/branding";
 
 export default function AllocationSignupLayout({ children }: { children: React.ReactNode }) {
+  const appName = getAppName();
+
   return (
-    <AppleLayoutWrapper appName={getAppName()} mode="chrome" title={getAppName()}>
-      {children}
-    </AppleLayoutWrapper>
+    <AppleAppFrame appName={appName}>
+      <AppleProductPage width="narrow" className="min-h-screen py-8 md:py-12">
+        <AppleWindow
+          title={appName}
+          showControls
+          resizable={false}
+          contentClassName="mun-apple-page-body p-4 md:p-6"
+        >
+          {children}
+        </AppleWindow>
+      </AppleProductPage>
+    </AppleAppFrame>
   );
 }
