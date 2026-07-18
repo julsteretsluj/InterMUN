@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
@@ -57,31 +57,47 @@ export function StancesView({
   const supabase = createClient();
   const stanceNoteFlaggedTerms = detectInappropriateTerms(noteContent);
 
-  useEffect(() => {
+  // Server-prop syncs below adjust state during render (not in effects); each
+  // tracks the same inputs the old effect dependency arrays did.
+  const [prevAllocations, setPrevAllocations] = useState(allocations);
+  if (allocations !== prevAllocations) {
+    setPrevAllocations(allocations);
     setSelectedAllocation((prev) => {
       if (!prev) return prev;
       const next = allocations.find((a) => a.id === prev.id);
       return next ?? prev;
     });
-  }, [allocations]);
+  }
 
-  useEffect(() => {
-    if (!selectedAllocation?.user_id) return;
-    const uid = selectedAllocation.user_id;
-    const row = stanceOverviewByUser[uid];
-    if (row) setStanceData(row);
-  }, [selectedAllocation?.user_id, stanceOverviewByUser]);
+  const selectedUid = selectedAllocation?.user_id ?? null;
+  const [prevSelSync, setPrevSelSync] = useState({ uid: selectedUid, rows: stanceOverviewByUser });
+  if (prevSelSync.uid !== selectedUid || prevSelSync.rows !== stanceOverviewByUser) {
+    setPrevSelSync({ uid: selectedUid, rows: stanceOverviewByUser });
+    if (selectedUid) {
+      const row = stanceOverviewByUser[selectedUid];
+      if (row) setStanceData(row);
+    }
+  }
 
-  useEffect(() => {
-    if (!canEdit) return;
-    const row = stanceOverviewByUser[currentUserId];
-    if (row) setStanceData(row);
-  }, [canEdit, stanceOverviewByUser, currentUserId]);
+  const [prevOwnSync, setPrevOwnSync] = useState({ canEdit, rows: stanceOverviewByUser, uid: currentUserId });
+  if (
+    prevOwnSync.canEdit !== canEdit ||
+    prevOwnSync.rows !== stanceOverviewByUser ||
+    prevOwnSync.uid !== currentUserId
+  ) {
+    setPrevOwnSync({ canEdit, rows: stanceOverviewByUser, uid: currentUserId });
+    if (canEdit) {
+      const row = stanceOverviewByUser[currentUserId];
+      if (row) setStanceData(row);
+    }
+  }
 
-  useEffect(() => {
+  const [prevMapSync, setPrevMapSync] = useState({ uid: countryMapUserId, rows: countryStanceMapByUser });
+  if (prevMapSync.uid !== countryMapUserId || prevMapSync.rows !== countryStanceMapByUser) {
+    setPrevMapSync({ uid: countryMapUserId, rows: countryStanceMapByUser });
     const row = countryStanceMapByUser[countryMapUserId];
     if (row) setCountryStanceMap(row);
-  }, [countryMapUserId, countryStanceMapByUser]);
+  }
 
   async function persistCountryStanceMap(next: CountryStanceMap) {
     setMutationError(null);

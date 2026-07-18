@@ -110,7 +110,6 @@ export function RoomCodesAndChairsClient({
   adminInviteConfigured: boolean;
 }) {
   const t = useTranslations("smtRoomCodesClient");
-  const tCommon = useTranslations("common");
   const tCommitteeLabels = useTranslations("committeeNames.labels");
   const chairRoleOptions = useMemo(
     () =>

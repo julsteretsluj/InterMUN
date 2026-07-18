@@ -224,11 +224,15 @@ export function ChairDashboardSidebar({
   const [labelsHidden, setLabelsHidden] = useState(false);
 
   useEffect(() => {
-    try {
-      setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
-    } catch {
-      setLabelsHidden(false);
-    }
+    // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
+      } catch {
+        setLabelsHidden(false);
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const toggleLabels = useCallback(() => {
@@ -451,11 +455,15 @@ export function ChairMobileDock({
   const [labelsHidden, setLabelsHidden] = useState(false);
 
   useEffect(() => {
-    try {
-      setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
-    } catch {
-      setLabelsHidden(false);
-    }
+    // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
+      } catch {
+        setLabelsHidden(false);
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const toggleLabels = useCallback(() => {

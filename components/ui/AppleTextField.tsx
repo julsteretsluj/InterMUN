@@ -4,7 +4,7 @@
 "use client";
 
 import { CircleX } from "lucide-react";
-import { useId, useState, type InputHTMLAttributes, type ReactNode, type TextareaHTMLAttributes } from "react";
+import { useId, useState, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type AppleTextFieldGroupProps = {

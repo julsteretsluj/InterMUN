@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { renameDelegationNoteThreadAction } from "@/app/actions/delegationNoteThreads";
@@ -118,9 +118,13 @@ export function DelegationNoteThreadDialog({
   const showNaming = canNameThread(messageCount);
   const title = threadListTitle(group, topicLabel, labels.unnamedChat);
 
-  useEffect(() => {
-    setNameText(group.meta?.display_name ?? "");
-  }, [group.meta?.display_name]);
+  // Re-sync the name draft from the server value (adjust state during render).
+  const serverDisplayName = group.meta?.display_name ?? "";
+  const [prevDisplayName, setPrevDisplayName] = useState(serverDisplayName);
+  if (serverDisplayName !== prevDisplayName) {
+    setPrevDisplayName(serverDisplayName);
+    setNameText(serverDisplayName);
+  }
 
   async function saveName() {
     if (!group.meta?.id) return;

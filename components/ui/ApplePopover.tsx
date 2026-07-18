@@ -245,11 +245,9 @@ export function ApplePopoverContent({
   }, []);
 
   useLayoutEffect(() => {
-    if (!open) {
-      setPlacement(null);
-      setFitLevel(0);
-      return;
-    }
+    // No reset needed on close: the panel unmounts, and reopening recomputes
+    // placement in this layout effect before paint.
+    if (!open) return;
 
     function resolvedPanelWidth(triggerRect: DOMRect) {
       if (matchAnchorWidth) {

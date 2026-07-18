@@ -67,12 +67,16 @@ export function OrbAnimationOverlay({
     loopIndexRef.current = loopIndex;
   }, [loopIndex]);
 
-  useEffect(() => {
+  // Restart the loop counter when a new play is requested (adjust state during render).
+  const [prevPlayKey, setPrevPlayKey] = useState(playKey);
+  if (playKey !== prevPlayKey) {
+    setPrevPlayKey(playKey);
     setLoopIndex(0);
-  }, [playKey]);
+  }
 
   useEffect(() => {
-    setMounted(true);
+    const frame = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -134,6 +138,22 @@ export function OrbAnimationOverlay({
     window.setTimeout(() => finishPlayback(generation), ORB_ANIMATION_FADE_MS);
   }, [finishPlayback]);
 
+  // State transitions for open/close and per-loop reloads happen during render;
+  // the effect below only handles imperative work (timers, fetch, object URLs, DOM).
+  const [prevLoadKey, setPrevLoadKey] = useState<string | null>(null);
+  const loadKeySignature = open ? `${playKey}:${loopIndex}` : null;
+  if (loadKeySignature !== prevLoadKey) {
+    setPrevLoadKey(loadKeySignature);
+    if (loadKeySignature === null) {
+      setPhase("closed");
+      setSrc(null);
+      setLoopIndex(0);
+    } else {
+      setPhase("loading");
+      setSrc(null);
+    }
+  }
+
   useEffect(() => {
     if (!open) {
       clearTimers();
@@ -144,9 +164,6 @@ export function OrbAnimationOverlay({
         objectUrlRef.current = null;
       }
       activeSrcRef.current = null;
-      setPhase("closed");
-      setSrc(null);
-      setLoopIndex(0);
       return;
     }
 
@@ -155,8 +172,6 @@ export function OrbAnimationOverlay({
     let cancelled = false;
 
     clearTimers();
-    setPhase("loading");
-    setSrc(null);
     activeSrcRef.current = null;
     document.body.style.overflow = "hidden";
 
@@ -260,6 +275,7 @@ export function OrbAnimationOverlay({
         </button>
       ) : null}
       {src ? (
+        // eslint-disable-next-line @next/next/no-img-element -- plays a blob object URL (GIF); next/image cannot optimize blob URLs
         <img
           key={`${playKey}-${loopIndex}-${src}`}
           src={src}

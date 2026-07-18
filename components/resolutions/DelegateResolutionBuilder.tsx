@@ -92,18 +92,20 @@ export function DelegateResolutionBuilder({
   }, [supabase, selectedResolutionId]);
 
   useEffect(() => {
-    void loadSuggestions();
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(loadSuggestions);
   }, [loadSuggestions]);
 
-  useEffect(() => {
-    if (resolutions.length && !resolutions.some((r) => r.id === selectedResolutionId)) {
-      setSelectedResolutionId(resolutions[0]!.id);
-    }
-  }, [resolutions, selectedResolutionId]);
-
-  useEffect(() => {
+  // Keep the selection valid and reset the opening phrase when the section
+  // changes (adjust state during render, not in effects).
+  if (resolutions.length && !resolutions.some((r) => r.id === selectedResolutionId)) {
+    setSelectedResolutionId(resolutions[0]!.id);
+  }
+  const [prevSection, setPrevSection] = useState(section);
+  if (section !== prevSection) {
+    setPrevSection(section);
     setOpening("");
-  }, [section]);
+  }
 
   async function mergeSuggestion(s: SuggestionRow) {
     if (!canMergeToOfficial || !selectedResolution) return;

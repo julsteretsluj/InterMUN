@@ -251,12 +251,15 @@ export function ProfileForm({
       ? profile.pronouns.trim()
       : null;
 
-  useEffect(() => {
-    if (!profile) return;
-    // Keep preview URL in sync when server profile updates (e.g. after refresh).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProfilePictureUrl(profile.profile_picture_url || "");
-  }, [profile?.id, profile?.profile_picture_url, profile?.updated_at]);
+  // Keep preview URL in sync when the server profile updates (adjust state during render).
+  const pictureSyncKey = profile
+    ? `${profile.id}\u0000${profile.profile_picture_url ?? ""}\u0000${profile.updated_at ?? ""}`
+    : null;
+  const [prevPictureSyncKey, setPrevPictureSyncKey] = useState(pictureSyncKey);
+  if (pictureSyncKey !== prevPictureSyncKey) {
+    setPrevPictureSyncKey(pictureSyncKey);
+    if (profile) setProfilePictureUrl(profile.profile_picture_url || "");
+  }
 
   async function onSubmit(data: FormData) {
     setSubmitFeedback(null);

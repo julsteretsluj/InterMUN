@@ -1,8 +1,11 @@
-/** @type {import('next').NextConfig} */
-const path = require("path");
-const createNextIntlPlugin = require("next-intl/plugin");
-const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import createNextIntlPlugin from "next-intl/plugin";
 
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
@@ -23,4 +26,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);

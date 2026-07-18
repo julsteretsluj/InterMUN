@@ -3,7 +3,6 @@
 
 "use server";
 
-import { z } from "zod";
 import { getTranslations } from "next-intl/server";
 import { getSecretariatRegistrationNotifyEmails, getAppName } from "@/lib/branding";
 import { sendTransactionalEmail } from "@/lib/smtp";

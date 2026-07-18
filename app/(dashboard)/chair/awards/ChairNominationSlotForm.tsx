@@ -124,9 +124,17 @@ export function ChairNominationSlotForm({
   );
   const liveScoresRef = useRef(liveScores);
 
-  useEffect(() => {
+  // Re-seed live scores when the slot or server snapshot changes (adjust state during render).
+  const [prevScoreSync, setPrevScoreSync] = useState({ nominationType, nominationRowId, scoreSnapshot, keys });
+  if (
+    prevScoreSync.nominationType !== nominationType ||
+    prevScoreSync.nominationRowId !== nominationRowId ||
+    prevScoreSync.scoreSnapshot !== scoreSnapshot ||
+    prevScoreSync.keys !== keys
+  ) {
+    setPrevScoreSync({ nominationType, nominationRowId, scoreSnapshot, keys });
     setLiveScores(scoresFromMap(scoreMap, keys));
-  }, [nominationType, nominationRowId, scoreSnapshot, keys]);
+  }
 
   useEffect(() => {
     setNomineeId(selectedNomineeId);

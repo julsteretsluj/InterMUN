@@ -132,7 +132,6 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       allocations,
       variant,
       isEuParliament = false,
-      isCrisisCommittee = false,
       speakerListPromptKind = null,
       onDismissSpeakerListPrompt,
       onNotify,
@@ -166,7 +165,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }, [supabase, conferenceId]);
 
     useEffect(() => {
-      void loadQueue();
+      // Deferred to a microtask so state lands asynchronously (no sync cascade).
+      void Promise.resolve().then(loadQueue);
     }, [loadQueue]);
 
     useEffect(() => {

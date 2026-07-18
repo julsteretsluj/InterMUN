@@ -70,10 +70,9 @@ export function ThemeSelector({
   }, [open]);
 
   useLayoutEffect(() => {
-    if (!open) {
-      setPopoverBox(null);
-      return;
-    }
+    // No reset needed on close: the panel unmounts, and reopening recomputes
+    // the box in this layout effect before paint.
+    if (!open) return;
     function sync() {
       const el = btnRef.current;
       if (!el) return;

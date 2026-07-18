@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   maxRubricTotal,
   rubricBandInitials,
@@ -49,7 +49,10 @@ export function ChairNominationsPanel({
     conference_best_delegate: t("bestDelegateOverall"),
   };
 
-  const canonical = (rawConferenceId: string) => conferenceIdToCanonical[rawConferenceId] ?? rawConferenceId;
+  const canonical = useCallback(
+    (rawConferenceId: string) => conferenceIdToCanonical[rawConferenceId] ?? rawConferenceId,
+    [conferenceIdToCanonical]
+  );
 
   const countByCommittee = useMemo(() => {
     const m = new Map<string, number>();
@@ -58,12 +61,12 @@ export function ChairNominationsPanel({
       m.set(k, (m.get(k) ?? 0) + 1);
     }
     return m;
-  }, [nominations, conferenceIdToCanonical]);
+  }, [nominations, canonical]);
 
   const visibleNominations = useMemo(() => {
     if (committeeFilter === "all" || committeeTabs.length === 0) return nominations;
     return nominations.filter((n) => canonical(n.committee_conference_id) === committeeFilter);
-  }, [nominations, committeeFilter, committeeTabs.length, conferenceIdToCanonical]);
+  }, [nominations, committeeFilter, committeeTabs.length, canonical]);
 
   const tabBtn = (id: "all" | string, label: string, count: number, domId: string) => (
     <button

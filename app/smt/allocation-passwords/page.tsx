@@ -34,12 +34,6 @@ type AllocRow = {
   profiles: ProfileEmbed | ProfileEmbed[];
 };
 
-function embedName(p: ProfileEmbed | ProfileEmbed[]): string | null {
-  if (p == null) return null;
-  const row = Array.isArray(p) ? p[0] : p;
-  return row?.name?.trim() || null;
-}
-
 export default async function SmtAllocationPasswordsPage({
   searchParams,
 }: {

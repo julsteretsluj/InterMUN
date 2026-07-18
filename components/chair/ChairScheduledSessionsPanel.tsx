@@ -67,13 +67,17 @@ export function ChairScheduledSessionsPanel({
   const timeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(DAY_STORAGE_KEY);
-      if (stored === "2") setSelectedDay(2);
-    } catch {
-      /* ignore */
-    }
-    setSoundEnabled(readTimerExpiryAlarmEnabled());
+    // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        const stored = localStorage.getItem(DAY_STORAGE_KEY);
+        if (stored === "2") setSelectedDay(2);
+      } catch {
+        /* ignore */
+      }
+      setSoundEnabled(readTimerExpiryAlarmEnabled());
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const chooseDay = useCallback((day: 1 | 2) => {
@@ -156,7 +160,8 @@ export function ChairScheduledSessionsPanel({
     for (const item of scheduled) {
       const delay = item.at - now;
       if (delay <= 0 || delay > MAX_REMINDER_HORIZON_MS) continue;
-      const { at: _at, ...reminder } = item;
+      const { at, ...reminder } = item;
+      void at;
       const timeoutId = window.setTimeout(() => pushReminder(reminder), delay);
       timeoutsRef.current.push(timeoutId);
     }

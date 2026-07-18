@@ -76,6 +76,8 @@ export function ChairCommitteeSessionControl({
   const [titleSaveStatus, setTitleSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const titleDebounceRef = useRef<number | null>(null);
   const sessionTitleDirtyRef = useRef(false);
+  /** Mirrors sessionTitleDirtyRef for render-time prop syncing (refs can't be read in render). */
+  const [sessionTitleDirty, setSessionTitleDirty] = useState(false);
 
   const [endMode, setEndMode] = useState<EndMode>(() =>
     modeFromRow(initialDurationSeconds, initialEndsAt)
@@ -190,6 +192,7 @@ export function ChairCommitteeSessionControl({
         return;
       }
       sessionTitleDirtyRef.current = false;
+      setSessionTitleDirty(false);
       setTitleSaveStatus("saved");
       window.setTimeout(() => {
         setTitleSaveStatus((prev) => (prev === "saved" ? "idle" : prev));
@@ -207,12 +210,17 @@ export function ChairCommitteeSessionControl({
 
   function onSessionTitleChange(value: string) {
     sessionTitleDirtyRef.current = true;
+    setSessionTitleDirty(true);
     setSessionTitle(value);
     setTitleSaveStatus("idle");
     schedulePersistSessionTitle(value);
   }
 
-  useEffect(() => {
+  // Re-sync from fresh server props (adjust state during render, not in effects).
+  const initialTimingKey = `${initialStartedAt ?? ""}\u0000${initialDurationSeconds ?? ""}\u0000${initialEndsAt ?? ""}`;
+  const [prevTimingKey, setPrevTimingKey] = useState(initialTimingKey);
+  if (initialTimingKey !== prevTimingKey) {
+    setPrevTimingKey(initialTimingKey);
     setStartedAt(initialStartedAt);
     const m = modeFromRow(initialDurationSeconds, initialEndsAt);
     setEndMode(m);
@@ -225,13 +233,15 @@ export function ChairCommitteeSessionControl({
     }
     if (m === "until" && initialEndsAt) setEndsAtLocal(isoToDatetimeLocalValue(initialEndsAt));
     else setEndsAtLocal("");
-  }, [initialStartedAt, initialDurationSeconds, initialEndsAt]);
+  }
 
-  useEffect(() => {
-    if (!sessionTitleDirtyRef.current) {
+  const [prevInitialTitle, setPrevInitialTitle] = useState(initialSessionTitle ?? "");
+  if ((initialSessionTitle ?? "") !== prevInitialTitle) {
+    setPrevInitialTitle(initialSessionTitle ?? "");
+    if (!sessionTitleDirty) {
       setSessionTitle(initialSessionTitle ?? "");
     }
-  }, [initialSessionTitle]);
+  }
 
   useEffect(() => {
     return () => {
@@ -322,6 +332,7 @@ export function ChairCommitteeSessionControl({
         titleDebounceRef.current = null;
       }
       sessionTitleDirtyRef.current = false;
+      setSessionTitleDirty(false);
       const res = await stopCommitteeSessionAction({ conferenceId });
       if (res.error) {
         setMsg(res.error);

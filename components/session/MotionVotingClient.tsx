@@ -75,7 +75,8 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
   }, [supabase, voteItemId]);
 
   useEffect(() => {
-    void load();
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(load);
   }, [load]);
 
   useEffect(() => {

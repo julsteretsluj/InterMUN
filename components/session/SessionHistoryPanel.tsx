@@ -79,7 +79,8 @@ export function SessionHistoryPanel({
   }, [conferenceId, scopedConferenceIds, supabase]);
 
   useEffect(() => {
-    void load();
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(load);
     const subs = scopedConferenceIds.map((id) =>
       supabase
         .channel(`session-history-${id}`)

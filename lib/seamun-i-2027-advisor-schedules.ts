@@ -25,7 +25,6 @@ import {
 import {
   SEAMUN_I_2027_LUNCH_GROUPS,
   seamunI2027LunchGroupDefinition,
-  seamunI2027LunchGroupForChamber,
   seamunI2027LunchTimingTrack,
   type SeamunLunchGroupId,
 } from "@/lib/seamun-i-2027-lunch-groups";
@@ -163,7 +162,8 @@ const ADVISOR_SHARED_CATEGORIES = new Set<SeamunLockedBlockCategory>([
 ]);
 
 function withoutLocation(block: SeamunLockedBlock): SeamunLockedBlock {
-  const { location: _loc, ...rest } = block;
+  const { location, ...rest } = block;
+  void location;
   return rest;
 }
 

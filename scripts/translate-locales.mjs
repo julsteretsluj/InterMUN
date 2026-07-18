@@ -12,7 +12,6 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
 import { translate } from "google-translate-api-x";
 
 const root = process.cwd();

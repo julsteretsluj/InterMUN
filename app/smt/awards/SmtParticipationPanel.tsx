@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
 import { saveAwardParticipationScore } from "@/app/actions/award-participation";
@@ -136,12 +136,10 @@ export function SmtParticipationPanel({
     [conferenceIdToCanonical]
   );
 
-  useEffect(() => {
-    if (committeeScope === "overview") return;
-    if (!committees.some((c) => c.id === committeeScope)) {
-      setCommitteeScope("overview");
-    }
-  }, [committees, committeeScope]);
+  // Keep the scope valid for the current committee list (adjust state during render).
+  if (committeeScope !== "overview" && !committees.some((c) => c.id === committeeScope)) {
+    setCommitteeScope("overview");
+  }
 
   const seatsInCommittee = useMemo(() => {
     if (committeeScope === "overview") return [];

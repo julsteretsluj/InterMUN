@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { saveEventScheduleConfigAction } from "@/app/actions/smtConference";
 import {
@@ -53,20 +53,14 @@ export function EventTwoDayScheduleEditor({
   const [message, setMessage] = useState<{ error?: string; ok?: boolean } | null>(null);
   const [pending, startTransition] = useTransition();
 
-  useEffect(() => {
-    if (cfg.groups.length === 0) return;
-    if (!cfg.groups.some((g) => g.id === activeGroupId)) {
-      setActiveGroupId(cfg.groups[0]!.id);
-    }
-  }, [cfg.groups, activeGroupId]);
-
-  useEffect(() => {
-    if (mainTab === "lunch") return;
-    const activeDay = dayKeyFromTab(mainTab);
-    if (!activeDay || !dayKeys.includes(activeDay)) {
-      setMainTab(dayKeys[0] ? `day:${dayKeys[0]}` : "lunch");
-    }
-  }, [dayKeys, mainTab]);
+  // Keep tab/group selections valid for the current config (adjust state during render).
+  if (cfg.groups.length > 0 && !cfg.groups.some((g) => g.id === activeGroupId)) {
+    setActiveGroupId(cfg.groups[0]!.id);
+  }
+  const activeDayForTab = mainTab === "lunch" ? null : dayKeyFromTab(mainTab);
+  if (mainTab !== "lunch" && (!activeDayForTab || !dayKeys.includes(activeDayForTab))) {
+    setMainTab(dayKeys[0] ? `day:${dayKeys[0]}` : "lunch");
+  }
 
   const dayKey = dayKeyFromTab(mainTab);
   const overlaps = useMemo(() => computeLunchOverlaps(cfg), [cfg]);

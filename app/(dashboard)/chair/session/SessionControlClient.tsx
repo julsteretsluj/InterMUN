@@ -57,9 +57,7 @@ import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages"
 import {
   euSessionPhaseMessageKey,
   isProcedureCodeRecommendedInEuPhase,
-  nextEuSessionPhase,
   parseEuSessionPhase,
-  previousEuSessionPhase,
   type EuSessionPhase,
 } from "@/lib/eu-session-phase";
 import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
@@ -440,7 +438,8 @@ export function SessionControlClient({
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
-  const [sessionPoints, setSessionPoints] = useState<SessionPointRow[]>([]);
+  // Value currently unused in the UI; rows are kept in state for the motions/points log.
+  const [, setSessionPoints] = useState<SessionPointRow[]>([]);
   const [pointDraftCode, setPointDraftCode] = useState<SessionPointCode>("parliamentary_inquiry");
   const [pointDraftDetail, setPointDraftDetail] = useState("");
   const [pointDraftAllocationId, setPointDraftAllocationId] = useState("");
@@ -536,18 +535,6 @@ export function SessionControlClient({
     },
     [tSessionControl]
   );
-  const sessionPointCodeLabel = useCallback(
-    (code: SessionPointCode) => {
-      if (code === "poi") return tSessionControl("pointOfInformation");
-      if (code === "poc") return tSessionControl("pointOfClarification");
-      if (code === "order") return tSessionControl("pointOfOrder");
-      if (code === "parliamentary_inquiry") return tSessionControl("parliamentaryInquiry");
-      if (code === "personal_privilege") return tSessionControl("personalPrivilege");
-      if (code === "right_of_reply") return tSessionControl("rightOfReply");
-      return tSessionControl("factCheck");
-    },
-    [tSessionControl]
-  );
 
   const quorumStatus = useMemo(() => {
     const present = membersPresentForMajorityDenominator(
@@ -618,11 +605,6 @@ export function SessionControlClient({
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code, procedureProfile),
     [motionDraft.vote_type, motionDraft.procedure_code, procedureProfile]
   );
-  const motionDraftValidationError = useMemo(
-    () => validateMotionDraft(motionDraft),
-    [motionDraft]
-  );
-
   const selectedResolutionClauses = useMemo(() => {
     if (!motionDraft.procedure_resolution_id) return [];
     return resolutionClauses.filter((c) => c.resolution_id === motionDraft.procedure_resolution_id);
@@ -631,6 +613,95 @@ export function SessionControlClient({
   const agendaUsedNameSet = useMemo(() => {
     return new Set(agendaTopicsUsedNames.map((n) => n.trim()).filter(Boolean));
   }, [agendaTopicsUsedNames]);
+
+  const validateMotionDraft = useCallback(
+    (draft: typeof motionDraft): string | null => {
+      if (draft.procedure_code === "moderated_caucus") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedModeratedRequiresTopic");
+        }
+        const total = Number(draft.moderated_total_minutes);
+        const speaker = Number(draft.moderated_speaker_seconds);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedModeratedRequiresTotalMinutes");
+        }
+        if (!Number.isFinite(speaker) || speaker <= 0) {
+          return tSessionControl("guidedModeratedRequiresSpeakerSeconds");
+        }
+      }
+      if (draft.procedure_code === "unmoderated_caucus") {
+        const total = Number(draft.unmoderated_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedUnmoderatedRequiresTotalMinutes");
+        }
+      }
+      if (draft.procedure_code === "consultation") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedConsultationRequiresTopicOrPurpose");
+        }
+        const total = Number(draft.consultation_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedConsultationRequiresTotalMinutes");
+        }
+      }
+      if (draft.procedure_code === "set_agenda") {
+        const title = draft.title.trim();
+        if (!title) return tSessionControl("guidedSelectAgendaTopic");
+        // Allow editing an already-stated/past set-agenda motion even if the remaining list is exhausted.
+        if (agendaTopicsRemaining.length <= 1 && !agendaUsedNameSet.has(title)) {
+          return tSessionControl("guidedSetAgendaUnavailableNotEnoughTopics");
+        }
+      }
+      if (
+        motionRequiresClauseTargets(draft.procedure_code) &&
+        (!draft.procedure_resolution_id || draft.procedure_clause_ids.length === 0)
+      ) {
+        return "Select a resolution and at least one clause for this procedural motion.";
+      }
+      if (
+        motionRequiresResolutionOnly(draft.procedure_code) &&
+        !draft.procedure_resolution_id
+      ) {
+        return "Select a resolution for this motion.";
+      }
+      if (draft.procedure_code === "amendment") {
+        if (draft.amendment_kind !== "friendly" && draft.amendment_kind !== "unfriendly") {
+          return "Select amendment type (friendly or unfriendly).";
+        }
+        if (draft.amendment_kind === "unfriendly") {
+          const debateSeconds = Number(draft.amendment_debate_seconds);
+          if (!Number.isFinite(debateSeconds) || debateSeconds < 30 || debateSeconds > 60) {
+            return "Unfriendly amendment debate time must be between 30 and 60 seconds.";
+          }
+        }
+      }
+      if (
+        (draft.procedure_code === "open_debate" || draft.procedure_code === "for_against_speeches") &&
+        draft.procedure_resolution_id
+      ) {
+        const target = resolutions.find((r) => r.id === draft.procedure_resolution_id);
+        if (target) {
+          const mainCount = (target.main_submitters ?? []).length;
+          const coCount = (target.co_submitters ?? []).length;
+          const signatoryCount = (target.signatories ?? []).length;
+          const minSignatories = Math.max(1, Math.ceil(votingCallOrder.length * 0.15));
+          if (mainCount < 2 || coCount < 2) {
+            return "Draft resolution readiness: requires at least 2 main submitters and 2 co-submitters.";
+          }
+          if (signatoryCount < minSignatories) {
+            return `Draft resolution readiness: requires at least ${minSignatories} signatories (15% of committee).`;
+          }
+        }
+      }
+      return null;
+    },
+    [agendaTopicsRemaining.length, agendaUsedNameSet, resolutions, tSessionControl, votingCallOrder.length]
+  );
+
+  const motionDraftValidationError = useMemo(
+    () => validateMotionDraft(motionDraft),
+    [motionDraft, validateMotionDraft]
+  );
 
   const setAgendaTopicOptions = useMemo(() => {
     if (motionDraft.procedure_code !== "set_agenda") return agendaTopicsRemaining;
@@ -676,13 +747,11 @@ export function SessionControlClient({
   const [euTimerMeta, setEuTimerMeta] = useState<
     Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }>
   >(() => defaultEuTimerMeta());
-  useEffect(() => {
-    if (isEuParliamentProfile && timerWorkflowTab === "setup") {
-      setTimerWorkflowTab("clock");
-    }
-  }, [isEuParliamentProfile, timerWorkflowTab]);
+  // EU profile has no setup tab (adjust state during render, not in an effect).
+  if (isEuParliamentProfile && timerWorkflowTab === "setup") {
+    setTimerWorkflowTab("clock");
+  }
   const [supportsEuTimerMeta, setSupportsEuTimerMeta] = useState(true);
-  const euTimerSeedRef = useRef("");
   const euTimerSlotLabel = useCallback(
     (slot: EuTimerSlotKey) => {
       if (EU_PARLIAMENT_PARTY_KEYS.includes(slot as EuPartyKey)) {
@@ -694,8 +763,9 @@ export function SessionControlClient({
     },
     [tSessionControl, tTimer]
   );
-  useEffect(() => {
-    if (procedureProfile !== "eu_parliament" || !euPartyAllocationPreview) return;
+  // Seed EU timer slots from the allocation preview (adjust state during render, not in an effect).
+  const [prevEuTimerSeed, setPrevEuTimerSeed] = useState("");
+  if (procedureProfile === "eu_parliament" && euPartyAllocationPreview) {
     const speakerSeconds =
       motionDraft.procedure_code === "moderated_caucus"
         ? Math.max(0, Number(motionDraft.moderated_speaker_seconds) || 0)
@@ -709,29 +779,22 @@ export function SessionControlClient({
       euPartyAllocationPreview.speechSeconds,
       euPartyAllocationPreview.inquirySeconds,
     ].join("|");
-    if (euTimerSeedRef.current === seed) return;
-    euTimerSeedRef.current = seed;
-    setEuTimerSlots((prev) => {
-      const next = { ...prev };
-      for (const partyKey of EU_PARLIAMENT_PARTY_KEYS) {
-        next[partyKey] =
-          euPartyAllocationPreview.breakdown.find((b) => b.party === partyKey)?.totalSeconds ?? 0;
-      }
-      next.total_time =
-        euPartyAllocationPreview.speechSeconds + euPartyAllocationPreview.inquirySeconds;
-      next.poi_poc_time = euPartyAllocationPreview.inquirySeconds;
-      next.speaker_time = speakerSeconds;
-      return next;
-    });
-  }, [
-    euPartyAllocationPreview,
-    floorConferenceId,
-    motionDraft.consultation_total_minutes,
-    motionDraft.moderated_speaker_seconds,
-    motionDraft.moderated_total_minutes,
-    motionDraft.procedure_code,
-    procedureProfile,
-  ]);
+    if (prevEuTimerSeed !== seed) {
+      setPrevEuTimerSeed(seed);
+      setEuTimerSlots((prev) => {
+        const next = { ...prev };
+        for (const partyKey of EU_PARLIAMENT_PARTY_KEYS) {
+          next[partyKey] =
+            euPartyAllocationPreview.breakdown.find((b) => b.party === partyKey)?.totalSeconds ?? 0;
+        }
+        next.total_time =
+          euPartyAllocationPreview.speechSeconds + euPartyAllocationPreview.inquirySeconds;
+        next.poi_poc_time = euPartyAllocationPreview.inquirySeconds;
+        next.speaker_time = speakerSeconds;
+        return next;
+      });
+    }
+  }
 
   function setEuTimerSlotSeconds(slot: EuTimerSlotKey, seconds: number) {
     setEuTimerSlots((prev) => ({ ...prev, [slot]: Math.max(0, seconds) }));
@@ -814,87 +877,6 @@ export function SessionControlClient({
       return base ? `${base}\n${kindLine}` : kindLine;
     }
     return draft.description.trim() || null;
-  }
-
-  function validateMotionDraft(draft: typeof motionDraft): string | null {
-    if (draft.procedure_code === "moderated_caucus") {
-      if (!draft.title.trim()) {
-        return tSessionControl("guidedModeratedRequiresTopic");
-      }
-      const total = Number(draft.moderated_total_minutes);
-      const speaker = Number(draft.moderated_speaker_seconds);
-      if (!Number.isFinite(total) || total <= 0) {
-        return tSessionControl("guidedModeratedRequiresTotalMinutes");
-      }
-      if (!Number.isFinite(speaker) || speaker <= 0) {
-        return tSessionControl("guidedModeratedRequiresSpeakerSeconds");
-      }
-    }
-    if (draft.procedure_code === "unmoderated_caucus") {
-      const total = Number(draft.unmoderated_total_minutes);
-      if (!Number.isFinite(total) || total <= 0) {
-        return tSessionControl("guidedUnmoderatedRequiresTotalMinutes");
-      }
-    }
-    if (draft.procedure_code === "consultation") {
-      if (!draft.title.trim()) {
-        return tSessionControl("guidedConsultationRequiresTopicOrPurpose");
-      }
-      const total = Number(draft.consultation_total_minutes);
-      if (!Number.isFinite(total) || total <= 0) {
-        return tSessionControl("guidedConsultationRequiresTotalMinutes");
-      }
-    }
-    if (draft.procedure_code === "set_agenda") {
-      const title = draft.title.trim();
-      if (!title) return tSessionControl("guidedSelectAgendaTopic");
-      // Allow editing an already-stated/past set-agenda motion even if the remaining list is exhausted.
-      if (agendaTopicsRemaining.length <= 1 && !agendaUsedNameSet.has(title)) {
-        return tSessionControl("guidedSetAgendaUnavailableNotEnoughTopics");
-      }
-    }
-    if (
-      motionRequiresClauseTargets(draft.procedure_code) &&
-      (!draft.procedure_resolution_id || draft.procedure_clause_ids.length === 0)
-    ) {
-      return "Select a resolution and at least one clause for this procedural motion.";
-    }
-    if (
-      motionRequiresResolutionOnly(draft.procedure_code) &&
-      !draft.procedure_resolution_id
-    ) {
-      return "Select a resolution for this motion.";
-    }
-    if (draft.procedure_code === "amendment") {
-      if (draft.amendment_kind !== "friendly" && draft.amendment_kind !== "unfriendly") {
-        return "Select amendment type (friendly or unfriendly).";
-      }
-      if (draft.amendment_kind === "unfriendly") {
-        const debateSeconds = Number(draft.amendment_debate_seconds);
-        if (!Number.isFinite(debateSeconds) || debateSeconds < 30 || debateSeconds > 60) {
-          return "Unfriendly amendment debate time must be between 30 and 60 seconds.";
-        }
-      }
-    }
-    if (
-      (draft.procedure_code === "open_debate" || draft.procedure_code === "for_against_speeches") &&
-      draft.procedure_resolution_id
-    ) {
-      const target = resolutions.find((r) => r.id === draft.procedure_resolution_id);
-      if (target) {
-        const mainCount = (target.main_submitters ?? []).length;
-        const coCount = (target.co_submitters ?? []).length;
-        const signatoryCount = (target.signatories ?? []).length;
-        const minSignatories = Math.max(1, Math.ceil(votingCallOrder.length * 0.15));
-        if (mainCount < 2 || coCount < 2) {
-          return "Draft resolution readiness: requires at least 2 main submitters and 2 co-submitters.";
-        }
-        if (signatoryCount < minSignatories) {
-          return `Draft resolution readiness: requires at least ${minSignatories} signatories (15% of committee).`;
-        }
-      }
-    }
-    return null;
   }
 
   useEffect(() => {
@@ -1279,11 +1261,11 @@ export function SessionControlClient({
     } else {
       setEuTimerMeta(defaultEuTimerMeta());
     }
-  }, [supabase, floorConferenceId, rosterConferenceIdList, rosterKey, conferenceId, supportsEuTimerMeta]);
+  }, [supabase, floorConferenceId, rosterConferenceIdList, conferenceId, canonicalConferenceId, supportsEuTimerMeta]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    void refresh();
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(refresh);
   }, [refresh]);
 
   useEffect(() => {
@@ -1557,7 +1539,6 @@ export function SessionControlClient({
       setMsg("No motion open for voting.");
       return;
     }
-    const hasRollEntry = rollAttendanceByAllocationId.has(allocation.id);
     const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "present_voting";
     const discipline = disciplineByAllocationId[allocation.id];
     if (discipline?.voting_rights_lost) {
@@ -1697,22 +1678,6 @@ export function SessionControlClient({
       setPointDraftDetail("");
       setPointDraftAllocationId("");
       setMsg("Point logged.");
-      void refresh();
-    });
-  }
-
-  function setSessionPointStatus(pointId: string, status: "accepted" | "denied") {
-    startTransition(async () => {
-      const { error } = await supabase
-        .from("chair_session_points")
-        .update({ status, updated_at: new Date().toISOString() })
-        .eq("id", pointId)
-        .eq("conference_id", floorConferenceId);
-      if (error) {
-        setMsg(error.message);
-        return;
-      }
-      setMsg(`Point ${status}.`);
       void refresh();
     });
   }
@@ -2814,19 +2779,19 @@ export function SessionControlClient({
 
   const show = (id: Exclude<SessionFloorSection, "all">) =>
     activeSection === "all" || activeSection === id;
-  const activeMotionForRecordedVotes = useMemo(() => {
-    const boundId = timer.boundVoteItemId.trim();
-    if (boundId) {
-      return openVotingMotions.find((m) => m.id === boundId) ?? null;
-    }
-    return openMotion;
-  }, [openMotion, openVotingMotions, timer.boundVoteItemId]);
+  const boundVoteItemIdTrimmed = timer.boundVoteItemId.trim();
+  const activeMotionForRecordedVotes = boundVoteItemIdTrimmed
+    ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed) ?? null
+    : openMotion;
 
-  useEffect(() => {
+  // Jump to the discipline tab when that section is focused (adjust state during render).
+  const [prevActiveSection, setPrevActiveSection] = useState<typeof activeSection | null>(null);
+  if (activeSection !== prevActiveSection) {
+    setPrevActiveSection(activeSection);
     if (activeSection === "discipline") {
       setMotionWorkflowTab("discipline");
     }
-  }, [activeSection]);
+  }
 
   return (
     <div className="space-y-12">

@@ -922,12 +922,6 @@ export function DelegationNotesView({
     await refreshNotes();
   }
 
-  const recipientSummary = (r: NoteRecipient) => {
-    if (r.kind === "allocation") return r.country;
-    if (r.kind === "chair") return r.name || t("chairFallback");
-    return t("anyChair");
-  };
-
   const formatRecipientSummary = (recipients: NoteRecipient[]) => {
     if (recipients.length === 0) return t("toEmpty");
     const seenAlloc = new Set<string>();

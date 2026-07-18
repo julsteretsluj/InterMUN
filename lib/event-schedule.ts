@@ -316,7 +316,8 @@ export function removeDayFromConfig(cfg: EventScheduleConfig, dayKey: EventSched
   const days = sortedScheduleDayKeys(cfg.slots);
   if (days.length <= MIN_SCHEDULE_DAYS) return cfg;
   if (!days.includes(dayKey)) return cfg;
-  const { [dayKey]: _removed, ...rest } = cfg.slots;
+  const rest = { ...cfg.slots };
+  delete rest[dayKey];
   return { ...cfg, slots: rest };
 }
 

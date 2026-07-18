@@ -38,6 +38,7 @@ export function CommitteeLogo({ src, alt, size = "sm", className }: CommitteeLog
         className
       )}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element -- arbitrary user-uploaded logo URLs; next/image can't optimize unknown remote hosts */}
       <img
         src={committeeLogoDisplaySrc(src)}
         alt={alt}

@@ -186,12 +186,13 @@ export function ChairMotionsPointsLog({
   }, [conferenceId, localizedCountryName, supabase]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    void loadPoints();
-    if (showDiscipline) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      void loadDiscipline();
-    }
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(() => {
+      void loadPoints();
+      if (showDiscipline) {
+        void loadDiscipline();
+      }
+    });
   }, [loadDiscipline, loadPoints, showDiscipline]);
 
   useEffect(() => {

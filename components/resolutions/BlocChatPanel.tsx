@@ -90,7 +90,8 @@ export function BlocChatPanel({
   }, [blocId, supabase]);
 
   useEffect(() => {
-    void loadMessages();
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(loadMessages);
   }, [loadMessages]);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { setRoomCodeAndEnterAction, switchCommitteeContextAction } from "@/app/actions/roomGate";
@@ -35,11 +35,10 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
     });
   }, [conferences, query]);
 
-  useEffect(() => {
-    if (conferences.length === 0) return;
-    if (filtered.some((c) => c.id === conferenceId)) return;
+  // Keep the selection valid for the current filter (adjust state during render).
+  if (conferences.length > 0 && !filtered.some((c) => c.id === conferenceId)) {
     setConferenceId(filtered[0]?.id ?? conferences[0]?.id ?? "");
-  }, [filtered, conferenceId, conferences]);
+  }
 
   const selected = conferences.find((c) => c.id === conferenceId);
 

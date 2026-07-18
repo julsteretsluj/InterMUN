@@ -26,17 +26,18 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
   const [tier, setTier] = useState<BandTier | null>(init?.tier ?? null);
   const lastReportedRef = useRef<number | null>(init?.band && init?.tier ? bandAndTierToScore(init.band, init.tier) : null);
 
+  // Re-sync from the server score (adjust state during render, not in an effect).
+  const [prevInitialScore, setPrevInitialScore] = useState(initialScore);
+  if (initialScore !== prevInitialScore) {
+    setPrevInitialScore(initialScore);
+    const next = scoreToBandAndTier(initialScore);
+    setBand(next?.band ?? null);
+    setTier(next?.tier ?? null);
+  }
+
   useEffect(() => {
     const next = scoreToBandAndTier(initialScore);
-    if (next) {
-      setBand(next.band);
-      setTier(next.tier);
-      lastReportedRef.current = bandAndTierToScore(next.band, next.tier);
-    } else {
-      setBand(null);
-      setTier(null);
-      lastReportedRef.current = null;
-    }
+    lastReportedRef.current = next ? bandAndTierToScore(next.band, next.tier) : null;
   }, [initialScore]);
 
   const score = band && tier ? bandAndTierToScore(band, tier) : null;

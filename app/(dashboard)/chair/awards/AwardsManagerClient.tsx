@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { AWARD_CATEGORIES, awardCategoryMeta, isConferenceEventPlaceholderRow } from "@/lib/awards";
 import {
@@ -65,10 +65,13 @@ export function AwardsManagerClient({
   const [err, setErr] = useState<string | null>(null);
   const [certSelected, setCertSelected] = useState<Set<string>>(() => new Set());
 
-  useEffect(() => {
+  // Prune selections that no longer exist (adjust state during render, not in an effect).
+  const [prevAssignments, setPrevAssignments] = useState(initialAssignments);
+  if (initialAssignments !== prevAssignments) {
+    setPrevAssignments(initialAssignments);
     const ids = new Set(initialAssignments.map((a) => a.id));
     setCertSelected((prev) => new Set([...prev].filter((id) => ids.has(id))));
-  }, [initialAssignments]);
+  }
 
   const committeeById = useMemo(
     () => Object.fromEntries(conferences.map((c) => [c.id, committeeOptionLabel(c)])),

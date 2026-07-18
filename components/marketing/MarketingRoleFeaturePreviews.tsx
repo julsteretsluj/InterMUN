@@ -11,7 +11,6 @@ import {
   Play,
   RefreshCw,
   Send,
-  SkipForward,
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
@@ -34,7 +33,6 @@ import {
   PREVIEW_CARD,
   PREVIEW_HEADING,
   PREVIEW_LABEL,
-  PREVIEW_MUTED,
 } from "@/components/marketing/marketing-preview-styles";
 import { cn } from "@/lib/utils";
 
@@ -145,10 +143,13 @@ export function ChairSessionTimerDemo() {
   const [secondsLeft, setSecondsLeft] = useState<number>(preset.seconds);
   const [running, setRunning] = useState(false);
 
-  useEffect(() => {
+  // Reset the timer when the preset changes (adjust state during render, not in an effect).
+  const [prevPreset, setPrevPreset] = useState(presetId);
+  if (presetId !== prevPreset) {
+    setPrevPreset(presetId);
     setSecondsLeft(preset.seconds);
     setRunning(false);
-  }, [preset.seconds, presetId]);
+  }
 
   useEffect(() => {
     if (!running || secondsLeft <= 0) return;

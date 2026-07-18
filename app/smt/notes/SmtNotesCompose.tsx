@@ -49,15 +49,14 @@ export function SmtNotesCompose({
   }, []);
 
   useEffect(() => {
-    void loadContext(conferenceId);
+    // Deferred to a microtask so state lands asynchronously (no sync cascade).
+    void Promise.resolve().then(() => loadContext(conferenceId));
   }, [conferenceId, loadContext]);
 
-  useEffect(() => {
-    if (committeeOptions.length === 0) return;
-    if (!committeeOptions.some((c) => c.id === conferenceId)) {
-      setConferenceId(committeeOptions[0]!.id);
-    }
-  }, [committeeOptions, conferenceId]);
+  // Keep the selection valid for the current options (adjust state during render).
+  if (committeeOptions.length > 0 && !committeeOptions.some((c) => c.id === conferenceId)) {
+    setConferenceId(committeeOptions[0]!.id);
+  }
 
   if (committeeOptions.length === 0) {
     return (

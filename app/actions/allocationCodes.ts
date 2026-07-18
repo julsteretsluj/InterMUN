@@ -114,7 +114,6 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
 
   const supabase = auth.supabase;
 
-  const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
   const { siblingConferenceIds } = await getCommitteeAwardScope(supabase, conferenceId);
 
   const { data: allocs, error: aErr } = await supabase

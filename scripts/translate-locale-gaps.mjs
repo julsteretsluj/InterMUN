@@ -161,7 +161,6 @@ async function main() {
   const enPath = path.join(messagesDir, "en.json");
   const en = JSON.parse(await fs.readFile(enPath, "utf8"));
   const enFlat = flattenStrings(en);
-  const enByPath = new Map(enFlat.map((e) => [e.path, e.value]));
 
   const targetLocales = onlyLocale ? [onlyLocale] : Object.keys(GOOGLE_LANG);
 

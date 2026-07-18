@@ -8,7 +8,6 @@ import type {
 } from "@/lib/seamun-preset-sessions";
 
 export default async function SessionFloorOverview({
-  conferenceId,
   conferenceTitle,
   canonicalConferenceId,
   initialCommitteeSessionStartedAt,

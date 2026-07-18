@@ -40,6 +40,7 @@ export function DashboardBrandLogos({
           : "flex-row gap-2"
       )}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element -- small static brand icon sized purely via CSS classes */}
       <img src={SEAMUN_LOGO_SRC} alt="" className={eventIconClass} decoding="async" />
       <span
         className={cn(

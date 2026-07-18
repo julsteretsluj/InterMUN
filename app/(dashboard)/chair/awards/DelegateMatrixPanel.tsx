@@ -109,12 +109,14 @@ export function DelegateMatrixPanel({
   }, [scoresByProfileId]);
 
   useEffect(() => {
+    const saveTimers = saveTimersRef.current;
+    const saveStateTimers = saveStateTimersRef.current;
     return () => {
-      for (const id of Object.keys(saveTimersRef.current)) {
-        window.clearTimeout(saveTimersRef.current[id]);
+      for (const id of Object.keys(saveTimers)) {
+        window.clearTimeout(saveTimers[id]);
       }
-      for (const id of Object.keys(saveStateTimersRef.current)) {
-        window.clearTimeout(saveStateTimersRef.current[id]);
+      for (const id of Object.keys(saveStateTimers)) {
+        window.clearTimeout(saveStateTimers[id]);
       }
     };
   }, []);

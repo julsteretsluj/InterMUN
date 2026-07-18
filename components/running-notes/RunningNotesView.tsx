@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
@@ -74,13 +74,12 @@ export function RunningNotesView({
   const supabase = createClient();
   const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
-  const activeNoteIdRef = useRef<string | null>(activeNote?.id ?? null);
-  activeNoteIdRef.current = activeNote?.id ?? null;
-
-  useEffect(() => {
+  // Re-sync from fresh server notes (adjust state during render, not in an effect).
+  const [prevNotes, setPrevNotes] = useState(notes);
+  if (notes !== prevNotes) {
+    setPrevNotes(notes);
     setItems(notes);
-    const id = activeNoteIdRef.current;
-    const keep = id ? notes.find((n) => n.id === id) : null;
+    const keep = activeNote?.id ? notes.find((n) => n.id === activeNote.id) : null;
     const next = keep ?? notes[0] ?? null;
     setActiveNote(next);
     if (next) syncFromNote(next, setContent, setDocsUrl, setTitle, setTags);
@@ -91,7 +90,7 @@ export function RunningNotesView({
       setTags([]);
     }
     setCustomTagDraft("");
-  }, [notes]);
+  }
 
   function togglePresetTag(label: string) {
     setTags((prev) => {

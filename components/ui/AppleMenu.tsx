@@ -107,10 +107,9 @@ export function AppleMenuContent({
   }, []);
 
   useLayoutEffect(() => {
-    if (!open) {
-      setPosition(null);
-      return;
-    }
+    // No reset needed on close: the panel unmounts, and reopening recomputes
+    // the position in this layout effect before paint.
+    if (!open) return;
 
     function syncPosition() {
       const trigger = triggerRef.current;
@@ -331,10 +330,9 @@ export function AppleMenuSubmenu({ label, icon, children, className }: AppleMenu
   const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
 
   useLayoutEffect(() => {
-    if (!open) {
-      setPosition(null);
-      return;
-    }
+    // No reset needed on close: the panel unmounts, and reopening recomputes
+    // the position in this layout effect before paint.
+    if (!open) return;
 
     function syncPosition() {
       const item = itemRef.current;

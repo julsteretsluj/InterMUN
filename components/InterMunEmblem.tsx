@@ -69,6 +69,7 @@ export function InterMunEmblem({
   return (
     <>
       <span className="inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none dark:hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
         <img
           src={INTERMUN_EMBLEM_LIGHT_PATH}
           alt={alt}
@@ -76,6 +77,7 @@ export function InterMunEmblem({
           decoding="async"
         />
       </span>
+      {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
       <img
         src={INTERMUN_EMBLEM_PATH}
         alt={alt}

@@ -37,24 +37,33 @@ export function useCommitteeSyncedState<T>({
   const [value, setValueState] = useState<T>(defaultValue);
   const [ready, setReady] = useState(false);
   const valueRef = useRef(value);
-  valueRef.current = value;
   const debounceTimer = useRef<number | null>(null);
-  const supabaseRef = useRef(createClient());
+  const supabaseRef = useRef<ReturnType<typeof createClient> | null>(null);
+  if (supabaseRef.current === null) {
+    supabaseRef.current = createClient();
+  }
 
   const defaultValueRef = useRef(defaultValue);
-  defaultValueRef.current = defaultValue;
   const parsePayloadRef = useRef(parsePayload);
-  parsePayloadRef.current = parsePayload;
   const toPayloadRef = useRef(toPayload);
-  toPayloadRef.current = toPayload;
   const hasMeaningfulDataRef = useRef(hasMeaningfulData);
-  hasMeaningfulDataRef.current = hasMeaningfulData;
   const loadLegacyRef = useRef(loadLegacy);
-  loadLegacyRef.current = loadLegacy;
+
+  // Keep "latest" refs in sync outside of render (React Compiler-safe).
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+  useEffect(() => {
+    defaultValueRef.current = defaultValue;
+    parsePayloadRef.current = parsePayload;
+    toPayloadRef.current = toPayload;
+    hasMeaningfulDataRef.current = hasMeaningfulData;
+    loadLegacyRef.current = loadLegacy;
+  }, [defaultValue, parsePayload, toPayload, hasMeaningfulData, loadLegacy]);
 
   const flushUpsert = useCallback(
     async (next: T) => {
-      const supabase = supabaseRef.current;
+      const supabase = supabaseRef.current!;
       const { error } = await supabase.from("committee_synced_state").upsert(
         {
           conference_id: conferenceId,
@@ -83,12 +92,18 @@ export function useCommitteeSyncedState<T>({
     [debounceMs, flushUpsert]
   );
 
+  // Reset to defaults when the scope changes (adjust state during render, not in an effect).
+  const scopeKey = `${conferenceId}\u0000${stateKey}`;
+  const [prevScopeKey, setPrevScopeKey] = useState(scopeKey);
+  if (scopeKey !== prevScopeKey) {
+    setPrevScopeKey(scopeKey);
+    setReady(false);
+    setValueState(defaultValue);
+  }
+
   useEffect(() => {
     let cancelled = false;
-    const supabase = supabaseRef.current;
-
-    setReady(false);
-    setValueState(defaultValueRef.current);
+    const supabase = supabaseRef.current!;
 
     void (async () => {
       const { data: row, error } = await supabase

@@ -18,7 +18,8 @@ export default async function AdvisorDelegateDocumentsPage({ params }: PageProps
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const assignment = await requireAdvisorDelegateContext(supabase, user.id, userId);
+  // Access check only (redirects when the advisor doesn't own this delegate).
+  await requireAdvisorDelegateContext(supabase, user.id, userId);
 
   const [{ data: docs }, { data: globalDocs }] = await Promise.all([
     supabase
