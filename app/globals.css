@@ -2193,6 +2193,12 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-section-dark {
+  /* These columns sit on the fixed dark role band in both themes, but many
+     children color themselves with the theme accent (eyebrow, § indexes,
+     feature icons, explore links, card edges), which is a near-black navy in
+     the default light theme. Remap the accent to a white-boosted bright
+     variant so it stays legible on dark. */
+  --accent: color-mix(in srgb, var(--accent-bright) 78%, #ffffff);
   color: #f4f4f5;
 }
 
