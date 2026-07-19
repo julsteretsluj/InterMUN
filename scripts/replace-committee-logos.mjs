@@ -29,6 +29,9 @@ const MANIFEST_PATH = path.join(SOURCE_DIR, "manifest.json");
 const MANIFEST_EXAMPLE_PATH = path.join(SOURCE_DIR, "manifest.example.json");
 const BUCKET = "committee-logos";
 const APPLY = process.argv.includes("--apply");
+/** Skip the dark-pixel knockout for sources that already have transparency
+ * and contain intentional black artwork (which the flood fill would erase). */
+const NO_KNOCKOUT = process.argv.includes("--no-knockout");
 /** Any non-flag args limit the run to those committee labels. */
 const FILTER_LABELS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
@@ -233,7 +236,11 @@ async function main() {
     const srcPath = path.join(SOURCE_DIR, sourceFile);
     const tmpOut = path.join(os.tmpdir(), `logo-out-${process.pid}-${code}.png`);
     try {
-      knockoutWithPython(srcPath, tmpOut);
+      if (NO_KNOCKOUT) {
+        fs.copyFileSync(srcPath, tmpOut);
+      } else {
+        knockoutWithPython(srcPath, tmpOut);
+      }
       const body = fs.readFileSync(tmpOut);
 
       const { error: uploadErr } = await supabase.storage.from(BUCKET).upload(objectPath, body, {
