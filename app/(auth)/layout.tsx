@@ -35,7 +35,11 @@ export default async function AuthLayout({
               <PublicPageControls compact />
             </div>
             <AppleWindow
-              title={appName}
+              title={
+                <Link href="/" className="text-inherit no-underline transition-opacity hover:opacity-75">
+                  {appName}
+                </Link>
+              }
               showControls
               resizable={false}
               contentClassName="mun-apple-page-body p-4 md:p-6"

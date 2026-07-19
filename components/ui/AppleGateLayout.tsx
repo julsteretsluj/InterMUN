@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { AppleAppFrame } from "@/components/ui/AppleAppShell";
 import { AppleProductPage } from "@/components/ui/AppleProductPage";
@@ -19,7 +20,13 @@ export function AppleGateLayout({ children, title }: AppleGateLayoutProps) {
           <PublicPageControls compact />
         </div>
         <AppleWindow
-          title={title ?? appName}
+          title={
+            title ?? (
+              <Link href="/" className="text-inherit no-underline transition-opacity hover:opacity-75">
+                {appName}
+              </Link>
+            )
+          }
           showControls
           resizable={false}
           contentClassName="mun-apple-page-body p-4 md:p-6"
