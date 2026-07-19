@@ -34,7 +34,9 @@ export function AccessibilitySelector({
     readColorblindTypeFromStorage()
   );
   const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
-  const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
+  const [popoverBox, setPopoverBox] = useState<{ top: number; right: number; maxHeight: number } | null>(
+    null
+  );
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -70,9 +72,13 @@ export function AccessibilitySelector({
       const el = btnRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
+      const top = rect.bottom + 8;
       setPopoverBox({
-        top: rect.bottom + 8,
+        top,
         right: Math.max(12, window.innerWidth - rect.right),
+        // Cap to the space below the trigger so the panel scrolls internally
+        // instead of clipping offscreen at large text-size settings.
+        maxHeight: Math.max(160, window.innerHeight - top - 12),
       });
     }
     sync();
@@ -153,9 +159,13 @@ export function AccessibilitySelector({
                 top: popoverBox.top,
                 right: popoverBox.right,
                 zIndex: 300,
+                maxHeight: popoverBox.maxHeight,
               }}
-              className="mun-popover w-[min(100vw-1.5rem,18.5rem)] p-3"
+              className="mun-popover flex w-[min(100vw-1.5rem,18.5rem)] flex-col p-3"
             >
+              {/* Inner scroller: the panel's ::before arrow overhangs its top edge,
+                  so overflow must be clipped here, not on the panel itself. */}
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
               <p className="tag tag-neutral mb-1.5">{tTheme("accessibility")}</p>
               <button
                 type="button"
@@ -235,6 +245,7 @@ export function AccessibilitySelector({
                 </span>
                 <span className="text-xs font-semibold">{dyslexicFont ? tTheme("on") : tTheme("off")}</span>
               </button>
+              </div>
             </div>,
             document.body
           )

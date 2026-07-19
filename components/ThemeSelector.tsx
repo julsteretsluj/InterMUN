@@ -41,7 +41,9 @@ export function ThemeSelector({
   const [accentHex, setAccentHex] = useState(() => readThemeFromStorage().accentHex);
   const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
-  const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
+  const [popoverBox, setPopoverBox] = useState<{ top: number; right: number; maxHeight: number } | null>(
+    null
+  );
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -77,9 +79,13 @@ export function ThemeSelector({
       const el = btnRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
+      const top = rect.bottom + 8;
       setPopoverBox({
-        top: rect.bottom + 8,
+        top,
         right: Math.max(12, window.innerWidth - rect.right),
+        // Cap to the space below the trigger so the panel scrolls internally
+        // instead of clipping offscreen at large text-size settings.
+        maxHeight: Math.max(160, window.innerHeight - top - 12),
       });
     }
     sync();
@@ -172,9 +178,13 @@ export function ThemeSelector({
                 top: popoverBox.top,
                 right: popoverBox.right,
                 zIndex: 300,
+                maxHeight: popoverBox.maxHeight,
               }}
-              className="mun-popover w-[min(100vw-1.5rem,22rem)] p-3"
+              className="mun-popover flex w-[min(100vw-1.5rem,22rem)] flex-col p-3"
             >
+          {/* Inner scroller: the panel's ::before arrow overhangs its top edge,
+              so overflow must be clipped here, not on the panel itself. */}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
           <p className="tag tag-neutral mb-0.5">{t("appearance")}</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button
@@ -250,6 +260,7 @@ export function ThemeSelector({
               <span>{t("medium")}</span>
               <span>{t("large")}</span>
             </div>
+          </div>
           </div>
             </div>,
             document.body
