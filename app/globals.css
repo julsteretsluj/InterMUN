@@ -1801,6 +1801,34 @@ html.colorblind-mode .schedule-swatch-session {
   color: color-mix(in srgb, #ffffff 68%, transparent);
 }
 
+/* The hero sits on a fixed dark chamber background in BOTH themes, but the
+   generic `.mun-apple-site h1:not(...):not(...)` rule (specificity 0-3-1)
+   paints it with theme-driven --apple-label (near-black in light mode) and
+   shrinks it to title-2. Lock hero copy to light-on-dark with the intended
+   display sizes; 0-4-1 selector outranks the apple h1 rule. */
+.mun-apple-site.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy h1 {
+  color: #ffffff;
+  font-size: var(--apple-text-large-title-size);
+}
+
+@media (min-width: 768px) {
+  .mun-apple-site.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy h1 {
+    font-size: 2.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mun-apple-site.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy h1 {
+    font-size: 3.25rem;
+  }
+}
+
+/* Cursive emphasis: --gold-text-bright resolves to a mid navy in light mode,
+   unreadable on the dark hero — brighten it towards white in both themes. */
+.mun-apple-site.marketing-shell .mun-marketing-hero h1 .mun-emph {
+  color: color-mix(in srgb, var(--gold-text-bright) 65%, #ffffff);
+}
+
 /* Light preview cards inside dark marketing surfaces — lock readable copy */
 .marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark) .marketing-preview-surface {
   color: #18181b;
@@ -1983,6 +2011,31 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-900 {
+  color: #18181b;
+}
+
+/* Generic `.mun-apple-site header[class*="border-b"]` and `.mun-apple-site h3`
+   rules leak into these dark glass panels: light material headers and
+   near-black --apple-label headings in light mode. Keep panel chrome dark. */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface header {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Same leak for `.mun-apple-site .mun-inset` (theme material bg turns these
+   dark-glass insets light in light mode while their copy stays light gray). */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-inset:not(.marketing-light-surface) {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.2);
+  color: #d4d4d8;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(h1, h2, h3, h4) {
+  color: #f4f4f5;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface :is(h1, h2, h3, h4) {
   color: #18181b;
 }
 
@@ -2194,7 +2247,11 @@ html.colorblind-mode .schedule-swatch-session {
   box-shadow: var(--marketing-float-shadow);
 }
 
-.marketing-shell .marketing-header {
+/* Extra .mun-apple-site selector outranks the generic
+   `.mun-apple-site header[class*="border-b"]` material override, which would
+   otherwise paint this header light while its text stays white. */
+.marketing-shell .marketing-header,
+.mun-apple-site.marketing-shell .marketing-header {
   position: sticky;
   top: 0;
   z-index: 30;
@@ -2519,7 +2576,11 @@ html.dark .marketing-shell {
 }
 
 .mun-glass-canvas {
-  overflow: hidden;
+  /* `clip`, not `hidden`: the ambient layer's -20% inset creates hidden
+     scrollable overflow, and anchor scrolling (scrollIntoView / #hash) would
+     scroll this container internally, shifting the whole site up and leaving
+     a blank band at the bottom. `clip` forbids all scrolling. */
+  overflow: clip;
   background: var(--apple-bg-secondary);
 }
 
