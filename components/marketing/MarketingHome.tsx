@@ -48,15 +48,13 @@ function RoleFeatureGrid({
   items,
   className,
   dark,
-  bento,
 }: {
   items: FeatureItem[];
   className?: string;
   dark?: boolean;
-  bento?: boolean;
 }) {
   return (
-    <ul className={cn("grid gap-3 sm:grid-cols-2", bento && "mun-marketing-bento", className)}>
+    <ul className={cn("grid gap-3 sm:grid-cols-2", className)}>
       {items.map((item) => (
         <li key={item.title} className="mun-role-feature">
           <div className="mb-2 flex items-center justify-between gap-2">
@@ -68,7 +66,7 @@ function RoleFeatureGrid({
           <h3
             className={cn(
               "font-display text-base font-semibold",
-              dark ? "text-white" : "text-brand-navy"
+              dark ? "text-[color:var(--marketing-ink)]" : "text-brand-navy"
             )}
           >
             {item.title}
@@ -76,7 +74,7 @@ function RoleFeatureGrid({
           <p
             className={cn(
               "mt-1.5 text-sm leading-relaxed",
-              dark ? "text-white/65" : "text-brand-muted"
+              dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
             {item.description}
@@ -135,7 +133,9 @@ function RoleSection({
       id={id}
       className={cn(
         "scroll-mt-24 py-16 md:py-20",
-        dark ? cn("mun-marketing-role-band text-white", bandClassName) : "border-t border-[var(--hairline)]"
+        dark
+          ? cn("mun-marketing-role-band text-[color:var(--marketing-ink)]", bandClassName)
+          : "border-t border-[var(--hairline)]"
       )}
     >
       <div
@@ -149,7 +149,12 @@ function RoleSection({
             {eyebrow}
           </p>
           <h2 className="mun-display mt-3 text-3xl md:text-4xl">{title}</h2>
-          <p className={cn("mt-4 text-base leading-relaxed md:text-lg", dark ? "text-white/65" : "text-brand-muted")}>
+          <p
+            className={cn(
+              "mt-4 text-base leading-relaxed md:text-lg",
+              dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
+            )}
+          >
             {description}
           </p>
           <RoleFeatureGrid items={items} className="mt-8" dark={dark} />
@@ -158,7 +163,9 @@ function RoleSection({
               href={exploreHref}
               className={cn(
                 "mt-6 inline-flex items-center gap-1 font-sans text-xs font-semibold uppercase tracking-wider transition",
-                dark ? "text-[var(--accent)] hover:text-white" : "text-[var(--accent)] hover:text-brand-navy"
+                dark
+                  ? "text-[var(--accent)] hover:text-[color:var(--marketing-ink)]"
+                  : "text-[var(--accent)] hover:text-brand-navy"
               )}
             >
               {exploreLabel} →
@@ -303,20 +310,20 @@ export async function MarketingHome() {
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10 pb-16 md:pb-20">
+      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-20">
         <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
         <div className="mx-auto w-full max-w-7xl px-4 py-10 md:px-6 md:py-14 lg:py-16">
           <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
             <div className="mun-marketing-hero-copy order-2 lg:order-1">
               <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
-              <h1 className="mun-apple-text mun-apple-text-large-title-emphasized mt-4 text-white md:text-[2.75rem] lg:text-[3.25rem]">
+              <h1 className="mun-apple-text mun-apple-text-large-title-emphasized mt-4 text-[color:var(--marketing-ink)] md:text-[2.75rem] lg:text-[3.25rem]">
                 <span className="block">{t("hero.title")}</span>
                 <MarketingEmph className="mt-2 block text-[1.2em] leading-none md:mt-3">
                   {t("hero.titleEmphasis")}
                 </MarketingEmph>
               </h1>
-              <p className="mun-apple-text mun-apple-text-body mt-5 max-w-xl text-white/70">{t("hero.subtitle")}</p>
+              <p className="mun-apple-text mun-apple-text-body mt-5 max-w-xl text-[color:var(--marketing-ink-soft)]">{t("hero.subtitle")}</p>
               <div className="mun-marketing-hero-actions mt-8 flex flex-col items-start gap-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <Link href="/register/secretariat" className="mun-apple-btn mun-apple-btn-filled-blue px-6 py-2.5 text-base">
@@ -324,7 +331,7 @@ export async function MarketingHome() {
                   </Link>
                   <Link
                     href="/login"
-                    className="mun-apple-btn mun-apple-btn-glass-gray px-6 py-2.5 text-base text-white"
+                    className="mun-apple-btn mun-apple-btn-glass-gray px-6 py-2.5 text-base"
                   >
                     {t("hero.ctaJoin")} →
                   </Link>
@@ -429,7 +436,7 @@ export async function MarketingHome() {
                 {t("platform.description")}
               </p>
             </div>
-            <RoleFeatureGrid items={platformFeatures} bento className="mt-10 lg:grid-cols-4" />
+            <RoleFeatureGrid items={platformFeatures} className="mt-10 lg:grid-cols-4" />
           </div>
         </section>
       </section>
@@ -501,7 +508,7 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section className="mun-marketing-hero relative overflow-hidden border-t border-white/10 py-16 md:py-20">
+      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-20">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
@@ -516,7 +523,7 @@ export async function MarketingHome() {
             </Link>
             <Link
               href="/login"
-              className="rounded-full border border-white/20 bg-white/8 px-7 py-3 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/12"
+              className="rounded-full border border-[color:var(--marketing-glass-line)] bg-[color:var(--marketing-glass-fill)] px-7 py-3 text-base font-semibold text-[color:var(--marketing-ink)] backdrop-blur-sm transition hover:border-[color:var(--marketing-glass-line-strong)] hover:bg-[color:var(--marketing-glass-fill-strong)]"
             >
               {t("footer.ctaJoin")}
             </Link>

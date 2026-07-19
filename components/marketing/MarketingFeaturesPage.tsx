@@ -24,7 +24,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10">
+      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)]">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-18">
           <p className="mun-marketing-eyebrow">{t("eyebrow")}</p>
@@ -32,7 +32,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
             {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed md:text-lg">{t("subtitle")}</p>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base">{t("intro")}</p>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[color:var(--marketing-ink-soft)] md:text-base">{t("intro")}</p>
           <div className="mt-8 flex flex-wrap gap-2">
             <span className="mun-procedure-chip">{t("chip1")}</span>
             <span className="mun-procedure-chip">{t("chip2")}</span>
@@ -43,7 +43,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <MarketingFeaturesDemos role={role} />
 
-      <section className="mun-marketing-hero relative overflow-hidden border-t border-white/10 py-16 md:py-20">
+      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-20">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mun-marketing-hero-copy mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl md:text-4xl">
@@ -56,7 +56,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
             </Link>
             <Link
               href="/"
-              className="rounded-full border border-white/20 bg-white/8 px-7 py-3 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/12"
+              className="rounded-full border border-[color:var(--marketing-glass-line)] bg-[color:var(--marketing-glass-fill)] px-7 py-3 text-base font-semibold text-[color:var(--marketing-ink)] backdrop-blur-sm transition hover:border-[color:var(--marketing-glass-line-strong)] hover:bg-[color:var(--marketing-glass-fill-strong)]"
             >
               {t("ctaBack")}
             </Link>

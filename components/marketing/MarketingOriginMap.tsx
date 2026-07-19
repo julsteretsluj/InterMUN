@@ -58,13 +58,14 @@ export function MarketingOriginMap({
             <span className="relative flex flex-col items-center">
               <span
                 aria-hidden
-                className="absolute -bottom-1 h-8 w-8 rounded-full bg-yellow-400/35 blur-md transition-transform duration-[var(--dur-base)] group-hover:scale-110"
+                className="absolute -bottom-1 h-8 w-8 rounded-full bg-[#FF5A5F]/35 blur-md transition-transform duration-[var(--dur-base)] group-hover:scale-110"
               />
               <MapPin
                 aria-hidden
-                className="relative h-9 w-9 text-[#F5C400] drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-transform duration-[var(--dur-base)] group-hover:scale-110"
-                fill="currentColor"
-                strokeWidth={1.5}
+                className="relative h-9 w-9 drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-transform duration-[var(--dur-base)] group-hover:scale-110"
+                fill="#FF5A5F"
+                stroke="#FFFFFF"
+                strokeWidth={1.75}
               />
             </span>
           </button>

@@ -36,7 +36,7 @@ export function MarketingFeatureDemoSection({
       className={cn(
         "scroll-mt-24 py-14 md:py-18",
         dark
-          ? "mun-marketing-role-band border-t border-white/8 text-white"
+          ? "mun-marketing-role-band mun-marketing-section-dark border-t border-[color:var(--marketing-hairline)] text-[color:var(--marketing-ink)]"
           : "mun-marketing-surface border-t border-[var(--hairline)]"
       )}
     >
@@ -52,7 +52,7 @@ export function MarketingFeatureDemoSection({
           <h2
             className={cn(
               "mun-display mt-2 text-2xl md:text-3xl",
-              dark ? "text-white" : "text-brand-navy"
+              dark ? "text-[color:var(--marketing-ink)]" : "text-brand-navy"
             )}
           >
             {title}
@@ -60,13 +60,18 @@ export function MarketingFeatureDemoSection({
           <p
             className={cn(
               "mt-4 text-base leading-relaxed md:text-lg",
-              dark ? "text-white/70" : "text-brand-muted"
+              dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
             {description}
           </p>
           {bullets && bullets.length > 0 ? (
-            <ul className={cn("mt-6 space-y-2 text-sm md:text-base", dark ? "text-white/75" : "text-brand-muted")}>
+            <ul
+              className={cn(
+                "mt-6 space-y-2 text-sm md:text-base",
+                dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
+              )}
+            >
               {bullets.map((bullet) => (
                 <li key={bullet} className="flex gap-2">
                   <span className="text-[var(--accent)]" aria-hidden>
