@@ -303,7 +303,7 @@ export default async function ChairAwardsPage() {
     <MunPageShell title={t("score")}>
       <ChairAwardsShell
         score={
-          <div className="space-y-5">
+          <div className="space-y-6">
         <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/12 p-3 text-sm text-brand-muted">
           <p>
             {tPage.rich("intro.scoringMatches", {

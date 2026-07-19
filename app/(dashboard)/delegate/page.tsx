@@ -133,7 +133,7 @@ export default async function DelegateDashboardPage({
   return (
     <MunPageShell title={tp("delegateDashboard")}>
       <div className="space-y-6">
-        <header className="dashboard-panel relative overflow-hidden !p-5 md:!p-6">
+        <header className="dashboard-panel relative overflow-hidden !p-4 md:!p-6">
           <span
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--gold)] via-[var(--gold-bright)] to-transparent"

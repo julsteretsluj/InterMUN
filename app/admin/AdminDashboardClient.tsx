@@ -30,7 +30,7 @@ export function AdminDashboardClient({
   const [roleState, roleAction, rolePending] = useActionState(adminSetProfileRoleAction, null);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <section className="mun-shell !shadow-none">
         <h2 className="mb-2 font-display text-lg font-semibold text-brand-navy">{t("newEventTitle")}</h2>
         <p className="mb-4 max-w-2xl text-sm text-brand-muted">

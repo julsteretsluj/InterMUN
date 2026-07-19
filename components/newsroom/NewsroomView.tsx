@@ -116,7 +116,7 @@ export function NewsroomView() {
         </div>
       </div>
 
-      <div className="w-full min-w-0 rounded-2xl border border-white/15 bg-black/25 p-4 shadow-sm backdrop-blur-sm sm:p-5 md:p-6">
+      <div className="w-full min-w-0 rounded-2xl border border-white/15 bg-black/25 p-4 shadow-sm backdrop-blur-sm sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <h3 className="font-display text-lg font-semibold text-brand-navy">{t("headlinesTitle")}</h3>
           <span className="shrink-0 font-mono text-xs tabular-nums text-brand-muted">

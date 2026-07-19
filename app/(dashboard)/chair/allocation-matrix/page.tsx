@@ -433,7 +433,7 @@ export default async function ChairAllocationMatrixPage() {
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         {isChairViewer ? tMatrix("introWithScoring") : tMatrix("intro")}
       </p>
-      <p className="text-xs text-brand-muted mb-5">
+      <p className="text-xs text-brand-muted mb-6">
         {translateConferenceHeadline(
           tTopics,
           tCommitteeLabels,
@@ -506,7 +506,7 @@ export default async function ChairAllocationMatrixPage() {
         allocationOptions={rows.map((r) => ({ id: r.id, country: r.country, user_id: r.user_id }))}
       />
 
-      <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+      <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
         <h2 className="font-display text-lg font-semibold text-brand-navy">
           {tMatrix("pendingApprovalsTitle")}
         </h2>
@@ -526,7 +526,7 @@ export default async function ChairAllocationMatrixPage() {
             <tbody>
               {pendingRequests.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="px-3 py-5 text-center text-brand-muted">
+                  <td colSpan={3} className="px-3 py-6 text-center text-brand-muted">
                     {tMatrix("noPendingRequests")}
                   </td>
                 </tr>

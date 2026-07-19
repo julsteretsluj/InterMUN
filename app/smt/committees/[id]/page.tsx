@@ -204,7 +204,7 @@ export default async function SmtCommitteeLivePage({
       </div>
 
       {activeTab === "overview" ? (
-        <div className="space-y-5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
+        <div className="space-y-6 rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-6">
         <div>
           <div className="flex items-start gap-3.5">
             {confMeta.committee_logo_url ? (
@@ -303,7 +303,7 @@ export default async function SmtCommitteeLivePage({
       ) : null}
 
       {activeTab === "room" ? (
-      <section className="space-y-3.5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
+      <section className="space-y-4 rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-6">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("digitalCommitteeRoom")}</h2>
         <p className="text-sm text-brand-navy/90 max-w-2xl">
           {t("digitalRoomDescription")}
@@ -329,7 +329,7 @@ export default async function SmtCommitteeLivePage({
       ) : null}
 
       {activeTab === "floor" ? (
-      <div className="space-y-6 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
+      <div className="space-y-6 rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-6">
         <section className="space-y-2.5">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("liveFloor")}</h2>
           <ChairLiveFloor

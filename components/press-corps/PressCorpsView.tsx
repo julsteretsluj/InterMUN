@@ -96,7 +96,7 @@ export function PressCorpsView() {
     <div className="w-full min-w-0 space-y-4 md:space-y-6">
       {/* Profile header */}
       <div className="w-full min-w-0 overflow-hidden rounded-2xl border border-white/15 bg-black/25 shadow-sm backdrop-blur-sm">
-        <div className="flex flex-wrap items-center gap-3 p-4 sm:p-5">
+        <div className="flex flex-wrap items-center gap-3 p-4 sm:p-6">
           <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] text-white ring-2 ring-white/20">
             {showAvatarImage ? (
               // eslint-disable-next-line @next/next/no-img-element

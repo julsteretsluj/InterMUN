@@ -319,7 +319,7 @@ th{background:#f4f4f5}
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/40 p-4 text-sm text-brand-muted">
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
@@ -345,7 +345,7 @@ th{background:#f4f4f5}
 
       <section>
         <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">{t("addOrEditEntry")}</h3>
-        <form onSubmit={submitForm} className="space-y-4 rounded-xl border border-brand-navy/10 p-4 md:p-5 bg-brand-paper">
+        <form onSubmit={submitForm} className="space-y-4 rounded-xl border border-brand-navy/10 p-4 md:p-6 bg-brand-paper">
           <input type="hidden" name="id" value={form.id} />
           <div className="grid sm:grid-cols-2 gap-4">
             <label className="block text-sm">

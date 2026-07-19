@@ -124,7 +124,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
   return (
     <section
       className={cn(
-        "rounded-xl border border-brand-navy/12 bg-brand-paper p-4 text-brand-navy [color-scheme:light] md:p-5",
+        "rounded-xl border border-brand-navy/12 bg-brand-paper p-4 text-brand-navy [color-scheme:light] md:p-6",
         "space-y-4",
         className
       )}

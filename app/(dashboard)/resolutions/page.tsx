@@ -2,7 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import { ResolutionsView } from "@/components/resolutions/ResolutionsView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
-import { getChamberScope } from "@/lib/chamber-scope";
 import { getTranslations } from "next-intl/server";
 
 export default async function ResolutionsPage() {
@@ -23,24 +22,6 @@ export default async function ResolutionsPage() {
   const canCreate = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
   const conferenceId = await requireActiveConferenceId();
-  const scope = await getChamberScope(supabase, conferenceId);
-
-  const { data: procedureState } = await supabase
-    .from("procedure_states")
-    .select("committee_session_started_at")
-    .eq("conference_id", scope.canonicalConferenceId)
-    .maybeSingle();
-  const sessionActive = Boolean(
-    (procedureState as { committee_session_started_at?: string | null } | null)?.committee_session_started_at
-  );
-
-  const { data: allocations } = await supabase
-    .from("allocations")
-    .select("id, country, user_id")
-    .eq("conference_id", conferenceId);
-
-  const myAllocation =
-    allocations?.find((row) => row.user_id === user.id) ?? null;
 
   const { data: initialResolutions } = await supabase
     .from("resolutions")
@@ -84,13 +65,6 @@ export default async function ResolutionsPage() {
         conferenceId={conferenceId}
         canCreate={canCreate}
         currentUserId={user.id}
-        myAllocationId={myAllocation?.id ?? null}
-        allocations={(allocations ?? []).map((row) => ({
-          id: row.id,
-          country: row.country,
-          user_id: row.user_id,
-        }))}
-        sessionActive={sessionActive}
       />
     </MunPageShell>
   );

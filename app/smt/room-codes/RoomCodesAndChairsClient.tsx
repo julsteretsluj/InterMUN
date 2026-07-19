@@ -135,7 +135,7 @@ export function RoomCodesAndChairsClient({
 
   return (
     <div className="space-y-10">
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
           {t("committeeRoomCodes")}
         </h2>
@@ -156,7 +156,7 @@ export function RoomCodesAndChairsClient({
         )}
       </section>
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">{t("inviteDaisChairs")}</h2>
         <p className="text-sm text-brand-muted mb-4 max-w-2xl">
           {t.rich("inviteHelp", {
@@ -220,7 +220,7 @@ export function RoomCodesAndChairsClient({
         )}
       </section>
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
           {t("grantChairRoleTitle")}
         </h2>

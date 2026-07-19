@@ -932,7 +932,7 @@ html.dark ::selection {
   }
 
   .dashboard-panel {
-    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
+    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
   }
   html.dark .dashboard-panel {
     @apply border-[var(--hairline)] bg-[var(--material-thick)] shadow-[0_8px_28px_-14px_rgba(0,0,0,0.55)];
@@ -1051,7 +1051,7 @@ html.dark ::selection {
   }
 
   html.dark .mun-shell {
-    @apply rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[0_10px_32px_-14px_rgba(0,0,0,0.65)] md:p-7;
+    @apply rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[0_10px_32px_-14px_rgba(0,0,0,0.65)] md:p-8;
   }
 
   .mun-shell-title {
@@ -1070,11 +1070,11 @@ html.dark ::selection {
     background: linear-gradient(90deg, var(--gold), var(--gold-bright));
   }
   html.dark .mun-shell-title {
-    @apply mb-5 text-[1.75rem] md:text-[2rem] tracking-[-0.02em];
+    @apply mb-4 text-[1.75rem] md:text-[2rem] tracking-[-0.02em];
   }
 
   .mun-card {
-    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
+    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
   }
   html.dark .mun-card {
     @apply border-[var(--hairline)] bg-[var(--material-thick)];
@@ -2081,6 +2081,26 @@ html.colorblind-mode .schedule-swatch-session {
   color: #71717a;
 }
 
+/*
+ * Cream/white committee islands nested directly in dark chamber frames
+ * (SMT oversight picker) — token reset. Child color locks are appended
+ * at end of this file so they beat `.mun-apple-site .text-brand-navy`.
+ */
+.marketing-shell .mun-chamber-frame-dark .marketing-light-surface {
+  color-scheme: light;
+  --color-text: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-muted: #71717a;
+  --brand-navy: #18181b;
+  --brand-muted: #71717a;
+  --color-brand-navy: #18181b;
+  --color-brand-muted: #71717a;
+  --apple-label: #18181b;
+  --apple-label-secondary: #52525b;
+  --hairline: rgba(60, 60, 67, 0.18);
+  color: #18181b;
+}
+
 /* Same card on light chamber frames — dark copy on tinted glass. */
 .marketing-shell .mun-chamber-frame-light .marketing-session-surface {
   color-scheme: light;
@@ -2146,7 +2166,7 @@ html.colorblind-mode .schedule-swatch-session {
   border: 1px solid var(--marketing-glass-border);
   background: color-mix(in srgb, var(--material-thick) 82%, transparent);
   backdrop-filter: blur(16px) saturate(1.08);
-  padding: 1.35rem 1.35rem 1.5rem;
+  padding: 1.5rem;
   box-shadow: var(--marketing-float-shadow);
   transition:
     transform var(--dur-base) var(--ease-apple),
@@ -2730,7 +2750,7 @@ html.dark .marketing-shell {
 
 @media (min-width: 768px) {
   .mun-glass-panel-dense {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
 }
 
@@ -8050,3 +8070,61 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site .mun-apple-layout-minimal {
   width: 100%;
 }
+
+/* SMT oversight light islands: force dark ink after mun-apple-site inherit rules. */
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface :where(
+  p,
+  span,
+  li,
+  div,
+  button,
+  h1,
+  h2,
+  h3,
+  h4
+) {
+  color: inherit;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface :is(
+  .text-zinc-900,
+  .text-brand-navy,
+  [class*="text-brand-navy"]
+) {
+  color: #18181b;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface :is(.text-zinc-800) {
+  color: #27272a;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface :is(
+  .text-zinc-700,
+  .text-zinc-600,
+  .text-zinc-500,
+  .text-brand-muted,
+  [class*="text-brand-muted"]
+) {
+  color: #52525b;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-emerald-950 {
+  color: #022c22;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-amber-950 {
+  color: #451a03;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-rose-950 {
+  color: #4c0519;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-orange-950 {
+  color: #431407;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-violet-950 {
+  color: #2e1065;
+}
+

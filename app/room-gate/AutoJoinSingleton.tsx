@@ -15,7 +15,7 @@ export function AutoJoinSingleton({ nextPath }: { nextPath: string }) {
   }, []);
 
   return (
-    <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10 text-center text-sm text-brand-muted">
+    <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-12 text-center text-sm text-brand-muted">
       <p className="mb-4">Only one conference and one committee are set up — signing you in…</p>
       <form ref={formRef} action={implicitJoinSingletonAction}>
         <input type="hidden" name="next" value={nextPath} />

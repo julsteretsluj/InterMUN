@@ -34,7 +34,7 @@ export function MarketingFeatureDemoSection({
     <section
       id={id}
       className={cn(
-        "scroll-mt-24 py-14 md:py-18",
+        "scroll-mt-24 py-12 md:py-12",
         dark
           ? "mun-marketing-role-band mun-marketing-section-dark border-t border-[color:var(--marketing-hairline)] text-[color:var(--marketing-ink)]"
           : "mun-marketing-surface border-t border-[var(--hairline)]"
@@ -42,7 +42,7 @@ export function MarketingFeatureDemoSection({
     >
       <div
         className={cn(
-          "mx-auto grid max-w-6xl items-start gap-10 px-4 md:px-6 lg:grid-cols-2 lg:gap-14",
+          "mx-auto grid max-w-6xl items-start gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12",
           reversed && "lg:[&>div:first-child]:order-2"
         )}
       >

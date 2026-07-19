@@ -25,7 +25,7 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
   }, [state?.error]);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-6">
       <input type="hidden" name="next" value={nextPath} />
 
       <div>

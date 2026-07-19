@@ -162,7 +162,7 @@ export default async function ChairNotesModerationPage() {
   return (
     <MunPageShell title={t("notesModeration")}>
       <div className="space-y-4">
-        <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+        <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
           <h2 className="font-display text-lg font-semibold text-brand-navy">{tMod("queueTitle")}</h2>
           <p className="mt-1 text-xs text-brand-muted leading-relaxed">{tMod("queueDescription")}</p>
         </section>

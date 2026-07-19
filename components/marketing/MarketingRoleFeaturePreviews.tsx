@@ -10,10 +10,11 @@ import {
   Pause,
   Play,
   RefreshCw,
-  Send,
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
+import type { CountryStanceMap } from "@/lib/country-stance";
+import { CountryStanceGrid } from "@/components/stances/CountryStanceGrid";
 import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
 import { MarketingChairAwardsRubricPanel } from "@/components/marketing/MarketingChairAwardsRubricPanel";
 import { MarketingDelegateResolutionBuilderPanel } from "@/components/marketing/MarketingDelegateResolutionBuilderPanel";
@@ -269,72 +270,11 @@ export function DelegateAmendmentFloorDemo() {
   );
 }
 
-type ChatMsg = { id: string; from: string; text: string };
-
-export function DelegateBlocMessagingDemo() {
-  const t = useTranslations("marketing.rolePreviews.delegate");
-  const [messages, setMessages] = useState<ChatMsg[]>([
-    { id: "1", from: "Kenya", text: "Can we align on operative clause 2?" },
-    { id: "2", from: "Norway", text: "Yes — suggest merging with our language on finance." },
-  ]);
-  const [draft, setDraft] = useState("");
-
-  const send = () => {
-    const trimmed = draft.trim();
-    if (!trimmed) return;
-    setMessages((prev) => [...prev, { id: String(Date.now()), from: "You", text: trimmed }]);
-    setDraft("");
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("blocLabel")}</span>
-      <ul className="mt-3 max-h-40 space-y-2 overflow-y-auto">
-        {messages.map((msg) => (
-          <li
-            key={msg.id}
-            className={cn(
-              "rounded-xl px-3 py-2 text-sm",
-              msg.from === "You"
-                ? "ml-6 bg-[color-mix(in_srgb,var(--accent)_12%,#fff)] text-zinc-900"
-                : "mr-6 border border-zinc-200 bg-zinc-50 text-zinc-800"
-            )}
-          >
-            <p className="text-xs font-semibold text-zinc-500">{msg.from}</p>
-            <p className="mt-0.5">{msg.text}</p>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-3 flex gap-2">
-        <input
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder={t("messagePlaceholder")}
-          className="min-w-0 flex-1 rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900"
-        />
-        <button type="button" onClick={send} className="rounded-lg bg-[var(--accent)] px-3 py-2 text-white" aria-label={t("send")}>
-          <Send className="h-4 w-4" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-const STANCE_CYCLE = ["support", "oppose", "neutral", "undecided"] as const;
-type Stance = (typeof STANCE_CYCLE)[number];
-
-const STANCE_COLORS: Record<Stance, string> = {
-  support: "bg-emerald-500/80 text-white",
-  oppose: "bg-rose-500/80 text-white",
-  neutral: "bg-zinc-400/80 text-white",
-  undecided: "bg-amber-400/90 text-zinc-900",
-};
+const STANCE_DEMO_COUNTRIES = ["Kenya", "Norway", "Mexico", "Peru", "Spain", "Ghana", "Japan", "France"];
 
 export function DelegateStanceHeatmapDemo() {
   const t = useTranslations("marketing.rolePreviews.delegate");
-  const countries = ["Kenya", "Norway", "Mexico", "Peru", "Spain", "Ghana", "Japan", "France"];
-  const [stances, setStances] = useState<Record<string, Stance>>({
+  const [stances, setStances] = useState<CountryStanceMap>({
     Kenya: "support",
     Norway: "support",
     Mexico: "neutral",
@@ -345,36 +285,18 @@ export function DelegateStanceHeatmapDemo() {
     France: "oppose",
   });
 
-  const cycle = (country: string) => {
-    setStances((prev) => {
-      const current = prev[country] ?? "undecided";
-      const idx = STANCE_CYCLE.indexOf(current);
-      const next = STANCE_CYCLE[(idx + 1) % STANCE_CYCLE.length];
-      return { ...prev, [country]: next };
-    });
-  };
-
   return (
     <div className={PREVIEW_CARD}>
       <span className={PREVIEW_LABEL}>{t("stanceLabel")}</span>
       <p className="mt-1 text-xs text-zinc-500">{t("stanceHint")}</p>
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {countries.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => cycle(c)}
-            className={cn(
-              "rounded-lg px-2 py-2 text-center text-xs font-semibold transition",
-              STANCE_COLORS[stances[c] ?? "undecided"]
-            )}
-          >
-            <span className="block truncate">{c}</span>
-            <span className="mt-0.5 block text-[0.65rem] font-normal opacity-90">
-              {t(`stance_${stances[c] ?? "undecided"}`)}
-            </span>
-          </button>
-        ))}
+      {/* Real in-app stance map grid, driven by static demo data. */}
+      <div className="mt-3">
+        <CountryStanceGrid
+          countries={STANCE_DEMO_COUNTRIES}
+          stances={stances}
+          canEdit
+          onChange={setStances}
+        />
       </div>
     </div>
   );

@@ -159,7 +159,7 @@ export function DelegationNoteThreadDialog({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl rounded-xl border border-white/15 bg-brand-paper p-4 md:p-5 shadow-2xl"
+        className="w-full max-w-2xl rounded-xl border border-white/15 bg-brand-paper p-4 md:p-6 shadow-2xl"
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         <div className="mb-3 flex items-center justify-between gap-3">

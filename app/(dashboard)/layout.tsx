@@ -189,7 +189,7 @@ export default async function DashboardLayout({
             isChairRole(effectiveRole) ? "/chair" : isAdvisorRole(effectiveRole) ? "/advisor" : "/delegate"
           }
           aria-label={t("appHomeAria", { appName })}
-          className="flex shrink-0 items-center justify-center gap-0 overflow-visible border-b border-[var(--hairline)] px-2 py-5 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex shrink-0 items-center justify-center gap-0 overflow-visible border-b border-[var(--hairline)] px-2 py-4 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-4 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span

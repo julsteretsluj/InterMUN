@@ -291,7 +291,7 @@ function ChairAllocationScoringPanel({
     <section
       ref={panelRef}
       id="allocation-matrix-scoring"
-      className="mt-5 rounded-xl border border-brand-accent/35 bg-logo-cyan/10 p-4 md:p-5 space-y-4"
+      className="mt-6 rounded-xl border border-brand-accent/35 bg-logo-cyan/10 p-4 md:p-6 space-y-4"
     >
       <div className="rounded-xl border border-amber-400/35 bg-amber-50/60 px-4 py-3 text-sm text-amber-950 dark:bg-amber-950/20 dark:text-amber-100">
         <p className="font-semibold">{t("scoringDraftTitle")}</p>

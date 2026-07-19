@@ -26,12 +26,12 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
     <>
       <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)]">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-18">
+        <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-12">
           <p className="mun-marketing-eyebrow">{t("eyebrow")}</p>
           <h1 className="mun-display mt-4 text-4xl md:text-5xl">
             {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
           </h1>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed md:text-lg">{t("subtitle")}</p>
+          <p className="mt-6 max-w-3xl text-base leading-relaxed md:text-lg">{t("subtitle")}</p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[color:var(--marketing-ink-soft)] md:text-base">{t("intro")}</p>
           <div className="mt-8 flex flex-wrap gap-2">
             <span className="mun-procedure-chip">{t("chip1")}</span>
@@ -43,7 +43,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <MarketingFeaturesDemos role={role} />
 
-      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-20">
+      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-12 md:py-12">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mun-marketing-hero-copy mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl md:text-4xl">

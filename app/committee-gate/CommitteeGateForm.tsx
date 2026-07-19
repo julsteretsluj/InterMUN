@@ -37,7 +37,7 @@ export function CommitteeGateForm({
   }, [state?.error]);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-6">
       <input type="hidden" name="conference_id" value={conferenceId} />
       <input type="hidden" name="next" value={nextPath} />
 

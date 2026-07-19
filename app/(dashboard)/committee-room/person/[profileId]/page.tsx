@@ -136,8 +136,8 @@ export default async function CommitteeRoomPersonPage({
         </div>
       </div>
 
-      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
-        <aside className="rounded-xl border border-brand-navy/15 bg-brand-paper p-5 shadow-[0_10px_28px_-16px_rgba(0,0,0,0.45)] dark:border-white/12 dark:bg-black/20">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
+        <aside className="rounded-xl border border-brand-navy/15 bg-brand-paper p-4 shadow-[0_10px_28px_-16px_rgba(0,0,0,0.45)] dark:border-white/12 dark:bg-black/20">
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               {fullProfile?.profile_picture_url ? (
@@ -167,7 +167,7 @@ export default async function CommitteeRoomPersonPage({
             <p className="mt-1.5 text-sm text-brand-muted max-w-[16rem]">{subtitle}</p>
           </div>
 
-          <div className="mt-5 space-y-3 border-t border-brand-navy/15 pt-5 dark:border-white/10">
+          <div className="mt-6 space-y-3 border-t border-brand-navy/15 pt-6 dark:border-white/10">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted text-center">
               Actions
             </p>
@@ -196,7 +196,7 @@ export default async function CommitteeRoomPersonPage({
 
         <div className="space-y-4 min-w-0">
           {placard || (canReadFullProfile && fullProfile) ? (
-            <section className="rounded-xl border border-brand-navy/15 bg-brand-paper p-5 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20 md:p-6">
+            <section className="rounded-xl border border-brand-navy/15 bg-brand-paper p-4 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20 md:p-6">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Member profile
               </h2>
@@ -239,7 +239,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {daisSeat ? (
-            <section className="rounded-xl border border-brand-navy/15 bg-brand-paper p-5 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20 md:p-6">
+            <section className="rounded-xl border border-brand-navy/15 bg-brand-paper p-4 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20 md:p-6">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">Dais</h2>
               <dl className="grid gap-2 sm:grid-cols-2">
                 <InfoRow label="Role" value={daisSeat.title} />

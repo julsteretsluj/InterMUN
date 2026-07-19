@@ -40,7 +40,7 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
   ] as const;
 
   return (
-    <form ref={formRef} action={formAction} className={cn("relative space-y-5 text-left", className)}>
+    <form ref={formRef} action={formAction} className={cn("relative space-y-6 text-left", className)}>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="inquiry-organization" className={LABEL_CLASS}>

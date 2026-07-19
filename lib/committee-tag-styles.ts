@@ -9,6 +9,14 @@
 const pill =
   "inline-flex rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold";
 
+/** Strip `dark:` variants so pills stay light-palette on cream/white marketing islands. */
+export function lightLockedTagClass(className: string): string {
+  return className
+    .split(/\s+/)
+    .filter((token) => token.length > 0 && !token.startsWith("dark:"))
+    .join(" ");
+}
+
 export function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced"): string {
   switch (level) {
     case "Beginner":

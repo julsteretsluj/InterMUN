@@ -18,7 +18,7 @@ export async function AppleGateLayout({ children, title }: AppleGateLayoutProps)
 
   return (
     <AppleAppFrame appName={appName}>
-      <AppleProductPage width="narrow" className="min-h-screen py-6 md:py-10">
+      <AppleProductPage width="narrow" className="min-h-screen py-8 md:py-12">
         <div className="mb-4 flex items-center justify-between gap-3">
           <Link
             href="/"

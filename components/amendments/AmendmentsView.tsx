@@ -179,7 +179,7 @@ export function AmendmentsView({
       ) : null}
 
       {/* Submit form */}
-      <section className="dashboard-panel space-y-4 p-4 sm:p-5">
+      <section className="dashboard-panel space-y-4 p-4 sm:p-6">
         <div className="flex items-center gap-2">
           <FilePlus2 className="h-5 w-5 text-brand-accent" />
           <h2 className="text-base font-semibold text-brand-navy">{t("submitTitle")}</h2>

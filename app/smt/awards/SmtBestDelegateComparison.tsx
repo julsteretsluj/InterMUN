@@ -47,7 +47,7 @@ export function SmtBestDelegateComparison({
 
   if (sorted.length === 0) {
     return (
-      <section className="rounded-xl border border-brand-navy/10 bg-brand-paper/60 p-4 md:p-5">
+      <section className="rounded-xl border border-brand-navy/10 bg-brand-paper/60 p-4 md:p-6">
         <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100 mb-1">
           Best Delegate submissions (comparison)
         </h3>
@@ -59,7 +59,7 @@ export function SmtBestDelegateComparison({
   }
 
   return (
-    <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5 space-y-3">
+    <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-3">
       <div>
         <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
           Best Delegate submissions (comparison)

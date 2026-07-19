@@ -104,7 +104,7 @@ export function DelegateChairFeedbackPanel({
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl border border-brand-navy/12 bg-logo-cyan/10 p-4 md:p-5 space-y-2">
+      <section className="rounded-xl border border-brand-navy/12 bg-logo-cyan/10 p-4 md:p-6 space-y-2">
         <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">Chair feedback</h2>
         <p className="text-xs text-brand-muted leading-relaxed">
           Rate each chair using the official chair performance rubric (same criteria as secretariat oversight). For each

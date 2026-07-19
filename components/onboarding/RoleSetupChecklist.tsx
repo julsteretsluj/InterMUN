@@ -34,7 +34,7 @@ export function RoleSetupChecklist({ role }: { role: RoleKey }) {
   const hrefs = HREFS[role];
 
   return (
-    <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+    <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
       <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
       <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
       <ol className="mt-4 space-y-2">

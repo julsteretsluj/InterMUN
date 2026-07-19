@@ -65,7 +65,7 @@ export function DelegationNoteModerationQueue({ notes }: { notes: HeldDelegation
 
   if (sorted.length === 0) {
     return (
-      <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+      <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
         <p className="text-sm text-brand-muted">{t("emptyQueue")}</p>
       </section>
     );

@@ -13,6 +13,7 @@ import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import { SpeechOutlinePlanner } from "@/components/speeches/SpeechOutlinePlanner";
 import { type SpeechOutlinePoint } from "@/lib/speech-outline";
+import { saveSpeechOutlinePoints } from "@/app/actions/speechOutline";
 
 interface Speech {
   id: string;
@@ -38,6 +39,8 @@ export function SpeechesView({
   const [form, setForm] = useState({ title: "", content: "", google_docs_url: "" });
   const [saveError, setSaveError] = useState<string | null>(null);
   const [outlinePoints, setOutlinePoints] = useState(speechOutlinePoints);
+  const [outlineError, setOutlineError] = useState<string | null>(null);
+  const [outlineSaving, setOutlineSaving] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -113,24 +116,30 @@ export function SpeechesView({
   }
 
   async function persistOutlinePoints(next: SpeechOutlinePoint[]) {
-    setSaveError(null);
+    const previous = outlinePoints;
+    setOutlineError(null);
     setOutlinePoints(next);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        speech_outline_points: next,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", user.id);
-    if (error) {
-      setSaveError(error.message);
-      return;
+    setOutlineSaving(true);
+    try {
+      const result = await saveSpeechOutlinePoints(next);
+      if (!result.ok) {
+        setOutlinePoints(previous);
+        setOutlineError(
+          result.error === "too_many_points"
+            ? t("errorTooManyPoints")
+            : result.error === "point_too_long"
+              ? t("errorPointTooLong")
+              : t("errorSaveFailed")
+        );
+        return;
+      }
+      router.refresh();
+    } catch {
+      setOutlinePoints(previous);
+      setOutlineError(t("errorSaveFailed"));
+    } finally {
+      setOutlineSaving(false);
     }
-    router.refresh();
   }
 
   return (
@@ -143,9 +152,15 @@ export function SpeechesView({
       <div>
         <h3 className="mb-1 font-semibold text-brand-navy dark:text-zinc-100">{t("outlineTitle")}</h3>
         <p className="mb-3 text-sm text-brand-muted">{t("outlineHelp")}</p>
+        {outlineError ? (
+          <p className="mb-3 text-sm text-red-600" role="alert">
+            {outlineError}
+          </p>
+        ) : null}
         <SpeechOutlinePlanner
           points={outlinePoints}
           canEdit
+          saving={outlineSaving}
           onChange={(next) => void persistOutlinePoints(next)}
         />
       </div>

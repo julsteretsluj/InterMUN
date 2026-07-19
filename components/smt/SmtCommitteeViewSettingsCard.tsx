@@ -112,7 +112,7 @@ export function SmtCommitteeViewSettingsCard({
   }
 
   return (
-    <section className="mb-8 rounded-xl border border-brand-navy/15 bg-brand-paper/80 p-4 md:p-5 dark:border-zinc-600 dark:bg-zinc-900/60">
+    <section className="mb-8 rounded-xl border border-brand-navy/15 bg-brand-paper/80 p-4 md:p-6 dark:border-zinc-600 dark:bg-zinc-900/60">
       <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
         {t("title")}
       </h2>
@@ -174,7 +174,7 @@ export function SmtCommitteeViewSettingsCard({
         ) : null}
       </div>
 
-      <div className="mt-6 border-t border-brand-navy/10 pt-5 dark:border-zinc-700">
+      <div className="mt-6 border-t border-brand-navy/10 pt-6 dark:border-zinc-700">
         <p className="text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
           {t("switchViewHeading")}
         </p>

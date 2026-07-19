@@ -228,7 +228,7 @@ function SecretariatRegistrationBoardInner({ rows }: { rows: Row[] }) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {rows.map((row) => (
         <div key={row.id} className="space-y-2">
           <div className="flex items-center justify-between gap-3 px-1">

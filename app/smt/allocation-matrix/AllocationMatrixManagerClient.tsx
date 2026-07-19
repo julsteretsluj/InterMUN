@@ -298,7 +298,7 @@ export function AllocationMatrixManagerClient({
         </div>
       )}
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("rosterHeading", { heading })}</h2>
         <p className="text-xs text-brand-muted">
           {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}
@@ -413,7 +413,7 @@ export function AllocationMatrixManagerClient({
         </div>
       </section>
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-3">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-3">
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
         <div className="flex flex-wrap gap-2">
           {isSmtSecretariatSheet
@@ -471,7 +471,7 @@ export function AllocationMatrixManagerClient({
         </form>
       </section>
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("importCsv")}</h2>
         <p className="text-sm text-brand-muted max-w-2xl">
           {t("importHelpPrefix")} <span className="font-mono">country,optional_code</span>. {t("importHelpMiddle")}{" "}

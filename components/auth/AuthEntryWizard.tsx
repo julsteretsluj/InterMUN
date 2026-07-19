@@ -327,7 +327,7 @@ export function AuthEntryWizard({
               mode: mode === "signup" ? t("nextModeSignup") : t("nextModeLogin"),
             })}
           </p>
-          <form onSubmit={handleConferenceSubmit} className="space-y-5">
+          <form onSubmit={handleConferenceSubmit} className="space-y-6">
             <div>
               <label
                 htmlFor="wizard-event-code"

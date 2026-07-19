@@ -49,7 +49,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
   const showSearch = conferences.length > 1;
 
   return (
-    <form action={formAction} className="max-w-lg space-y-5">
+    <form action={formAction} className="max-w-lg space-y-6">
       <input type="hidden" name="next" value="/profile" />
 
       <div>
