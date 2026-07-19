@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { MarketingFeaturesPage } from "@/components/marketing/MarketingFeaturesPage";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
-import { redirectMarketingGuestsToApp } from "@/lib/marketing-guest-redirect";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("marketing.featuresPages.delegates");
@@ -13,7 +12,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function DelegatesFeaturesPage() {
-  await redirectMarketingGuestsToApp();
   return (
     <MarketingOpening>
       <MarketingFeaturesPage role="delegates" />
