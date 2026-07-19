@@ -520,7 +520,13 @@
     "selectorAria": "Select language"
   },
   "dashboardTopBar": {
-    "delegateHub": "Delegate hub"
+    "delegateHub": "Delegate hub",
+    "backToHome": "Back to home"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "backToHome": "Back to home"
   },
   "navFolders": {
     "home": "Home",

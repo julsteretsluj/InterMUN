@@ -3,6 +3,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AccessibilitySelector } from "@/components/AccessibilitySelector";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -47,6 +48,9 @@ export function AdminAppChrome({
         sidebarClassName="hidden md:flex flex-col"
         trailing={
           <div className="flex items-center gap-1">
+            <Link href="/" className="mun-apple-btn mun-apple-btn-plain-blue mun-apple-btn-compact !px-2">
+              Back to home
+            </Link>
             <AccessibilitySelector />
             <ThemeSelector />
             <SignOutButton className="mun-apple-btn mun-apple-btn-plain-blue mun-apple-btn-compact !px-2" />

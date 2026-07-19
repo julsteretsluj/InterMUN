@@ -111,6 +111,12 @@ export function DashboardTopBar({
           <DashboardSearch />
         </div>
         <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5 sm:ml-0 sm:flex-nowrap sm:gap-2">
+          <Link
+            href="/"
+            className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)]"
+          >
+            ← {t("backToHome")}
+          </Link>
           {showDelegateHubLink ? (
             <Link
               href="/delegate"

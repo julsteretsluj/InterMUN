@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { AppleAppFrame } from "@/components/ui/AppleAppShell";
 import { AppleProductPage } from "@/components/ui/AppleProductPage";
@@ -10,13 +12,21 @@ type AppleGateLayoutProps = {
   title?: string;
 };
 
-export function AppleGateLayout({ children, title }: AppleGateLayoutProps) {
+export async function AppleGateLayout({ children, title }: AppleGateLayoutProps) {
+  const t = await getTranslations("authWizard");
   const appName = getAppName();
 
   return (
     <AppleAppFrame appName={appName}>
       <AppleProductPage width="narrow" className="min-h-screen py-6 md:py-10">
-        <div className="mb-4 flex justify-end">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <Link
+            href="/"
+            className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm"
+          >
+            <ChevronLeft className="size-4 shrink-0" aria-hidden />
+            {t("backToHome")}
+          </Link>
           <PublicPageControls compact />
         </div>
         <AppleWindow
