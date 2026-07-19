@@ -52,12 +52,13 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
     setPhase("open");
   };
 
-  if (phase === "checking") {
-    return <div className="fixed inset-0 z-[9999] bg-brand-cream [color-scheme:light]" aria-hidden />;
-  }
-
   return (
     <>
+      {/* Children always render (SSR) so content is crawlable and #anchor links can
+          scroll on load; the cover/orb sit on top until the intro resolves. */}
+      {phase === "checking" ? (
+        <div className="fixed inset-0 z-[9999] bg-brand-cream [color-scheme:light]" aria-hidden />
+      ) : null}
       <OrbAnimationOverlay
         open={phase === "playing"}
         playKey={playKey}

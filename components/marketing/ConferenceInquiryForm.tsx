@@ -158,7 +158,7 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
           {interests.map((item) => (
             <label
               key={item.value}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--hairline)] bg-white px-3 py-1.5 text-xs font-medium text-brand-navy has-[:checked]:border-[color-mix(in_srgb,var(--accent)_45%,var(--hairline))] has-[:checked]:bg-[color-mix(in_srgb,var(--accent)_10%,#fff)]"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--hairline)] bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-brand-navy transition-colors hover:bg-white/[0.1] has-[:checked]:border-[color-mix(in_srgb,var(--accent)_55%,var(--hairline))] has-[:checked]:bg-[color-mix(in_srgb,var(--accent)_18%,transparent)]"
             >
               <input
                 type="checkbox"

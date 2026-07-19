@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
 type AppleStatusBarProps = {
@@ -80,15 +80,36 @@ function StatusIndicators({ showCellular = false, showBatteryLabel = false }: { 
   );
 }
 
-function useStatusClock() {
-  const [now, setNow] = useState(() => new Date());
+const clockListeners = new Set<() => void>();
+let clockTimer: ReturnType<typeof setInterval> | null = null;
+let clockMs = 0;
 
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(new Date()), 30_000);
-    return () => window.clearInterval(timer);
-  }, []);
+function subscribeClock(onStoreChange: () => void) {
+  clockListeners.add(onStoreChange);
+  if (clockTimer == null) {
+    clockMs = Date.now();
+    clockTimer = setInterval(() => {
+      clockMs = Date.now();
+      clockListeners.forEach((listener) => listener());
+    }, 30_000);
+  }
+  return () => {
+    clockListeners.delete(onStoreChange);
+    if (clockListeners.size === 0 && clockTimer != null) {
+      clearInterval(clockTimer);
+      clockTimer = null;
+    }
+  };
+}
 
-  return now;
+/**
+ * Server snapshot is null so SSR renders no time text — the real,
+ * locale-correct time fills in on the client. This avoids hydration
+ * mismatches from server/client clock and locale differences.
+ */
+function useStatusClock(): Date | null {
+  const ms = useSyncExternalStore(subscribeClock, () => clockMs, () => 0);
+  return ms === 0 ? null : new Date(ms);
 }
 
 export function AppleStatusBar({ variant = "auto", className }: AppleStatusBarProps) {
@@ -96,18 +117,19 @@ export function AppleStatusBar({ variant = "auto", className }: AppleStatusBarPr
   const showIpadRow = variant !== "iphone";
 
   return (
-    <div className={cn("mun-apple-status-bar", className)} role="status" aria-live="polite">
+    // aria-live="off": the clock re-renders every 30s and must not be announced each time.
+    <div className={cn("mun-apple-status-bar", className)} role="status" aria-live="off">
       <div className="mun-apple-status-bar-iphone flex md:hidden">
-        <time className="mun-apple-status-bar-time" dateTime={now.toISOString()}>
-          {formatIphoneTime(now)}
+        <time className="mun-apple-status-bar-time" dateTime={now?.toISOString()}>
+          {now ? formatIphoneTime(now) : "\u00a0"}
         </time>
         <span className="mun-apple-status-bar-island" aria-hidden />
         <StatusIndicators showCellular />
       </div>
       {showIpadRow ? (
         <div className="mun-apple-status-bar-ipad hidden md:flex">
-          <time className="mun-apple-status-bar-datetime" dateTime={now.toISOString()}>
-            {formatIpadStatus(now)}
+          <time className="mun-apple-status-bar-datetime" dateTime={now?.toISOString()}>
+            {now ? formatIpadStatus(now) : "\u00a0"}
           </time>
           <StatusIndicators showBatteryLabel />
         </div>
@@ -138,8 +160,8 @@ function AppleMenuBarStatus() {
 
   return (
     <div className="mun-apple-menu-bar-status" aria-hidden>
-      <time className="mun-apple-status-bar-datetime" dateTime={now.toISOString()}>
-        {formatIpadStatus(now)}
+      <time className="mun-apple-status-bar-datetime" dateTime={now?.toISOString()}>
+        {now ? formatIpadStatus(now) : "\u00a0"}
       </time>
       <StatusIndicators showBatteryLabel />
     </div>

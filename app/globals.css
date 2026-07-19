@@ -2222,6 +2222,23 @@ html.colorblind-mode .schedule-swatch-session {
   background: color-mix(in srgb, #ffffff 8%, transparent);
 }
 
+/* Tighten header controls on phones so the brand, language selector, and
+   CTA all fit on one row without overlapping. */
+@media (max-width: 479px) {
+  .marketing-shell .marketing-header .mun-apple-btn {
+    padding: 0.4375rem 0.6875rem;
+  }
+
+  /* Flag-only language selector on phones; full labels remain in the dropdown. */
+  .marketing-shell .marketing-header-controls select {
+    max-width: 2.25rem;
+  }
+
+  .marketing-shell .marketing-header-controls > div:first-child {
+    padding-inline: 0.125rem;
+  }
+}
+
 .marketing-shell .marketing-header .mun-apple-btn-glass-gray:hover:not(:disabled):not([aria-disabled="true"]) {
   background: color-mix(in srgb, #ffffff 14%, transparent);
 }
