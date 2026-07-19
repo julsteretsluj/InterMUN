@@ -14,7 +14,9 @@ export function GateBrandWordmark({
   size?: "default" | "hero";
 }) {
   return (
-    <OrbPlayTrigger>
+    // Full-width block so the emblem centers in the card (the trigger button
+    // otherwise shrinks to content width and hugs the left edge).
+    <OrbPlayTrigger className="mx-auto block w-full text-center">
       <BrandWordmark className={className} size={size} />
     </OrbPlayTrigger>
   );
