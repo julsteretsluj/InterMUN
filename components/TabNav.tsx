@@ -127,14 +127,16 @@ function AspireSidebarLink({
       href={tab.href}
       aria-label={`${priority}. ${label}`}
       className={cn(
-        "nav-priority-link nav-priority-link--rail flex w-full min-w-0 items-center justify-center gap-2 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
+        "nav-priority-link nav-priority-link--rail flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
         isActive
           ? "dashboard-nav-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
       <NavPriorityBadge priority={priority} />
-      <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>
+      <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
+        {tab.emoji}
+      </span>
       <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
   );
@@ -247,7 +249,7 @@ export function TabNav({
     return (
       <nav
         aria-label={t("mainNavigationAria")}
-        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
+        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         {folderGroups.map(({ folderId, items }) => (
           <NavFolder

@@ -92,10 +92,10 @@ export function NavFolder({
         onClick={onToggle}
         title={label}
         className={cn(
-          "nav-folder-trigger flex w-full min-w-0 items-center gap-2 rounded-[var(--radius-md)] py-1.5 text-left text-sm font-semibold text-brand-muted transition-apple hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]",
-          labelsHidden ? "justify-center px-2 pr-3.5" : "px-2.5",
+          "nav-folder-trigger flex w-full min-w-0 items-center gap-2 rounded-[var(--radius-md)] py-2 text-left text-sm font-semibold text-brand-muted transition-apple hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]",
+          labelsHidden ? "justify-center px-2" : "px-2.5",
           compact &&
-            "justify-center gap-0 px-2 pr-3.5 group-hover:justify-start group-hover:gap-2 group-hover:px-2.5 group-hover:pr-3",
+            "justify-center px-2 group-hover:justify-start group-hover:gap-2 group-hover:px-2.5",
           hasActiveChild && "text-brand-navy"
         )}
       >

@@ -220,19 +220,19 @@ export default async function DashboardLayout({
           )}
         </div>
         {!isChairRole(effectiveRole) ? (
-          <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-3 py-4">
+          <div className="mt-auto shrink-0 space-y-1 border-t border-[var(--hairline)] px-2 py-3 group-hover:px-3">
             <Link
               href="/guides"
-              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
+              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <span className="text-base leading-none" aria-hidden>❓</span>
+              <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>❓</span>
               <span className="hidden group-hover:inline">{t("helpCenter")}</span>
             </Link>
             <Link
               href="/profile"
-              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
+              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <span className="text-base leading-none" aria-hidden>⚙️</span>
+              <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>⚙️</span>
               <span className="hidden group-hover:inline">{t("settings")}</span>
             </Link>
           </div>

@@ -36,7 +36,7 @@ export function DashboardBrandLogos({
       className={cn(
         "group/logo-stack flex shrink-0 items-center justify-center overflow-visible transition-all duration-200",
         variant === "sidebar"
-          ? "flex-col gap-1 group-hover:flex-row group-hover:gap-1.5"
+          ? "flex-col gap-1.5 group-hover:flex-row group-hover:gap-2"
           : "flex-row gap-2"
       )}
     >

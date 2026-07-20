@@ -82,14 +82,16 @@ function SmtSidebarLink({
       href={item.href}
       aria-label={`${priority}. ${label}`}
       className={cn(
-        "nav-priority-link nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-2 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
+        "nav-priority-link nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
         isActive
           ? "smt-nav-row-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
       <NavPriorityBadge priority={priority} />
-      <span className="text-base leading-none" aria-hidden>{item.emoji}</span>
+      <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
+        {item.emoji}
+      </span>
       <span className="hidden truncate group-hover:inline">{label}</span>
     </Link>
   );
@@ -165,19 +167,21 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="shrink-0 px-1.5 pb-2 pt-3 group-hover:px-3">
+      <div className="shrink-0 px-2 pb-2 pt-3 group-hover:px-3">
         <Link
           href="/smt"
           title={hubLabel}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-[var(--accent)] px-3 py-2.5 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95",
+            "flex w-full items-center justify-center gap-1.5 rounded-[var(--radius-pill)] bg-[var(--accent)] px-2 py-2 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95 group-hover:gap-2 group-hover:px-3 group-hover:py-2.5",
             hubActive &&
               "ring-2 ring-[color:color-mix(in_srgb,white_45%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
-          <span className="text-base leading-none" aria-hidden>📌</span>
+          <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
+            📌
+          </span>
           <span className="hidden min-w-0 truncate group-hover:inline">{hubLabel}</span>
-          <span className="inline text-base leading-none group-hover:hidden" aria-hidden>
+          <span className="text-xs font-bold leading-none tracking-wide group-hover:hidden" aria-hidden>
             {tNav("hubAbbrev")}
           </span>
         </Link>
@@ -185,7 +189,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
       <nav
         aria-label={tNav("ariaDashboard")}
-        className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-1.5 py-1 [scrollbar-width:thin] group-hover:px-3"
+        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-1 [scrollbar-width:thin] group-hover:px-3"
       >
         {folderGroups.map(({ folderId, items }) => (
           <NavFolder
@@ -209,12 +213,14 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
         ))}
       </nav>
 
-      <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-1.5 py-4 group-hover:px-3">
+      <div className="mt-auto shrink-0 space-y-1 border-t border-[var(--hairline)] px-2 py-3 group-hover:px-3">
         <Link
           href="/guides"
-          className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
         >
-          <span className="text-base leading-none" aria-hidden>❓</span>
+          <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
+            ❓
+          </span>
           <span className="hidden group-hover:inline">{tDash("helpCenter")}</span>
         </Link>
       </div>

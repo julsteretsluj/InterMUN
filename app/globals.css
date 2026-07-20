@@ -69,9 +69,10 @@ html {
   --navy: #003f88;
   --navy-bright: #00509d;
   --navy-glass: rgba(0, 41, 107, 0.72);
-  --gold: #fdc500;
-  --gold-bright: #ffd500;
-  --gold-soft: #ffe273;
+  /* Brand gold tracks the theme accent (set after --accent-bright below; resolved at use). */
+  --gold: var(--accent-bright);
+  --gold-bright: color-mix(in srgb, var(--accent-bright) 55%, #ffffff);
+  --gold-soft: color-mix(in srgb, var(--accent-bright) 42%, #ffffff);
   --parchment: var(--dashboard-cream);
 
   /* —— Apple system colors (light / sRGB — HIG) —— */
@@ -82,7 +83,8 @@ html {
   --system-mint: #00c7be;
   --system-teal: #30b0c7;
   --system-cyan: #32ade6;
-  --system-blue: #007aff;
+  /* Interactive “system blue” follows the user’s theme accent. */
+  --system-blue: var(--accent);
   --system-indigo: #5856d6;
   --system-purple: #af52de;
   --system-pink: #ff2d55;
@@ -260,7 +262,7 @@ html.dark {
   --system-mint: #63e6e2;
   --system-teal: #40c8e0;
   --system-cyan: #64d2ff;
-  --system-blue: #0a84ff;
+  --system-blue: var(--accent);
   --system-indigo: #5e5ce6;
   --system-purple: #bf5af2;
   --system-pink: #ff375f;
@@ -312,9 +314,9 @@ html.dark {
   --navy: #0a3a6e;
   --navy-bright: #2f7fd0;
   --navy-glass: rgba(6, 26, 55, 0.62);
-  --gold: #fdc500;
-  --gold-bright: #ffd500;
-  --gold-soft: #cbb25e;
+  --gold: var(--accent-bright);
+  --gold-bright: color-mix(in srgb, var(--accent-bright) 55%, #ffffff);
+  --gold-soft: color-mix(in srgb, var(--accent-bright) 38%, transparent);
 
   --accent: #2f7fd0;
   --accent-bright: #5aa0e6;
@@ -966,19 +968,22 @@ html.dark ::selection {
     @apply border-emerald-200 bg-emerald-50 text-emerald-800;
   }
   .nav-priority-badge {
-    @apply absolute left-1 top-1 z-[1] flex h-[1.125rem] min-w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0.5 text-[0.625rem] font-bold leading-none text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
+    /* Fixed width so 1- and 2-digit numbers share one column when the badge
+       sits beside the icon in the collapsed rail (min-width alone made "11"
+       wider than "3" and staggered every icon). */
+    @apply absolute left-1 top-1 z-[1] flex h-[1.125rem] w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0 text-[0.625rem] font-bold leading-none tabular-nums text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
   }
-  /* Gold numbered chip on active nav pill + hub tiles (Gavelling) */
+  /* Numbered chip on active nav pill — theme accent-bright (was fixed gold). */
   .dashboard-nav-active .nav-priority-badge {
-    background-color: var(--gold);
-    color: var(--navy-deep);
+    background-color: var(--accent-bright);
+    color: #ffffff;
   }
   .nav-priority-badge--tile {
     @apply left-2.5 top-2.5 h-[1.375rem] w-[1.375rem] px-0 text-[0.6875rem];
-    background-color: var(--gold);
-    color: var(--navy-deep);
+    background-color: var(--accent-bright);
+    color: #ffffff;
   }
-  /* Committee / hub tiles: float the gold number so topic copy wraps around it. */
+  /* Committee / hub tiles: float the number so topic copy wraps around it. */
   .nav-priority-badge--wrap-tile {
     position: static;
     float: right;
@@ -988,8 +993,8 @@ html.dark ::selection {
     width: 2rem;
     font-size: 0.875rem;
     shape-outside: circle(50% at 50% 50%);
-    background-color: var(--gold);
-    color: var(--navy-deep);
+    background-color: var(--accent-bright);
+    color: #ffffff;
   }
   .nav-priority-link {
     @apply relative pl-8;
@@ -1004,13 +1009,27 @@ html.dark ::selection {
   .nav-priority-link:not(.nav-priority-link--dock) .nav-priority-badge {
     @apply left-2.5 top-1/2 -translate-y-1/2;
   }
-  /* Collapsed sidebar rail: badge sits beside the icon with gap (no overlap). */
+  /* Collapsed sidebar rail: badge sits beside the icon with gap (no overlap).
+     Drop the absolute-badge left padding so the badge+icon pair can truly
+     centre in the narrow rail instead of sitting off to the right. */
+  .group:not(:hover) .nav-priority-link--rail {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    gap: 0.375rem !important;
+    justify-content: center !important;
+  }
   .group:not(:hover) .nav-priority-link--rail .nav-priority-badge {
-    position: static;
-    left: auto;
-    top: auto;
-    transform: none;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
     flex-shrink: 0;
+  }
+  /* Compact folder triggers also keep equal inset in the collapsed rail. */
+  .group:not(:hover) .nav-folder-trigger {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    justify-content: center !important;
   }
   .nav-priority-tab {
     @apply relative pl-6;
@@ -1171,27 +1190,27 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--accent) 88%, #ffffff);
   }
 
-  /* Warm gold call-to-action — deep navy ink on gold (diplomatic hero button) */
+  /* Theme-colored call-to-action (replaces fixed diplomatic gold). */
   .mun-btn-gold {
     @apply border border-transparent px-4 py-2 text-sm font-bold disabled:opacity-45;
     @apply [border-radius:var(--radius-pill)];
     transition: transform var(--dur-fast) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
-    color: var(--navy-deep);
-    background-color: var(--gold);
-    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 26%, transparent) 0%, transparent 60%);
+    color: #ffffff;
+    background-color: var(--accent);
+    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 22%, transparent) 0%, transparent 60%);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 1px 0 rgba(255, 255, 255, 0.28) inset,
       0 0 0 0.5px rgba(0, 0, 0, 0.14) inset,
-      0 2px 6px -1px color-mix(in srgb, var(--gold) 45%, transparent);
+      0 2px 6px -1px color-mix(in srgb, var(--accent) 45%, transparent);
   }
   .mun-btn-gold:hover:not(:disabled) {
-    background-color: var(--gold-bright);
+    background-color: var(--accent-bright);
   }
   .mun-btn-gold:active:not(:disabled) {
     transform: scale(0.97);
   }
   html.dark .mun-btn-gold {
-    color: #001233;
+    color: #ffffff;
   }
 
   /* Gentle hover lift for interactive cards / tiles */
@@ -8014,9 +8033,13 @@ html.dark .mun-apple-window-sidebar {
 }
 
 .mun-apple-site .mun-btn-gold {
-  color: var(--apple-label);
-  background: color-mix(in srgb, var(--accent) 14%, var(--apple-fill-quaternary));
-  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: #ffffff;
+  background: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 88%, #000000);
+  background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 18%, transparent) 0%, transparent 60%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 28%, transparent),
+    0 2px 6px -1px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 .mun-apple-site.marketing-shell .marketing-nav a,

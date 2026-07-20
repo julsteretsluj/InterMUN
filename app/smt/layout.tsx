@@ -60,7 +60,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         <Link
           href="/smt"
           aria-label={`${appName} home`}
-          className="flex shrink-0 items-center justify-center gap-0 overflow-visible border-b border-[var(--hairline)] px-2 py-5 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex shrink-0 items-center justify-center gap-0 overflow-visible border-b border-[var(--hairline)] px-2 py-4 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-4 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
