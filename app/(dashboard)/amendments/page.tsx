@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { AmendmentsView } from "@/components/amendments/AmendmentsView";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getTranslations } from "next-intl/server";
@@ -51,7 +52,10 @@ export default async function AmendmentsPage() {
     .map((r) => r.id);
 
   return (
-    <MunPageShell title={t("amendments")}>
+    <MunPageShell
+      title={t("amendments")}
+      titleAside={<PageFeatureGuideLink featureId="amendments" role={role} />}
+    >
       <AmendmentsView
         conferenceId={conferenceId}
         userId={user.id}

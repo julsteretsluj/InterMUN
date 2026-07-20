@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import {
   getCommitteeAwardScope,
@@ -429,7 +430,10 @@ export default async function ChairAllocationMatrixPage() {
     : {};
 
   return (
-    <MunPageShell title={t("allocationMatrix")}>
+    <MunPageShell
+      title={t("allocationMatrix")}
+      titleAside={<PageFeatureGuideLink featureId="allocationMatrix" role={isChairViewer ? "chair" : "smt"} />}
+    >
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         {isChairViewer ? tMatrix("introWithScoring") : tMatrix("intro")}
       </p>

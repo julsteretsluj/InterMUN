@@ -3,8 +3,10 @@
 
 "use client";
 
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { LocalTabs } from "@/components/ui/Tabs";
 import { totalEarnedCheckpoints, type MilestoneProgress } from "@/lib/committee-milestones";
 import type {
   CommitteeMilestoneGroup,
@@ -163,6 +165,18 @@ function CommitteeSection({ group }: { group: CommitteeMilestoneGroup }) {
 export function MilestonesView({ data }: { data: MilestonesData }) {
   const t = useTranslations("milestones");
   const hasAnything = data.self != null || data.committees.length > 0;
+  const committees = data.committees;
+
+  const committeeTabOptions = useMemo(
+    () => committees.map((group) => ({ id: group.conferenceId, label: group.label })),
+    [committees]
+  );
+
+  const committeeById = useMemo(() => {
+    const map = new Map<string, CommitteeMilestoneGroup>();
+    for (const group of committees) map.set(group.conferenceId, group);
+    return map;
+  }, [committees]);
 
   return (
     <div className="w-full min-w-0 space-y-6">
@@ -178,9 +192,20 @@ export function MilestonesView({ data }: { data: MilestonesData }) {
         </section>
       ) : null}
 
-      {data.committees.map((group) => (
-        <CommitteeSection key={group.conferenceId} group={group} />
-      ))}
+      {committees.length === 1 ? (
+        <CommitteeSection key={committees[0].conferenceId} group={committees[0]} />
+      ) : null}
+
+      {committees.length > 1 ? (
+        <LocalTabs
+          options={committeeTabOptions}
+          ariaLabel={t("committeeTabsAria")}
+          renderPanel={(activeTab) => {
+            const group = committeeById.get(activeTab) ?? committees[0];
+            return group ? <CommitteeSection group={group} /> : null;
+          }}
+        />
+      ) : null}
 
       {!hasAnything ? <p className="text-sm text-brand-muted">{t("empty")}</p> : null}
     </div>

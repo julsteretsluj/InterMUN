@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { StancesView } from "@/components/stances/StancesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
@@ -96,7 +97,10 @@ export default async function StancesPage() {
   }
 
   return (
-    <MunPageShell title={t("stances")}>
+    <MunPageShell
+      title={t("stances")}
+      titleAside={<PageFeatureGuideLink featureId="stances" role={myRole} />}
+    >
       <StancesView
         allocations={allocationsWithNotes}
         committeeCountries={committeeCountries}

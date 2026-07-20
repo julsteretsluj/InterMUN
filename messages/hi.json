@@ -17,7 +17,10 @@
     "secretaryGeneral": "प्रधान सचिव",
     "returnToProfile": "प्रोफ़ाइल पर लौटें",
     "useDifferentAccount": "किसी भिन्न खाते का उपयोग करें",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
+    "chooseFile": "Choose File",
+    "noFileChosen": "No file chosen",
+    "clear": "Clear"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "जैसे SEAMUNI2027",
@@ -517,7 +520,8 @@
     "selectorAria": "भाषा चुने"
   },
   "dashboardTopBar": {
-    "delegateHub": "प्रतिनिधि केंद्र"
+    "delegateHub": "प्रतिनिधि केंद्र",
+    "backToHome": "Back to home"
   },
   "tabNav": {
     "delegateHub": "प्रतिनिधि केंद्र",
@@ -649,7 +653,9 @@
       "purple": "बैंगनी",
       "pink": "गुलाबी",
       "neutral": "तटस्थ"
-    }
+    },
+    "colorsTitle": "Colors",
+    "customAccent": "Custom ({hex})"
   },
   "awardsManager": {
     "updated": "अद्यतन किया गया।",
@@ -1170,7 +1176,10 @@
     "delete": "हटाएँ",
     "errSelectResolution": "एक प्रस्ताव चुनें और साइन इन करें।",
     "errEmptyBody": "उद्घाटन के बाद खंड पाठ जोड़ें (या बॉडी फ़ील्ड में पूरा खंड टाइप करें)।",
-    "okSubmitted": "सुझाव जमा हो गया। डाइस इसकी समीक्षा कर मसौदे में जोड़ सकता है।"
+    "okSubmitted": "सुझाव जमा हो गया। डाइस इसकी समीक्षा कर मसौदे में जोड़ सकता है।",
+    "mergeToOfficial": "Add to official draft",
+    "merging": "Adding…",
+    "mergedOk": "Added to the official clause list."
   },
   "committeeGate": {
     "title": "समिति साइन-इन",
@@ -1214,7 +1223,8 @@
     "newsroom": "Newsroom",
     "pressCorps": "Press Corps",
     "milestones": "Milestones",
-    "profile": "Profile"
+    "profile": "Profile",
+    "guides": "Guides"
   },
   "smtCommitteeView": {
     "title": "सचिवालय: अध्यक्ष एवं प्रतिनिधि के विचार",
@@ -1305,7 +1315,8 @@
       "officialLinks": "आधिकारिक लिंक",
       "roomCode": "कक्ष कोड",
       "settings": "सेटिंग्स",
-      "resolutions": "Resolutions"
+      "resolutions": "Resolutions",
+      "guides": "Guides"
     }
   },
   "smtNav": {
@@ -1323,7 +1334,8 @@
     "milestones": "Milestones",
     "profile": "प्रोफ़ाइल",
     "follow": "अनुसरण करना",
-    "hubAbbrev": "श्रीमती"
+    "hubAbbrev": "श्रीमती",
+    "guides": "Guides"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1348,7 +1360,8 @@
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
       "points_raised": "Points (POI / POC)"
-    }
+    },
+    "committeeTabsAria": "Committee milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -1812,7 +1825,8 @@
       "ariaLabel": "व्यवस्थापक अनुभाग",
       "setup": "स्थापित करना",
       "checklist": "जांच सूची",
-      "portal": "स्थिति पोर्टल"
+      "portal": "स्थिति पोर्टल",
+      "registrations": "Registrations"
     }
   },
   "adminDashboard": {
@@ -2180,7 +2194,10 @@
           "g2": "बीटा",
           "g3": "गामा"
         }
-      }
+      },
+      "addDay": "Add day",
+      "removeDay": "Remove day",
+      "confirmRemoveDay": "Remove Day {day} and all of its blocks for every group?"
     }
   },
   "allocationMatrixManager": {
@@ -3436,6 +3453,99 @@
         }
       },
       "topicLine": "विषय: {विषय}"
+    },
+    "layers": {
+      "howTo": "How to use InterMUN",
+      "conference": "Conference guides"
+    },
+    "openFullGuide": "Open full guide",
+    "roles": {
+      "delegate": {
+        "overview": {
+          "title": "Delegate overview",
+          "body": "## Your job in InterMUN\n\nYou represent your assigned country (or seat) in committee. Use the **delegate hub** to jump into floor tools, prep, and documents.\n\n## Start here\n- Confirm your **country**, **committee**, and **topic** on Profile / hub\n- Open **Committee room** when session is live\n- Keep **Stances**, **Speeches**, and **Sources** updated before and during debate\n\n## Tips\n- Prefer in-app notes and documents so chairs and advisors can see shared work\n- Use **Guides** (this page) for product how-tos; conference staff may add RoP docs below"
+        },
+        "prep": {
+          "title": "Prep: stances, speeches, sources",
+          "body": "## Before session\n- **Stances** — map your country’s positions and allies\n- **Speeches** — draft outlines and speaking points\n- **Sources** — keep citations and research links handy\n- **Ideas** / running notes — capture clauses and talking points early\n\n## During debate\n- Update stances as blocs form\n- Reuse speech outlines when you take the floor\n- Attach sources when drafting resolution language"
+        },
+        "floor": {
+          "title": "On the floor: room, voting, motions",
+          "body": "## Live session\n- **Committee room** — follow speakers, timers, and dais announcements\n- Raise placard / request to speak when your chair opens the list\n- Watch for moderated vs unmoderated caucus cues from the dais\n\n## Voting\n- Open **Voting** when a vote is open\n- Vote Yes / No / Abstain as allowed by procedure\n- Follow roll-call prompts if the chair runs a roll-call vote"
+        },
+        "documents": {
+          "title": "Documents: resolutions & amendments",
+          "body": "## Resolutions\n- Create or join a draft in **Resolutions**\n- Use Google Docs links when your committee embeds them\n- Track sponsors and signatories as required by your RoP\n\n## Amendments\n- File amendments from **Amendments** while drafts are open\n- Coordinate merges during unmods; keep clause numbers clear\n\n## Other papers\n- **Documents** and **Running notes** for working text outside formal drafts"
+        },
+        "tools": {
+          "title": "Tools: notes, news, milestones",
+          "body": "## Communication\n- **Chats & notes** — message seats and review chair notes\n- Stay professional; chairs and SMT can moderate\n\n## Media & progress\n- **Newsroom** / **Press Corps** — follow conference media when enabled\n- **Milestones** — track caucus, speech, and resolution checkpoints\n- **History** — review past session outcomes"
+        }
+      },
+      "chair": {
+        "overview": {
+          "title": "Chair overview",
+          "body": "## Dais workflow\n\nRun floor from **Session** and supporting chair tools. Prep checklists and flow checklists keep debate on track.\n\n## Start here\n- Complete **Prep checklist** before first session\n- Open **Session** for speakers, motions, timer, and announcements\n- Use **Delegates** (allocation matrix) to confirm placards\n\n## Tips\n- Prefer in-app motions and votes so history and milestones stay accurate\n- Publish dais announcements for the digital room"
+        },
+        "session": {
+          "title": "Running session",
+          "body": "## Core controls\n- **Roll call** — mark present / present & voting\n- **Speakers** — manage GSL and caucus lists\n- **Formal motions** — entertain and dispose motions\n- **Timer** — keep speeches and caucuses on time\n- **Announcements** — push markdown notes to the floor\n\n## Voting & documents\n- Open votes from **Voting**; set majority rules carefully\n- Review **Resolutions** / **Amendments** before substantive votes\n- Use **Disciplinary** tools only when needed"
+        },
+        "prep": {
+          "title": "Prep & committee setup",
+          "body": "## Before opening\n- **Prep checklist** and **Flow checklist**\n- **Schedule** for timed sessions when enabled\n- **Room code** / **Digital room** for remote or hybrid access\n- Confirm agenda topics and crisis tools if your committee uses them\n\n## During the day\n- Keep roll call and speaker lists current\n- Archive materials when a topic closes"
+        },
+        "tools": {
+          "title": "Chair tools: awards, notes, media",
+          "body": "## Awards & feedback\n- **Score / Awards** — nominations and rubrics\n- Review notes moderation when enabled\n\n## Shared surfaces\n- **Newsroom**, **Press Corps**, **Milestones**, **History**\n- **Official links** for conference resources\n- **Guides** — keep RoP docs updated for your delegates"
+        }
+      },
+      "smt": {
+        "overview": {
+          "title": "SMT overview",
+          "body": "## Secretariat hub\n\nUse **Live committees** to monitor floors, then jump into operations (rooms, matrix, passwords) and people tools (advisors, notes, awards).\n\n## Start here\n- Confirm the **active event** code in the top bar\n- Open a committee from **Live committees** to preview chair/delegate surfaces\n- Keep allocation and room codes ready before opening ceremonies"
+        },
+        "operations": {
+          "title": "Operations: rooms, sessions, passwords",
+          "body": "## Event ops\n- **Event & sessions** — conference schedule and settings\n- **Room codes & chairs** — assign dais access\n- **Allocation passwords** — hand out seat logins securely\n\n## Live oversight\n- Watch committee status from the hub\n- Fix binding issues when chairs need a different topic row"
+        },
+        "people": {
+          "title": "People: advisors, notes, awards",
+          "body": "## Advisors & messaging\n- **Advisors** — assign schools and seats\n- **Notes** — secretariat messaging and review\n\n## Awards\n- Review chair nominations and promote/reject from **Awards**\n- Keep rubric guidance consistent across committees"
+        },
+        "tools": {
+          "title": "SMT tools: media & milestones",
+          "body": "## Media\n- **Newsroom** and **Press Corps** across the event\n- **Milestones** — event-wide checkpoint progress\n\n## Guides\n- Publish conference RoP and templates under **Conference guides** so every role can open them"
+        }
+      },
+      "advisor": {
+        "overview": {
+          "title": "Advisor overview",
+          "body": "## Your role\n\nSupport your school’s delegates without running the floor. Use the **Advisor hub** for assigned seats, notes, and schedule.\n\n## Start here\n- Confirm which delegates you oversee\n- Skim **Milestones** and notes for coaching signals\n- Use **Guides** to point students at product how-tos"
+        },
+        "delegation": {
+          "title": "Supporting your delegation",
+          "body": "## Coaching loop\n- Message delegates via **Notes**\n- Review schedule so students arrive on time\n- Encourage stances, speeches, and sources before session\n\n## Boundaries\n- Chairs run procedure; advisors coach policy and participation\n- Escalate logistics issues to SMT, not the dais mid-vote"
+        },
+        "tools": {
+          "title": "Advisor tools: media & progress",
+          "body": "## Stay informed\n- **Newsroom** / **Press Corps** for conference media\n- **Milestones** for participation checkpoints\n- **Profile** for account and accessibility settings"
+        }
+      },
+      "admin": {
+        "overview": {
+          "title": "Admin overview",
+          "body": "## Platform admin\n\nUse **Admin** for event setup, registrations, and portal checks. Jump to **SMT dashboard** for live operations.\n\n## Start here\n- Confirm the active event\n- Complete setup / checklist tabs on the admin overview\n- Open **Guides** to maintain shared conference documentation"
+        },
+        "setup": {
+          "title": "Setup & conference portal",
+          "body": "## Creating conferences\n- **New conference** starts event scaffolding\n- Verify committees, topics, and registrations\n- Hand SMT room codes and allocation tools once seats exist\n\n## Safety\n- First admin is assigned in the database\n- Never share the service role key"
+        },
+        "tools": {
+          "title": "Admin tools: media & SMT",
+          "body": "## Shared tools\n- **Newsroom**, **Press Corps**, **Milestones** under admin chrome\n- **SMT dashboard** for live committee oversight\n- Keep **Conference guides** current for all roles"
+        }
+      }
     }
   },
   "ideas": {
@@ -3475,7 +3585,16 @@
     "noteLanguageWarning": "पाठक चेतावनी: इस नोट में अनुचित भाषा हो सकती है।",
     "save": "बचाना",
     "saveHelpTitle": "स्टांस नोट सहेजें",
-    "saveHelpBody": "इस आवंटन के लिए स्टांस नोट सहेजता है। इसे कर्मचारियों और (समिति सेटिंग्स के आधार पर) अन्य प्रतिभागियों द्वारा देखा जा सकता है।"
+    "saveHelpBody": "इस आवंटन के लिए स्टांस नोट सहेजता है। इसे कर्मचारियों और (समिति सेटिंग्स के आधार पर) अन्य प्रतिभागियों द्वारा देखा जा सकता है।",
+    "countryGridTitle": "Stance map",
+    "countryGridHelp": "Tap a country to cycle its position — support, oppose, neutral, and undecided.",
+    "countryGridEmpty": "No delegations in this committee yet.",
+    "countryGridViewingDelegate": "Viewing this delegate's country positions.",
+    "countryStance_support": "Support",
+    "countryStance_oppose": "Oppose",
+    "countryStance_neutral": "Neutral",
+    "countryStance_undecided": "Undecided",
+    "countryStanceAria": "{country}: {stance}. Tap to cycle position."
   },
   "speeches": {
     "newSpeech": "नया भाषण",
@@ -3948,7 +4067,9 @@
         "fieldInterests": "रुचियाँ",
         "fieldMessage": "संदेश",
         "fieldSubmittedAt": "(UTC) पर सबमिट किया गया"
-      }
+      },
+      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
+      "registerSecretariatLink": "Register your conference"
     },
     "footer": {
       "ctaTitle": "अपनी अगली समिति लाओ",
@@ -4325,6 +4446,246 @@
       "title": "Where it began",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand"
+    }
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "backToHome": "Back to home"
+  },
+  "appleColorPicker": {
+    "title": "Colors",
+    "grid": "Grid",
+    "spectrum": "Spectrum",
+    "sliders": "Sliders",
+    "opacity": "Opacity",
+    "hue": "Hue",
+    "saturation": "Saturation",
+    "brightness": "Brightness",
+    "presets": "Color presets",
+    "addPreset": "Add color preset",
+    "eyedropper": "Pick color from screen",
+    "close": "Close"
+  },
+  "secretariatRegistration": {
+    "eyebrow": "Secretariat onboarding",
+    "title": "Register your conference",
+    "subtitle": "Tell us about your event, choose features, upload rules of procedure and schedule, and outline committees. Our team will configure your workspace and email you when manual uploads are live.",
+    "alreadyAccount": "Already have an account?",
+    "alreadyAccountLink": "Sign in",
+    "step_contact": "Contact",
+    "step_scale": "Scale",
+    "step_features": "Features",
+    "step_committees": "Committees",
+    "step_uploads": "Uploads",
+    "step_matrix": "Allocations",
+    "step_review": "Review",
+    "contactNameLabel": "Your name",
+    "contactEmailLabel": "Email",
+    "conferenceNameLabel": "Conference name",
+    "conferenceLogoLabel": "Conference logo",
+    "conferenceLogoHelp": "Required. PNG, JPEG, or WebP — square or landscape mark for your conference (max 12 MB).",
+    "eventDatesLabel": "Event dates",
+    "eventDatesPlaceholder": "e.g. 14–16 March 2026",
+    "eventDatesCalendarOpen": "Open calendar",
+    "eventDatesCalendarAria": "Choose event dates",
+    "calendarPreviousMonth": "Previous month",
+    "calendarNextMonth": "Next month",
+    "calendarMonthLabel": "Month",
+    "calendarYearLabel": "Year",
+    "calendarSelectStart": "Select a start date",
+    "calendarSelectEnd": "Select an end date",
+    "calendarClearDates": "Clear dates",
+    "committeeCountLabel": "Number of committees",
+    "delegateCountLabel": "Delegates (total)",
+    "delegateCountPlaceholder": "Optional",
+    "chairCountLabel": "Chairs (total)",
+    "chairCountPlaceholder": "Optional",
+    "featuresHelp": "Select the InterMUN capabilities you want for this conference.",
+    "feature_floor_control": "Floor control",
+    "feature_voting": "Voting",
+    "feature_delegate_prep": "Delegate prep",
+    "feature_allocations_matrix": "Allocations matrix",
+    "feature_awards": "Awards",
+    "feature_schedule": "Schedule",
+    "feature_advisor_oversight": "Advisor oversight",
+    "feature_gate_codes": "Gate codes",
+    "feature_crisis": "Crisis",
+    "committeesHelp": "Name each committee, add one or more topics, per-committee delegate and chair counts, and an optional logo.",
+    "committeeHeading": "Committee {number}",
+    "committeeNameLabel": "Committee name",
+    "committeeTopicsLabel": "Topics",
+    "committeeTopicPlaceholder": "Topic {number}",
+    "committeeAddTopic": "+ Add topic",
+    "committeeRemoveTopic": "Remove",
+    "actionSheetRemoveTopicTitle": "Remove topic?",
+    "actionSheetRemoveTopicMessage": "This topic field will be deleted from the committee.",
+    "actionSheetRemoveTopicConfirm": "Remove topic",
+    "actionSheetSubmitTitle": "Submit registration?",
+    "actionSheetSubmitMessage": "We will review your intake and email you about manual uploads and provisioning next steps.",
+    "actionSheetSubmitConfirm": "Submit registration",
+    "actionSheetClearDatesTitle": "Clear event dates?",
+    "actionSheetClearDatesMessage": "Your selected start and end dates will be removed.",
+    "menuSteps": "Steps",
+    "menuStepsSection": "Go to step",
+    "pageControlLabel": "Registration steps",
+    "popoverHelpLabel": "More information",
+    "sidebarSearchSteps": "Search steps",
+    "sidebarSectionBasics": "Basics",
+    "sidebarSectionSetup": "Setup",
+    "sidebarSectionFiles": "Files",
+    "sidebarSectionFinish": "Finish",
+    "menuBarFile": "File",
+    "menuBarEdit": "Edit",
+    "menuBarView": "View",
+    "menuBarHelp": "Help",
+    "stepperDecrease": "Decrease",
+    "stepperIncrease": "Increase",
+    "tabBarLabel": "Registration sections",
+    "toolbarStepSubtitle": "Step {current} of {total}",
+    "toolbarNavigationLabel": "Registration navigation",
+    "widgetGalleryLabel": "Registration summary widgets",
+    "widgetConferencePlaceholder": "Your conference",
+    "widgetDatesPlaceholder": "Dates to be confirmed",
+    "widgetStepTitle": "Progress",
+    "widgetCommitteesLabel": "Committees",
+    "widgetFeaturesLabel": "Features",
+    "menuEditSection": "Edit",
+    "menuTopicActions": "Topic options",
+    "menuRemoveTopic": "Remove topic",
+    "menuActions": "Actions",
+    "menuMarkComplete": "Mark complete",
+    "menuCopyRequestId": "Copy request ID",
+    "notificationErrorTitle": "Couldn’t continue",
+    "notificationDismiss": "Dismiss",
+    "committeeDelegatesLabel": "Delegates",
+    "committeeChairsLabel": "Chairs",
+    "committeeLogoLabel": "Committee logo (optional)",
+    "ropUploadLabel": "Rules of procedure",
+    "ropUploadHelp": "Upload your ROP (PDF or Word). Our team will add it to your conference manually and notify you when it is ready.",
+    "scheduleUploadLabel": "Master schedule",
+    "scheduleUploadHelp": "Upload your schedule (PDF, Word, CSV, or Excel). We will import it manually and notify you when it is live.",
+    "awardCriteriaDeferLabel": "Customize award criteria later in the dashboard",
+    "awardCriteriaUploadLabel": "Award criteria document",
+    "awardCriteriaDeferHelp": "You can define rubrics after your workspace is provisioned.",
+    "matrixHelp": "The delegate allocation matrix can be filled in after go-live. Check below if you want to set it up later.",
+    "matrixDeferLabel": "Set up the delegate allocation matrix later (recommended for first-time hosts)",
+    "notesLabel": "Notes for our team",
+    "notesPlaceholder": "Special requirements, timeline, committee details not covered above…",
+    "reviewManualNote": "ROP and schedule uploads are processed manually. You will receive an email when each item is added to your conference.",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit registration",
+    "submitting": "Submitting…",
+    "successTitle": "Registration received",
+    "successBody": "Thank you. We will review your intake and email you about manual uploads and next steps for provisioning your conference.",
+    "successCreateAccount": "Create your account",
+    "successBackHome": "Back to home",
+    "successShare": "Share",
+    "activitySubtitle": "Secretariat registration",
+    "activityMetaLabel": "Registration received",
+    "activityMetaHint": "Share with your secretariat team",
+    "activityShortcutMail": "Mail",
+    "activityShortcutCopy": "Copy",
+    "activityShortcutShare": "Share",
+    "activityQuickCopyLink": "Copy link",
+    "activityQuickCopySummary": "Copy summary",
+    "activityListCopySummary": "Copy registration summary",
+    "activityListEmailTeam": "Email your team",
+    "activityListOpenSignup": "Open account signup",
+    "activityShareHeading": "InterMUN secretariat registration",
+    "activityShareRequestId": "Request ID",
+    "errorContactName": "Enter your name (at least 2 characters).",
+    "errorContactEmail": "Enter a valid email address.",
+    "errorConferenceName": "Enter your conference name.",
+    "errorConferenceLogo": "Upload your conference logo to continue.",
+    "errorConferenceLogoInvalid": "Conference logo must be a PNG, JPEG, or WebP image under 12 MB.",
+    "errorConferenceLogoTooLarge": "File too large",
+    "errorConferenceLogoUpload": "We could not upload your conference logo. Please try again.",
+    "errorCommitteeCount": "Enter between 1 and 64 committees.",
+    "errorFeatures": "Select at least one feature.",
+    "errorCommitteeNames": "Every committee needs a name.",
+    "errorValidation": "Please complete the required fields.",
+    "errorCommitteeMismatch": "Committee details must match the committee count.",
+    "errorNotConfigured": "Registration is not configured on the server yet. Please contact us by email.",
+    "errorSaveFailed": "We could not save your registration. Please try again.",
+    "fieldContactName": "Contact name",
+    "fieldContactEmail": "Contact email",
+    "fieldConference": "Conference",
+    "fieldConferenceLogo": "Conference logo",
+    "fieldEventDates": "Event dates",
+    "fieldCommitteeCount": "Committees",
+    "fieldDelegateCount": "Delegates",
+    "fieldChairCount": "Chairs",
+    "fieldFeatures": "Features",
+    "fieldCommittees": "Committees",
+    "fieldRop": "Rules of procedure",
+    "fieldSchedule": "Schedule",
+    "fieldAwardCriteria": "Award criteria",
+    "fieldMatrix": "Allocation matrix",
+    "fieldNotes": "Notes",
+    "fieldRequestId": "Request ID",
+    "statusPendingReview": "Pending manual review",
+    "statusNotSubmitted": "Not submitted",
+    "statusDeferred": "Deferred",
+    "statusReadyNow": "Ready to configure now",
+    "staffEmailIntro": "New secretariat registration intake ({app})",
+    "staffEmailSubject": "[{app}] Secretariat registration — {conference}",
+    "confirmEmailIntro": "Thanks for registering {conference} with {app}.",
+    "confirmEmailLogoReceived": "Your conference logo is attached to this intake and will be reviewed with your registration.",
+    "confirmEmailManualProcessing": "Uploaded rules of procedure and/or schedule will be added to your conference manually. We will email you when each item is complete.",
+    "confirmEmailNoUploads": "You can upload rules of procedure and schedule later if you did not attach them today.",
+    "confirmEmailAwardDeferred": "Award criteria can be customized in your dashboard after provisioning.",
+    "confirmEmailMatrixDeferred": "The delegate allocation matrix can be configured after your workspace is ready.",
+    "confirmEmailMatrixReady": "We noted that you want help with the allocation matrix during setup.",
+    "confirmEmailOutro": "Our team will follow up with provisioning steps and account access.",
+    "confirmEmailSubject": "We received your {app} secretariat registration",
+    "admin": {
+      "title": "Secretariat registrations",
+      "intro": "Review pending secretariat onboarding requests. Mark conference logo, ROP, schedule, and award criteria complete after manual import — the submitter is notified by email.",
+      "empty": "No pending registrations.",
+      "submitted": "Submitted",
+      "archive": "Archive",
+      "archiveConfirmTitle": "Archive this registration?",
+      "archiveConfirmMessage": "The intake will move out of the pending queue. You can still find it in archives.",
+      "archiveConfirmAction": "Archive registration",
+      "share": "Share",
+      "activitySubtitle": "Secretariat intake",
+      "activityMetaLabel": "Pending review",
+      "activityMetaHint": "Share intake details with staff",
+      "activityShortcutMail": "Mail",
+      "activityShortcutCopy": "Copy",
+      "activityShortcutShare": "Share",
+      "activityQuickCopyLink": "Copy email",
+      "activityQuickCopySummary": "Copy summary",
+      "activityListCopySummary": "Copy intake summary",
+      "activityListEmailContact": "Email contact",
+      "activityListCopyId": "Copy request ID",
+      "activityShareHeading": "InterMUN secretariat intake",
+      "activityShareRequestId": "Request ID",
+      "markComplete": "Mark complete",
+      "menuActions": "Actions",
+      "menuMarkComplete": "Mark complete",
+      "menuCopyRequestId": "Copy request ID",
+      "notificationCompleteTitle": "Marked complete",
+      "notificationCompleteMessage": "The submitter will be notified by email.",
+      "notificationErrorTitle": "Update failed",
+      "summaryCounts": "{committees} committees · {delegates} delegates · {chairs} chairs",
+      "itemRop": "ROP",
+      "itemSchedule": "Schedule",
+      "itemAwardCriteria": "Award criteria",
+      "itemConferenceLogo": "Conference logo",
+      "matrixDeferred": "Matrix deferred",
+      "loadError": "Could not load registrations.",
+      "errorForbidden": "You do not have permission to manage registrations.",
+      "errorInvalid": "Invalid request.",
+      "errorNotConfigured": "Server is not configured for registration management.",
+      "errorNotFound": "Registration not found.",
+      "errorUpdateFailed": "Update failed. Try again.",
+      "notifyEmailSubject": "{item} added to your {app} conference",
+      "notifyEmailGreeting": "Hi {name},",
+      "notifyEmailBody": "Your {item} for {conference} has been added to {app}. Sign in when your workspace is ready to review it.",
+      "notifyEmailOutro": "Reply to this email if anything looks incorrect."
     }
   }
 }

@@ -4,18 +4,26 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import Link from "next/link";
 import { HelpCircle, X } from "lucide-react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 
 export function HelpButton({
   title,
   children,
   className,
+  guideHref,
+  guideLabel,
 }: {
   title: string;
   children: React.ReactNode;
   className?: string;
+  /** Deep link into Guides curriculum / conference docs. */
+  guideHref?: string;
+  guideLabel?: string;
 }) {
+  const t = useTranslations("guides");
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dialogId = useId();
@@ -78,7 +86,20 @@ export function HelpButton({
                     <span className="sr-only">Close</span>
                   </button>
                 </div>
-                <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">{children}</div>
+                <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+                  {children}
+                </div>
+                {guideHref ? (
+                  <div className="mt-4 border-t border-slate-200/80 pt-3 dark:border-white/10">
+                    <Link
+                      href={guideHref}
+                      onClick={() => setOpen(false)}
+                      className="text-sm font-medium text-[var(--accent)] underline-offset-2 hover:underline"
+                    >
+                      {guideLabel ?? t("openFullGuide")}
+                    </Link>
+                  </div>
+                ) : null}
               </div>
             </div>,
             document.body
@@ -87,4 +108,3 @@ export function HelpButton({
     </>
   );
 }
-

@@ -47,6 +47,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         { href: "/admin/newsroom", label: "Newsroom" },
         { href: "/admin/press-corps", label: "Press Corps" },
         { href: "/admin/milestones", label: "Milestones" },
+        { href: "/admin/guides", label: "Guides" },
         { href: "/conference-setup?next=%2Fadmin", label: "New conference" },
         { href: "/smt/profile", label: "Profile" },
       ],

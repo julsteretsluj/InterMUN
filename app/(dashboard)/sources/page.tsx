@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { SourcesView } from "@/components/sources/SourcesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { getTranslations } from "next-intl/server";
 
 export default async function SourcesPage() {
@@ -32,7 +33,10 @@ export default async function SourcesPage() {
   const { data: sources } = await sourcesQuery;
 
   return (
-    <MunPageShell title={t("sources")}>
+    <MunPageShell
+      title={t("sources")}
+      titleAside={<PageFeatureGuideLink featureId="sources" role={myRole} />}
+    >
       <SourcesView
         sources={sources || []}
         currentUserId={user.id}

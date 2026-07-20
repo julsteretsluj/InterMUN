@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import type { AwardAssignment, AwardParticipationScore } from "@/types/database";
 import { isConferenceEventPlaceholderRow } from "@/lib/awards";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
@@ -295,7 +296,10 @@ export default async function SmtAwardsPage() {
   }));
 
   return (
-    <MunPageShell title={t("awardsSmt")}>
+    <MunPageShell
+      title={t("awardsSmt")}
+      titleAside={<PageFeatureGuideLink featureId="awards" role="smt" />}
+    >
       <SmtAwardsRefreshOnFocus />
       {nominationsError ? (
         <div

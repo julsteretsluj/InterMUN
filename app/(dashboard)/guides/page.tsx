@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import type { GlossaryContext } from "@/lib/mun-glossary";
+import { isGuideRole, type GuideRole } from "@/lib/guides-curriculum";
 
 export default async function GuidesPage() {
   const t = await getTranslations("pageTitles");
@@ -49,9 +50,16 @@ export default async function GuidesPage() {
     .select("*")
     .order("slug");
 
+  const guideRole: GuideRole = isGuideRole(myRole) ? myRole : "delegate";
+
   return (
     <MunPageShell title={t("guides")}>
-      <GuidesView guides={guides || []} canEdit={canEdit} glossaryContext={glossaryContext} />
+      <GuidesView
+        guides={guides || []}
+        canEdit={canEdit}
+        glossaryContext={glossaryContext}
+        role={guideRole}
+      />
     </MunPageShell>
   );
 }

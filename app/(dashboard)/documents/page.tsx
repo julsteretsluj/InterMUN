@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { DocumentsView } from "@/components/documents/DocumentsView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { getTranslations } from "next-intl/server";
 
 export default async function DocumentsPage() {
@@ -54,7 +55,10 @@ export default async function DocumentsPage() {
   ];
 
   return (
-    <MunPageShell title={t("documents")}>
+    <MunPageShell
+      title={t("documents")}
+      titleAside={<PageFeatureGuideLink featureId="documents" role={myRole} />}
+    >
       <DocumentsView
         documents={mergedDocs || []}
         currentUserId={user.id}

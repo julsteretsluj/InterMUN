@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { loadChairSessionConference } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
 import SessionFloorOverview from "./SessionFloorOverview";
@@ -17,7 +18,10 @@ export default async function ChairSessionPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title={t("committeeSession")}>
+      <MunPageShell
+        title={t("committeeSession")}
+        titleAside={<PageFeatureGuideLink featureId="session" role="chair" />}
+      >
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
@@ -77,7 +81,10 @@ export default async function ChairSessionPage() {
   }
 
   return (
-    <MunPageShell title={t("committeeSession")}>
+    <MunPageShell
+      title={t("committeeSession")}
+      titleAside={<PageFeatureGuideLink featureId="session" role="chair" />}
+    >
       <SessionFloorOverview
         conferenceId={data.conferenceId}
         conferenceTitle={data.conferenceTitle}

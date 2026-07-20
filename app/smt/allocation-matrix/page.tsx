@@ -18,6 +18,7 @@ import {
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
+import { FeatureGuideLink } from "@/components/guides/FeatureGuideLink";
 
 type ConfRow = { id: string; name: string; committee: string | null; committee_code: string | null };
 
@@ -251,7 +252,10 @@ export default async function SmtAllocationMatrixPage({
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">{t("title")}</h1>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <h1 className="font-display text-2xl font-semibold text-brand-navy">{t("title")}</h1>
+        <FeatureGuideLink featureId="allocationMatrix" role="smt" />
+      </div>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">
         {t("intro")}
       </p>

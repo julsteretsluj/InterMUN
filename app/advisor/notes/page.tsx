@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { isAdvisorRole } from "@/lib/roles";
 import { fetchAdvisorAssignmentsForAdvisor } from "@/lib/advisor-access";
 import {
@@ -95,7 +96,10 @@ export default async function AdvisorNotesPage() {
     });
 
   return (
-    <MunPageShell title={t("advisorNotes")}>
+    <MunPageShell
+      title={t("advisorNotes")}
+      titleAside={<PageFeatureGuideLink featureId="notes" role="advisor" />}
+    >
       <p className="mb-6 max-w-2xl text-sm text-brand-muted">{tn("intro")}</p>
       <Suspense
         fallback={

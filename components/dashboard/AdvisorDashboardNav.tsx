@@ -24,7 +24,15 @@ import { cn } from "@/lib/utils";
 
 type AdvisorNavItem = {
   href: string;
-  labelKey: "hub" | "notes" | "schedule" | "newsroom" | "pressCorps" | "milestones" | "profile";
+  labelKey:
+    | "hub"
+    | "notes"
+    | "schedule"
+    | "newsroom"
+    | "pressCorps"
+    | "milestones"
+    | "guides"
+    | "profile";
   emoji: string;
 };
 
@@ -35,6 +43,7 @@ const ADVISOR_NAV_ITEMS: AdvisorNavItem[] = [
   { href: "/advisor/newsroom", labelKey: "newsroom", emoji: "📰" },
   { href: "/advisor/press-corps", labelKey: "pressCorps", emoji: "📸" },
   { href: "/advisor/milestones", labelKey: "milestones", emoji: "🏅" },
+  { href: "/advisor/guides", labelKey: "guides", emoji: "📚" },
   { href: "/advisor/profile", labelKey: "profile", emoji: "⚙️" },
 ];
 

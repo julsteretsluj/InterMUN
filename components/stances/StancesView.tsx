@@ -11,6 +11,7 @@ import { StanceHeatmap } from "./StanceHeatmap";
 import { CountryStanceGrid } from "./CountryStanceGrid";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
+import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import { type CountryStanceMap } from "@/lib/country-stance";
 
 interface Allocation {
@@ -239,7 +240,12 @@ export function StancesView({
               />
               <div className="flex flex-wrap items-center gap-2">
                 <label className="text-sm">{t("extentLabel")}</label>
-                <HelpButton title={t("extentHelpTitle")}>{t("extentHelpBody")}</HelpButton>
+                <HelpButton
+                  title={t("extentHelpTitle")}
+                  guideHref={resolveFeatureGuideHref("stances", "delegate").href}
+                >
+                  {t("extentHelpBody")}
+                </HelpButton>
                 <input
                   type="range"
                   min={1}

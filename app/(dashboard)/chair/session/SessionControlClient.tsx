@@ -43,6 +43,7 @@ import {
   parseRollAttendance,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
+import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
@@ -2814,7 +2815,12 @@ export function SessionControlClient({
         <section className="space-y-4">
           <div className="flex items-center justify-between gap-3">
             <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
-            <HelpButton title={tSessionControl("tabAgenda")}>{tSessionControl("agendaTabHelp")}</HelpButton>
+            <HelpButton
+              title={tSessionControl("tabAgenda")}
+              guideHref={resolveFeatureGuideHref("session", "chair").href}
+            >
+              {tSessionControl("agendaTabHelp")}
+            </HelpButton>
           </div>
           {(debateTopicOptions?.length ?? 0) > 0 ? (
             <CommitteeAgendaVotesTab
@@ -2842,7 +2848,10 @@ export function SessionControlClient({
           <h3 className="font-display text-lg font-semibold text-brand-navy">
             {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
           </h3>
-          <HelpButton title={tSessionControl("motionControl")}>
+          <HelpButton
+            title={tSessionControl("motionControl")}
+            guideHref={resolveFeatureGuideHref("session", "chair").href}
+          >
             {tSessionControl("motionControlHelp")}
           </HelpButton>
         </div>

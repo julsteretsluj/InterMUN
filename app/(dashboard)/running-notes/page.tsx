@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { RunningNotesView } from "@/components/running-notes/RunningNotesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -28,7 +29,10 @@ export default async function RunningNotesPage() {
   const { data: notes } = await notesQuery.order("updated_at", { ascending: false });
 
   return (
-    <MunPageShell title={t("runningNotes")}>
+    <MunPageShell
+      title={t("runningNotes")}
+      titleAside={<PageFeatureGuideLink featureId="runningNotes" role={myRole} />}
+    >
       <RunningNotesView notes={notes || []} currentUserId={user.id} myRole={myRole} />
     </MunPageShell>
   );

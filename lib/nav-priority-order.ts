@@ -82,6 +82,7 @@ export const ADVISOR_TAB_NAV_HREF_ORDER = [
   "/milestones",
   "/documents",
   "/guides",
+  "/advisor/guides",
   "/sources",
   "/resolutions",
   "/amendments",
@@ -113,6 +114,7 @@ export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "newsroom",
   "pressCorps",
   "milestones",
+  "guides",
   "score",
   "discipline",
   "crisis",
@@ -136,6 +138,7 @@ export const SMT_NAV_KEY_ORDER = [
   "newsroom",
   "pressCorps",
   "milestones",
+  "guides",
   "allocationPasswords",
   "profile",
 ] as const;
@@ -195,6 +198,7 @@ export const ADMIN_NAV_HREF_ORDER = [
   "/admin/newsroom",
   "/admin/press-corps",
   "/admin/milestones",
+  "/admin/guides",
   "/conference-setup?next=%2Fadmin",
   "/smt/profile",
 ] as const;

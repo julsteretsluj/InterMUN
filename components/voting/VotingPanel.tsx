@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteItem } from "@/types/database";
 import { HelpButton } from "@/components/HelpButton";
+import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import {
   DAIS_SEAT_CO_CHAIR,
   DAIS_SEAT_HEAD_CHAIR,
@@ -313,7 +314,12 @@ export function VotingPanel({
           <label className="block text-sm text-brand-navy dark:text-brand-navy">
               <div className="flex items-center justify-between gap-2">
                 <span className="mun-label">{t("requiredMajority")}</span>
-                <HelpButton title={t("helpRequiredMajorityTitle")}>{t("helpRequiredMajorityBody")}</HelpButton>
+                <HelpButton
+                  title={t("helpRequiredMajorityTitle")}
+                  guideHref={resolveFeatureGuideHref("voting", "delegate").href}
+                >
+                  {t("helpRequiredMajorityBody")}
+                </HelpButton>
               </div>
             {isAgendaFloor ? (
               <p className="mun-field mt-1.5 flex min-h-10 items-center bg-[var(--material-thin)]">

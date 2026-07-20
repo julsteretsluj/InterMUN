@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { redirect } from "next/navigation";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
@@ -11,6 +11,7 @@ import {
 } from "@/lib/delegation-notes-options";
 import { getTranslations } from "next-intl/server";
 import { getChamberScope } from "@/lib/chamber-scope";
+import { createClient } from "@/lib/supabase/server";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -356,7 +357,10 @@ export default async function ChatsNotesPage({
   });
 
   return (
-    <MunPageShell title={t("notes")}>
+    <MunPageShell
+      title={t("notes")}
+      titleAside={<PageFeatureGuideLink featureId="notes" role={myRole} />}
+    >
       <DelegationNotesView
         conferenceId={scope.canonicalConferenceId}
         initialNotes={initialNotes}

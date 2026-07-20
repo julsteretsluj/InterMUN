@@ -69,6 +69,7 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   newsroom: "resources",
   pressCorps: "resources",
   milestones: "resources",
+  guides: "resources",
   archive: "resources",
   notesModeration: "resources",
   officialLinks: "resources",
@@ -98,6 +99,7 @@ export const SMT_ITEM_FOLDER: Record<string, NavFolderId> = {
   newsroom: "media",
   pressCorps: "media",
   milestones: "media",
+  guides: "media",
   profile: "account",
 };
 
@@ -111,6 +113,7 @@ export const ADVISOR_ITEM_FOLDER: Record<string, NavFolderId> = {
   newsroom: "media",
   pressCorps: "media",
   milestones: "media",
+  guides: "media",
   profile: "account",
 };
 

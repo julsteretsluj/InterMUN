@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import {
@@ -300,7 +301,10 @@ export default async function ChairAwardsPage() {
     : null;
 
   return (
-    <MunPageShell title={t("score")}>
+    <MunPageShell
+      title={t("score")}
+      titleAside={<PageFeatureGuideLink featureId="awards" role="chair" />}
+    >
       <ChairAwardsShell
         score={
           <div className="space-y-6">

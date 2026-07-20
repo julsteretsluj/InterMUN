@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { SpeechesView } from "@/components/speeches/SpeechesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { parseSpeechOutlinePoints } from "@/lib/speech-outline";
 import { getTranslations } from "next-intl/server";
 
@@ -20,13 +21,16 @@ export default async function SpeechesPage() {
       .order("updated_at", { ascending: false }),
     supabase
       .from("profiles")
-      .select("speech_outline_points")
+      .select("role, speech_outline_points")
       .eq("id", user.id)
       .single(),
   ]);
 
   return (
-    <MunPageShell title={t("speeches")}>
+    <MunPageShell
+      title={t("speeches")}
+      titleAside={<PageFeatureGuideLink featureId="speeches" role={profile?.role} />}
+    >
       <SpeechesView
         speeches={speeches || []}
         speechOutlinePoints={parseSpeechOutlinePoints(profile?.speech_outline_points)}

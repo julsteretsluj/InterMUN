@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
 import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
@@ -61,7 +62,10 @@ export default async function SmtAllocationPasswordsPage({
   const eventId = await getActiveEventId();
   if (!eventId) {
     return (
-      <MunPageShell title={t("allocationPasswords")}>
+      <MunPageShell
+      title={t("allocationPasswords")}
+      titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
+    >
         <p className="text-sm text-brand-muted">
           Select an event first, then open this page from the SMT dashboard.
         </p>
@@ -85,7 +89,10 @@ export default async function SmtAllocationPasswordsPage({
   const rawList = ((conferences ?? []) as ConfRow[]).filter((c) => !isRetiredSeamunCommitteeRow(c));
   if (rawList.length === 0) {
     return (
-      <MunPageShell title={t("allocationPasswords")}>
+      <MunPageShell
+      title={t("allocationPasswords")}
+      titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
+    >
         <p className="text-sm text-brand-muted">Create a conference first.</p>
       </MunPageShell>
     );
@@ -202,7 +209,10 @@ export default async function SmtAllocationPasswordsPage({
     .maybeSingle();
 
   return (
-    <MunPageShell title={t("allocationPasswords")}>
+    <MunPageShell
+      title={t("allocationPasswords")}
+      titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
+    >
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         Per-allocation <strong>codes</strong> for placards, binders, or handouts. Optional <strong>third gate</strong>
         : when enabled, each delegate and chair must enter their seat code after committee sign-in. Stored in plain

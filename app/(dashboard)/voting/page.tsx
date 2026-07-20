@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { VotingPanel } from "@/components/voting/VotingPanel";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
@@ -35,7 +36,10 @@ export default async function VotingPage() {
     .limit(50);
 
   return (
-    <MunPageShell title={t("voting")}>
+    <MunPageShell
+      title={t("voting")}
+      titleAside={<PageFeatureGuideLink featureId="voting" role={myRole} />}
+    >
       <VotingPanel voteItems={voteItems || []} myRole={myRole} />
     </MunPageShell>
   );

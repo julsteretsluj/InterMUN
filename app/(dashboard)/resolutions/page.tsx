@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { ResolutionsView } from "@/components/resolutions/ResolutionsView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getTranslations } from "next-intl/server";
 
@@ -49,7 +50,10 @@ export default async function ResolutionsPage() {
       : { data: [] };
 
   return (
-    <MunPageShell title={t("resolutions")}>
+    <MunPageShell
+      title={t("resolutions")}
+      titleAside={<PageFeatureGuideLink featureId="resolutions" role={myRole} />}
+    >
       <ResolutionsView
         resolutions={resolutions}
         blocs={blocs || []}

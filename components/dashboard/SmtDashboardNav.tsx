@@ -34,6 +34,7 @@ export type SmtNavKey =
   | "newsroom"
   | "pressCorps"
   | "milestones"
+  | "guides"
   | "profile";
 
 type SmtNavItem = {
@@ -52,6 +53,7 @@ const SMT_NAV_ITEMS: SmtNavItem[] = [
   { href: "/smt/newsroom", navKey: "newsroom", emoji: "📰" },
   { href: "/smt/press-corps", navKey: "pressCorps", emoji: "📸" },
   { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },
+  { href: "/smt/guides", navKey: "guides", emoji: "📚" },
   { href: "/smt/notes", navKey: "notes", emoji: "💬" },
   { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
   { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "👥" },
@@ -215,7 +217,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
       <div className="mt-auto shrink-0 space-y-1 border-t border-[var(--hairline)] px-2 py-3 group-hover:px-3">
         <Link
-          href="/guides"
+          href="/smt/guides"
           className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>

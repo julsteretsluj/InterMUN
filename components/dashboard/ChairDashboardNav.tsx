@@ -34,6 +34,7 @@ export type ChairNavItemKey =
   | "newsroom"
   | "pressCorps"
   | "milestones"
+  | "guides"
   | "rollCall"
   | "session"
   | "agenda"
@@ -99,6 +100,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/newsroom", itemKey: "newsroom", emoji: "📰" },
   { href: "/press-corps", itemKey: "pressCorps", emoji: "📸" },
   { href: "/milestones", itemKey: "milestones", emoji: "🏅" },
+  { href: "/guides", itemKey: "guides", emoji: "📚" },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",

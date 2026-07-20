@@ -3,11 +3,11 @@ import { GuidesView } from "@/components/guides/GuidesView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { isAdvisorRole } from "@/lib/roles";
+import { isSmtRole, isAdminRole } from "@/lib/roles";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import type { GlossaryContext } from "@/lib/mun-glossary";
 
-export default async function AdvisorGuidesPage() {
+export default async function SmtGuidesPage() {
   const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
@@ -21,7 +21,10 @@ export default async function AdvisorGuidesPage() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (!isAdvisorRole(profile?.role)) redirect("/advisor");
+  if (!isSmtRole(profile?.role)) redirect("/smt");
+
+  const myRole = (profile?.role || "smt").toString().toLowerCase();
+  const canEdit = myRole === "smt" || isAdminRole(myRole);
 
   const eventId = await getActiveEventId();
   let glossaryContext: GlossaryContext | null = null;
@@ -50,9 +53,9 @@ export default async function AdvisorGuidesPage() {
     <MunPageShell title={t("guides")}>
       <GuidesView
         guides={guides || []}
-        canEdit={false}
+        canEdit={canEdit}
         glossaryContext={glossaryContext}
-        role="advisor"
+        role="smt"
       />
     </MunPageShell>
   );
