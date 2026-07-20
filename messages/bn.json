@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "ফ্রান্স,DIS-001\\nজার্মানি,DIS-002\\nজাপান",
     "parsedRowsSample": "পার্স করা {count} সারি(গুলি)। নমুনা:",
     "runImport": "আমদানি চালান",
-    "generateMissingRandomCodes": "অনুপস্থিত র্যান্ডম কোড তৈরি করুন"
+    "generateMissingRandomCodes": "অনুপস্থিত র্যান্ডম কোড তৈরি করুন",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "আপনার বর্তমান অধিবেশনের জন্য কমিটির বরাদ্দ ম্যাট্রিক্স। এটি চেয়ারের জন্য শুধুমাত্র পঠনযোগ্য এবং সক্রিয় আসন অ্যাসাইনমেন্ট এবং প্ল্যাকার্ড কোড প্রতিফলিত করে।",

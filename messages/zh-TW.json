@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "法國、DIS-001\\n德國、DIS-002\\n日本",
     "parsedRowsSample": "已解析 {count} 行。 樣本：",
     "runImport": "運行導入",
-    "generateMissingRandomCodes": "產生缺少的隨機代碼"
+    "generateMissingRandomCodes": "產生缺少的隨機代碼",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "目前會議的委員會分配矩陣。 這對於椅子來說是唯讀的，反映了有效的座位分配和標誌代碼。",

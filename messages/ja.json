@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "フランス、DIS-001\\nドイツ、DIS-002\\n日本",
     "parsedRowsSample": "{count} 行を解析しました。 サンプル：",
     "runImport": "インポートを実行する",
-    "generateMissingRandomCodes": "欠落しているランダムコードを生成する"
+    "generateMissingRandomCodes": "欠落しているランダムコードを生成する",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "現在のセッションの委員会割り当てマトリックス。 これは椅子の読み取り専用であり、アクティブな座席の割り当てとプラカード コードを反映します。",

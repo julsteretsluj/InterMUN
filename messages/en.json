@@ -1370,11 +1370,17 @@
     "hubAbbrev": "SMT"
   },
   "milestones": {
-    "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
+    "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, amendments, and passed resolutions. Progress updates as chairs run session.",
     "yourMilestones": "Your milestones",
     "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
     "committeeTitle": "{committee} — committee milestones",
+    "councilTitle": "{council} — council milestones",
     "delegateLeaderboard": "Delegate milestones",
+    "councilLeaderboard": "Council seat milestones",
     "emptyDelegates": "No delegate activity recorded yet.",
     "empty": "No milestone data yet. Checkpoints appear once your committee is in session.",
     "earnedOfTotal": "{earned}/{total} earned",
@@ -1391,8 +1397,10 @@
       "unmoderated_caucuses": "Unmoderated caucuses",
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
+      "amendments": "Amendments",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments_submitted": "Amendments submitted"
     }
   },
   "pressCorps": {
@@ -2470,6 +2478,10 @@
     "addCommitteesFirst": "Add committees to this event first in",
     "eventCommitteeSessionsLink": "Event & committee sessions",
     "committeeFallback": "Committee",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
     "showingOneCommitteeAtATime": "Showing one committee at a time. Switch committee using the bottom tabs.",
     "editPlacardCodesSheet": "Edit placard codes sheet ->",
     "rosterHeading": "Roster · {heading}",
@@ -2548,7 +2560,7 @@
     "title": "Allocation matrix",
     "selectConferenceEventFirst": "Select a conference event first.",
     "enterConferenceCode": "Enter conference code",
-    "intro": "Build or import the seat list for each committee in the active event. Delegates pick their row at the committee gate after sign-in; placard codes can match your spreadsheet IDs."
+    "intro": "Build or import the seat list for each committee or the Secretariat Council in the active event. Delegates pick their row at the committee gate after sign-in; placard codes can match your spreadsheet IDs."
   },
   "chairAwardsPage": {
     "committeeLabel": "Committee",

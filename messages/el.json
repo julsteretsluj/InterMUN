@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "Γαλλία,DIS-001\\nΓερμανία,DIS-002\\nΙαπωνία",
     "parsedRowsSample": "Αναλύθηκαν {count} σειρές. Δείγμα:",
     "runImport": "Εκτέλεση εισαγωγής",
-    "generateMissingRandomCodes": "Δημιουργήστε τυχαίους κωδικούς που λείπουν"
+    "generateMissingRandomCodes": "Δημιουργήστε τυχαίους κωδικούς που λείπουν",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "Πίνακας κατανομής επιτροπής για την τρέχουσα συνεδρία σας. Αυτό είναι μόνο για ανάγνωση για καρέκλες και αντικατοπτρίζει ενεργές αναθέσεις καθισμάτων και κωδικούς πλακάτ.",

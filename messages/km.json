@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "ប្រទេសបារាំង,DIS-001\\nអាល្លឺម៉ង់,DIS-002\\nជប៉ុន",
     "parsedRowsSample": "ញែកជួរ {count} ។ គំរូ៖",
     "runImport": "ដំណើរការការនាំចូល",
-    "generateMissingRandomCodes": "បង្កើតលេខកូដចៃដន្យដែលបាត់"
+    "generateMissingRandomCodes": "បង្កើតលេខកូដចៃដន្យដែលបាត់",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "ម៉ាទ្រីសបែងចែកគណៈកម្មាធិការសម្រាប់វគ្គបច្ចុប្បន្នរបស់អ្នក។ នេះគឺបានតែអានសម្រាប់កៅអី និងឆ្លុះបញ្ចាំងពីការចាត់តាំងកៅអីសកម្ម និងលេខកូដផ្លាកសញ្ញា។",

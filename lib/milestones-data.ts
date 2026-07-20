@@ -14,6 +14,7 @@ import {
   mergeAllocationsAcrossSiblingConferences,
 } from "@/lib/conference-committee-canonical";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
+import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
 import {
   computeMilestonesForScope,
   type MilestoneCounts,
@@ -28,9 +29,13 @@ export type DelegateMilestoneRow = {
   earned: number;
 };
 
+export type MilestoneChamberKind = "committee" | "council";
+
 export type CommitteeMilestoneGroup = {
   conferenceId: string;
   label: string;
+  /** SMT / secretariat sheet is a council, not a delegate committee chamber. */
+  kind: MilestoneChamberKind;
   committee: MilestoneProgress[];
   delegates: DelegateMilestoneRow[];
 };
@@ -83,10 +88,13 @@ async function committeeCountsForConferences(
   conferenceIds: string[]
 ): Promise<MilestoneCounts> {
   if (conferenceIds.length === 0) return {};
-  const { data } = await supabase
-    .from("vote_items")
-    .select("procedure_code, vote_type, outcome, closed_at")
-    .in("conference_id", conferenceIds);
+  const [{ data }, { data: amendmentRows }] = await Promise.all([
+    supabase
+      .from("vote_items")
+      .select("procedure_code, vote_type, outcome, closed_at")
+      .in("conference_id", conferenceIds),
+    supabase.from("amendments").select("id").in("conference_id", conferenceIds),
+  ]);
   let mod = 0;
   let unmod = 0;
   let cons = 0;
@@ -108,6 +116,7 @@ async function committeeCountsForConferences(
     unmoderated_caucuses: unmod,
     consultations: cons,
     resolutions_passed: resolutionsPassed,
+    amendments: (amendmentRows ?? []).length,
   };
 }
 
@@ -118,30 +127,43 @@ async function rawDelegateCountsByAllocation(
 ): Promise<Map<string, MilestoneCounts>> {
   if (conferenceIds.length === 0) return new Map();
 
-  const raw = new Map<string, { speeches: number; points: number }>();
-  const bump = (id: string | null, key: "speeches" | "points") => {
+  const raw = new Map<string, { speeches: number; points: number; amendments: number }>();
+  const bump = (id: string | null, key: "speeches" | "points" | "amendments") => {
     if (!id) return;
-    const e = raw.get(id) ?? { speeches: 0, points: 0 };
+    const e = raw.get(id) ?? { speeches: 0, points: 0, amendments: 0 };
     e[key] += 1;
     raw.set(id, e);
   };
 
-  const [{ data: speeches }, { data: points }] = await Promise.all([
+  const [{ data: speeches }, { data: points }, { data: amendments }] = await Promise.all([
     supabase.from("committee_speech_events").select("allocation_id").in("conference_id", conferenceIds),
     supabase
       .from("chair_session_points")
       .select("raised_by_allocation_id, point_code")
       .in("conference_id", conferenceIds)
       .in("point_code", ["poi", "poc"]),
+    supabase
+      .from("amendments")
+      .select("submitter_allocation_id")
+      .in("conference_id", conferenceIds),
   ]);
 
   for (const s of (speeches ?? []) as { allocation_id: string | null }[]) bump(s.allocation_id, "speeches");
   for (const p of (points ?? []) as { raised_by_allocation_id: string | null }[]) {
     bump(p.raised_by_allocation_id, "points");
   }
+  for (const a of (amendments ?? []) as { submitter_allocation_id: string | null }[]) {
+    bump(a.submitter_allocation_id, "amendments");
+  }
 
   const out = new Map<string, MilestoneCounts>();
-  for (const [id, c] of raw) out.set(id, { speeches: c.speeches, points_raised: c.points });
+  for (const [id, c] of raw) {
+    out.set(id, {
+      speeches: c.speeches,
+      points_raised: c.points,
+      amendments_submitted: c.amendments,
+    });
+  }
   return out;
 }
 
@@ -209,9 +231,13 @@ async function committeeGroup(
   siblingConferenceIds: string[],
   label: string,
   restrictAllocationIds: Set<string> | null,
-  opts: { includeCommittee?: boolean; includeDelegates?: boolean } = {}
+  opts: {
+    includeCommittee?: boolean;
+    includeDelegates?: boolean;
+    kind?: MilestoneChamberKind;
+  } = {}
 ): Promise<CommitteeMilestoneGroup> {
-  const { includeCommittee = true, includeDelegates = true } = opts;
+  const { includeCommittee = true, includeDelegates = true, kind = "committee" } = opts;
   const scopeIds = siblingConferenceIds.length > 0 ? siblingConferenceIds : [canonicalConferenceId];
 
   const committee = includeCommittee
@@ -239,7 +265,7 @@ async function committeeGroup(
       .sort((x, y) => y.earned - x.earned || x.label.localeCompare(y.label));
   }
 
-  return { conferenceId: canonicalConferenceId, label, committee, delegates };
+  return { conferenceId: canonicalConferenceId, label, kind, committee, delegates };
 }
 
 async function loadEventCanonicalCommittees(
@@ -324,23 +350,37 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
     }
 
     const committees = await Promise.all(
-      [...byCanonical.entries()].map(([canonicalId, bucket]) =>
-        committeeGroup(
+      [...byCanonical.entries()].map(async ([canonicalId, bucket]) => {
+        const { data: confMeta } = await supabase
+          .from("conferences")
+          .select("committee, committee_code")
+          .eq("id", canonicalId)
+          .maybeSingle();
+        const kind: MilestoneChamberKind = isSmtSecretariatConferenceRow({
+          committee: confMeta?.committee,
+          committee_code: confMeta?.committee_code,
+        })
+          ? "council"
+          : "committee";
+        return committeeGroup(
           supabase,
           canonicalId,
           [...bucket.siblingIds],
-          bucket.label,
+          kind === "council" ? "Secretariat Council" : bucket.label,
           bucket.allocationIds,
-          { includeCommittee: false, includeDelegates: true }
-        )
-      )
+          { includeCommittee: false, includeDelegates: true, kind }
+        );
+      })
     );
 
-    committees.sort((a, b) => a.label.localeCompare(b.label));
+    committees.sort((a, b) => {
+      if (a.kind !== b.kind) return a.kind === "council" ? 1 : -1;
+      return a.label.localeCompare(b.label);
+    });
     return { role, self: null, committees };
   }
 
-  // SMT / admin: one section per canonical committee in the active event.
+  // SMT / admin: committees + secretariat council for the active event.
   if (isSmtRole(role) || isAdminRole(role)) {
     const eventId = await getActiveEventId();
     if (!eventId) return { role, self: null, committees: [] };
@@ -348,27 +388,55 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
     const { committees: canonicalCommittees, conferenceIdToCanonical } =
       await loadEventCanonicalCommittees(supabase, eventId);
 
+    const confIds = canonicalCommittees.map((c) => c.id);
+    const { data: confMetaRows } = confIds.length
+      ? await supabase
+          .from("conferences")
+          .select("id, committee, committee_code")
+          .in("id", confIds)
+      : { data: [] as { id: string; committee: string | null; committee_code: string | null }[] };
+    const metaById = new Map(
+      (confMetaRows ?? []).map((r) => [r.id, r] as const)
+    );
+
     const committees = await Promise.all(
-      canonicalCommittees.map((c) =>
-        committeeGroup(
+      canonicalCommittees.map((c) => {
+        const meta = metaById.get(c.id);
+        const isCouncil = isSmtSecretariatConferenceRow({
+          committee: meta?.committee ?? c.label,
+          committee_code: meta?.committee_code,
+        });
+        return committeeGroup(
           supabase,
           c.id,
           siblingConferenceIdsForCanonical(c.id, conferenceIdToCanonical),
-          c.label,
-          null
-        )
-      )
+          isCouncil ? "Secretariat Council" : c.label,
+          null,
+          { kind: isCouncil ? "council" : "committee" }
+        );
+      })
     );
+
+    committees.sort((a, b) => {
+      if (a.kind !== b.kind) return a.kind === "council" ? 1 : -1;
+      return a.label.localeCompare(b.label);
+    });
 
     return { role, self: null, committees };
   }
 
-  // Delegate / chair: their dashboard committee — committee-scope milestones only.
+  // Delegate / chair: dashboard committee milestones; delegates also get personal progress.
   const conf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!conf) return { role, self: null, committees: [] };
 
   const scope = await getCommitteeAwardScope(supabase, conf.id);
-  const label = (conf.committee ?? conf.name ?? "").trim() || "Committee";
+  const isCouncil = isSmtSecretariatConferenceRow({
+    committee: conf.committee,
+    committee_code: conf.committee_code,
+  });
+  const label = isCouncil
+    ? "Secretariat Council"
+    : (conf.committee ?? conf.name ?? "").trim() || "Committee";
 
   const group = await committeeGroup(
     supabase,
@@ -376,8 +444,40 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
     scope.siblingConferenceIds,
     label,
     null,
-    { includeCommittee: true, includeDelegates: false }
+    {
+      includeCommittee: true,
+      includeDelegates: false,
+      kind: isCouncil ? "council" : "committee",
+    }
   );
 
-  return { role, self: null, committees: [group] };
+  let self: DelegateMilestoneRow | null = null;
+  if (role === "delegate") {
+    const { data: myAllocs } = await supabase
+      .from("allocations")
+      .select("id, country, user_id, conference_id")
+      .in("conference_id", scope.siblingConferenceIds)
+      .eq("user_id", user.id);
+
+    const merged = mergeAllocationsAcrossSiblingConferences(
+      (myAllocs ?? []) as AllocRow[],
+      scope.canonicalConferenceId
+    ).filter((a) => !isDaisSeat(a.country));
+
+    const primary = merged[0];
+    if (primary) {
+      const countsMap = await delegateCountsForMergedAllocations(
+        supabase,
+        scope.siblingConferenceIds,
+        merged
+      );
+      self = delegateRow(
+        primary.id,
+        (primary.country ?? "").trim() || "—",
+        countsMap.get(primary.id) ?? {}
+      );
+    }
+  }
+
+  return { role, self, committees: [group] };
 }

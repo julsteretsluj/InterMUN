@@ -66,7 +66,7 @@ function dedupeConferencesForMatrixTabs(
   };
 }
 
-/** Secretariat / SMT sheet always appears first in the tab strip. */
+/** Secretariat / SMT council sheet always appears first in the tab strip. */
 function pinSmtCommitteeFirst(rows: ConfRow[]): ConfRow[] {
   const smt: ConfRow[] = [];
   const rest: ConfRow[] = [];
@@ -166,7 +166,7 @@ export default async function SmtAllocationMatrixPage({
   );
   const list = pinSmtCommitteeFirst(deduped.list);
   const { resolveConferenceId } = deduped;
-  // First tab after pinning is the SMT / secretariat sheet when present; otherwise first committee.
+  // First tab after pinning is the Secretariat Council when present; otherwise first committee.
   const fallbackConferenceId = list[0]?.id ?? null;
 
   const selectedConferenceId =

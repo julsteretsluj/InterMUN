@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "프랑스,DIS-001\\n독일,DIS-002\\n일본",
     "parsedRowsSample": "{count}개의 행을 구문 분석했습니다. 견본:",
     "runImport": "가져오기 실행",
-    "generateMissingRandomCodes": "누락된 무작위 코드 생성"
+    "generateMissingRandomCodes": "누락된 무작위 코드 생성",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "현재 세션에 대한 위원회 할당 매트릭스입니다. 이는 의자에 대한 읽기 전용이며 활성 좌석 할당 및 플래카드 코드를 반영합니다.",

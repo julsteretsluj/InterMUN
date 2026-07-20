@@ -137,13 +137,24 @@ function DelegateLeaderboard({ delegates }: { delegates: DelegateMilestoneRow[] 
   );
 }
 
+function chamberDisplayLabel(group: CommitteeMilestoneGroup, secretariatCouncilLabel: string): string {
+  if (group.kind === "council") return secretariatCouncilLabel;
+  return group.label;
+}
+
 function CommitteeSection({ group }: { group: CommitteeMilestoneGroup }) {
   const t = useTranslations("milestones");
   const hasCommittee = group.committee.length > 0;
+  const name = chamberDisplayLabel(group, t("secretariatCouncil"));
+  const title =
+    group.kind === "council"
+      ? t("councilTitle", { council: name })
+      : t("committeeTitle", { committee: name });
+
   return (
     <section className="dashboard-panel space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="dashboard-panel-title">{t("committeeTitle", { committee: group.label })}</h3>
+        <h3 className="dashboard-panel-title">{title}</h3>
         {hasCommittee ? <EarnedBadge items={group.committee} /> : null}
       </div>
       {hasCommittee ? <MilestoneGrid items={group.committee} /> : null}
@@ -154,7 +165,9 @@ function CommitteeSection({ group }: { group: CommitteeMilestoneGroup }) {
             hasCommittee && "border-t border-[var(--hairline)] pt-4"
           )}
         >
-          <h4 className="text-sm font-semibold text-brand-navy">{t("delegateLeaderboard")}</h4>
+          <h4 className="text-sm font-semibold text-brand-navy">
+            {group.kind === "council" ? t("councilLeaderboard") : t("delegateLeaderboard")}
+          </h4>
           <DelegateLeaderboard delegates={group.delegates} />
         </div>
       ) : null}
@@ -162,21 +175,72 @@ function CommitteeSection({ group }: { group: CommitteeMilestoneGroup }) {
   );
 }
 
+function ChamberGroupBlock({
+  groups,
+  tabsAria,
+  sectionHeading,
+}: {
+  groups: CommitteeMilestoneGroup[];
+  tabsAria: string;
+  sectionHeading?: string;
+}) {
+  const t = useTranslations("milestones");
+  const secretariatCouncilLabel = t("secretariatCouncil");
+
+  const localizedOptions = useMemo(
+    () =>
+      groups.map((group) => ({
+        id: group.conferenceId,
+        label: chamberDisplayLabel(group, secretariatCouncilLabel),
+      })),
+    [groups, secretariatCouncilLabel]
+  );
+
+  const byId = useMemo(() => {
+    const map = new Map<string, CommitteeMilestoneGroup>();
+    for (const group of groups) map.set(group.conferenceId, group);
+    return map;
+  }, [groups]);
+
+  if (groups.length === 0) return null;
+
+  return (
+    <div className="space-y-3">
+      {sectionHeading ? (
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
+          {sectionHeading}
+        </h3>
+      ) : null}
+      {groups.length === 1 ? (
+        <CommitteeSection key={groups[0].conferenceId} group={groups[0]} />
+      ) : (
+        <LocalTabs
+          options={localizedOptions}
+          ariaLabel={tabsAria}
+          renderPanel={(activeTab) => {
+            const group = byId.get(activeTab) ?? groups[0];
+            return group ? <CommitteeSection group={group} /> : null;
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
 export function MilestonesView({ data }: { data: MilestonesData }) {
   const t = useTranslations("milestones");
   const hasAnything = data.self != null || data.committees.length > 0;
-  const committees = data.committees;
 
-  const committeeTabOptions = useMemo(
-    () => committees.map((group) => ({ id: group.conferenceId, label: group.label })),
-    [committees]
+  const committeeGroups = useMemo(
+    () => data.committees.filter((g) => g.kind !== "council"),
+    [data.committees]
+  );
+  const councilGroups = useMemo(
+    () => data.committees.filter((g) => g.kind === "council"),
+    [data.committees]
   );
 
-  const committeeById = useMemo(() => {
-    const map = new Map<string, CommitteeMilestoneGroup>();
-    for (const group of committees) map.set(group.conferenceId, group);
-    return map;
-  }, [committees]);
+  const showSectionHeadings = committeeGroups.length > 0 && councilGroups.length > 0;
 
   return (
     <div className="w-full min-w-0 space-y-6">
@@ -192,20 +256,17 @@ export function MilestonesView({ data }: { data: MilestonesData }) {
         </section>
       ) : null}
 
-      {committees.length === 1 ? (
-        <CommitteeSection key={committees[0].conferenceId} group={committees[0]} />
-      ) : null}
+      <ChamberGroupBlock
+        groups={committeeGroups}
+        tabsAria={t("committeeTabsAria")}
+        sectionHeading={showSectionHeadings ? t("committeesHeading") : undefined}
+      />
 
-      {committees.length > 1 ? (
-        <LocalTabs
-          options={committeeTabOptions}
-          ariaLabel={t("committeeTabsAria")}
-          renderPanel={(activeTab) => {
-            const group = committeeById.get(activeTab) ?? committees[0];
-            return group ? <CommitteeSection group={group} /> : null;
-          }}
-        />
-      ) : null}
+      <ChamberGroupBlock
+        groups={councilGroups}
+        tabsAria={t("councilTabsAria")}
+        sectionHeading={showSectionHeadings ? t("councilsHeading") : undefined}
+      />
 
       {!hasAnything ? <p className="text-sm text-brand-muted">{t("empty")}</p> : null}
     </div>

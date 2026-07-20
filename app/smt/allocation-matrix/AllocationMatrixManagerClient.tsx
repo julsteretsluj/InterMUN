@@ -251,15 +251,31 @@ export function AllocationMatrixManagerClient({
   }
 
   const confLabel = conferences.find((c) => c.id === selectedConferenceId);
-  const heading = confLabel
-    ? translateConferenceHeadline(
-        tTopics,
-        tCommitteeLabels,
-        [confLabel.name, confLabel.committee].filter(Boolean).join(" — "),
-        locale
-      )
-    : t("committeeFallback");
+  const selectedIsCouncil = confLabel
+    ? isSmtSecretariatConferenceRow({
+        committee: confLabel.committee,
+        committee_code: confLabel.committee_code ?? null,
+      })
+    : false;
+  const heading = selectedIsCouncil
+    ? t("secretariatCouncilTab")
+    : confLabel
+      ? translateConferenceHeadline(
+          tTopics,
+          tCommitteeLabels,
+          [confLabel.name, confLabel.committee].filter(Boolean).join(" — "),
+          locale
+        )
+      : t("committeeFallback");
   const sheetTabs = conferences.map((c) => {
+    const isCouncil = isSmtSecretariatConferenceRow({
+      committee: c.committee,
+      committee_code: c.committee_code ?? null,
+    });
+    if (isCouncil) {
+      const label = t("secretariatCouncilTab");
+      return { id: c.id, label, title: label, isCouncil: true as const };
+    }
     const titleRaw = [c.name, c.committee].filter(Boolean).join(" — ");
     const title = titleRaw
       ? translateConferenceHeadline(tTopics, tCommitteeLabels, titleRaw, locale)
@@ -270,14 +286,17 @@ export function AllocationMatrixManagerClient({
       : c.name?.trim()
         ? translateAgendaTopicLabel(tTopics, c.name, locale)
         : c.id.slice(0, 8);
-    return { id: c.id, label, title };
+    return { id: c.id, label, title, isCouncil: false as const };
   });
+
+  const councilTabs = sheetTabs.filter((tab) => tab.isCouncil);
+  const committeeTabs = sheetTabs.filter((tab) => !tab.isCouncil);
 
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 flex-wrap">
         <div className="text-sm text-brand-muted">
-          {t("showingOneCommitteeAtATime")}
+          {t("showingOneChamberAtATime")}
         </div>
         <Link
           href={`/smt/allocation-passwords?conference=${selectedConferenceId}`}
@@ -554,25 +573,63 @@ export function AllocationMatrixManagerClient({
         </form>
       </section>
       <div className="sticky bottom-2 z-20 rounded-xl border border-brand-navy/15 bg-brand-paper/95 p-2 shadow-sm backdrop-blur">
-        <div className="flex gap-2 overflow-x-auto">
-          {sheetTabs.map((tab) => {
-            const active = tab.id === selectedConferenceId;
-            return (
-              <button
-                key={`bottom-${tab.id}`}
-                type="button"
-                title={tab.title}
-                onClick={() => onConferenceChange(tab.id)}
-                className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
-                  active
-                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/30 dark:text-white"
-                    : "border-zinc-300 bg-zinc-100 text-zinc-900 hover:bg-zinc-200/90 dark:border-white/15 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700/90"
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
+        <div className="flex flex-col gap-2">
+          {councilTabs.length > 0 ? (
+            <div className="space-y-1">
+              <p className="px-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
+                {t("councilsTabGroup")}
+              </p>
+              <div className="flex gap-2 overflow-x-auto">
+                {councilTabs.map((tab) => {
+                  const active = tab.id === selectedConferenceId;
+                  return (
+                    <button
+                      key={`bottom-council-${tab.id}`}
+                      type="button"
+                      title={tab.title}
+                      onClick={() => onConferenceChange(tab.id)}
+                      className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
+                        active
+                          ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/30 dark:text-white"
+                          : "border-zinc-300 bg-zinc-100 text-zinc-900 hover:bg-zinc-200/90 dark:border-white/15 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700/90"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
+          {committeeTabs.length > 0 ? (
+            <div className="space-y-1">
+              {councilTabs.length > 0 ? (
+                <p className="px-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
+                  {t("committeesTabGroup")}
+                </p>
+              ) : null}
+              <div className="flex gap-2 overflow-x-auto">
+                {committeeTabs.map((tab) => {
+                  const active = tab.id === selectedConferenceId;
+                  return (
+                    <button
+                      key={`bottom-${tab.id}`}
+                      type="button"
+                      title={tab.title}
+                      onClick={() => onConferenceChange(tab.id)}
+                      className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
+                        active
+                          ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/30 dark:text-white"
+                          : "border-zinc-300 bg-zinc-100 text-zinc-900 hover:bg-zinc-200/90 dark:border-white/15 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700/90"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "फ़्रांस, DIS-001\\nजर्मनी, DIS-002\\nजापान",
     "parsedRowsSample": "पार्स की गई {गिनती} पंक्तियाँ। नमूना:",
     "runImport": "आयात चलाएँ",
-    "generateMissingRandomCodes": "गुम यादृच्छिक कोड उत्पन्न करें"
+    "generateMissingRandomCodes": "गुम यादृच्छिक कोड उत्पन्न करें",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "आपके वर्तमान सत्र के लिए समिति आवंटन मैट्रिक्स। यह कुर्सियों के लिए केवल पढ़ने योग्य है और सक्रिय सीट असाइनमेंट और प्लेकार्ड कोड को दर्शाता है।",

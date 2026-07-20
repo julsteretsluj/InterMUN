@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "ຝຣັ່ງ,DIS-001\\nເຢຍລະມັນ,DIS-002\\nຍີ່ປຸ່ນ",
     "parsedRowsSample": "ວິເຄາະ {count} ແຖວ. ຕົວຢ່າງ:",
     "runImport": "ດໍາເນີນການນໍາເຂົ້າ",
-    "generateMissingRandomCodes": "ສ້າງລະຫັດສຸ່ມທີ່ຂາດຫາຍໄປ"
+    "generateMissingRandomCodes": "ສ້າງລະຫັດສຸ່ມທີ່ຂາດຫາຍໄປ",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "ຕາຕະລາງການຈັດສັນຄະນະກໍາມະການສໍາລັບກອງປະຊຸມປັດຈຸບັນຂອງທ່ານ. ນີ້ແມ່ນການອ່ານເທົ່ານັ້ນສໍາລັບເກົ້າອີ້ແລະສະທ້ອນໃຫ້ເຫັນເຖິງການມອບຫມາຍບ່ອນນັ່ງທີ່ຫ້າວຫັນແລະລະຫັດປ້າຍ.",

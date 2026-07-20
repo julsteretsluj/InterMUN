@@ -16,8 +16,10 @@ export type MilestoneMetricId =
   | "unmoderated_caucuses"
   | "consultations"
   | "resolutions_passed"
+  | "amendments"
   | "speeches"
-  | "points_raised";
+  | "points_raised"
+  | "amendments_submitted";
 
 export type MilestoneMetricDef = {
   id: MilestoneMetricId;
@@ -72,6 +74,14 @@ export const MILESTONE_METRICS: readonly MilestoneMetricDef[] = [
     openEnded: true,
   },
   {
+    id: "amendments",
+    scope: "committee",
+    icon: "✏️",
+    tiers: [1, 5, 10],
+    tierIcons: ["📝", "🖊️", "📒"],
+    openEnded: true,
+  },
+  {
     id: "speeches",
     scope: "delegate",
     icon: "🎤",
@@ -85,6 +95,14 @@ export const MILESTONE_METRICS: readonly MilestoneMetricDef[] = [
     icon: "✋",
     tiers: [1, 5, 20, 50],
     tierIcons: ["🙋", "☝️", "🤚", "🎖️"],
+    openEnded: true,
+  },
+  {
+    id: "amendments_submitted",
+    scope: "delegate",
+    icon: "📎",
+    tiers: [1, 5, 10],
+    tierIcons: ["📌", "🔖", "🗄️"],
     openEnded: true,
   },
 ] as const;

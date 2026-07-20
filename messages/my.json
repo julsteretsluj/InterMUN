@@ -1359,9 +1359,17 @@
       "consultations": "Consultations",
       "resolutions_passed": "Resolutions passed",
       "speeches": "Speeches delivered",
-      "points_raised": "Points (POI / POC)"
+      "points_raised": "Points (POI / POC)",
+      "amendments": "Amendments",
+      "amendments_submitted": "Amendments submitted"
     },
-    "committeeTabsAria": "Committee milestones"
+    "committeeTabsAria": "Committee milestones",
+    "councilTabsAria": "Council milestones",
+    "committeesHeading": "Committees",
+    "councilsHeading": "Councils",
+    "secretariatCouncil": "Secretariat Council",
+    "councilTitle": "{council} — council milestones",
+    "councilLeaderboard": "Council seat milestones"
   },
   "pressCorps": {
     "title": "SEAMUN Press Corps",
@@ -2252,7 +2260,11 @@
     "csvPlaceholder": "ပြင်သစ်၊DIS-001\\nဂျာမနီ၊DIS-002\\nဂျပန်",
     "parsedRowsSample": "ပိုင်းခြားထားသော {count} အတန်း(များ)။ နမူနာ-",
     "runImport": "တင်သွင်းမှုကို လုပ်ဆောင်ပါ။",
-    "generateMissingRandomCodes": "ပျောက်ဆုံးနေသော ကျပန်းကုဒ်များကို ဖန်တီးပါ။"
+    "generateMissingRandomCodes": "ပျောက်ဆုံးနေသော ကျပန်းကုဒ်များကို ဖန်တီးပါ။",
+    "secretariatCouncilTab": "Secretariat Council",
+    "councilsTabGroup": "Councils",
+    "committeesTabGroup": "Committees",
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
   },
   "chairAllocationMatrixPage": {
     "intro": "သင်၏လက်ရှိအစည်းအဝေးအတွက် ကော်မတီခွဲဝေသတ်မှတ်မှုမက်ထရစ်။ ၎င်းသည် ထိုင်ခုံများအတွက်သာ ဖတ်ရန်ဖြစ်ပြီး တက်ကြွသောထိုင်ခုံတာဝန်များနှင့် စာတန်းကုဒ်များကို ထင်ဟပ်စေသည်။",

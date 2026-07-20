@@ -33,8 +33,12 @@ export async function GET() {
   try {
     const data = await loadMilestonesForViewer();
 
-    // delegate/chair -> committee scope; smt/admin -> first committee scope.
-    const primary = data.self?.milestones ?? data.committees[0]?.committee ?? [];
+    // Prefer a real committee chamber for the dashboard card; fall back to council.
+    const primaryGroup =
+      data.committees.find((c) => c.kind !== "council" && c.committee.length > 0) ??
+      data.committees.find((c) => c.committee.length > 0) ??
+      data.committees[0];
+    const primary = data.self?.milestones ?? primaryGroup?.committee ?? [];
     if (primary.length > 0) {
       const { earned, total } = totalEarnedCheckpoints(primary);
       return NextResponse.json({
