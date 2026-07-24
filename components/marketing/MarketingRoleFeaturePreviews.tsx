@@ -30,6 +30,7 @@ import { MarketingSessionVoteRecordingPanel } from "@/components/marketing/Marke
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
+  MARKETING_SESSION_INSET,
   marketingRollAttendanceButtonClass,
   PREVIEW_CARD,
   PREVIEW_HEADING,
@@ -83,11 +84,14 @@ export function ChairRollCallQuorumDemo() {
         </span>
       </div>
       <div className={cn(MARKETING_DARK_GLASS_CARD, "space-y-3")}>
-        <ul className="space-y-2 text-sm">
+        <ul className="space-y-2 text-sm text-brand-navy">
           {rows.map((row) => (
             <li
               key={row.id}
-              className="flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
+              className={cn(
+                MARKETING_SESSION_INSET,
+                "flex flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
+              )}
             >
               <span className="font-medium">{row.country}</span>
               <div className="flex flex-wrap gap-1.5">
@@ -112,7 +116,7 @@ export function ChairRollCallQuorumDemo() {
             </li>
           ))}
         </ul>
-        <p className="font-mono text-xs text-white/60">{t("votingHeadcount", { voting, present })}</p>
+        <p className="font-mono text-xs text-brand-muted">{t("votingHeadcount", { voting, present })}</p>
       </div>
     </div>
   );

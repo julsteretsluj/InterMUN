@@ -43,4 +43,4 @@ export const ROLL_ATTENDANCE_BUTTONS: RollAttendanceButtonConfig[] = [
 ];
 
 export const SESSION_SURFACE_CARD =
-  "rounded-xl border border-white/15 bg-black/25 p-4 text-brand-navy shadow-sm backdrop-blur-sm";
+  "rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-sm backdrop-blur-sm";

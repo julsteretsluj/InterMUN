@@ -11,7 +11,7 @@ import {
 import type { VoteType } from "@/types/database";
 import { cn } from "@/lib/utils";
 
-import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, MARKETING_SESSION_INSET, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 type MotionDemoRow = {
   id: string;
@@ -68,15 +68,15 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
       </div>
 
       <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
-        <div className="space-y-2 rounded-lg border border-white/15 bg-black/20 px-3 py-2">
-          <p className="text-sm font-medium text-zinc-100">
+        <div className={cn("space-y-2 px-3 py-2", MARKETING_SESSION_INSET)}>
+          <p className="text-sm font-medium text-brand-navy">
             {t("motionFloorLabel")}{" "}
-            <span className="text-zinc-400">{t("closed")}</span>
+            <span className="text-brand-muted">{t("closed")}</span>
           </p>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
-              className="rounded-lg border border-brand-accent/50 bg-brand-accent/15 px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-brand-accent/25"
+              className="rounded-lg border border-brand-accent/50 bg-brand-accent/15 px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-accent/25"
             >
               {t("addMotionGuided")}
             </button>
@@ -88,13 +88,13 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
             </button>
             <button
               type="button"
-              className="rounded-lg border border-white/25 bg-black/25 px-3 py-2 text-sm font-medium text-zinc-100 hover:bg-black/20"
+              className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]"
             >
               {t("closeFloorStatementsEnded")}
             </button>
             <button
               type="button"
-              className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-200 hover:bg-amber-500/15"
+              className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-500/15"
             >
               {t("recordStatedMotionButton")}
             </button>
@@ -107,9 +107,9 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
           </div>
         </div>
 
-        <div className="space-y-2 rounded-lg border border-white/12 bg-black/25 px-3 py-2">
-          <p className={cn(SESSION_FLOOR_LABEL, "text-zinc-400")}>{t("pendingVoteOrderMostDisruptive")}</p>
-          <ol className="list-decimal space-y-2 pl-5 text-sm text-zinc-100">
+        <div className={cn("space-y-2 px-3 py-2", MARKETING_SESSION_INSET)}>
+          <p className={SESSION_FLOOR_LABEL}>{t("pendingVoteOrderMostDisruptive")}</p>
+          <ol className="list-decimal space-y-2 pl-5 text-sm text-brand-navy">
             {motions.map((motion, index) => (
                 <li key={motion.id} className="pl-1">
                   <div className="flex flex-wrap items-start justify-between gap-2">
@@ -118,7 +118,7 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
                     </div>
                     <button
                       type="button"
-                      className="shrink-0 text-xs font-medium text-red-400 hover:underline"
+                      className="shrink-0 text-xs font-medium text-red-700 hover:underline"
                     >
                       {t("withdraw")}
                     </button>

@@ -8,9 +8,9 @@ export const OPENING_ORB_GIF_FRAME_MS = 90;
 export const OPENING_ORB_GIF_FRAME_COUNT = 27;
 export const OPENING_ORB_GIF_LOOP_MS = OPENING_ORB_GIF_FRAME_MS * OPENING_ORB_GIF_FRAME_COUNT;
 
-/** Full loop on screen before fade — loop length + buffer for decode / paint jitter. */
-export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 900;
-export const ORB_ANIMATION_FADE_MS = 800;
+/** Full loop on screen before fade — loop length + a short paint-jitter buffer. */
+export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 300;
+export const ORB_ANIMATION_FADE_MS = 500;
 
 /** Logo click replays this many full GIF loops before fading out. */
 export const ORB_ANIMATION_CLICK_LOOPS = 2;

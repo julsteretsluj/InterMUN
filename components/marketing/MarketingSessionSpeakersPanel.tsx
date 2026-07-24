@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp, Pause, Play, SkipForward } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, MARKETING_SESSION_INSET, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 export type SpeakerQueueDemoRow = {
   id: string;
@@ -127,7 +127,7 @@ export function MarketingSessionSpeakersPanel({
       </div>
 
       <div className={cn(MARKETING_SESSION_SURFACE, heroCompact ? "space-y-2" : "space-y-4")}>
-        <div className={cn("space-y-2 rounded-lg border border-white/15 bg-black/20", heroCompact ? "p-2" : "space-y-3 p-3")}>
+        <div className={cn("space-y-2", MARKETING_SESSION_INSET, heroCompact ? "p-2" : "space-y-3 p-3")}>
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
             {!heroCompact ? (
@@ -139,7 +139,7 @@ export function MarketingSessionSpeakersPanel({
           <div className="flex flex-wrap items-end justify-between gap-2">
             <div className="min-w-0">
               <p className="text-xs text-brand-muted">{tTimer("currentSpeaker")}</p>
-              <p className={cn("font-display font-semibold text-zinc-100", heroCompact ? "text-sm" : "text-base")}>
+              <p className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
                 {current?.country ?? tq("dash")}
               </p>
             </div>
@@ -185,7 +185,7 @@ export function MarketingSessionSpeakersPanel({
           <label className="min-w-[12rem] flex-1 text-sm text-brand-navy">
             <span className={SESSION_FLOOR_LABEL}>{tq("addDelegation")}</span>
             <select
-              className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+              className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
               defaultValue=""
               aria-label={tq("addDelegation")}
             >
@@ -196,25 +196,25 @@ export function MarketingSessionSpeakersPanel({
           </label>
           <button
             type="button"
-            className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-white/20"
+            className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]"
           >
             {tq("add")}
           </button>
         </div>
         ) : null}
 
-        <ul className={cn("text-zinc-100", heroCompact ? "space-y-1" : "space-y-2")}>
+        <ul className={cn("text-brand-navy", heroCompact ? "space-y-1" : "space-y-2")}>
           {(heroCompact ? sorted.slice(0, 3) : sorted).map((row, pos) => (
             <li
               key={row.id}
               className={cn(
-                "flex flex-wrap items-center justify-between gap-2 border-b border-white/12",
+                "flex flex-wrap items-center justify-between gap-2 border-b border-[var(--hairline)]",
                 heroCompact ? "py-1.5" : "py-2"
               )}
             >
               <span className="font-medium">
                 {row.country}{" "}
-                <span className="text-xs font-normal text-zinc-400">
+                <span className="text-xs font-normal text-brand-muted">
                   ({tq(`status.${row.status}`)})
                 </span>
               </span>
@@ -222,7 +222,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos <= 0}
-                  className="rounded-md p-1.5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100 disabled:opacity-30"
+                  className="rounded-md p-1.5 text-brand-muted hover:bg-brand-navy/5 hover:text-brand-navy disabled:opacity-30"
                   title={tq("moveUp")}
                   aria-label={tq("moveUp")}
                   onClick={() => moveRow(row.id, "up")}
@@ -232,7 +232,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos >= sorted.length - 1}
-                  className="rounded-md p-1.5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100 disabled:opacity-30"
+                  className="rounded-md p-1.5 text-brand-muted hover:bg-brand-navy/5 hover:text-brand-navy disabled:opacity-30"
                   title={tq("moveDown")}
                   aria-label={tq("moveDown")}
                   onClick={() => moveRow(row.id, "down")}

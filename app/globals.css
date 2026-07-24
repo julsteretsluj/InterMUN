@@ -1966,61 +1966,44 @@ html.colorblind-mode .schedule-swatch-session {
   color: #ffffff;
 }
 
-/* Session-floor glass cards — readable copy on dark glass in dark chambers. */
+/* Session-floor cards inside dark chambers — light dashboard surfaces (match live chair). */
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface {
-  color-scheme: dark;
-  --color-text: #f4f4f5;
-  --color-text-secondary: #d4d4d8;
-  --color-text-muted: #a1a1aa;
-  --brand-navy: #f4f4f5;
-  --brand-muted: #a1a1aa;
-  --color-brand-navy: #f4f4f5;
-  --color-brand-muted: #a1a1aa;
-  --hairline: rgba(255, 255, 255, 0.12);
-  --color-bg-page: #27272a;
-  color: #f4f4f5;
-}
-
-/* Tailwind utilities read --color-brand-navy from :root; force light copy on dark glass. */
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(
-  .text-brand-navy,
-  [class*="text-brand-navy"]
-) {
-  color: #f4f4f5;
+  color-scheme: light;
+  --color-text: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-muted: #71717a;
+  --brand-navy: #18181b;
+  --brand-muted: #71717a;
+  --color-brand-navy: #18181b;
+  --color-brand-muted: #71717a;
+  --hairline: rgba(60, 60, 67, 0.18);
+  --color-bg-page: #fffdf8;
+  color: #18181b;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(
-  .text-brand-muted,
-  [class*="text-brand-muted"]
-) {
-  color: #a1a1aa;
-}
-
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(.bg-white, .bg-brand-cream) :where(
   .text-brand-navy,
-  .text-zinc-900,
   [class*="text-brand-navy"]
 ) {
   color: #18181b;
 }
 
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(.bg-white, .bg-brand-cream) :where(
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(
   .text-brand-muted,
   [class*="text-brand-muted"]
 ) {
   color: #71717a;
 }
 
-/* mun-* utilities set color on the element itself (not via utility classes). */
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(.mun-inset, .mun-label, .mun-muted) {
-  color: #d4d4d8;
+  color: #3f3f46;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-label {
-  color: #a1a1aa;
+  color: #71717a;
 }
 
-/* Light islands inside dark session glass — reset inherited zinc/cream copy. */
+/* Nested white islands — same light copy as the parent session card. */
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface {
   color-scheme: light;
   --color-text: #18181b;
@@ -2057,47 +2040,19 @@ html.colorblind-mode .schedule-swatch-session {
   color: #18181b;
 }
 
-/* Generic `.mun-apple-site header[class*="border-b"]` and `.mun-apple-site h3`
-   rules leak into these dark glass panels: light material headers and
-   near-black --apple-label headings in light mode. Keep panel chrome dark. */
+/* Generic `.mun-apple-site header[class*="border-b"]` leak — keep panel chrome transparent. */
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface header {
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-/* Same leak for `.mun-apple-site .mun-inset` (theme material bg turns these
-   dark-glass insets light in light mode while their copy stays light gray). */
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-inset:not(.marketing-light-surface) {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.2);
-  color: #d4d4d8;
-}
-
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(h1, h2, h3, h4) {
-  color: #f4f4f5;
+  color: #18181b;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface :is(h1, h2, h3, h4) {
   color: #18181b;
-}
-
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
-  .bg-white,
-  .bg-white\/95,
-  .bg-zinc-50,
-  .bg-brand-cream
-) :where(.mun-inset, .mun-label, .mun-muted, .mun-group-list) {
-  color: #3f3f46;
-}
-
-.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
-  .bg-white,
-  .bg-white\/95,
-  .bg-zinc-50,
-  .bg-brand-cream
-) .mun-label {
-  color: #71717a;
 }
 
 /*
@@ -2144,9 +2099,9 @@ html.colorblind-mode .schedule-swatch-session {
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface select,
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface input,
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface textarea {
-  background-color: rgba(0, 0, 0, 0.35);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: #f4f4f5;
+  background-color: var(--material-thin);
+  border-color: var(--hairline);
+  color: #18181b;
 }
 
 .marketing-shell .marketing-session-surface option {

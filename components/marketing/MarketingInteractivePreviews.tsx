@@ -19,6 +19,7 @@ import { MarketingSessionVoteRecordingPanel } from "@/components/marketing/Marke
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
+  MARKETING_SESSION_INSET,
   marketingRollAttendanceButtonClass,
 } from "@/components/marketing/marketing-preview-styles";
 type RollRow = { id: string; country: string; status: RollAttendance };
@@ -48,15 +49,14 @@ function MarketingRollCallCard({
   heroCompact?: boolean;
 }) {
   const t = useTranslations("sessionControlClient");
+  // Titles outside the card stay light on dark chamber chrome; card body is always light.
   const heading = onDarkSurface ? "text-white" : "text-brand-navy";
   const muted = onDarkSurface ? "text-white/70" : "text-brand-muted";
-  const body = onDarkSurface ? "text-white" : "text-brand-navy";
-  const initBtn = onDarkSurface
-    ? "marketing-chamber-init-btn rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
-    : "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
+  const initBtn =
+    "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
 
   return (
-    <section className={cn(heroCompact ? "space-y-2" : "space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW, body)}>
+    <section className={cn(heroCompact ? "space-y-2" : "space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW)}>
       <div className="flex items-center justify-between gap-3">
         <h3 className={cn("font-display font-semibold", heading, heroCompact ? "text-base" : "text-lg")}>
           ✅ {t("rollCallTracker")}
@@ -75,24 +75,25 @@ function MarketingRollCallCard({
         ) : null}
       </div>
       {!heroCompact ? <p className={cn("text-sm", muted)}>{t("rollCallIntro")}</p> : null}
-      <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4", onDarkSurface && "text-white")}>
+      <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4")}>
         {!heroCompact ? (
         <button type="button" className={initBtn}>
           {t("initializeRowsAllAllocations")}
         </button>
         ) : null}
         <div>
-          <h4 className={cn("font-display font-semibold", onDarkSurface ? "text-white" : heading, heroCompact ? "text-sm" : "text-base")}>
+          <h4 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
             👥 {t("delegates")}
           </h4>
-          {!heroCompact ? <p className={cn("mt-1 text-sm", muted)}>{t("delegateRollStatusHint")}</p> : null}
+          {!heroCompact ? <p className={cn("mt-1 text-sm text-brand-muted")}>{t("delegateRollStatusHint")}</p> : null}
         </div>
-        <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", body)}>
+        <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", "text-brand-navy")}>
           {(heroCompact ? rows.slice(0, 3) : rows).map((row) => (
             <li
               key={row.id}
               className={cn(
-                "flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 sm:flex-row sm:items-center sm:justify-between",
+                MARKETING_SESSION_INSET,
+                "flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between",
                 heroCompact ? "px-2 py-1.5" : "px-3 py-2"
               )}
             >
@@ -110,13 +111,7 @@ function MarketingRollCallCard({
                       type="button"
                       title={t(opt.titleKey)}
                       onClick={() => onSetAttendance(row.id, opt.value)}
-                      className={
-                        onDarkSurface
-                          ? marketingRollAttendanceButtonClass(opt.value, active)
-                          : `rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm ${
-                              active ? opt.activeClass : opt.inactiveClass
-                            }`
-                      }
+                      className={marketingRollAttendanceButtonClass(opt.value, active)}
                     >
                       {t(opt.labelKey)}
                     </button>

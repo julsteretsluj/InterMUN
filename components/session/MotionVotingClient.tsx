@@ -125,7 +125,7 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
     requiredMajority === "2/3" ? "2/3" : t("majoritySimple");
 
   return (
-    <div className="rounded-xl border border-white/15 bg-black/25 p-3 space-y-3">
+    <div className="rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-3 space-y-3 text-brand-navy shadow-sm">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs uppercase tracking-wider text-brand-muted">{t("votingProcedure")}</p>
