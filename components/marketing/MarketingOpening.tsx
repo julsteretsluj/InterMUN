@@ -67,7 +67,7 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
       />
       <div
         className={cn(
-          "transition-opacity duration-500",
+          "transition-opacity duration-300",
           phase === "open" ? "opacity-100" : "opacity-0"
         )}
       >

@@ -29,8 +29,8 @@ export function MarketingDelegatePrepWorkspacePanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-display text-lg font-semibold text-white">{tPrep("prepWorkspaceTitle")}</h3>
-          <p className="mt-1 text-sm text-white/70">{tPrep("prepWorkspaceHint")}</p>
+          <h3 className="font-display text-lg font-semibold text-brand-navy">{tPrep("prepWorkspaceTitle")}</h3>
+          <p className="mt-1 text-sm text-brand-muted">{tPrep("prepWorkspaceHint")}</p>
         </div>
       ) : null}
 

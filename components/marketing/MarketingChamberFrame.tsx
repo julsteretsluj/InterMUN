@@ -9,11 +9,12 @@ export function MarketingChamberFrame({
   children,
   className,
   label = "LIVE FLOOR",
-  variant = "dark",
+  variant = "light",
 }: {
   children: ReactNode;
   className?: string;
   label?: string;
+  /** Prefer light — follows page theme tokens. Dark is a legacy screenshot chrome. */
   variant?: "dark" | "light";
 }) {
   const isDark = variant === "dark";

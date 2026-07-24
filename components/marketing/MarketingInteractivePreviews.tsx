@@ -40,41 +40,31 @@ const HERO_ROLL_SEED = HERO_ROLL_ALL.slice(0, 4);
 function MarketingRollCallCard({
   rows,
   onSetAttendance,
-  onDarkSurface = false,
   heroCompact = false,
 }: {
   rows: RollRow[];
   onSetAttendance: (id: string, status: RollAttendance) => void;
-  onDarkSurface?: boolean;
   heroCompact?: boolean;
 }) {
   const t = useTranslations("sessionControlClient");
-  // Titles outside the card stay light on dark chamber chrome; card body is always light.
-  const heading = onDarkSurface ? "text-white" : "text-brand-navy";
-  const muted = onDarkSurface ? "text-white/70" : "text-brand-muted";
   const initBtn =
     "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
 
   return (
-    <section className={cn(heroCompact ? "space-y-2" : "space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW)}>
-      <div className="flex items-center justify-between gap-3">
-        <h3 className={cn("font-display font-semibold", heading, heroCompact ? "text-base" : "text-lg")}>
-          ✅ {t("rollCallTracker")}
-        </h3>
-        {!heroCompact ? (
-        <HelpButton
-          title={t("rollCallTracker")}
-          className={
-            onDarkSurface
-              ? "border-white/20 bg-white/10 text-white/85 hover:bg-white/20 dark:border-white/20 dark:bg-white/10 dark:text-white/85"
-              : undefined
-          }
-        >
-          {t("rollCallHelp")}
-        </HelpButton>
-        ) : null}
+    <section className={cn(heroCompact ? "space-y-2" : "space-y-4")}>
+      <div className={cn(heroCompact ? "space-y-2" : "space-y-4", MARKETING_CHAMBER_PREVIEW)}>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
+            ✅ {t("rollCallTracker")}
+          </h3>
+          {!heroCompact ? (
+          <HelpButton title={t("rollCallTracker")}>
+            {t("rollCallHelp")}
+          </HelpButton>
+          ) : null}
+        </div>
+        {!heroCompact ? <p className="text-sm text-brand-muted">{t("rollCallIntro")}</p> : null}
       </div>
-      {!heroCompact ? <p className={cn("text-sm", muted)}>{t("rollCallIntro")}</p> : null}
       <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4")}>
         {!heroCompact ? (
         <button type="button" className={initBtn}>
@@ -85,7 +75,7 @@ function MarketingRollCallCard({
           <h4 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
             👥 {t("delegates")}
           </h4>
-          {!heroCompact ? <p className={cn("mt-1 text-sm text-brand-muted")}>{t("delegateRollStatusHint")}</p> : null}
+          {!heroCompact ? <p className="mt-1 text-sm text-brand-muted">{t("delegateRollStatusHint")}</p> : null}
         </div>
         <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", "text-brand-navy")}>
           {(heroCompact ? rows.slice(0, 3) : rows).map((row) => (
@@ -146,7 +136,6 @@ export function MarketingHeroSessionPreview({
       <MarketingRollCallCard
         rows={roll}
         onSetAttendance={setRollAttendance}
-        onDarkSurface
         heroCompact={heroCompact}
       />
       <MarketingSessionSpeakersPanel compactIntro heroCompact={heroCompact} />
@@ -163,7 +152,7 @@ export function MarketingChairMotionPreview({ className }: { className?: string 
 
   return (
     <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
+      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} />
       <MarketingSessionVoteRecordingPanel compactIntro />
     </div>
   );

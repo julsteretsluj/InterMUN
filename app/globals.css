@@ -1954,11 +1954,17 @@ html.colorblind-mode .schedule-swatch-session {
   color: #f4f4f5;
 }
 
-.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview :where(h3, h4, span, li) {
+/* Chamber chrome copy only — never the light session cards nested below it. */
+.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview :where(h3, h4, span, li):not(
+  .marketing-session-surface,
+  .marketing-session-surface *
+) {
   color: #ffffff;
 }
 
-.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview p {
+.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview p:not(
+  .marketing-session-surface *
+) {
   color: color-mix(in srgb, #ffffff 68%, transparent);
 }
 
@@ -1976,6 +1982,8 @@ html.colorblind-mode .schedule-swatch-session {
   --brand-muted: #71717a;
   --color-brand-navy: #18181b;
   --color-brand-muted: #71717a;
+  --apple-label: #18181b;
+  --apple-label-secondary: #52525b;
   --hairline: rgba(60, 60, 67, 0.18);
   --color-bg-page: #fffdf8;
   color: #18181b;
@@ -8104,5 +8112,44 @@ html.dark .mun-apple-window-sidebar {
 
 .mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-light-surface .text-violet-950 {
   color: #2e1065;
+}
+
+/*
+ * Session cards in dark chambers are light dashboard surfaces. They must be
+ * re-inked here because `.mun-apple-site .text-brand-navy { color: inherit }`
+ * (0-4-0) otherwise pulls the near-white chamber copy into them.
+ */
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface,
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
+  .text-zinc-900,
+  .text-brand-navy,
+  [class*="text-brand-navy"]
+) {
+  color: #18181b;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
+  .text-zinc-500,
+  .text-brand-muted,
+  [class*="text-brand-muted"]
+) {
+  color: #71717a;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-label {
+  color: #71717a;
+}
+
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .text-zinc-800 {
+  color: #27272a;
+}
+
+/* Filled action pills (vote Yes/No, primary buttons) keep white labels; the
+   `color: inherit` resets above would otherwise paint them card-ink dark. */
+.mun-apple-site.marketing-shell .mun-chamber-frame-dark :is(
+  .marketing-session-surface,
+  .marketing-light-surface
+) .text-white {
+  color: #ffffff;
 }
 

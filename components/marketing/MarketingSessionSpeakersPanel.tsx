@@ -112,16 +112,16 @@ export function MarketingSessionSpeakersPanel({
   return (
     <section className={cn(heroCompact ? "space-y-2" : "space-y-3", className)}>
       <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className={cn("font-display font-semibold text-white", heroCompact ? "text-base" : "text-lg")}>
+        <h3 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
           🎤 {tq("speakerList")}
         </h3>
         {!compactIntro ? (
-          <p className="mt-1 text-sm text-white/70">
+          <p className="mt-1 text-sm text-brand-muted">
             {tq("introPrefix")}{" "}
-            <span className="font-medium text-white">{tq("requestToSpeak")}</span> {tq("introMiddle")}{" "}
+            <span className="font-medium text-brand-navy">{tq("requestToSpeak")}</span> {tq("introMiddle")}{" "}
             <span className="font-medium text-[var(--accent)]">{tq("sessionTimerLink")}</span>{" "}
             {tq("introSuffixPrefix")}{" "}
-            <strong className="font-medium text-white">{tq("advanceSpeaker")}</strong>.
+            <strong className="font-medium text-brand-navy">{tq("advanceSpeaker")}</strong>.
           </p>
         ) : null}
       </div>

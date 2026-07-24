@@ -8,15 +8,15 @@ export const OPENING_ORB_GIF_FRAME_MS = 90;
 export const OPENING_ORB_GIF_FRAME_COUNT = 27;
 export const OPENING_ORB_GIF_LOOP_MS = OPENING_ORB_GIF_FRAME_MS * OPENING_ORB_GIF_FRAME_COUNT;
 
-/** Full loop on screen before fade — loop length + a short paint-jitter buffer. */
-export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 300;
-export const ORB_ANIMATION_FADE_MS = 500;
+/** Full loop on screen before fade — loop length + a minimal paint-jitter buffer. */
+export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 80;
+export const ORB_ANIMATION_FADE_MS = 320;
 
 /** Logo click replays this many full GIF loops before fading out. */
 export const ORB_ANIMATION_CLICK_LOOPS = 2;
 
 /** Bump when playback logic changes so users get a fresh auto-intro. */
-export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v6";
+export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v7";
 
 /** Cache-busted URL so each play remounts a fresh GIF decode. */
 export function openingOrbUrl(playKey: number): string {

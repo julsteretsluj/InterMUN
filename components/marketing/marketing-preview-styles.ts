@@ -4,10 +4,10 @@
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 
-/** Root class for roll-call / chair demos inside `mun-chamber-frame-dark`. */
+/** Root class for roll-call / chair demos inside chamber frames. */
 export const MARKETING_CHAMBER_PREVIEW = "marketing-chamber-preview";
 
-/** Roll-call buttons on marketing session cards (light dashboard surfaces). */
+/** Roll-call buttons on marketing session cards (theme-aware surfaces). */
 export function marketingRollAttendanceButtonClass(value: RollAttendance, active: boolean): string {
   const pair = ROLL_ATTENDANCE_BUTTONS.find((b) => b.value === value);
   const tone = pair
@@ -29,7 +29,7 @@ export const PREVIEW_ROW =
 
 /** Session-floor card chrome — matches live chair `surfaceCard` / dashboard tokens. */
 export const MARKETING_SESSION_SURFACE =
-  "marketing-session-surface rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-sm backdrop-blur-sm [color-scheme:light]";
+  "marketing-session-surface rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-sm backdrop-blur-sm";
 
 /** @deprecated Prefer MARKETING_SESSION_SURFACE — kept for role-feature previews. */
 export const MARKETING_DARK_GLASS_CARD = MARKETING_SESSION_SURFACE;
@@ -38,9 +38,9 @@ export const MARKETING_DARK_GLASS_CARD = MARKETING_SESSION_SURFACE;
 export const MARKETING_SESSION_INSET =
   "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)]";
 
-/** Light card island inside marketing session surfaces — keeps dark copy readable. */
+/** Nested content island — same theme tokens as the parent session card. */
 export const MARKETING_LIGHT_SURFACE =
-  "marketing-light-surface rounded-lg border border-zinc-200/90 bg-white text-zinc-900 [color-scheme:light]";
+  "marketing-light-surface rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy";
 
 /** Session floor labels — matches chair session control / speaker queue panel. */
 export const SESSION_FLOOR_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";

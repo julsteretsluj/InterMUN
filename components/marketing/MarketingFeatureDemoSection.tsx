@@ -16,7 +16,7 @@ export function MarketingFeatureDemoSection({
   preview,
   reversed,
   dark,
-  variant = "dark",
+  variant = "light",
 }: {
   id: string;
   index: string;

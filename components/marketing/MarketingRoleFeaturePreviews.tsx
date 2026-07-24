@@ -69,15 +69,15 @@ export function ChairRollCallQuorumDemo() {
   const quorumMet = present >= Math.ceil(total / 2);
 
   return (
-    <div className={cn("space-y-4 text-white", MARKETING_CHAMBER_PREVIEW)}>
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display text-lg font-semibold text-white">✅ {tc("rollCallTracker")}</h3>
+    <div className="space-y-4">
+      <div className={cn("flex items-center justify-between gap-2", MARKETING_CHAMBER_PREVIEW)}>
+        <h3 className="font-display text-lg font-semibold text-brand-navy">✅ {tc("rollCallTracker")}</h3>
         <span
           className={cn(
             "rounded-full px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider",
             quorumMet
-              ? "border border-emerald-400/50 bg-emerald-500/15 text-emerald-200"
-              : "border border-amber-400/40 bg-amber-500/10 text-amber-200"
+              ? "border border-emerald-500/40 bg-emerald-400/15 text-emerald-900"
+              : "border border-amber-500/40 bg-amber-400/15 text-amber-950"
           )}
         >
           {quorumMet ? t("quorumMet") : t("quorumNotMet")} · {t("quorumCount", { present, total })}

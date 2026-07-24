@@ -405,7 +405,7 @@ export async function MarketingHome() {
           exploreHref="/features/delegates"
           exploreLabel={t("exploreDelegates")}
           preview={
-            <MarketingChamberFrame label={t("delegates.previewLabel")} variant="light">
+            <MarketingChamberFrame label={t("delegates.previewLabel")}>
               <MarketingDelegatePrepPreview />
             </MarketingChamberFrame>
           }

@@ -104,8 +104,8 @@ export function MarketingSessionVoteRecordingPanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-display text-lg font-semibold text-white">{t("currentOpenMotion")}</h3>
-          <p className="mt-1 text-sm text-white/70">{t("chairRecordVotesHint")}</p>
+          <h3 className="font-display text-lg font-semibold text-brand-navy">{t("currentOpenMotion")}</h3>
+          <p className="mt-1 text-sm text-brand-muted">{t("chairRecordVotesHint")}</p>
         </div>
       ) : null}
 
@@ -128,7 +128,7 @@ export function MarketingSessionVoteRecordingPanel({
           </div>
         </header>
 
-        <div className={cn("mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm", MARKETING_LIGHT_SURFACE, "bg-white/95")}>
+        <div className={cn("mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm", MARKETING_LIGHT_SURFACE)}>
           <span>
             <span className="mun-label mr-1">{t("yes")}</span>
             <span className="font-semibold tabular-nums">{yes}</span>
@@ -159,7 +159,7 @@ export function MarketingSessionVoteRecordingPanel({
             <p className="text-xs leading-relaxed text-brand-muted">{t("chairRecordVotesHint")}</p>
           </div>
           <div className="max-h-[min(18rem,50vh)] overflow-y-auto pr-1">
-            <div className={cn("mun-group-list", MARKETING_LIGHT_SURFACE, "overflow-hidden border-zinc-200/90 p-0")}>
+            <div className={cn("mun-group-list", MARKETING_LIGHT_SURFACE, "overflow-hidden p-0")}>
               {delegates.map((row) => (
                 <div key={row.id} className="transition-apple px-4 py-3">
                   <div className="flex flex-wrap items-start justify-between gap-3">

@@ -63,8 +63,8 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
   return (
     <section className={cn("space-y-3", className)}>
       <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className="font-display text-lg font-semibold text-white">{t("motionControl")}</h3>
-        <p className="mt-1 text-sm text-white/70">{t("motionControlHelp")}</p>
+        <h3 className="font-display text-lg font-semibold text-brand-navy">{t("motionControl")}</h3>
+        <p className="mt-1 text-sm text-brand-muted">{t("motionControlHelp")}</p>
       </div>
 
       <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>

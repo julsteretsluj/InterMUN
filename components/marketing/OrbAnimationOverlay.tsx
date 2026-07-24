@@ -256,7 +256,7 @@ export function OrbAnimationOverlay({
       className={cn(
         "fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden transition-opacity ease-out",
         isLight ? "bg-brand-cream [color-scheme:light]" : "bg-black",
-        fading ? "pointer-events-none opacity-0 duration-500" : "opacity-100 duration-0",
+        fading ? "pointer-events-none opacity-0 duration-[320ms]" : "opacity-100 duration-0",
         phase === "loading" && "opacity-100"
       )}
       aria-hidden={fading}
