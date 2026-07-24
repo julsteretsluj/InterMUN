@@ -5,6 +5,7 @@ import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger"
 import { openingOrbUrl } from "@/lib/opening-orb";
 import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
+import { MarketingSiteFooter } from "@/components/marketing/MarketingSiteFooter";
 
 export default async function MarketingLayout({
   children,
@@ -33,6 +34,7 @@ export default async function MarketingLayout({
             </Link>
           </div>
           <nav className="marketing-nav hidden items-center justify-self-center lg:flex lg:gap-1">
+            <Link href="/about">About</Link>
             <Link href="/#how-it-works">{t("nav.howItWorks")}</Link>
             <Link href="/features/chairs">{t("nav.chairs")}</Link>
             <Link href="/features/delegates">{t("nav.delegates")}</Link>
@@ -56,6 +58,7 @@ export default async function MarketingLayout({
           {children}
         </AppleLayoutWrapper>
       </main>
+      <MarketingSiteFooter />
     </div>
   );
 }

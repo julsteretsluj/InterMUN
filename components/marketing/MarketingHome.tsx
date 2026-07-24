@@ -530,25 +530,6 @@ export async function MarketingHome() {
           </div>
         </div>
       </section>
-
-      <footer className="mun-marketing-surface border-t border-[var(--hairline)] py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
-          <p className="font-sans text-xs tracking-wide">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 font-sans text-xs uppercase tracking-wider">
-            {partnershipEmail ? (
-              <a href={`mailto:${partnershipEmail}`} className="hover:text-brand-navy">
-                {t("footer.contact")}
-              </a>
-            ) : null}
-            <Link href="/login" className="hover:text-brand-navy">
-              {t("nav.signIn")}
-            </Link>
-            <Link href="/signup" className="hover:text-brand-navy">
-              {t("nav.getStarted")}
-            </Link>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
