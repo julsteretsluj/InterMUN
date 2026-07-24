@@ -227,7 +227,7 @@ export function ChairScheduledSessionsPanel({
   }
 
   return (
-    <div className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
+    <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 shadow-sm backdrop-blur-sm md:p-8">
       <div className="flex items-center justify-between gap-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
         <HelpButton title={t("title")}>{t("help")}</HelpButton>
@@ -269,7 +269,7 @@ export function ChairScheduledSessionsPanel({
               <button
                 type="button"
                 onClick={() => dismissReminder(reminder.id)}
-                className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-brand-navy hover:bg-white/15"
+                className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-semibold text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15"
               >
                 {t("dismissReminder")}
               </button>
@@ -279,7 +279,7 @@ export function ChairScheduledSessionsPanel({
       ) : null}
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex items-center gap-1 rounded-xl border border-white/15 bg-black/20 p-1">
+        <div className="inline-flex items-center gap-1 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] p-1">
           <span className="px-2 text-xs font-semibold uppercase tracking-wide text-brand-muted">
             {t("dayLabel")}
           </span>
@@ -292,7 +292,7 @@ export function ChairScheduledSessionsPanel({
               className={
                 selectedDay === day
                   ? "rounded-lg bg-brand-accent px-3 py-1.5 text-sm font-semibold text-white"
-                  : "rounded-lg px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/10"
+                  : "rounded-lg px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/10"
               }
             >
               {day === 1 ? t("day1") : t("day2")}
@@ -303,7 +303,7 @@ export function ChairScheduledSessionsPanel({
           type="button"
           onClick={toggleSound}
           aria-pressed={soundEnabled}
-          className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-black/20 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/10"
+          className="inline-flex items-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/10"
         >
           <span aria-hidden>{soundEnabled ? "🔔" : "🔕"}</span>
           {soundEnabled ? t("soundOn") : t("soundOff")}
@@ -312,7 +312,7 @@ export function ChairScheduledSessionsPanel({
 
       <ul className="mt-4 space-y-2">
         {dayPresets.length === 0 ? (
-          <li className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-brand-muted">
+          <li className="rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-3 text-sm text-brand-muted">
             {t("noSessions")}
           </li>
         ) : (
@@ -344,7 +344,7 @@ export function ChairScheduledSessionsPanel({
             return (
               <li
                 key={key}
-                className={`flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-white/10 bg-black/20 px-4 py-3 ${
+                className={`flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-3 ${
                   isPast ? "opacity-60" : ""
                 }`}
               >

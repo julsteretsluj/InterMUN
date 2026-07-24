@@ -119,10 +119,10 @@ type SpeakerAllocation = Alloc & {
 };
 
 const SESSION_CARD =
-  "rounded-xl border border-white/15 bg-black/25 p-3 text-brand-navy shadow-sm backdrop-blur-sm";
+  "rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-3 text-brand-navy shadow-sm backdrop-blur-sm";
 const SESSION_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";
 const SESSION_INPUT_CORE =
-  "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
+  "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
 const SESSION_FIELD = `mt-1 ${SESSION_INPUT_CORE}`;
 
 export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueuePanelProps>(
@@ -368,9 +368,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       ? SESSION_FIELD
       : "mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100";
     const addButtonClass = isSession
-      ? "px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
+      ? "px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
       : "rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700";
-    const rowBorder = isSession ? "border-b border-white/12" : "border-b border-slate-200/80 dark:border-zinc-700/80";
+    const rowBorder = isSession ? "border-b border-[var(--hairline)]" : "border-b border-slate-200/80 dark:border-zinc-700/80";
 
     return (
       <section ref={ref} className="space-y-3">
@@ -443,7 +443,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   <p className={`${labelClass} text-brand-muted dark:text-amber-200/70`}>
                     {t("prompt.quickAdd")}
                   </p>
-                  <ul className="max-h-40 overflow-y-auto rounded border border-amber-200/80 bg-black/40 p-2 space-y-1.5 text-sm dark:border-amber-800/50 dark:bg-black/30">
+                  <ul className="max-h-40 overflow-y-auto rounded border border-amber-200/80 bg-amber-50/80 p-2 space-y-1.5 text-sm dark:border-amber-800/50 dark:bg-black/30">
                     {speakerAllocations.map((a) => {
                       if (activeQueueAllocationIds.has(a.id)) return null;
                       const checked = caucusBulkPick.includes(a.id);
@@ -473,7 +473,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                         onDismissSpeakerListPrompt?.();
                         setCaucusBulkPick([]);
                       }}
-                      className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
+                      className="px-3 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                     >
                       {t("dismissReminder")}
                     </button>
@@ -491,7 +491,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       onDismissSpeakerListPrompt?.();
                       setCaucusBulkPick([]);
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
+                    className="px-3 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                   >
                     {t("dismissReminder")}
                   </button>
@@ -505,7 +505,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                     onDismissSpeakerListPrompt?.();
                     setCaucusBulkPick([]);
                   }}
-                  className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
+                  className="px-3 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                 >
                   {t("dismissReminder")}
                 </button>
@@ -558,7 +558,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       disabled={pending || pos <= 0}
                       className={
                         isSession
-                          ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
+                          ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-30"
                           : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
                       title={t("moveUp")}
@@ -572,7 +572,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       disabled={pending || pos >= sortedQueue.length - 1}
                       className={
                         isSession
-                          ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
+                          ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-30"
                           : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
                       title={t("moveDown")}

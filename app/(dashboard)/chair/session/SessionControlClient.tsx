@@ -2767,16 +2767,17 @@ export function SessionControlClient({
   }
 
   const surfaceCard =
-    "rounded-xl border border-white/15 bg-black/25 p-4 text-brand-navy shadow-sm backdrop-blur-sm";
+    "rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-sm backdrop-blur-sm";
   const surfaceLabel = "text-xs font-medium uppercase tracking-wide text-brand-muted";
   const surfaceInputCore =
-    "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
+    "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
   const surfaceField = `mt-1 ${surfaceInputCore}`;
   const surfaceFieldSm =
-    "rounded-lg border border-white/15 bg-black/30 px-2 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
-  const surfaceSubpanel = "space-y-4 rounded-lg border border-white/15 bg-black/20 p-4 text-brand-navy";
+    "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
+  const surfaceSubpanel =
+    "space-y-4 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-4 text-brand-navy";
   const surfaceInset =
-    "max-h-36 space-y-1 overflow-y-auto rounded border border-white/15 bg-black/30 p-2 text-xs text-brand-navy";
+    "max-h-36 space-y-1 overflow-y-auto rounded border border-[var(--hairline)] bg-[var(--material-thin)] p-2 text-xs text-brand-navy";
 
   const show = (id: Exclude<SessionFloorSection, "all">) =>
     activeSection === "all" || activeSection === id;
@@ -2798,12 +2799,12 @@ export function SessionControlClient({
     <div className="space-y-12">
       <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
       {msg && (
-        <div className="flex items-start justify-between gap-3 rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
+        <div className="flex items-start justify-between gap-3 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2 text-sm text-brand-navy shadow-sm">
           <p className="min-w-0 flex-1">{msg}</p>
           <button
             type="button"
             onClick={() => setMsg(null)}
-            className="shrink-0 rounded-md border border-white/20 bg-black/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-black/30"
+            className="shrink-0 rounded-md border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1 text-xs font-medium text-brand-navy hover:bg-brand-navy/10 dark:hover:bg-black/30"
             aria-label="Dismiss message"
           >
             ×
@@ -2875,7 +2876,7 @@ export function SessionControlClient({
                   "rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
                   active
                     ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
-                    : "border-white/20 bg-black/25 text-brand-muted hover:text-brand-navy hover:bg-black/20",
+                    : "border-[var(--hairline)] bg-[var(--material-thin)] text-brand-muted hover:text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-black/20",
                 ].join(" ")}
                 aria-pressed={active}
               >
@@ -2886,7 +2887,7 @@ export function SessionControlClient({
         </div>
         {motionWorkflowTab === "setup" ? (
           <div className="space-y-3">
-            <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
+            <div className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2.5 space-y-2">
               <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
                 {tSessionControl("pointsWorkflow")}
               </p>
@@ -2896,7 +2897,7 @@ export function SessionControlClient({
                   <select
                     value={pointDraftCode}
                     onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
-                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                    className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1.5 text-xs text-brand-navy"
                   >
                     <option value="poi">{tSessionControl("pointOfInformation")}</option>
                     <option value="poc">{tSessionControl("pointOfClarification")}</option>
@@ -2912,7 +2913,7 @@ export function SessionControlClient({
                   <select
                     value={pointDraftAllocationId}
                     onChange={(e) => setPointDraftAllocationId(e.target.value)}
-                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                    className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1.5 text-xs text-brand-navy"
                   >
                     <option value="">{tSessionControl("notSpecified")}</option>
                     {votingCallOrder.map((a) => (
@@ -2928,7 +2929,7 @@ export function SessionControlClient({
                 <input
                   value={pointDraftDetail}
                   onChange={(e) => setPointDraftDetail(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                  className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1.5 text-xs text-brand-navy"
                 />
               </label>
               <button
@@ -2945,7 +2946,7 @@ export function SessionControlClient({
         <div className={`${surfaceCard} space-y-4`}>
           {motionWorkflowTab === "floor" ? (
             <>
-          <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
+          <div className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 space-y-2">
             <p className="text-sm font-medium text-brand-navy">
               {tSessionControl("motionFloorLabel")}{" "}
               <span className={motionFloorOpen ? "text-amber-300" : "text-brand-muted"}>
@@ -2975,7 +2976,7 @@ export function SessionControlClient({
                 type="button"
                 disabled={pending || !motionFloorOpen}
                 onClick={closeMotionFloorForStatements}
-                className="px-3 py-2 rounded-lg border border-white/25 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 disabled:opacity-50"
+                className="px-3 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-black/20 disabled:opacity-50"
               >
                 {tSessionControl("closeFloorStatementsEnded")}
               </button>
@@ -2998,7 +2999,7 @@ export function SessionControlClient({
                   pending || motionFloorOpen || !!openMotion || pendingStatedMotions.length === 0
                 }
                 onClick={beginVotingInDisruptivenessOrder}
-                className="px-3 py-2 rounded-lg bg-zinc-950 text-white text-sm font-medium hover:bg-zinc-800 disabled:opacity-50"
+                className="px-3 py-2 rounded-lg bg-brand-navy text-white text-sm font-medium hover:bg-brand-navy/90 dark:bg-zinc-950 dark:hover:bg-zinc-800 disabled:opacity-50"
               >
                 {tSessionControl("beginVotingMostDisruptive")}
               </button>
@@ -3006,7 +3007,7 @@ export function SessionControlClient({
           </div>
 
           {pendingStatedMotions.length > 0 ? (
-            <div className="rounded-lg border border-white/12 bg-black/25 px-3 py-2 space-y-2">
+            <div className="rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2 space-y-2">
               <p className={surfaceLabel}>{tSessionControl("pendingVoteOrderMostDisruptive")}</p>
               <ol className="list-decimal pl-5 space-y-2 text-sm text-brand-navy">
                 {pendingStatedMotions.map((m, i) => (
@@ -3163,7 +3164,7 @@ export function SessionControlClient({
                 <option value="resolution">{tSessionControl("resolution")}</option>
               </select>
             </label>
-            <div className="text-sm text-brand-navy rounded-lg border border-white/15 bg-black/20 px-3 py-2">
+            <div className="text-sm text-brand-navy rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2">
               <span className={surfaceLabel}>{tSessionControl("requiredMajorityRop")}</span>
               <p className="mt-1 font-semibold text-brand-navy">{formatVoteMajorityLabel(ropMajorityForDraft)}</p>
               <p className="text-xs text-brand-muted mt-1 leading-snug">
@@ -3437,7 +3438,7 @@ export function SessionControlClient({
                   type="button"
                   disabled={pending}
                   onClick={saveMotionEdits}
-                  className="px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
                 >
                   {tSessionControl("saveEdits")}
                 </button>
@@ -3535,7 +3536,7 @@ export function SessionControlClient({
                     return (
                       <div
                         key={call.id}
-                        className="rounded-lg border border-white/12 bg-black/25 px-3 py-2.5"
+                        className="rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2.5"
                       >
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <div>
@@ -3623,7 +3624,7 @@ export function SessionControlClient({
                               type="button"
                               disabled={pending || discipline?.voting_rights_lost}
                               onClick={() => clearDelegateVoteForAllocation(call)}
-                              className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
+                              className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15 disabled:opacity-50"
                             >
                               Clear
                             </button>
@@ -3684,7 +3685,7 @@ export function SessionControlClient({
                   type="button"
                   disabled={pending || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("revoke_warning")}
-                  className="rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                  className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
                   {tDiscipline("revokeWarning")}
                 </button>
@@ -3692,7 +3693,7 @@ export function SessionControlClient({
                   type="button"
                   disabled={pending || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("revoke_strike")}
-                  className="rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                  className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
                   {tDiscipline("revokeStrike")}
                 </button>
@@ -3818,7 +3819,7 @@ export function SessionControlClient({
                   "rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
                   active
                     ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
-                    : "border-white/20 bg-black/25 text-brand-muted hover:text-brand-navy hover:bg-black/20",
+                    : "border-[var(--hairline)] bg-[var(--material-thin)] text-brand-muted hover:text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-black/20",
                 ].join(" ")}
                 aria-pressed={active}
               >
@@ -3844,7 +3845,7 @@ export function SessionControlClient({
                 return (
                   <div
                     key={slot}
-                    className="rounded-md border border-brand-navy/15 bg-white/70 px-3 py-2"
+                    className="rounded-md border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2"
                   >
                     <p className="text-xs font-medium text-brand-navy">{euTimerSlotLabel(slot)}</p>
                     <div className="mt-1 grid gap-2 sm:grid-cols-2">
@@ -4084,14 +4085,14 @@ export function SessionControlClient({
           ) : null}
 
           {timerWorkflowTab === "notes" ? (
-          <div className="rounded-lg border border-white/15 bg-black/20 p-3 space-y-3 text-brand-navy">
+          <div className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-3 space-y-3 text-brand-navy">
             <div>
               <p className={surfaceLabel}>{tTimer("speechNotesCurrentSpeaker")}</p>
               <p className="text-xs text-brand-muted mt-1 leading-snug">
                 {tTimer("speechNotesHelp")}
               </p>
             </div>
-            <div className="text-sm rounded-md border border-white/10 bg-black/25 px-3 py-2 space-y-1">
+            <div className="text-sm rounded-md border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2 space-y-1">
               <p>
                 <span className="text-brand-muted">{tTimer("timerFloorLabel")} </span>
                 <span className="font-medium">{timer.current.trim() || "—"}</span>
@@ -4131,11 +4132,11 @@ export function SessionControlClient({
               {tTimer("saveSpeechNote")}
             </button>
             {speechNotesRecent.length > 0 ? (
-              <div className="border-t border-white/10 pt-3 space-y-2">
+              <div className="border-t border-[var(--hairline)] pt-3 space-y-2">
                 <p className={surfaceLabel}>{tTimer("recentNotes")}</p>
                 <ul className="max-h-48 overflow-y-auto space-y-2 text-sm">
                   {speechNotesRecent.map((n) => (
-                    <li key={n.id} className="rounded-md border border-white/10 bg-black/20 p-2">
+                    <li key={n.id} className="rounded-md border border-[var(--hairline)] bg-[var(--material-thin)] p-2">
                       <div className="flex flex-wrap items-start justify-between gap-2">
                         <span className="font-medium text-brand-navy">{n.speaker_label}</span>
                         <button
@@ -4231,7 +4232,7 @@ export function SessionControlClient({
           ) : null}
           {timerWorkflowTab === "log" ? (
             pauseEvents.length > 0 ? (
-              <div className="border-t border-white/12 pt-3">
+              <div className="border-t border-[var(--hairline)] pt-3">
                 <p className={`${surfaceLabel} mb-2`}>{tTimer("recentPauseLog")}</p>
                 <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
                   {pauseEvents.map((ev) => (
@@ -4300,7 +4301,7 @@ export function SessionControlClient({
           >
             {tSessionControl("post")}
           </button>
-          <ul className="text-sm space-y-3 border-t border-white/12 pt-3 text-brand-navy/85">
+          <ul className="text-sm space-y-3 border-t border-[var(--hairline)] pt-3 text-brand-navy/85">
             {announcements.map((a) => {
               const fmt = a.body_format === "markdown" ? "markdown" : "plain";
               const scheduled =
@@ -4309,7 +4310,7 @@ export function SessionControlClient({
                   : false;
               const editing = daisEditingId === a.id;
               return (
-                <li key={a.id} className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <li key={a.id} className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-3">
                   <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
                     <time className="text-brand-muted" dateTime={a.created_at}>
                       {new Date(a.created_at).toLocaleString()}
@@ -4370,7 +4371,7 @@ export function SessionControlClient({
                           type="button"
                           disabled={pending}
                           onClick={cancelEditDais}
-                          className="rounded-lg border border-white/20 px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/10 disabled:opacity-50"
+                          className="rounded-lg border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-50"
                         >
                           {tSessionControl("cancel")}
                         </button>
@@ -4456,7 +4457,7 @@ export function SessionControlClient({
             type="button"
             disabled={pending}
             onClick={initRollCall}
-            className="px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
+            className="px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
           >
             {tSessionControl("initializeRowsAllAllocations")}
           </button>
@@ -4481,7 +4482,7 @@ export function SessionControlClient({
                   return (
                     <li
                       key={r.allocation_id}
-                      className="flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
+                      className="flex flex-col gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
                     >
                       <span className="font-medium shrink-0">{country}</span>
                       <div

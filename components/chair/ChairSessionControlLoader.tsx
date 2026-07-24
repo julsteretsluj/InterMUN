@@ -16,7 +16,7 @@ const SessionControlClientLazy = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="rounded-xl border border-white/15 bg-black/25 p-6 text-sm text-brand-muted"
+        className="rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 text-sm text-brand-muted"
         role="status"
         aria-live="polite"
       >

@@ -225,9 +225,9 @@ export function CommitteeAgendaVotesTab({
     <div className="space-y-4">
       <p className="text-xs text-brand-muted max-w-2xl">{t("agendaTabHelp")}</p>
 
-      <div className="overflow-hidden rounded-xl border border-white/15 bg-black/10">
+      <div className="overflow-hidden rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)]">
         {committeeTrim ? (
-          <div className="border-b border-white/10 bg-black/20 px-3 py-2.5">
+          <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2.5">
             <p className="font-display text-base font-semibold leading-snug text-brand-navy">
               {translateCommitteeLabel(tCommitteeLabels, committeeTrim)}
             </p>
@@ -243,7 +243,7 @@ export function CommitteeAgendaVotesTab({
                 key={topic.id}
                 className={[
                   "min-w-0 px-3 py-2.5 transition-colors",
-                  isSelected ? "bg-brand-accent/12 ring-inset ring-1 ring-brand-accent/35" : "hover:bg-black/15",
+                  isSelected ? "bg-brand-accent/12 ring-inset ring-1 ring-brand-accent/35" : "hover:bg-brand-navy/5 dark:hover:bg-black/15",
                 ].join(" ")}
               >
                 <button
@@ -272,7 +272,7 @@ export function CommitteeAgendaVotesTab({
                   type="button"
                   disabled={pending || isLive}
                   onClick={() => onSetLiveTopic(topic.id)}
-                  className="mt-2 w-full rounded-lg border border-white/20 bg-black/30 px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-black/40 disabled:opacity-50"
+                  className="mt-2 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/10 dark:hover:bg-black/40 disabled:opacity-50"
                 >
                   {t("agendaSetLive")}
                 </button>
@@ -282,7 +282,7 @@ export function CommitteeAgendaVotesTab({
         </ul>
       </div>
 
-      <div className="rounded-xl border border-white/15 bg-black/20 p-3 space-y-3">
+      <div className="rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] p-3 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className={`text-xs font-medium uppercase tracking-wide text-brand-muted`}>
             {t("agendaViewingVotes")} —{" "}
@@ -298,7 +298,7 @@ export function CommitteeAgendaVotesTab({
             type="button"
             disabled={loading}
             onClick={() => void load(selectedId)}
-            className="rounded-lg border border-white/20 bg-black/25 px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-black/35 disabled:opacity-50"
+            className="rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-brand-navy/10 dark:hover:bg-black/35 disabled:opacity-50"
           >
             {t("agendaRefresh")}
           </button>
@@ -339,7 +339,7 @@ export function CommitteeAgendaVotesTab({
                 {motions.map((m) => (
                   <li
                     key={m.id}
-                    className="rounded-lg border border-white/12 bg-black/25 px-3 py-2 text-sm text-brand-navy"
+                    className="rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2 text-sm text-brand-navy"
                   >
                     <p className="font-medium line-clamp-2">{m.title}</p>
                     <p className="text-xs text-brand-muted mt-1">
@@ -372,7 +372,7 @@ export function CommitteeAgendaVotesTab({
           onClick={() => setVotingPanelTopicId(null)}
         >
           <div
-            className="flex max-h-[min(92vh,48rem)] w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-white/15 bg-[var(--color-bg-page)] shadow-2xl"
+            className="flex max-h-[min(92vh,48rem)] w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-[var(--hairline)] bg-[var(--color-bg-page)] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[var(--hairline)] px-4 py-3">
@@ -389,7 +389,7 @@ export function CommitteeAgendaVotesTab({
               <button
                 type="button"
                 onClick={() => setVotingPanelTopicId(null)}
-                className="shrink-0 rounded-lg border border-white/20 bg-black/20 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-black/30"
+                className="shrink-0 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/10 dark:hover:bg-black/30"
               >
                 {t("agendaCloseVotingPanel")}
               </button>

@@ -307,7 +307,7 @@ export function ChairMotionsPointsLog({
               className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
                 active
                   ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
-                  : "border-white/20 bg-black/25 text-brand-muted hover:bg-black/20 hover:text-brand-navy"
+                  : "border-[var(--hairline)] bg-[var(--material-thin)] text-brand-muted hover:bg-brand-navy/5 dark:hover:bg-black/20 hover:text-brand-navy"
               }`}
               aria-pressed={active}
             >
