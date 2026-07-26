@@ -82,15 +82,14 @@ function SmtSidebarLink({
   return (
     <Link
       href={item.href}
-      aria-label={`${priority}. ${label}`}
+      aria-label={label}
       className={cn(
-        "nav-priority-link nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
+        "nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
           ? "smt-nav-row-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
-      <NavPriorityBadge priority={priority} />
       <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
         {item.emoji}
       </span>

@@ -163,19 +163,18 @@ function ChairNavRow({
   return (
     <Link
       href={item.href}
-      title={labelsHidden ? `${priority}. ${label}` : undefined}
-      aria-label={`${priority}. ${label}`}
+      title={labelsHidden ? label : undefined}
+      aria-label={label}
       className={cn(
-          "nav-priority-link nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2 text-sm transition-apple",
+          "nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2 text-sm transition-apple",
         labelsHidden
           ? "h-11 justify-center gap-0 px-2"
-          : "justify-center gap-1.5 px-2 group-hover:justify-start group-hover:gap-3 group-hover:pl-8 group-hover:pr-2.5",
+          : "justify-center gap-1.5 px-2 group-hover:justify-start group-hover:gap-3 group-hover:pl-2.5 group-hover:pr-2.5",
         isActive
           ? "dashboard-nav-active"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
-      {!labelsHidden ? <NavPriorityBadge priority={priority} /> : null}
       <span
         className={cn(
           "inline-flex size-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent transition-apple",
