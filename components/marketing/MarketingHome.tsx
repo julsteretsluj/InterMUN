@@ -379,7 +379,6 @@ export async function MarketingHome() {
       <section id="features" className="scroll-mt-24">
         <RoleSection
           id="chairs"
-          dark
           eyebrow={t("chairs.eyebrow")}
           title={t("chairs.title")}
           description={t("chairs.description")}
@@ -395,8 +394,6 @@ export async function MarketingHome() {
 
         <RoleSection
           id="delegates"
-          dark
-          bandClassName="mun-marketing-role-band-alt"
           reversed
           eyebrow={t("delegates.eyebrow")}
           title={t("delegates.title")}
@@ -413,7 +410,6 @@ export async function MarketingHome() {
 
         <RoleSection
           id="smt"
-          dark
           eyebrow={t("smt.eyebrow")}
           title={t("smt.title")}
           description={t("smt.description")}

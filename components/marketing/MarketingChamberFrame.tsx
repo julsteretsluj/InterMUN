@@ -4,44 +4,36 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Session-floor monitor chrome for marketing previews. */
+/** Session-floor monitor chrome for marketing previews — always light Apple glass. */
 export function MarketingChamberFrame({
   children,
   className,
   label = "LIVE FLOOR",
-  variant = "light",
+  variant: _variant = "light",
 }: {
   children: ReactNode;
   className?: string;
   label?: string;
-  /** Prefer light — follows page theme tokens. Dark is a legacy screenshot chrome. */
+  /** @deprecated Always renders light; kept for call-site compatibility. */
   variant?: "dark" | "light";
 }) {
-  const isDark = variant === "dark";
-
   return (
-    <div
-      className={cn(
-        "mun-chamber-frame overflow-hidden",
-        isDark ? "mun-chamber-frame-dark" : "mun-chamber-frame-light",
-        className
-      )}
-    >
-      <div className={cn("mun-chamber-frame-bar", isDark ? "text-white/45" : "text-brand-muted")}>
+    <div className={cn("mun-chamber-frame mun-chamber-frame-light overflow-hidden", className)}>
+      <div className="mun-chamber-frame-bar text-brand-muted">
         <div className="flex items-center gap-1.5" aria-hidden>
-          <span className={cn("mun-chamber-dot", isDark ? "bg-[#FF5F57]" : "bg-rose-400/80")} />
-          <span className={cn("mun-chamber-dot", isDark ? "bg-[#FEBC2E]" : "bg-amber-400/80")} />
-          <span className={cn("mun-chamber-dot", isDark ? "bg-[#28C840]" : "bg-emerald-500/80")} />
+          <span className="mun-chamber-dot bg-rose-400/80" />
+          <span className="mun-chamber-dot bg-amber-400/80" />
+          <span className="mun-chamber-dot bg-emerald-500/80" />
         </div>
-        <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.18em]">{label}</span>
+        <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-brand-navy">
+          {label}
+        </span>
         <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-wider text-[var(--accent)]">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)]" aria-hidden />
           Live
         </span>
       </div>
-      <div className={cn("mun-chamber-frame-body", isDark ? "bg-[#12121A]" : "bg-[var(--material-thin)]")}>
-        {children}
-      </div>
+      <div className="mun-chamber-frame-body bg-[var(--apple-bg-secondary,#f5f5f7)]">{children}</div>
     </div>
   );
 }

@@ -1765,10 +1765,7 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-marketing-hero-demo .mun-chamber-frame {
   border-radius: 1.25rem;
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, #ffffff 7%, transparent) inset,
-    0 20px 44px -24px rgba(0, 0, 0, 0.62),
-    0 8px 20px -12px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1901,23 +1898,17 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-chamber-frame {
   border-radius: 1.75rem;
-  border: 1px solid color-mix(in srgb, var(--marketing-ink) 16%, transparent);
-  /* The dark app-window previews stay dark in both themes (they are product
-     screenshots); an explicit dark base keeps their chrome readable when the
-     surrounding band is light parchment. */
-  background: #101016;
-  backdrop-filter: blur(18px) saturate(1.15);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.07) inset,
-    0 32px 64px -28px rgba(0, 0, 0, 0.55),
-    0 12px 28px -16px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  backdrop-filter: blur(20px) saturate(1.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 .marketing-shell .mun-chamber-frame-light {
-  border-color: var(--marketing-glass-border);
-  background: var(--marketing-glass);
+  border-color: rgba(0, 0, 0, 0.08);
+  background: #ffffff;
   backdrop-filter: blur(20px) saturate(1.1);
-  box-shadow: var(--marketing-float-shadow), 0 1px 0 color-mix(in srgb, #ffffff 85%, transparent) inset;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 .marketing-shell .mun-chamber-frame-bar {
@@ -1925,14 +1916,14 @@ html.colorblind-mode .schedule-swatch-session {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 0.75rem;
-  border-bottom: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
-  background: color-mix(in srgb, #000000 35%, transparent);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fbfbfd;
   padding: 0.55rem 0.85rem;
 }
 
 .marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar {
-  border-bottom-color: var(--hairline);
-  background: var(--material-thick);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+  background: #fbfbfd;
 }
 
 .marketing-shell .mun-chamber-frame-bar > :last-child {
@@ -1947,29 +1938,65 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-chamber-frame-body {
   padding: 1.25rem;
+  background: #f5f5f7;
+  color: #1d1d1f;
 }
 
-/* Dark chamber previews stay dark in BOTH themes (product screenshots) —
-   force readable copy and a white-boosted accent so accent-colored elements
-   (Live indicator, motion buttons) stay legible when the page theme's accent
-   is a dark navy. */
+/* Keep marketing product previews light even when the site is in dark mode */
+html.dark .marketing-shell .mun-chamber-frame,
+html.dark .marketing-shell .mun-chamber-frame-light,
+html.dark .marketing-shell .mun-chamber-frame-dark {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
+  color: #1d1d1f !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+html.dark .marketing-shell .mun-chamber-frame-bar,
+html.dark .marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar,
+html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-bar {
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  background: #fbfbfd !important;
+  color: #6e6e73 !important;
+}
+
+html.dark .marketing-shell .mun-chamber-frame-body,
+html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
+  background: #f5f5f7 !important;
+  color: #1d1d1f !important;
+}
+
+/* Legacy dark chamber class — force light Apple chrome everywhere */
 .marketing-shell .mun-chamber-frame-dark {
-  --accent: color-mix(in srgb, var(--accent-bright) 78%, #ffffff);
-  color: #f4f4f5;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
+  color: #1d1d1f;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Chamber chrome copy only — never the light session cards nested below it. */
+.marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-bar {
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  background: #fbfbfd !important;
+  color: #6e6e73 !important;
+}
+
+.marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
+  background: #f5f5f7 !important;
+  color: #1d1d1f !important;
+}
+
+/* Chamber chrome copy — dark ink on light glass */
 .marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview :where(h3, h4, span, li):not(
   .marketing-session-surface,
   .marketing-session-surface *
 ) {
-  color: #ffffff;
+  color: #1d1d1f;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview p:not(
   .marketing-session-surface *
 ) {
-  color: color-mix(in srgb, #ffffff 68%, transparent);
+  color: #6e6e73;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview .marketing-chamber-init-btn {

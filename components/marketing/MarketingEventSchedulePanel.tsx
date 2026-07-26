@@ -328,7 +328,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       <button
         type="button"
         onClick={() => setSaved(true)}
-        className="rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
+        className="rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
       >
         {saved ? t("saved") : t("saveSchedule")}
       </button>

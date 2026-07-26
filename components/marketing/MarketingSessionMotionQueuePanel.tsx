@@ -100,7 +100,7 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
             </button>
             <button
               type="button"
-              className="rounded-lg bg-zinc-950 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800"
+              className="rounded-[var(--radius-md)] bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white hover:bg-[color:color-mix(in_srgb,var(--accent)_88%,#000000)]"
             >
               {t("beginVotingMostDisruptive")}
             </button>
