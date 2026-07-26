@@ -42,7 +42,7 @@ export function MarketingFeatureDemoSection({
     >
       <div
         className={cn(
-          "mx-auto grid max-w-6xl items-start gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12",
+          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-start gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12",
           reversed && "lg:[&>div:first-child]:order-2"
         )}
       >

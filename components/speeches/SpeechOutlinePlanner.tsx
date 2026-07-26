@@ -76,7 +76,7 @@ export function SpeechOutlinePlanner({
           {points.map((p) => (
             <li
               key={p.id}
-              className="flex items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-3 py-2 dark:border-white/10 dark:bg-black/20"
+              className="flex items-center gap-2 rounded-xl border border-[var(--hairline)] bg-white px-3 py-2 dark:border-white/10 dark:bg-black/20"
             >
               <button
                 type="button"
@@ -95,7 +95,7 @@ export function SpeechOutlinePlanner({
                     "flex h-4 w-4 items-center justify-center rounded border transition",
                     p.done
                       ? "border-brand-accent bg-brand-accent text-white"
-                      : "border-slate-300 bg-white dark:border-white/20 dark:bg-black/30"
+                      : "border-[var(--hairline-strong)] bg-white dark:border-white/20 dark:bg-black/30"
                   )}
                   aria-hidden="true"
                 >
@@ -132,7 +132,7 @@ export function SpeechOutlinePlanner({
                   <button
                     type="button"
                     onClick={() => setEditingId(null)}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-brand-muted hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent dark:hover:bg-white/10"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-brand-muted hover:bg-[var(--apple-bg-tertiary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent dark:hover:bg-white/10"
                     aria-label={t("cancel")}
                   >
                     <X className="h-4 w-4" />
@@ -156,7 +156,7 @@ export function SpeechOutlinePlanner({
                         type="button"
                         disabled={locked}
                         onClick={() => startEdit(p)}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg text-brand-muted transition hover:bg-slate-100 hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:opacity-50 dark:hover:bg-white/10 dark:hover:text-zinc-100"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg text-brand-muted transition hover:bg-[var(--apple-bg-tertiary)] hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:opacity-50 dark:hover:bg-white/10 dark:hover:text-zinc-100"
                         aria-label={t("editPoint")}
                       >
                         <Pencil className="h-4 w-4" />

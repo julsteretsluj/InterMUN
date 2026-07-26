@@ -20,10 +20,10 @@ export default async function AuthLayout({
   return (
     <MarketingOpening>
       <AppleAppFrame appName={appName}>
-        <AppleProductPage width="narrow" className="relative min-h-screen py-8 md:py-12">
+        <AppleProductPage width="narrow" className="relative min-h-screen py-10 md:py-16">
           <link rel="preload" href={openingOrbUrl(0)} as="image" />
           <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
-          <div className="relative space-y-6">
+          <div className="relative space-y-8">
             <div className="flex items-center justify-between gap-3">
               <Link
                 href="/"
@@ -42,7 +42,7 @@ export default async function AuthLayout({
               }
               showControls
               resizable={false}
-              contentClassName="mun-apple-page-body p-4 md:p-6"
+              contentClassName="mun-apple-page-body p-6 md:p-8"
             >
               {children}
             </AppleWindow>

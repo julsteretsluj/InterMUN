@@ -83,8 +83,8 @@ function CountdownLine({
 
   if (!iso || Number.isNaN(target)) {
     return (
-      <p className="text-sm text-slate-500 dark:text-zinc-400">
-        <span className="font-medium text-slate-700 dark:text-zinc-300">{label}:</span> {tc("notSet")}
+      <p className="text-sm text-brand-muted dark:text-zinc-400">
+        <span className="font-medium text-brand-navy dark:text-zinc-300">{label}:</span> {tc("notSet")}
       </p>
     );
   }
@@ -93,12 +93,12 @@ function CountdownLine({
   const past = remaining <= 0;
 
   return (
-    <p className="text-sm text-slate-700 dark:text-zinc-200">
+    <p className="text-sm text-brand-navy dark:text-zinc-200">
       <span className="font-medium">{label}:</span>{" "}
       <span className={past ? "text-brand-diplomatic dark:text-brand-accent-bright" : "tabular-nums"}>
         {past ? tc("past") : formatRemaining(remaining, tc)}
       </span>
-      <span className="ml-1 text-slate-500 dark:text-zinc-500">
+      <span className="ml-1 text-brand-muted dark:text-zinc-500">
         ({new Date(iso).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })})
       </span>
     </p>

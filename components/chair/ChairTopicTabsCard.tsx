@@ -32,23 +32,23 @@ export function ChairTopicTabsCard({
   const committeeTrim = committeeLabelRaw?.trim() ?? "";
 
   return (
-    <section className="rounded-xl border border-slate-200/90 bg-white px-4 py-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
+    <section className="rounded-xl border border-[var(--hairline)] bg-white px-4 py-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
       {committeeTrim ? (
-        <div className="border-b border-slate-200/80 pb-3 dark:border-zinc-600/80">
-          <p className="text-lg font-semibold leading-snug text-slate-900 dark:text-zinc-50">
+        <div className="border-b border-[var(--hairline)] pb-3 dark:border-zinc-600/80">
+          <p className="text-lg font-semibold leading-snug text-brand-navy dark:text-zinc-50">
             {translateCommitteeLabel(tCommitteeLabels, committeeTrim)}
           </p>
-          <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">{t("chooseTopicHelp")}</p>
+          <p className="mt-1 text-sm text-brand-muted dark:text-zinc-300">{t("chooseTopicHelp")}</p>
         </div>
       ) : (
         <>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">
             {t("selectLiveTopic")}
           </p>
-          <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">{t("chooseTopicHelp")}</p>
+          <p className="mt-1 text-sm text-brand-muted dark:text-zinc-300">{t("chooseTopicHelp")}</p>
         </>
       )}
-      <ul className="mt-3 divide-y divide-slate-200/80 rounded-lg border border-slate-200/90 dark:divide-zinc-600/80 dark:border-zinc-600/80">
+      <ul className="mt-3 divide-y divide-slate-200/80 rounded-lg border border-[var(--hairline)] dark:divide-zinc-600/80 dark:border-zinc-600/80">
         {topics.map((topic) => {
           const active = topic.id === activeTopicId;
           return (
@@ -65,8 +65,8 @@ export function ChairTopicTabsCard({
                 className={[
                   "w-full px-3 py-2.5 text-left text-sm transition-colors disabled:opacity-60",
                   active
-                    ? "bg-brand-accent/12 font-semibold text-slate-900 dark:text-zinc-50"
-                    : "text-slate-700 hover:bg-slate-50 dark:text-zinc-200 dark:hover:bg-zinc-800/80",
+                    ? "bg-brand-accent/12 font-semibold text-brand-navy dark:text-zinc-50"
+                    : "text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:text-zinc-200 dark:hover:bg-zinc-800/80",
                 ].join(" ")}
                 aria-pressed={active}
               >

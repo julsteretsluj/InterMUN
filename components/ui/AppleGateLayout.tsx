@@ -18,8 +18,8 @@ export async function AppleGateLayout({ children, title }: AppleGateLayoutProps)
 
   return (
     <AppleAppFrame appName={appName}>
-      <AppleProductPage width="narrow" className="min-h-screen py-8 md:py-12">
-        <div className="mb-4 flex items-center justify-between gap-3">
+      <AppleProductPage width="narrow" className="min-h-screen py-10 md:py-16">
+        <div className="mb-6 flex items-center justify-between gap-3">
           <Link
             href="/"
             className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm"
@@ -39,7 +39,7 @@ export async function AppleGateLayout({ children, title }: AppleGateLayoutProps)
           }
           showControls
           resizable={false}
-          contentClassName="mun-apple-page-body p-4 md:p-6"
+          contentClassName="mun-apple-page-body p-6 md:p-8"
         >
           {children}
         </AppleWindow>

@@ -230,7 +230,7 @@ export function RunningNotesView({
         <button
           type="button"
           onClick={createNote}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-medium hover:bg-slate-50 dark:border-white/15 dark:hover:bg-white/5"
+          className="w-full rounded-lg border border-[var(--hairline)] px-3 py-2 text-left text-sm font-medium hover:bg-[var(--apple-bg-secondary)] dark:border-white/15 dark:hover:bg-white/5"
         >
           + {t("newNote")}
         </button>
@@ -266,7 +266,7 @@ export function RunningNotesView({
               className={`block w-full truncate rounded-lg px-3 py-2 text-left text-sm transition ${
                 activeNote?.id === n.id
                   ? "bg-brand-accent text-white"
-                  : "hover:bg-slate-100 dark:hover:bg-white/10"
+                  : "hover:bg-[var(--apple-bg-tertiary)] dark:hover:bg-white/10"
               }`}
               title={runningNoteSidebarLabel(n, formatTag)}
             >
@@ -317,7 +317,7 @@ export function RunningNotesView({
                       className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
                         on
                           ? "border-brand-accent bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/25 dark:text-zinc-100"
-                          : "border-slate-200 text-brand-muted hover:border-brand-accent/40 dark:border-white/15 dark:hover:border-brand-accent/40"
+                          : "border-[var(--hairline)] text-brand-muted hover:border-brand-accent/40 dark:border-white/15 dark:hover:border-brand-accent/40"
                       }`}
                     >
                       {t(`tagPresets.${i18nKey}` as never)}
@@ -393,7 +393,7 @@ export function RunningNotesView({
               </p>
             ) : null}
             {embedSource ? (
-              <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+              <p className="mb-2 text-sm font-semibold text-brand-muted dark:text-zinc-400">
                 {t("plainTextOptional")}
               </p>
             ) : null}

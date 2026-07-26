@@ -32,7 +32,7 @@ function parseLegacyChecklistArray(raw: string | null): Set<string> | null {
 }
 
 const surfaceCard =
-  "rounded-xl border border-slate-200/90 bg-white p-4 text-slate-800 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100";
+  "rounded-xl border border-[var(--hairline)] bg-white p-4 text-brand-navy shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100";
 
 export function ChairPrepChecklistClient({
   conferenceId,
@@ -85,7 +85,7 @@ export function ChairPrepChecklistClient({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-slate-600 dark:text-zinc-400">
+        <p className="text-sm text-brand-muted dark:text-zinc-400">
           {ready ? (
             <>
               {t("common.progressSynced", { done, total: allIds.length })}
@@ -97,7 +97,7 @@ export function ChairPrepChecklistClient({
         <button
           type="button"
           onClick={reset}
-          className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="rounded-lg border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {t("common.resetChecklist")}
         </button>
@@ -124,18 +124,18 @@ function PrepSectionBlock({
   const t = useTranslations("chairChecklists");
   return (
     <div className={surfaceCard}>
-      <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">
+      <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-50">
         {t(`prep.sections.${section.id}.title`)}
       </h3>
       <ul className="mt-3 space-y-2">
         {section.itemIds.map((itemId) => (
           <li key={itemId}>
-            <label className="flex cursor-pointer items-start gap-3 rounded-lg py-1 text-sm leading-snug hover:bg-slate-50 dark:hover:bg-zinc-800/50">
+            <label className="flex cursor-pointer items-start gap-3 rounded-lg py-1 text-sm leading-snug hover:bg-[var(--apple-bg-secondary)] dark:hover:bg-zinc-800/50">
               <input
                 type="checkbox"
                 checked={checked.has(itemId)}
                 onChange={() => onToggle(itemId)}
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--hairline-strong)] text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
               />
               <span>{t(`prep.items.${itemId}`)}</span>
             </label>
@@ -184,7 +184,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-slate-600 dark:text-zinc-400">
+        <p className="text-sm text-brand-muted dark:text-zinc-400">
           {ready ? (
             <>
               {t("common.progressSynced", { done, total: allIds.length })}
@@ -196,22 +196,22 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
         <button
           type="button"
           onClick={reset}
-          className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="rounded-lg border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {t("common.resetChecklist")}
         </button>
       </div>
 
       <div className={surfaceCard}>
-        <ul className="space-y-2 text-sm text-slate-800 dark:text-zinc-100">
+        <ul className="space-y-2 text-sm text-brand-navy dark:text-zinc-100">
           {CHAIR_FLOW_ITEMS.map((item) => (
             <li key={item.id}>
-              <label className="flex cursor-pointer items-start gap-3 rounded-lg py-0.5 hover:bg-slate-50 dark:hover:bg-zinc-800/50">
+              <label className="flex cursor-pointer items-start gap-3 rounded-lg py-0.5 hover:bg-[var(--apple-bg-secondary)] dark:hover:bg-zinc-800/50">
                 <input
                   type="checkbox"
                   checked={checked.has(item.id)}
                   onChange={() => toggle(item.id)}
-                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--hairline-strong)] text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
                 />
                 <span>{t(`flow.items.${item.id}`)}</span>
               </label>

@@ -107,7 +107,7 @@ function DocumentsWorkspace() {
       </button>
 
       {showForm ? (
-        <div className="mun-card space-y-3 border-slate-200">
+        <div className="mun-card space-y-3 border-[var(--hairline)]">
           <h3 className="font-display font-semibold text-brand-navy">{t("newDocumentTitle")}</h3>
           <div className="space-y-3">
             <div>
@@ -213,7 +213,7 @@ function SpeechesWorkspace() {
       </button>
 
       {showForm ? (
-        <div className="mun-card space-y-3 border-slate-200">
+        <div className="mun-card space-y-3 border-[var(--hairline)]">
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}

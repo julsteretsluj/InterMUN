@@ -11,7 +11,7 @@ export async function MarketingSiteFooter() {
 
   return (
     <footer className="mun-marketing-surface relative z-10 border-t border-[var(--hairline)] py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
+      <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
         <p className="font-sans text-xs tracking-wide">
           {t("footer.copyright", { year: new Date().getFullYear() })}
         </p>

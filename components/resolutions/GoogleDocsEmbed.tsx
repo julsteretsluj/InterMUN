@@ -91,7 +91,7 @@ export function GoogleDocsEmbed({
           title={heading}
           src={iframeSrc}
           className={cn(
-            "w-full bg-slate-50 dark:bg-brand-cream",
+            "w-full bg-[var(--apple-bg-secondary)] dark:bg-brand-cream",
             compact
               ? "h-[min(520px,58vh)] min-h-[320px] sm:h-[min(560px,62vh)]"
               : "min-h-[70vh] h-[calc(100dvh-12rem)]"

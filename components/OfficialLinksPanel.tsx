@@ -11,11 +11,11 @@ export function OfficialLinksPanel() {
 
   return (
     <>
-      <p className="mb-6 text-sm text-slate-600 dark:text-zinc-400">{t("intro")}</p>
+      <p className="mb-6 text-sm text-brand-muted dark:text-zinc-400">{t("intro")}</p>
       <div className="space-y-8">
         {OFFICIAL_UN_LINK_GROUPS_DEF.map((group) => (
           <section key={group.groupKey}>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">
+            <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-50">
               {t(`groups.${group.groupKey}`)}
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm">

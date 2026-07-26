@@ -144,7 +144,7 @@ export function IdeasView({
         </p>
       ) : null}
       {editing && (
-        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+        <div className="mun-card space-y-3 border-[var(--hairline)] dark:border-white/10">
           <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("editIdea")}</h3>
           <div>
             <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
@@ -185,7 +185,7 @@ export function IdeasView({
         </div>
       )}
 
-      <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+      <div className="mun-card space-y-3 border-[var(--hairline)] dark:border-white/10">
         <p className="text-sm text-brand-muted">{t("addIntro")}</p>
         <div>
           <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
@@ -248,7 +248,7 @@ export function IdeasView({
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
                     displaySelectedId === idea.id
                       ? "border-brand-accent/45 bg-brand-accent/10 font-medium text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-brand-navy"
-                      : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
+                      : "border-[var(--hairline)] bg-white hover:border-[var(--hairline-strong)] dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
                   <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
@@ -264,7 +264,7 @@ export function IdeasView({
           </div>
 
           {selected ? (
-            <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
+            <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-[var(--hairline)] bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <span className="text-xs text-brand-muted">
                   {t("addedOn", { date: new Date(selected.created_at).toLocaleString() })}
@@ -300,7 +300,7 @@ export function IdeasView({
               {selected.content?.trim() ? (
                 <div>
                   {selected.google_docs_url?.trim() ? (
-                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                    <p className="mb-2 text-sm font-semibold text-brand-muted dark:text-zinc-400">
                       {t("summary")}
                     </p>
                   ) : null}

@@ -26,7 +26,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
     <>
       <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)]">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-12">
+        <div className="mun-marketing-hero-copy mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 py-12 md:px-6 md:py-12">
           <p className="mun-marketing-eyebrow">{t("eyebrow")}</p>
           <h1 className="mun-display mt-4 text-4xl md:text-5xl">
             {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
@@ -68,7 +68,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
         className="border-t border-[var(--hairline)] bg-[var(--material-thin)] py-6"
         aria-label={t("relatedNavLabel")}
       >
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-4 px-4 font-sans text-xs uppercase tracking-wider md:px-6">
+        <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-wrap justify-center gap-4 px-4 font-sans text-xs uppercase tracking-wider md:px-6">
           {(Object.keys(ROLE_PATH) as MarketingFeatureRole[])
             .filter((r) => r !== role)
             .map((r) => (

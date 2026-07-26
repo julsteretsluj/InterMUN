@@ -52,8 +52,8 @@ export function HelpButton({
         aria-controls={dialogId}
         onClick={() => setOpen(true)}
         className={[
-          "inline-flex items-center justify-center rounded-lg border border-slate-200/90 bg-white/60 p-1",
-          "text-slate-600 hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200",
+          "inline-flex items-center justify-center rounded-lg border border-[var(--hairline)] bg-white/60 p-1",
+          "text-brand-muted hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent-bright/25",
           className ?? "",
         ].join(" ")}
@@ -80,17 +80,17 @@ export function HelpButton({
                     type="button"
                     onMouseDown={(e) => e.stopPropagation()}
                     onClick={() => setOpen(false)}
-                    className="rounded-lg border border-slate-200/90 bg-white/60 p-1 text-slate-700 hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200 dark:hover:bg-black/50"
+                    className="rounded-lg border border-[var(--hairline)] bg-white/60 p-1 text-brand-navy hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200 dark:hover:bg-black/50"
                   >
                     <X className="h-4 w-4" strokeWidth={1.75} />
                     <span className="sr-only">Close</span>
                   </button>
                 </div>
-                <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+                <div className="mt-2 text-sm leading-relaxed text-brand-navy dark:text-zinc-200">
                   {children}
                 </div>
                 {guideHref ? (
-                  <div className="mt-4 border-t border-slate-200/80 pt-3 dark:border-white/10">
+                  <div className="mt-4 border-t border-[var(--hairline)] pt-3 dark:border-white/10">
                     <Link
                       href={guideHref}
                       onClick={() => setOpen(false)}

@@ -288,7 +288,7 @@ export function ChairMotionsPointsLog({
 
   return (
     <div className="space-y-6">
-      <p className="text-sm text-slate-600 dark:text-zinc-400">
+      <p className="text-sm text-brand-muted dark:text-zinc-400">
         {t("intro")}
       </p>
 
@@ -317,13 +317,13 @@ export function ChairMotionsPointsLog({
         })}
       </div>
 
-      <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
-        <label className="block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+      <div className="rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)]">
+        <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
           {t("delegate")}
           <select
             value={selectedAllocationId}
             onChange={(e) => setSelectedAllocationId(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-white px-3 py-2 text-sm text-brand-navy focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
             <option value="">{t("selectDelegate")}</option>
             {delegateOptions.map((d) => (
@@ -335,14 +335,14 @@ export function ChairMotionsPointsLog({
         </label>
         {activeTab === "points" ? (
           <>
-            <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+            <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
               {t("text")}
               <input
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), add())}
                 placeholder={t("textPlaceholder")}
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+                className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-white px-3 py-2 text-sm text-brand-navy placeholder:text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
               />
             </label>
             <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -356,11 +356,11 @@ export function ChairMotionsPointsLog({
               </button>
             </div>
 
-            <details className="mt-4 rounded-lg border border-slate-200/90 bg-slate-50/80 p-3 dark:border-zinc-600 dark:bg-zinc-800/40">
-              <summary className="cursor-pointer text-sm font-medium text-slate-800 dark:text-zinc-200">
+            <details className="mt-4 rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] p-3 dark:border-zinc-600 dark:bg-zinc-800/40">
+              <summary className="cursor-pointer text-sm font-medium text-brand-navy dark:text-zinc-200">
                 {t("presetOptions")}
               </summary>
-              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400">
+              <p className="mt-2 text-xs text-brand-muted dark:text-zinc-400">
                 {t("presetHint")}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -372,7 +372,7 @@ export function ChairMotionsPointsLog({
                     type="button"
                     onClick={() => void addEntry(preset.logText)}
                     disabled={!selectedAllocationId || !myUserId}
-                    className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-left text-sm font-medium text-slate-800 hover:border-brand-accent/35 hover:bg-brand-accent/8 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
+                    className="rounded-lg border border-[var(--hairline)] bg-white px-3 py-1.5 text-left text-sm font-medium text-brand-navy hover:border-brand-accent/35 hover:bg-brand-accent/8 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
                   >
                     {preset.buttonLabel}
                   </button>
@@ -387,13 +387,13 @@ export function ChairMotionsPointsLog({
             <p className="mt-1 text-xs text-rose-900/80 dark:text-rose-200/90">
               {t("disciplineRules")}
             </p>
-            <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+            <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
               {t("reasonOptional")}
               <input
                 value={disciplineReason}
                 onChange={(e) => setDisciplineReason(e.target.value)}
                 placeholder={t("reasonPlaceholder")}
-                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+                className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-white px-3 py-2 text-sm text-brand-navy placeholder:text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
               />
             </label>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -433,13 +433,13 @@ export function ChairMotionsPointsLog({
                 type="button"
                 onClick={() => void applyDisciplinaryAction("reset")}
                 disabled={!selectedAllocationId}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
+                className="rounded-lg border border-[var(--hairline-strong)] bg-white px-3 py-1.5 text-xs font-semibold text-brand-navy disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
               >
                 {t("resetRecord")}
               </button>
             </div>
             {selectedDiscipline ? (
-              <div className="mt-3 rounded-md border border-rose-300/30 bg-white/75 px-3 py-2 text-xs text-slate-700 dark:border-rose-900/40 dark:bg-zinc-900/50 dark:text-zinc-200">
+              <div className="mt-3 rounded-md border border-rose-300/30 bg-white/75 px-3 py-2 text-xs text-brand-navy dark:border-rose-900/40 dark:bg-zinc-900/50 dark:text-zinc-200">
                 <p>
                   <span className="font-semibold">{t("current")}:</span> {selectedDiscipline.delegateLabel} · {t("warnings")}{" "}
                   <span className="font-semibold">{selectedDiscipline.warningCount}</span> · {t("strikes")}{" "}
@@ -466,17 +466,17 @@ export function ChairMotionsPointsLog({
       </div>
 
       <div>
-        <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">📋 {t("log")}</h3>
+        <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-50">📋 {t("log")}</h3>
         {!ready ? (
-          <p className="mt-2 text-sm text-slate-500">{tCommon("loading")}</p>
+          <p className="mt-2 text-sm text-brand-muted">{tCommon("loading")}</p>
         ) : sorted.length === 0 ? (
-          <p className="mt-2 text-sm text-slate-500 dark:text-zinc-400">{t("noEntries")}</p>
+          <p className="mt-2 text-sm text-brand-muted dark:text-zinc-400">{t("noEntries")}</p>
         ) : (
           <ul className="mt-3 space-y-2">
             {sorted.map((e) => (
               <li
                 key={e.id}
-                className="flex items-start gap-2 rounded-lg border border-slate-100 bg-slate-50/80 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900/50"
+                className="flex items-start gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900/50"
               >
                 <button
                   type="button"
@@ -487,11 +487,11 @@ export function ChairMotionsPointsLog({
                   <Star className={`h-4 w-4 ${e.starred ? "fill-current" : ""}`} strokeWidth={1.75} />
                 </button>
                 <div className="min-w-0 flex-1">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">
                     {t("point")} · {e.delegateLabel}
                   </span>
-                  <p className="text-slate-900 dark:text-zinc-100">{e.text}</p>
-                  <p className="text-xs text-slate-400 dark:text-zinc-500">
+                  <p className="text-brand-navy dark:text-zinc-100">{e.text}</p>
+                  <p className="text-xs text-brand-muted dark:text-zinc-500">
                     {new Date(e.createdAt).toLocaleString()}
                   </p>
                 </div>

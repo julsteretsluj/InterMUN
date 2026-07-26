@@ -44,6 +44,14 @@ export function deriveThemeAccentPair(hex: string, mode: ThemePreference): Theme
     };
   }
 
+  /* Preserve vivid mid/high-brightness picks (e.g. Apple #0071E3) for light UI. */
+  if (b >= 55 && b <= 92 && s >= 40) {
+    return {
+      accent: parsed,
+      accentBright: hsbToHex(h, clamp(s * 0.82, 36, 100), clamp(b + 10, 72, 96)),
+    };
+  }
+
   return {
     accent: hsbToHex(h, clamp(s, 48, 100), clamp(b * 0.52, 26, 54)),
     accentBright: hsbToHex(h, clamp(s * 0.92, 36, 100), clamp(Math.max(b, 50) * 0.72, 42, 70)),

@@ -64,7 +64,7 @@ export function GoogleSlidesEmbed({
           title={heading}
           src={iframeSrc}
           className={cn(
-            "w-full bg-slate-50 dark:bg-brand-cream",
+            "w-full bg-[var(--apple-bg-secondary)] dark:bg-brand-cream",
             compact
               ? "h-[min(480px,55vh)] min-h-[280px] sm:h-[min(520px,60vh)]"
               : "min-h-[65vh] h-[calc(100dvh-14rem)]"

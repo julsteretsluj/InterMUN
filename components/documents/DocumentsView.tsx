@@ -242,7 +242,7 @@ export function DocumentsView({
   return (
     <div className="space-y-4">
       {isDelegate ? (
-        <div className="rounded-lg border border-brand-accent/28 bg-brand-accent/11 px-4 py-3 text-sm text-brand-navy dark:border-brand-accent/35 dark:bg-brand-accent/12 dark:text-brand-accent-bright">
+        <div className="rounded-[var(--radius-lg)] border border-[color:color-mix(in_srgb,var(--accent)_28%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] px-4 py-3 text-sm text-brand-navy dark:border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] dark:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)]">
           <p className="font-medium">{t("delegatePrepTitle")}</p>
           <p className="mt-1">
             {t.rich("delegatePrepBody", {
@@ -251,7 +251,7 @@ export function DocumentsView({
           </p>
         </div>
       ) : null}
-      <div className="rounded-lg border border-brand-navy/10 bg-brand-paper px-4 py-3 text-sm text-brand-navy">
+      <div className="rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--dashboard-card)] px-4 py-3 text-sm text-brand-navy shadow-[var(--dashboard-shadow)]">
         <p className="font-medium">{t("positionPaperGuideTitle")}</p>
         <p className="mt-1 text-brand-muted">{t("positionPaperGuideBlurb")}</p>
         <a
@@ -291,7 +291,7 @@ export function DocumentsView({
                 {t("addDocument")}
               </button>
               {(showForm || editing) && (
-                <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+                <div className="mun-card space-y-3 border-[var(--hairline)] dark:border-white/10">
                   <h3 className="font-display font-semibold text-brand-navy dark:text-zinc-100">
                     {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
                   </h3>
@@ -423,7 +423,7 @@ export function DocumentsView({
               {!showForm && !editing ? <p className="text-sm text-brand-muted">{t("tabs.composeHint")}</p> : null}
             </div>
           ) : docs.length === 0 ? (
-            <p className="text-sm text-brand-muted">{t("empty")}</p>
+            <p className="mun-empty-state text-sm">{t("empty")}</p>
           ) : (
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-64">
@@ -584,7 +584,7 @@ export function DocumentsView({
           </div>
 
               {selected ? (
-                <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.12)] backdrop-blur-xl sm:p-6">
+                <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)] sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
@@ -639,11 +639,11 @@ export function DocumentsView({
               {selected.content?.trim() ? (
                 <div>
                   {selected.google_docs_url?.trim() ? (
-                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                    <p className="mb-2 text-sm font-semibold text-brand-muted dark:text-zinc-400">
                       {t("notesHeading")}
                     </p>
                   ) : null}
-                  <pre className="whitespace-pre-wrap rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans text-sm text-slate-800 dark:border-white/10 dark:bg-black/30 dark:text-zinc-200">
+                  <pre className="whitespace-pre-wrap rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] p-5 font-sans text-[1.0625rem] leading-relaxed text-brand-navy dark:bg-black/30 dark:text-zinc-200">
                     {selected.content}
                   </pre>
                 </div>

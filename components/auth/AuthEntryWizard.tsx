@@ -274,7 +274,7 @@ export function AuthEntryWizard({
   return (
     <div className="w-full">
       {step === "welcome" ? (
-        <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
+        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
           <AuthBrandWordmark size="hero" />
           <div
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
@@ -304,7 +304,7 @@ export function AuthEntryWizard({
       ) : null}
 
       {step === "conference" ? (
-        <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
+        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
           <div
             className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
@@ -368,7 +368,7 @@ export function AuthEntryWizard({
       ) : null}
 
       {step === "role" ? (
-        <div className="rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-lg md:p-10 dark:border-white/10 dark:bg-brand-paper/95 w-full max-w-4xl mx-auto">
+        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-6 shadow-lg md:p-10 dark:border-white/10 dark:bg-brand-paper/95 w-full max-w-4xl mx-auto">
           <AuthBrandWordmark className="mb-6" />
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
             <div className="space-y-4">
@@ -536,7 +536,7 @@ export function AuthEntryWizard({
       ) : null}
 
       {step === "account" ? (
-        <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
+        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
           <div
             className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden

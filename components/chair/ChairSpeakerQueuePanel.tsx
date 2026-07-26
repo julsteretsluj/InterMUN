@@ -122,7 +122,7 @@ const SESSION_CARD =
   "rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-3 text-brand-navy shadow-sm backdrop-blur-sm";
 const SESSION_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";
 const SESSION_INPUT_CORE =
-  "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
+  "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-brand-navy placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
 const SESSION_FIELD = `mt-1 ${SESSION_INPUT_CORE}`;
 
 export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueuePanelProps>(
@@ -359,32 +359,32 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     const isSession = variant === "session";
     const headingClass = isSession
       ? "font-display text-lg font-semibold text-brand-navy"
-      : "font-display text-lg font-semibold text-slate-900 dark:text-zinc-50";
+      : "font-display text-lg font-semibold text-brand-navy";
     const cardClass = isSession
       ? SESSION_CARD
-      : "rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80";
-    const labelClass = isSession ? SESSION_LABEL : "text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400";
+      : "rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)]";
+    const labelClass = isSession ? SESSION_LABEL : "text-xs font-medium uppercase tracking-wide text-brand-muted";
     const fieldClass = isSession
       ? SESSION_FIELD
-      : "mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100";
+      : "mun-field mt-1";
     const addButtonClass = isSession
-      ? "px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
-      : "rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700";
-    const rowBorder = isSession ? "border-b border-[var(--hairline)]" : "border-b border-slate-200/80 dark:border-zinc-700/80";
+      ? "px-4 py-2 rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
+      : "mun-btn-outline px-4 py-2 text-sm disabled:opacity-50";
+    const rowBorder = isSession ? "border-b border-[var(--hairline)]" : "border-b border-[var(--hairline)]";
 
     return (
       <section ref={ref} className="space-y-3">
         <div>
-          <h3 className={headingClass}>🎤 {t("speakerList")}</h3>
+          <h3 className={headingClass}>{t("speakerList")}</h3>
           <p
             className={`mt-1 text-sm ${
-              isSession ? "text-brand-muted" : "text-slate-600 dark:text-zinc-400"
+              isSession ? "text-brand-muted" : "text-brand-muted dark:text-zinc-400"
             }`}
           >
             {t("introPrefix")}{" "}
             <span
               className={
-                isSession ? "font-medium text-brand-navy" : "font-medium text-slate-800 dark:text-zinc-200"
+                isSession ? "font-medium text-brand-navy" : "font-medium text-brand-navy dark:text-zinc-200"
               }
             >
               {t("requestToSpeak")}
@@ -405,7 +405,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         </div>
 
         {!isSession && localFeedback ? (
-          <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-200">
+          <p className="rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-200">
             {localFeedback}
           </p>
         ) : null}
@@ -514,7 +514,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           ) : null}
 
           <div className="flex flex-wrap gap-2 items-end">
-            <label className={`text-sm flex-1 min-w-[12rem] ${isSession ? "text-brand-navy" : "text-slate-800 dark:text-zinc-200"}`}>
+            <label className={`text-sm flex-1 min-w-[12rem] ${isSession ? "text-brand-navy" : "text-brand-navy dark:text-zinc-200"}`}>
               <span className={labelClass}>{t("addDelegation")}</span>
               <select
                 className={fieldClass}
@@ -534,7 +534,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             </button>
           </div>
 
-          <ul className={`space-y-2 ${isSession ? "text-brand-navy" : "text-slate-900 dark:text-zinc-100"}`}>
+          <ul className={`space-y-2 ${isSession ? "text-brand-navy" : "text-brand-navy dark:text-zinc-100"}`}>
             {sortedQueue.map((q, pos) => (
                 <li
                   key={q.id}
@@ -546,7 +546,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       className={
                         isSession
                           ? "text-xs font-normal text-brand-muted"
-                          : "text-xs font-normal text-slate-500 dark:text-zinc-400"
+                          : "text-xs font-normal text-brand-muted dark:text-zinc-400"
                       }
                     >
                       ({statusLabel(q.status)})
@@ -559,7 +559,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       className={
                         isSession
                           ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-30"
-                          : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                          : "p-1.5 rounded-md text-brand-muted hover:bg-[var(--apple-bg-tertiary)] disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
                       title={t("moveUp")}
                       aria-label={t("moveUp")}
@@ -573,7 +573,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       className={
                         isSession
                           ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-30"
-                          : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                          : "p-1.5 rounded-md text-brand-muted hover:bg-[var(--apple-bg-tertiary)] disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
                       title={t("moveDown")}
                       aria-label={t("moveDown")}

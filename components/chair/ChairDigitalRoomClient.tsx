@@ -170,10 +170,10 @@ export function ChairDigitalRoomClient({
 
   return (
     <div className="space-y-5">
-      <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
-        <p className="text-sm text-slate-700 dark:text-zinc-200">
-          <span className="font-semibold text-slate-900 dark:text-zinc-50">{committeeLine}</span>
-          <span className="text-slate-500 dark:text-zinc-400">
+      <div className="rounded-xl border border-[var(--hairline)] bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
+        <p className="text-sm text-brand-navy dark:text-zinc-200">
+          <span className="font-semibold text-brand-navy dark:text-zinc-50">{committeeLine}</span>
+          <span className="text-brand-muted dark:text-zinc-400">
             {" "}
             {t("notesSyncSuffix")}
           </span>
@@ -181,14 +181,14 @@ export function ChairDigitalRoomClient({
         <div className="mt-3 flex flex-wrap items-center gap-2">
           <Link
             href="/committee-room"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--apple-bg-tertiary)] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           >
             {t("openFullCommitteeRoom")}
             <ExternalLink className="h-3.5 w-3.5 opacity-70" strokeWidth={2} />
           </Link>
           <Link
             href="/chair/allocation-matrix"
-            className="inline-flex items-center rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            className="inline-flex items-center rounded-lg border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
             {t("delegatesMatrix")}
           </Link>
@@ -204,7 +204,7 @@ export function ChairDigitalRoomClient({
 
       <div className="space-y-3">
         {speakerPlacardMsg ? (
-          <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-200">
+          <p className="rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-200">
             {speakerPlacardMsg}
           </p>
         ) : null}
@@ -219,7 +219,7 @@ export function ChairDigitalRoomClient({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <label className="relative block min-w-[12rem] flex-1">
           <Search
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-muted"
             strokeWidth={1.75}
             aria-hidden
           />
@@ -228,10 +228,10 @@ export function ChairDigitalRoomClient({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("searchCountry")}
-            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="w-full rounded-xl border border-[var(--hairline)] bg-white py-2.5 pl-10 pr-3 text-sm text-brand-navy shadow-inner placeholder:text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           />
         </label>
-        <p className="text-sm text-slate-500 dark:text-zinc-400">
+        <p className="text-sm text-brand-muted dark:text-zinc-400">
           {t("roomStats", {
             placards: allocations.length,
             flagged: flaggedCount,
@@ -241,9 +241,9 @@ export function ChairDigitalRoomClient({
       </div>
 
       {!ready ? (
-        <p className="text-sm text-slate-500">{t("loading")}</p>
+        <p className="text-sm text-brand-muted">{t("loading")}</p>
       ) : filtered.length === 0 ? (
-        <p className="text-sm text-slate-500 dark:text-zinc-400">{t("noDelegationsMatch")}</p>
+        <p className="text-sm text-brand-muted dark:text-zinc-400">{t("noDelegationsMatch")}</p>
       ) : (
         <ul className="space-y-2">
           {filtered.map((a) => {
@@ -257,17 +257,17 @@ export function ChairDigitalRoomClient({
                   ? "bg-amber-100 text-amber-950 dark:bg-amber-950/45 dark:text-amber-100"
                   : att === "absent"
                     ? "bg-rose-100 text-rose-900 dark:bg-rose-950/45 dark:text-rose-200"
-                    : "bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400";
+                    : "bg-[var(--apple-bg-tertiary)] text-brand-muted dark:bg-zinc-800 dark:text-zinc-400";
 
             return (
               <li
                 key={a.id}
-                className="rounded-xl border border-slate-200/90 bg-white p-3 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
+                className="rounded-xl border border-[var(--hairline)] bg-white p-3 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="font-semibold text-slate-900 dark:text-zinc-50">{a.country || t("dash")}</h3>
+                      <h3 className="font-semibold text-brand-navy dark:text-zinc-50">{a.country || t("dash")}</h3>
                       <span
                         className={cn(
                           "rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide",
@@ -304,7 +304,7 @@ export function ChairDigitalRoomClient({
                         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition",
                         f.compliment
                           ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                          : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                          : "border-[var(--hairline)] text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >
                       <Smile className="h-4 w-4" strokeWidth={1.75} aria-hidden />
@@ -317,7 +317,7 @@ export function ChairDigitalRoomClient({
                         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition",
                         f.concern
                           ? "border-amber-400 bg-amber-50 text-amber-950 dark:border-amber-600 dark:bg-amber-950/45 dark:text-amber-100"
-                          : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                          : "border-[var(--hairline)] text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >
                       <TriangleAlert className="h-4 w-4" strokeWidth={1.75} aria-hidden />
@@ -327,7 +327,7 @@ export function ChairDigitalRoomClient({
                       type="button"
                       disabled={addingSpeakerId === a.id}
                       onClick={() => void addPlacardToSpeakerList(a.id, a.country || t("dash"))}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-brand-navy transition hover:bg-[var(--apple-bg-secondary)] disabled:opacity-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Mic2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />
                       {addingSpeakerId === a.id ? t("adding") : t("addToSpeakerList")}
@@ -339,7 +339,7 @@ export function ChairDigitalRoomClient({
                         "rounded-lg border px-3 py-2 text-sm font-medium transition",
                         expandedReminderId === a.id || f.reminder
                           ? "border-brand-accent/32 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/14 dark:text-brand-accent-bright"
-                          : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                          : "border-[var(--hairline)] text-brand-navy hover:bg-[var(--apple-bg-secondary)] dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >
                       {t("reminder")}
@@ -347,12 +347,12 @@ export function ChairDigitalRoomClient({
                   </div>
                 </div>
                 {f.reminder && expandedReminderId !== a.id ? (
-                  <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700 dark:bg-zinc-800/80 dark:text-zinc-200">
+                  <p className="mt-2 rounded-lg bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm text-brand-navy dark:bg-zinc-800/80 dark:text-zinc-200">
                     {f.reminder}
                   </p>
                 ) : null}
                 {expandedReminderId === a.id ? (
-                  <label className="mt-2 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+                  <label className="mt-2 block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
                     {t("privateReminderLabel")}
                     <textarea
                       value={f.reminder ?? ""}
@@ -365,7 +365,7 @@ export function ChairDigitalRoomClient({
                         });
                       }}
                       rows={2}
-                      className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+                      className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
                       placeholder={t("chairNotePlaceholder")}
                     />
                   </label>

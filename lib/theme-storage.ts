@@ -46,7 +46,7 @@ export const THEME_HUES = [
 
 export type ThemeHue = (typeof THEME_HUES)[number];
 
-/** Brand default accent (diplomatic navy — `theme-blue` rules). */
+/** Brand default accent (Apple blue — `theme-blue` rules). */
 export const DEFAULT_THEME_HUE: ThemeHue = "blue";
 
 /** Hue keys removed from the picker but still stripped from `<html>` on apply. */

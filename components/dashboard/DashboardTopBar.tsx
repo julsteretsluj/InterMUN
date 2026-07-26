@@ -93,7 +93,7 @@ export function DashboardTopBar({
   }
 
   return (
-    <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--titlebar-shadow)] [transition:backdrop-filter_200ms_var(--ease-apple)]">
+    <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[color:color-mix(in_srgb,#fbfbfd_78%,transparent)] backdrop-blur-2xl backdrop-saturate-150 shadow-none [transition:backdrop-filter_200ms_var(--ease-apple-out)] dark:bg-[color:color-mix(in_srgb,var(--material-chrome)_78%,transparent)]">
       <div className="flex w-full flex-wrap items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
         <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:dark:inline-flex" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
@@ -113,7 +113,7 @@ export function DashboardTopBar({
         <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5 sm:ml-0 sm:flex-nowrap sm:gap-2">
           <Link
             href="/"
-            className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)]"
+            className="rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)]"
           >
             ← {t("backToHome")}
           </Link>

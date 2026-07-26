@@ -1,13 +1,13 @@
 ---
-description: InterMUN Figma system and UI constraints
+description: InterMUN Apple-inspired UI system and constraints
 alwaysApply: true
 ---
 
-# InterMUN Figma-First UI Rule
+# InterMUN Apple-Inspired UI Rule
 
-Use the provided Figma system as the source of truth for UI work.
+Use the Apple-inspired light design system as the source of truth for UI work.
 
-## File / Page Structure (Figma)
+## File / Page Structure
 - Keep the 4-page structure in mind for all design decisions:
   - `01 — Foundations`
   - `02 — Components`
@@ -15,18 +15,19 @@ Use the provided Figma system as the source of truth for UI work.
   - `04 — Prototypes`
 
 ## Foundations
-- Respect base color intents:
-  - `bg/primary #0B0B0F`, `bg/secondary #12121A`, `bg/glass rgba(255,255,255,0.04)`
-  - `text/primary #FFFFFF`, `text/secondary #B3B3B3`, `text/muted #6B6B6B`
-  - `accent/primary #1DB954`, `accent/warm #C2A878`, `accent/danger #FF5A5F`
+- Respect base color intents (light primary):
+  - `bg/primary #FFFFFF`, `bg/secondary #F5F5F7`, `bg/tertiary #FBFBFD`
+  - `text/primary #1D1D1F`, `text/secondary #424245`, `text/muted #6E6E73`
+  - `accent/primary #0071E3`, `accent/bright #2997FF`, `accent/success #34C759`, `accent/danger #FF3B30`
+  - Borders: `#D2D2D7`, `rgba(0,0,0,0.08)`
+- Dark mode is refined Apple dark (true black / gray materials), secondary to light.
 - Respect typography intents:
-  - UI Sans for app chrome (`h1/h2/body`)
+  - SF Pro / system UI Sans for app chrome (`h1/h2/body`); Inter as fallback
   - Serif for document surfaces
   - Mono for system metadata
 - Use 8pt spacing rhythm: `4, 8, 12, 16, 24, 32, 48`.
-- Reuse glass/shadow patterns:
-  - Glass card feel with subtle stroke + blur
-  - Soft shadow depth
+- Soft shadows only (e.g. `0 8px 30px rgba(0,0,0,.06)`).
+- Glass/frosted materials only for sticky chrome — not everywhere.
 
 ## Components and Naming
 - Keep existing naming and structural semantics intact.
@@ -40,6 +41,7 @@ Use the provided Figma system as the source of truth for UI work.
 ## Patterns
 - Compose screens from reusable components (Dashboard, Committees, Documents, Voting, Chair Controls).
 - Prefer consistency and reuse over one-off page-specific styling.
+- Content max-width around 1200–1400px with generous margins.
 
 ## Auto Layout / Layout Behavior
 - Apply auto-layout principles in implementation:

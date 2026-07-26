@@ -132,7 +132,7 @@ function RoleSection({
     <section
       id={id}
       className={cn(
-        "scroll-mt-24 py-12 md:py-12",
+        "scroll-mt-24 py-16 md:py-24",
         dark
           ? cn("mun-marketing-role-band text-[color:var(--marketing-ink)]", bandClassName)
           : "border-t border-[var(--hairline)]"
@@ -140,7 +140,7 @@ function RoleSection({
     >
       <div
         className={cn(
-          "mx-auto grid max-w-6xl items-center gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12",
+          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-10 px-4 md:px-8 lg:grid-cols-2 lg:gap-16",
           reversed && "lg:[&>div:first-child]:order-2"
         )}
       >
@@ -148,16 +148,16 @@ function RoleSection({
           <p className={cn(dark ? "mun-marketing-eyebrow" : "mun-marketing-eyebrow text-[var(--accent)]")}>
             {eyebrow}
           </p>
-          <h2 className="mun-display mt-3 text-3xl md:text-4xl">{title}</h2>
+          <h2 className="mun-display mt-4 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.02em]">{title}</h2>
           <p
             className={cn(
-              "mt-4 text-base leading-relaxed md:text-lg",
+              "mt-5 text-[1.0625rem] leading-relaxed md:text-xl",
               dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
             {description}
           </p>
-          <RoleFeatureGrid items={items} className="mt-8" dark={dark} />
+          <RoleFeatureGrid items={items} className="mt-10" dark={dark} />
           {exploreHref && exploreLabel ? (
             <Link
               href={exploreHref}
@@ -310,7 +310,7 @@ export async function MarketingHome() {
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-12 md:pb-12">
+      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-24">
         <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
         <div className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-12">
@@ -352,12 +352,12 @@ export async function MarketingHome() {
                 height={975}
                 priority
                 aria-hidden
-                className="mun-marketing-hero-accent w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
+                className="mun-marketing-hero-accent w-full max-w-[18rem] rounded-[var(--radius-2xl)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
               />
             </div>
           </div>
 
-          <div className="mun-marketing-hero-demo relative mt-12 w-full md:mt-12 lg:mt-12">
+          <div className="mun-marketing-hero-demo relative mt-16 w-full md:mt-20 lg:mt-24">
             <MarketingChamberFrame label={t("hero.previewLabel")}>
               <MarketingHeroSessionPreview heroCompact />
             </MarketingChamberFrame>
@@ -365,8 +365,8 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="how-it-works" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-12 md:py-12">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <section id="how-it-works" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
           <div className="max-w-2xl">
             <p className="mun-marketing-eyebrow">{t("steps.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("steps.title")}</h2>
@@ -427,8 +427,8 @@ export async function MarketingHome() {
           }
         />
 
-        <section className="mun-marketing-surface border-t border-[var(--hairline)] py-12 md:py-12">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <section className="mun-marketing-surface border-t border-[var(--hairline)] py-16 md:py-24">
+          <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
             <div className="max-w-2xl">
               <p className="mun-marketing-eyebrow">{t("platform.eyebrow")}</p>
               <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("platform.title")}</h2>
@@ -441,8 +441,8 @@ export async function MarketingHome() {
         </section>
       </section>
 
-      <section id="origin" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-12 md:py-12">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <section id="origin" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
           <div className="max-w-2xl">
             <p className="mun-marketing-eyebrow">{t("origin.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("origin.title")}</h2>
@@ -455,8 +455,8 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="about" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-12 md:py-12">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <section id="about" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-24">
+        <div className="mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="flex justify-center lg:justify-start">
             <div className="mun-marketing-contact-card max-w-sm p-8">
               <BrandWordmark size="hero" />
@@ -475,7 +475,7 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="contact" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-12 md:py-12">
+      <section id="contact" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
           <div className="mun-marketing-contact-card">
             <div className="text-center">
@@ -508,7 +508,7 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-12 md:py-12">
+      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-24">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>

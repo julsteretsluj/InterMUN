@@ -22,7 +22,7 @@ export default async function MarketingLayout({
         <div className="mun-marketing-rainbow-bar" aria-hidden />
         {/* Side columns use `1fr` (min-content floor) so the controls can never overlap the
             centered nav; the nav only appears from lg, where all three columns actually fit. */}
-        <div className="marketing-header-inner mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-center gap-2 px-3 py-2.5 md:gap-3 md:px-6 lg:grid-cols-[1fr_auto_1fr]">
+        <div className="marketing-header-inner mx-auto grid max-w-[var(--content-max-width,82.5rem)] grid-cols-[1fr_auto] items-center gap-2 px-4 py-3 md:gap-4 md:px-8 lg:grid-cols-[1fr_auto_1fr]">
           {/* No justify-self-start: stretching lets the brand truncate inside a narrow column. */}
           <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
             <MarketingOrbTrigger emblemClassName="max-h-8 w-auto md:max-h-9" />

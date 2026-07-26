@@ -41,7 +41,7 @@ export function AdminAppChrome({
   }
 
   return (
-    <AppleProductPage width="wide" className="py-6 md:py-8">
+    <AppleProductPage width="wide" className="py-8 md:py-12">
       <AppleWindowWithSidebar
         title="Admin"
         subtitle={activeEventName ?? appName}

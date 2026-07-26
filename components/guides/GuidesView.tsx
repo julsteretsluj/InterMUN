@@ -32,7 +32,7 @@ type SidebarSelection =
 
 function GuideMarkdown({ body }: { body: string }) {
   return (
-    <div className="prose-guide text-sm leading-relaxed text-slate-800 dark:text-zinc-200 [&_a]:text-brand-diplomatic [&_a]:underline dark:[&_a]:text-brand-accent-bright [&_h2]:mb-2 [&_h2]:mt-4 [&_h2]:text-base [&_h2]:font-bold [&_h2]:text-brand-navy dark:[&_h2]:text-zinc-100 [&_h2:first-child]:mt-0 [&_li]:my-0.5 [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.85em] dark:[&_code]:bg-white/10 [&_pre]:mb-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-slate-100 [&_pre]:p-3 [&_pre]:font-mono [&_pre]:text-xs dark:[&_pre]:bg-black/40">
+    <div className="prose-guide text-sm leading-relaxed text-brand-navy dark:text-zinc-200 [&_a]:text-brand-diplomatic [&_a]:underline dark:[&_a]:text-brand-accent-bright [&_h2]:mb-2 [&_h2]:mt-4 [&_h2]:text-base [&_h2]:font-bold [&_h2]:text-brand-navy dark:[&_h2]:text-zinc-100 [&_h2:first-child]:mt-0 [&_li]:my-0.5 [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_code]:rounded [&_code]:bg-[var(--apple-bg-tertiary)] [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.85em] dark:[&_code]:bg-white/10 [&_pre]:mb-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[var(--apple-bg-tertiary)] [&_pre]:p-3 [&_pre]:font-mono [&_pre]:text-xs dark:[&_pre]:bg-black/40">
       <ReactMarkdown
         components={{
           a: ({ href, children }) => (
@@ -201,7 +201,7 @@ export function GuidesView({
                   "block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition",
                   active
                     ? "bg-brand-accent text-white"
-                    : "bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
+                    : "bg-[var(--apple-bg-tertiary)] text-brand-navy hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
                 )}
               >
                 {t(`roles.${activeRole}.${sectionKey}.title` as Parameters<typeof t>[0])}
@@ -223,7 +223,7 @@ export function GuidesView({
                 "block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition",
                 selection.layer === "conference" && selectedConference?.id === g.id
                   ? "bg-brand-accent text-white"
-                  : "bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
+                  : "bg-[var(--apple-bg-tertiary)] text-brand-navy hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
               )}
             >
               {g.title}
@@ -234,7 +234,7 @@ export function GuidesView({
 
       <div className="min-w-0 flex-1">
         {glossary.length > 0 ? (
-          <section className="mb-6 rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-black/20">
+          <section className="mb-6 rounded-2xl border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] p-4 dark:border-white/10 dark:bg-black/20">
             <h3 className="text-base font-semibold text-brand-navy dark:text-zinc-100">
               {t("glossary.title")}
             </h3>
@@ -250,7 +250,7 @@ export function GuidesView({
               {(glossaryContext?.topicLabels ?? []).slice(0, 2).map((topic) => (
                 <span
                   key={topic}
-                  className="rounded-full border border-slate-300/80 bg-white px-2 py-0.5 text-slate-700 dark:border-white/15 dark:bg-black/30 dark:text-zinc-200"
+                  className="rounded-full border border-[var(--hairline-strong)]/80 bg-white px-2 py-0.5 text-brand-navy dark:border-white/15 dark:bg-black/30 dark:text-zinc-200"
                 >
                   {t("glossary.topicLine", { topic })}
                 </span>
@@ -260,17 +260,17 @@ export function GuidesView({
               {glossary.map((entry) => (
                 <li
                   key={entry.id}
-                  className="rounded-xl border border-slate-200/90 bg-white p-3 text-sm shadow-sm dark:border-white/10 dark:bg-black/30"
+                  className="rounded-xl border border-[var(--hairline)] bg-white p-3 text-sm shadow-sm dark:border-white/10 dark:bg-black/30"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <p className="font-semibold text-brand-navy dark:text-zinc-100">
                       {t(`glossary.terms.${entry.id}.term` as Parameters<typeof t>[0])}
                     </p>
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-slate-600 dark:bg-white/10 dark:text-zinc-300">
+                    <span className="rounded-full bg-[var(--apple-bg-tertiary)] px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-brand-muted dark:bg-white/10 dark:text-zinc-300">
                       {t(`glossary.sources.${entry.source}` as Parameters<typeof t>[0])}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
+                  <p className="mt-1 text-xs leading-relaxed text-brand-muted dark:text-zinc-300">
                     {t(`glossary.terms.${entry.id}.definition` as Parameters<typeof t>[0])}
                   </p>
                 </li>
@@ -280,14 +280,14 @@ export function GuidesView({
         ) : null}
 
         {selection.layer === "howto" && howtoTitle && howtoBody ? (
-          <div className="rounded-2xl border border-slate-200/90 bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
+          <div className="rounded-2xl border border-[var(--hairline)] bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
             <h2 className="mb-4 text-xl font-bold">{howtoTitle}</h2>
             <GuideMarkdown body={howtoBody} />
           </div>
         ) : null}
 
         {selection.layer === "conference" && selectedConference ? (
-          <div className="rounded-2xl border border-slate-200/90 bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
+          <div className="rounded-2xl border border-[var(--hairline)] bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
             <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
               <h2 className="text-xl font-bold">{selectedConference.title}</h2>
               {canEdit && !editMode ? (
@@ -318,14 +318,14 @@ export function GuidesView({
                 {selectedConference.content?.trim() ? (
                   <div>
                     {selectedConference.google_docs_url?.trim() ? (
-                      <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                      <p className="mb-2 text-sm font-semibold text-brand-muted dark:text-zinc-400">
                         {t("additionalNotes")}
                       </p>
                     ) : null}
                     <GuideMarkdown body={selectedConference.content} />
                   </div>
                 ) : !selectedConference.google_docs_url?.trim() ? (
-                  <p className="text-sm text-slate-500 dark:text-zinc-400">{t("noContentYet")}</p>
+                  <p className="text-sm text-brand-muted dark:text-zinc-400">{t("noContentYet")}</p>
                 ) : null}
               </div>
             ) : (
@@ -399,7 +399,7 @@ export function GuidesView({
         ) : null}
 
         {canEdit ? (
-          <div className="mt-6 space-y-3 rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-black/20">
+          <div className="mt-6 space-y-3 rounded-2xl border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] p-4 dark:border-white/10 dark:bg-black/20">
             <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("createNewGuide")}</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <input

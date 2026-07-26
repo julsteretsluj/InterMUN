@@ -54,21 +54,21 @@ html {
   /* —— Apple motion —— */
   --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-apple-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 160ms;
-  --dur-base: 220ms;
-  --dur-slow: 320ms;
+  --dur-fast: 200ms;
+  --dur-base: 280ms;
+  --dur-slow: 380ms;
 
-  /* —— Soft dashboard (light) — warm parchment canvas (Gavelling-inspired) —— */
-  --dashboard-cream: #f4f0e6;
-  --dashboard-card: #fffdf8;
-  --dashboard-shadow: 0 1px 2px rgba(45, 35, 18, 0.05), 0 10px 28px -14px rgba(45, 35, 18, 0.12);
-  --dashboard-shadow-hover: 0 2px 5px rgba(45, 35, 18, 0.07), 0 16px 34px -12px rgba(45, 35, 18, 0.16);
+  /* —— Soft dashboard (light) — Apple cool neutrals —— */
+  --dashboard-cream: #f5f5f7;
+  --dashboard-card: #ffffff;
+  --dashboard-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --dashboard-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.08);
 
-  /* —— Brand: diplomatic navy + gold (source of truth for --accent/gold) —— */
-  --navy-deep: #00296b;
-  --navy: #003f88;
-  --navy-bright: #00509d;
-  --navy-glass: rgba(0, 41, 107, 0.72);
+  /* —— Brand blues (legacy aliases; interactive accent is --accent) —— */
+  --navy-deep: #0071e3;
+  --navy: #0071e3;
+  --navy-bright: #0071e3;
+  --navy-glass: rgba(0, 113, 227, 0.72);
   /* Brand gold tracks the theme accent (set after --accent-bright below; resolved at use). */
   --gold: var(--accent-bright);
   --gold-bright: color-mix(in srgb, var(--accent-bright) 55%, #ffffff);
@@ -98,12 +98,12 @@ html {
 
   /* —— Apple HIG semantic UI (light) —— */
   --apple-bg-primary: #ffffff;
-  --apple-bg-secondary: #f2f2f7;
-  --apple-bg-tertiary: #ffffff;
+  --apple-bg-secondary: #f5f5f7;
+  --apple-bg-tertiary: #fbfbfd;
   --apple-bg-elevated: #ffffff;
-  --apple-label: #000000;
-  --apple-label-secondary: rgba(60, 60, 67, 0.6);
-  --apple-label-tertiary: rgba(60, 60, 67, 0.3);
+  --apple-label: #1d1d1f;
+  --apple-label-secondary: #424245;
+  --apple-label-tertiary: #6e6e73;
   --apple-label-quaternary: rgba(60, 60, 67, 0.18);
   --apple-fill: rgba(120, 120, 128, 0.2);
   --apple-fill-secondary: rgba(120, 120, 128, 0.16);
@@ -114,17 +114,20 @@ html {
 
   /* —— Apple UI typography (SF Pro semantic scale — app-wide) —— */
   --apple-font-ui: var(--font-sans);
-  --apple-text-large-title-size: 2.125rem;
-  --apple-text-title-1-size: 1.75rem;
-  --apple-text-title-2-size: 1.375rem;
+  --apple-text-large-title-size: 2.5rem;
+  --apple-text-title-1-size: 2rem;
+  --apple-text-title-2-size: 1.5rem;
   --apple-text-title-3-size: 1.25rem;
   --apple-text-headline-size: 1.0625rem;
   --apple-text-body-size: 1.0625rem;
   --apple-text-callout-size: 1rem;
   --apple-text-subheadline-size: 0.9375rem;
   --apple-text-footnote-size: 0.8125rem;
-  --apple-text-caption-1-size: 0.75rem;
-  --apple-text-caption-2-size: 0.6875rem;
+  --apple-text-caption-1-size: 0.8125rem;
+  --apple-text-caption-2-size: 0.75rem;
+  --apple-text-hero-size: clamp(2.5rem, 5vw, 4.5rem);
+  --apple-text-section-size: clamp(2rem, 3.5vw, 3.25rem);
+  --content-max-width: 82.5rem;
 
   /* —— Apple UI materials (app-wide glass surfaces) —— */
   --apple-material-saturate: 180%;
@@ -140,14 +143,10 @@ html {
   --apple-material-border-edge: rgba(255, 255, 255, 0.22);
   --apple-material-shadow:
     inset 0 1px 0 var(--apple-material-border-highlight),
-    inset 0 -0.5px 0 var(--apple-material-border-edge),
-    0 24px 48px -24px rgba(0, 0, 0, 0.12),
-    0 8px 20px -12px rgba(0, 0, 0, 0.06);
+    0 8px 30px rgba(0, 0, 0, 0.06);
   --apple-material-shadow-hover:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -0.5px 0 var(--apple-material-border-edge),
-    0 32px 56px -24px rgba(0, 0, 0, 0.16),
-    0 12px 28px -14px rgba(0, 0, 0, 0.08);
+    0 12px 36px rgba(0, 0, 0, 0.08);
 
   /* —— Materials (vibrancy — used with backdrop-blur + saturate) —— */
   --material-chrome: var(--dashboard-card);
@@ -157,8 +156,8 @@ html {
   --material-popover: var(--dashboard-card);
 
   /* —— Hairline separators —— */
-  --hairline: rgba(15, 23, 42, 0.08);
-  --hairline-strong: rgba(15, 23, 42, 0.14);
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-strong: #d2d2d7;
 
   /* —— Dashboard chrome —— */
   --sidebar-material: var(--dashboard-card);
@@ -171,15 +170,15 @@ html {
 
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
   --logo-cyan: #00ccff;
-  --logo-blue: #007aff;
+  --logo-blue: #0071e3;
   --logo-magenta: #ff00ff;
   --logo-orange: #ff9500;
   --logo-yellow: #ffcc00;
   --logo-green: #34c759;
 
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
-  --accent: var(--navy-bright);
-  --accent-bright: color-mix(in srgb, var(--navy-bright) 76%, #ffffff);
+  --accent: #0071e3;
+  --accent-bright: #2997ff;
   /* Emphasis copy — follows active theme hue instead of fixed gold */
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
@@ -187,19 +186,19 @@ html {
   /* —— PAGE —— */
   --color-bg-page: var(--dashboard-cream);
   --background: var(--color-bg-page);
-  --foreground: #1c1c1e;
+  --foreground: #1d1d1f;
 
   /* —— SURFACE —— */
   --color-surface: var(--material-regular);
-  --color-surface-subtle: #e5e5ea;
+  --color-surface-subtle: #fbfbfd;
   --color-surface-elevated: var(--material-thick);
   --brand-paper: var(--color-surface);
   --brand-cream: var(--color-surface-subtle);
 
   /* —— TEXT —— */
-  --color-text: #1c1c1e;
-  --color-text-secondary: #3a3a3c;
-  --color-text-muted: #8e8e93;
+  --color-text: #1d1d1f;
+  --color-text-secondary: #424245;
+  --color-text-muted: #6e6e73;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
@@ -220,14 +219,14 @@ html {
   --brand-silver: #8e8e93;
 
   /* —— STATE (semantic — tuned for light grouped backgrounds) —— */
-  --semantic-success: #15803d;
-  --semantic-success-bg: color-mix(in srgb, #15803d 12%, var(--color-bg-page));
-  --semantic-warning: #b45309;
-  --semantic-warning-bg: color-mix(in srgb, #b45309 12%, var(--color-bg-page));
-  --semantic-danger: #b91c1c;
-  --semantic-danger-bg: color-mix(in srgb, #b91c1c 12%, var(--color-bg-page));
-  --semantic-info: #1d4ed8;
-  --semantic-info-bg: color-mix(in srgb, #1d4ed8 12%, var(--color-bg-page));
+  --semantic-success: #34c759;
+  --semantic-success-bg: color-mix(in srgb, #34c759 14%, var(--color-bg-page));
+  --semantic-warning: #ff9500;
+  --semantic-warning-bg: color-mix(in srgb, #ff9500 14%, var(--color-bg-page));
+  --semantic-danger: #ff3b30;
+  --semantic-danger-bg: color-mix(in srgb, #ff3b30 12%, var(--color-bg-page));
+  --semantic-info: #0071e3;
+  --semantic-info-bg: color-mix(in srgb, #0071e3 12%, var(--color-bg-page));
 
   /* —— App chrome aliases (light) — same tokens as “discord-*” for backwards compatibility —— */
   --discord-sidebar: var(--sidebar-material);
@@ -298,28 +297,24 @@ html.dark {
   --apple-material-border-edge: rgba(0, 0, 0, 0.35);
   --apple-material-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -0.5px 0 rgba(0, 0, 0, 0.4),
-    0 32px 64px -28px rgba(0, 0, 0, 0.72),
-    0 12px 28px -16px rgba(0, 0, 0, 0.48);
+    0 8px 30px rgba(0, 0, 0, 0.35);
   --apple-material-shadow-hover:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -0.5px 0 rgba(0, 0, 0, 0.4),
-    0 40px 72px -28px rgba(0, 0, 0, 0.78),
-    0 16px 36px -18px rgba(0, 0, 0, 0.52);
+    0 12px 36px rgba(0, 0, 0, 0.42);
 
   /* Legacy block continues below — system colors were consolidated above */
 
-  /* —— Brand: navy + gold tuned for glass-over-black —— */
-  --navy-deep: #041a3d;
-  --navy: #0a3a6e;
-  --navy-bright: #2f7fd0;
-  --navy-glass: rgba(6, 26, 55, 0.62);
+  /* —— Brand: blues tuned for glass-over-black —— */
+  --navy-deep: #0a84ff;
+  --navy: #0a84ff;
+  --navy-bright: #2997ff;
+  --navy-glass: rgba(10, 132, 255, 0.62);
   --gold: var(--accent-bright);
   --gold-bright: color-mix(in srgb, var(--accent-bright) 55%, #ffffff);
   --gold-soft: color-mix(in srgb, var(--accent-bright) 38%, transparent);
 
-  --accent: #2f7fd0;
-  --accent-bright: #5aa0e6;
+  --accent: #0a84ff;
+  --accent-bright: #2997ff;
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
 
@@ -353,8 +348,8 @@ html.dark {
 
   --dashboard-cream: var(--content-material);
   --dashboard-card: var(--material-thick);
-  --dashboard-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 8px 28px -14px rgba(0, 0, 0, 0.55);
-  --dashboard-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 12px 32px -12px rgba(0, 0, 0, 0.62);
+  --dashboard-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --dashboard-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.42);
   --parchment: var(--content-material);
 
   --color-text: #f2f2f7;
@@ -530,7 +525,7 @@ html.dyslexic-font body {
     transform: scale(0.97);
   }
 
-  /* Entrance — content rises and settles (Gavelling/Apple feel) */
+  /* Entrance — content rises and settles */
   .mun-rise {
     animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
   }
@@ -541,6 +536,22 @@ html.dyslexic-font body {
   .mun-rise-3 {
     animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
     animation-delay: 120ms;
+  }
+
+  /* Scroll-friendly fade/slide (pair with IntersectionObserver or CSS animation on enter) */
+  .mun-fade-up {
+    animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
+  }
+
+  .mun-empty-state {
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--hairline);
+    background: var(--apple-bg-tertiary);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: var(--apple-text-body-size);
+    line-height: 1.47;
   }
 
   /* Pill / badge pop-in */
@@ -646,6 +657,7 @@ html.dyslexic-font body {
   .mun-rise,
   .mun-rise-2,
   .mun-rise-3,
+  .mun-fade-up,
   .mun-pop,
   .mun-shell,
   .mun-shimmer::after,
@@ -681,18 +693,18 @@ html.dark body.mun-apple-site {
   background-image: none;
 }
 
-/* Warm parchment grain — barely-there tint so cards float above the canvas */
+/* Cool neutral canvas — subtle accent wash only */
 html:not(.dark) body {
   background-image:
-    radial-gradient(1200px 800px at 12% -8%, color-mix(in srgb, var(--gold) 8%, transparent), transparent 60%),
-    radial-gradient(1000px 700px at 92% 4%, color-mix(in srgb, var(--navy-bright) 6%, transparent), transparent 55%);
+    radial-gradient(1200px 800px at 12% -8%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 92% 4%, color-mix(in srgb, var(--accent-bright) 4%, transparent), transparent 55%);
   background-attachment: fixed;
 }
 
 html.dark body {
   background-color: var(--background);
   background-image:
-    radial-gradient(1100px 760px at 88% -6%, color-mix(in srgb, var(--navy-bright) 12%, transparent), transparent 58%);
+    radial-gradient(1100px 760px at 88% -6%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 58%);
   background-attachment: fixed;
 }
 
@@ -801,17 +813,17 @@ html.theme-yellow.dark body {
   background-color: var(--background);
 }
 
-/* Brand default — diplomatic navy */
+/* Brand default — Apple blue */
 html.theme-blue:not(.dark) {
-  --accent: var(--navy-bright);
-  --accent-bright: color-mix(in srgb, var(--navy-bright) 76%, #ffffff);
+  --accent: #0071e3;
+  --accent-bright: #2997ff;
 }
 html.theme-blue:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 3%, var(--background));
+  background-color: color-mix(in srgb, var(--accent) 2%, var(--background));
 }
 html.theme-blue.dark {
-  --accent: #2f7fd0;
-  --accent-bright: #5aa0e6;
+  --accent: #0a84ff;
+  --accent-bright: #2997ff;
 }
 html.theme-blue.dark body {
   background-color: var(--background);
@@ -881,19 +893,25 @@ html.theme-custom.dark body {
   background-image: var(--toolbar-gradient);
 }
 html:not(.dark) .mun-toolbar-titlebar {
-  @apply border-b border-[var(--hairline)] shadow-sm;
-  background-color: color-mix(in srgb, var(--dashboard-card) 82%, transparent);
+  @apply border-b border-[var(--hairline)] shadow-none;
+  background-color: color-mix(in srgb, #fbfbfd 78%, transparent);
 }
 
 /* Apple-style focus (blue halo) */
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 26%, transparent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 html.dark :focus-visible {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* Prefer keyboard focus rings; suppress mouse click outline noise */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
 }
 
 ::selection {
@@ -934,38 +952,36 @@ html.dark ::selection {
   }
 
   .dashboard-panel {
-    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
+    @apply relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple-out)] md:p-7;
   }
   html.dark .dashboard-panel {
-    @apply border-[var(--hairline)] bg-[var(--material-thick)] shadow-[0_8px_28px_-14px_rgba(0,0,0,0.55)];
+    @apply border-[var(--hairline)] bg-[var(--material-thick)] shadow-[var(--dashboard-shadow)];
   }
 
   .dashboard-panel-title {
-    @apply font-display text-lg font-semibold tracking-tight text-brand-navy md:text-xl;
+    @apply font-display text-xl font-semibold tracking-tight text-brand-navy md:text-2xl;
   }
 
-  /* Active nav — filled diplomatic pill w/ gold indicator (Gavelling signature) */
+  /* Active nav — soft filled pill */
   .dashboard-nav-active {
     position: relative;
     background-color: var(--accent);
     color: #ffffff;
     font-weight: 600;
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.22) inset,
-      0 6px 16px -8px color-mix(in srgb, var(--accent) 65%, transparent);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 22%, transparent);
   }
   .dashboard-nav-active :is(svg, .lucide) {
     color: #ffffff;
   }
 
   .dashboard-status-badge {
-    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+    @apply inline-flex items-center rounded-[var(--radius-md)] border px-2.5 py-0.5 text-xs font-semibold;
   }
   .dashboard-status-badge--info {
     @apply border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] text-[var(--accent)];
   }
   .dashboard-status-badge--success {
-    @apply border-emerald-200 bg-emerald-50 text-emerald-800;
+    @apply border-[color-mix(in_srgb,var(--semantic-success)_30%,var(--hairline))] bg-[var(--semantic-success-bg)] text-[var(--semantic-success)];
   }
   .nav-priority-badge {
     /* Fixed width so 1- and 2-digit numbers share one column when the badge
@@ -1074,34 +1090,34 @@ html.dark ::selection {
   }
 
   .mun-shell-title {
-    @apply mb-4 font-display text-xl font-extrabold text-brand-navy;
-    @apply tracking-tight md:text-2xl;
-    letter-spacing: -0.02em;
+    @apply mb-5 font-display text-2xl font-semibold text-brand-navy;
+    @apply tracking-tight md:text-3xl;
+    letter-spacing: -0.022em;
   }
-  /* Gavelling-style gold accent bar under page titles */
+  /* Accent bar under page titles */
   .mun-shell-title::after {
     content: "";
     display: block;
     width: 2.25rem;
-    height: 3px;
-    margin-top: 0.5rem;
+    height: 2px;
+    margin-top: 0.75rem;
     border-radius: var(--radius-pill);
-    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    background: var(--accent);
   }
   html.dark .mun-shell-title {
     @apply mb-4 text-[1.75rem] md:text-[2rem] tracking-[-0.02em];
   }
 
   .mun-card {
-    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
+    @apply relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple-out)] md:p-7;
   }
   html.dark .mun-card {
     @apply border-[var(--hairline)] bg-[var(--material-thick)];
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 8px 28px -14px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   }
 
   .mun-card-dense {
-    @apply rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-sm text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
+    @apply rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-sm text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple-out)];
   }
   html.dark .mun-card-dense {
     @apply rounded-[var(--radius-md)] bg-[var(--material-thin)] shadow-none;
@@ -1123,68 +1139,67 @@ html.dark ::selection {
   }
 
   .mun-field {
-    @apply w-full border px-3 py-2 text-sm text-brand-navy transition-[box-shadow,border-color] duration-[var(--dur-base)] ease-[var(--ease-apple)] placeholder:text-brand-muted focus:outline-none focus:ring-2;
+    @apply w-full border px-3.5 py-2.5 text-[1.0625rem] text-brand-navy transition-[box-shadow,border-color] duration-[var(--dur-base)] ease-[var(--ease-apple-out)] placeholder:text-brand-muted focus:outline-none focus:ring-2;
     @apply [border-radius:var(--radius-md)];
-    border-color: var(--hairline);
-    background: var(--material-thin);
+    border-color: var(--hairline-strong);
+    background: #ffffff;
     color: var(--color-text);
     @apply dark:placeholder:text-brand-muted/60;
   }
   .mun-field:focus {
-    border-color: color-mix(in srgb, var(--accent) 50%, var(--hairline));
-    --tw-ring-color: color-mix(in srgb, var(--accent-bright) 32%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--hairline));
+    --tw-ring-color: color-mix(in srgb, var(--accent-bright) 28%, transparent);
+  }
+  html.dark .mun-field {
+    background: var(--material-thin);
   }
 
   .mun-btn {
-    @apply border border-transparent px-3 py-2 text-sm font-semibold transition-[color,background-color,border-color,transform,box-shadow] duration-[var(--dur-base)] ease-[var(--ease-apple)] focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
-    @apply [border-radius:var(--radius-pill)];
-    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), border-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    @apply border border-transparent px-4 py-2.5 text-sm font-semibold transition-[color,background-color,border-color,transform,box-shadow] duration-[var(--dur-base)] ease-[var(--ease-apple-out)] focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    @apply [border-radius:var(--radius-md)];
+    transition: transform var(--dur-fast) var(--ease-apple-out), color var(--dur-base) var(--ease-apple-out), background-color var(--dur-base) var(--ease-apple-out), border-color var(--dur-base) var(--ease-apple-out), box-shadow var(--dur-base) var(--ease-apple-out);
     color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
   }
   .mun-btn:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    transform: scale(1.015);
   }
   .mun-btn:active:not(:disabled) {
-    transform: scale(0.97);
+    transform: scale(0.985);
   }
 
   .mun-btn-outline {
     color: var(--brand-navy);
-    background: color-mix(in srgb, #ffffff 55%, transparent);
-    border-color: color-mix(in srgb, var(--hairline-strong) 100%, transparent);
-    box-shadow: 0 1px 0 color-mix(in srgb, #ffffff 80%, transparent) inset;
+    background: #ffffff;
+    border-color: var(--hairline-strong);
+    box-shadow: none;
   }
 
   .mun-btn-outline:hover:not(:disabled) {
-    background: color-mix(in srgb, #ffffff 82%, transparent);
+    background: var(--apple-bg-secondary);
     border-color: color-mix(in srgb, var(--accent) 28%, var(--hairline));
   }
 
   .mun-btn-primary {
-    @apply border border-transparent px-4 py-2 text-sm font-semibold text-white disabled:opacity-45;
-    @apply [border-radius:var(--radius-pill)];
-    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    @apply border border-transparent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-45;
+    @apply [border-radius:var(--radius-md)];
+    transition: transform var(--dur-fast) var(--ease-apple-out), color var(--dur-base) var(--ease-apple-out), background-color var(--dur-base) var(--ease-apple-out), box-shadow var(--dur-base) var(--ease-apple-out);
     background-color: var(--accent);
-    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 12%, transparent) 0%, transparent 65%);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.25) inset,
-      0 0 0 0.5px rgba(0, 0, 0, 0.18) inset,
-      0 1px 2px rgba(0, 0, 0, 0.12);
+    background-image: none;
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 18%, transparent);
   }
   .mun-btn-primary:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--accent) 92%, #000000);
-    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 8%, transparent) 0%, transparent 65%);
+    background-color: color-mix(in srgb, var(--accent) 88%, #000000);
+    background-image: none;
+    transform: scale(1.015);
   }
   .mun-btn-primary:active:not(:disabled) {
-    transform: scale(0.97);
+    transform: scale(0.985);
   }
   html.dark .mun-btn-primary {
-    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 8%, transparent) 0%, transparent 65%);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.12) inset,
-      0 0 0 0.5px rgba(255, 255, 255, 0.12) inset,
-      0 1px 2px rgba(0, 0, 0, 0.4);
+    background-image: none;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
   }
   html.dark .mun-btn-primary:hover:not(:disabled) {
     background-color: color-mix(in srgb, var(--accent) 88%, #ffffff);
@@ -1192,22 +1207,20 @@ html.dark ::selection {
 
   /* Theme-colored call-to-action (replaces fixed diplomatic gold). */
   .mun-btn-gold {
-    @apply border border-transparent px-4 py-2 text-sm font-bold disabled:opacity-45;
-    @apply [border-radius:var(--radius-pill)];
-    transition: transform var(--dur-fast) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    @apply border border-transparent px-5 py-2.5 text-sm font-semibold disabled:opacity-45;
+    @apply [border-radius:var(--radius-md)];
+    transition: transform var(--dur-fast) var(--ease-apple-out), background-color var(--dur-base) var(--ease-apple-out), box-shadow var(--dur-base) var(--ease-apple-out);
     color: #ffffff;
     background-color: var(--accent);
-    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 22%, transparent) 0%, transparent 60%);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.28) inset,
-      0 0 0 0.5px rgba(0, 0, 0, 0.14) inset,
-      0 2px 6px -1px color-mix(in srgb, var(--accent) 45%, transparent);
+    background-image: none;
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 18%, transparent);
   }
   .mun-btn-gold:hover:not(:disabled) {
     background-color: var(--accent-bright);
+    transform: scale(1.015);
   }
   .mun-btn-gold:active:not(:disabled) {
-    transform: scale(0.97);
+    transform: scale(0.985);
   }
   html.dark .mun-btn-gold {
     color: #ffffff;
@@ -1264,17 +1277,18 @@ html.dark ::selection {
   }
 
   .mun-btn-danger {
-    @apply border border-transparent px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
-    @apply [border-radius:var(--radius-pill)];
-    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    @apply border border-transparent px-4 py-2.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    @apply [border-radius:var(--radius-md)];
+    transition: transform var(--dur-fast) var(--ease-apple-out), color var(--dur-base) var(--ease-apple-out), background-color var(--dur-base) var(--ease-apple-out), box-shadow var(--dur-base) var(--ease-apple-out);
     color: var(--system-red);
-    background: color-mix(in srgb, var(--system-red) 14%, transparent);
+    background: color-mix(in srgb, var(--system-red) 12%, transparent);
   }
   .mun-btn-danger:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--system-red) 24%, transparent);
+    background: color-mix(in srgb, var(--system-red) 20%, transparent);
+    transform: scale(1.015);
   }
   .mun-btn-danger:active:not(:disabled) {
-    transform: scale(0.97);
+    transform: scale(0.985);
   }
 
   .mun-link {
@@ -1653,42 +1667,33 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell {
-  /* Chamber surfaces (header, hero, role bands) follow the theme: warm light
-     parchment with dark ink by default, flipped to the dark chamber under
-     html.dark (see the html.dark .marketing-shell block below). */
-  --marketing-chamber: #f6f2ea;
-  --marketing-chamber-elevated: #fdfbf6;
-  --marketing-chamber-deep: #ece7dc;
-  --marketing-ink: #1d1d22;
-  --marketing-ink-soft: rgba(29, 29, 34, 0.66);
-  --marketing-hairline: rgba(29, 29, 34, 0.1);
+  /* Chamber surfaces — cool Apple neutrals with dark ink */
+  --marketing-chamber: #f5f5f7;
+  --marketing-chamber-elevated: #ffffff;
+  --marketing-chamber-deep: #fbfbfd;
+  --marketing-ink: #1d1d1f;
+  --marketing-ink-soft: #6e6e73;
+  --marketing-hairline: rgba(0, 0, 0, 0.08);
   --marketing-emph: var(--gold-text);
   --marketing-band-accent: var(--accent);
-  --marketing-band-card-bg: rgba(255, 255, 255, 0.72);
+  --marketing-band-card-bg: rgba(255, 255, 255, 0.88);
   --marketing-band-card-shadow:
-    0 20px 40px -22px rgba(45, 35, 18, 0.16),
-    0 0 0 1px rgba(29, 29, 34, 0.05) inset;
-  --marketing-glass-line: color-mix(in srgb, var(--marketing-ink) 20%, transparent);
-  --marketing-glass-line-strong: color-mix(in srgb, var(--marketing-ink) 35%, transparent);
-  --marketing-glass-fill: color-mix(in srgb, var(--marketing-ink) 8%, transparent);
-  --marketing-glass-fill-strong: color-mix(in srgb, var(--marketing-ink) 12%, transparent);
-  --marketing-hero-accent-shadow: rgba(45, 35, 18, 0.28);
-  --marketing-glass: color-mix(in srgb, #ffffff 72%, transparent);
-  --marketing-glass-border: color-mix(in srgb, #ffffff 55%, var(--hairline));
-  --marketing-float-shadow: 0 24px 48px -18px rgba(45, 35, 18, 0.14), 0 8px 20px -10px rgba(45, 35, 18, 0.1);
+    0 8px 30px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(0, 0, 0, 0.04) inset;
+  --marketing-glass-line: rgba(0, 0, 0, 0.08);
+  --marketing-glass-line-strong: rgba(0, 0, 0, 0.14);
+  --marketing-glass-fill: rgba(255, 255, 255, 0.72);
+  --marketing-glass-fill-strong: rgba(255, 255, 255, 0.88);
+  --marketing-hero-accent-shadow: rgba(0, 0, 0, 0.08);
+  --marketing-glass: color-mix(in srgb, #ffffff 78%, transparent);
+  --marketing-glass-border: rgba(0, 0, 0, 0.08);
+  --marketing-float-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   --marketing-rainbow: linear-gradient(
     90deg,
-    #e11d48 0%,
-    #f59e0b 18%,
-    #84cc16 36%,
-    #06b6d4 54%,
-    #6366f1 72%,
-    #a855f7 100%
+    color-mix(in srgb, var(--accent) 55%, transparent) 0%,
+    color-mix(in srgb, var(--accent-bright) 45%, transparent) 100%
   );
-  background:
-    radial-gradient(1100px 520px at 12% -8%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
-    radial-gradient(900px 480px at 88% 4%, color-mix(in srgb, var(--gold) 6%, transparent), transparent 55%),
-    var(--dashboard-cream);
+  background: var(--dashboard-cream);
 }
 
 .marketing-shell .mun-marketing-surface {
@@ -1779,8 +1784,9 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-rainbow-bar {
-  height: 3px;
-  background: var(--marketing-rainbow);
+  height: 1px;
+  background: var(--marketing-hairline);
+  opacity: 1;
 }
 
 .marketing-shell .mun-marketing-eyebrow {
@@ -1814,11 +1820,9 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-marketing-hero {
   background:
-    radial-gradient(ellipse 72% 48% at 18% 8%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 62%),
-    radial-gradient(ellipse 58% 42% at 82% 22%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 58%),
-    radial-gradient(color-mix(in srgb, var(--marketing-ink) 5%, transparent) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 65%),
     var(--marketing-chamber);
-  background-size: auto, auto, 26px 26px, auto;
+  background-size: auto;
   color: var(--marketing-ink);
 }
 
@@ -1849,13 +1853,13 @@ html.colorblind-mode .schedule-swatch-session {
 
 @media (min-width: 768px) {
   .mun-apple-site.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy h1 {
-    font-size: 2.75rem;
+    font-size: var(--apple-text-hero-size, 3.5rem);
   }
 }
 
 @media (min-width: 1024px) {
   .mun-apple-site.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy h1 {
-    font-size: 3.25rem;
+    font-size: var(--apple-text-hero-size, 4.5rem);
   }
 }
 
@@ -1985,7 +1989,7 @@ html.colorblind-mode .schedule-swatch-session {
   --apple-label: #18181b;
   --apple-label-secondary: #52525b;
   --hairline: rgba(60, 60, 67, 0.18);
-  --color-bg-page: #fffdf8;
+  --color-bg-page: #fbfbfd;
   color: #18181b;
 }
 
@@ -2274,11 +2278,17 @@ html.colorblind-mode .schedule-swatch-session {
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid var(--marketing-hairline);
-  background: color-mix(in srgb, var(--marketing-chamber) 88%, transparent);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(251, 251, 253, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: none;
+}
+
+html.dark .marketing-shell .marketing-header,
+html.dark .mun-apple-site.marketing-shell .marketing-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: rgba(28, 28, 30, 0.72);
 }
 
 .marketing-shell .marketing-header-brand {
@@ -2322,17 +2332,17 @@ html.colorblind-mode .schedule-swatch-session {
 .marketing-shell .marketing-nav a {
   position: relative;
   font-family: var(--apple-font-ui, var(--font-sans));
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
   white-space: nowrap;
   color: var(--marketing-ink-soft);
-  padding: 0.375rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: var(--radius-md);
   transition:
-    color var(--dur-base) var(--ease-apple),
-    background-color var(--dur-base) var(--ease-apple);
+    color var(--dur-base) var(--ease-apple-out),
+    background-color var(--dur-base) var(--ease-apple-out);
 }
 
 @media (min-width: 1024px) {
@@ -2760,18 +2770,18 @@ html.dark .marketing-shell {
 /* Controls on materials use vibrant fills, not full material layers */
 .mun-glass-input {
   width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--apple-separator);
-  background: var(--apple-fill-tertiary);
-  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline-strong);
+  background: #ffffff;
+  padding: 0.75rem 1rem;
   font-family: var(--apple-font-ui);
-  font-size: var(--apple-text-callout-size);
-  line-height: 1.31;
-  letter-spacing: -0.02em;
+  font-size: var(--apple-text-body-size);
+  line-height: 1.47;
+  letter-spacing: -0.022em;
   font-weight: 400;
   color: var(--apple-label);
-  backdrop-filter: blur(8px) saturate(var(--apple-material-saturate));
-  -webkit-backdrop-filter: blur(8px) saturate(var(--apple-material-saturate));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   transition:
     border-color var(--dur-base) var(--ease-apple-out),
     box-shadow var(--dur-base) var(--ease-apple-out),
@@ -2781,6 +2791,7 @@ html.dark .marketing-shell {
 
 html.dark .mun-glass-input {
   background: var(--apple-fill-secondary);
+  border-color: var(--apple-separator);
   color-scheme: dark;
 }
 
@@ -2791,8 +2802,12 @@ html.dark .mun-glass-input {
 .mun-glass-input:focus {
   outline: none;
   border-color: color-mix(in srgb, var(--system-blue) 55%, var(--apple-separator));
+  background: #ffffff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--system-blue) 22%, transparent);
+}
+
+html.dark .mun-glass-input:focus {
   background: var(--apple-fill-secondary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--system-blue) 22%, transparent);
 }
 
 /* Step chips — ultrathin material */
@@ -3745,8 +3760,8 @@ html.dark .mun-apple-alert-panel {
   justify-content: center;
   gap: 0.375rem;
   border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  padding: 0.625rem 1.125rem;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
   font-family: var(--font-sans);
   font-size: var(--apple-text-callout-size, 1rem);
   line-height: 1.31;
@@ -3766,7 +3781,7 @@ html.dark .mun-apple-alert-panel {
 
 .mun-apple-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--system-blue) 28%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--system-blue) 28%, transparent);
 }
 
 .mun-apple-btn:disabled,
@@ -3775,8 +3790,12 @@ html.dark .mun-apple-alert-panel {
   opacity: 0.45;
 }
 
+.mun-apple-btn:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(1.015);
+}
+
 .mun-apple-btn:active:not(:disabled):not([aria-disabled="true"]) {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
 .mun-apple-btn-compact {
@@ -3791,16 +3810,14 @@ html.dark .mun-apple-alert-panel {
 
 /* Filled — prominent */
 .mun-apple-btn-filled-blue {
-  border-color: color-mix(in srgb, var(--system-blue) 88%, #000000);
+  border-color: transparent;
   background: var(--system-blue);
   color: #ffffff;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 1px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--system-blue) 22%, transparent);
 }
 
 .mun-apple-btn-filled-blue:hover:not(:disabled):not([aria-disabled="true"]) {
-  background: color-mix(in srgb, var(--system-blue) 92%, #ffffff);
+  background: color-mix(in srgb, var(--system-blue) 88%, #000000);
 }
 
 .mun-apple-btn-filled-red {
@@ -7812,11 +7829,11 @@ html.dark .mun-apple-window-sidebar {
 }
 
 .mun-apple-product-page-narrow {
-  max-width: 64rem;
+  max-width: 42rem;
 }
 
 .mun-apple-product-page-wide {
-  max-width: 80rem;
+  max-width: var(--content-max-width, 82.5rem);
 }
 
 .mun-apple-page-intro {

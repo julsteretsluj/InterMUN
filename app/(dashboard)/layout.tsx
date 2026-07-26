@@ -255,11 +255,11 @@ export default async function DashboardLayout({
           }
         />
         <DashboardAnnouncementPopup />
-        <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
-          <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="space-y-6">
+        <main className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10">
+          <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="mx-auto w-full max-w-[var(--content-max-width,82.5rem)] space-y-8">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
             <GlassPanel
-              className="overflow-hidden border-l-[3px] border-l-[color:var(--gold)]"
+              className="overflow-hidden border-l-[3px] border-l-[color:var(--accent)]"
               material="thin"
               interactive={false}
               dense

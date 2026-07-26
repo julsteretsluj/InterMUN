@@ -388,15 +388,15 @@ export function VotingPanel({
           </div>
           <div className="flex shrink-0 flex-wrap justify-end gap-2">
             <span
-              className={`rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide ${
+              className={`rounded-[var(--radius-md)] px-2.5 py-1 text-xs font-semibold tracking-wide ${
                 isMustVote
-                  ? "bg-amber-100 text-amber-950 dark:bg-amber-500/20 dark:text-amber-100"
+                  ? "bg-[color:color-mix(in_srgb,var(--system-orange)_16%,transparent)] text-[color:color-mix(in_srgb,var(--system-orange)_88%,var(--color-text))] dark:bg-amber-500/20 dark:text-amber-100"
                   : "bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] text-brand-navy"
               }`}
             >
               {isMustVote ? t("mustVoteBadge") : t("canVoteBadge")}
             </span>
-            <span className="rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] px-2.5 py-1 text-xs font-medium text-brand-navy">
+            <span className="rounded-[var(--radius-md)] bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] px-2.5 py-1 text-xs font-medium text-brand-navy">
               {t("majorityLine", { label: majorityLabel(item.required_majority) })}
             </span>
           </div>

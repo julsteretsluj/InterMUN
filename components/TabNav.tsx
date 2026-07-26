@@ -5,8 +5,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { useTranslations } from "next-intl";
+import {
+  Award,
+  BookOpen,
+  Calendar,
+  CheckSquare,
+  DoorOpen,
+  FileText,
+  Flag,
+  GraduationCap,
+  History,
+  Home,
+  Image,
+  KeyRound,
+  LayoutGrid,
+  Lightbulb,
+  Link2,
+  Mic,
+  Newspaper,
+  Camera,
+  ClipboardList,
+  Pencil,
+  Compass,
+  Shield,
+  User,
+  Vote,
+  type LucideProps,
+} from "lucide-react";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
 import {
@@ -26,38 +53,76 @@ import {
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
 
+type NavIcon = ComponentType<LucideProps>;
+
+const NAV_ICONS: Record<string, NavIcon> = {
+  "/delegate": Home,
+  "/profile": User,
+  "/chats-notes": ClipboardList,
+  "/committee-room": LayoutGrid,
+  "/history": History,
+  "/newsroom": Newspaper,
+  "/press-corps": Camera,
+  "/milestones": Award,
+  "/voting": Vote,
+  "/guides": BookOpen,
+  "/documents": FileText,
+  "/stances": Compass,
+  "/ideas": Lightbulb,
+  "/sources": Link2,
+  "/resolutions": CheckSquare,
+  "/amendments": Pencil,
+  "/speeches": Mic,
+  "/running-notes": ClipboardList,
+  "/report": Flag,
+  "/crisis-slides": Image,
+  "/advisor": GraduationCap,
+  "/advisor/notes": ClipboardList,
+  "/advisor/schedule": Calendar,
+  "/delegate/schedule": Calendar,
+  "/chair/room-code": DoorOpen,
+  "/chair/session": Shield,
+  "/smt/allocation-passwords": KeyRound,
+  "/chair/allocation-matrix": LayoutGrid,
+  "/chair/awards": Award,
+};
+
 const BASE_TABS = [
-  { href: "/delegate", labelKey: "delegateHub", emoji: "🏠" },
-  { href: "/profile", labelKey: "profile", emoji: "👤" },
-  { href: "/chats-notes", labelKey: "notes", emoji: "📝" },
-  { href: "/committee-room", labelKey: "committee", emoji: "🏛️" },
-  { href: "/history", labelKey: "history", emoji: "🕘" },
-  { href: "/newsroom", labelKey: "newsroom", emoji: "📰" },
-  { href: "/press-corps", labelKey: "pressCorps", emoji: "📸" },
-  { href: "/milestones", labelKey: "milestones", emoji: "🏅" },
-  { href: "/voting", labelKey: "voting", emoji: "🗳️" },
-  { href: "/guides", labelKey: "guides", emoji: "📚" },
-  { href: "/documents", labelKey: "documents", emoji: "📄" },
-  { href: "/stances", labelKey: "stances", emoji: "🧭" },
-  { href: "/ideas", labelKey: "ideas", emoji: "💡" },
-  { href: "/sources", labelKey: "sources", emoji: "🔗" },
-  { href: "/resolutions", labelKey: "resolutions", emoji: "✅" },
-  { href: "/amendments", labelKey: "amendments", emoji: "✏️" },
-  { href: "/speeches", labelKey: "speeches", emoji: "🎤" },
-  { href: "/running-notes", labelKey: "running", emoji: "📋" },
-  { href: "/report", labelKey: "report", emoji: "🚩" },
-  { href: "/crisis-slides", labelKey: "crisisSlides", emoji: "🖼️" },
+  { href: "/delegate", labelKey: "delegateHub" },
+  { href: "/profile", labelKey: "profile" },
+  { href: "/chats-notes", labelKey: "notes" },
+  { href: "/committee-room", labelKey: "committee" },
+  { href: "/history", labelKey: "history" },
+  { href: "/newsroom", labelKey: "newsroom" },
+  { href: "/press-corps", labelKey: "pressCorps" },
+  { href: "/milestones", labelKey: "milestones" },
+  { href: "/voting", labelKey: "voting" },
+  { href: "/guides", labelKey: "guides" },
+  { href: "/documents", labelKey: "documents" },
+  { href: "/stances", labelKey: "stances" },
+  { href: "/ideas", labelKey: "ideas" },
+  { href: "/sources", labelKey: "sources" },
+  { href: "/resolutions", labelKey: "resolutions" },
+  { href: "/amendments", labelKey: "amendments" },
+  { href: "/speeches", labelKey: "speeches" },
+  { href: "/running-notes", labelKey: "running" },
+  { href: "/report", labelKey: "report" },
+  { href: "/crisis-slides", labelKey: "crisisSlides" },
 ] as const;
 
 const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
 
 const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
 
-const SCHEDULE_TAB = { labelKey: "conferenceSchedule" as const, emoji: "📅" };
+const SCHEDULE_TAB = { labelKey: "conferenceSchedule" as const };
 
 function scheduleHrefForRole(role: UserRole | null): string | null {
   if (role === "advisor") return "/advisor/schedule";
   return "/delegate/schedule";
+}
+
+function iconForHref(href: string): NavIcon {
+  return NAV_ICONS[href] ?? FileText;
 }
 
 function useNavTabs(
@@ -77,8 +142,8 @@ function useNavTabs(
 
   if (role === "advisor") {
     return [
-      { href: "/advisor", labelKey: "advisorHub", emoji: "🎓" },
-      { href: "/advisor/notes", labelKey: "advisorNotes", emoji: "📨" },
+      { href: "/advisor", labelKey: "advisorHub" },
+      { href: "/advisor/notes", labelKey: "advisorNotes" },
       ...scheduleTab,
       ...baseTabs
         .filter((t) => t.href !== "/delegate" && !ADVISOR_BLOCKED_HREFS.has(t.href))
@@ -89,15 +154,15 @@ function useNavTabs(
   return role === "chair" || role === "smt" || role === "admin"
     ? [
         ...baseTabs.slice(0, 3),
-        { href: "/chair/room-code", labelKey: "committeeCode", emoji: "🚪" },
+        { href: "/chair/room-code", labelKey: "committeeCode" },
         ...(role === "chair"
-          ? ([{ href: "/chair/session", labelKey: "session", emoji: "🧠" }] as const)
+          ? ([{ href: "/chair/session", labelKey: "session" }] as const)
           : []),
         ...(role === "smt" || role === "admin"
-          ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords", emoji: "🔐" }] as const)
+          ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords" }] as const)
           : []),
-        { href: "/chair/allocation-matrix", labelKey: "matrix", emoji: "🔢" },
-        { href: "/chair/awards", labelKey: "awards", emoji: "🏆" },
+        { href: "/chair/allocation-matrix", labelKey: "matrix" },
+        { href: "/chair/awards", labelKey: "awards" },
         ...baseTabs.slice(3),
       ]
     : [
@@ -117,11 +182,12 @@ function AspireSidebarLink({
   isActive,
   priority,
 }: {
-  tab: { href: string; labelKey: string; emoji: string };
+  tab: { href: string; labelKey: string };
   label: string;
   isActive: boolean;
   priority: number;
 }) {
+  const Icon = iconForHref(tab.href);
   return (
     <Link
       href={tab.href}
@@ -134,8 +200,8 @@ function AspireSidebarLink({
       )}
     >
       <NavPriorityBadge priority={priority} />
-      <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
-        {tab.emoji}
+      <span className="inline-flex size-7 shrink-0 items-center justify-center text-brand-muted" aria-hidden>
+        <Icon className={cn("size-[1.125rem] stroke-[1.5]", isActive && "text-[var(--accent)]")} />
       </span>
       <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
@@ -148,11 +214,12 @@ function DockLink({
   isActive,
   priority,
 }: {
-  tab: { href: string; labelKey: string; emoji: string };
+  tab: { href: string; labelKey: string };
   label: string;
   isActive: boolean;
   priority: number;
 }) {
+  const Icon = iconForHref(tab.href);
   return (
     <Link
       href={tab.href}
@@ -167,7 +234,7 @@ function DockLink({
           isActive && "text-[var(--accent)]"
         )}
       >
-        <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>
+        <Icon className="size-[1.125rem] stroke-[1.5]" aria-hidden />
       </span>
       <span
         className={cn(
@@ -279,7 +346,7 @@ export function TabNav({
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <nav
         aria-label={t("mainNavigationAria")}
-        className="mx-auto max-w-2xl overflow-x-auto overflow-y-hidden overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]"
+        className="mx-auto max-w-2xl overflow-x-auto overflow-y-hidden overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[color:color-mix(in_srgb,#ffffff_78%,transparent)] px-2 py-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] backdrop-blur-2xl backdrop-saturate-150 dark:bg-[color:color-mix(in_srgb,var(--material-chrome)_88%,transparent)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
       >
         <div className="flex min-w-full flex-col gap-1.5">
           {folderIds.length > 1 ? (

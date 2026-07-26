@@ -340,21 +340,21 @@ export function FloorStatusBar({
 
   const isLight = theme === "light";
   const box = isLight
-    ? "rounded-lg border border-brand-navy/10 bg-brand-cream/30 px-3 py-1.5 text-brand-navy text-sm space-y-1.5"
-    : "rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-brand-navy text-sm space-y-1.5";
+    ? "rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--apple-bg-tertiary)] px-3 py-2 text-brand-navy text-sm space-y-1.5"
+    : "rounded-[var(--radius-xl)] border border-white/10 bg-white/5 px-3 py-2 text-brand-navy text-sm space-y-1.5";
   const muted = isLight
     ? "text-[0.65rem] uppercase tracking-wider text-brand-muted"
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/80";
   const icon = isLight ? "text-brand-accent" : "text-brand-accent-bright";
-  const border = isLight ? "border-brand-navy/10" : "border-white/10";
+  const border = isLight ? "border-[var(--hairline)]" : "border-white/10";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
   const qText = "text-brand-navy/90";
   const card = isLight
-    ? "rounded-lg border border-brand-navy/10 bg-white/80 px-2.5 py-1.5 text-brand-navy"
-    : "rounded-lg border border-white/10 bg-black/20 px-2.5 py-1.5 text-brand-navy";
+    ? "rounded-[var(--radius-md)] border border-[var(--hairline)] bg-white px-2.5 py-1.5 text-brand-navy"
+    : "rounded-[var(--radius-md)] border border-white/10 bg-black/20 px-2.5 py-1.5 text-brand-navy";
   const cardActive = isLight
-    ? "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy"
-    : "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy";
+    ? "rounded-[var(--radius-md)] border border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] px-2.5 py-1.5 text-brand-navy"
+    : "rounded-[var(--radius-md)] border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy";
 
   const limitFmt =
     sessionStartedAt != null && sessionEndMs != null && nowMs > 0
@@ -402,8 +402,8 @@ export function FloorStatusBar({
     <div
       className={
         isLight
-          ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
-          : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
+          ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--apple-bg-tertiary)] px-3 py-2 text-sm text-brand-navy"
+          : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[var(--radius-xl)] border border-white/10 bg-white/5 px-3 py-2 text-sm text-brand-navy"
       }
     >
       <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
@@ -452,8 +452,8 @@ export function FloorStatusBar({
               href={link.href}
               className={
                 isLight
-                  ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
-                  : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
+                  ? "rounded-[var(--radius-md)] border border-[var(--hairline)] bg-white px-2.5 py-1 text-[0.7rem] font-medium text-brand-navy hover:bg-[var(--apple-bg-secondary)]"
+                  : "rounded-[var(--radius-md)] border border-white/15 bg-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
               }
             >
               {link.label}
@@ -566,7 +566,7 @@ export function FloorStatusBar({
           onClick={() => setExpandedAnnouncement(null)}
         >
           <div
-            className="w-full max-w-2xl rounded-xl border border-white/15 bg-brand-paper p-4 md:p-6 shadow-2xl"
+            className="w-full max-w-2xl rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 md:p-7 shadow-[var(--dashboard-shadow)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
