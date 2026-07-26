@@ -131,7 +131,7 @@ export function ChairMotionQueueDemo() {
 }
 
 export function ChairMotionVoteDemo() {
-  return <MarketingSessionVoteRecordingPanel />;
+  return <MarketingSessionVoteRecordingPanel compactIntro />;
 }
 
 const TIMER_PRESETS = [

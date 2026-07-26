@@ -29,18 +29,18 @@ export const PREVIEW_ROW =
 
 /** Session-floor card chrome — matches live chair `surfaceCard` / dashboard tokens. */
 export const MARKETING_SESSION_SURFACE =
-  "marketing-session-surface rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-brand-navy shadow-sm backdrop-blur-sm";
+  "marketing-session-surface rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-white p-5 text-brand-navy shadow-[var(--dashboard-shadow)]";
 
 /** @deprecated Prefer MARKETING_SESSION_SURFACE — kept for role-feature previews. */
 export const MARKETING_DARK_GLASS_CARD = MARKETING_SESSION_SURFACE;
 
 /** Nested row / inset inside a session surface card. */
 export const MARKETING_SESSION_INSET =
-  "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)]";
+  "rounded-[var(--radius-lg)] bg-[var(--apple-bg-secondary)]";
 
 /** Nested content island — same theme tokens as the parent session card. */
 export const MARKETING_LIGHT_SURFACE =
-  "marketing-light-surface rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy";
+  "marketing-light-surface rounded-[var(--radius-lg)] bg-white text-brand-navy";
 
 /** Session floor labels — matches chair session control / speaker queue panel. */
-export const SESSION_FLOOR_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";
+export const SESSION_FLOOR_LABEL = "text-[0.75rem] font-medium text-brand-muted";

@@ -54,18 +54,12 @@ function RoleFeatureGrid({
   dark?: boolean;
 }) {
   return (
-    <ul className={cn("grid gap-3 sm:grid-cols-2", className)}>
+    <ul className={cn("grid gap-8 sm:grid-cols-2", className)}>
       {items.map((item) => (
         <li key={item.title} className="mun-role-feature">
-          <div className="mb-2 flex items-center justify-between gap-2">
-            <span className="mun-role-feature-index">{item.index}</span>
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--accent)]">
-              {item.icon}
-            </span>
-          </div>
           <h3
             className={cn(
-              "font-display text-base font-semibold",
+              "text-[1.0625rem] font-semibold tracking-[-0.02em]",
               dark ? "text-[color:var(--marketing-ink)]" : "text-brand-navy"
             )}
           >
@@ -73,7 +67,7 @@ function RoleFeatureGrid({
           </h3>
           <p
             className={cn(
-              "mt-1.5 text-sm leading-relaxed",
+              "mt-2 text-[0.9375rem] leading-relaxed",
               dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
@@ -145,13 +139,13 @@ function RoleSection({
         )}
       >
         <div className={dark ? "mun-marketing-section-dark" : undefined}>
-          <p className={cn(dark ? "mun-marketing-eyebrow" : "mun-marketing-eyebrow text-[var(--accent)]")}>
-            {eyebrow}
-          </p>
-          <h2 className="mun-display mt-4 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.02em]">{title}</h2>
+          <p className="text-[0.8125rem] font-medium text-[var(--accent)]">{eyebrow}</p>
+          <h2 className="mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.025em] text-brand-navy">
+            {title}
+          </h2>
           <p
             className={cn(
-              "mt-5 text-[1.0625rem] leading-relaxed md:text-xl",
+              "mt-5 text-[1.0625rem] leading-relaxed",
               dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
@@ -161,14 +155,9 @@ function RoleSection({
           {exploreHref && exploreLabel ? (
             <Link
               href={exploreHref}
-              className={cn(
-                "mt-6 inline-flex items-center gap-1 font-sans text-xs font-semibold uppercase tracking-wider transition",
-                dark
-                  ? "text-[var(--accent)] hover:text-[color:var(--marketing-ink)]"
-                  : "text-[var(--accent)] hover:text-brand-navy"
-              )}
+              className="mt-8 inline-flex text-[0.9375rem] font-medium text-[var(--accent)] transition-apple hover:opacity-75"
             >
-              {exploreLabel} →
+              {exploreLabel}
             </Link>
           ) : null}
         </div>

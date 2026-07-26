@@ -1697,9 +1697,8 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-surface {
-  background-color: color-mix(in srgb, var(--material-thin) 88%, transparent);
-  background-image: radial-gradient(color-mix(in srgb, var(--navy) 7%, transparent) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-color: transparent;
+  background-image: none;
 }
 
 @keyframes mun-marketing-float {
@@ -1912,18 +1911,18 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-chamber-frame-bar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 0.75rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fbfbfd;
-  padding: 0.55rem 0.85rem;
+  background: #ffffff;
+  padding: 0.75rem 1.25rem;
 }
 
 .marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar {
   border-bottom-color: rgba(0, 0, 0, 0.08);
-  background: #fbfbfd;
+  background: #ffffff;
 }
 
 .marketing-shell .mun-chamber-frame-bar > :last-child {
@@ -1937,8 +1936,8 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-chamber-frame-body {
-  padding: 1.25rem;
-  background: #f5f5f7;
+  padding: 1.5rem;
+  background: #fbfbfd;
   color: #1d1d1f;
 }
 
@@ -1956,13 +1955,13 @@ html.dark .marketing-shell .mun-chamber-frame-bar,
 html.dark .marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar,
 html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-bar {
   border-bottom-color: rgba(0, 0, 0, 0.08) !important;
-  background: #fbfbfd !important;
+  background: #ffffff !important;
   color: #6e6e73 !important;
 }
 
 html.dark .marketing-shell .mun-chamber-frame-body,
 html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
-  background: #f5f5f7 !important;
+  background: #fbfbfd !important;
   color: #1d1d1f !important;
 }
 
@@ -2210,32 +2209,27 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
 }
 
 .marketing-shell .mun-role-feature {
-  border-radius: 1.25rem;
-  border: 1px solid var(--marketing-glass-border);
-  border-left-width: 3px;
-  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--hairline));
-  background: color-mix(in srgb, var(--material-thick) 84%, transparent);
-  backdrop-filter: blur(14px) saturate(1.05);
-  padding: 1.15rem 1.15rem 1.2rem 1rem;
-  box-shadow: var(--marketing-float-shadow);
-  transition:
-    transform var(--dur-base) var(--ease-apple),
-    box-shadow var(--dur-base) var(--ease-apple),
-    border-color var(--dur-base) var(--ease-apple);
+  border-radius: var(--radius-xl);
+  border: none;
+  border-left-width: 0;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0.25rem 0 1rem;
+  box-shadow: none;
+  transition: opacity var(--dur-base) var(--ease-apple-out);
 }
 
 .marketing-shell .mun-role-feature:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 22px 44px -18px rgba(45, 35, 18, 0.14),
-    0 8px 20px -10px rgba(45, 35, 18, 0.08);
+  transform: none;
+  box-shadow: none;
+  opacity: 0.85;
 }
 
 .marketing-shell .mun-role-feature-index {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--accent);
 }
 

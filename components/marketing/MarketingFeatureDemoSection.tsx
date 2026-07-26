@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function MarketingFeatureDemoSection({
   id,
-  index,
+  index: _index,
   eyebrow,
   title,
   description,
@@ -32,38 +32,34 @@ export function MarketingFeatureDemoSection({
   /** @deprecated Previews always use light chamber chrome. */
   variant?: "dark" | "light";
 }) {
+  const shownBullets = bullets?.slice(0, 2) ?? [];
+
   return (
-    <section
-      id={id}
-      className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-24"
-    >
+    <section id={id} className="scroll-mt-24 py-20 md:py-28">
       <div
         className={cn(
-          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-start gap-10 px-4 md:px-8 lg:grid-cols-2 lg:gap-16",
+          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-12 px-5 md:px-10 lg:grid-cols-2 lg:gap-20",
           reversed && "lg:[&>div:first-child]:order-2"
         )}
       >
-        <div>
-          <p className="mun-marketing-eyebrow text-[var(--accent)]">{eyebrow}</p>
-          <p className="mt-3 font-sans text-xs font-bold tracking-[0.14em] text-[var(--accent)]">{index}</p>
-          <h2 className="mun-display mt-2 text-2xl text-brand-navy md:text-3xl">{title}</h2>
-          <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{description}</p>
-          {bullets && bullets.length > 0 ? (
-            <ul className="mt-6 space-y-2 text-sm text-brand-muted md:text-base">
-              {bullets.map((bullet) => (
-                <li key={bullet} className="flex gap-2">
-                  <span className="text-[var(--accent)]" aria-hidden>
-                    ›
-                  </span>
+        <div className="max-w-xl">
+          <p className="text-[0.8125rem] font-medium tracking-[-0.01em] text-[var(--accent)]">{eyebrow}</p>
+          <h2 className="mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.025em] text-brand-navy">
+            {title}
+          </h2>
+          <p className="mt-5 text-[1.0625rem] leading-[1.55] text-brand-muted">{description}</p>
+          {shownBullets.length > 0 ? (
+            <ul className="mt-8 space-y-3">
+              {shownBullets.map((bullet) => (
+                <li key={bullet} className="flex gap-3 text-[0.9375rem] leading-snug text-brand-navy/80">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden />
                   <span>{bullet}</span>
                 </li>
               ))}
             </ul>
           ) : null}
         </div>
-        <MarketingChamberFrame label={previewLabel} variant="light">
-          {preview}
-        </MarketingChamberFrame>
+        <MarketingChamberFrame label={previewLabel}>{preview}</MarketingChamberFrame>
       </div>
     </section>
   );

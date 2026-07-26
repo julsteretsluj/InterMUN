@@ -5,13 +5,10 @@
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import {
-  sortMotionsMostDisruptiveFirst,
-} from "@/lib/motion-disruptiveness";
+import { sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import type { VoteType } from "@/types/database";
 import { cn } from "@/lib/utils";
-
-import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, MARKETING_SESSION_INSET, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE } from "./marketing-preview-styles";
 
 type MotionDemoRow = {
   id: string;
@@ -21,7 +18,6 @@ type MotionDemoRow = {
   created_at: string;
 };
 
-/** RoP-ranked pending motions — mirrors session floor `pendingStatedMotions` order. */
 const MOTION_QUEUE_SEED: MotionDemoRow[] = [
   {
     id: "close",
@@ -44,86 +40,40 @@ const MOTION_QUEUE_SEED: MotionDemoRow[] = [
     procedure_code: "moderated_caucus",
     created_at: "2026-07-05T10:02:00.000Z",
   },
-  {
-    id: "order",
-    title: "Point of order",
-    vote_type: "motion",
-    procedure_code: null,
-    created_at: "2026-07-05T10:03:00.000Z",
-  },
 ];
 
 export function MarketingSessionMotionQueuePanel({ className }: { className?: string }) {
   const t = useTranslations("sessionControlClient");
-  const motions = useMemo(
-    () => sortMotionsMostDisruptiveFirst(MOTION_QUEUE_SEED),
-    []
-  );
+  const motions = useMemo(() => sortMotionsMostDisruptiveFirst(MOTION_QUEUE_SEED), []);
 
   return (
-    <section className={cn("space-y-3", className)}>
-      <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className="font-display text-lg font-semibold text-brand-navy">{t("motionControl")}</h3>
-        <p className="mt-1 text-sm text-brand-muted">{t("motionControlHelp")}</p>
-      </div>
-
-      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
-        <div className={cn("space-y-2 px-3 py-2", MARKETING_SESSION_INSET)}>
-          <p className="text-sm font-medium text-brand-navy">
-            {t("motionFloorLabel")}{" "}
-            <span className="text-brand-muted">{t("closed")}</span>
+    <section className={cn("space-y-4", className)}>
+      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-5 p-5")}>
+        <div className="flex items-baseline justify-between gap-3">
+          <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-brand-navy">
+            {t("motionControl")}
+          </h3>
+          <p className="text-[0.8125rem] text-brand-muted">
+            {t("motionFloorLabel")} {t("closed")}
           </p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              className="rounded-lg border border-brand-accent/50 bg-brand-accent/15 px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-accent/25"
-            >
-              {t("addMotionGuided")}
-            </button>
-            <button
-              type="button"
-              className="rounded-lg bg-brand-accent px-3 py-2 text-sm font-medium text-white"
-            >
-              {t("openFloorForMotionStatements")}
-            </button>
-            <button
-              type="button"
-              className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]"
-            >
-              {t("closeFloorStatementsEnded")}
-            </button>
-            <button
-              type="button"
-              className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-500/15"
-            >
-              {t("recordStatedMotionButton")}
-            </button>
-            <button
-              type="button"
-              className="rounded-[var(--radius-md)] bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white hover:bg-[color:color-mix(in_srgb,var(--accent)_88%,#000000)]"
-            >
-              {t("beginVotingMostDisruptive")}
-            </button>
-          </div>
         </div>
 
-        <div className={cn("space-y-2 px-3 py-2", MARKETING_SESSION_INSET)}>
-          <p className={SESSION_FLOOR_LABEL}>{t("pendingVoteOrderMostDisruptive")}</p>
-          <ol className="list-decimal space-y-2 pl-5 text-sm text-brand-navy">
+        <button type="button" className="mun-apple-btn mun-apple-btn-filled-blue mun-apple-btn-block">
+          {t("beginVotingMostDisruptive")}
+        </button>
+
+        <div>
+          <p className="mb-3 text-[0.75rem] font-medium text-brand-muted">{t("pendingVoteOrderMostDisruptive")}</p>
+          <ol className="space-y-0 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]">
             {motions.map((motion, index) => (
-                <li key={motion.id} className="pl-1">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <span className="font-medium">#{index + 1}</span> — {motion.title}
-                    </div>
-                    <button
-                      type="button"
-                      className="shrink-0 text-xs font-medium text-red-700 hover:underline"
-                    >
-                      {t("withdraw")}
-                    </button>
-                  </div>
-                </li>
+              <li
+                key={motion.id}
+                className="flex items-center justify-between gap-3 py-3 text-[0.9375rem] text-brand-navy"
+              >
+                <span className="min-w-0 truncate">
+                  <span className="tabular-nums text-brand-muted">{index + 1}.</span> {motion.title}
+                </span>
+              </li>
             ))}
           </ol>
         </div>
