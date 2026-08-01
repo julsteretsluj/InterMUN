@@ -83,13 +83,13 @@ html {
   /* Base rem scale; `--text-scale-step` is percentage points from default (-50..+50). */
   font-size: calc(100% + (var(--text-scale-step, 0) * 1%));
 
-  /* —— Intentional radii (hero ~16px, small cards ~8–10px) —— */
-  --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
+  /* —— Intentional radii (SEAMUN Chat–inspired softer rounds) —— */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 30px;
   --radius-pill: 999px;
 
   /* —— Human motion (300–500ms, natural easing) —— */
@@ -99,17 +99,17 @@ html {
   --dur-base: 400ms;
   --dur-slow: 500ms;
 
-  /* —— Soft dashboard (light) — pastel blue canvas —— */
+  /* —— Soft dashboard (light) — SEAMUN pastel blue canvas —— */
   --dashboard-cream: #dff2fc;
   --dashboard-card: #ffffff;
-  --dashboard-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-  --dashboard-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.08);
+  --dashboard-shadow: 0 8px 20px rgba(35, 75, 104, 0.08);
+  --dashboard-shadow-hover: 0 20px 48px rgba(35, 75, 104, 0.12);
 
-  /* —— Brand blues (legacy aliases; interactive accent is --accent) —— */
-  --navy-deep: #0071e3;
-  --navy: #0071e3;
-  --navy-bright: #0071e3;
-  --navy-glass: rgba(0, 113, 227, 0.72);
+  /* —— Brand blues (SEAMUN Chat–inspired navy / teal accent) —— */
+  --navy-deep: #17324a;
+  --navy: #17324a;
+  --navy-bright: #244964;
+  --navy-glass: rgba(23, 50, 74, 0.72);
   /* Brand gold tracks the theme accent (set after --accent-bright below; resolved at use). */
   --gold: var(--accent-bright);
   --gold-bright: color-mix(in srgb, var(--accent-bright) 55%, #ffffff);
@@ -140,18 +140,18 @@ html {
   /* —— Intentional semantic UI (light) —— */
   --apple-bg-primary: #ffffff;
   --apple-bg-secondary: #dff2fc;
-  --apple-bg-tertiary: #f0f9fd;
-  --apple-bg-elevated: #ffffff;
-  --apple-label: #1d1d1f;
-  --apple-label-secondary: #424245;
-  --apple-label-tertiary: #6e6e73;
-  --apple-label-quaternary: rgba(60, 60, 67, 0.18);
-  --apple-fill: rgba(120, 120, 128, 0.2);
-  --apple-fill-secondary: rgba(120, 120, 128, 0.16);
-  --apple-fill-tertiary: rgba(118, 118, 128, 0.12);
-  --apple-fill-quaternary: rgba(116, 116, 128, 0.08);
-  --apple-separator: rgba(60, 60, 67, 0.29);
-  --apple-separator-opaque: #c6c6c8;
+  --apple-bg-tertiary: #eff9ff;
+  --apple-bg-elevated: #fffdf8;
+  --apple-label: #183148;
+  --apple-label-secondary: #35516b;
+  --apple-label-tertiary: #6a7d91;
+  --apple-label-quaternary: rgba(24, 49, 72, 0.18);
+  --apple-fill: rgba(23, 50, 74, 0.08);
+  --apple-fill-secondary: rgba(23, 50, 74, 0.06);
+  --apple-fill-tertiary: rgba(23, 50, 74, 0.04);
+  --apple-fill-quaternary: rgba(23, 50, 74, 0.03);
+  --apple-separator: rgba(24, 49, 72, 0.14);
+  --apple-separator-opaque: #c9dde9;
 
   /* —— Apple UI typography (SF Pro semantic scale — app-wide) —— */
   --apple-font-ui: var(--font-ui), "Inter Tight", system-ui, sans-serif;
@@ -170,24 +170,24 @@ html {
   --apple-text-section-size: clamp(2rem, 3.5vw, 3.25rem);
   --content-max-width: 82.5rem;
 
-  /* —— Soft pastel materials (less glass, more solid warmth) —— */
+  /* —— Soft pastel materials (SEAMUN Chat glass/surface) —— */
   --apple-material-saturate: 120%;
   --apple-material-ultrathin-bg: rgba(255, 255, 255, 0.72);
   --apple-material-ultrathin-blur: 12px;
   --apple-material-thin-bg: rgba(255, 255, 255, 0.82);
   --apple-material-thin-blur: 16px;
-  --apple-material-regular-bg: rgba(255, 255, 255, 0.92);
+  --apple-material-regular-bg: rgba(255, 255, 255, 0.86);
   --apple-material-regular-blur: 20px;
   --apple-material-thick-bg: #ffffff;
   --apple-material-thick-blur: 24px;
   --apple-material-border-highlight: rgba(255, 255, 255, 0.9);
-  --apple-material-border-edge: color-mix(in srgb, #0071e3 12%, #d2d2d7);
+  --apple-material-border-edge: #c9dde9;
   --apple-material-shadow:
     0 1px 0 rgba(255, 255, 255, 0.8),
-    0 8px 30px rgba(0, 0, 0, 0.06);
+    0 8px 20px rgba(35, 75, 104, 0.08);
   --apple-material-shadow-hover:
     0 1px 0 rgba(255, 255, 255, 0.9),
-    0 12px 36px rgba(0, 0, 0, 0.08);
+    0 20px 48px rgba(35, 75, 104, 0.12);
 
   /* —— Materials (vibrancy — used with backdrop-blur + saturate) —— */
   --material-chrome: var(--dashboard-card);
@@ -197,8 +197,8 @@ html {
   --material-popover: var(--dashboard-card);
 
   /* —— Hairline separators —— */
-  --hairline: rgba(0, 0, 0, 0.08);
-  --hairline-strong: #d2d2d7;
+  --hairline: #c9dde9;
+  --hairline-strong: #b5cfdc;
 
   /* —— Dashboard chrome —— */
   --sidebar-material: var(--dashboard-card);
@@ -210,16 +210,16 @@ html {
   --desktop-bg: var(--dashboard-cream);
 
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
-  --logo-cyan: #00ccff;
-  --logo-blue: #0071e3;
+  --logo-cyan: #3bb4e0;
+  --logo-blue: #119ed3;
   --logo-magenta: #ff00ff;
   --logo-orange: #ff9500;
   --logo-yellow: #ffcc00;
   --logo-green: #34c759;
 
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
-  --accent: #0071e3;
-  --accent-bright: #2997ff;
+  --accent: #119ed3;
+  --accent-bright: #3bb4e0;
   /* Emphasis copy — follows active theme hue instead of fixed gold */
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
@@ -237,9 +237,9 @@ html {
   --brand-cream: var(--color-surface-subtle);
 
   /* —— TEXT —— */
-  --color-text: #1d1d1f;
-  --color-text-secondary: #424245;
-  --color-text-muted: #6e6e73;
+  --color-text: #183148;
+  --color-text-secondary: #35516b;
+  --color-text-muted: #6a7d91;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
@@ -256,18 +256,18 @@ html {
   --brand-gold: var(--gold);
   --brand-gold-text: var(--gold-text-bright);
 
-  --brand-navy-soft: rgba(60, 60, 67, 0.08);
-  --brand-silver: #8e8e93;
+  --brand-navy-soft: rgba(23, 50, 74, 0.08);
+  --brand-silver: #6a7d91;
 
   /* —— STATE (semantic — tuned for light grouped backgrounds) —— */
-  --semantic-success: #34c759;
-  --semantic-success-bg: color-mix(in srgb, #34c759 14%, var(--color-bg-page));
+  --semantic-success: #2d7f68;
+  --semantic-success-bg: color-mix(in srgb, #2d7f68 14%, var(--color-bg-page));
   --semantic-warning: #ff9500;
   --semantic-warning-bg: color-mix(in srgb, #ff9500 14%, var(--color-bg-page));
-  --semantic-danger: #ff3b30;
-  --semantic-danger-bg: color-mix(in srgb, #ff3b30 12%, var(--color-bg-page));
-  --semantic-info: #0071e3;
-  --semantic-info-bg: color-mix(in srgb, #0071e3 12%, var(--color-bg-page));
+  --semantic-danger: #aa4a47;
+  --semantic-danger-bg: color-mix(in srgb, #aa4a47 12%, var(--color-bg-page));
+  --semantic-info: #119ed3;
+  --semantic-info-bg: color-mix(in srgb, #119ed3 12%, var(--color-bg-page));
 
   /* —— App chrome aliases (light) — same tokens as “discord-*” for backwards compatibility —— */
   --discord-sidebar: var(--sidebar-material);
@@ -467,13 +467,13 @@ html.dark {
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
-  /* Prefer Inter Tight (next/font --font-ui); Clash Display for headings */
+  /* Prefer Inter Tight body; Instrument Serif for headings (SEAMUN Chat) */
   --font-sans: var(--font-ui), "Inter Tight", system-ui, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-heading: "Clash Display", var(--font-sans);
-  --font-display: "Clash Display", var(--font-sans);
-  --font-marketing-display: "Clash Display", "Rijusans", var(--font-sans);
+  --font-heading: var(--font-display-serif), "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-display: var(--font-display-serif), "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-marketing-display: var(--font-display-serif), "Instrument Serif", "Clash Display", Georgia, serif;
   --font-marketing-cursive: "Momo Signature", "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: var(--font-marketing-cursive);
@@ -729,11 +729,13 @@ html.dark body.mun-apple-site {
   background-image: none;
 }
 
-/* Cool neutral canvas — subtle accent wash only */
+/* Cool pastel wash — SEAMUN Chat canvas */
 html:not(.dark) body {
+  background-color: var(--dashboard-cream);
   background-image:
-    radial-gradient(1200px 800px at 12% -8%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 60%),
-    radial-gradient(1000px 700px at 92% 4%, color-mix(in srgb, var(--accent-bright) 4%, transparent), transparent 55%);
+    radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.72), transparent 24%),
+    radial-gradient(circle at 88% 16%, rgba(255, 255, 255, 0.55), transparent 20%),
+    linear-gradient(#dff2fc, #edf8ff 58%, #f8fbff);
   background-attachment: fixed;
 }
 
@@ -997,7 +999,7 @@ html.dark ::selection {
   }
 
   .dashboard-panel-title {
-    @apply font-heading text-xl font-semibold tracking-[-0.03em] text-brand-navy md:text-2xl;
+    @apply font-heading text-xl font-normal tracking-[-0.02em] text-brand-navy md:text-2xl;
   }
 
   /* Active nav — soft filled pill */
@@ -1287,11 +1289,11 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Marketing editorial headlines — Clash Display */
+  /* Marketing editorial headlines — Instrument Serif */
   .marketing-shell .mun-display {
-    @apply font-semibold;
+    @apply font-normal;
     font-family: var(--font-marketing-display);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
@@ -1706,13 +1708,13 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell {
-  /* Pastel intentional marketing surfaces */
+  /* SEAMUN Chat–aligned marketing surfaces */
   --marketing-chamber: #dff2fc;
   --marketing-chamber-elevated: #ffffff;
-  --marketing-chamber-deep: #f0f9fd;
-  --marketing-ink: #1d1d1f;
-  --marketing-ink-soft: #424245;
-  --marketing-hairline: color-mix(in srgb, #0071e3 14%, #d2d2d7);
+  --marketing-chamber-deep: #eff9ff;
+  --marketing-ink: #183148;
+  --marketing-ink-soft: #35516b;
+  --marketing-hairline: #c9dde9;
   --marketing-emph: var(--gold-text);
   --marketing-band-accent: var(--accent);
   --marketing-band-card-bg: rgba(255, 255, 255, 0.88);
@@ -3880,18 +3882,18 @@ html.dark .mun-apple-alert-panel {
   width: 100%;
 }
 
-/* Filled — prominent */
+/* Filled — prominent navy CTA (SEAMUN Chat primary) */
 .mun-apple-btn-filled-blue {
   border-color: transparent;
-  background: var(--system-blue);
+  background: var(--navy);
   color: #ffffff;
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--system-blue) 22%, transparent);
+  box-shadow: 0 8px 20px rgba(35, 75, 104, 0.18);
 }
 
 .mun-apple-btn-filled-blue:hover:not(:disabled):not([aria-disabled="true"]) {
-  background: color-mix(in srgb, var(--system-blue) 88%, #000000);
+  background: var(--navy-bright);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px color-mix(in srgb, var(--system-blue) 28%, transparent);
+  box-shadow: 0 16px 36px rgba(35, 75, 104, 0.22);
 }
 
 .mun-apple-btn-filled-red {
@@ -7940,18 +7942,18 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site .mun-shell-title,
 .mun-apple-site .dashboard-panel-title,
 .mun-apple-site h1:not(.mun-display):not(.mun-emph) {
-  font-family: var(--font-heading), var(--font-sans);
+  font-family: var(--font-heading), Georgia, serif;
   font-size: var(--apple-text-title-2-size);
-  line-height: 1.27;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 400;
   color: var(--apple-label);
 }
 
 .mun-apple-site h2 {
-  font-family: var(--font-heading), var(--font-sans);
+  font-family: var(--font-heading), Georgia, serif;
   font-size: var(--apple-text-title-3-size);
-  line-height: 1.25;
+  line-height: 1.22;
   letter-spacing: -0.015em;
   font-weight: 600;
   color: var(--apple-label);
@@ -8323,4 +8325,119 @@ html.dark .mun-apple-window-sidebar {
   border-radius: 60% 40% 55% 45%;
   pointer-events: none;
   opacity: 0.55;
+}
+
+
+/* —— SEAMUN Chat–inspired split auth / gate shells —— */
+.mun-seamun-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  background: linear-gradient(#dff2fc, #edf8ff 58%, #f8fbff);
+}
+
+@media (min-width: 960px) {
+  .mun-seamun-split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mun-seamun-brand-panel {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy, #17324a);
+  padding: 3.5rem 3rem;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: mun-slide-from-left var(--dur-slow) var(--ease-apple-out) both;
+}
+
+@media (min-width: 960px) {
+  .mun-seamun-brand-panel {
+    display: flex;
+  }
+}
+
+.mun-seamun-brand-glow {
+  position: absolute;
+  top: -60px;
+  right: -80px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.mun-seamun-brand-letter {
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  font-size: 50vh;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  color: #ffffff;
+  opacity: 0.04;
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+
+.mun-seamun-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mun-seamun-brand-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.mun-seamun-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1.5rem 3rem;
+  animation: mun-slide-from-right var(--dur-slow) var(--ease-apple-out) both;
+}
+
+@media (min-width: 960px) {
+  .mun-seamun-form-panel {
+    padding: 3rem 4rem;
+  }
+}
+
+.mun-seamun-form-card {
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.mun-seamun-form-card .rounded-\[var\(--radius-xl\)\],
+.mun-seamun-form-card [class*="rounded-2xl"],
+.mun-seamun-form-card [class*="shadow-lg"] {
+  /* Flatten nested cards inside the split form panel */
+}
+
+.mun-seamun-form-panel h1,
+.mun-seamun-form-panel h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink, #183148);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mun-seamun-brand-panel,
+  .mun-seamun-form-panel {
+    animation: none;
+  }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Merriweather } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, Merriweather } from "next/font/google";
 import Script from "next/script";
 import { getLocale, getMessages } from "next-intl/server";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
@@ -17,6 +17,14 @@ const sans = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-ui",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+/** Display / headings — SEAMUN Chat–inspired Instrument Serif. */
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-display-serif",
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 /** Document surfaces only (resolutions, papers) — Coursera-style specialization pairing. */
@@ -75,7 +83,7 @@ export default async function RootLayout({
       lang={locale}
       dir={localeDirection(locale)}
       suppressHydrationWarning
-      className={`${sans.variable} ${documentSerif.variable} h-full antialiased`}
+      className={`${sans.variable} ${display.variable} ${documentSerif.variable} h-full antialiased`}
     >
       <body className="mun-apple-site flex min-h-full flex-col font-sans text-brand-navy">
         <Script id="intermun-theme-init" strategy="beforeInteractive">

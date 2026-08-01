@@ -1,49 +1,41 @@
 ---
-description: Human, intentional UI theme — avoid AI-generated look across all InterMUN surfaces
+description: SEAMUN Chat–inspired intentional UI across all InterMUN surfaces
 alwaysApply: true
 ---
 
 # InterMUN Intentional UI Rule
 
-Use this theme as the source of truth for **all** UI (landing, app chrome, documents, prototypes). Designs should feel human, slightly imperfect, and emotionally engaging — not templated.
+Use the SEAMUN Chat visual language as the source of truth for **all** UI (landing, app chrome, documents, prototypes). Designs should feel premium, calm, and human — not templated.
 
 ## Color & Tone
-- Background base: pastel blue `#DFF2FC`
-- Anchor with one strong neutral; text contrast ≥ 4.5:1
-- Soft gradients/shadows only to draw attention — never everywhere
-- No neon, glow-everywhere accents, or oversaturated palettes
+- Background base: pastel blue `#DFF2FC` with soft wash to `#EDF8FF` / `#F8FBFF`
+- Ink: `#183148` · soft ink `#35516B` · muted `#6A7D91`
+- Navy brand panels / primary CTAs: `#17324A` (hover `#244964`)
+- Accent (selected / links): `#119ED3`
+- Borders: `#C9DDE9` · raised surface `#FFFDF8`
+- Soft blue-tinted shadows only — never harsh black glows
 
 ## Typography
-- Distinct heading font (e.g. Clash Display) + clean body (e.g. Inter Tight / Satoshi)
-- Mix weights and letter-spacing; 2–3 natural heading scales
-- Avoid Poppins + Inter + Manrope and single-weight sites
-- No oversized hero text without visual balance
+- Display / headings: **Instrument Serif**
+- Body / UI: **Inter Tight**
+- Mix serif display with tight sans body; 2–3 natural heading scales
+- Avoid Poppins + Inter + Manrope stacks
 
 ## Layout & Composition
-- Prefer asymmetry / staggered sections; vary composition between sections
-- Intentional whitespace — not equal gaps everywhere
-- Break the grid slightly (offset a card, pull a button toward its title)
-- Alternate background tones or padding for rhythm
+- Auth / gates: split navy brand panel + white form (desktop)
+- Prefer asymmetry / staggered sections; intentional whitespace
 - Never clone identical section structures back-to-back
 
 ## Buttons & Microcopy
-- One primary + one secondary button style
-- Descriptive CTAs (“Start studying free”), not “Get started”
-- Conversational copy; no “Unlock your potential” / “Empower your future”
-- Subtle hover (lift, soft color shift); no harsh shadows or glowing edges
+- Primary = navy filled; secondary = soft bordered / glass
+- Descriptive CTAs; conversational copy
+- Subtle hover lift — no glowing edges
 
 ## Cards & Components
-- Vary card heights slightly; hero radius ~16px, small cards ~8–10px
-- Soft shadows or pastel borders for depth
-- Keep existing component naming/IA intact (Sidebar, Top Bar, Cards, Documents, Voting, Chair Controls, etc.)
+- Softer radii (~12–24px); soft pastel borders
+- Keep existing component naming/IA intact
 - Enhance only via color, texture, motion — do not change labels or structural naming
 
-## Visuals & Motion
-- Mix illustrations with at least one real photo; consistent illustration style
-- Tiny hand-drawn accents / doodles welcome; no generic 3D blobs
-- Motion 300–500ms with varied direction/delay per section — not identical sync fades
-
-## Polish Checklist
-- Contrast passes; no repeated section pattern twice in a row
-- Hierarchy feels natural; hover states vary slightly across CTAs
-- At least one cue (photo, doodle, quote) that feels real
+## Motion
+- 300–500ms with staggered direction/delay
+- Brand panel slides from left; form from right on auth/gates

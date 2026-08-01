@@ -3,10 +3,7 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
-import { AppleAppFrame } from "@/components/ui/AppleAppShell";
-import { AppleProductPage } from "@/components/ui/AppleProductPage";
-import { AppleWindow } from "@/components/ui/AppleWindow";
-import { getAppName } from "@/lib/branding";
+import { getAppName, getAppTagline } from "@/lib/branding";
 import { openingOrbUrl } from "@/lib/opening-orb";
 
 export default async function AuthLayout({
@@ -16,39 +13,57 @@ export default async function AuthLayout({
 }) {
   const t = await getTranslations("authWizard");
   const appName = getAppName();
+  const tagline = getAppTagline();
 
   return (
     <MarketingOpening>
-      <AppleAppFrame appName={appName}>
-        <AppleProductPage width="narrow" className="relative min-h-screen bg-[var(--dashboard-cream)] py-10 md:py-16">
-          <link rel="preload" href={openingOrbUrl(0)} as="image" />
-          <div className="pointer-events-none absolute -left-10 top-24 h-40 w-40 rounded-[55%_45%_60%_40%] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] blur-3xl" aria-hidden />
-          <div className="relative space-y-8">
-            <div className="flex items-center justify-between gap-3">
-              <Link
-                href="/"
-                className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm transition-all duration-300 hover:-translate-x-0.5"
-              >
-                <ChevronLeft className="size-4 shrink-0" aria-hidden />
-                {t("backToHome")}
-              </Link>
-              <PublicPageControls compact />
-            </div>
-            <AppleWindow
-              title={
-                <Link href="/" className="text-inherit no-underline transition-opacity hover:opacity-75">
-                  {appName}
-                </Link>
-              }
-              showControls
-              resizable={false}
-              contentClassName="mun-apple-page-body bg-white p-6 md:p-8 rounded-b-[var(--radius-xl)]"
-            >
-              {children}
-            </AppleWindow>
+      <div className="mun-seamun-split min-h-screen">
+        <link rel="preload" href={openingOrbUrl(0)} as="image" />
+        <aside className="mun-seamun-brand-panel" aria-hidden={false}>
+          <div className="mun-seamun-brand-glow" aria-hidden />
+          <div className="mun-seamun-brand-letter" aria-hidden>
+            I
           </div>
-        </AppleProductPage>
-      </AppleAppFrame>
+          <div className="relative z-[1] flex flex-1 flex-col justify-between">
+            <div>
+              <p className="mun-seamun-eyebrow text-white/70">Est. 2026 — Conference platform</p>
+              <h1 className="mun-seamun-brand-title mt-5 text-white">{appName}</h1>
+              <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/75">{tagline}</p>
+              <ul className="mt-10 space-y-3 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white/55">
+                <li className="flex items-center gap-3">
+                  <span className="h-px w-4 bg-white/40" aria-hidden />
+                  Live session tools
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="h-px w-4 bg-white/40" aria-hidden />
+                  Delegate prep workspace
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="h-px w-4 bg-white/40" aria-hidden />
+                  Secretariat oversight
+                </li>
+              </ul>
+            </div>
+            <p className="border-t border-white/15 pt-6 font-heading text-sm italic text-white/55">
+              “Diplomacy is the art of letting someone else have your way.”
+            </p>
+          </div>
+        </aside>
+
+        <section className="mun-seamun-form-panel">
+          <div className="mb-8 flex items-center justify-between gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 text-sm font-medium text-[var(--muted,#6a7d91)] transition hover:text-[var(--ink,#183148)]"
+            >
+              <ChevronLeft className="size-4 shrink-0" aria-hidden />
+              {t("backToHome")}
+            </Link>
+            <PublicPageControls compact />
+          </div>
+          <div className="mun-seamun-form-card">{children}</div>
+        </section>
+      </div>
     </MarketingOpening>
   );
 }
