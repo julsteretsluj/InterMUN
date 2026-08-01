@@ -9,6 +9,7 @@ export default async function SmtMilestonesPage() {
   const data = await loadMilestonesForViewer();
   return (
     <MunPageShell
+      variant="flush"
       title={t("milestones")}
       titleAside={<PageFeatureGuideLink featureId="milestones" role="smt" />}
     >

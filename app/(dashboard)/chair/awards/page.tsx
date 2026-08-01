@@ -302,6 +302,7 @@ export default async function ChairAwardsPage() {
 
   return (
     <MunPageShell
+      variant="split"
       title={t("score")}
       titleAside={<PageFeatureGuideLink featureId="awards" role="chair" />}
     >

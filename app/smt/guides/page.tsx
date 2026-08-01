@@ -50,7 +50,7 @@ export default async function SmtGuidesPage() {
   const { data: guides } = await supabase.from("guides").select("*").order("slug");
 
   return (
-    <MunPageShell title={t("guides")}>
+    <MunPageShell title={t("guides")} variant="offset">
       <GuidesView
         guides={guides || []}
         canEdit={canEdit}

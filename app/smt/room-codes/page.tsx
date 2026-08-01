@@ -16,7 +16,7 @@ export default async function SmtRoomCodesPage() {
 
   if (!eventId) {
     return (
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
+      <div className="rounded-[var(--radius-lg)] border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
         <p className="mb-4">{t("selectEventFirst")}</p>
         <Link
           href="/event-gate?next=%2Fsmt%2Froom-codes"

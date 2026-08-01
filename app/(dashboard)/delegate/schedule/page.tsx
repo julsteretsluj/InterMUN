@@ -18,7 +18,7 @@ export default async function DelegateSchedulePage() {
   if (!ctx?.initialCommittee) redirect("/delegate");
 
   return (
-    <MunPageShell title={t("delegateSchedule")}>
+    <MunPageShell title={t("delegateSchedule")} variant="offset">
       <p className="mb-4 max-w-2xl text-sm text-brand-muted">{td("intro")}</p>
       <SeamunI2027LockedScheduleVisual
         variant="committee"

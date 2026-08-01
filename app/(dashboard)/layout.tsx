@@ -181,9 +181,9 @@ export default async function DashboardLayout({
 
   return (
     <AppleAppFrame appName={appName}>
-    <div className="min-h-screen text-brand-navy lg:p-3">
-      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--apple-material-shadow)] lg:flex-row mun-apple-material mun-apple-material-regular lg:!bg-[var(--apple-material-regular-bg)]">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--apple-material-thick-bg)] shadow-[var(--apple-material-shadow)] backdrop-blur-[var(--apple-material-thick-blur)] backdrop-saturate-[var(--apple-material-saturate)] transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
+    <div className="min-h-screen bg-[var(--dashboard-cream)] text-brand-navy lg:p-3">
+      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--dashboard-card)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--hairline)] lg:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.45)]">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] shadow-[inset_-1px_0_0_var(--hairline)] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
         <Link
           href={
             isChairRole(effectiveRole) ? "/chair" : isAdvisorRole(effectiveRole) ? "/advisor" : "/delegate"
@@ -239,7 +239,7 @@ export default async function DashboardLayout({
         ) : null}
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-transparent lg:min-h-0">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--dashboard-cream)] lg:min-h-0">
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}

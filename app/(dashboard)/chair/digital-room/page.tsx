@@ -84,7 +84,7 @@ export default async function ChairDigitalRoomPage() {
   }
 
   return (
-    <MunPageShell title={t("digitalRoom")}>
+    <MunPageShell title={t("digitalRoom")} variant="flush">
       <ChairDigitalRoomClient
         conferenceId={scope.canonicalConferenceId}
         committeeLine={committeeLine}

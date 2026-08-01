@@ -56,7 +56,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   );
 
   return (
-    <AppleAppFrame appName={appName}>
+    <AppleAppFrame appName={appName} className="bg-[var(--dashboard-cream)]">
       <AdminAppChrome
         appName={appName}
         navItems={adminNav}

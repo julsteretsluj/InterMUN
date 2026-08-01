@@ -9,6 +9,7 @@ export default async function AdminMilestonesPage() {
   const data = await loadMilestonesForViewer();
   return (
     <MunPageShell
+      variant="default"
       title={t("milestones")}
       titleAside={<PageFeatureGuideLink featureId="milestones" role="admin" />}
     >

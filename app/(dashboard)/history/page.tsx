@@ -12,7 +12,7 @@ export default async function HistoryPage() {
   const bundle = await getResolvedDebateConferenceBundle(supabase, activeConferenceId);
 
   return (
-    <MunPageShell title={t("history")}>
+    <MunPageShell title={t("history")} variant="default">
       <SessionHistoryPanel
         conferenceId={bundle.debateConferenceId}
         conferenceIds={bundle.siblingConferenceIds}

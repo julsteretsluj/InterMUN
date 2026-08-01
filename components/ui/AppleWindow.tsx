@@ -58,7 +58,7 @@ export function AppleWindowTitlebar({
   className,
 }: AppleWindowTitlebarProps) {
   return (
-    <header className={cn("mun-apple-window-titlebar", className)}>
+    <header className={cn("mun-apple-window-titlebar border-b border-[var(--hairline)] bg-[var(--dashboard-card)]", className)}>
       <div className="mun-apple-window-titlebar-leading">
         {leading ?? (showControls ? <AppleWindowControls showMore={showMore} moreLabel={moreLabel} onMore={onMore} /> : null)}
       </div>
@@ -101,7 +101,7 @@ export function AppleWindow({
   trailing,
 }: AppleWindowProps) {
   return (
-    <section className={cn("mun-apple-window", className)}>
+    <section className={cn("mun-apple-window rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] shadow-[var(--dashboard-shadow)]", className)}>
       {title || subtitle || showControls ? (
         <AppleWindowTitlebar
           title={title}
@@ -138,7 +138,7 @@ export function AppleWindowWithSidebar({
   return (
     <AppleWindow {...windowProps} contentClassName={cn("mun-apple-window-content-split", contentClassName)}>
       {showSidebar ? (
-        <div className={cn("mun-apple-window-sidebar flex flex-col", sidebarClassName)}>{sidebar}</div>
+        <div className={cn("mun-apple-window-sidebar flex flex-col bg-[color:color-mix(in_srgb,var(--dashboard-cream)_62%,white)]", sidebarClassName)}>{sidebar}</div>
       ) : null}
       <div className="mun-apple-window-main">{children}</div>
     </AppleWindow>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Inter_Tight, Merriweather } from "next/font/google";
 import Script from "next/script";
 import { getLocale, getMessages } from "next-intl/server";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
@@ -13,7 +13,7 @@ import "@fontsource/atkinson-hyperlegible/latin-400.css";
 import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
 
-const sans = Inter({
+const sans = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-ui",
   weight: ["400", "500", "600", "700", "800"],

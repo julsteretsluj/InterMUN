@@ -22,7 +22,7 @@ export default async function ChairSchedulePage() {
   if (!ctx?.initialCommittee) redirect("/chair");
 
   return (
-    <MunPageShell title={t("chairSchedule")}>
+    <MunPageShell title={t("chairSchedule")} variant="default">
       <p className="mb-4 max-w-2xl text-sm text-brand-muted">{td("intro")}</p>
       <SeamunI2027LockedScheduleVisual
         variant="committee"

@@ -21,7 +21,7 @@ export function AppleAppProviders({ children }: { children: ReactNode }) {
 /** Ambient glass canvas + Apple typography context for every route. */
 export function AppleSiteShell({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <GlassCanvas className={cn("mun-apple-site min-h-full", className)}>
+    <GlassCanvas className={cn("mun-apple-site min-h-full bg-[var(--dashboard-cream)] text-brand-navy", className)}>
       {children}
     </GlassCanvas>
   );
@@ -53,7 +53,7 @@ export function AppleLayoutWrapper({
   );
 
   if (mode === "minimal") {
-    return <div className={cn("mun-apple-layout-minimal", className)}>{body}</div>;
+    return <div className={cn("mun-apple-layout-minimal bg-transparent", className)}>{body}</div>;
   }
 
   const window = (

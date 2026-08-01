@@ -41,7 +41,7 @@ export default async function CrisisSlidesPage() {
     [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
 
   return (
-    <MunPageShell title={t("crisisSlides")}>
+    <MunPageShell title={t("crisisSlides")} variant="default">
       <div className="space-y-4 max-w-4xl">
         <p className="text-sm text-brand-muted">
           Live crisis deck for <span className="font-medium text-brand-navy">{committeeLine}</span>. Secretariat

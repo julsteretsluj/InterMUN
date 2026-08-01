@@ -68,7 +68,7 @@ function AdvisorSidebarLink({
       href={item.href}
       aria-label={label}
       className={cn(
-        "nav-priority-link--rail flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
+        "nav-priority-link--rail flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm transition-all duration-300 group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
           ? "dashboard-nav-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
@@ -98,7 +98,10 @@ function AdvisorDockLink({
       href={item.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
-      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
+      className={cn(
+        "nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 rounded-lg px-1.5 py-1.5 transition-all duration-300 active:scale-[0.97]",
+        isActive && "bg-[color:color-mix(in_srgb,var(--accent)_10%,white)] shadow-[inset_0_1px_3px_rgba(15,23,42,0.12)]"
+      )}
     >
       <NavPriorityBadge priority={priority} />
       <span
@@ -232,7 +235,7 @@ export function AdvisorMobileDock() {
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <nav
         aria-label={t("ariaDashboard")}
-        className="mx-auto max-w-md overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150"
+        className="mx-auto max-w-md overflow-x-auto overscroll-x-contain rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] px-2 py-2.5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.45)] dark:bg-[var(--material-chrome)]"
       >
         <div className="flex min-w-full flex-col gap-1.5">
           {folderIds.length > 1 ? (

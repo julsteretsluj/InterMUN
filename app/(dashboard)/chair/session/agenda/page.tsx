@@ -9,13 +9,13 @@ export default async function ChairSessionAgendaPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title={t("committeeAgenda")}>
+      <MunPageShell title={t("committeeAgenda")} variant="split">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
   return (
-    <MunPageShell title={t("committeeAgenda")}>
+    <MunPageShell title={t("committeeAgenda")} variant="flush">
       <ChairSessionControlLoader {...data} activeSection="agenda" />
     </MunPageShell>
   );

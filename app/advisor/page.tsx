@@ -33,7 +33,7 @@ export default async function AdvisorDashboardPage() {
   const assignments = await fetchAdvisorAssignmentsForAdvisor(supabase, user.id);
 
   return (
-    <MunPageShell title={t("advisorDashboard")}>
+    <MunPageShell title={t("advisorDashboard")} variant="split">
       <div className="space-y-4">
         <p className="max-w-2xl text-sm text-brand-muted">{ta("intro")}</p>
         <div className="flex flex-wrap gap-2">

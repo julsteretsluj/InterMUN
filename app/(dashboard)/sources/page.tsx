@@ -34,6 +34,7 @@ export default async function SourcesPage() {
 
   return (
     <MunPageShell
+      variant="default"
       title={t("sources")}
       titleAside={<PageFeatureGuideLink featureId="sources" role={myRole} />}
     >

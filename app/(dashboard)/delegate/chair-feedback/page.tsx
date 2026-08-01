@@ -122,7 +122,7 @@ export default async function DelegateChairFeedbackPage() {
   );
 
   return (
-    <MunPageShell title={t("chairFeedback")}>
+    <MunPageShell title={t("chairFeedback")} variant="offset">
       <DelegateChairFeedbackPanel
         chairSeats={seats}
         myScores={(myScores ?? []) as AwardParticipationScore[]}

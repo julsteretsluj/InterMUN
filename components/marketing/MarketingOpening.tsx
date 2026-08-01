@@ -57,7 +57,7 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
       {/* Children always render (SSR) so content is crawlable and #anchor links can
           scroll on load; the cover/orb sit on top until the intro resolves. */}
       {phase === "checking" ? (
-        <div className="fixed inset-0 z-[9999] bg-brand-cream [color-scheme:light]" aria-hidden />
+        <div className="fixed inset-0 z-[9999] bg-[var(--dashboard-cream)] [color-scheme:light]" aria-hidden />
       ) : null}
       <OrbAnimationOverlay
         open={phase === "playing"}

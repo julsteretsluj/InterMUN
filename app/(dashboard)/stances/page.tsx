@@ -98,6 +98,7 @@ export default async function StancesPage() {
 
   return (
     <MunPageShell
+      variant="split"
       title={t("stances")}
       titleAside={<PageFeatureGuideLink featureId="stances" role={myRole} />}
     >

@@ -1,60 +1,49 @@
 ---
-description: InterMUN Apple-inspired UI system and constraints
+description: Human, intentional UI theme — avoid AI-generated look across all InterMUN surfaces
 alwaysApply: true
 ---
 
-# InterMUN Apple-Inspired UI Rule
+# InterMUN Intentional UI Rule
 
-Use the Apple-inspired light design system as the source of truth for UI work.
+Use this theme as the source of truth for **all** UI (landing, app chrome, documents, prototypes). Designs should feel human, slightly imperfect, and emotionally engaging — not templated.
 
-## File / Page Structure
-- Keep the 4-page structure in mind for all design decisions:
-  - `01 — Foundations`
-  - `02 — Components`
-  - `03 — Patterns (Screens)`
-  - `04 — Prototypes`
+## Color & Tone
+- Background base: pastel blue `#DFF2FC`
+- Anchor with one strong neutral; text contrast ≥ 4.5:1
+- Soft gradients/shadows only to draw attention — never everywhere
+- No neon, glow-everywhere accents, or oversaturated palettes
 
-## Foundations
-- Respect base color intents (light primary):
-  - `bg/primary #FFFFFF`, `bg/secondary #F5F5F7`, `bg/tertiary #FBFBFD`
-  - `text/primary #1D1D1F`, `text/secondary #424245`, `text/muted #6E6E73`
-  - `accent/primary #0071E3`, `accent/bright #2997FF`, `accent/success #34C759`, `accent/danger #FF3B30`
-  - Borders: `#D2D2D7`, `rgba(0,0,0,0.08)`
-- Dark mode is refined Apple dark (true black / gray materials), secondary to light.
-- Respect typography intents:
-  - SF Pro / system UI Sans for app chrome (`h1/h2/body`); Inter as fallback
-  - Serif for document surfaces
-  - Mono for system metadata
-- Use 8pt spacing rhythm: `4, 8, 12, 16, 24, 32, 48`.
-- Soft shadows only (e.g. `0 8px 30px rgba(0,0,0,.06)`).
-- Glass/frosted materials only for sticky chrome — not everywhere.
+## Typography
+- Distinct heading font (e.g. Clash Display) + clean body (e.g. Inter Tight / Satoshi)
+- Mix weights and letter-spacing; 2–3 natural heading scales
+- Avoid Poppins + Inter + Manrope and single-weight sites
+- No oversized hero text without visual balance
 
-## Components and Naming
-- Keep existing naming and structural semantics intact.
-- Build and evolve UI using the specified component families:
-  - Sidebar, Top Bar, Card, Dashboard Panel, Live Session Bar, Committees Card
-  - Documents (Clause Item / Editor / Toolbar)
-  - Messages Thread, Voting Button / Results Bar
-  - Chair Controls (Speakers List / Motion Button)
-  - Profile Header / Stats, Admin Table
+## Layout & Composition
+- Prefer asymmetry / staggered sections; vary composition between sections
+- Intentional whitespace — not equal gaps everywhere
+- Break the grid slightly (offset a card, pull a button toward its title)
+- Alternate background tones or padding for rhythm
+- Never clone identical section structures back-to-back
 
-## Patterns
-- Compose screens from reusable components (Dashboard, Committees, Documents, Voting, Chair Controls).
-- Prefer consistency and reuse over one-off page-specific styling.
-- Content max-width around 1200–1400px with generous margins.
+## Buttons & Microcopy
+- One primary + one secondary button style
+- Descriptive CTAs (“Start studying free”), not “Get started”
+- Conversational copy; no “Unlock your potential” / “Empower your future”
+- Subtle hover (lift, soft color shift); no harsh shadows or glowing edges
 
-## Auto Layout / Layout Behavior
-- Apply auto-layout principles in implementation:
-  - vertical page flow
-  - internal spacing around `16–24`
-  - inter-element gaps around `12–16`
-- Keep sidebar fixed and main content fill behavior.
+## Cards & Components
+- Vary card heights slightly; hero radius ~16px, small cards ~8–10px
+- Soft shadows or pastel borders for depth
+- Keep existing component naming/IA intact (Sidebar, Top Bar, Cards, Documents, Voting, Chair Controls, etc.)
+- Enhance only via color, texture, motion — do not change labels or structural naming
 
-## Strict Constraint
-- Enhance UI only through:
-  - color
-  - texture
-  - motion
-- Do **not** change:
-  - labels
-  - information architecture / structural naming
+## Visuals & Motion
+- Mix illustrations with at least one real photo; consistent illustration style
+- Tiny hand-drawn accents / doodles welcome; no generic 3D blobs
+- Motion 300–500ms with varied direction/delay per section — not identical sync fades
+
+## Polish Checklist
+- Contrast passes; no repeated section pattern twice in a row
+- Hierarchy feels natural; hover states vary slightly across CTAs
+- At least one cue (photo, doodle, quote) that feels real

@@ -53,6 +53,7 @@ export default async function AmendmentsPage() {
 
   return (
     <MunPageShell
+      variant="default"
       title={t("amendments")}
       titleAside={<PageFeatureGuideLink featureId="amendments" role={role} />}
     >

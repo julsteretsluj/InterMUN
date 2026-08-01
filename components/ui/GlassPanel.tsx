@@ -37,6 +37,7 @@ export function GlassPanel({
       className={cn(
         "mun-apple-material",
         "mun-glass-panel",
+        "rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] shadow-[var(--dashboard-shadow)]",
         MATERIAL_CLASS[material],
         interactive && "mun-glass-panel-interactive mun-apple-material-interactive",
         dense ? "mun-glass-panel-dense" : "mun-glass-panel-spacious",

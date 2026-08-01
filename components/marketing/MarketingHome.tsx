@@ -85,11 +85,21 @@ function GateFlow({
   steps: { code: string; title: string; description: string }[];
 }) {
   return (
-    <ol className="mun-gate-flow mt-12 grid gap-4 md:grid-cols-3 md:gap-4">
-      {steps.map((step) => (
-        <li key={step.code} className="mun-gate-card">
+    <ol className="mun-gate-flow mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
+      {steps.map((step, i) => (
+        <li
+          key={step.code}
+          className={cn(
+            "mun-gate-card mun-animate-rise",
+            i === 1 && "md:mt-8",
+            i === 2 && "md:mt-4",
+            i === 0 && "mun-animate-delay-1",
+            i === 1 && "mun-animate-delay-2",
+            i === 2 && "mun-animate-delay-3"
+          )}
+        >
           <span className="mun-gate-code">{step.code}</span>
-          <h3 className="mt-3 font-display text-lg font-semibold text-brand-navy">{step.title}</h3>
+          <h3 className="mt-3 font-heading text-lg font-semibold tracking-[-0.02em] text-brand-navy">{step.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-brand-muted">{step.description}</p>
         </li>
       ))}
@@ -126,26 +136,35 @@ function RoleSection({
     <section
       id={id}
       className={cn(
-        "scroll-mt-24 py-16 md:py-24",
+        "scroll-mt-24 py-16 md:py-28",
         dark
           ? cn("mun-marketing-role-band text-[color:var(--marketing-ink)]", bandClassName)
-          : "border-t border-[var(--hairline)]"
+          : reversed
+            ? "bg-[var(--marketing-chamber-deep)]"
+            : "border-t border-[var(--hairline)]"
       )}
     >
       <div
         className={cn(
-          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-10 px-4 md:px-8 lg:grid-cols-2 lg:gap-16",
+          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-12 px-4 md:px-8 lg:gap-20",
+          reversed ? "lg:grid-cols-[1.05fr_0.95fr]" : "lg:grid-cols-[0.92fr_1.08fr]",
           reversed && "lg:[&>div:first-child]:order-2"
         )}
       >
-        <div className={dark ? "mun-marketing-section-dark" : undefined}>
-          <p className="text-[0.8125rem] font-medium text-[var(--accent)]">{eyebrow}</p>
-          <h2 className="mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.025em] text-brand-navy">
+        <div
+          className={cn(
+            "mun-animate-from-left",
+            dark ? "mun-marketing-section-dark" : undefined,
+            reversed && "md:pl-4 lg:pl-8"
+          )}
+        >
+          <p className="text-[0.8125rem] font-medium tracking-[0.08em] text-[var(--accent)]">{eyebrow}</p>
+          <h2 className="font-heading mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
             {title}
           </h2>
           <p
             className={cn(
-              "mt-5 text-[1.0625rem] leading-relaxed",
+              "mt-5 max-w-lg text-[1.0625rem] leading-relaxed",
               dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
             )}
           >
@@ -161,7 +180,10 @@ function RoleSection({
             </Link>
           ) : null}
         </div>
-        <div className="relative">{preview}</div>
+        <div className={cn("relative mun-animate-from-right mun-animate-delay-2", reversed && "md:-mt-4")}>
+          <span className="mun-accent-doodle -right-2 -top-3 hidden md:block" aria-hidden />
+          {preview}
+        </div>
       </div>
     </section>
   );
@@ -299,21 +321,21 @@ export async function MarketingHome() {
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-24">
-        <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
-        <div className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-12">
-          <div className="mun-marketing-hero-stage grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-12">
-            <div className="mun-marketing-hero-copy order-2 lg:order-1">
+      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-28">
+        <div className="pointer-events-none absolute -left-20 bottom-4 h-64 w-64 rounded-[45%_55%_50%_50%] bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -right-16 top-10 h-72 w-72 rounded-[60%_40%_55%_45%] bg-[color-mix(in_srgb,var(--accent-bright)_18%,transparent)] blur-3xl" aria-hidden />
+        <div className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-14">
+          <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-16">
+            <div className="mun-marketing-hero-copy mun-animate-rise order-2 lg:order-1 lg:pt-6">
               <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
-              <h1 className="mun-apple-text mun-apple-text-large-title-emphasized mt-4 text-[color:var(--marketing-ink)] md:text-[2.75rem] lg:text-[3.25rem]">
+              <h1 className="font-heading mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-semibold tracking-[-0.035em] text-[color:var(--marketing-ink)]">
                 <span className="block">{t("hero.title")}</span>
-                <MarketingEmph className="mt-2 block text-[1.2em] leading-none md:mt-3">
+                <MarketingEmph className="mt-2 block text-[1.15em] leading-none md:mt-3">
                   {t("hero.titleEmphasis")}
                 </MarketingEmph>
               </h1>
-              <p className="mun-apple-text mun-apple-text-body mt-6 max-w-xl text-[color:var(--marketing-ink-soft)]">{t("hero.subtitle")}</p>
-              <div className="mun-marketing-hero-actions mt-8 flex flex-col items-start gap-4">
+              <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-[color:var(--marketing-ink-soft)]">{t("hero.subtitle")}</p>
+              <div className="mun-marketing-hero-actions mt-9 flex flex-col items-start gap-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <Link href="/register/secretariat" className="mun-apple-btn mun-apple-btn-filled-blue px-6 py-2.5 text-base">
                     {t("hero.ctaStart")} →
@@ -333,7 +355,7 @@ export async function MarketingHome() {
               </div>
             </div>
 
-            <div className="mun-marketing-hero-visual order-1 flex justify-center lg:order-2 lg:justify-end">
+            <div className="mun-marketing-hero-visual mun-animate-from-right mun-animate-delay-1 order-1 flex justify-center lg:order-2 lg:justify-end lg:-mr-4">
               <Image
                 src="/marketing/hero-laptop.png"
                 alt=""
@@ -341,12 +363,12 @@ export async function MarketingHome() {
                 height={975}
                 priority
                 aria-hidden
-                className="mun-marketing-hero-accent w-full max-w-[18rem] rounded-[var(--radius-2xl)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
+                className="mun-marketing-hero-accent w-full max-w-[18rem] rounded-[var(--radius-xl)] shadow-[var(--dashboard-shadow)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
               />
             </div>
           </div>
 
-          <div className="mun-marketing-hero-demo relative mt-16 w-full md:mt-20 lg:mt-24">
+          <div className="mun-marketing-hero-demo mun-animate-rise mun-animate-delay-3 relative mt-14 w-full md:mt-18 lg:mt-20 lg:ml-8 lg:max-w-[92%]">
             <MarketingChamberFrame label={t("hero.previewLabel")}>
               <MarketingHeroSessionPreview heroCompact />
             </MarketingChamberFrame>
@@ -354,9 +376,9 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="how-it-works" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-24">
+      <section id="how-it-works" className="scroll-mt-24 border-b border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-20 md:py-28">
         <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
-          <div className="max-w-2xl">
+          <div className="mun-animate-rise max-w-xl md:ml-4">
             <p className="mun-marketing-eyebrow">{t("steps.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("steps.title")}</h2>
             <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("steps.subtitle")}</p>
@@ -503,12 +525,12 @@ export async function MarketingHome() {
           </h2>
           <p className="mt-4 text-base leading-relaxed md:text-lg">{t("footer.ctaSubtitle")}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/signup" className="mun-btn-gold rounded-full px-7 py-3 text-base font-bold">
+            <Link href="/signup" className="mun-apple-btn mun-apple-btn-filled-blue px-7 py-3 text-base">
               {t("footer.ctaStart")} →
             </Link>
             <Link
               href="/login"
-              className="rounded-full border border-[color:var(--marketing-glass-line)] bg-[color:var(--marketing-glass-fill)] px-7 py-3 text-base font-semibold text-[color:var(--marketing-ink)] backdrop-blur-sm transition hover:border-[color:var(--marketing-glass-line-strong)] hover:bg-[color:var(--marketing-glass-fill-strong)]"
+              className="mun-apple-btn mun-apple-btn-glass-gray px-7 py-3 text-base"
             >
               {t("footer.ctaJoin")}
             </Link>

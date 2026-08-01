@@ -64,7 +64,7 @@ export default async function SmtOverviewPage({
 
   if (!eventId) {
     return (
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
+      <div className="rounded-[var(--radius-lg)] border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
         <p className="mb-4">{t("noEventSelected")}</p>
         <Link
           href="/event-gate?next=%2Fsmt"
@@ -187,7 +187,7 @@ export default async function SmtOverviewPage({
 
   if (list.length === 0) {
     return (
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-sm text-brand-muted">
+      <div className="rounded-[var(--radius-lg)] border border-brand-navy/10 bg-brand-paper p-8 text-sm text-brand-muted">
         {t("noCommittees")}{" "}
         <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
           {t("eventSessionsLink")}
@@ -211,8 +211,8 @@ export default async function SmtOverviewPage({
           })}
         </div>
       )}
-      <h1 className="mb-1.5 font-display text-[1.85rem] font-semibold text-brand-navy">{t("welcomeSg")}</h1>
-      <p className="mb-5 text-[0.95rem] text-brand-navy">{t("whichCommittee")}</p>
+      <h1 className="mb-1.5 font-heading text-[1.85rem] font-semibold tracking-[-0.03em] text-brand-navy">{t("welcomeSg")}</h1>
+      <p className="mb-5 max-w-lg text-[0.95rem] leading-relaxed text-brand-muted">{t("whichCommittee")}</p>
       <div className="mb-5">
         <RoleSetupChecklist role="smt" />
       </div>
@@ -247,8 +247,8 @@ export default async function SmtOverviewPage({
                   aria-hidden
                 />
               </div>
-              <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-                {section.items.map((g) => {
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {section.items.map((g, cardIndex) => {
                   priority += 1;
                   const cardPriority = priority;
                   return (
@@ -256,7 +256,7 @@ export default async function SmtOverviewPage({
                       key={g.latestId}
                       href={`/smt/committees/${g.latestId}`}
                       aria-label={`${cardPriority}. ${g.latestRow.committee ?? "Committee"}`}
-                      className="relative rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
+                      className={`relative rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--accent)_12%,var(--hairline))] bg-white px-3.5 py-3 text-brand-navy shadow-[var(--dashboard-shadow)] transition-all duration-[var(--dur-base)] hover:-translate-y-1 hover:shadow-[var(--dashboard-shadow-hover)] dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10 ${cardIndex % 3 === 1 ? "sm:mt-3" : ""}`}
                     >
                       {g.logoUrl ? (
                         <CommitteeLogo

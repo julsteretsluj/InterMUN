@@ -20,14 +20,14 @@ export default async function AuthLayout({
   return (
     <MarketingOpening>
       <AppleAppFrame appName={appName}>
-        <AppleProductPage width="narrow" className="relative min-h-screen py-10 md:py-16">
+        <AppleProductPage width="narrow" className="relative min-h-screen bg-[var(--dashboard-cream)] py-10 md:py-16">
           <link rel="preload" href={openingOrbUrl(0)} as="image" />
-          <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
+          <div className="pointer-events-none absolute -left-10 top-24 h-40 w-40 rounded-[55%_45%_60%_40%] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] blur-3xl" aria-hidden />
           <div className="relative space-y-8">
             <div className="flex items-center justify-between gap-3">
               <Link
                 href="/"
-                className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm"
+                className="mun-apple-btn mun-apple-btn-plain-blue inline-flex items-center gap-1 !px-0 text-sm transition-all duration-300 hover:-translate-x-0.5"
               >
                 <ChevronLeft className="size-4 shrink-0" aria-hidden />
                 {t("backToHome")}
@@ -42,7 +42,7 @@ export default async function AuthLayout({
               }
               showControls
               resizable={false}
-              contentClassName="mun-apple-page-body p-6 md:p-8"
+              contentClassName="mun-apple-page-body bg-white p-6 md:p-8 rounded-b-[var(--radius-xl)]"
             >
               {children}
             </AppleWindow>

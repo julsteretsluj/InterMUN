@@ -28,12 +28,12 @@ export default async function MarketingLayout({
             <MarketingOrbTrigger emblemClassName="max-h-8 w-auto md:max-h-9" />
             <Link
               href="/"
-              className="mun-apple-text mun-apple-text-headline marketing-header-brand min-w-0 truncate !mb-0 text-xs md:text-sm"
+              className="marketing-header-brand font-heading min-w-0 truncate !mb-0 text-sm font-semibold tracking-[-0.03em] md:text-base"
             >
               {appName}
             </Link>
           </div>
-          <nav className="marketing-nav hidden items-center justify-self-center lg:flex lg:gap-1">
+          <nav className="marketing-nav hidden items-center justify-self-center lg:flex lg:gap-2">
             <Link href="/about">About</Link>
             <Link href="/#how-it-works">{t("nav.howItWorks")}</Link>
             <Link href="/features/chairs">{t("nav.chairs")}</Link>
@@ -41,7 +41,7 @@ export default async function MarketingLayout({
             <Link href="/features/secretariat">{t("nav.secretariat")}</Link>
             <Link href="/#contact">{t("nav.contact")}</Link>
           </nav>
-          <div className="flex shrink-0 items-center justify-end gap-1.5 justify-self-end lg:col-start-3">
+          <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end lg:col-start-3">
             <PublicPageControls compact className="marketing-header-controls" />
             {/* !important variants: unlayered .mun-apple-btn display beats layered `hidden` in Tailwind v4. */}
             <Link href="/login" className="mun-apple-btn mun-apple-btn-glass-gray !hidden text-xs sm:!inline-flex">

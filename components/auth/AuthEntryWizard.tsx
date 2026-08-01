@@ -274,13 +274,13 @@ export function AuthEntryWizard({
   return (
     <div className="w-full">
       {step === "welcome" ? (
-        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
+        <div className="rounded-[var(--radius-xl)] border border-[color-mix(in_srgb,var(--accent)_12%,var(--hairline))] bg-white p-8 shadow-[var(--dashboard-shadow)] dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
           <AuthBrandWordmark size="hero" />
           <div
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
+          <h1 className="font-heading text-3xl md:text-4xl font-semibold text-brand-navy tracking-[-0.03em]">
             {t("enterApp")}
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
@@ -291,7 +291,7 @@ export function AuthEntryWizard({
           <button
             type="button"
             onClick={() => setStep("conference")}
-            className="mun-btn-primary group/continue mx-auto flex w-full max-w-xs items-center justify-center gap-2 rounded-xl py-3.5 text-base font-semibold"
+            className="mun-btn-primary group/continue mx-auto flex w-full max-w-xs items-center justify-center gap-2 rounded-[var(--radius-md)] py-3.5 text-base font-semibold"
           >
             {tc("continue")}
             <ChevronRight
@@ -304,7 +304,7 @@ export function AuthEntryWizard({
       ) : null}
 
       {step === "conference" ? (
-        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
+        <div className="rounded-[var(--radius-xl)] border border-[color-mix(in_srgb,var(--accent)_12%,var(--hairline))] bg-white p-8 shadow-[var(--dashboard-shadow)] dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
           <div
             className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
@@ -321,7 +321,7 @@ export function AuthEntryWizard({
             {t("back")}
           </button>
           <AuthBrandWordmark className="mb-4" />
-          <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">{t("conferenceTitle")}</h2>
+          <h2 className="font-heading text-xl font-semibold text-center tracking-[-0.02em] text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
             {t("conferenceDescription", {
               mode: mode === "signup" ? t("nextModeSignup") : t("nextModeLogin"),
@@ -536,7 +536,7 @@ export function AuthEntryWizard({
       ) : null}
 
       {step === "account" ? (
-        <div className="rounded-2xl border border-[var(--hairline)] bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
+        <div className="rounded-[var(--radius-xl)] border border-[color-mix(in_srgb,var(--accent)_12%,var(--hairline))] bg-white p-8 shadow-[var(--dashboard-shadow)] dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
           <div
             className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden

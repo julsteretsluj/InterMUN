@@ -24,13 +24,13 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
   return (
     <>
-      <section className="border-b border-[var(--hairline)]">
-        <div className="mx-auto max-w-[42rem] px-5 py-20 text-center md:px-10 md:py-28">
-          <p className="text-[0.8125rem] font-medium text-[var(--accent)]">{t("eyebrow")}</p>
-          <h1 className="mt-4 text-[length:var(--apple-text-hero-size)] font-semibold tracking-[-0.03em] text-brand-navy">
+      <section className="border-b border-[var(--hairline)] bg-[var(--marketing-chamber-deep)]">
+        <div className="mx-auto max-w-[46rem] px-5 py-20 text-left md:px-10 md:py-28 md:pl-16">
+          <p className="mun-animate-rise text-[0.8125rem] font-medium tracking-[0.08em] text-[var(--accent)]">{t("eyebrow")}</p>
+          <h1 className="font-heading mun-animate-rise mun-animate-delay-1 mt-4 text-[length:var(--apple-text-hero-size)] font-semibold tracking-[-0.035em] text-brand-navy">
             {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-brand-muted">
+          <p className="mun-animate-rise mun-animate-delay-2 mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-brand-muted">
             {t("subtitle")}
           </p>
         </div>
@@ -38,9 +38,9 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <MarketingFeaturesDemos role={role} />
 
-      <section className="border-t border-[var(--hairline)]">
-        <div className="mx-auto max-w-[36rem] px-5 py-20 text-center md:px-10 md:py-28">
-          <h2 className="text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.025em] text-brand-navy">
+      <section className="border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)]">
+        <div className="mx-auto max-w-[38rem] px-5 py-20 text-center md:px-10 md:py-28">
+          <h2 className="font-heading text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
             {t("ctaTitle")} <MarketingEmph>{t("ctaTitleEmphasis")}</MarketingEmph>
           </h2>
           <p className="mt-4 text-[1.0625rem] leading-relaxed text-brand-muted">{t("ctaSubtitle")}</p>
@@ -48,7 +48,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
             <Link href={FEATURE_PAGE_CTA_HREF[role]} className="mun-apple-btn mun-apple-btn-filled-blue">
               {t("ctaStart")}
             </Link>
-            <Link href="/" className="mun-apple-btn mun-apple-btn-plain-gray">
+            <Link href="/" className="mun-apple-btn mun-apple-btn-glass-gray">
               {t("ctaBack")}
             </Link>
           </div>

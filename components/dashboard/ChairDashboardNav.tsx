@@ -166,7 +166,7 @@ function ChairNavRow({
       title={labelsHidden ? label : undefined}
       aria-label={label}
       className={cn(
-          "nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2 text-sm transition-apple",
+        "nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-lg py-2 text-sm transition-all duration-300",
         labelsHidden
           ? "h-11 justify-center gap-0 px-2"
           : "justify-center gap-1.5 px-2 group-hover:justify-start group-hover:gap-3 group-hover:pl-2.5 group-hover:pr-2.5",
@@ -179,7 +179,7 @@ function ChairNavRow({
         className={cn(
           "inline-flex size-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent transition-apple",
           isActive
-            ? "border-white/25 bg-white/20 shadow-[0_1px_0_rgba(255,255,255,0.25)_inset]"
+            ? "border-[color:color-mix(in_srgb,var(--accent)_18%,var(--hairline))] bg-white/70 shadow-[inset_0_1px_3px_rgba(15,23,42,0.12)]"
             : "bg-[color:color-mix(in_srgb,var(--color-text)_4%,#ffffff)]"
         )}
         aria-hidden
@@ -413,7 +413,7 @@ function DockItem({
         className={cn(
           "relative flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted transition-apple",
           isActive &&
-            "bg-[var(--accent)] text-white shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_6px_16px_-8px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
+            "bg-[color:color-mix(in_srgb,var(--accent)_11%,white)] text-[var(--accent)] shadow-[inset_0_1px_3px_rgba(15,23,42,0.12)]"
         )}
       >
         <span className="text-sm leading-none" aria-hidden>
@@ -527,7 +527,7 @@ export function ChairMobileDock({
 
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
-      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
+      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] px-2 py-2 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.45)] dark:bg-[var(--material-chrome)]">
         <div className="flex min-w-full flex-col gap-1.5">
           {folderIds.length > 1 ? (
             <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />

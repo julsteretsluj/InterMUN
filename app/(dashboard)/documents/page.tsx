@@ -56,6 +56,7 @@ export default async function DocumentsPage() {
 
   return (
     <MunPageShell
+      variant="split"
       title={t("documents")}
       titleAside={<PageFeatureGuideLink featureId="documents" role={myRole} />}
     >

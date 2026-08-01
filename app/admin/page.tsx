@@ -28,8 +28,8 @@ export default async function AdminPage({
 
   return (
     <div>
-      <h1 className="mb-2 font-display text-2xl font-semibold text-brand-navy">{t("title")}</h1>
-      <p className="mb-6 max-w-2xl text-sm text-brand-muted">{t("intro")}</p>
+      <h1 className="mb-2 font-heading text-2xl font-semibold tracking-[-0.03em] text-brand-navy">{t("title")}</h1>
+      <p className="mb-6 max-w-xl text-sm leading-relaxed text-brand-muted">{t("intro")}</p>
 
       {e === "no-session-floor" && (
         <div

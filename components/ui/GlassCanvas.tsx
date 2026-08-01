@@ -8,10 +8,10 @@ type GlassCanvasProps = {
   className?: string;
 };
 
-/** Ambient mesh + floating light blobs behind frosted glass panels. */
+/** Pastel canvas with a restrained ambient wash behind solid cards. */
 export function GlassCanvas({ children, className }: GlassCanvasProps) {
   return (
-    <div className={cn("mun-glass-canvas relative isolate", className)}>
+    <div className={cn("mun-glass-canvas relative isolate bg-[var(--dashboard-cream)]", className)}>
       <div className="mun-glass-ambient" aria-hidden />
       <div className="relative z-[1]">{children}</div>
     </div>

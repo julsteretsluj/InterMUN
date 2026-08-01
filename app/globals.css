@@ -2,7 +2,48 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Rijusans (SIL OFL 1.1) — marketing display + heading sans */
+/* Clash Display (Fontshare FFL) — headings / display */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Rijusans (SIL OFL 1.1) — legacy marketing display fallback */
 @font-face {
   font-family: "Rijusans";
   src: url("/fonts/rijusans-regular.ttf") format("truetype");
@@ -42,24 +83,24 @@ html {
   /* Base rem scale; `--text-scale-step` is percentage points from default (-50..+50). */
   font-size: calc(100% + (var(--text-scale-step, 0) * 1%));
 
-  /* —— Apple-style continuous radii —— */
+  /* —— Intentional radii (hero ~16px, small cards ~8–10px) —— */
   --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --radius-xl: 22px;
-  --radius-2xl: 28px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-pill: 999px;
 
-  /* —— Apple motion —— */
+  /* —— Human motion (300–500ms, natural easing) —— */
   --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-apple-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 200ms;
-  --dur-base: 280ms;
-  --dur-slow: 380ms;
+  --dur-fast: 300ms;
+  --dur-base: 400ms;
+  --dur-slow: 500ms;
 
-  /* —— Soft dashboard (light) — Apple cool neutrals —— */
-  --dashboard-cream: #f5f5f7;
+  /* —— Soft dashboard (light) — pastel blue canvas —— */
+  --dashboard-cream: #dff2fc;
   --dashboard-card: #ffffff;
   --dashboard-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   --dashboard-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.08);
@@ -96,10 +137,10 @@ html {
   --system-gray-5: #e5e5ea;
   --system-gray-6: #f2f2f7;
 
-  /* —— Apple HIG semantic UI (light) —— */
+  /* —— Intentional semantic UI (light) —— */
   --apple-bg-primary: #ffffff;
-  --apple-bg-secondary: #f5f5f7;
-  --apple-bg-tertiary: #fbfbfd;
+  --apple-bg-secondary: #dff2fc;
+  --apple-bg-tertiary: #f0f9fd;
   --apple-bg-elevated: #ffffff;
   --apple-label: #1d1d1f;
   --apple-label-secondary: #424245;
@@ -113,7 +154,7 @@ html {
   --apple-separator-opaque: #c6c6c8;
 
   /* —— Apple UI typography (SF Pro semantic scale — app-wide) —— */
-  --apple-font-ui: var(--font-sans);
+  --apple-font-ui: var(--font-ui), "Inter Tight", system-ui, sans-serif;
   --apple-text-large-title-size: 2.5rem;
   --apple-text-title-1-size: 2rem;
   --apple-text-title-2-size: 1.5rem;
@@ -129,23 +170,23 @@ html {
   --apple-text-section-size: clamp(2rem, 3.5vw, 3.25rem);
   --content-max-width: 82.5rem;
 
-  /* —— Apple UI materials (app-wide glass surfaces) —— */
-  --apple-material-saturate: 180%;
-  --apple-material-ultrathin-bg: rgba(255, 255, 255, 0.36);
-  --apple-material-ultrathin-blur: 20px;
-  --apple-material-thin-bg: rgba(255, 255, 255, 0.48);
-  --apple-material-thin-blur: 30px;
-  --apple-material-regular-bg: rgba(255, 255, 255, 0.62);
-  --apple-material-regular-blur: 40px;
-  --apple-material-thick-bg: rgba(255, 255, 255, 0.78);
-  --apple-material-thick-blur: 50px;
-  --apple-material-border-highlight: rgba(255, 255, 255, 0.72);
-  --apple-material-border-edge: rgba(255, 255, 255, 0.22);
+  /* —— Soft pastel materials (less glass, more solid warmth) —— */
+  --apple-material-saturate: 120%;
+  --apple-material-ultrathin-bg: rgba(255, 255, 255, 0.72);
+  --apple-material-ultrathin-blur: 12px;
+  --apple-material-thin-bg: rgba(255, 255, 255, 0.82);
+  --apple-material-thin-blur: 16px;
+  --apple-material-regular-bg: rgba(255, 255, 255, 0.92);
+  --apple-material-regular-blur: 20px;
+  --apple-material-thick-bg: #ffffff;
+  --apple-material-thick-blur: 24px;
+  --apple-material-border-highlight: rgba(255, 255, 255, 0.9);
+  --apple-material-border-edge: color-mix(in srgb, #0071e3 12%, #d2d2d7);
   --apple-material-shadow:
-    inset 0 1px 0 var(--apple-material-border-highlight),
+    0 1px 0 rgba(255, 255, 255, 0.8),
     0 8px 30px rgba(0, 0, 0, 0.06);
   --apple-material-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 0 rgba(255, 255, 255, 0.9),
     0 12px 36px rgba(0, 0, 0, 0.08);
 
   /* —— Materials (vibrancy — used with backdrop-blur + saturate) —— */
@@ -190,7 +231,7 @@ html {
 
   /* —— SURFACE —— */
   --color-surface: var(--material-regular);
-  --color-surface-subtle: #fbfbfd;
+  --color-surface-subtle: #f0f9fd;
   --color-surface-elevated: var(--material-thick);
   --brand-paper: var(--color-surface);
   --brand-cream: var(--color-surface-subtle);
@@ -273,11 +314,11 @@ html.dark {
   --system-gray-5: #2c2c2e;
   --system-gray-6: #1c1c1e;
 
-  /* —— Apple HIG semantic UI (dark — base) —— */
-  --apple-bg-primary: #000000;
-  --apple-bg-secondary: #1c1c1e;
-  --apple-bg-tertiary: #2c2c2e;
-  --apple-bg-elevated: #1c1c1e;
+  /* —— Cool dark companion (not true-black glass) —— */
+  --apple-bg-primary: #121a28;
+  --apple-bg-secondary: #0b1220;
+  --apple-bg-tertiary: #1a2436;
+  --apple-bg-elevated: #162033;
   --apple-label: #ffffff;
   --apple-label-secondary: rgba(235, 235, 245, 0.6);
   --apple-label-tertiary: rgba(235, 235, 245, 0.3);
@@ -289,17 +330,15 @@ html.dark {
   --apple-separator: rgba(84, 84, 88, 0.65);
   --apple-separator-opaque: #38383a;
 
-  --apple-material-ultrathin-bg: rgba(44, 44, 46, 0.42);
-  --apple-material-thin-bg: rgba(44, 44, 46, 0.55);
-  --apple-material-regular-bg: rgba(44, 44, 46, 0.68);
-  --apple-material-thick-bg: rgba(44, 44, 46, 0.82);
-  --apple-material-border-highlight: rgba(255, 255, 255, 0.14);
-  --apple-material-border-edge: rgba(0, 0, 0, 0.35);
+  --apple-material-ultrathin-bg: rgba(22, 32, 51, 0.72);
+  --apple-material-thin-bg: rgba(22, 32, 51, 0.82);
+  --apple-material-regular-bg: rgba(26, 36, 54, 0.92);
+  --apple-material-thick-bg: #1a2436;
+  --apple-material-border-highlight: rgba(255, 255, 255, 0.1);
+  --apple-material-border-edge: rgba(41, 151, 255, 0.18);
   --apple-material-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 8px 30px rgba(0, 0, 0, 0.35);
   --apple-material-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
     0 12px 36px rgba(0, 0, 0, 0.42);
 
   /* Legacy block continues below — system colors were consolidated above */
@@ -318,24 +357,24 @@ html.dark {
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
 
-  /* —— True black page (glass over black) —— */
-  --color-bg-page: #000000;
+  /* —— Cool dark page —— */
+  --color-bg-page: #0b1220;
   --background: var(--color-bg-page);
   --foreground: #f2f2f7;
 
-  --material-chrome: rgba(28, 28, 30, 0.72);
-  --material-thin: rgba(28, 28, 30, 0.55);
-  --material-regular: rgba(28, 28, 30, 0.72);
-  --material-thick: rgba(44, 44, 46, 0.86);
-  --material-popover: rgba(44, 44, 46, 0.82);
+  --material-chrome: #162033;
+  --material-thin: #162033;
+  --material-regular: #1a2436;
+  --material-thick: #1e2a40;
+  --material-popover: #1e2a40;
 
-  --sidebar-material: rgba(28, 28, 30, 0.68);
-  --content-material: rgba(28, 28, 30, 0.55);
-  --toolbar-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  --sidebar-material: #121a28;
+  --content-material: #0b1220;
+  --toolbar-gradient: none;
   --titlebar-shadow: 0 1px 0 var(--hairline);
-  --window-radius: 18px;
-  --window-shadow: 0 32px 56px -32px rgba(0, 0, 0, 0.65), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
-  --desktop-bg: #000000;
+  --window-radius: 16px;
+  --window-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+  --desktop-bg: #0b1220;
 
   --hairline: rgba(255, 255, 255, 0.12);
   --hairline-strong: rgba(255, 255, 255, 0.2);
@@ -428,16 +467,13 @@ html.dark {
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
-  /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", var(--font-ui),
-    system-ui, sans-serif;
+  /* Prefer Inter Tight (next/font --font-ui); Clash Display for headings */
+  --font-sans: var(--font-ui), "Inter Tight", system-ui, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* Product chrome: UI sans everywhere. Marketing heroes: Rijusans display + Momo Signature emphasis. */
-  --font-heading: var(--font-sans);
-  --font-display: var(--font-sans);
-  --font-marketing-display: "Rijusans", var(--font-sans);
+  --font-heading: "Clash Display", var(--font-sans);
+  --font-display: "Clash Display", var(--font-sans);
+  --font-marketing-display: "Clash Display", "Rijusans", var(--font-sans);
   --font-marketing-cursive: "Momo Signature", "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: var(--font-marketing-cursive);
@@ -940,11 +976,13 @@ html.dark ::selection {
   }
 
   .smt-nav-row-active {
-    background-color: var(--accent) !important;
-    color: #ffffff !important;
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--hairline));
+    background-color: color-mix(in srgb, var(--accent) 10%, #ffffff) !important;
+    color: var(--accent) !important;
+    box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.12);
   }
   .smt-nav-row-active :is(svg, .lucide) {
-    color: #ffffff !important;
+    color: var(--accent) !important;
   }
   html.dark .smt-dock-tile-active {
     background-image: none !important;
@@ -959,19 +997,20 @@ html.dark ::selection {
   }
 
   .dashboard-panel-title {
-    @apply font-display text-xl font-semibold tracking-tight text-brand-navy md:text-2xl;
+    @apply font-heading text-xl font-semibold tracking-[-0.03em] text-brand-navy md:text-2xl;
   }
 
   /* Active nav — soft filled pill */
   .dashboard-nav-active {
     position: relative;
-    background-color: var(--accent);
-    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--hairline));
+    background-color: color-mix(in srgb, var(--accent) 10%, #ffffff);
+    color: var(--accent);
     font-weight: 600;
-    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 22%, transparent);
+    box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.12);
   }
   .dashboard-nav-active :is(svg, .lucide) {
-    color: #ffffff;
+    color: var(--accent);
   }
 
   .dashboard-status-badge {
@@ -1248,11 +1287,11 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Marketing editorial headlines only — scoped to .marketing-shell (not product chrome). */
+  /* Marketing editorial headlines — Clash Display */
   .marketing-shell .mun-display {
-    @apply font-extrabold;
+    @apply font-semibold;
     font-family: var(--font-marketing-display);
-    letter-spacing: 0.035em;
+    letter-spacing: -0.03em;
     line-height: 1.1;
   }
 
@@ -1667,13 +1706,13 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell {
-  /* Chamber surfaces — cool Apple neutrals with dark ink */
-  --marketing-chamber: #f5f5f7;
+  /* Pastel intentional marketing surfaces */
+  --marketing-chamber: #dff2fc;
   --marketing-chamber-elevated: #ffffff;
-  --marketing-chamber-deep: #fbfbfd;
+  --marketing-chamber-deep: #f0f9fd;
   --marketing-ink: #1d1d1f;
-  --marketing-ink-soft: #6e6e73;
-  --marketing-hairline: rgba(0, 0, 0, 0.08);
+  --marketing-ink-soft: #424245;
+  --marketing-hairline: color-mix(in srgb, #0071e3 14%, #d2d2d7);
   --marketing-emph: var(--gold-text);
   --marketing-band-accent: var(--accent);
   --marketing-band-card-bg: rgba(255, 255, 255, 0.88);
@@ -1780,9 +1819,15 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-rainbow-bar {
-  height: 1px;
-  background: var(--marketing-hairline);
-  opacity: 1;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent) 35%, transparent) 0%,
+    var(--accent) 42%,
+    color-mix(in srgb, var(--accent-bright) 70%, #ffffff) 100%
+  );
+  opacity: 0.85;
+  border-radius: 0 0 2px 2px;
 }
 
 .marketing-shell .mun-marketing-eyebrow {
@@ -2649,7 +2694,7 @@ html.dark .marketing-shell {
      scroll this container internally, shifting the whole site up and leaving
      a blank band at the bottom. `clip` forbids all scrolling. */
   overflow: clip;
-  background: var(--apple-bg-secondary);
+  background: var(--dashboard-cream);
 }
 
 .mun-glass-ambient {
@@ -2658,12 +2703,10 @@ html.dark .marketing-shell {
   inset: -20% -10%;
   z-index: 0;
   background:
-    radial-gradient(ellipse 55% 45% at 18% 22%, color-mix(in srgb, var(--system-blue) 22%, transparent), transparent 68%),
-    radial-gradient(ellipse 48% 42% at 82% 18%, color-mix(in srgb, var(--system-purple) 18%, transparent), transparent 65%),
-    radial-gradient(ellipse 50% 40% at 62% 88%, color-mix(in srgb, var(--system-teal) 16%, transparent), transparent 62%),
-    radial-gradient(ellipse 40% 35% at 8% 78%, color-mix(in srgb, var(--system-indigo) 14%, transparent), transparent 58%);
-  filter: blur(48px);
-  opacity: 0.75;
+    radial-gradient(ellipse 52% 42% at 12% 18%, rgba(255, 255, 255, 0.72), transparent 70%),
+    radial-gradient(ellipse 44% 36% at 88% 84%, color-mix(in srgb, var(--system-blue) 8%, transparent), transparent 68%);
+  filter: blur(56px);
+  opacity: 0.58;
   animation: mun-glass-ambient-drift 22s var(--ease-apple-out) infinite alternate;
 }
 
@@ -2717,8 +2760,8 @@ html.dark .marketing-shell {
 
 .mun-apple-material-interactive:hover {
   box-shadow: var(--apple-material-shadow-hover);
-  transform: scale(1.01);
-  border-color: color-mix(in srgb, var(--apple-material-border-highlight) 75%, var(--apple-separator));
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 18%, var(--apple-separator));
 }
 
 .mun-apple-material-interactive:focus-within {
@@ -2745,6 +2788,12 @@ html.dark .marketing-shell {
 /* Glass panel = regular material + padding helpers */
 .mun-glass-panel {
   overflow: hidden;
+  border-radius: 1rem;
+  border-color: var(--hairline);
+  background: var(--dashboard-card);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--dashboard-shadow);
 }
 
 .mun-glass-panel-spacious {
@@ -2768,8 +2817,8 @@ html.dark .marketing-shell {
 }
 
 .mun-glass-panel-interactive:hover {
-  box-shadow: var(--apple-material-shadow-hover);
-  transform: scale(1.01);
+  box-shadow: 0 14px 32px -24px rgba(15, 23, 42, 0.42);
+  transform: translateY(-2px);
 }
 
 .mun-glass-panel-interactive:focus-within {
@@ -3812,12 +3861,14 @@ html.dark .mun-apple-alert-panel {
 }
 
 .mun-apple-btn:hover:not(:disabled):not([aria-disabled="true"]) {
-  transform: scale(1.015);
+  transform: translateY(-1px);
 }
 
 .mun-apple-btn:active:not(:disabled):not([aria-disabled="true"]) {
-  transform: scale(0.985);
+  transform: translateY(0);
 }
+
+
 
 .mun-apple-btn-compact {
   padding: 0.4375rem 0.875rem;
@@ -3839,6 +3890,8 @@ html.dark .mun-apple-alert-panel {
 
 .mun-apple-btn-filled-blue:hover:not(:disabled):not([aria-disabled="true"]) {
   background: color-mix(in srgb, var(--system-blue) 88%, #000000);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--system-blue) 28%, transparent);
 }
 
 .mun-apple-btn-filled-red {
@@ -5966,10 +6019,9 @@ html.dark .mun-apple-sheet-panel {
   overflow: hidden;
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--apple-separator) 65%, transparent);
-  background: color-mix(in srgb, var(--apple-fill-quaternary) 92%, transparent);
+  background: color-mix(in srgb, var(--dashboard-cream) 64%, #ffffff);
   padding: 0.75rem;
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 html.dark .mun-apple-sidebar {
@@ -6076,12 +6128,12 @@ html.dark .mun-apple-sidebar {
   gap: 0.5rem;
   min-height: 1.875rem;
   border: 0;
-  border-radius: 0.4375rem;
+  border-radius: 0.5625rem;
   background: transparent;
   padding: 0.375rem 0.5rem;
   text-align: left;
   color: var(--apple-label);
-  transition: background var(--dur-fast) var(--ease-apple-out);
+  transition: background 350ms var(--ease-apple-out), box-shadow 350ms var(--ease-apple-out), color 350ms var(--ease-apple-out);
 }
 
 .mun-apple-sidebar-row.is-indented {
@@ -6097,17 +6149,20 @@ html.dark .mun-apple-sidebar {
 }
 
 .mun-apple-sidebar-row.is-selected {
-  background: color-mix(in srgb, var(--apple-label) 88%, transparent);
-  color: #ffffff;
+  background: color-mix(in srgb, var(--accent) 10%, #ffffff);
+  color: var(--accent);
+  box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.12);
 }
 
 html.dark .mun-apple-sidebar-row.is-selected {
-  background: color-mix(in srgb, var(--system-blue) 78%, #ffffff 22%);
+  background: color-mix(in srgb, var(--accent) 18%, var(--material-thick));
+  color: color-mix(in srgb, var(--accent) 72%, #ffffff);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .mun-apple-sidebar-row.is-selected .mun-apple-sidebar-row-detail,
 .mun-apple-sidebar-row.is-selected .mun-apple-sidebar-row-chevron {
-  color: color-mix(in srgb, #ffffff 72%, transparent);
+  color: color-mix(in srgb, var(--accent) 72%, var(--apple-label-secondary));
 }
 
 .mun-apple-sidebar-row.is-disabled {
@@ -6123,7 +6178,7 @@ html.dark .mun-apple-sidebar-row.is-selected {
 }
 
 .mun-apple-sidebar-row.is-selected .mun-apple-sidebar-row-leading {
-  color: #ffffff;
+  color: var(--accent);
 }
 
 .mun-apple-sidebar-row-title {
@@ -7599,12 +7654,10 @@ html.dark .mun-apple-widget {
   min-width: 0;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 1.375rem;
+  border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--apple-separator) 78%, transparent);
   background: var(--apple-bg-elevated, #ffffff);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.05),
-    0 12px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 45px -30px rgba(15, 23, 42, 0.45);
 }
 
 html.dark .mun-apple-window {
@@ -7621,7 +7674,7 @@ html.dark .mun-apple-window {
   gap: 0.75rem;
   min-height: 3rem;
   border-bottom: 1px solid color-mix(in srgb, var(--apple-separator) 72%, transparent);
-  background: color-mix(in srgb, var(--apple-fill-quaternary) 72%, var(--apple-bg-elevated, #ffffff));
+  background: var(--dashboard-card);
   padding: 0.625rem 0.875rem;
 }
 
@@ -7649,7 +7702,7 @@ html.dark .mun-apple-window-titlebar {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: var(--font-sans);
+  font-family: var(--font-heading, var(--font-sans));
   font-size: var(--apple-text-footnote-size, 0.8125rem);
   line-height: 1.23;
   font-weight: 600;
@@ -7887,16 +7940,16 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site .mun-shell-title,
 .mun-apple-site .dashboard-panel-title,
 .mun-apple-site h1:not(.mun-display):not(.mun-emph) {
-  font-family: var(--apple-font-ui, var(--font-sans));
+  font-family: var(--font-heading), var(--font-sans);
   font-size: var(--apple-text-title-2-size);
   line-height: 1.27;
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-weight: 600;
   color: var(--apple-label);
 }
 
 .mun-apple-site h2 {
-  font-family: var(--apple-font-ui, var(--font-sans));
+  font-family: var(--font-heading), var(--font-sans);
   font-size: var(--apple-text-title-3-size);
   line-height: 1.25;
   letter-spacing: -0.015em;
@@ -8191,3 +8244,83 @@ html.dark .mun-apple-window-sidebar {
   color: #ffffff;
 }
 
+
+
+/* —— Intentional page shell variants —— */
+.mun-page-shell {
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, var(--hairline));
+  background: var(--dashboard-card);
+  box-shadow: var(--dashboard-shadow);
+}
+
+.mun-page-shell-offset {
+  margin-left: 0;
+  border-radius: var(--radius-xl) var(--radius-xl) var(--radius-md) var(--radius-xl);
+}
+
+@media (min-width: 768px) {
+  .mun-page-shell-offset {
+    margin-left: 0.75rem;
+    transform: rotate(-0.15deg);
+  }
+}
+
+.mun-page-shell-split {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, #ffffff 0%, color-mix(in srgb, var(--accent) 4%, #ffffff) 100%);
+}
+
+.mun-page-shell-flush {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  border-color: var(--hairline);
+}
+
+@keyframes mun-rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes mun-slide-from-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes mun-slide-from-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.mun-animate-rise {
+  animation: mun-rise-in var(--dur-base) var(--ease-apple-out) both;
+}
+.mun-animate-from-left {
+  animation: mun-slide-from-left var(--dur-slow) var(--ease-apple-out) both;
+}
+.mun-animate-from-right {
+  animation: mun-slide-from-right var(--dur-slow) var(--ease-apple-out) both;
+}
+.mun-animate-delay-1 { animation-delay: 80ms; }
+.mun-animate-delay-2 { animation-delay: 160ms; }
+.mun-animate-delay-3 { animation-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mun-animate-rise,
+  .mun-animate-from-left,
+  .mun-animate-from-right {
+    animation: none;
+  }
+  .mun-page-shell-offset {
+    transform: none;
+  }
+}
+
+/* Soft doodle accent for human touches */
+.mun-accent-doodle {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 60% 40% 55% 45%;
+  pointer-events: none;
+  opacity: 0.55;
+}

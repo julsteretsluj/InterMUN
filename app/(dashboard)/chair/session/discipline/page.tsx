@@ -9,13 +9,13 @@ export default async function ChairSessionDisciplinePage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title={t("disciplinarySystem")}>
+      <MunPageShell title={t("disciplinarySystem")} variant="split">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
   return (
-    <MunPageShell title={t("disciplinarySystem")}>
+    <MunPageShell title={t("disciplinarySystem")} variant="flush">
       <ChairSessionControlLoader {...data} activeSection="discipline" />
     </MunPageShell>
   );

@@ -9,13 +9,13 @@ export default async function ChairSessionAnnouncementsPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title={t("announcements")}>
+      <MunPageShell title={t("announcements")} variant="default">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
   return (
-    <MunPageShell title={t("announcements")}>
+    <MunPageShell title={t("announcements")} variant="offset">
       <ChairSessionControlLoader {...data} activeSection="announcements" />
     </MunPageShell>
   );

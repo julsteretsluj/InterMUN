@@ -28,6 +28,7 @@ export default async function SpeechesPage() {
 
   return (
     <MunPageShell
+      variant="offset"
       title={t("speeches")}
       titleAside={<PageFeatureGuideLink featureId="speeches" role={profile?.role} />}
     >

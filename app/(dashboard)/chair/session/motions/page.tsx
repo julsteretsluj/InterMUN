@@ -9,14 +9,14 @@ export default async function ChairSessionMotionsPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title={t("formalMotions")}>
+      <MunPageShell title={t("formalMotions")} variant="default">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
 
   return (
-    <MunPageShell title={t("formalMotions")}>
+    <MunPageShell title={t("formalMotions")} variant="offset">
       <ChairSessionControlLoader {...data} activeSection="motions" />
     </MunPageShell>
   );

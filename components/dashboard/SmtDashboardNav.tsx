@@ -84,7 +84,7 @@ function SmtSidebarLink({
       href={item.href}
       aria-label={label}
       className={cn(
-        "nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
+        "nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm transition-all duration-300 group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
           ? "smt-nav-row-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
@@ -119,7 +119,7 @@ function SmtDockLink({
       <NavPriorityBadge priority={priority} />
       <span
         className={cn(
-          "flex h-8 w-8 items-center justify-center text-brand-muted",
+          "flex h-8 w-8 items-center justify-center rounded-lg text-brand-muted transition-all duration-300",
           isActive && "smt-dock-tile-active text-[var(--accent)]"
         )}
       >
@@ -272,7 +272,7 @@ export function SmtMobileDock() {
 
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
-      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
+      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] px-2 py-2 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.45)] dark:bg-[var(--material-chrome)]">
         <div className="flex min-w-full flex-col gap-1.5">
           {folderIds.length > 1 ? (
             <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />

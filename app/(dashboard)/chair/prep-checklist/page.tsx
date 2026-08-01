@@ -34,7 +34,7 @@ export default async function ChairPrepChecklistPage() {
   const crisisPrepEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   return (
-    <MunPageShell title={t("prepChecklist")}>
+    <MunPageShell title={t("prepChecklist")} variant="flush">
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {tChecklist("description")}

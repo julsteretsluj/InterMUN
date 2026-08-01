@@ -358,6 +358,7 @@ export default async function ChatsNotesPage({
 
   return (
     <MunPageShell
+      variant="offset"
       title={t("notes")}
       titleAside={<PageFeatureGuideLink featureId="notes" role={myRole} />}
     >

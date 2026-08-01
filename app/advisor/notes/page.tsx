@@ -97,6 +97,7 @@ export default async function AdvisorNotesPage() {
 
   return (
     <MunPageShell
+      variant="offset"
       title={t("advisorNotes")}
       titleAside={<PageFeatureGuideLink featureId="notes" role="advisor" />}
     >

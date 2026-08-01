@@ -42,7 +42,7 @@ export default async function ChairRoomCodePage() {
     ];
     if (allowedIds.length === 0) {
       return (
-        <MunPageShell title={t("committeeCodes")}>
+        <MunPageShell title={t("committeeCodes")} variant="default">
           <p className="text-sm text-brand-muted mb-4 max-w-xl">
             You don&apos;t have a committee seat yet. Ask secretariat to assign you on the allocation
             matrix, then return here.
@@ -56,7 +56,7 @@ export default async function ChairRoomCodePage() {
   const { data: conferences } = await conferencesQuery;
 
   return (
-    <MunPageShell title={t("committeeCodes")}>
+    <MunPageShell title={t("committeeCodes")} variant="offset">
       <p className="text-sm text-brand-muted mb-6 max-w-xl">
         Each committee has a <strong>committee code</strong> within its conference (second gate after
         delegates enter the conference code). Codes must be unique within the same conference event.

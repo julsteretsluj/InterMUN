@@ -53,7 +53,7 @@ export default async function GuidesPage() {
   const guideRole: GuideRole = isGuideRole(myRole) ? myRole : "delegate";
 
   return (
-    <MunPageShell title={t("guides")}>
+    <MunPageShell title={t("guides")} variant="flush">
       <GuidesView
         guides={guides || []}
         canEdit={canEdit}

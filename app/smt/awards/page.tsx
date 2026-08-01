@@ -297,6 +297,7 @@ export default async function SmtAwardsPage() {
 
   return (
     <MunPageShell
+      variant="split"
       title={t("awardsSmt")}
       titleAside={<PageFeatureGuideLink featureId="awards" role="smt" />}
     >

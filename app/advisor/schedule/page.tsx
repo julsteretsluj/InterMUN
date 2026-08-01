@@ -22,7 +22,7 @@ export default async function AdvisorSchedulePage() {
   if (!ctx) redirect("/advisor");
 
   return (
-    <MunPageShell title={t("advisorSchedule")}>
+    <MunPageShell title={t("advisorSchedule")} variant="split">
       <p className="mb-4 max-w-2xl text-sm text-brand-muted">{ta("intro")}</p>
       <SeamunI2027LockedScheduleVisual variant="advisor" defaultView="detail" />
     </MunPageShell>

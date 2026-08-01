@@ -7,6 +7,7 @@ export default async function SmtPressCorpsPage() {
   const t = await getTranslations("pageTitles");
   return (
     <MunPageShell
+      variant="offset"
       title={t("pressCorps")}
       titleAside={<PageFeatureGuideLink featureId="pressCorps" role="smt" />}
     >

@@ -383,7 +383,7 @@ export default async function ProfilePage({
   const welcomeFlag = flagEmojiForCountryName(welcomeCountry);
 
   const delegateWelcome = isDelegate ? (
-    <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
+    <div className="rounded-[var(--radius-lg)] border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
           {tp("delegateWelcome.title", { flag: welcomeFlag, country: welcomeCountry })}
@@ -464,7 +464,7 @@ export default async function ProfilePage({
   const showSettings = activeTab === "settings";
 
   return (
-    <MunPageShell title={t("profile")}>
+    <MunPageShell title={t("profile")} variant="split">
       {visibleTabs.length > 1 ? (
         <div className="mb-6 flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={tp("tabs.ariaLabel")}>
           {visibleTabs.map((id) => (

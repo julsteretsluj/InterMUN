@@ -7,6 +7,7 @@ export default async function AdvisorPressCorpsPage() {
   const t = await getTranslations("pageTitles");
   return (
     <MunPageShell
+      variant="split"
       title={t("pressCorps")}
       titleAside={<PageFeatureGuideLink featureId="pressCorps" role="advisor" />}
     >

@@ -30,6 +30,7 @@ export default async function RunningNotesPage() {
 
   return (
     <MunPageShell
+      variant="flush"
       title={t("runningNotes")}
       titleAside={<PageFeatureGuideLink featureId="runningNotes" role={myRole} />}
     >

@@ -22,7 +22,7 @@ export default async function IdeasPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <MunPageShell title={t("ideas")}>
+    <MunPageShell title={t("ideas")} variant="offset">
       <IdeasView ideas={ideas || []} conferenceId={conferenceId} />
     </MunPageShell>
   );

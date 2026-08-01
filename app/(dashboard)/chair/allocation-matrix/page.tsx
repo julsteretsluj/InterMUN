@@ -431,6 +431,7 @@ export default async function ChairAllocationMatrixPage() {
 
   return (
     <MunPageShell
+      variant="offset"
       title={t("allocationMatrix")}
       titleAside={<PageFeatureGuideLink featureId="allocationMatrix" role={isChairViewer ? "chair" : "smt"} />}
     >

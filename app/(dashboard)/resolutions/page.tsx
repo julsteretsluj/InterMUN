@@ -51,6 +51,7 @@ export default async function ResolutionsPage() {
 
   return (
     <MunPageShell
+      variant="split"
       title={t("resolutions")}
       titleAside={<PageFeatureGuideLink featureId="resolutions" role={myRole} />}
     >

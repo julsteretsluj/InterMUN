@@ -121,7 +121,7 @@ export default async function ChairOverviewPage({
   const activeTab = tab === "guidance" || tab === "jump" ? tab : "overview";
 
   return (
-    <MunPageShell title={t("chairRoom")}>
+    <MunPageShell title={t("chairRoom")} variant="split">
       <div className="space-y-8">
         <header className="space-y-3">
           <span
@@ -184,9 +184,9 @@ export default async function ChairOverviewPage({
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("dashboardTabs.jump")}</h3>
           <p className="mt-1 text-xs text-brand-muted dark:text-zinc-400">{tc("navPriorityOrderHint")}</p>
-          <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {tiles.map((tile) => (
-              <li key={tile.href}>
+              <li key={tile.href} className={tile.priority % 5 === 0 ? "sm:translate-y-3" : undefined}>
                 <HubTileLink
                   href={tile.href}
                   label={tile.label}

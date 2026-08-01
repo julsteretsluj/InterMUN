@@ -54,7 +54,7 @@ export default async function ReportPage({
         : undefined;
 
   return (
-    <MunPageShell title={t("report")}>
+    <MunPageShell title={t("report")} variant="flush">
       <ReportView
         reports={reports || []}
         canViewAll={canViewAll}

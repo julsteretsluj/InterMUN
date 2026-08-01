@@ -37,6 +37,7 @@ export default async function VotingPage() {
 
   return (
     <MunPageShell
+      variant="flush"
       title={t("voting")}
       titleAside={<PageFeatureGuideLink featureId="voting" role={myRole} />}
     >

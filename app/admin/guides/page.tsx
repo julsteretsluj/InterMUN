@@ -47,7 +47,7 @@ export default async function AdminGuidesPage() {
   const { data: guides } = await supabase.from("guides").select("*").order("slug");
 
   return (
-    <MunPageShell title={t("guides")}>
+    <MunPageShell title={t("guides")} variant="split">
       <GuidesView
         guides={guides || []}
         canEdit

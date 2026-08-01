@@ -36,7 +36,7 @@ export default async function AdvisorDelegateProfilePage({ params }: PageProps) 
   ].filter((f) => f.value);
 
   return (
-    <MunPageShell title={t("advisorDelegateProfile")}>
+    <MunPageShell title={t("advisorDelegateProfile")} variant="default">
       {!assignment.delegate_user_id ? (
         <p className="rounded-lg border border-dashed border-brand-navy/15 px-4 py-6 text-sm text-brand-muted">
           {td("notLinked")}

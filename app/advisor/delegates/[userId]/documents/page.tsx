@@ -40,7 +40,7 @@ export default async function AdvisorDelegateDocumentsPage({ params }: PageProps
   ];
 
   return (
-    <MunPageShell title={t("advisorDelegateDocuments")}>
+    <MunPageShell title={t("advisorDelegateDocuments")} variant="split">
       <DocumentsView
         documents={mergedDocs}
         currentUserId={userId}

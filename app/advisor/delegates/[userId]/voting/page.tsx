@@ -41,7 +41,7 @@ export default async function AdvisorDelegateVotingPage({ params }: PageProps) {
   );
 
   return (
-    <MunPageShell title={t("advisorDelegateVoting")}>
+    <MunPageShell title={t("advisorDelegateVoting")} variant="offset">
       <AdvisorDelegateVotingView
         voteItems={voteItems ?? []}
         voteByItemId={voteByItemId}

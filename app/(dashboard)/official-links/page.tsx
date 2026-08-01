@@ -13,7 +13,7 @@ export default async function OfficialLinksPage() {
   if (!user) redirect("/login");
 
   return (
-    <MunPageShell title={t("officialUnLinks")}>
+    <MunPageShell title={t("officialUnLinks")} variant="default">
       <OfficialLinksPanel />
     </MunPageShell>
   );

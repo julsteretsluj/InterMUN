@@ -131,7 +131,7 @@ export default async function DelegateDashboardPage({
   const activeTab = tab && validTabs.has(tab) ? tab : "overview";
 
   return (
-    <MunPageShell title={tp("delegateDashboard")}>
+    <MunPageShell title={tp("delegateDashboard")} variant="offset">
       <div className="space-y-6">
         <header className="dashboard-panel relative overflow-hidden !p-4 md:!p-6">
           <span
@@ -198,9 +198,9 @@ export default async function DelegateDashboardPage({
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("jumpTo")}</h2>
           <p className="mt-1 text-xs text-brand-muted">{tc("navPriorityOrderHint")}</p>
-          <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
+          <ul className="mt-2.5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {tiles.map((tile) => (
-              <li key={tile.href + tile.label}>
+              <li key={tile.href + tile.label} className={tile.priority % 4 === 0 ? "sm:translate-y-2" : undefined}>
                 <DelegateHubTileLink
                   href={tile.href}
                   label={tile.label}

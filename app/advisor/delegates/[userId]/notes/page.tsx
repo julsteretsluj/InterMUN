@@ -89,7 +89,7 @@ export default async function AdvisorDelegateNotesPage({ params }: PageProps) {
   );
 
   return (
-    <MunPageShell title={t("advisorDelegateNotes")}>
+    <MunPageShell title={t("advisorDelegateNotes")} variant="flush">
       {!assignment.delegate_user_id ? (
         <p className="rounded-lg border border-dashed border-brand-navy/15 px-4 py-6 text-sm text-brand-muted">
           {ts("delegateNotLinked")}

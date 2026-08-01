@@ -17,7 +17,7 @@ export default async function AdvisorProfilePage() {
   if (!isAdvisorRole(profile?.role)) redirect("/profile");
 
   return (
-    <MunPageShell title={t("profile")}>
+    <MunPageShell title={t("profile")} variant="default">
       <ProfileForm
         profile={profile}
         userId={user.id}

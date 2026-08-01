@@ -58,7 +58,7 @@ export default async function CommitteeRoomPage() {
     .order("name");
 
   return (
-    <MunPageShell title={t("committeeRoom")}>
+    <MunPageShell title={t("committeeRoom")} variant="flush">
       <CommitteeRoomDigitalMUNClient
         conferenceId={conferenceId}
         floorConferenceId={debateBundle.debateConferenceId}

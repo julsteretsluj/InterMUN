@@ -10,14 +10,14 @@ export async function MarketingSiteFooter() {
   const contactEmail = getPartnershipContactEmail();
 
   return (
-    <footer className="mun-marketing-surface relative z-10 border-t border-[var(--hairline)] py-8">
-      <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
-        <p className="font-sans text-xs tracking-wide">
+    <footer className="relative z-10 border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-10">
+      <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-col items-start justify-between gap-6 px-4 text-sm text-brand-muted md:flex-row md:items-center md:px-8">
+        <p className="font-heading text-sm font-medium tracking-[-0.02em] text-brand-navy">
           {t("footer.copyright", { year: new Date().getFullYear() })}
         </p>
         <nav
           aria-label="Company and legal"
-          className="flex flex-wrap items-center justify-center gap-4 font-sans text-xs uppercase tracking-wider"
+          className="flex flex-wrap items-center gap-x-5 gap-y-2 font-sans text-xs tracking-wide"
         >
           <Link href="/about" className="hover:text-brand-navy">
             About

@@ -63,6 +63,7 @@ export default async function SmtAllocationPasswordsPage({
   if (!eventId) {
     return (
       <MunPageShell
+      variant="flush"
       title={t("allocationPasswords")}
       titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
     >
@@ -90,6 +91,7 @@ export default async function SmtAllocationPasswordsPage({
   if (rawList.length === 0) {
     return (
       <MunPageShell
+      variant="default"
       title={t("allocationPasswords")}
       titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
     >
@@ -210,6 +212,7 @@ export default async function SmtAllocationPasswordsPage({
 
   return (
     <MunPageShell
+      variant="offset"
       title={t("allocationPasswords")}
       titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
     >

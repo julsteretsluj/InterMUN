@@ -7,6 +7,7 @@ export default async function AdminNewsroomPage() {
   const t = await getTranslations("pageTitles");
   return (
     <MunPageShell
+      variant="offset"
       title={t("newsroom")}
       titleAside={<PageFeatureGuideLink featureId="newsroom" role="admin" />}
     >

@@ -10,13 +10,14 @@ export default async function NotFound() {
 
   return (
     <AppleGateLayout>
-      <div className="flex flex-col items-center gap-3 py-8 text-center">
-        <p className="mun-apple-text mun-apple-text-caption-1 mun-vibrancy-tertiary font-mono">404</p>
-        <h1 className="mun-apple-text mun-apple-text-title-2">{t("title")}</h1>
-        <p className="mun-apple-text mun-apple-text-body mun-vibrancy-secondary max-w-sm">
-          {t("description")}
-        </p>
-        <Link href="/" className="mun-apple-btn mun-apple-btn-filled-blue mt-2">
+      <div className="relative flex flex-col items-start gap-3 py-6 text-left md:py-8">
+        <span className="mun-accent-doodle right-4 top-2" aria-hidden />
+        <p className="font-mono text-xs tracking-[0.16em] text-brand-muted">404</p>
+        <h1 className="font-heading text-2xl font-semibold tracking-[-0.03em] text-brand-navy md:text-3xl">
+          {t("title")}
+        </h1>
+        <p className="max-w-sm text-[1.0625rem] leading-relaxed text-brand-muted">{t("description")}</p>
+        <Link href="/" className="mun-apple-btn mun-apple-btn-filled-blue mt-3">
           {t("backToHome")}
         </Link>
       </div>

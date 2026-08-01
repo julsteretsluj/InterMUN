@@ -19,6 +19,7 @@ export default async function ChairSessionPage() {
   if (!data) {
     return (
       <MunPageShell
+        variant="flush"
         title={t("committeeSession")}
         titleAside={<PageFeatureGuideLink featureId="session" role="chair" />}
       >
@@ -82,6 +83,7 @@ export default async function ChairSessionPage() {
 
   return (
     <MunPageShell
+      variant="default"
       title={t("committeeSession")}
       titleAside={<PageFeatureGuideLink featureId="session" role="chair" />}
     >
