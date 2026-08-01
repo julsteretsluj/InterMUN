@@ -127,6 +127,7 @@ export async function submitConferenceInquiryAction(
 
   const result = await sendTransactionalEmail({
     to: partnershipEmail,
+    from: partnershipEmail,
     subject,
     text,
     replyTo: data.contactEmail,

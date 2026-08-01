@@ -25,7 +25,7 @@ export function getPartnershipContactEmail(): string {
   return (
     process.env.PARTNERSHIP_CONTACT_EMAIL?.trim() ||
     process.env.NEXT_PUBLIC_PARTNERSHIP_CONTACT_EMAIL?.trim() ||
-    ""
+    "juleskittoastrop@gmail.com"
   );
 }
 

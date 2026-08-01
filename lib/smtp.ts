@@ -33,6 +33,8 @@ export async function sendTransactionalEmail(args: {
   subject: string;
   text: string;
   replyTo?: string;
+  /** Overrides SMTP_FROM / MATERIALS_EXPORT_FROM for this message. */
+  from?: string;
 }): Promise<{ ok: true } | { ok: false; reason: "not_configured" | "send_failed" }> {
   const cfg = getSmtpConfig();
   if (!cfg) return { ok: false, reason: "not_configured" };
@@ -46,7 +48,7 @@ export async function sendTransactionalEmail(args: {
 
   try {
     await transporter.sendMail({
-      from: cfg.from,
+      from: args.from?.trim() || cfg.from,
       to: args.to,
       subject: args.subject,
       text: args.text,
