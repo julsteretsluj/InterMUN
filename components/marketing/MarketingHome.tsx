@@ -158,7 +158,7 @@ function RoleSection({
             reversed && "md:pl-4 lg:pl-8"
           )}
         >
-          <p className="text-[0.8125rem] font-medium tracking-[0.08em] text-[var(--accent)]">{eyebrow}</p>
+          <p className="text-[0.8125rem] font-medium tracking-[0.08em] text-[color:var(--accent-text)]">{eyebrow}</p>
           <h2 className="font-heading mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
             {title}
           </h2>
@@ -174,7 +174,7 @@ function RoleSection({
           {exploreHref && exploreLabel ? (
             <Link
               href={exploreHref}
-              className="mt-8 inline-flex text-[0.9375rem] font-medium text-[var(--accent)] transition-apple hover:opacity-75"
+              className="mt-8 inline-flex text-[0.9375rem] font-medium text-[color:var(--accent-text)] underline-offset-2 transition-apple hover:underline"
             >
               {exploreLabel}
             </Link>
@@ -328,7 +328,7 @@ export async function MarketingHome() {
           <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-16">
             <div className="mun-marketing-hero-copy mun-animate-rise order-2 lg:order-1 lg:pt-6">
               <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
-              <h1 className="font-heading mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-normal tracking-[-0.02em] text-[color:var(--marketing-ink)]">
+              <h1 className="font-heading mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-normal tracking-normal text-[color:var(--marketing-ink)]">
                 <span className="block">{t("hero.title")}</span>
                 <MarketingEmph className="mt-2 block text-[1.15em] leading-none md:mt-3">
                   {t("hero.titleEmphasis")}
@@ -495,7 +495,7 @@ export async function MarketingHome() {
             </div>
             <p className="mt-6 text-center text-sm text-brand-muted">
               {t("contact.registerSecretariat")}{" "}
-              <Link href="/register/secretariat" className="font-semibold text-[var(--accent)] hover:underline">
+              <Link href="/register/secretariat" className="font-semibold text-[color:var(--accent-text)] hover:underline">
                 {t("contact.registerSecretariatLink")} →
               </Link>
             </p>
@@ -504,7 +504,7 @@ export async function MarketingHome() {
               {partnershipEmail ? (
                 <a
                   href={`mailto:${partnershipEmail}`}
-                  className="font-mono font-semibold text-[var(--accent)] hover:underline"
+                  className="font-mono font-semibold text-[color:var(--accent-text)] hover:underline"
                   aria-label={t("contact.emailAria")}
                 >
                   {partnershipEmail}

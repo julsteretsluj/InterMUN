@@ -144,7 +144,7 @@ html {
   --apple-bg-elevated: #fffdf8;
   --apple-label: #183148;
   --apple-label-secondary: #35516b;
-  --apple-label-tertiary: #6a7d91;
+  --apple-label-tertiary: #4d6174;
   --apple-label-quaternary: rgba(24, 49, 72, 0.18);
   --apple-fill: rgba(23, 50, 74, 0.08);
   --apple-fill-secondary: rgba(23, 50, 74, 0.06);
@@ -220,6 +220,8 @@ html {
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
   --accent: #119ed3;
   --accent-bright: #3bb4e0;
+  /* Readable accent for body/link text on pastel & white (≥4.5:1) */
+  --accent-text: color-mix(in srgb, var(--navy) 55%, var(--accent));
   /* Emphasis copy — follows active theme hue instead of fixed gold */
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
@@ -239,7 +241,8 @@ html {
   /* —— TEXT —— */
   --color-text: #183148;
   --color-text-secondary: #35516b;
-  --color-text-muted: #6a7d91;
+  /* Darker muted for ≥4.5:1 on pastel #dff2fc and white */
+  --color-text-muted: #4d6174;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
@@ -257,7 +260,7 @@ html {
   --brand-gold-text: var(--gold-text-bright);
 
   --brand-navy-soft: rgba(23, 50, 74, 0.08);
-  --brand-silver: #6a7d91;
+  --brand-silver: #4d6174;
 
   /* —— STATE (semantic — tuned for light grouped backgrounds) —— */
   --semantic-success: #2d7f68;
@@ -504,47 +507,52 @@ html.dark {
 /* Self-hosted OpenDyslexic (see layout.tsx @fontsource); OFL; weighted baselines + distinct letterforms.
    Atkinson Hyperlegible is kept as a legible fallback while OpenDyslexic loads. */
 html.dyslexic-font {
-  --font-ui: "OpenDyslexic", "Atkinson Hyperlegible", "Comic Sans MS", "Verdana", sans-serif;
+  --font-ui: "OpenDyslexic", "Atkinson Hyperlegible", "Verdana", sans-serif;
   --font-document: "OpenDyslexic", "Atkinson Hyperlegible", "Verdana", "Georgia", serif;
-  --font-dyslexic: "OpenDyslexic", "Atkinson Hyperlegible", "Comic Sans MS", "Verdana", sans-serif;
+  --font-dyslexic: "OpenDyslexic", "Atkinson Hyperlegible", "Verdana", sans-serif;
+  --font-heading: var(--font-dyslexic);
+  --font-display: var(--font-dyslexic);
+  --font-marketing-display: var(--font-dyslexic);
   --apple-font-ui: var(--font-dyslexic);
 }
 
-/* Tailwind `@theme inline` bakes the literal `--font-sans`/`--font-display` stacks
-   (system SF fonts first) into the utility classes, so overriding the CSS variables
-   isn't enough to surface OpenDyslexic. Force the family on the root, body, and the
-   font utilities so the dyslexic face actually wins everywhere. */
+/* Force dyslexic face over Tailwind-baked font utilities and serif headings. */
 html.dyslexic-font,
 html.dyslexic-font body,
 html.dyslexic-font .font-sans,
 html.dyslexic-font .font-display,
-html.dyslexic-font .marketing-shell .mun-display,
+html.dyslexic-font .font-heading,
 html.dyslexic-font .font-serif,
 html.dyslexic-font .font-mono,
+html.dyslexic-font .marketing-shell .mun-display,
+html.dyslexic-font .mun-seamun-brand-title,
 html.dyslexic-font [class*="mun-apple-"],
 html.dyslexic-font .mun-apple-page-body {
   font-family: var(--font-dyslexic) !important;
+  font-synthesis: none;
 }
 
-/* Keep script emphasis readable when dyslexic mode overrides UI fonts */
+/* Decorative scripts are hard to read — use the clear dyslexic face instead. */
 html.dyslexic-font :is(em, i, .italic, .mun-emph, .font-cursive) {
-  font-family: var(--font-marketing-cursive) !important;
+  font-family: var(--font-dyslexic) !important;
   font-style: normal !important;
+  font-weight: 700;
 }
 
-/* Keep UI sans on compact dashboard headings when dyslexic mode is on */
 html.dyslexic-font
-  :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display):not(.text-xs):not(
-    .text-sm
-  ):not(:is(.mun-emph, .font-cursive, em, i, .italic)) {
+  :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display, .font-heading):not(
+    :is(.mun-emph, .font-cursive)
+  ) {
   font-family: var(--font-dyslexic) !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 /* OpenDyslexic runs wide + tall — open up spacing and line height so it stays readable. */
 html.dyslexic-font body {
-  letter-spacing: 0.02em;
-  word-spacing: 0.08em;
-  line-height: 1.65;
+  letter-spacing: 0.03em;
+  word-spacing: 0.1em;
+  line-height: 1.7;
 }
 
 /* —— Apple-style motion + tap feedback —— */
@@ -712,6 +720,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Inter Tight is condensed — open tracking/leading for clarity */
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  font-size: 1rem;
 }
 
 /* Apple site shell — ambient canvas replaces parchment wash */
@@ -999,7 +1011,7 @@ html.dark ::selection {
   }
 
   .dashboard-panel-title {
-    @apply font-heading text-xl font-normal tracking-[-0.02em] text-brand-navy md:text-2xl;
+    @apply font-heading text-xl font-normal tracking-normal text-brand-navy md:text-2xl;
   }
 
   /* Active nav — soft filled pill */
@@ -1289,12 +1301,13 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Marketing editorial headlines — Instrument Serif */
+  /* Marketing editorial headlines — Instrument Serif (weight 400 only) */
   .marketing-shell .mun-display {
     @apply font-normal;
     font-family: var(--font-marketing-display);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: 0;
+    line-height: 1.2;
+    font-synthesis: none;
   }
 
   .marketing-shell .mun-emph {
@@ -1713,7 +1726,7 @@ html.colorblind-mode .schedule-swatch-session {
   --marketing-chamber-elevated: #ffffff;
   --marketing-chamber-deep: #eff9ff;
   --marketing-ink: #183148;
-  --marketing-ink-soft: #35516b;
+  --marketing-ink-soft: #4d6174;
   --marketing-hairline: #c9dde9;
   --marketing-emph: var(--gold-text);
   --marketing-band-accent: var(--accent);
@@ -1834,11 +1847,11 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-marketing-eyebrow {
   font-family: var(--apple-font-ui, var(--font-sans));
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: color-mix(in srgb, var(--navy) 82%, var(--accent));
 }
 
 .marketing-shell .mun-marketing-eyebrow-hero {
@@ -7944,26 +7957,29 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site h1:not(.mun-display):not(.mun-emph) {
   font-family: var(--font-heading), Georgia, serif;
   font-size: var(--apple-text-title-2-size);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+  letter-spacing: 0;
+  /* Instrument Serif ships only at 400 — avoid synthetic bold */
   font-weight: 400;
+  font-synthesis: none;
   color: var(--apple-label);
 }
 
 .mun-apple-site h2 {
   font-family: var(--font-heading), Georgia, serif;
   font-size: var(--apple-text-title-3-size);
-  line-height: 1.22;
-  letter-spacing: -0.015em;
-  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-synthesis: none;
   color: var(--apple-label);
 }
 
 .mun-apple-site h3 {
   font-family: var(--apple-font-ui, var(--font-sans));
   font-size: var(--apple-text-headline-size);
-  line-height: 1.29;
-  letter-spacing: -0.02em;
+  line-height: 1.35;
+  letter-spacing: 0;
   font-weight: 600;
   color: var(--apple-label);
 }
@@ -8387,18 +8403,20 @@ html.dark .mun-apple-window-sidebar {
 
 .mun-seamun-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: max(0.75rem, 12px);
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .mun-seamun-brand-title {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 4vw, 3.4rem);
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-synthesis: none;
+  letter-spacing: 0;
+  line-height: 1.15;
 }
 
 .mun-seamun-form-panel {
@@ -8440,4 +8458,52 @@ html.dark .mun-apple-window-sidebar {
   .mun-seamun-form-panel {
     animation: none;
   }
+}
+
+/* —— Accessible type: clear Instrument Serif + readable UI —— */
+.font-heading,
+.font-display,
+.mun-seamun-brand-title {
+  font-family: var(--font-heading), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.mun-text-accent-readable {
+  color: var(--accent-text);
+}
+
+.mun-apple-site a:not(.mun-apple-btn):not(.mun-btn):not([class*="btn"]) {
+  text-underline-offset: 0.15em;
+}
+
+.mun-label,
+.mun-seamun-eyebrow {
+  font-size: max(0.75rem, 12px);
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+}
+
+.mun-apple-site p,
+.mun-seamun-form-panel p,
+.marketing-shell p {
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+}
+
+.mun-field,
+.mun-seamun-form-panel input,
+.mun-seamun-form-panel select,
+.mun-seamun-form-panel textarea {
+  font-size: max(1rem, 16px);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.mun-seamun-form-panel h1,
+.mun-seamun-form-panel h2 {
+  letter-spacing: 0;
+  font-synthesis: none;
 }

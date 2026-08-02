@@ -42,7 +42,7 @@ export function MunPageShell({
       >
         <h2
           className={cn(
-            "font-heading !mb-0 text-[1.5rem] font-normal tracking-[-0.02em] text-brand-navy md:text-[1.85rem]",
+            "font-heading !mb-0 text-[1.5rem] font-normal tracking-normal text-brand-navy md:text-[1.85rem]",
             variant === "offset" && "relative after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-10 after:rounded-full after:bg-[var(--accent)]"
           )}
         >

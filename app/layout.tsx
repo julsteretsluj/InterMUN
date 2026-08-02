@@ -14,24 +14,30 @@ import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
 
 const sans = Inter_Tight({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-ui",
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 /** Display / headings — SEAMUN Chat–inspired Instrument Serif. */
 const display = Instrument_Serif({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-display-serif",
   weight: "400",
   style: ["normal", "italic"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 /** Document surfaces only (resolutions, papers) — Coursera-style specialization pairing. */
 const documentSerif = Merriweather({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-document",
   weight: ["400", "700"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {

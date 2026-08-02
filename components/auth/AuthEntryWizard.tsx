@@ -280,7 +280,7 @@ export function AuthEntryWizard({
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
-          <h1 className="font-heading text-3xl md:text-4xl font-normal text-brand-navy tracking-[-0.03em]">
+          <h1 className="font-heading text-3xl md:text-4xl font-normal text-brand-navy tracking-normal">
             {t("enterApp")}
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
@@ -321,7 +321,7 @@ export function AuthEntryWizard({
             {t("back")}
           </button>
           <AuthBrandWordmark className="mb-4" />
-          <h2 className="font-heading text-xl font-normal text-center tracking-[-0.02em] text-brand-navy mb-2">{t("conferenceTitle")}</h2>
+          <h2 className="font-heading text-xl font-normal text-center tracking-normal text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
             {t("conferenceDescription", {
               mode: mode === "signup" ? t("nextModeSignup") : t("nextModeLogin"),

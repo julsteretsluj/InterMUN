@@ -54,7 +54,7 @@ export default async function AuthLayout({
           <div className="mb-8 flex items-center justify-between gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 text-sm font-medium text-[var(--muted,#6a7d91)] transition hover:text-[var(--ink,#183148)]"
+              className="inline-flex items-center gap-1 text-sm font-medium text-brand-muted transition hover:text-brand-navy"
             >
               <ChevronLeft className="size-4 shrink-0" aria-hidden />
               {t("backToHome")}

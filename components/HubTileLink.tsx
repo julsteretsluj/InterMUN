@@ -45,7 +45,7 @@ export function HubTileLink({
       />
       <NavPriorityBadge priority={priority} variant="tile" />
       <span className="flex items-center justify-between gap-2">
-        <span className="font-heading text-[0.98rem] font-semibold tracking-[-0.02em] text-brand-navy dark:text-zinc-100">
+        <span className="font-heading text-[0.98rem] font-normal tracking-normal text-brand-navy dark:text-zinc-100">
           {label}
         </span>
         <span
