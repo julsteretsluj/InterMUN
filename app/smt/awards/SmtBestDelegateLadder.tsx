@@ -76,7 +76,7 @@ export function SmtBestDelegateLadder({
   if (pending.length === 0) {
     return (
       <section className="rounded-xl border border-brand-navy/10 bg-brand-paper/60 p-4 md:p-6">
-        <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100 mb-1">
+        <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100 mb-1">
           Best Delegate (overall) — ladder
         </h3>
         <p className="text-xs text-brand-muted">
@@ -96,7 +96,7 @@ export function SmtBestDelegateLadder({
     return (
       <section className="rounded-xl border border-brand-accent/35 bg-brand-accent/8 p-4 md:p-6 space-y-3">
         <div>
-          <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
+          <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">
             Best Delegate (overall) — ladder complete
           </h3>
           <p className="text-xs text-brand-muted mt-1">
@@ -128,7 +128,7 @@ export function SmtBestDelegateLadder({
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
       <div>
-        <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
+        <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">
           Best Delegate (overall) — ladder
         </h3>
         <p className="text-xs text-brand-muted mt-1">

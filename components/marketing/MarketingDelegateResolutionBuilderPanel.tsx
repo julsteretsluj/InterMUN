@@ -81,7 +81,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
   return (
     <section className={cn("mun-card space-y-4 border-white/10", className)}>
       <div>
-        <h3 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h3>
         <p className="mt-1 text-xs leading-relaxed text-brand-muted">{t("introDescription")}</p>
       </div>
 

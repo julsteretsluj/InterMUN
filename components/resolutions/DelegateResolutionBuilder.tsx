@@ -172,7 +172,7 @@ export function DelegateResolutionBuilder({
   if (resolutions.length === 0) {
     return (
       <section className="mun-card space-y-2 border-white/10">
-        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
           {t("title")}
         </h2>
         <p className="text-sm text-brand-muted">{t("emptyDescription")}</p>
@@ -183,7 +183,7 @@ export function DelegateResolutionBuilder({
   return (
     <section className="mun-card space-y-4 border-white/10">
       <div>
-        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
           {t("title")}
         </h2>
         <p className="mt-1 text-xs text-brand-muted leading-relaxed">{t("introDescription")}</p>

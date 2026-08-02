@@ -28,7 +28,7 @@ export default async function MarketingLayout({
             <MarketingOrbTrigger emblemClassName="max-h-8 w-auto md:max-h-9" />
             <Link
               href="/"
-              className="marketing-header-brand font-heading min-w-0 truncate !mb-0 text-sm font-semibold tracking-[-0.03em] md:text-base"
+              className="marketing-header-brand font-sans min-w-0 truncate !mb-0 text-sm font-semibold tracking-[-0.03em] md:text-base"
             >
               {appName}
             </Link>

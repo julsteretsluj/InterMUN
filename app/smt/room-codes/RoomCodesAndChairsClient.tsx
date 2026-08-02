@@ -136,7 +136,7 @@ export function RoomCodesAndChairsClient({
   return (
     <div className="space-y-10">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy mb-2">
           {t("committeeRoomCodes")}
         </h2>
         <p className="text-sm text-brand-muted mb-6 max-w-2xl">
@@ -157,7 +157,7 @@ export function RoomCodesAndChairsClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">{t("inviteDaisChairs")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy mb-2">{t("inviteDaisChairs")}</h2>
         <p className="text-sm text-brand-muted mb-4 max-w-2xl">
           {t.rich("inviteHelp", {
             strong: (chunks) => <strong>{chunks}</strong>,
@@ -221,7 +221,7 @@ export function RoomCodesAndChairsClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy mb-2">
           {t("grantChairRoleTitle")}
         </h2>
         <p className="text-sm text-brand-muted mb-4 max-w-2xl">

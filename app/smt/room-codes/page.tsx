@@ -39,7 +39,7 @@ export default async function SmtRoomCodesPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">{t("title")}</h1>
+      <h1 className="font-sans text-2xl font-semibold text-brand-navy mb-2">{t("title")}</h1>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">{t("subtitle")}</p>
       <RoomCodesAndChairsClient
         conferences={conferences}

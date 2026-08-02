@@ -83,7 +83,7 @@ export function MarketingSessionVoteRecordingPanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{t("currentOpenMotion")}</h3>
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("currentOpenMotion")}</h3>
           <p className="mt-1 text-sm text-brand-muted">{t("chairRecordVotesHint")}</p>
         </div>
       ) : null}

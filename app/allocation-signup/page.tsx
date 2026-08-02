@@ -39,7 +39,7 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">{t("invalidLinkTitle")}</h1>
+          <h1 className="font-sans text-xl font-semibold">{t("invalidLinkTitle")}</h1>
           <p className="text-sm text-brand-muted">{t("invalidLinkBody")}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             {tc("returnToProfile")}
@@ -85,7 +85,7 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="w-full max-w-lg rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-4">
-          <h1 className="font-display text-xl font-semibold">Select your allocation</h1>
+          <h1 className="font-sans text-xl font-semibold">Select your allocation</h1>
           <p className="text-sm text-brand-muted">
             Choose your country/position to submit a sign-up request for chair approval.
           </p>
@@ -150,7 +150,7 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">{t("allocationNotFoundTitle")}</h1>
+          <h1 className="font-sans text-xl font-semibold">{t("allocationNotFoundTitle")}</h1>
           <p className="text-sm text-brand-muted">{t("allocationNotFoundBody")}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             {tc("returnToProfile")}
@@ -164,7 +164,7 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">{t("allocationTakenTitle")}</h1>
+          <h1 className="font-sans text-xl font-semibold">{t("allocationTakenTitle")}</h1>
           <p className="text-sm text-brand-muted">
             {t("allocationTakenBody", { country: targetAllocation.country })}
           </p>
@@ -190,7 +190,7 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">{t("submitFailedTitle")}</h1>
+          <h1 className="font-sans text-xl font-semibold">{t("submitFailedTitle")}</h1>
           <p className="text-sm text-brand-muted">{requestResult.error}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             {tc("returnToProfile")}
@@ -203,7 +203,7 @@ export default async function AllocationSignupPage({
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
       <div className="max-w-lg rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-        <h1 className="font-display text-xl font-semibold">{t("requestSubmittedTitle")}</h1>
+        <h1 className="font-sans text-xl font-semibold">{t("requestSubmittedTitle")}</h1>
         <p className="text-sm text-brand-muted">
           {t("requestSubmittedBody", { country: targetAllocation.country })}
         </p>

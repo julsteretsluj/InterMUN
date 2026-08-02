@@ -23,7 +23,7 @@ export function MarketingSetupChecklistPanel({ className }: { className?: string
 
   return (
     <section className={cn(PREVIEW_CARD, className)}>
-      <h2 className="font-display text-sm font-semibold text-zinc-900">{t("title")}</h2>
+      <h2 className="font-sans text-sm font-semibold text-zinc-900">{t("title")}</h2>
       <p className="mt-1 text-xs text-zinc-500">{t("subtitle")}</p>
       <ol className="mt-3 space-y-2">
         {STEP_HREFS.map((href, i) => (

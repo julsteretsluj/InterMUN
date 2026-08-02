@@ -38,7 +38,7 @@ function ProfilePreviewAvatar({ imageUrl, initials }: { imageUrl: string; initia
           onError={() => setImgBroken(true)}
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-brand-accent/15 font-display text-2xl font-semibold text-brand-navy">
+        <div className="flex h-full w-full items-center justify-center bg-brand-accent/15 font-sans text-2xl font-semibold text-brand-navy">
           {initials}
         </div>
       )}
@@ -94,7 +94,7 @@ export function ProfileLivePreview({
       <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
         <ProfilePreviewAvatar key={imageUrl} imageUrl={imageUrl} initials={initials} />
 
-        <h2 className="font-display text-xl font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
+        <h2 className="font-sans text-xl font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
           {name.trim() || t("preview.yourName")}
         </h2>
 

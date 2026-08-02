@@ -43,7 +43,7 @@ export function SmtAdvisorsClient({
   return (
     <div className="space-y-8">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("inviteTitle")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("inviteTitle")}</h2>
         <p className="mt-1 text-sm text-brand-muted">{t("inviteBody")}</p>
         {!adminInviteConfigured ? (
           <div className="mt-3 rounded-lg border border-amber-300/50 bg-amber-50/80 px-4 py-3 text-sm text-amber-950 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-100">
@@ -78,7 +78,7 @@ export function SmtAdvisorsClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("assignTitle")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("assignTitle")}</h2>
         <p className="mt-1 text-sm text-brand-muted">{t("assignBody")}</p>
         <form action={assignAction} className="mt-4 grid max-w-xl gap-3">
           <label className="text-sm">
@@ -107,7 +107,7 @@ export function SmtAdvisorsClient({
 
       {assignments.length > 0 ? (
         <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
-          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("currentAssignmentsTitle")}</h2>
+          <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("currentAssignmentsTitle")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("currentAssignmentsHint")}</p>
           <div className="mt-4 overflow-x-auto rounded-xl border border-brand-navy/10">
             <table className="w-full min-w-[32rem] text-left text-sm">
@@ -138,7 +138,7 @@ export function SmtAdvisorsClient({
 
       {allocationRefs.length > 0 ? (
         <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
-          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("allocationIdsTitle")}</h2>
+          <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("allocationIdsTitle")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("allocationIdsHint")}</p>
           <div className="mt-4 overflow-x-auto rounded-xl border border-brand-navy/10">
             <table className="w-full min-w-[36rem] text-left text-sm">

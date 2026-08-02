@@ -113,7 +113,7 @@ export function SmtCommitteeViewSettingsCard({
 
   return (
     <section className="mb-8 rounded-xl border border-brand-navy/15 bg-brand-paper/80 p-4 md:p-6 dark:border-zinc-600 dark:bg-zinc-900/60">
-      <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+      <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
         {t("title")}
       </h2>
       <p className="mt-1 text-sm text-brand-muted dark:text-zinc-400">{t("intro")}</p>

@@ -124,7 +124,7 @@ function PrepSectionBlock({
   const t = useTranslations("chairChecklists");
   return (
     <div className={surfaceCard}>
-      <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-50">
+      <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-50">
         {t(`prep.sections.${section.id}.title`)}
       </h3>
       <ul className="mt-3 space-y-2">

@@ -96,7 +96,7 @@ function Placard({
         ].join(" ")}
       >
         {vacant ? (
-          <div className="text-center font-display text-xs font-semibold py-1">
+          <div className="text-center font-sans text-xs font-semibold py-1">
             <span aria-hidden="true" className="mr-1">🪑</span>
             {t("virtualRoomVacant")}
           </div>

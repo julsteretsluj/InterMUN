@@ -29,7 +29,7 @@ export function MarketingDelegatePrepWorkspacePanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{tPrep("prepWorkspaceTitle")}</h3>
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{tPrep("prepWorkspaceTitle")}</h3>
           <p className="mt-1 text-sm text-brand-muted">{tPrep("prepWorkspaceHint")}</p>
         </div>
       ) : null}
@@ -108,7 +108,7 @@ function DocumentsWorkspace() {
 
       {showForm ? (
         <div className="mun-card space-y-3 border-[var(--hairline)]">
-          <h3 className="font-display font-semibold text-brand-navy">{t("newDocumentTitle")}</h3>
+          <h3 className="font-sans font-semibold text-brand-navy">{t("newDocumentTitle")}</h3>
           <div className="space-y-3">
             <div>
               <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>

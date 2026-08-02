@@ -131,7 +131,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h3>
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h3>
           <p className="mt-1 text-xs leading-relaxed text-brand-muted">
             {t.rich("intro", {
               strong: (chunks) => <strong>{chunks}</strong>,
@@ -244,7 +244,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
 
           <div className="space-y-3 rounded-xl border border-brand-accent/30 bg-logo-cyan/8 p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h4 className="font-display text-base font-semibold text-brand-navy">
+              <h4 className="font-sans text-base font-semibold text-brand-navy">
                 {activeDelegate.country} — {activeDelegate.displayName}
               </h4>
               <span

@@ -381,7 +381,7 @@ export function VotingPanel({
         <header className="flex flex-wrap items-start justify-between gap-3 border-b border-[var(--hairline)] pb-3">
           <div className="min-w-0 space-y-1">
             <p className="mun-label">{typeLabel}</p>
-            <h3 className="font-display text-lg font-semibold leading-snug text-brand-navy">{titleLine}</h3>
+            <h3 className="font-sans text-lg font-semibold leading-snug text-brand-navy">{titleLine}</h3>
             {proc ? (
               <p className="mun-muted text-xs capitalize">{proc}</p>
             ) : null}
@@ -411,24 +411,24 @@ export function VotingPanel({
             <div className="mun-inset flex flex-wrap items-center gap-x-6 gap-y-2">
               <div className="text-center sm:text-left">
                 <p className="mun-label">{t("yes")}</p>
-                <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{yes}</p>
+                <p className="font-sans text-xl font-semibold tabular-nums text-brand-navy">{yes}</p>
               </div>
               <div className="hidden h-8 w-px bg-[var(--hairline)] sm:block" aria-hidden />
               <div className="text-center sm:text-left">
                 <p className="mun-label">{t("no")}</p>
-                <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{no}</p>
+                <p className="font-sans text-xl font-semibold tabular-nums text-brand-navy">{no}</p>
               </div>
               <div className="hidden h-8 w-px bg-[var(--hairline)] sm:block" aria-hidden />
               <div className="text-center sm:text-left">
                 <p className="mun-label">{t("ballots")}</p>
-                <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{total}</p>
+                <p className="font-sans text-xl font-semibold tabular-nums text-brand-navy">{total}</p>
               </div>
               {abstainAllowedForItem && abstainCount > 0 ? (
                 <>
                   <div className="hidden h-8 w-px bg-[var(--hairline)] sm:block" aria-hidden />
                   <div className="text-center sm:text-left">
                     <p className="mun-label">{t("abstain")}</p>
-                    <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{abstainCount}</p>
+                    <p className="font-sans text-xl font-semibold tabular-nums text-brand-navy">{abstainCount}</p>
                   </div>
                 </>
               ) : null}
@@ -436,7 +436,7 @@ export function VotingPanel({
                 <p className="mun-label mb-1">{t("outcome")}</p>
                 {total > 0 ? (
                   <p
-                    className={`font-display text-lg font-semibold ${
+                    className={`font-sans text-lg font-semibold ${
                       passes
                         ? "text-brand-diplomatic dark:text-brand-accent-bright"
                         : "text-rose-700 dark:text-rose-400"

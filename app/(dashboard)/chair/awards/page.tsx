@@ -376,7 +376,7 @@ export default async function ChairAwardsPage() {
         />
         {rankingDesc.length > 0 ? (
           <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-            <h3 className="font-display text-base font-semibold text-brand-navy mb-2">
+            <h3 className="font-sans text-base font-semibold text-brand-navy mb-2">
               {tPage("ranking.title")}
             </h3>
             <p className="text-xs text-brand-muted mb-3">
@@ -411,7 +411,7 @@ export default async function ChairAwardsPage() {
               className="rounded-xl border border-brand-navy/10 bg-logo-cyan/7 p-4 md:p-4 space-y-3"
             >
               <div>
-                <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>
+                <h3 className="font-sans text-lg font-semibold text-brand-navy">{type.label}</h3>
                 <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
                 <SectionAwardsProgress
                   nominationType={type.id}

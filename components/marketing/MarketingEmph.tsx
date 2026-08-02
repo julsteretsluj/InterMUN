@@ -4,7 +4,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Theme-accent cursive emphasis — Momo Signature via `.mun-emph` in globals.css. */
+/** Marketing emphasis — Inter italic via `.mun-emph` (same family as the rest of the UI). */
 export function MarketingEmph({
   children,
   className,

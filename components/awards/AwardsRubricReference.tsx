@@ -35,7 +35,7 @@ function RubricMatrix({
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h4 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">{title}</h4>
+        <h4 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">{title}</h4>
         <span className="font-mono text-xs text-brand-muted dark:text-discord-muted">
           {t("maxPoints", { points: maxPoints })}
         </span>
@@ -102,7 +102,7 @@ function AwardList({
 }) {
   return (
     <div>
-      <h4 className="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-discord-muted">
+      <h4 className="mb-2 font-sans text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-discord-muted">
         {heading}
       </h4>
       <ul className="list-inside list-disc space-y-1.5 text-sm text-brand-navy dark:text-zinc-200">
@@ -123,7 +123,7 @@ export function AwardsRubricReference() {
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 dark:border-white/10 dark:bg-white/5">
-        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
           {t("reference.title")}
         </h2>
         <p className="mt-1 text-xs leading-relaxed text-brand-muted dark:text-discord-muted">
@@ -132,7 +132,7 @@ export function AwardsRubricReference() {
       </section>
 
       <details className="group rounded-xl border border-brand-navy/10 bg-brand-paper/80 open:shadow-sm dark:border-white/10 dark:bg-discord-elevated/40">
-        <summary className="cursor-pointer list-none px-4 py-3 font-display text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
+        <summary className="cursor-pointer list-none px-4 py-3 font-sans text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
@@ -151,7 +151,7 @@ export function AwardsRubricReference() {
       </details>
 
       <details className="group rounded-xl border border-brand-navy/10 bg-brand-paper/80 open:shadow-sm dark:border-white/10 dark:bg-discord-elevated/40">
-        <summary className="cursor-pointer list-none px-4 py-3 font-display text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
+        <summary className="cursor-pointer list-none px-4 py-3 font-sans text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
@@ -160,7 +160,7 @@ export function AwardsRubricReference() {
         <div className="space-y-4 border-t border-brand-navy/10 px-4 pb-4 pt-3 dark:border-white/10">
           {SEAMUN_AWARDS_PROCESS_SECTIONS.map((s) => (
             <div key={s.title}>
-              <h4 className="font-display text-sm font-semibold text-brand-navy dark:text-zinc-100">{s.title}</h4>
+              <h4 className="font-sans text-sm font-semibold text-brand-navy dark:text-zinc-100">{s.title}</h4>
               {s.paragraphs?.map((p, j) => (
                 <p key={j} className="mt-1 text-sm text-brand-navy dark:text-zinc-300">
                   {p}
@@ -210,7 +210,7 @@ export function AwardsRubricReference() {
       <RubricMatrix title={t("matrices.bestCommittee")} criteria={BEST_COMMITTEE_RUBRIC} maxPoints={32} />
 
       <details className="group rounded-xl border border-brand-navy/10 bg-brand-paper/80 open:shadow-sm dark:border-white/10 dark:bg-discord-elevated/40">
-        <summary className="cursor-pointer list-none px-4 py-3 font-display text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
+        <summary className="cursor-pointer list-none px-4 py-3 font-sans text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
@@ -219,7 +219,7 @@ export function AwardsRubricReference() {
         <div className="space-y-4 border-t border-brand-navy/10 px-4 pb-4 pt-3 dark:border-white/10">
           {SEAMUN_CHAIR_TRAINING_GUIDE.map((block) => (
             <div key={block.title}>
-              <h4 className="font-display text-sm font-semibold text-brand-navy dark:text-zinc-100">{block.title}</h4>
+              <h4 className="font-sans text-sm font-semibold text-brand-navy dark:text-zinc-100">{block.title}</h4>
               <ul className="mt-1.5 list-inside list-disc space-y-1 text-sm text-brand-navy dark:text-zinc-300">
                 {block.bullets.map((b, k) => (
                   <li key={k}>{b}</li>

@@ -11,7 +11,7 @@ export default async function SetupPage() {
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10 space-y-4">
           <BrandWordmark className="mb-2" />
           <div className="h-1 w-16 rounded-full bg-brand-accent" aria-hidden />
-          <h1 className="font-display text-2xl font-semibold text-brand-navy">{t("title")}</h1>
+          <h1 className="font-sans text-2xl font-semibold text-brand-navy">{t("title")}</h1>
           <p className="text-brand-muted leading-relaxed">{t("body")}</p>
           <ul className="list-disc list-inside text-sm text-brand-navy space-y-1.5">
             <li>

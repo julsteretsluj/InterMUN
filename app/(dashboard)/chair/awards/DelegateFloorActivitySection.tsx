@@ -81,7 +81,7 @@ export function DelegateFloorActivitySection({ activity }: Props) {
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/8 p-3 md:p-4 space-y-4">
       <div>
-        <h4 className="font-display text-sm font-semibold text-brand-navy dark:text-zinc-100">
+        <h4 className="font-sans text-sm font-semibold text-brand-navy dark:text-zinc-100">
           {t("title")}
         </h4>
         <p className="mt-0.5 text-[11px] text-brand-muted leading-relaxed">{t("description")}</p>

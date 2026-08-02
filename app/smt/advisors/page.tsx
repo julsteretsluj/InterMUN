@@ -121,7 +121,7 @@ export default async function SmtAdvisorsPage() {
 
   return (
     <div>
-      <h1 className="mb-2 font-display text-2xl font-semibold text-brand-navy">{t("title")}</h1>
+      <h1 className="mb-2 font-sans text-2xl font-semibold text-brand-navy">{t("title")}</h1>
       <p className="mb-6 max-w-2xl text-sm text-brand-muted">{t("subtitle")}</p>
       <SmtAdvisorsClient
         adminInviteConfigured={adminInviteConfigured}

@@ -68,7 +68,7 @@ export function SeamunLunchOverlapCompare({
 
   return (
     <div className="mt-8 border-t border-brand-navy/10 pt-6">
-      <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">{t("title")}</h3>
+      <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">{t("title")}</h3>
       <p className="mt-1 text-xs text-brand-muted">{t("body", { max: SEAMUN_MAX_LUNCH_COMPARE_COMMITTEES })}</p>
       <CanteenLeaveNotice className="mt-4" />
       <p className="mt-4 text-sm font-semibold text-brand-navy dark:text-zinc-100">{primaryKey}</p>

@@ -300,7 +300,7 @@ function ChairAllocationScoringPanel({
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+          <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
             {t("scoringPanelTitle")}
           </h2>
           <p className="mt-0.5 text-xs text-brand-muted">
@@ -321,7 +321,7 @@ function ChairAllocationScoringPanel({
 
       <div className="rounded-xl border border-brand-accent/30 bg-brand-paper p-4 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
+          <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">
             {activeDelegate.country} — {activeDelegate.displayName}
           </h3>
           <span

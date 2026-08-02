@@ -163,7 +163,7 @@ export function DelegationNoteThreadDialog({
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{title}</h3>
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{title}</h3>
           <button
             type="button"
             onClick={onClose}

@@ -12,7 +12,7 @@ export async function MarketingSiteFooter() {
   return (
     <footer className="relative z-10 border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-10">
       <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-col items-start justify-between gap-6 px-4 text-sm text-brand-muted md:flex-row md:items-center md:px-8">
-        <p className="font-heading text-sm font-medium tracking-[-0.02em] text-brand-navy">
+        <p className="font-sans text-sm font-semibold tracking-[-0.01em] text-brand-navy">
           {t("footer.copyright", { year: new Date().getFullYear() })}
         </p>
         <nav

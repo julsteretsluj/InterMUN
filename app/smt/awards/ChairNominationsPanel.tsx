@@ -90,7 +90,7 @@ export function ChairNominationsPanel({
 
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
-      <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">{t("title")}</h2>
+      <h2 className="font-sans text-lg font-semibold text-brand-navy mb-2">{t("title")}</h2>
       <p className="text-xs text-brand-muted mb-3">
         {t("description")}
       </p>

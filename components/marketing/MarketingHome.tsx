@@ -99,7 +99,7 @@ function GateFlow({
           )}
         >
           <span className="mun-gate-code">{step.code}</span>
-          <h3 className="mt-3 font-heading text-lg font-semibold tracking-[-0.02em] text-brand-navy">{step.title}</h3>
+          <h3 className="mt-3 font-sans text-lg font-semibold tracking-[-0.02em] text-brand-navy">{step.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-brand-muted">{step.description}</p>
         </li>
       ))}
@@ -159,7 +159,7 @@ function RoleSection({
           )}
         >
           <p className="text-[0.8125rem] font-medium tracking-[0.08em] text-[color:var(--accent-text)]">{eyebrow}</p>
-          <h2 className="font-heading mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
+          <h2 className="font-sans mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.015em] text-brand-navy">
             {title}
           </h2>
           <p
@@ -328,7 +328,7 @@ export async function MarketingHome() {
           <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-16">
             <div className="mun-marketing-hero-copy mun-animate-rise order-2 lg:order-1 lg:pt-6">
               <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
-              <h1 className="font-heading mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-normal tracking-normal text-[color:var(--marketing-ink)]">
+              <h1 className="font-sans mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-bold tracking-[-0.02em] text-[color:var(--marketing-ink)]">
                 <span className="block">{t("hero.title")}</span>
                 <MarketingEmph className="mt-2 block text-[1.15em] leading-none md:mt-3">
                   {t("hero.titleEmphasis")}

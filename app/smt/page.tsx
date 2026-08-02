@@ -211,7 +211,7 @@ export default async function SmtOverviewPage({
           })}
         </div>
       )}
-      <h1 className="mb-1.5 font-heading text-[1.85rem] font-semibold tracking-[-0.03em] text-brand-navy">{t("welcomeSg")}</h1>
+      <h1 className="mb-1.5 font-sans text-[1.85rem] font-semibold tracking-[-0.03em] text-brand-navy">{t("welcomeSg")}</h1>
       <p className="mb-5 max-w-lg text-[0.95rem] leading-relaxed text-brand-muted">{t("whichCommittee")}</p>
       <div className="mb-5">
         <RoleSetupChecklist role="smt" />

@@ -96,7 +96,7 @@ export default async function RoomGatePage({
         <div className="relative w-full max-w-md space-y-8">
           <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-12 space-y-4">
             <GateBrandWordmark className="mb-2" />
-            <h1 className="font-display text-xl font-semibold text-brand-navy text-center">
+            <h1 className="font-sans text-xl font-semibold text-brand-navy text-center">
               {t("alreadyInCommittee")}
             </h1>
             <p className="text-sm text-brand-muted text-center">
@@ -153,7 +153,7 @@ export default async function RoomGatePage({
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-12">
           <GateBrandWordmark className="mb-6" />
           <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
-          <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
+          <h1 className="font-sans text-xl font-semibold text-brand-navy text-center mb-2">
             {t("joinCommittee")}
           </h1>
           <p className="text-sm text-brand-muted text-center mb-6">

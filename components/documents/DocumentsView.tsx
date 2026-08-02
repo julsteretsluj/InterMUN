@@ -292,7 +292,7 @@ export function DocumentsView({
               </button>
               {(showForm || editing) && (
                 <div className="mun-card space-y-3 border-[var(--hairline)] dark:border-white/10">
-                  <h3 className="font-display font-semibold text-brand-navy dark:text-zinc-100">
+                  <h3 className="font-sans font-semibold text-brand-navy dark:text-zinc-100">
                     {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
                   </h3>
                   <div className="space-y-3">
@@ -587,7 +587,7 @@ export function DocumentsView({
                 <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)] sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+                  <h3 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
                     {selected.title || t("untitled")}
                   </h3>
                   <p className="text-sm capitalize text-brand-muted">{labelForDocType(selected.doc_type)}</p>

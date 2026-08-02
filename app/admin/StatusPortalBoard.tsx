@@ -25,7 +25,7 @@ export default async function StatusPortalBoard() {
   if (!eventId) {
     return (
       <section className="mun-shell !shadow-none space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h2>
         <p className="text-sm text-brand-muted">{t("selectEventFirst")}</p>
       </section>
     );
@@ -43,7 +43,7 @@ export default async function StatusPortalBoard() {
   if (confIds.length === 0) {
     return (
       <section className="mun-shell !shadow-none space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h2>
         <p className="text-sm text-brand-muted">{t("noSessionsYet")}</p>
       </section>
     );
@@ -71,7 +71,7 @@ export default async function StatusPortalBoard() {
     <section className="mun-shell !shadow-none space-y-4">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("titlePipeline")}</h2>
+          <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("titlePipeline")}</h2>
           <p className="text-sm text-brand-muted">
             {t.rich("intro", {
               strong: (chunks) => <strong>{chunks}</strong>,
@@ -87,7 +87,7 @@ export default async function StatusPortalBoard() {
 
       <div className="flex gap-4 overflow-x-auto pb-2">
         <div className="min-w-[320px] flex-1 rounded-lg border border-brand-navy/10 bg-brand-paper p-4">
-          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">{t("pending")}</h3>
+          <h3 className="font-sans text-sm font-semibold text-brand-navy mb-3">{t("pending")}</h3>
           <div className="space-y-3">
             {pendingRequests.length === 0 ? (
               <p className="text-sm text-brand-muted">{t("nothingPending")}</p>
@@ -132,7 +132,7 @@ export default async function StatusPortalBoard() {
         </div>
 
         <div className="min-w-[320px] flex-1 rounded-lg border border-brand-navy/10 bg-brand-paper p-4">
-          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">{t("confirmed")}</h3>
+          <h3 className="font-sans text-sm font-semibold text-brand-navy mb-3">{t("confirmed")}</h3>
           <div className="space-y-3">
             {approvedRequests.length === 0 ? (
               <p className="text-sm text-brand-muted">{t("noConfirmedYet")}</p>

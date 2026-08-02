@@ -284,7 +284,7 @@ export function DelegateMatrixPanel({
         className="rounded-xl border border-brand-navy/12 bg-brand-paper p-4 md:p-6 space-y-3"
       >
         <div>
-          <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+          <h3 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
             {t("title")}
           </h3>
           <p className="mt-1 text-xs text-brand-muted leading-relaxed">{t("emptyBody")}</p>
@@ -306,7 +306,7 @@ export function DelegateMatrixPanel({
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+          <h3 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
             {t("title")}
           </h3>
           <p className="mt-1 text-xs text-brand-muted leading-relaxed">
@@ -428,7 +428,7 @@ export function DelegateMatrixPanel({
 
             <div className="rounded-xl border border-brand-accent/30 bg-logo-cyan/8 p-4 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h4 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
+                <h4 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">
                   {activeDelegate.country} — {activeDelegate.displayName}
                 </h4>
                 <span

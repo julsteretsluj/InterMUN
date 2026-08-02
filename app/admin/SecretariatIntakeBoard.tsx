@@ -16,7 +16,7 @@ export default async function SecretariatIntakeBoard() {
   if (error) {
     return (
       <section className="mun-shell !shadow-none space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h2>
         <p className="text-sm text-rose-600">{t("loadError")}</p>
       </section>
     );
@@ -24,7 +24,7 @@ export default async function SecretariatIntakeBoard() {
 
   return (
     <section className="mun-shell !shadow-none space-y-4">
-      <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+      <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h2>
       <p className="max-w-2xl text-sm text-brand-muted">{t("intro")}</p>
       <SecretariatRegistrationBoard rows={data ?? []} />
     </section>

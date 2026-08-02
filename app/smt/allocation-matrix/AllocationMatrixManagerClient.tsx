@@ -318,7 +318,7 @@ export function AllocationMatrixManagerClient({
       )}
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("rosterHeading", { heading })}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("rosterHeading", { heading })}</h2>
         <p className="text-xs text-brand-muted">
           {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}
         </p>
@@ -433,7 +433,7 @@ export function AllocationMatrixManagerClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-3">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
         <div className="flex flex-wrap gap-2">
           {isSmtSecretariatSheet
             ? SMT_TEMPORARY_SEAT_LABELS.map((label) => (
@@ -491,7 +491,7 @@ export function AllocationMatrixManagerClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("importCsv")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("importCsv")}</h2>
         <p className="text-sm text-brand-muted max-w-2xl">
           {t("importHelpPrefix")} <span className="font-mono">country,optional_code</span>. {t("importHelpMiddle")}{" "}
           <strong>{t("append")}</strong> {t("appendHelp")} <strong>{t("replaceUnassigned")}</strong>{" "}

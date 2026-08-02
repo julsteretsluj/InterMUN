@@ -112,7 +112,7 @@ export function MarketingSessionSpeakersPanel({
   return (
     <section className={cn(heroCompact ? "space-y-2" : "space-y-3", className)}>
       <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
+        <h3 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
           🎤 {tq("speakerList")}
         </h3>
         {!compactIntro ? (
@@ -139,7 +139,7 @@ export function MarketingSessionSpeakersPanel({
           <div className="flex flex-wrap items-end justify-between gap-2">
             <div className="min-w-0">
               <p className="text-xs text-brand-muted">{tTimer("currentSpeaker")}</p>
-              <p className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
+              <p className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
                 {current?.country ?? tq("dash")}
               </p>
             </div>

@@ -161,7 +161,7 @@ export default async function CommitteeRoomPersonPage({
                 aria-hidden
               />
             </div>
-            <h1 className="mt-4 px-1 font-display text-xl font-semibold leading-tight text-brand-navy">
+            <h1 className="mt-4 px-1 font-sans text-xl font-semibold leading-tight text-brand-navy">
               {displayLabel}
             </h1>
             <p className="mt-1.5 text-sm text-brand-muted max-w-[16rem]">{subtitle}</p>

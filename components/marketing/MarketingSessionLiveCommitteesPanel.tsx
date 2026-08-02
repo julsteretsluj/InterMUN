@@ -132,7 +132,7 @@ export function MarketingSessionLiveCommitteesPanel({
     >
       {!compactIntro ? (
         <>
-          <h1 className="mb-1.5 font-display text-[1.35rem] font-semibold leading-tight text-zinc-900 sm:text-[1.85rem]">
+          <h1 className="mb-1.5 font-sans text-[1.35rem] font-semibold leading-tight text-zinc-900 sm:text-[1.85rem]">
             {t("welcomeSg")}
           </h1>
           <p className="mb-6 text-[0.9rem] text-zinc-700 sm:text-[0.95rem]">{t("whichCommittee")}</p>

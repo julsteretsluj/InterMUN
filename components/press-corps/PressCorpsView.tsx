@@ -126,7 +126,7 @@ export function PressCorpsView() {
                 </span>
                 {t("liveBadge")}
               </span>
-              <p className="min-w-0 break-words font-display text-lg font-semibold text-brand-navy">
+              <p className="min-w-0 break-words font-sans text-lg font-semibold text-brand-navy">
                 {data?.fullName || t("title")}
               </p>
             </div>

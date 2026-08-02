@@ -2,47 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Clash Display (Fontshare FFL) — headings / display */
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/clash-display-variable.woff2") format("woff2");
-  font-weight: 200 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/clash-display-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/clash-display-medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/clash-display-semibold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/clash-display-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Rijusans (SIL OFL 1.1) — legacy marketing display fallback */
 @font-face {
   font-family: "Rijusans";
@@ -154,7 +113,7 @@ html {
   --apple-separator-opaque: #c9dde9;
 
   /* —— Apple UI typography (SF Pro semantic scale — app-wide) —— */
-  --apple-font-ui: var(--font-ui), "Inter Tight", system-ui, sans-serif;
+  --apple-font-ui: var(--font-ui), "Inter", "Atkinson Hyperlegible", system-ui, sans-serif;
   --apple-text-large-title-size: 2.5rem;
   --apple-text-title-1-size: 2rem;
   --apple-text-title-2-size: 1.5rem;
@@ -470,16 +429,17 @@ html.dark {
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
-  /* Prefer Inter Tight body; Instrument Serif for headings (SEAMUN Chat) */
-  --font-sans: var(--font-ui), "Inter Tight", system-ui, sans-serif;
+  /* One clear UI face everywhere — hierarchy via size/weight only.
+     Merriweather (--font-document) is reserved for document editors. */
+  --font-sans: var(--font-ui), "Inter", "Atkinson Hyperlegible", system-ui, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-heading: var(--font-display-serif), "Instrument Serif", Georgia, "Times New Roman", serif;
-  --font-display: var(--font-display-serif), "Instrument Serif", Georgia, "Times New Roman", serif;
-  --font-marketing-display: var(--font-display-serif), "Instrument Serif", "Clash Display", Georgia, serif;
-  --font-marketing-cursive: "Momo Signature", "Super Onigiri", cursive;
-  --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
-  --font-cursive: var(--font-marketing-cursive);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-marketing-display: var(--font-sans);
+  --font-marketing-cursive: var(--font-sans);
+  --font-serif: var(--font-document), "Merriweather", Georgia, "Times New Roman", serif;
+  --font-cursive: var(--font-sans);
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold-text);
@@ -715,15 +675,15 @@ body {
   min-height: 100%;
   background-color: var(--apple-bg-secondary, var(--background));
   color: var(--foreground);
-  font-family: var(--apple-font-ui, var(--font-sans));
+  font-family: var(--font-sans);
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* Inter Tight is condensed — open tracking/leading for clarity */
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   line-height: 1.55;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 /* Apple site shell — ambient canvas replaces parchment wash */
@@ -1011,7 +971,7 @@ html.dark ::selection {
   }
 
   .dashboard-panel-title {
-    @apply font-heading text-xl font-normal tracking-normal text-brand-navy md:text-2xl;
+    @apply font-sans text-xl font-semibold tracking-[-0.01em] text-brand-navy md:text-2xl;
   }
 
   /* Active nav — soft filled pill */
@@ -1301,32 +1261,35 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Marketing editorial headlines — Instrument Serif (weight 400 only) */
+  /* Marketing headlines — same Inter family as the rest of the product */
   .marketing-shell .mun-display {
-    @apply font-normal;
-    font-family: var(--font-marketing-display);
-    letter-spacing: 0;
+    @apply font-semibold;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
     line-height: 1.2;
     font-synthesis: none;
   }
 
   .marketing-shell .mun-emph {
-    font-family: var(--font-marketing-cursive);
-    font-style: normal;
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 600;
     font-synthesis: none;
-    color: var(--gold-text-bright);
-    letter-spacing: 0.01em;
+    color: var(--accent-text);
+    letter-spacing: 0;
   }
 
   .marketing-shell .mun-display .mun-emph {
-    font-family: var(--font-marketing-cursive);
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-style: italic;
     font-synthesis: none;
   }
 
   .marketing-shell .font-cursive {
-    font-family: var(--font-marketing-cursive);
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 600;
     font-style: normal;
   }
 
@@ -7955,28 +7918,27 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site .mun-shell-title,
 .mun-apple-site .dashboard-panel-title,
 .mun-apple-site h1:not(.mun-display):not(.mun-emph) {
-  font-family: var(--font-heading), Georgia, serif;
+  font-family: var(--font-sans);
   font-size: var(--apple-text-title-2-size);
   line-height: 1.25;
-  letter-spacing: 0;
-  /* Instrument Serif ships only at 400 — avoid synthetic bold */
-  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-weight: 700;
   font-synthesis: none;
   color: var(--apple-label);
 }
 
 .mun-apple-site h2 {
-  font-family: var(--font-heading), Georgia, serif;
+  font-family: var(--font-sans);
   font-size: var(--apple-text-title-3-size);
-  line-height: 1.28;
-  letter-spacing: 0;
-  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
   font-synthesis: none;
   color: var(--apple-label);
 }
 
 .mun-apple-site h3 {
-  font-family: var(--apple-font-ui, var(--font-sans));
+  font-family: var(--font-sans);
   font-size: var(--apple-text-headline-size);
   line-height: 1.35;
   letter-spacing: 0;
@@ -8447,9 +8409,9 @@ html.dark .mun-apple-window-sidebar {
 
 .mun-seamun-form-panel h1,
 .mun-seamun-form-panel h2 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--ink, #183148);
 }
 
@@ -8460,14 +8422,15 @@ html.dark .mun-apple-window-sidebar {
   }
 }
 
-/* —— Accessible type: clear Instrument Serif + readable UI —— */
+/* —— Standardized accessible type: Inter everywhere (except document serif) —— */
 .font-heading,
 .font-display,
-.mun-seamun-brand-title {
-  font-family: var(--font-heading), Georgia, "Times New Roman", serif;
-  font-weight: 400;
+.mun-seamun-brand-title,
+.mun-shell-title,
+.dashboard-panel-title {
+  font-family: var(--font-sans) !important;
   font-synthesis: none;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 1.25;
 }
 
@@ -8506,4 +8469,37 @@ html.dark .mun-apple-window-sidebar {
 .mun-seamun-form-panel h2 {
   letter-spacing: 0;
   font-synthesis: none;
+}
+
+/* —— Force one UI font across the product —— */
+.mun-apple-site,
+.mun-apple-site :where(
+  h1, h2, h3, h4, h5, h6,
+  p, span, a, li, label, button, input, select, textarea,
+  td, th, dt, dd, legend, summary, figcaption
+):not(.font-serif):not(.font-mono):not([class*="font-mono"]) {
+  font-family: var(--font-sans);
+}
+
+.mun-apple-site .font-heading,
+.mun-apple-site .font-display,
+.mun-apple-site .mun-display,
+.mun-apple-site .mun-emph,
+.mun-apple-site .font-cursive,
+.marketing-shell .mun-display,
+.marketing-shell .mun-emph {
+  font-family: var(--font-sans) !important;
+}
+
+.mun-apple-site .font-serif,
+.mun-apple-site .prose-document,
+.mun-apple-site [data-document-surface="true"] {
+  font-family: var(--font-serif) !important;
+}
+
+.mun-apple-btn,
+.mun-btn,
+.mun-field,
+.mun-label {
+  font-family: var(--font-sans) !important;
 }

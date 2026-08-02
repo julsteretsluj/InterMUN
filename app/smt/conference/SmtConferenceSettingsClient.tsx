@@ -75,7 +75,7 @@ export function SmtConferenceSettingsClient({
   return (
     <div className="space-y-10">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
-        <h2 className="font-display text-xl font-semibold text-brand-navy mb-4">{t("eventDetails")}</h2>
+        <h2 className="font-sans text-xl font-semibold text-brand-navy mb-4">{t("eventDetails")}</h2>
         {!eventRow ? (
           <p className="text-sm text-brand-muted">
             {t("selectConferenceFirst")}
@@ -94,7 +94,7 @@ export function SmtConferenceSettingsClient({
       ) : null}
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
-        <h2 className="font-display text-xl font-semibold text-brand-navy mb-2">
+        <h2 className="font-sans text-xl font-semibold text-brand-navy mb-2">
           {t("committeeSessionsTitle")}
         </h2>
         <p className="text-sm text-brand-muted mb-6">

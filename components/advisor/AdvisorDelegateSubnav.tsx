@@ -47,7 +47,7 @@ export function AdvisorDelegateSubnav({
           {flag}
         </span>
         <div className="min-w-0">
-          <h1 className="font-display text-xl font-semibold text-brand-navy dark:text-zinc-100">{displayName}</h1>
+          <h1 className="font-sans text-xl font-semibold text-brand-navy dark:text-zinc-100">{displayName}</h1>
           <p className="text-sm text-brand-muted">{assignment.delegate_country}</p>
           {assignment.committee ? (
             <p className="mt-1 text-xs font-semibold text-brand-navy/80 dark:text-zinc-300">

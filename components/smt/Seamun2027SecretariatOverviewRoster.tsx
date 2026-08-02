@@ -32,7 +32,7 @@ export async function Seamun2027SecretariatOverviewRoster() {
       aria-labelledby="secretariat-oversight-heading"
     >
       <div>
-        <h2 id="secretariat-oversight-heading" className="font-display text-lg font-semibold text-brand-navy">
+        <h2 id="secretariat-oversight-heading" className="font-sans text-lg font-semibold text-brand-navy">
           {t("secretariatOversightTitle")}
         </h2>
         <p className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-brand-navy/90">

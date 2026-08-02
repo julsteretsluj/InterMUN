@@ -71,7 +71,7 @@ export function ChairRollCallQuorumDemo() {
   return (
     <div className="space-y-4">
       <div className={cn("flex items-center justify-between gap-2", MARKETING_CHAMBER_PREVIEW)}>
-        <h3 className="font-display text-lg font-semibold text-brand-navy">✅ {tc("rollCallTracker")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy">✅ {tc("rollCallTracker")}</h3>
         <span
           className={cn(
             "rounded-full px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider",

@@ -327,7 +327,7 @@ export function CommitteeRoomDigitalMUNClient({
         <aside className="mb-4 h-fit space-y-2.5 xl:sticky xl:top-4 xl:mb-0">
           <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] dark:border-white/10 dark:bg-[#12121A] dark:shadow-[0_20px_40px_-28px_rgba(0,0,0,0.75)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("committeeLabel")}</p>
-            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words dark:text-white">
+            <p className="mt-2 font-sans text-sm font-semibold text-brand-navy leading-snug break-words dark:text-white">
               {committeeName}
             </p>
             <p className="mt-1 text-xs text-brand-muted break-words">{conferenceName}</p>
@@ -390,7 +390,7 @@ export function CommitteeRoomDigitalMUNClient({
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 {t("digitalDisplay")}
               </p>
-              <p className="break-words font-display text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base dark:text-white">
+              <p className="break-words font-sans text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base dark:text-white">
                 {committeeName}
               </p>
             </div>

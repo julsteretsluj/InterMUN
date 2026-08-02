@@ -228,7 +228,7 @@ export function CommitteeAgendaVotesTab({
       <div className="overflow-hidden rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)]">
         {committeeTrim ? (
           <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2.5">
-            <p className="font-display text-base font-semibold leading-snug text-brand-navy">
+            <p className="font-sans text-base font-semibold leading-snug text-brand-navy">
               {translateCommitteeLabel(tCommitteeLabels, committeeTrim)}
             </p>
             <p className="mt-1 text-xs text-brand-muted">{t("guidedSelectAgendaTopic")}</p>
@@ -380,7 +380,7 @@ export function CommitteeAgendaVotesTab({
                 <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
                   {t("agendaOpenVotingPanel")}
                 </p>
-                <h2 className="font-display mt-1 text-base font-semibold leading-snug text-brand-navy line-clamp-3">
+                <h2 className="font-sans mt-1 text-base font-semibold leading-snug text-brand-navy line-clamp-3">
                   {votingPanelTopicLabel
                     ? translateAgendaTopicLabel(tTopics, votingPanelTopicLabel, locale)
                     : "—"}

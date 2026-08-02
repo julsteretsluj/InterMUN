@@ -253,7 +253,7 @@ export default async function SmtAllocationMatrixPage({
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="font-display text-2xl font-semibold text-brand-navy">{t("title")}</h1>
+        <h1 className="font-sans text-2xl font-semibold text-brand-navy">{t("title")}</h1>
         <FeatureGuideLink featureId="allocationMatrix" role="smt" />
       </div>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">

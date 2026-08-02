@@ -175,7 +175,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
 
       <section className="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
         <div>
-          <h3 className="font-display text-sm font-semibold text-zinc-900">
+          <h3 className="font-sans text-sm font-semibold text-zinc-900">
             {t("rosterHeading", { heading: active.heading })}
           </h3>
           <p className="mt-0.5 text-[0.65rem] text-zinc-500">
@@ -258,7 +258,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
       </section>
 
       <section className="space-y-2 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-display text-sm font-semibold text-zinc-900">{t("addOneSeat")}</h3>
+        <h3 className="font-sans text-sm font-semibold text-zinc-900">{t("addOneSeat")}</h3>
         <div className="flex flex-wrap gap-1.5">
           {active.quickAddLabels.map((label) => (
             <button

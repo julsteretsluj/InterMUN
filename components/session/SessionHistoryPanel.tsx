@@ -125,7 +125,7 @@ export function SessionHistoryPanel({
   return (
     <section className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
         <p className="text-xs text-brand-muted">{t("savedCount", { count: rows.length })}</p>
       </div>
       <p className="mt-1 text-sm text-brand-muted">

@@ -512,7 +512,7 @@ export default async function ChairAllocationMatrixPage() {
       />
 
       <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">
           {tMatrix("pendingApprovalsTitle")}
         </h2>
         <p className="text-xs text-brand-muted mt-1 mb-3">

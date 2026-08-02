@@ -217,7 +217,7 @@ export default async function SmtCommitteeLivePage({
                 className="mt-1"
               />
             ) : null}
-            <h1 className="font-display text-[1.6rem] font-semibold text-brand-navy">{displayTitle}</h1>
+            <h1 className="font-sans text-[1.6rem] font-semibold text-brand-navy">{displayTitle}</h1>
           </div>
           <p className="mt-1.5 text-xs uppercase tracking-wide text-brand-muted">{t("committeeOverview")}</p>
         </div>

@@ -141,7 +141,7 @@ export default async function DelegateDashboardPage({
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold-text)] dark:text-[var(--gold-text-bright)]">
             {line}
           </p>
-          <h1 className="font-display mt-1.5 text-2xl font-semibold tracking-tight text-brand-navy md:text-[1.75rem]">
+          <h1 className="font-sans mt-1.5 text-2xl font-semibold tracking-tight text-brand-navy md:text-[1.75rem]">
             {td("welcome", { flag: countryFlag, country: countryLabel })}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-muted">

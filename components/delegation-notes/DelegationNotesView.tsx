@@ -1367,7 +1367,7 @@ export function DelegationNotesView({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
-              <h3 className="font-display text-lg font-semibold text-brand-navy">{t("fullNoteTitle")}</h3>
+              <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("fullNoteTitle")}</h3>
               <button
                 type="button"
                 onClick={() => setExpandedNote(null)}

@@ -358,8 +358,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     const isSession = variant === "session";
     const headingClass = isSession
-      ? "font-display text-lg font-semibold text-brand-navy"
-      : "font-display text-lg font-semibold text-brand-navy";
+      ? "font-sans text-lg font-semibold text-brand-navy"
+      : "font-sans text-lg font-semibold text-brand-navy";
     const cardClass = isSession
       ? SESSION_CARD
       : "rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)]";

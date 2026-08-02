@@ -398,7 +398,7 @@ export function ChairCommitteeSessionControl({
     <div className="space-y-8">
       <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 text-brand-navy shadow-sm backdrop-blur-sm md:p-8">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold md:text-xl">{t("title")}</h3>
+          <h3 className="font-sans text-lg font-semibold md:text-xl">{t("title")}</h3>
           <HelpButton title={t("title")}>
             {t("helpStartStop")}
           </HelpButton>

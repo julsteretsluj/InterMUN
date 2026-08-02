@@ -11,7 +11,7 @@ export default function ChairSessionError({
 }) {
   return (
     <div className="mun-shell rounded-xl border border-rose-500/35 bg-rose-950/15 p-6 text-brand-navy dark:text-zinc-100">
-      <p className="font-display text-lg font-semibold">Session floor failed to load</p>
+      <p className="font-sans text-lg font-semibold">Session floor failed to load</p>
       <p className="mt-2 text-sm text-brand-muted dark:text-zinc-400">
         {error.message || "An unexpected error occurred while loading chair session controls."}
       </p>

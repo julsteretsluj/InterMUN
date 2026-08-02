@@ -136,7 +136,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
     <div className={cn(PREVIEW_CARD, "space-y-3", className)}>
       <div>
         <span className={PREVIEW_LABEL}>{tPreview("scheduleLabel")}</span>
-        <h3 className="mt-2 font-display text-sm font-semibold text-zinc-900">{t("title")}</h3>
+        <h3 className="mt-2 font-sans text-sm font-semibold text-zinc-900">{t("title")}</h3>
         <p className="mt-1 text-[0.65rem] leading-relaxed text-zinc-500">{t("subtitle")}</p>
       </div>
 

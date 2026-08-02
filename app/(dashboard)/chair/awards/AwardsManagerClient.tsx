@@ -344,7 +344,7 @@ th{background:#f4f4f5}
       )}
 
       <section>
-        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">{t("addOrEditEntry")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy mb-3">{t("addOrEditEntry")}</h3>
         <form onSubmit={submitForm} className="space-y-4 rounded-xl border border-brand-navy/10 p-4 md:p-6 bg-brand-paper">
           <input type="hidden" name="id" value={form.id} />
           <div className="grid sm:grid-cols-2 gap-4">
@@ -523,7 +523,7 @@ th{background:#f4f4f5}
       </section>
 
       <section>
-        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">{t("currentList")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy mb-3">{t("currentList")}</h3>
         {enableCertificatePrint && ordered.length > 0 ? (
           <div className="mb-3 flex flex-wrap items-center gap-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-2 text-sm">
             <span className="text-brand-muted">{t("certificatePrinting")}</span>

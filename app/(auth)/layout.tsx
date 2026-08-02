@@ -44,7 +44,7 @@ export default async function AuthLayout({
                 </li>
               </ul>
             </div>
-            <p className="border-t border-white/15 pt-6 font-heading text-sm italic text-white/55">
+            <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/55">
               “Diplomacy is the art of letting someone else have your way.”
             </p>
           </div>

@@ -69,7 +69,7 @@ export function SmtNotesCompose({
   return (
     <section className="space-y-4 rounded-2xl border border-brand-navy/10 bg-brand-paper/80 p-4 md:p-6">
       <div className="space-y-1">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("composeTitle")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("composeTitle")}</h2>
         <p className="text-sm text-brand-muted">{t("composeHint")}</p>
       </div>
 

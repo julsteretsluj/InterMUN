@@ -2815,7 +2815,7 @@ export function SessionControlClient({
       {show("agenda") ? (
         <section className="space-y-4">
           <div className="flex items-center justify-between gap-3">
-            <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
+            <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
             <HelpButton
               title={tSessionControl("tabAgenda")}
               guideHref={resolveFeatureGuideHref("session", "chair").href}
@@ -2846,7 +2846,7 @@ export function SessionControlClient({
       {show("motions") || show("discipline") ? (
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">
             {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
           </h3>
           <HelpButton
@@ -3789,7 +3789,7 @@ export function SessionControlClient({
       {show("timer") ? (
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
           <HelpButton title={tTimer("controlsTitle")}>
             {tTimer("controlsHelp")}
           </HelpButton>
@@ -4259,7 +4259,7 @@ export function SessionControlClient({
 
       {show("announcements") ? (
       <section className="space-y-4">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
         <div className={`${surfaceCard} space-y-4`}>
           <p className="text-sm text-brand-muted">{tSessionControl("daisAnnouncementsHelp")}</p>
           <label className="block text-sm text-brand-navy">
@@ -4444,7 +4444,7 @@ export function SessionControlClient({
       {show("roll-call") ? (
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">
             ✅ {tSessionControl("rollCallTracker")}
           </h3>
           <HelpButton title={tSessionControl("rollCallTracker")}>
@@ -4468,7 +4468,7 @@ export function SessionControlClient({
           ) : (
             <>
               <div>
-                <h4 className="font-display text-base font-semibold text-brand-navy">👥 {tSessionControl("delegates")}</h4>
+                <h4 className="font-sans text-base font-semibold text-brand-navy">👥 {tSessionControl("delegates")}</h4>
                 <p className="mt-1 text-sm text-brand-muted">
                   {tSessionControl("delegateRollStatusHint")}
                 </p>

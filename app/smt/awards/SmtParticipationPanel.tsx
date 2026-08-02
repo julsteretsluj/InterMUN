@@ -202,7 +202,7 @@ export function SmtParticipationPanel({
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-brand-navy/12 bg-logo-cyan/10 p-4 md:p-6 space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
           Score every chair &amp; every chair report
         </h2>
         <p className="text-xs text-brand-muted leading-relaxed">
@@ -278,7 +278,7 @@ export function SmtParticipationPanel({
           </p>
           <section className="grid gap-6 lg:grid-cols-3">
             <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-              <h4 className="font-display text-sm font-semibold text-brand-navy mb-2">Chair ranking (highest → lowest)</h4>
+              <h4 className="font-sans text-sm font-semibold text-brand-navy mb-2">Chair ranking (highest → lowest)</h4>
               <p className="text-[10px] uppercase tracking-wide text-brand-muted mb-2">Secretariat</p>
               <ol className="space-y-1.5 text-sm">
                 {chairRanking.map((row, i) => (
@@ -296,7 +296,7 @@ export function SmtParticipationPanel({
               </ol>
             </div>
             <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-              <h4 className="font-display text-sm font-semibold text-brand-navy mb-2">Delegate feedback (mean → low)</h4>
+              <h4 className="font-sans text-sm font-semibold text-brand-navy mb-2">Delegate feedback (mean → low)</h4>
               <p className="text-[10px] uppercase tracking-wide text-brand-muted mb-2">Aggregated</p>
               <ol className="space-y-1.5 text-sm">
                 {[...delegateChairFeedback]
@@ -326,7 +326,7 @@ export function SmtParticipationPanel({
               </ol>
             </div>
             <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-              <h4 className="font-display text-sm font-semibold text-brand-navy mb-2">Chair report ranking (highest → lowest)</h4>
+              <h4 className="font-sans text-sm font-semibold text-brand-navy mb-2">Chair report ranking (highest → lowest)</h4>
               <p className="text-[10px] uppercase tracking-wide text-brand-muted mb-2">Secretariat</p>
               <ol className="space-y-1.5 text-sm">
                 {reportRanking.map((row, i) => (
@@ -343,11 +343,11 @@ export function SmtParticipationPanel({
       ) : (
         <>
           {activeCommittee ? (
-            <p className="font-display text-sm font-semibold text-brand-navy dark:text-zinc-100 px-1 pt-1">{activeCommittee.label}</p>
+            <p className="font-sans text-sm font-semibold text-brand-navy dark:text-zinc-100 px-1 pt-1">{activeCommittee.label}</p>
           ) : null}
 
           <section className="space-y-4">
-            <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">
+            <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">
               Delegate feedback on chairs
             </h3>
             <p className="text-xs text-brand-muted">
@@ -385,7 +385,7 @@ export function SmtParticipationPanel({
           </section>
 
           <section className="space-y-4">
-            <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">Chairs (performance)</h3>
+            <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">Chairs (performance)</h3>
             {seatsInCommittee.map((seat) => {
               const pk = `${seat.committee_conference_id}:${seat.chair_profile_id}`;
               const scoreMap = chairScoreMap(seat.committee_conference_id, seat.chair_profile_id);
@@ -448,7 +448,7 @@ export function SmtParticipationPanel({
           </section>
 
           <section className="space-y-4">
-            <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">Chair report</h3>
+            <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-100">Chair report</h3>
             {activeCommittee ? (
               <ChairReportEvalDetails
                 committee={activeCommittee}

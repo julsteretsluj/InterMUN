@@ -84,7 +84,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
       ) : null}
 
       <section className="space-y-2 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-display text-sm font-semibold text-zinc-900">{tEvent("eventDetails")}</h3>
+        <h3 className="font-sans text-sm font-semibold text-zinc-900">{tEvent("eventDetails")}</h3>
         <div>
           <label className="mb-1 block text-[0.65rem] font-medium uppercase tracking-wider text-zinc-500">
             {tEvent("conferenceCodeFirstGate")}
@@ -120,7 +120,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
       </section>
 
       <section className="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-display text-sm font-semibold text-zinc-900">{tRoom("committeeRoomCodes")}</h3>
+        <h3 className="font-sans text-sm font-semibold text-zinc-900">{tRoom("committeeRoomCodes")}</h3>
         <div className="space-y-2">
           {committees.map((row) => {
             const draft = drafts[row.id] ?? row.code;

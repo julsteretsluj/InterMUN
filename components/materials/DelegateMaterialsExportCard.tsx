@@ -25,7 +25,7 @@ export function DelegateMaterialsExportCard() {
   return (
     <div className="mb-6 rounded-2xl border border-brand-navy/10 bg-black/25 shadow-sm overflow-hidden">
       <div className="p-5 md:p-6">
-        <h3 className="font-display text-xl font-semibold text-brand-navy">
+        <h3 className="font-sans text-xl font-semibold text-brand-navy">
           {t("title")}
         </h3>
         <p className="mt-2 text-sm text-brand-muted">{t("description")}</p>

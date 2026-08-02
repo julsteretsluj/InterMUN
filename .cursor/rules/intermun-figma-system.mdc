@@ -1,25 +1,25 @@
 ---
-description: SEAMUN Chat–inspired intentional UI across all InterMUN surfaces
+description: Clear Inter-first UI type system across all InterMUN surfaces
 alwaysApply: true
 ---
 
 # InterMUN Intentional UI Rule
 
-Use the SEAMUN Chat visual language as the source of truth for **all** UI (landing, app chrome, documents, prototypes). Designs should feel premium, calm, and human — not templated.
+Designs should feel premium, calm, and human — with **one clear font system**.
+
+## Typography (strict)
+- **UI everywhere** (body, headings, buttons, nav, marketing, auth): **Inter**
+- Hierarchy = size + weight only (`400` body · `600` subheads · `700` titles)
+- **Documents only** (resolutions / papers): Merriweather via `.font-serif`
+- Dyslexic mode: OpenDyslexic (with Atkinson Hyperlegible fallback)
+- Do **not** mix Instrument Serif, Clash Display, cursive scripts, or Inter Tight into product UI
+- Avoid Poppins + Inter + Manrope stacks
 
 ## Color & Tone
 - Background base: pastel blue `#DFF2FC` with soft wash to `#EDF8FF` / `#F8FBFF`
-- Ink: `#183148` · soft ink `#35516B` · muted `#6A7D91`
-- Navy brand panels / primary CTAs: `#17324A` (hover `#244964`)
-- Accent (selected / links): `#119ED3`
-- Borders: `#C9DDE9` · raised surface `#FFFDF8`
-- Soft blue-tinted shadows only — never harsh black glows
-
-## Typography
-- Display / headings: **Instrument Serif**
-- Body / UI: **Inter Tight**
-- Mix serif display with tight sans body; 2–3 natural heading scales
-- Avoid Poppins + Inter + Manrope stacks
+- Ink: `#183148` · secondary `#35516B` · muted `#4D6174` (≥4.5:1)
+- Navy CTAs: `#17324A` · accent fill `#119ED3` · readable accent text `--accent-text`
+- Borders: `#C9DDE9`
 
 ## Layout & Composition
 - Auth / gates: split navy brand panel + white form (desktop)
@@ -27,15 +27,9 @@ Use the SEAMUN Chat visual language as the source of truth for **all** UI (landi
 - Never clone identical section structures back-to-back
 
 ## Buttons & Microcopy
-- Primary = navy filled; secondary = soft bordered / glass
+- Primary = navy filled; secondary = soft bordered
 - Descriptive CTAs; conversational copy
-- Subtle hover lift — no glowing edges
 
-## Cards & Components
-- Softer radii (~12–24px); soft pastel borders
+## Constraints
 - Keep existing component naming/IA intact
 - Enhance only via color, texture, motion — do not change labels or structural naming
-
-## Motion
-- 300–500ms with staggered direction/delay
-- Brand panel slides from left; form from right on auth/gates

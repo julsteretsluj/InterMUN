@@ -326,7 +326,7 @@ export function SeamunI2027LockedScheduleVisual({
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="font-display text-xl font-semibold text-brand-navy">{t("title")}</h2>
+          <h2 className="font-sans text-xl font-semibold text-brand-navy">{t("title")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
           {isSmt ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("smtBrowseHint")}</p> : null}
           {isAdvisor ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorOnlyHint")}</p> : null}

@@ -128,7 +128,7 @@ export default async function ChairOverviewPage({
             aria-hidden
             className="block h-[3px] w-10 rounded-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-bright)]"
           />
-          <h1 className="font-display text-[1.95rem] font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
+          <h1 className="font-sans text-[1.95rem] font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
             {tPage("welcome", { committee: committeeLabel })}
           </h1>
           <p className="text-base font-medium text-brand-navy dark:text-zinc-100">

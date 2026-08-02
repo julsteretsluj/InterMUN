@@ -98,7 +98,7 @@ export function CommitteeRoomStaffControls({
 
   return (
     <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4 dark:border-white/10 dark:bg-[#12121A]">
-      <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-white">
+      <h2 className="font-sans text-lg font-semibold text-brand-navy dark:text-white">
         Seat controls
       </h2>
       <p className="text-sm text-brand-muted dark:text-white/70">

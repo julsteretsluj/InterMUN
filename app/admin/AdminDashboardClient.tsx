@@ -32,7 +32,7 @@ export function AdminDashboardClient({
   return (
     <div className="space-y-8">
       <section className="mun-shell !shadow-none">
-        <h2 className="mb-2 font-display text-lg font-semibold text-brand-navy">{t("newEventTitle")}</h2>
+        <h2 className="mb-2 font-sans text-lg font-semibold text-brand-navy">{t("newEventTitle")}</h2>
         <p className="mb-4 max-w-2xl text-sm text-brand-muted">
           {t.rich("newEventBody", {
             code: (chunks) => <span className="font-mono text-xs">{chunks}</span>,
@@ -47,7 +47,7 @@ export function AdminDashboardClient({
       </section>
 
       <section className="mun-shell !shadow-none space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("smtTitle")}</h2>
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("smtTitle")}</h2>
         <p className="max-w-2xl text-sm text-brand-muted">{t("smtBody")}</p>
 
         {!adminInviteConfigured ? (

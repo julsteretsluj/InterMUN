@@ -229,7 +229,7 @@ export function ChairScheduledSessionsPanel({
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 shadow-sm backdrop-blur-sm md:p-8">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
         <HelpButton title={t("title")}>{t("help")}</HelpButton>
       </div>
       <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>

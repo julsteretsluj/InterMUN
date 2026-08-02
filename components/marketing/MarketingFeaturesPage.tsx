@@ -27,7 +27,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
       <section className="border-b border-[var(--hairline)] bg-[var(--marketing-chamber-deep)]">
         <div className="mx-auto max-w-[46rem] px-5 py-20 text-left md:px-10 md:py-28 md:pl-16">
           <p className="mun-animate-rise text-[0.8125rem] font-medium tracking-[0.08em] text-[color:var(--accent-text)]">{t("eyebrow")}</p>
-          <h1 className="font-heading mun-animate-rise mun-animate-delay-1 mt-4 text-[length:var(--apple-text-hero-size)] font-semibold tracking-[-0.035em] text-brand-navy">
+          <h1 className="font-sans mun-animate-rise mun-animate-delay-1 mt-4 text-[length:var(--apple-text-hero-size)] font-semibold tracking-[-0.035em] text-brand-navy">
             {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
           </h1>
           <p className="mun-animate-rise mun-animate-delay-2 mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-brand-muted">
@@ -40,7 +40,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <section className="border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)]">
         <div className="mx-auto max-w-[38rem] px-5 py-20 text-center md:px-10 md:py-28">
-          <h2 className="font-heading text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
+          <h2 className="font-sans text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
             {t("ctaTitle")} <MarketingEmph>{t("ctaTitleEmphasis")}</MarketingEmph>
           </h2>
           <p className="mt-4 text-[1.0625rem] leading-relaxed text-brand-muted">{t("ctaSubtitle")}</p>

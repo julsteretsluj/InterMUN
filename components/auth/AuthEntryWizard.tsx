@@ -280,7 +280,7 @@ export function AuthEntryWizard({
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
-          <h1 className="font-heading text-3xl md:text-4xl font-normal text-brand-navy tracking-normal">
+          <h1 className="font-sans text-3xl md:text-4xl font-bold text-brand-navy tracking-normal">
             {t("enterApp")}
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
@@ -321,7 +321,7 @@ export function AuthEntryWizard({
             {t("back")}
           </button>
           <AuthBrandWordmark className="mb-4" />
-          <h2 className="font-heading text-xl font-normal text-center tracking-normal text-brand-navy mb-2">{t("conferenceTitle")}</h2>
+          <h2 className="font-sans text-xl font-semibold text-center tracking-[-0.01em] text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
             {t("conferenceDescription", {
               mode: mode === "signup" ? t("nextModeSignup") : t("nextModeLogin"),
@@ -380,7 +380,7 @@ export function AuthEntryWizard({
                 <ChevronLeft className="size-4" strokeWidth={2} />
                 {t("back")}
               </button>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy">{t("whatIsYourRole")}</h2>
+              <h2 className="font-sans text-3xl md:text-4xl font-bold text-brand-navy">{t("whatIsYourRole")}</h2>
               <p className="text-brand-navy text-sm md:text-base">{t("moveCircleRole")}</p>
               <button
                 type="button"
@@ -513,7 +513,7 @@ export function AuthEntryWizard({
                       strokeWidth={1.25}
                       style={{ color: roleAccent(roleIndex) }}
                     />
-                    <p className="font-display text-2xl md:text-3xl font-bold text-brand-navy">{selectedRoleLabel}</p>
+                    <p className="font-sans text-2xl md:text-3xl font-bold text-brand-navy">{selectedRoleLabel}</p>
                     <p className="text-sm italic text-brand-navy/85">{selectedRoleHint}</p>
                   </div>
                 </div>
@@ -550,7 +550,7 @@ export function AuthEntryWizard({
             {t("backToRole")}
           </button>
           <AuthBrandWordmark className="mb-4" />
-          <h2 className="font-heading text-xl font-normal text-center text-brand-navy mb-6">
+          <h2 className="font-sans text-xl font-semibold text-center text-brand-navy mb-6">
             {mode === "login" ? t("signIn") : t("createAccount")}
           </h2>
           <form onSubmit={mode === "login" ? handleLoginSubmit : handleSignupSubmit} className="space-y-4">

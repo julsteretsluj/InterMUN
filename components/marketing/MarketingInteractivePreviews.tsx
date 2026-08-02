@@ -54,7 +54,7 @@ function MarketingRollCallCard({
     <section className={cn(heroCompact ? "space-y-2" : "space-y-4")}>
       <div className={cn(heroCompact ? "space-y-2" : "space-y-4", MARKETING_CHAMBER_PREVIEW)}>
         <div className="flex items-center justify-between gap-3">
-          <h3 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
+          <h3 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
             ✅ {t("rollCallTracker")}
           </h3>
           {!heroCompact ? (
@@ -72,7 +72,7 @@ function MarketingRollCallCard({
         </button>
         ) : null}
         <div>
-          <h4 className={cn("font-display font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
+          <h4 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
             👥 {t("delegates")}
           </h4>
           {!heroCompact ? <p className="mt-1 text-sm text-brand-muted">{t("delegateRollStatusHint")}</p> : null}

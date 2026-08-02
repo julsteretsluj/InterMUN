@@ -23,7 +23,7 @@ export function ChairDelegateApprovalByEmailForm({
   return (
     <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-6">
       <div className="flex items-center justify-between gap-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">
+        <h2 className="font-sans text-lg font-semibold text-brand-navy">
           {t("title")}
         </h2>
         <HelpButton title={t("helpTitleAcceptDelegate")}>

@@ -101,7 +101,7 @@ export function SmtAwardsTabs({
       {tab === "final" ? (
         <div role="tabpanel" aria-labelledby="tab-smt-final" className="space-y-6">
           <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 text-sm text-brand-navy">
-            <h2 className="font-display text-lg font-semibold text-brand-navy mb-1">Final recorded awards</h2>
+            <h2 className="font-sans text-lg font-semibold text-brand-navy mb-1">Final recorded awards</h2>
             <p className="text-xs text-brand-muted">
               Official recipients entered by SMT. Tick rows to include them in a printable certificate run, then use{" "}
               <span className="font-medium text-brand-navy">Print selected</span>. Add or edit entries below.

@@ -87,7 +87,7 @@ export function RequestToSpeakClient({
   return (
     <div className="rounded-xl border border-brand-navy/10 bg-white/60 p-3 space-y-2">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display text-sm font-semibold text-brand-navy">{t("title")}</h3>
+        <h3 className="font-sans text-sm font-semibold text-brand-navy">{t("title")}</h3>
         <HelpButton title={t("title")}>
           {t("helpBody")}
         </HelpButton>

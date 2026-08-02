@@ -90,7 +90,7 @@ export default async function SmtConferencePage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">Event & committee sessions</h1>
+      <h1 className="font-sans text-2xl font-semibold text-brand-navy mb-2">Event & committee sessions</h1>
       {!eventId ? (
         <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-6 text-sm text-brand-muted mb-6">
           Choose an event first:{" "}

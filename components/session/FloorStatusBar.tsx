@@ -407,7 +407,7 @@ export function FloorStatusBar({
       }
     >
       <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
-      <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
+      <span className="font-sans font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
         {sessionStartedAt && nowMs > 0
           ? formatSessionElapsed(sessionStartedAt, nowMs)
           : t("sessionNotStarted")}
@@ -418,7 +418,7 @@ export function FloorStatusBar({
             ·
           </span>
           <span
-            className={`font-display font-semibold tabular-nums tracking-tight ${
+            className={`font-sans font-semibold tabular-nums tracking-tight ${
               limitFmt.label === "passed"
                 ? isLight
                   ? "text-amber-800"
@@ -570,7 +570,7 @@ export function FloorStatusBar({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
-              <h3 className="font-display text-lg font-semibold text-brand-navy">{t("daisAnnouncement")}</h3>
+              <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("daisAnnouncement")}</h3>
               <button
                 type="button"
                 onClick={() => setExpandedAnnouncement(null)}

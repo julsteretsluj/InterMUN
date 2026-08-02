@@ -466,7 +466,7 @@ export function ChairMotionsPointsLog({
       </div>
 
       <div>
-        <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-50">📋 {t("log")}</h3>
+        <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-50">📋 {t("log")}</h3>
         {!ready ? (
           <p className="mt-2 text-sm text-brand-muted">{tCommon("loading")}</p>
         ) : sorted.length === 0 ? (

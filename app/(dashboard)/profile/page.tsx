@@ -385,7 +385,7 @@ export default async function ProfilePage({
   const delegateWelcome = isDelegate ? (
     <div className="rounded-[var(--radius-lg)] border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
+        <h2 className="font-sans text-2xl md:text-3xl font-semibold text-brand-navy">
           {tp("delegateWelcome.title", { flag: welcomeFlag, country: welcomeCountry })}
         </h2>
         <p className="mt-3 text-brand-muted">{tp("delegateWelcome.subtitle")}</p>
@@ -503,7 +503,7 @@ export default async function ProfilePage({
           recordedSlot={
             (myAwards?.length ?? 0) > 0 ? (
               <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-6">
-                <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
+                <h3 className="font-sans text-lg font-semibold text-brand-navy mb-2">
                   {tp("awards.recorded.title")}
                 </h3>
                 <p className="text-xs text-brand-muted mb-3">
@@ -535,7 +535,7 @@ export default async function ProfilePage({
       ) : null}
       {showPrivate && isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-logo-cyan/35 bg-logo-cyan/10 p-4 md:p-6">
-          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+          <h3 className="mb-2 font-sans text-lg font-semibold text-brand-navy">
             {tp("privateSections.points.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
@@ -561,7 +561,7 @@ export default async function ProfilePage({
       )}
       {showPrivate && isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-silver/35 bg-brand-silver/10 p-4 md:p-6">
-          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+          <h3 className="mb-2 font-sans text-lg font-semibold text-brand-navy">
             {tp("privateSections.speechNotes.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
@@ -586,7 +586,7 @@ export default async function ProfilePage({
       )}
       {showPrivate && isDelegate && (myMotions?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-accent/32 bg-brand-accent/8 p-4 md:p-6">
-          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+          <h3 className="mb-2 font-sans text-lg font-semibold text-brand-navy">
             {tp("privateSections.motions.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
@@ -620,7 +620,7 @@ export default async function ProfilePage({
       )}
       {showPrivate && isDelegate && (myDiscipline?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-rose-300/40 bg-rose-50/35 p-4 md:p-6">
-          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+          <h3 className="mb-2 font-sans text-lg font-semibold text-brand-navy">
             {tp("discipline.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
