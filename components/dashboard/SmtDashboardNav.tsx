@@ -46,19 +46,19 @@ type SmtNavItem = {
 };
 
 const SMT_NAV_ITEMS: SmtNavItem[] = [
-  { href: "/smt", navKey: "liveCommittees", emoji: "📡", isLiveHub: true },
+  { href: "/smt", navKey: "liveCommittees", emoji: "🛰️", isLiveHub: true },
   { href: "/smt/conference", navKey: "eventSessions", emoji: "📅" },
   { href: "/smt/room-codes", navKey: "roomCodes", emoji: "🚪" },
   { href: "/smt/advisors", navKey: "advisors", emoji: "🎓" },
-  { href: "/smt/newsroom", navKey: "newsroom", emoji: "📰" },
+  { href: "/smt/newsroom", navKey: "newsroom", emoji: "🗞️" },
   { href: "/smt/press-corps", navKey: "pressCorps", emoji: "📸" },
   { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },
   { href: "/smt/guides", navKey: "guides", emoji: "📚" },
   { href: "/smt/notes", navKey: "notes", emoji: "💬" },
   { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
-  { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "👥" },
+  { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "🧩" },
   { href: "/smt/allocation-passwords", navKey: "allocationPasswords", emoji: "🔐" },
-  { href: "/smt/profile", navKey: "profile", emoji: "⚙️" },
+  { href: "/smt/profile", navKey: "profile", emoji: "👤" },
 ];
 
 function smtNavItemIsActive(pathname: string, item: SmtNavItem): boolean {

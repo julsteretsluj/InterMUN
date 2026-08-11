@@ -83,7 +83,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   },
   { href: "/chair/allocation-matrix", itemKey: "delegates", emoji: "👥" },
   { href: "/chair/schedule", itemKey: "conferenceSchedule", emoji: "📅" },
-  { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
+  { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "🗂️" },
   {
     href: "/chair/session/roll-call",
     itemKey: "rollCall",
@@ -100,7 +100,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/newsroom", itemKey: "newsroom", emoji: "📰" },
   { href: "/press-corps", itemKey: "pressCorps", emoji: "📸" },
   { href: "/milestones", itemKey: "milestones", emoji: "🏅" },
-  { href: "/guides", itemKey: "guides", emoji: "📚" },
+  { href: "/guides", itemKey: "guides", emoji: "📘" },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",
@@ -111,7 +111,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     itemKey: "formalMotions",
     emoji: "📜",
   },
-  { href: "/resolutions", itemKey: "resolutions", emoji: "✅" },
+  { href: "/resolutions", itemKey: "resolutions", emoji: "📄" },
   { href: "/amendments", itemKey: "amendments", emoji: "✏️" },
   {
     href: "/chair/session/timer",
@@ -128,10 +128,10 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/documents", itemKey: "archive", emoji: "📁" },
   { href: "/chair/notes-moderation", itemKey: "notesModeration", emoji: "📝" },
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
-  { href: "/report", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
+  { href: "/report", itemKey: "crisis", emoji: "🚨", crisisOnly: true },
   { href: "/crisis-slides", itemKey: "crisisSlides", emoji: "🖼️", crisisOnly: true },
   { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },
-  { href: "/profile", itemKey: "settings", emoji: "⚙️", activeMatch: "/profile" },
+  { href: "/profile", itemKey: "settings", emoji: "👤", activeMatch: "/profile" },
 ];
 
 function navItemIsActive(pathname: string, item: ChairNavItem): boolean {

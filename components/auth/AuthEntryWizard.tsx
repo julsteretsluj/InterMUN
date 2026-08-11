@@ -370,8 +370,8 @@ export function AuthEntryWizard({
       {step === "role" ? (
         <div className="w-full max-w-4xl mx-auto md:py-2">
           <AuthBrandWordmark className="mb-6" />
-          <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
-            <div className="space-y-4">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-8 lg:gap-12">
+            <div className="min-w-0 space-y-4 md:pr-2">
               <button
                 type="button"
                 onClick={() => setStep("conference")}
@@ -397,12 +397,12 @@ export function AuthEntryWizard({
               </button>
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-4">
-              <div className="flex items-center gap-3">
+            <div className="flex min-w-0 flex-col items-center justify-center gap-4">
+              <div className="flex w-full min-w-0 items-center justify-center gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => cycle(-1)}
-                  className="rounded-full border border-brand-navy/15 p-2 text-brand-navy hover:bg-brand-navy/5 dark:border-white/20"
+                  className="shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
                   aria-label={t("previousRoleAria")}
                 >
                   <ChevronLeft className="size-6" />
@@ -426,7 +426,7 @@ export function AuthEntryWizard({
                       cycle(-1);
                     }
                   }}
-                  className="relative size-[min(18rem,85vw)] shrink-0 touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
+                  className="relative aspect-square w-[min(18rem,calc(100%-5.5rem))] shrink touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
                 >
                   <svg
                     viewBox="-50 -50 100 100"
@@ -521,7 +521,7 @@ export function AuthEntryWizard({
                 <button
                   type="button"
                   onClick={() => cycle(1)}
-                  className="rounded-full border border-brand-navy/15 p-2 text-brand-navy hover:bg-brand-navy/5 dark:border-white/20"
+                  className="shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
                   aria-label={t("nextRoleAria")}
                 >
                   <ChevronRight className="size-6" />
