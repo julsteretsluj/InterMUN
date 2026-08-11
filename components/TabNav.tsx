@@ -19,6 +19,7 @@ import {
   History,
   Home,
   Image,
+  AlertTriangle,
   KeyRound,
   LayoutGrid,
   Lightbulb,
@@ -75,6 +76,7 @@ const NAV_ICONS: Record<string, NavIcon> = {
   "/speeches": Mic,
   "/running-notes": ClipboardList,
   "/report": Flag,
+  "/crisis": AlertTriangle,
   "/crisis-slides": Image,
   "/advisor": GraduationCap,
   "/advisor/notes": ClipboardList,
@@ -110,7 +112,7 @@ const BASE_TABS = [
   { href: "/crisis-slides", labelKey: "crisisSlides" },
 ] as const;
 
-const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
+const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides", "/crisis"]);
 
 const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
 
@@ -135,6 +137,13 @@ function useNavTabs(
     ? [...BASE_TABS]
     : BASE_TABS.filter((t) => !CRISIS_ONLY_HREFS.has(t.href));
 
+  const roleTabs =
+    role === "chair"
+      ? baseTabs.map((t) =>
+          t.href === "/crisis-slides" ? { href: "/crisis", labelKey: "crisis" as const } : t
+        )
+      : baseTabs;
+
   const scheduleTab =
     seamunScheduleEnabled && role !== "chair" && role !== "smt" && role !== "admin"
       ? [{ href: scheduleHrefForRole(role)!, ...SCHEDULE_TAB }]
@@ -145,7 +154,7 @@ function useNavTabs(
       { href: "/advisor", labelKey: "advisorHub" },
       { href: "/advisor/notes", labelKey: "advisorNotes" },
       ...scheduleTab,
-      ...baseTabs
+      ...roleTabs
         .filter((t) => t.href !== "/delegate" && !ADVISOR_BLOCKED_HREFS.has(t.href))
         .map((t) => (t.href === "/profile" ? t : t)),
     ];
@@ -153,7 +162,7 @@ function useNavTabs(
 
   return role === "chair" || role === "smt" || role === "admin"
     ? [
-        ...baseTabs.slice(0, 3),
+        ...roleTabs.slice(0, 3),
         { href: "/chair/room-code", labelKey: "committeeCode" },
         ...(role === "chair"
           ? ([{ href: "/chair/session", labelKey: "session" }] as const)
@@ -163,12 +172,12 @@ function useNavTabs(
           : []),
         { href: "/chair/allocation-matrix", labelKey: "matrix" },
         { href: "/chair/awards", labelKey: "awards" },
-        ...baseTabs.slice(3),
+        ...roleTabs.slice(3),
       ]
     : [
-        baseTabs[0]!,
+        roleTabs[0]!,
         ...scheduleTab,
-        ...baseTabs.slice(1),
+        ...roleTabs.slice(1),
       ];
 }
 
@@ -258,7 +267,7 @@ export function TabNav({
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
-  /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC). */
+  /** When false, hide crisis routes (`/report`, `/crisis-slides`, `/crisis`). */
   crisisReportingEnabled?: boolean;
   /** SEAMUN I 2027 locked timetable link in sidebar/dock. */
   seamunScheduleEnabled?: boolean;

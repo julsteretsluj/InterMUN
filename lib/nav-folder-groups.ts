@@ -75,7 +75,7 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   officialLinks: "resources",
   score: "resources",
   crisis: "crisis",
-  crisisSlides: "crisis",
+  crisisReport: "crisis",
   settings: "account",
 };
 
@@ -139,6 +139,7 @@ export function tabHrefFolder(href: string): NavFolderId {
     href === "/amendments" ||
     href === "/running-notes" ||
     href === "/report" ||
+    href === "/crisis" ||
     href === "/crisis-slides" ||
     href === "/chair/session" ||
     href.startsWith("/chair/session/") ||

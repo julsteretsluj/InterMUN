@@ -92,8 +92,8 @@ export default async function ChairOverviewPage({
     { href: "/chair/awards", label: tPage("tiles.score.label"), hint: tPage("tiles.score.hint") },
     ...(crisisReportingEnabled
       ? ([
-          { href: "/report", label: tPage("tiles.crisis.label"), hint: tPage("tiles.crisis.hint") },
-          { href: "/crisis-slides", label: tPage("tiles.crisisSlides.label"), hint: tPage("tiles.crisisSlides.hint") },
+          { href: "/crisis", label: tPage("tiles.crisis.label"), hint: tPage("tiles.crisis.hint") },
+          { href: "/report", label: tPage("tiles.crisisReport.label"), hint: tPage("tiles.crisisReport.hint") },
         ] as const)
       : []),
     { href: "/documents", label: tPage("tiles.archive.label"), hint: tPage("tiles.archive.hint") },

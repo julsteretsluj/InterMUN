@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 /**
- * Crisis-style committees use incident / crisis reporting (`/report`) and crisis prep items.
- * Matches `conferences.committee` labels such as UNSC or FWC (including "FWC - …").
+ * Crisis-style committees use `/crisis` notes & prompts (chair), `/crisis-slides`,
+ * and incident reporting (`/report`). Matches `conferences.committee` labels such as UNSC or FWC.
  */
 export function isCrisisCommittee(committee: string | null | undefined): boolean {
   const raw = (committee ?? "").trim();

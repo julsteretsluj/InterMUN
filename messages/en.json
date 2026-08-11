@@ -565,6 +565,7 @@
     "speeches": "Speeches",
     "running": "Running",
     "report": "Report",
+    "crisis": "Crisis",
     "crisisSlides": "Crisis slides",
     "committeeCode": "Committee code",
     "session": "Session",
@@ -804,6 +805,7 @@
   },
   "pageTitles": {
     "crisisSlides": "Crisis slides",
+    "crisis": "Crisis",
     "resolutions": "Resolutions",
     "amendments": "Amendments",
     "pressCorps": "Press Corps",
@@ -1343,7 +1345,7 @@
       "voting": "Voting",
       "score": "Score",
       "crisis": "Crisis",
-      "crisisSlides": "Crisis slides",
+      "crisisReport": "Report",
       "archive": "Archive",
       "notesModeration": "Note review",
       "officialLinks": "Official links",
@@ -2752,6 +2754,10 @@
       },
       "crisis": {
         "label": "Crisis",
+        "hint": "Notes and prompts for your chamber"
+      },
+      "crisisReport": {
+        "label": "Report",
         "hint": "Incident reporting"
       },
       "crisisSlides": {
