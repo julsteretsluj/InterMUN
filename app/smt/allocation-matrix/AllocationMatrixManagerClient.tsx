@@ -62,11 +62,17 @@ export function AllocationMatrixManagerClient({
   }
 
   function linkedLabel(row: { user_id: string | null; linked_role: string | null; linked_name: string | null }) {
-    if (!row.user_id) return t("linkedOpen");
+    const name = row.linked_name?.trim();
+    if (!row.user_id && !name) return t("linkedOpen");
     const role = row.linked_role?.trim().toLowerCase();
     const roleLabel =
-      role === "chair" ? t("linkedRoleChair") : role === "delegate" ? t("linkedRoleDelegate") : t("linkedRoleLinked");
-    const name = row.linked_name?.trim();
+      role === "chair"
+        ? t("linkedRoleChair")
+        : role === "delegate"
+          ? t("linkedRoleDelegate")
+          : row.user_id
+            ? t("linkedRoleLinked")
+            : t("linkedRoleChair");
     return name ? `${roleLabel}: ${name}` : roleLabel;
   }
 
@@ -325,7 +331,11 @@ export function AllocationMatrixManagerClient({
                       <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
                         {r.code?.trim() ? r.code : "—"}
                       </td>
-                      <td className={`px-3 py-2 text-xs ${r.user_id ? "text-amber-800/90" : "text-brand-muted"}`}>
+                      <td
+                        className={`px-3 py-2 text-xs ${
+                          r.user_id || r.linked_name?.trim() ? "text-amber-800/90" : "text-brand-muted"
+                        }`}
+                      >
                         {linkedLabel(r)}
                       </td>
                       <td className="px-3 py-2">

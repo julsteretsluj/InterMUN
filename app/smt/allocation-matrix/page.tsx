@@ -187,7 +187,7 @@ export default async function SmtAllocationMatrixPage({
       (
         await supabase
           .from("allocations")
-          .select("id, country, user_id, conference_id")
+          .select("id, country, user_id, conference_id, display_name_override")
           .in("conference_id", siblingConferenceIds)
           .order("country", { ascending: true })
           .order("id", { ascending: true })
@@ -208,7 +208,7 @@ export default async function SmtAllocationMatrixPage({
         (
           await supabase
             .from("allocations")
-            .select("id, country, user_id, conference_id")
+            .select("id, country, user_id, conference_id, display_name_override")
             .in("conference_id", siblingConferenceIds)
             .order("country", { ascending: true })
             .order("id", { ascending: true })
@@ -234,14 +234,19 @@ export default async function SmtAllocationMatrixPage({
       (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
     );
     rows = sortRowsByAllocationCountry(
-      (allocs ?? []).map((a) => ({
-        id: a.id,
-        country: a.country,
-        user_id: a.user_id,
-        linked_role: a.user_id ? (profileById.get(a.user_id)?.role ?? null) : null,
-        linked_name: a.user_id ? (profileById.get(a.user_id)?.name ?? null) : null,
-        code: codeById.get(a.id) ?? null,
-      }))
+      (allocs ?? []).map((a) => {
+        const overrideName = String(a.display_name_override ?? "").trim() || null;
+        const profile = a.user_id ? profileById.get(a.user_id) : null;
+        const linkedName = profile?.name?.trim() || overrideName;
+        return {
+          id: a.id,
+          country: a.country,
+          user_id: a.user_id,
+          linked_role: profile?.role ?? (linkedName && !a.user_id ? "chair" : null),
+          linked_name: linkedName,
+          code: codeById.get(a.id) ?? null,
+        };
+      })
     );
   }
 

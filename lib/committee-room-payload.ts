@@ -72,10 +72,12 @@ function daisFromChairAllocations(
         }
       | undefined
   ) {
-    if (!row || !row.user_id) return null;
-    const p = embedProfile(row.profiles);
+    if (!row) return null;
     const override = String(row.display_name_override ?? "").trim();
-    return override || p?.name?.trim() || null;
+    if (override) return override;
+    if (!row.user_id) return null;
+    const p = embedProfile(row.profiles);
+    return p?.name?.trim() || null;
   }
   const lower = (s: string | null | undefined) => String(s ?? "").trim().toLowerCase();
 

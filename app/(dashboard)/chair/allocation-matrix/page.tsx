@@ -44,6 +44,7 @@ type AllocationRow = {
   user_id: string | null;
   linked_role: string | null;
   linked_name: string | null;
+  display_name_override?: string | null;
   country_display: string;
   party_label: string | null;
   member_country: string | null;
@@ -251,7 +252,7 @@ export default async function ChairAllocationMatrixPage() {
   const [{ data: allocData }, { data: participationDelegate }] = await Promise.all([
     supabase
       .from("allocations")
-      .select("id, conference_id, country, user_id")
+      .select("id, conference_id, country, user_id, display_name_override")
       .in("conference_id", awardScope.siblingConferenceIds)
       .order("country", { ascending: true }),
     isChairViewer
@@ -385,15 +386,18 @@ export default async function ChairAllocationMatrixPage() {
           : isEuParliament && gateCode && !/^[A-Z]{2,4}-\d{2,4}$/.test(gateCode)
             ? gateCode
             : null;
+      const overrideName = String(r.display_name_override ?? "").trim() || null;
+      const profile = r.user_id ? profileById.get(r.user_id) : null;
+      const displayName = profile?.name?.trim() || overrideName;
       return {
         ...r,
         flag: flagEmojiForCountryName(countryDisplay),
         email: r.user_id ? (emailByUserId.get(r.user_id) ?? null) : null,
-        name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
+        name: displayName,
         grade: r.user_id ? (profileById.get(r.user_id)?.grade ?? null) : null,
         notes: r.user_id ? (profileById.get(r.user_id)?.notes ?? null) : null,
-        linked_role: r.user_id ? (profileById.get(r.user_id)?.role ?? null) : null,
-        linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
+        linked_role: profile?.role ?? (displayName && isChairSeat ? "chair" : null),
+        linked_name: displayName,
         country_display: countryDisplay,
         party_label: partyLabel,
         member_country: memberCountry,
