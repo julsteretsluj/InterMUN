@@ -133,8 +133,8 @@ async function requireChairForCommittee(conferenceId: string): Promise<
     .maybeSingle();
   const role = profile?.role?.toString().trim().toLowerCase();
 
-  if (role !== "chair" && role !== "admin") {
-    return { error: "Only chairs can manage a committee session." };
+  if (role !== "chair" && role !== "smt" && role !== "admin") {
+    return { error: "Only chairs and secretariat can manage a committee session." };
   }
 
   const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, trimmed);
