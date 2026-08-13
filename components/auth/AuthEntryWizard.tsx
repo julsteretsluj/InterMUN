@@ -398,11 +398,11 @@ export function AuthEntryWizard({
             </div>
 
             <div className="flex min-w-0 flex-col items-center justify-center gap-4">
-              <div className="flex w-full min-w-0 items-center justify-center gap-2 sm:gap-3">
+              <div className="flex w-full min-w-0 items-center justify-center gap-4 sm:gap-5">
                 <button
                   type="button"
                   onClick={() => cycle(-1)}
-                  className="shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
+                  className="relative z-10 shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
                   aria-label={t("previousRoleAria")}
                 >
                   <ChevronLeft className="size-6" />
@@ -426,7 +426,7 @@ export function AuthEntryWizard({
                       cycle(-1);
                     }
                   }}
-                  className="relative aspect-square w-[min(18rem,calc(100%-5.5rem))] shrink touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
+                  className="relative aspect-square w-[min(17.5rem,calc(100%-8.5rem))] shrink-0 touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
                 >
                   <svg
                     viewBox="-50 -50 100 100"
@@ -504,24 +504,28 @@ export function AuthEntryWizard({
                       );
                     })()}
                   </svg>
-                  {/* Inner disc (donut hole) */}
-                  <div className="pointer-events-none absolute inset-[14px] rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
+                  {/* Inner disc matches SVG hole (rInner 30 / viewBox 50 → 20% inset). */}
+                  <div className="pointer-events-none absolute inset-[22%] overflow-hidden rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
 
-                  <div className="pointer-events-none absolute inset-[14px] flex flex-col items-center justify-center rounded-full p-4 text-center">
+                  <div className="pointer-events-none absolute inset-[22%] flex flex-col items-center justify-center overflow-hidden rounded-full px-3 py-2 text-center">
                     <RoleIcon
-                      className="size-12 md:size-14 mb-2"
+                      className="mb-1 size-8 md:size-9"
                       strokeWidth={1.25}
                       style={{ color: roleAccent(roleIndex) }}
                     />
-                    <p className="font-sans text-2xl md:text-3xl font-bold text-brand-navy">{selectedRoleLabel}</p>
-                    <p className="text-sm italic text-brand-navy/85">{selectedRoleHint}</p>
+                    <p className="font-sans text-lg font-bold leading-tight tracking-tight text-brand-navy md:text-xl">
+                      {selectedRoleLabel}
+                    </p>
+                    <p className="mt-0.5 max-w-[9.5rem] text-[0.7rem] leading-snug italic text-brand-navy/85 md:text-xs">
+                      {selectedRoleHint}
+                    </p>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => cycle(1)}
-                  className="shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
+                  className="relative z-10 shrink-0 rounded-full border border-brand-navy/15 bg-white p-2 text-brand-navy shadow-sm hover:bg-brand-navy/5 dark:border-white/20 dark:bg-discord-app"
                   aria-label={t("nextRoleAria")}
                 >
                   <ChevronRight className="size-6" />

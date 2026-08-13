@@ -34,7 +34,7 @@ SEED_NS = uuid.UUID("a1b2c3d4-e5f6-4789-a012-3456789abcde")
 DEFAULT_EVENT_ID = "11111111-1111-1111-1111-111111111101"
 
 # Overview / multi-grid sheets — not one committee + roster.
-SKIP_SHEETS = frozenset({"OVERVIEW", "BEG", "INT", "ADV"})
+SKIP_SHEETS = frozenset({"OVERVIEW", "BEG", "INT", "ADV", "MAIN"})
 
 # Map tab name -> committee string stored in DB and used in uuid5 (must match historical matrix).
 SHEET_COMMITTEE_KEY: dict[str, str] = {
@@ -161,7 +161,16 @@ DELEGATION_HEADER_MARKERS = frozenset(
 )
 
 GATE_CODE_COLUMN_HEADERS = frozenset(
-    {"code", "id", "gate code", "allocation code", "alloc code", "allocation id"}
+    {
+        "code",
+        "id",
+        "gate code",
+        "allocation code",
+        "alloc code",
+        "allocation id",
+        "placard code",
+        "placard codes",
+    }
 )
 
 NON_GATE_CODE_COLUMN_HEADERS = frozenset(
@@ -189,7 +198,10 @@ def use_column_c_as_gate_code(
         if a.lower().startswith("total"):
             break
         raw = (rows[ri].get("C") or "").strip()
-        if raw and re.match(r"^[A-Z]{2,6}-\d{3}$", raw, re.I):
+        if raw and (
+            re.match(r"^[A-Z]{2,6}-\d{3}$", raw, re.I)
+            or re.match(r"^SEAMUN-\d{4}-[A-Z]{2,6}-\d{3}$", raw, re.I)
+        ):
             return True
         break
     return False
@@ -226,6 +238,8 @@ def extract_delegations(
             continue
         if a.lower().startswith("total"):
             break
+        if re.match(r"^(head\s*chair|co-?chair|agenda)$", a, re.I):
+            continue
         seq += 1
         if read_gate_from_c:
             raw_code = r.get("C")
@@ -279,7 +293,7 @@ def emit_sql(
         "-- Source: data/allocation-matrix.xlsx (Allocation Matrix).",
         "--",
         "-- Creates conferences for 1–2 topics per worksheet; allocations have user_id NULL until",
-        "-- chairs assign delegates. allocation_gate_codes use spreadsheet column C when present,",
+        "-- chairs assign delegates. allocation_gate_codes use Placard Code (column C) when present,",
         "-- otherwise generated {STEM}-### codes.",
         "--",
         "-- WARNING: Deletes existing allocations + gate codes for these conference IDs,",

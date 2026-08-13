@@ -202,12 +202,19 @@ async function resolveAllocation(admin, delegate, legacyCode) {
     return { allocation: byCountry, scope, legacyCode, matchedBy: "country" };
   }
 
-  if (!legacyCode) return null;
+  const codeCandidates = [
+    ...new Set(
+      [delegate.placardCode, legacyCode]
+        .map((c) => (c ?? "").trim())
+        .filter(Boolean)
+    ),
+  ];
+  if (!codeCandidates.length) return null;
 
   const { data: gateRows, error: gErr } = await admin
     .from("allocation_gate_codes")
     .select("allocation_id, code, allocations(id, country, conference_id, user_id)")
-    .eq("code", legacyCode);
+    .in("code", codeCandidates);
   if (gErr) throw gErr;
   if (!gateRows?.length) return null;
 

@@ -2489,6 +2489,7 @@
     "rosterHeading": "Roster · {heading}",
     "seatsSummary": "{count} seat(s).",
     "linkedDelegatesCannotBeDeleted": "Linked delegates cannot be deleted here.",
+    "positionNamesLocked": "Position names can only be changed by a site admin.",
     "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}",
     "countryPosition": "Country / position",
     "placardCode": "Placard code",

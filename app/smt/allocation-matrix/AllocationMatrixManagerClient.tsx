@@ -320,7 +320,8 @@ export function AllocationMatrixManagerClient({
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
         <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("rosterHeading", { heading })}</h2>
         <p className="text-xs text-brand-muted">
-          {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}
+          {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}{" "}
+          {t("positionNamesLocked")}
         </p>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
           <table className="w-full text-sm">
@@ -367,23 +368,12 @@ export function AllocationMatrixManagerClient({
                   }
                   return (
                     <tr key={r.id} className="border-t border-brand-navy/5">
-                      <td className="px-3 py-2">
+                      <td className="px-3 py-2 font-medium text-brand-navy">
                         <form id={formId} onSubmit={onUpdate} className="m-0">
                           <input type="hidden" name="allocation_id" value={r.id} />
-                          {smtParliamentarianSeatLabelByRowId.has(r.id) ? (
-                            <>
-                              <input type="hidden" name="country" defaultValue={r.country} />
-                              <span className="font-medium text-brand-navy">{positionLabel}</span>
-                            </>
-                          ) : (
-                            <input
-                              name="country"
-                              defaultValue={r.country}
-                              required
-                              className="w-full min-w-[120px] px-2 py-1 rounded border border-brand-navy/15 text-sm"
-                            />
-                          )}
+                          <input type="hidden" name="country" value={r.country} />
                         </form>
+                        {positionLabel}
                       </td>
                       <td className="px-3 py-2">
                         <input

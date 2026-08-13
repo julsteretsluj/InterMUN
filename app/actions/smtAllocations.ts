@@ -145,11 +145,7 @@ export async function smtUpdateAllocationRow(formData: FormData) {
   const auth = await requireSmt(row.conference_id);
   if (!auth.ok) return { error: auth.error };
 
-  const { error: upErr } = await auth.supabase
-    .from("allocations")
-    .update({ country })
-    .eq("id", allocationId);
-  if (upErr) return { error: upErr.message };
+  // Country/position labels stay as stored; SMT may only update placard codes.
 
   if (code) {
     const { error: codeErr } = await auth.supabase.from("allocation_gate_codes").upsert(
