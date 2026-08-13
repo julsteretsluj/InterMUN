@@ -7,7 +7,9 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
+import { canonicalPlacardCode } from "@/lib/placard-code";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import { getTranslations } from "next-intl/server";
@@ -63,7 +65,7 @@ export async function smtAddAllocationRow(formData: FormData) {
   const t = await getTranslations("serverActions.smtAllocations");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const country = String(formData.get("country") ?? "").trim();
-  const code = String(formData.get("code") ?? "").trim();
+  const code = canonicalPlacardCode(String(formData.get("code") ?? ""));
 
   if (!conferenceId || !country) {
     return { error: t("requiredCommitteeAndCountry") };
@@ -120,16 +122,12 @@ export async function smtUpdateAllocationRow(formData: FormData) {
   const t = await getTranslations("serverActions.smtAllocations");
   const allocationId = String(formData.get("allocation_id") ?? "").trim();
   const country = String(formData.get("country") ?? "").trim();
-  const code = String(formData.get("code") ?? "").trim();
 
   if (!allocationId || !country) {
     return { error: t("requiredAllocationAndCountry") };
   }
   if (country.length > MAX_COUNTRY_LEN) {
     return { error: t("countryTooLong") };
-  }
-  if (code.length > MAX_CODE_LEN) {
-    return { error: t("codeTooLong") };
   }
 
   const supabase = await createClient();
@@ -145,21 +143,7 @@ export async function smtUpdateAllocationRow(formData: FormData) {
   const auth = await requireSmt(row.conference_id);
   if (!auth.ok) return { error: auth.error };
 
-  // Country/position labels stay as stored; SMT may only update placard codes.
-
-  if (code) {
-    const { error: codeErr } = await auth.supabase.from("allocation_gate_codes").upsert(
-      {
-        allocation_id: allocationId,
-        code,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "allocation_id" }
-    );
-    if (codeErr) return { error: codeErr.message };
-  } else {
-    await auth.supabase.from("allocation_gate_codes").delete().eq("allocation_id", allocationId);
-  }
+  // Position names and placard codes stay as stored; only site admins may change them.
 
   revalidateAllocationPaths();
   return { success: true as const };
@@ -173,7 +157,7 @@ export async function smtDeleteAllocationRow(allocationId: string) {
   const supabase = await createClient();
   const { data: row, error: fetchErr } = await supabase
     .from("allocations")
-    .select("conference_id, user_id")
+    .select("conference_id, user_id, country")
     .eq("id", id)
     .maybeSingle();
   if (fetchErr || !row?.conference_id) {
@@ -183,6 +167,9 @@ export async function smtDeleteAllocationRow(allocationId: string) {
     return {
       error: t("seatLinkedToDelegate"),
     };
+  }
+  if (isCommitteeChairSeatLabel(row.country)) {
+    return { error: t("chairSeatsCannotBeDeleted") };
   }
 
   const auth = await requireSmt(row.conference_id);
@@ -233,12 +220,14 @@ export async function smtImportAllocationsCsv(formData: FormData) {
   if (mode === "replace_unassigned") {
     const { data: toRemove, error: listErr } = await auth.supabase
       .from("allocations")
-      .select("id")
+      .select("id, country")
       .eq("conference_id", canonicalId)
       .is("user_id", null);
 
     if (listErr) return { error: listErr.message };
-    const ids = (toRemove ?? []).map((r) => r.id);
+    const ids = (toRemove ?? [])
+      .filter((r) => !isCommitteeChairSeatLabel(r.country))
+      .map((r) => r.id);
     if (ids.length) {
       await auth.supabase.from("allocation_gate_codes").delete().in("allocation_id", ids);
       const { error: delErr } = await auth.supabase.from("allocations").delete().in("id", ids);

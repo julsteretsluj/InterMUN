@@ -76,6 +76,15 @@ def generate_six_char_committee_code(committee_label: str, conference_uuid: str)
     return f"{prefix}{str(n).zfill(3)}"
 
 
+def canonical_placard_code(code: str) -> str:
+    """Store ECO-001, not SEAMUN-2027-ECO-001. Gate still accepts the printed prefix."""
+    c = (code or "").strip()
+    c = re.sub(r"^SEAMUN-\d{4}-", "", c, flags=re.I)
+    if re.match(r"^(?:[A-Z]{2,6}|DAIS)-\d{2,4}$", c, re.I):
+        return c.upper()
+    return c
+
+
 def sql_str(s: str | None) -> str:
     if s is None:
         return "NULL"
@@ -248,7 +257,7 @@ def extract_delegations(
                 code = f"{stem}-{seq:03d}"
         else:
             code = f"{stem}-{seq:03d}"
-        out.append((a, code))
+        out.append((a, canonical_placard_code(code)))
     return out
 
 
@@ -294,7 +303,7 @@ def emit_sql(
         "--",
         "-- Creates conferences for 1–2 topics per worksheet; allocations have user_id NULL until",
         "-- chairs assign delegates. allocation_gate_codes use Placard Code (column C) when present,",
-        "-- otherwise generated {STEM}-### codes.",
+        "-- otherwise generated {STEM}-### codes. SEAMUN-YYYY- prefixes are stripped for storage.",
         "--",
         "-- WARNING: Deletes existing allocations + gate codes for these conference IDs,",
         "-- then re-inserts. Run on dev/staging or when you intentionally refresh the matrix.",

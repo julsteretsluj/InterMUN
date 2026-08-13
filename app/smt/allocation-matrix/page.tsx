@@ -16,6 +16,7 @@ import {
   pickCanonicalConferenceRowByAllocationScore,
 } from "@/lib/conference-committee-canonical";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
 import { FeatureGuideLink } from "@/components/guides/FeatureGuideLink";
@@ -194,33 +195,27 @@ export default async function SmtAllocationMatrixPage({
 
     allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
 
-    const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
-    // Empty committees: seed dais rows. SMT secretariat: always re-run — legacy installs may still
-    // have only Head Chair / Co-chair; ensure migrates labels and adds full roster rows (idempotent).
-    const shouldEnsureSeatRows =
-      allocs.length === 0 ||
-      (selectedConfRow ? isSmtSecretariatConferenceRow(selectedConfRow) : false);
-
-    if (shouldEnsureSeatRows) {
-      try {
+    const seeder = createAdminClient() ?? supabase;
+    try {
+      for (const c of list) {
         await ensureDaisSeatAllocations(
-          supabase,
-          canonicalConferenceId,
-          selectedConfRow ? committeeHintForSmtDaisPlan(selectedConfRow) : null
+          seeder,
+          c.id,
+          isSmtSecretariatConferenceRow(c) ? "SMT" : committeeHintForSmtDaisPlan(c)
         );
-        allocs =
-          (
-            await supabase
-              .from("allocations")
-              .select("id, country, user_id, conference_id")
-              .in("conference_id", siblingConferenceIds)
-              .order("country", { ascending: true })
-              .order("id", { ascending: true })
-          ).data ?? [];
-        allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
-      } catch {
-        // If insert fails (permissions, missing conference, etc.), fall back to empty roster.
       }
+      allocs =
+        (
+          await supabase
+            .from("allocations")
+            .select("id, country, user_id, conference_id")
+            .in("conference_id", siblingConferenceIds)
+            .order("country", { ascending: true })
+            .order("id", { ascending: true })
+        ).data ?? [];
+      allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
+    } catch {
+      // If insert fails (permissions, missing conference, etc.), keep the roster we already loaded.
     }
 
     const ids = (allocs ?? []).map((a) => a.id);

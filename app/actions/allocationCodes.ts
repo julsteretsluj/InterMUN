@@ -11,6 +11,8 @@ import {
   resolveCanonicalCommitteeConferenceId,
 } from "@/lib/conference-committee-canonical";
 import { randomBytes } from "crypto";
+import { canonicalPlacardCode } from "@/lib/placard-code";
+import { isAdminRole } from "@/lib/roles";
 
 function randomCode(): string {
   return randomBytes(4).toString("hex").toUpperCase();
@@ -67,7 +69,11 @@ export async function saveAllocationCode(allocationId: string, code: string) {
     return { error: "Only chairs, SMT, and website admins can update allocation codes." };
   }
 
-  const trimmed = code.trim();
+  if (!isAdminRole(auth.role)) {
+    return { error: "Placard codes can only be changed by a site admin." };
+  }
+
+  const trimmed = canonicalPlacardCode(code);
   const supabase = auth.supabase;
 
   const { data: alloc } = await supabase
@@ -107,6 +113,10 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
     return { error: "Only chairs, SMT, and website admins can generate codes." };
+  }
+
+  if (!isAdminRole(auth.role)) {
+    return { error: "Placard codes can only be changed by a site admin." };
   }
 
   const scope = await assertChairOwnsConference(auth.role, auth.user.id, conferenceId);

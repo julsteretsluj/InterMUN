@@ -61,10 +61,16 @@ function loadEnvLocal() {
   }
 }
 
+function shortPlacardCode(code) {
+  const trimmed = (code ?? "").trim();
+  if (!trimmed) return null;
+  return trimmed.replace(/^SEAMUN-\d{4}-/i, "").toUpperCase() || null;
+}
+
 function toLegacyGateCode(code) {
   const trimmed = (code ?? "").trim();
   if (!trimmed) return null;
-  const m = trimmed.match(/^SEAMUN-2027-([A-Z]+)-(\d+)$/i);
+  const m = trimmed.match(/^SEAMUN-\d{4}-([A-Z]+)-(\d+)$/i);
   if (!m) return trimmed;
   const prefix = SPREADSHEET_PREFIX_TO_DB[m[1].toUpperCase()] ?? m[1].toUpperCase();
   return `${prefix}-${m[2]}`;
@@ -204,7 +210,7 @@ async function resolveAllocation(admin, delegate, legacyCode) {
 
   const codeCandidates = [
     ...new Set(
-      [delegate.placardCode, legacyCode]
+      [delegate.placardCode, shortPlacardCode(delegate.placardCode), legacyCode]
         .map((c) => (c ?? "").trim())
         .filter(Boolean)
     ),

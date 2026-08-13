@@ -7,15 +7,13 @@ import {
   smtAddAllocationRow,
   smtDeleteAllocationRow,
   smtImportAllocationsCsv,
-  smtUpdateAllocationRow,
 } from "@/app/actions/smtAllocations";
-import { generateMissingAllocationCodes } from "@/app/actions/allocationCodes";
 import type { AllocationCsvRow } from "@/lib/parse-allocation-csv";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
-import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
+import { getDaisSeatLabelsForCommittee, isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
 import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
 import { SMT_TEMPORARY_SEAT_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
 
@@ -152,22 +150,6 @@ export function AllocationMatrixManagerClient({
     });
   }
 
-  async function onUpdate(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setMessage(null);
-    const fd = new FormData(e.currentTarget);
-    startTransition(async () => {
-      const res = await smtUpdateAllocationRow(fd);
-      if ("error" in res && res.error) {
-        flash(null, res.error);
-        return;
-      }
-      flash(t("updatedRow"), null);
-      router.refresh();
-    });
-  }
-
   async function onDelete(allocationId: string) {
     if (!confirm(t("confirmRemoveUnassignedSeat"))) return;
     setError(null);
@@ -203,22 +185,6 @@ export function AllocationMatrixManagerClient({
       flash(parts.join(" "), null);
       setCsvPreview(null);
       setCsvText("");
-      router.refresh();
-    });
-  }
-
-  async function onGenerateCodes() {
-    if (!selectedConferenceId) return;
-    setError(null);
-    setMessage(null);
-    startTransition(async () => {
-      const res = await generateMissingAllocationCodes(selectedConferenceId);
-      if ("error" in res && res.error) {
-        flash(null, res.error);
-        return;
-      }
-      const n = Number(("generated" in res ? res.generated : 0) ?? 0);
-      flash(t("generatedRandomCodes", { count: n }), null);
       router.refresh();
     });
   }
@@ -343,48 +309,25 @@ export function AllocationMatrixManagerClient({
                 </tr>
               ) : (
                 rows.map((r) => {
-                  const formId = `alloc-row-${r.id}`;
                   const positionLabel =
                     smtParliamentarianSeatLabelByRowId.get(r.id) ?? r.country;
-                  if (r.user_id) {
-                    return (
-                      <tr key={r.id} className="border-t border-brand-navy/5">
-                        <td className="px-3 py-2 font-medium text-brand-navy">{positionLabel}</td>
-                        <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
-                          {r.code?.trim() ? r.code : "—"}
-                        </td>
-                        <td className="px-3 py-2 text-xs text-amber-800/90">{linkedLabel(r)}</td>
-                        <td className="px-3 py-2">
-                          <a
-                            href={signupHref(selectedConferenceId, r.id)}
-                            className="text-xs text-brand-accent hover:underline break-all"
-                          >
-                            {t("allocationSignupLink")}
-                          </a>
-                        </td>
-                        <td className="px-3 py-2 text-xs text-brand-muted">{t("dash")}</td>
-                      </tr>
-                    );
-                  }
+                  const isChairSeat = isCommitteeChairSeatLabel(r.country);
                   return (
-                    <tr key={r.id} className="border-t border-brand-navy/5">
-                      <td className="px-3 py-2 font-medium text-brand-navy">
-                        <form id={formId} onSubmit={onUpdate} className="m-0">
-                          <input type="hidden" name="allocation_id" value={r.id} />
-                          <input type="hidden" name="country" value={r.country} />
-                        </form>
-                        {positionLabel}
+                    <tr
+                      key={r.id}
+                      className={
+                        isChairSeat
+                          ? "border-t border-[#C9DDE9] bg-[#DFF2FC]"
+                          : "border-t border-brand-navy/5"
+                      }
+                    >
+                      <td className="px-3 py-2 font-medium text-brand-navy">{positionLabel}</td>
+                      <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
+                        {r.code?.trim() ? r.code : "—"}
                       </td>
-                      <td className="px-3 py-2">
-                        <input
-                          form={formId}
-                          name="code"
-                          defaultValue={r.code ?? ""}
-                          placeholder={t("optional")}
-                          className="w-full min-w-[88px] px-2 py-1 rounded border border-brand-navy/15 font-mono text-xs"
-                        />
+                      <td className={`px-3 py-2 text-xs ${r.user_id ? "text-amber-800/90" : "text-brand-muted"}`}>
+                        {linkedLabel(r)}
                       </td>
-                      <td className="px-3 py-2 text-xs text-brand-muted">{linkedLabel(r)}</td>
                       <td className="px-3 py-2">
                         <a
                           href={signupHref(selectedConferenceId, r.id)}
@@ -394,15 +337,9 @@ export function AllocationMatrixManagerClient({
                         </a>
                       </td>
                       <td className="px-3 py-2">
-                        <div className="flex flex-wrap gap-2">
-                          <button
-                            type="submit"
-                            form={formId}
-                            disabled={pending}
-                            className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium disabled:opacity-50"
-                          >
-                            {t("save")}
-                          </button>
+                        {r.user_id || isChairSeat ? (
+                          <span className="text-xs text-brand-muted">{t("dash")}</span>
+                        ) : (
                           <button
                             type="button"
                             onClick={() => onDelete(r.id)}
@@ -411,7 +348,7 @@ export function AllocationMatrixManagerClient({
                           >
                             {t("remove")}
                           </button>
-                        </div>
+                        )}
                       </td>
                     </tr>
                   );
@@ -550,14 +487,6 @@ export function AllocationMatrixManagerClient({
               className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
             >
               {t("runImport")}
-            </button>
-            <button
-              type="button"
-              onClick={onGenerateCodes}
-              disabled={pending}
-              className="px-4 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
-            >
-              {t("generateMissingRandomCodes")}
             </button>
           </div>
         </form>

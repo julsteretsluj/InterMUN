@@ -17,25 +17,23 @@ const DEFAULT_PLAN = ["Head Chair", "Co-chair"] as const;
 const PLAN_BY_SESSION_GROUP: Record<string, readonly string[]> = {
   /** Must stay in sync with SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS — full secretariat roster, no chair titles. */
   SMT: [...SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS],
-  ECOSOC: ["Head Chair", "Co-chair"],
-  /** Full committee title normalizes to PRESS CORPS */
-  "PRESS CORPS": ["Head Editor", "Co-Editor"],
-  UNHRC: ["Head Chair", "Co-chair"],
-  UNSC: ["Frontroom Chair", "Backroom Chair"],
-  UNODC: ["Head Chair", "Co-chair"],
-  "UN WOMEN": ["Head Chair", "Co-chair"],
-  DISEC: ["Head Chair", "Co-chair"],
-  WHO: ["Head Chair", "Co-chair"],
-  FWC: ["Head Chair", "Co-chair"],
-  INTERPOL: ["Head Chair", "Co-chair"],
 };
+
+const COMMITTEE_CHAIR_SEAT_LABELS_LOWER = new Set([
+  "head chair",
+  "co-chair",
+  "co chair",
+  "frontroom chair",
+  "backroom chair",
+  "head editor",
+  "co-editor",
+]);
 
 /** When switching naming schemes, rename vacant legacy rows before inserting new labels. */
 export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: string][]> = {
   UNSC: [
-    ["head chair", "Frontroom Chair"],
-    ["co-chair", "Backroom Chair"],
-    ["co chair", "Backroom Chair"],
+    ["frontroom chair", "Head Chair"],
+    ["backroom chair", "Co-chair"],
   ],
   WHO: [
     ["frontroom chair", "Head Chair"],
@@ -46,9 +44,8 @@ export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: st
     ["backroom chair", "Co-chair"],
   ],
   "PRESS CORPS": [
-    ["head chair", "Head Editor"],
-    ["co-chair", "Co-Editor"],
-    ["co chair", "Co-Editor"],
+    ["head editor", "Head Chair"],
+    ["co-editor", "Co-chair"],
   ],
   SMT: [
     ["head chair", "Secretary General"],
@@ -65,13 +62,27 @@ for (const l of SMT_TEMPORARY_SEAT_LABELS) {
   ALL_PLAN_LABELS_LOWER.add(l.trim().toLowerCase());
 }
 DEFAULT_PLAN.forEach((l) => ALL_PLAN_LABELS_LOWER.add(l.toLowerCase()));
-["co chair", "backroom chair 2"].forEach((l) => ALL_PLAN_LABELS_LOWER.add(l));
+[
+  "co chair",
+  "frontroom chair",
+  "backroom chair",
+  "backroom chair 2",
+  "head editor",
+  "co-editor",
+].forEach((l) => ALL_PLAN_LABELS_LOWER.add(l));
 
 /** Used to exclude dais rows from delegate placards when loading committee room. */
 export function isDaisSeatAllocationCountry(raw: string | null | undefined): boolean {
   const label = String(raw ?? "").trim().toLowerCase();
   if (!label) return false;
   return ALL_PLAN_LABELS_LOWER.has(label);
+}
+
+/** Head Chair / Co-chair (and legacy aliases) — not the full SMT secretariat roster. */
+export function isCommitteeChairSeatLabel(raw: string | null | undefined): boolean {
+  const label = String(raw ?? "").trim().toLowerCase();
+  if (!label) return false;
+  return COMMITTEE_CHAIR_SEAT_LABELS_LOWER.has(label);
 }
 
 export function getDaisSeatLabelsForCommittee(committee: string | null | undefined): readonly string[] {

@@ -23,6 +23,9 @@ import {
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
 import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import type { EuPartyKey } from "@/lib/eu-party-time";
 import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages";
@@ -233,6 +236,15 @@ export default async function ChairAllocationMatrixPage() {
 
   const allocationsConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, activeConf.id);
   const awardScope = await getCommitteeAwardScope(supabase, activeConf.id);
+  try {
+    await ensureDaisSeatAllocations(
+      createAdminClient() ?? supabase,
+      allocationsConferenceId,
+      committeeHintForSmtDaisPlan(activeConf)
+    );
+  } catch {
+    // Keep going if dais seed fails; roster still loads.
+  }
   const awardConferenceId = awardScope.canonicalConferenceId;
   const isChairViewer = profile?.role === "chair";
 
@@ -478,8 +490,16 @@ export default async function ChairAllocationMatrixPage() {
               ) : (
                 rows.map((r) => {
                   const scorable = isScorableAllocationSeat(r.country, r.linked_role, r.user_id);
+                  const isChairSeat = isCommitteeChairSeatLabel(r.country);
                   return (
-                    <tr key={r.id} className="border-t border-brand-navy/5">
+                    <tr
+                      key={r.id}
+                      className={
+                        isChairSeat
+                          ? "border-t border-[#C9DDE9] bg-[#DFF2FC]"
+                          : "border-t border-brand-navy/5"
+                      }
+                    >
                       <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
                       <td className="px-3 py-2 text-base">{r.flag}</td>
                       <td className="px-3 py-2 text-xs text-brand-muted">{r.party_label || tMatrix("dash")}</td>
