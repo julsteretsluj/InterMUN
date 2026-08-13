@@ -454,7 +454,7 @@
       "crisisHidden": "He mea huna mo tenei momo komiti."
     },
     "flowPage": {
-      "description": "Te rere o te komiti - tohua nga hikoinga i a koe e haere ana. Ka tohatohahia puta noa i nga kaute tuuru me nga taputapu; ka whakakorea te tautuhi mo te katoa."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Huri waea",
-        "open-floor": "Whakatuwheratia te papa (tohu me nga nekehanga)",
-        "recognize": "Te mohio ki nga nekehanga",
-        "vote-1": "Pooti mo te motini",
-        "engage": "Whakauru ki te motini kua tohua, neke atu ranei ki te GSL",
-        "open-again": "Whakatuwheratia ano te papa",
-        "recognize-repeat": "Te mohio ki nga nekehanga (whakahokia mehemea e tika ana)",
-        "vote-2": "Pooti mo te motini",
-        "cycle": "Haere tonu te huringa (whakauru mo te nekehanga / GSL -> papa tuwhera)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Whaia",
     "guides": "Kaitohutohu",
     "committeeCodes": "Waehere komiti (heamana / SMT)",
-    "committeeFlowChecklist": "📋 He rarangi arowhai rere a te komiti",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Hononga UN mana",
     "committeeRoom": "Rua komiti",
     "history": "Hītori",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Komiti",
     "items": {
       "prepChecklist": "Rārangi arowhai",
-      "flowChecklist": "Rarangi arowhai rere",
+      "flowChecklist": "Session progress",
       "delegates": "Nga Kai-whakahaere",
       "conferenceSchedule": "Hōtaka",
       "digitalRoom": "Rūma Matihiko",
@@ -2442,8 +2457,8 @@
         "hint": "I mua i te huihuinga"
       },
       "flowChecklist": {
-        "label": "Rarangi arowhai rere",
-        "hint": "I te wa o te huihuinga"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Nga Kai-whakahaere",

@@ -15,6 +15,7 @@ const NOTE_TOPICS = new Set<NoteTopic>([
   "speech pois or pocs",
   "questions",
   "informal conversations",
+  "session progress",
 ]);
 
 export type AdvisorNoteFormState = { error?: string; success?: string };

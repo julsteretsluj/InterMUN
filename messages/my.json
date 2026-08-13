@@ -454,7 +454,7 @@
       "crisisHidden": "ဤကော်မတီအမျိုးအစားအတွက် အကျပ်အတည်းအလိုက် ကြိုတင်ပြင်ဆင်သည့်အရာများကို ဝှက်ထားသည်။"
     },
     "flowPage": {
-      "description": "ပုံမှန်ကော်မတီစီးဆင်းမှု - သင်သွားသည့်အတိုင်း အဆင့်များကို အမှတ်ခြစ်ပါ။ ထိုင်ခုံအကောင့်များနှင့် စက်များပေါ်တွင် မျှဝေထားသည်။ လူတိုင်းအတွက် ရှင်းလင်းချက်များကို ပြန်လည်သတ်မှတ်ပါ။"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Roll call",
-        "open-floor": "ကြမ်းပြင်ကိုဖွင့်ပါ (အချက်များနှင့်လှုပ်ရှားမှုများ)",
-        "recognize": "လှုပ်ရှားမှုများကို အသိအမှတ်ပြုပါ။",
-        "vote-1": "လှုပ်ရှားမှု(များ)ကို မဲပေးပါ",
-        "engage": "ရွေးချယ်ထားသော လှုပ်ရှားမှုတွင် ပါဝင်ပါ သို့မဟုတ် GSL သို့ ရွှေ့ပါ။",
-        "open-again": "ကြမ်းပြင်ကို ပြန်ဖွင့်ပါ။",
-        "recognize-repeat": "လှုပ်ရှားမှုများကို အသိအမှတ်ပြုပါ (လိုအပ်သလို ထပ်လုပ်ပါ)",
-        "vote-2": "လှုပ်ရှားမှု(များ)ကို မဲပေးပါ",
-        "cycle": "စက်ဝိုင်းကို ဆက်သွားပါ (ထိတွေ့လှုပ်ရှားမှု / GSL -> ကြမ်းပြင်ဖွင့်သည်)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "လိုက်နာပါ။",
     "guides": "လမ်းညွှန်များ",
     "committeeCodes": "ကော်မတီကုဒ်များ (ဥက္ကဌ / SMT)",
-    "committeeFlowChecklist": "📋 ကော်မတီ စီးဆင်းမှုစာရင်း",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "တရားဝင် ကုလသမဂ္ဂ လင့်ခ်များ",
     "committeeRoom": "ကော်မတီအခန်း",
     "history": "သမိုင်း",
@@ -1288,7 +1303,7 @@
     "committeeHub": "ကော်မတီ",
     "items": {
       "prepChecklist": "ကြိုတင်ပြင်ဆင်မှုစာရင်း",
-      "flowChecklist": "စီးဆင်းမှုစာရင်း",
+      "flowChecklist": "Session progress",
       "delegates": "ကိုယ်စားလှယ်တွေ",
       "conferenceSchedule": "အချိန်ဇယား",
       "digitalRoom": "ဒစ်ဂျစ်တယ်အခန်း",
@@ -2442,8 +2457,8 @@
         "hint": "ညီလာခံမတိုင်ခင်"
       },
       "flowChecklist": {
-        "label": "စီးဆင်းမှုစာရင်း",
-        "hint": "သတ်မှတ်ချိန်အတွင်း"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "ကိုယ်စားလှယ်တွေ",

@@ -454,7 +454,7 @@
       "crisisHidden": "এই কমিটির ধরনের জন্য সংকট-নির্দিষ্ট প্রস্তুতির আইটেম লুকানো আছে।"
     },
     "flowPage": {
-      "description": "সাধারণ কমিটি প্রবাহ - আপনি যেতে পদক্ষেপ টিক. চেয়ার অ্যাকাউন্ট এবং ডিভাইস জুড়ে ভাগ করা; রিসেট ক্লিয়ার সবার জন্য।"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "রোল কল",
-        "open-floor": "মেঝে খুলুন (বিন্দু এবং গতি)",
-        "recognize": "গতিবিধি চিনুন",
-        "vote-1": "গতি (গুলি) ভোট",
-        "engage": "নির্বাচিত গতিতে নিযুক্ত হন বা GSL এ যান",
-        "open-again": "আবার মেঝে খুলুন",
-        "recognize-repeat": "গতি শনাক্ত করুন (প্রয়োজনে পুনরাবৃত্তি করুন)",
-        "vote-2": "গতি (গুলি) ভোট",
-        "cycle": "চক্র চালিয়ে যান (এনগেজ মোশন / জিএসএল -> ওপেন ফ্লোর)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "অনুসরণ করুন",
     "guides": "গাইড",
     "committeeCodes": "কমিটির কোড (চেয়ার / এসএমটি)",
-    "committeeFlowChecklist": "📋 কমিটির প্রবাহ চেকলিস্ট",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "জাতিসংঘের অফিসিয়াল লিঙ্ক",
     "committeeRoom": "কমিটি রুম",
     "history": "ইতিহাস",
@@ -1288,7 +1303,7 @@
     "committeeHub": "কমিটি",
     "items": {
       "prepChecklist": "প্রস্তুতির চেকলিস্ট",
-      "flowChecklist": "ফ্লো চেকলিস্ট",
+      "flowChecklist": "Session progress",
       "delegates": "প্রতিনিধি",
       "conferenceSchedule": "সময়সূচী",
       "digitalRoom": "ডিজিটাল রুম",
@@ -2442,8 +2457,8 @@
         "hint": "সম্মেলনের আগে"
       },
       "flowChecklist": {
-        "label": "ফ্লো চেকলিস্ট",
-        "hint": "অধিবেশন চলাকালীন"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "প্রতিনিধি",

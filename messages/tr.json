@@ -454,7 +454,7 @@
       "crisisHidden": "Bu komite türü için krize özel hazırlık öğeleri gizlidir."
     },
     "flowPage": {
-      "description": "Normal komite akışı - ilerledikçe adımları işaretleyin. Başkan hesapları ve cihazları arasında paylaşılır; sıfırlama herkes için temizlenir."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Yoklama",
-        "open-floor": "Zemini açın (noktalar ve hareketler)",
-        "recognize": "Hareketleri tanıma",
-        "vote-1": "Öneri(ler)e oy verin",
-        "engage": "Seçilen harekete katılın veya GSL'ye geçin",
-        "open-again": "Zemini tekrar aç",
-        "recognize-repeat": "Hareketleri tanıyın (gerektiği kadar tekrarlayın)",
-        "vote-2": "Öneri(ler)e oy verin",
-        "cycle": "Döngüye devam edin (harekete geçin / GSL -> açık zemin)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Takip etmek",
     "guides": "Kılavuzlar",
     "committeeCodes": "Komite kodları (başkan / SMT)",
-    "committeeFlowChecklist": "📋 Komite akış kontrol listesi",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Resmi BM bağlantıları",
     "committeeRoom": "Komite odası",
     "history": "Tarih",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Komite",
     "items": {
       "prepChecklist": "Hazırlık kontrol listesi",
-      "flowChecklist": "Akış kontrol listesi",
+      "flowChecklist": "Session progress",
       "delegates": "Delegeler",
       "conferenceSchedule": "Takvim",
       "digitalRoom": "Dijital Oda",
@@ -2442,8 +2457,8 @@
         "hint": "Konferanstan önce"
       },
       "flowChecklist": {
-        "label": "Akış kontrol listesi",
-        "hint": "Oturum sırasında"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Delegeler",

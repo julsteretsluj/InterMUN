@@ -4,6 +4,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
@@ -19,6 +20,10 @@ import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 import { useNowMs } from "@/lib/hooks/useNowMs";
+import {
+  SMT_PROGRESS_NOTE_HREF,
+  smtProgressReminderStorageKey,
+} from "@/lib/smt-progress-note-reminder";
 
 type EndMode = "none" | "duration" | "until";
 
@@ -87,6 +92,8 @@ export function ChairCommitteeSessionControl({
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
   const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
+  const [showSmtProgressReminder, setShowSmtProgressReminder] = useState(false);
+  const overdueReminderShownRef = useRef(false);
 
   function isSessionColumnCacheError(message: string | null | undefined): boolean {
     const m = String(message ?? "");
@@ -339,6 +346,12 @@ export function ChairCommitteeSessionControl({
         return;
       }
       dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
+      try {
+        sessionStorage.setItem(smtProgressReminderStorageKey(conferenceId), "1");
+      } catch {
+        /* ignore */
+      }
+      setShowSmtProgressReminder(true);
       router.refresh();
       void refresh();
     });
@@ -388,6 +401,40 @@ export function ChairCommitteeSessionControl({
     clockTick: nowMs,
   });
 
+  const sessionOverdue = Boolean(live && endMs != null && nowMs > 0 && nowMs >= endMs);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(smtProgressReminderStorageKey(conferenceId)) === "1") {
+        setShowSmtProgressReminder(true);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [conferenceId]);
+
+  useEffect(() => {
+    if (sessionOverdue && !overdueReminderShownRef.current) {
+      overdueReminderShownRef.current = true;
+      setShowSmtProgressReminder(true);
+      try {
+        sessionStorage.setItem(smtProgressReminderStorageKey(conferenceId), "1");
+      } catch {
+        /* ignore */
+      }
+    }
+    if (!live) overdueReminderShownRef.current = false;
+  }, [sessionOverdue, live, conferenceId]);
+
+  function dismissSmtProgressReminder() {
+    setShowSmtProgressReminder(false);
+    try {
+      sessionStorage.removeItem(smtProgressReminderStorageKey(conferenceId));
+    } catch {
+      /* ignore */
+    }
+  }
+
   const fieldWrap =
     "rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm text-brand-navy focus-within:border-brand-accent/40";
   const radioLabel = "flex cursor-pointer items-start gap-2 text-sm text-brand-navy";
@@ -404,6 +451,36 @@ export function ChairCommitteeSessionControl({
           </HelpButton>
         </div>
         <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
+
+        {showSmtProgressReminder ? (
+          <div
+            className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-amber-400/50 bg-amber-500/15 px-4 py-3"
+            role="status"
+            aria-live="polite"
+          >
+            <span aria-hidden className="text-lg">
+              📝
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-brand-navy">{t("smtProgressReminderTitle")}</p>
+              <p className="text-sm text-brand-navy/90">{t("smtProgressReminderBody")}</p>
+            </div>
+            <Link
+              href={SMT_PROGRESS_NOTE_HREF}
+              onClick={dismissSmtProgressReminder}
+              className="inline-flex items-center justify-center rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
+            >
+              {t("smtProgressReminderWrite")}
+            </Link>
+            <button
+              type="button"
+              onClick={dismissSmtProgressReminder}
+              className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-semibold text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15"
+            >
+              {t("smtProgressReminderDismiss")}
+            </button>
+          </div>
+        ) : null}
 
         <div className="mt-4 space-y-1.5">
           <label className="block text-xs font-semibold uppercase tracking-wide text-brand-muted" htmlFor="committee-session-title">

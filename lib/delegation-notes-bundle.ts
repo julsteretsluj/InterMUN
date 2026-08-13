@@ -8,7 +8,8 @@ export type NoteTopic =
   | "bloc forming"
   | "speech pois or pocs"
   | "questions"
-  | "informal conversations";
+  | "informal conversations"
+  | "session progress";
 
 type DelegationNoteRow = {
   id: string;

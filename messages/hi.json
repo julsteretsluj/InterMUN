@@ -454,7 +454,7 @@
       "crisisHidden": "इस समिति प्रकार के लिए संकट-विशिष्ट तैयारी आइटम छिपे हुए हैं।"
     },
     "flowPage": {
-      "description": "सामान्य समिति प्रवाह - जैसे-जैसे आप आगे बढ़ें, चरणों पर निशान लगाएँ। चेयर खातों और उपकरणों में साझा किया गया; रीसेट सभी के लिए साफ़ हो जाता है।"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "उपस्थिति",
-        "open-floor": "फर्श खोलें (बिंदु और प्रस्ताव)",
-        "recognize": "गतियों को पहचानें",
-        "vote-1": "प्रस्ताव पर वोट करें",
-        "engage": "चुनी गई गति में संलग्न हों या जीएसएल की ओर बढ़ें",
-        "open-again": "फर्श फिर से खोलो",
-        "recognize-repeat": "गतियों को पहचानें (आवश्यकतानुसार दोहराएँ)",
-        "vote-2": "प्रस्ताव पर वोट करें",
-        "cycle": "चक्र जारी रखें (संलग्न गति / जीएसएल -> खुली मंजिल)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "अनुसरण करना",
     "guides": "गाइड",
     "committeeCodes": "समिति कोड (अध्यक्ष/श्रीमती)",
-    "committeeFlowChecklist": "📋 समिति प्रवाह चेकलिस्ट",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "आधिकारिक संयुक्त राष्ट्र लिंक",
     "committeeRoom": "समिति कक्ष",
     "history": "इतिहास",
@@ -1288,7 +1303,7 @@
     "committeeHub": "समिति",
     "items": {
       "prepChecklist": "तैयारी चेकलिस्ट",
-      "flowChecklist": "प्रवाह जांच सूची",
+      "flowChecklist": "Session progress",
       "delegates": "प्रतिनिधियों",
       "conferenceSchedule": "अनुसूची",
       "digitalRoom": "डिजिटल कक्ष",
@@ -2442,8 +2457,8 @@
         "hint": "सम्मेलन से पहले"
       },
       "flowChecklist": {
-        "label": "प्रवाह जांच सूची",
-        "hint": "सत्र के दौरान"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "प्रतिनिधियों",

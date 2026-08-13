@@ -454,7 +454,7 @@
       "crisisHidden": "Τα στοιχεία προετοιμασίας για συγκεκριμένη κρίση είναι κρυμμένα για αυτόν τον τύπο επιτροπής."
     },
     "flowPage": {
-      "description": "Κανονική ροή επιτροπής - σημειώστε τα βήματα καθώς προχωράτε. Κοινή χρήση σε λογαριασμούς καρέκλας και συσκευές. η επαναφορά διαγράφεται για όλους."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Προσκλητήριο",
-        "open-floor": "Ανοίξτε το πάτωμα (σημεία και κινήσεις)",
-        "recognize": "Αναγνώριση κινήσεων",
-        "vote-1": "Ψηφοφορία επί της πρότασης(ών)",
-        "engage": "Ασχοληθείτε με την επιλεγμένη κίνηση ή μετακινηθείτε στο GSL",
-        "open-again": "Ανοίξτε ξανά το πάτωμα",
-        "recognize-repeat": "Αναγνώριση κινήσεων (επαναλάβετε όπως απαιτείται)",
-        "vote-2": "Ψηφοφορία επί της πρότασης(ών)",
-        "cycle": "Συνέχιση του κύκλου (εμπλοκή κίνησης / GSL -> ανοιχτό πάτωμα)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Ακολουθώ",
     "guides": "Οδηγοί",
     "committeeCodes": "Κωδικοί επιτροπής (πρόεδρος / SMT)",
-    "committeeFlowChecklist": "📋 Λίστα ελέγχου ροής επιτροπής",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Επίσημοι σύνδεσμοι του ΟΗΕ",
     "committeeRoom": "Αίθουσα επιτροπής",
     "history": "Ιστορία",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Επιτροπή",
     "items": {
       "prepChecklist": "Λίστα ελέγχου προετοιμασίας",
-      "flowChecklist": "Λίστα ελέγχου ροής",
+      "flowChecklist": "Session progress",
       "delegates": "Αντιπρόσωποι",
       "conferenceSchedule": "Πρόγραμμα",
       "digitalRoom": "Ψηφιακό δωμάτιο",
@@ -2442,8 +2457,8 @@
         "hint": "Πριν το συνέδριο"
       },
       "flowChecklist": {
-        "label": "Λίστα ελέγχου ροής",
-        "hint": "Κατά τη διάρκεια της συνεδρίας"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Αντιπρόσωποι",

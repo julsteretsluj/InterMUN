@@ -454,7 +454,7 @@
       "crisisHidden": "Voor dit commissietype zijn crisisspecifieke voorbereidingsitems verborgen."
     },
     "flowPage": {
-      "description": "Normale commissiestroom: vink de stappen aan terwijl u bezig bent. Gedeeld tussen stoelaccounts en apparaten; resetten is voor iedereen gewist."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Naamafroeping",
-        "open-floor": "Open de vloer (punten en bewegingen)",
-        "recognize": "Herken bewegingen",
-        "vote-1": "Stemming over motie(s)",
-        "engage": "Neem deel aan de gekozen beweging of ga naar GSL",
-        "open-again": "Open de vloer opnieuw",
-        "recognize-repeat": "Bewegingen herkennen (herhalen indien nodig)",
-        "vote-2": "Stemming over motie(s)",
-        "cycle": "Cyclus voortzetten (beweging inschakelen / GSL -> open vloer)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Volgen",
     "guides": "Gidsen",
     "committeeCodes": "Commissiecodes (voorzitter / SMT)",
-    "committeeFlowChecklist": "📋 Controlelijst voor commissiestroom",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Officiële VN-links",
     "committeeRoom": "Commissie kamer",
     "history": "Geschiedenis",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Commissie",
     "items": {
       "prepChecklist": "Controlelijst voorbereiden",
-      "flowChecklist": "Stroomcontrolelijst",
+      "flowChecklist": "Session progress",
       "delegates": "Afgevaardigden",
       "conferenceSchedule": "Schema",
       "digitalRoom": "Digitale Kamer",
@@ -2442,8 +2457,8 @@
         "hint": "Vóór de conferentie"
       },
       "flowChecklist": {
-        "label": "Stroomcontrolelijst",
-        "hint": "Tijdens sessie"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Afgevaardigden",

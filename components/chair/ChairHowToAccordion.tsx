@@ -43,7 +43,8 @@ export function ChairHowToAccordion() {
             </li>
             <li>
               <strong className="font-medium text-brand-navy dark:text-zinc-100">Session</strong> — roll call, speakers,
-              announcements, timer, and formal motions with chair-recorded votes.
+              announcements, timer, and formal motions with chair-recorded votes. When the session ends, send SMT a
+              short progress note from Chats &amp; notes.
             </li>
             <li>
               <strong className="font-medium text-brand-navy dark:text-zinc-100">Motions &amp; Points</strong> — informal

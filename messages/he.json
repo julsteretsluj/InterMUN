@@ -454,7 +454,7 @@
       "crisisHidden": "פריטי הכנה ספציפיים למשבר מוסתרים עבור סוג ועדה זה."
     },
     "flowPage": {
-      "description": "זרימת ועדות רגילה - סמנו צעדים תוך כדי. משותף בין חשבונות כיסא ומכשירים; האיפוס מתנקה לכולם."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "מפקד",
-        "open-floor": "פתח את הרצפה (נקודות ותנועות)",
-        "recognize": "זיהוי תנועות",
-        "vote-1": "הצבעה על הצעות",
-        "engage": "לעסוק בתנועה שנבחרה או לעבור ל-GSL",
-        "open-again": "פתח שוב את הרצפה",
-        "recognize-repeat": "זיהוי תנועות (חזור לפי הצורך)",
-        "vote-2": "הצבעה על הצעות",
-        "cycle": "המשך מחזור (הפעל תנועה / GSL -> רצפה פתוחה)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "לַעֲקוֹב",
     "guides": "מדריכים",
     "committeeCodes": "קודי ועדה (יו\"ר / SMT)",
-    "committeeFlowChecklist": "📋 רשימת תיוג זרימת ועדה",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "קישורים רשמיים של האו\"ם",
     "committeeRoom": "חדר ועדות",
     "history": "הִיסטוֹרִיָה",
@@ -1288,7 +1303,7 @@
     "committeeHub": "וַעֲדָה",
     "items": {
       "prepChecklist": "רשימת בדיקה הכנה",
-      "flowChecklist": "רשימת תיוג זרימה",
+      "flowChecklist": "Session progress",
       "delegates": "נציגים",
       "conferenceSchedule": "לוּחַ זְמַנִים",
       "digitalRoom": "חדר דיגיטלי",
@@ -2442,8 +2457,8 @@
         "hint": "לפני הכנס"
       },
       "flowChecklist": {
-        "label": "רשימת תיוג זרימה",
-        "hint": "במהלך הפגישה"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "נציגים",

@@ -454,7 +454,7 @@
       "crisisHidden": "對於這種委員會類型，針對特定危機的準備項目是隱藏的。"
     },
     "flowPage": {
-      "description": "正常的委員會流程 - 邊走邊勾選步驟。 在主席帳戶和設備之間共用；重置對每個人來說都是清除的。"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "點名",
-        "open-floor": "打開地板（點和動作）",
-        "recognize": "辨識動作",
-        "vote-1": "對動議進行投票",
-        "engage": "進行選定的動作或前往 GSL",
-        "open-again": "再次打開地板",
-        "recognize-repeat": "辨識動作（根據需要重複）",
-        "vote-2": "對動議進行投票",
-        "cycle": "繼續循環（參與運動/GSL -> 開放地板）"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "跟隨",
     "guides": "指南",
     "committeeCodes": "委員會代碼（主席/SMT）",
-    "committeeFlowChecklist": "📋 委員會流程清單",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "聯合國官方連結",
     "committeeRoom": "委員會室",
     "history": "歷史",
@@ -1288,7 +1303,7 @@
     "committeeHub": "委員會",
     "items": {
       "prepChecklist": "準備清單",
-      "flowChecklist": "流程清單",
+      "flowChecklist": "Session progress",
       "delegates": "代表們",
       "conferenceSchedule": "行程",
       "digitalRoom": "數位室內",
@@ -2442,8 +2457,8 @@
         "hint": "會前"
       },
       "flowChecklist": {
-        "label": "流程清單",
-        "hint": "會議期間"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "代表們",

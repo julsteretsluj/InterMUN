@@ -454,7 +454,7 @@
       "crisisHidden": "对于这种委员会类型，针对特定危机的准备项目是隐藏的。"
     },
     "flowPage": {
-      "description": "正常的委员会流程 - 边走边勾选步骤。 在主席帐户和设备之间共享； 重置对每个人来说都是清除的。"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "点名",
-        "open-floor": "打开地板（点和动作）",
-        "recognize": "识别动作",
-        "vote-1": "对动议进行投票",
-        "engage": "进行选定的动作或转到 GSL",
-        "open-again": "再次打开地板",
-        "recognize-repeat": "识别动作（根据需要重复）",
-        "vote-2": "对动议进行投票",
-        "cycle": "继续循环（参与运动/GSL -> 开放地板）"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "跟随",
     "guides": "指南",
     "committeeCodes": "委员会代码（主席/SMT）",
-    "committeeFlowChecklist": "📋 委员会流程清单",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "联合国官方链接",
     "committeeRoom": "委员会室",
     "history": "历史",
@@ -1288,7 +1303,7 @@
     "committeeHub": "委员会",
     "items": {
       "prepChecklist": "准备清单",
-      "flowChecklist": "流程清单",
+      "flowChecklist": "Session progress",
       "delegates": "代表们",
       "conferenceSchedule": "日程",
       "digitalRoom": "数字室",
@@ -2442,8 +2457,8 @@
         "hint": "会前"
       },
       "flowChecklist": {
-        "label": "流程清单",
-        "hint": "会议期间"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "代表们",

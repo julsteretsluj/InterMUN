@@ -454,7 +454,7 @@
       "crisisHidden": "Crisis-specific prep items are hidden for this committee type."
     },
     "flowPage": {
-      "description": "Normal committee flow - tick steps as you go. Shared across chair accounts and devices; reset clears for everyone."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Roll call",
-        "open-floor": "Open the floor (points & motions)",
-        "recognize": "Recognize motions",
-        "vote-1": "Vote on motion(s)",
-        "engage": "Engage in chosen motion or move to GSL",
-        "open-again": "Open the floor again",
-        "recognize-repeat": "Recognize motions (repeat as needed)",
-        "vote-2": "Vote on motion(s)",
-        "cycle": "Continue cycle (engage motion / GSL -> open floor)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -834,7 +849,7 @@
     "follow": "Follow",
     "guides": "Guides",
     "committeeCodes": "Committee codes (chair / SMT)",
-    "committeeFlowChecklist": "📋 Committee flow checklist",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Official UN links",
     "committeeRoom": "Committee room",
     "history": "History",
@@ -1322,7 +1337,7 @@
     "committeeHub": "Committee",
     "items": {
       "prepChecklist": "Prep checklist",
-      "flowChecklist": "Flow checklist",
+      "flowChecklist": "Session progress",
       "delegates": "Delegates",
       "conferenceSchedule": "Schedule",
       "digitalRoom": "Digital Room",
@@ -1760,7 +1775,8 @@
       "blocForming": "Bloc forming",
       "speechPoisOrPocs": "Speech POIs or POCs",
       "questions": "Questions",
-      "informalConversations": "Informal conversations"
+      "informalConversations": "Informal conversations",
+      "sessionProgress": "Session progress (SMT)"
     },
     "concernLabel": "Concern (auto placeholder)",
     "concernHelpTitle": "Concern flag",
@@ -1786,6 +1802,11 @@
     "delegateTargetsHint": "Targets are limited to assigned allocations only.",
     "chairsLabel": "Chairs",
     "anyChair": "Any chair",
+    "sendToSmt": "Send to SMT",
+    "sendToSmtHelp": "Lands in the secretariat notes inbox (From chairs). Use this for end-of-session progress.",
+    "progressPrefill": "Committee session just ended.\n\nProgress:\n-\n\nAnything SMT should follow up on:\n-",
+    "progressComposeHint": "This note will go to SMT. Summarize what the room covered and what secretariat should know.",
+    "progressSent": "Progress note sent to SMT.",
     "noChairs": "No chair profiles found.",
     "notesListTitle": "Notes list",
     "noteCount": "{count, plural, one {# note} other {# notes}}",
@@ -2699,8 +2720,8 @@
         "hint": "Before conference"
       },
       "flowChecklist": {
-        "label": "Flow checklist",
-        "hint": "During session"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Delegates",
@@ -4017,7 +4038,7 @@
       "sessionNameHint": "Saves automatically and appears in session history.",
       "title": "Committee session",
       "subtitle": "Start or stop the committee session.",
-      "helpStartStop": "Start begins the live committee session timer/status for everyone. Stop ends the session and clears the current time limit.",
+      "helpStartStop": "Start begins the live committee session timer/status for everyone. Stop ends the session and reminds you to send SMT a progress note.",
       "migrationUnavailable": "Session controls are temporarily unavailable until the latest database migrations are applied.",
       "endTimeInFuture": "Choose an end time in the future, or switch to no limit.",
       "sessionStartUnavailable": "Session start timestamp is unavailable until latest migrations are applied.",
@@ -4048,6 +4069,10 @@
       "minimumOneMinute": "(minimum 1 minute)",
       "endAtLocalTime": "End at (local time)",
       "stopSession": "Stop session",
+      "smtProgressReminderTitle": "Update SMT on this session",
+      "smtProgressReminderBody": "Send a short progress note so secretariat knows how committee went and what to follow up on.",
+      "smtProgressReminderWrite": "Write a note",
+      "smtProgressReminderDismiss": "Later",
       "saveLimit": "Save limit",
       "saveLimitHelp": "Applies updated limit settings while the session is already running, without stopping the session.",
       "startSession": "Start session",
@@ -4087,6 +4112,9 @@
       "reminderStartNow": "{title} is scheduled to start now ({start}).",
       "reminderResolutionsDue": "Resolutions are due in {minutes} minutes (deadline {start}).",
       "reminderClosing": "Closing ceremony starts in {minutes} minutes ({start}).",
+      "reminderTitleSessionEnd": "Session ended — update SMT",
+      "reminderSessionEnd": "{title} was scheduled to end at {start}. Send SMT a short progress note.",
+      "writeSmtNote": "Write a note",
       "dismissReminder": "Dismiss",
       "startNow": "Start now",
       "remindersHint": "Reminders show here while this page is open.",

@@ -454,7 +454,7 @@
       "crisisHidden": "Для этого типа комитета скрыты элементы подготовки к кризису."
     },
     "flowPage": {
-      "description": "Обычная работа комитета: отмечайте шаги по ходу дела. Доступно для всех учетных записей и устройств председателя; сброс очищается для всех."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Перекличка",
-        "open-floor": "Откройте пол (точки и движения)",
-        "recognize": "Распознавать движения",
-        "vote-1": "Голосование по предложению(ям)",
-        "engage": "Займитесь выбранным движением или перейдите на GSL.",
-        "open-again": "Откройте пол снова",
-        "recognize-repeat": "Распознавание движений (повторяйте при необходимости)",
-        "vote-2": "Голосование по предложению(ям)",
-        "cycle": "Продолжить цикл (включить движение / GSL -> открытый пол)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Следовать",
     "guides": "Путеводители",
     "committeeCodes": "Коды комитетов (председатель / SMT)",
-    "committeeFlowChecklist": "📋 Контрольный список работы комитета",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Официальные ссылки ООН",
     "committeeRoom": "Комната комитета",
     "history": "История",
@@ -1288,7 +1303,7 @@
     "committeeHub": "комитет",
     "items": {
       "prepChecklist": "Подготовительный контрольный список",
-      "flowChecklist": "Контрольный список потока",
+      "flowChecklist": "Session progress",
       "delegates": "Делегаты",
       "conferenceSchedule": "Расписание",
       "digitalRoom": "Цифровая комната",
@@ -2442,8 +2457,8 @@
         "hint": "Перед конференцией"
       },
       "flowChecklist": {
-        "label": "Контрольный список потока",
-        "hint": "Во время сеанса"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Делегаты",

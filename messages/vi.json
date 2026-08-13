@@ -454,7 +454,7 @@
       "crisisHidden": "Các mục chuẩn bị dành riêng cho khủng hoảng được ẩn đối với loại ủy ban này."
     },
     "flowPage": {
-      "description": "Quy trình ủy ban bình thường - đánh dấu các bước khi bạn thực hiện. Được chia sẻ trên các tài khoản và thiết bị của ghế; thiết lập lại xóa cho tất cả mọi người."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Cuộc gọi điểm danh",
-        "open-floor": "Mở sàn (điểm & chuyển động)",
-        "recognize": "Nhận biết chuyển động",
-        "vote-1": "Bỏ phiếu cho (các) kiến ​​nghị",
-        "engage": "Tham gia vào chuyển động đã chọn hoặc chuyển sang GSL",
-        "open-again": "Mở sàn lần nữa",
-        "recognize-repeat": "Nhận biết chuyển động (lặp lại nếu cần)",
-        "vote-2": "Bỏ phiếu cho (các) kiến ​​nghị",
-        "cycle": "Tiếp tục chu trình (tham gia chuyển động / GSL -> sàn mở)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Theo",
     "guides": "Hướng dẫn",
     "committeeCodes": "Mã ủy ban (chủ tịch / SMT)",
-    "committeeFlowChecklist": "📋 Danh sách kiểm tra quy trình của ủy ban",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Liên kết chính thức của Liên Hợp Quốc",
     "committeeRoom": "Phòng ủy ban",
     "history": "Lịch sử",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Ủy ban",
     "items": {
       "prepChecklist": "Danh sách kiểm tra chuẩn bị",
-      "flowChecklist": "Danh sách kiểm tra quy trình",
+      "flowChecklist": "Session progress",
       "delegates": "Đại biểu",
       "conferenceSchedule": "Lịch trình",
       "digitalRoom": "Phòng kỹ thuật số",
@@ -2442,8 +2457,8 @@
         "hint": "Trước hội nghị"
       },
       "flowChecklist": {
-        "label": "Danh sách kiểm tra quy trình",
-        "hint": "Trong phiên"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Đại biểu",

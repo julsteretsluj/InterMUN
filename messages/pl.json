@@ -454,7 +454,7 @@
       "crisisHidden": "Przedmioty przygotowawcze związane z kryzysem są ukryte dla tego typu komisji."
     },
     "flowPage": {
-      "description": "Normalny przebieg prac komisji – zaznaczaj etapy na bieżąco. Udostępniane na kontach krzeseł i urządzeniach; reset czyści dla wszystkich."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Apel",
-        "open-floor": "Otwórz podłogę (punkty i ruchy)",
-        "recognize": "Rozpoznawanie ruchów",
-        "vote-1": "Głosowanie nad wnioskami",
-        "engage": "Zaangażuj się w wybrany ruch lub przejdź do GSL",
-        "open-again": "Otwórz ponownie podłogę",
-        "recognize-repeat": "Rozpoznawanie ruchów (powtórz w razie potrzeby)",
-        "vote-2": "Głosowanie nad wnioskami",
-        "cycle": "Kontynuuj cykl (włącz ruch / GSL -> otwarta podłoga)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Podążać",
     "guides": "Przewodniki",
     "committeeCodes": "Kody komisji (przewodniczącego / SMT)",
-    "committeeFlowChecklist": "📋 Lista kontrolna przepływu prac komisji",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Oficjalne linki ONZ",
     "committeeRoom": "Pokój komisji",
     "history": "Historia",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Komisja",
     "items": {
       "prepChecklist": "Lista kontrolna przygotowania",
-      "flowChecklist": "Lista kontrolna przepływu",
+      "flowChecklist": "Session progress",
       "delegates": "Delegaci",
       "conferenceSchedule": "Harmonogram",
       "digitalRoom": "Pokój cyfrowy",
@@ -2442,8 +2457,8 @@
         "hint": "Przed konferencją"
       },
       "flowChecklist": {
-        "label": "Lista kontrolna przepływu",
-        "hint": "Podczas sesji"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Delegaci",

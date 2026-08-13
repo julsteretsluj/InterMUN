@@ -454,7 +454,7 @@
       "crisisHidden": "ລາຍການກະກຽມສະເພາະວິກິດຖືກເຊື່ອງໄວ້ສຳລັບປະເພດຄະນະກໍາມະການນີ້."
     },
     "flowPage": {
-      "description": "ການໄຫລຂອງຄະນະກໍາມະການປົກກະຕິ - ຫມາຍຕິກຂັ້ນຕອນຕາມທີ່ທ່ານໄປ. ແບ່ງປັນໃນທົ່ວບັນຊີເກົ້າອີ້ແລະອຸປະກອນ; reset clears ສໍາລັບທຸກຄົນ."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "ໂທມ້ວນ",
-        "open-floor": "ເປີດພື້ນ (ຈຸດ & ການເຄື່ອນໄຫວ)",
-        "recognize": "ຮັບຮູ້ການເຄື່ອນໄຫວ",
-        "vote-1": "ລົງ​ຄະ​ແນນ​ສຽງ​ກ່ຽວ​ກັບ​ການ​ເຄື່ອນ​ໄຫວ",
-        "engage": "ເຂົ້າຮ່ວມການເຄື່ອນໄຫວທີ່ເລືອກ ຫຼືຍ້າຍໄປ GSL",
-        "open-again": "ເປີດຊັ້ນອີກເທື່ອຫນຶ່ງ",
-        "recognize-repeat": "ຮັບຮູ້ການເຄື່ອນໄຫວ (ເຮັດຊ້ຳຕາມຕ້ອງການ)",
-        "vote-2": "ລົງ​ຄະ​ແນນ​ສຽງ​ກ່ຽວ​ກັບ​ການ​ເຄື່ອນ​ໄຫວ",
-        "cycle": "ສືບຕໍ່ຮອບວຽນ (engage motion / GSL -> open floor)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "ປະຕິບັດຕາມ",
     "guides": "ຜູ້ແນະນຳ",
     "committeeCodes": "ລະຫັດຄະນະກໍາມະການ (ປະທານ / SMT)",
-    "committeeFlowChecklist": "📋 ການກວດສອບການໄຫຼເຂົ້າຂອງຄະນະກໍາມະການ",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການຂອງສະຫະປະຊາຊາດ",
     "committeeRoom": "ຫ້ອງ​ຄະ​ນະ​ກໍາ​ມະ​",
     "history": "ປະຫວັດສາດ",
@@ -1288,7 +1303,7 @@
     "committeeHub": "ຄະນະກໍາມະການ",
     "items": {
       "prepChecklist": "ລາຍ​ການ​ກວດ​ສອບ​ການ​ກະ​ກຽມ​",
-      "flowChecklist": "ລາຍການກວດສອບການໄຫຼເຂົ້າ",
+      "flowChecklist": "Session progress",
       "delegates": "ຜູ້ແທນ",
       "conferenceSchedule": "ຕາຕະລາງ",
       "digitalRoom": "ຫ້ອງດິຈິຕອລ",
@@ -2442,8 +2457,8 @@
         "hint": "ກ່ອນກອງປະຊຸມ"
       },
       "flowChecklist": {
-        "label": "ລາຍການກວດສອບການໄຫຼເຂົ້າ",
-        "hint": "ໃນລະຫວ່າງກອງປະຊຸມ"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "ຜູ້ແທນ",

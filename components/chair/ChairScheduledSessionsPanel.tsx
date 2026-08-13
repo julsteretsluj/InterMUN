@@ -18,12 +18,13 @@ import type {
   SeamunPresetSession,
   SeamunScheduleMilestone,
 } from "@/lib/seamun-preset-sessions";
+import { SMT_PROGRESS_NOTE_HREF } from "@/lib/smt-progress-note-reminder";
 
 const DAY_STORAGE_KEY = "intermun-scheduled-sessions-day";
 /** setTimeout ceiling we schedule reminders within (24h). */
 const MAX_REMINDER_HORIZON_MS = 24 * 60 * 60 * 1000;
 
-type ReminderCategory = "session" | "resolutions_due" | "closing_ceremony";
+type ReminderCategory = "session" | "session_end" | "resolutions_due" | "closing_ceremony";
 
 type ActiveReminder = {
   id: string;
@@ -141,6 +142,15 @@ export function ChairScheduledSessionsPanel({
           at: startMs - minutesBefore * 60_000,
         });
       }
+      const endMs = scheduledStartMs(preset.end);
+      scheduled.push({
+        id: `session-end-${preset.end}`,
+        category: "session_end",
+        minutesBefore: 0,
+        title: preset.title,
+        start: preset.end,
+        at: endMs,
+      });
     }
 
     for (const milestone of dayMilestones) {
@@ -211,6 +221,7 @@ export function ChairScheduledSessionsPanel({
   function reminderTitle(reminder: ActiveReminder): string {
     if (reminder.category === "resolutions_due") return t("reminderTitleResolutions");
     if (reminder.category === "closing_ceremony") return t("reminderTitleClosing");
+    if (reminder.category === "session_end") return t("reminderTitleSessionEnd");
     return t("reminderTitle");
   }
 
@@ -220,6 +231,9 @@ export function ChairScheduledSessionsPanel({
     }
     if (reminder.category === "closing_ceremony") {
       return t("reminderClosing", { minutes: reminder.minutesBefore, start: reminder.start });
+    }
+    if (reminder.category === "session_end") {
+      return t("reminderSessionEnd", { title: reminder.title, start: reminder.start });
     }
     if (reminder.minutesBefore === 5) return t("reminder5Min", { title: reminder.title, start: reminder.start });
     if (reminder.minutesBefore === 1) return t("reminder1Min", { title: reminder.title, start: reminder.start });
@@ -265,6 +279,15 @@ export function ChairScheduledSessionsPanel({
                     </span>
                   ) : null}
                 </div>
+              ) : null}
+              {reminder.category === "session_end" ? (
+                <a
+                  href={SMT_PROGRESS_NOTE_HREF}
+                  onClick={() => dismissReminder(reminder.id)}
+                  className="inline-flex items-center justify-center rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
+                >
+                  {t("writeSmtNote")}
+                </a>
               ) : null}
               <button
                 type="button"

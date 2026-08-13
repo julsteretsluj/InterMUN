@@ -27,21 +27,24 @@ import {
 import { DelegationNoteThreadDialog } from "@/components/delegation-notes/DelegationNoteThreadDialog";
 import { DelegationNoteModerationToolbar } from "@/components/delegation-notes/DelegationNoteModerationToolbar";
 import { avatarToneClass, displayInitials } from "@/lib/ui/avatar-chip";
+import { smtProgressReminderStorageKey } from "@/lib/smt-progress-note-reminder";
 
 type NoteTopic =
   | "bloc forming"
   | "speech pois or pocs"
   | "questions"
-  | "informal conversations";
+  | "informal conversations"
+  | "session progress";
 
 const TOPIC_MSG_KEY: Record<
   NoteTopic,
-  "blocForming" | "speechPoisOrPocs" | "questions" | "informalConversations"
+  "blocForming" | "speechPoisOrPocs" | "questions" | "informalConversations" | "sessionProgress"
 > = {
   "bloc forming": "blocForming",
   "speech pois or pocs": "speechPoisOrPocs",
   questions: "questions",
   "informal conversations": "informalConversations",
+  "session progress": "sessionProgress",
 };
 
 type NoteSender =
@@ -119,6 +122,7 @@ export function DelegationNotesView({
   composeTitle,
   onNoteCreated,
   initialOpenThreadId = null,
+  initialProgressToSmt = false,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -148,6 +152,8 @@ export function DelegationNotesView({
   onNoteCreated?: (note: DelegationNote) => void;
   /** Open a thread from deep link (/chats-notes?thread=…). */
   initialOpenThreadId?: string | null;
+  /** Prefill an end-of-session progress note addressed to SMT. */
+  initialProgressToSmt?: boolean;
 }) {
   const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
@@ -155,8 +161,11 @@ export function DelegationNotesView({
   const topicLabel = (topicValue: NoteTopic) => t(`topics.${TOPIC_MSG_KEY[topicValue]}`);
 
   const [notes, setNotes] = useState<DelegationNote[]>(initialNotes);
-  const [topic, setTopic] = useState<NoteTopic>("bloc forming");
-  const [content, setContent] = useState("");
+  const [topic, setTopic] = useState<NoteTopic>(
+    initialProgressToSmt ? "session progress" : "bloc forming"
+  );
+  const [content, setContent] = useState(() => (initialProgressToSmt ? t("progressPrefill") : ""));
+  const [toSmtRecipient, setToSmtRecipient] = useState(initialProgressToSmt);
   const [concernFlag, setConcernFlag] = useState(false);
   const [composeSuccess, setComposeSuccess] = useState<string | null>(null);
 
@@ -258,6 +267,15 @@ export function DelegationNotesView({
   useEffect(() => {
     if (initialOpenThreadId) setOpenThreadId(initialOpenThreadId);
   }, [initialOpenThreadId]);
+
+  useEffect(() => {
+    if (!initialProgressToSmt) return;
+    try {
+      sessionStorage.removeItem(smtProgressReminderStorageKey(conferenceId));
+    } catch {
+      /* ignore */
+    }
+  }, [initialProgressToSmt, conferenceId]);
 
   const smtComposeOk = smtSecretariatCompose || smtVerified;
   // Chairs/admin moderate the room, so the session/procedure gates that restrict
@@ -506,6 +524,7 @@ export function DelegationNotesView({
     chairRecipientIds?: string[];
     anyChairRecipient?: boolean;
     contentText?: string;
+    toSmt?: boolean;
   }) {
     if (sending) return;
     setError(null);
@@ -531,12 +550,13 @@ export function DelegationNotesView({
     );
     const chairRecipientIds = uniqueIds(overrides?.chairRecipientIds ?? selectedChairRecipientIds);
     const useAnyChair = overrides?.anyChairRecipient ?? anyChairRecipient;
+    const sendToSmt = overrides?.toSmt ?? toSmtRecipient;
 
     const trimmed = (overrides?.contentText ?? content).trim();
     if (!trimmed) return setError(t("errors.emptyContent"));
 
     if (allocationRecipientIds.length === 0 && chairRecipientIds.length === 0) {
-      if (!useAnyChair) return setError(t("errors.noRecipients"));
+      if (!useAnyChair && !sendToSmt) return setError(t("errors.noRecipients"));
     }
 
     const senderAllo = myAllocationId;
@@ -597,6 +617,17 @@ export function DelegationNotesView({
             recipient_profile_id: null,
           });
         if (recipErr) throw recipErr;
+      }
+
+      if (sendToSmt && isStaffLike) {
+        const nowIso = new Date().toISOString();
+        const { error: fwdErr } = await supabase
+          .from("delegation_notes")
+          .update({ forwarded_to_smt: true, forwarded_at: nowIso })
+          .eq("id", inserted.id);
+        if (fwdErr) throw fwdErr;
+        inserted.forwarded_to_smt = true;
+        inserted.forwarded_at = nowIso;
       }
 
       const sender: NoteSender = senderAllo
@@ -660,8 +691,11 @@ export function DelegationNotesView({
       setSelectedAllocationRecipientIdsState([]);
       setSelectedChairRecipientIdsState([]);
       setAnyChairRecipientState(false);
+      setToSmtRecipient(false);
       if (newNote.moderation_state === "held") {
         setComposeSuccess(t("moderation.pendingAfterSend"));
+      } else if (sendToSmt) {
+        setComposeSuccess(t("progressSent"));
       } else {
         setComposeSuccess(null);
       }
@@ -981,6 +1015,9 @@ export function DelegationNotesView({
                 <option value="speech pois or pocs">{topicLabel("speech pois or pocs")}</option>
                 <option value="questions">{topicLabel("questions")}</option>
                 <option value="informal conversations">{topicLabel("informal conversations")}</option>
+                {isStaffLike ? (
+                  <option value="session progress">{topicLabel("session progress")}</option>
+                ) : null}
               </select>
             </div>
 
@@ -996,6 +1033,12 @@ export function DelegationNotesView({
               </label>
               <HelpButton title={t("concernHelpTitle")}>{t("concernHelpBody")}</HelpButton>
             </div>
+
+            {isStaffLike && (toSmtRecipient || topic === "session progress") ? (
+              <p className="rounded-lg border border-brand-accent/25 bg-brand-accent/10 px-3 py-2 text-xs text-brand-navy">
+                {t("progressComposeHint")}
+              </p>
+            ) : null}
 
             {composeWillHold ? (
               <p className="rounded-lg border border-amber-300/45 bg-amber-50/70 px-3 py-2 text-xs text-amber-950 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-100">
@@ -1139,6 +1182,26 @@ export function DelegationNotesView({
                 />
                 <span>{t("anyChair")}</span>
               </label>
+
+              {isStaffLike ? (
+                <div className="flex items-center gap-2 px-1 py-1 text-sm text-brand-navy">
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={toSmtRecipient}
+                      className="size-4 rounded border-white/25 accent-brand-accent"
+                      disabled={composeLocked}
+                      onChange={(e) => {
+                        const next = e.target.checked;
+                        setToSmtRecipient(next);
+                        if (next && topic !== "session progress") setTopic("session progress");
+                      }}
+                    />
+                    <span>{t("sendToSmt")}</span>
+                  </label>
+                  <HelpButton title={t("sendToSmt")}>{t("sendToSmtHelp")}</HelpButton>
+                </div>
+              ) : null}
 
               <div className="mun-inset max-h-32 overflow-y-auto">
                 {chairOptions.map((c) => {

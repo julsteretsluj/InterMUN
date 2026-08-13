@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-/** Checklist copy aligned with [SEAMUNs chair dashboard](https://thedashboard.seamuns.site/chair) prep & flow sections. */
+/** Prep checklist plus session-progress stages chairs tick as committee unfolds. */
 
 export type ChairPrepSection = {
   id: string;
@@ -35,15 +35,15 @@ export const CHAIR_PREP_SECTIONS: ChairPrepSection[] = [
   },
 ];
 
-/** Labels match SEAMUNs “Committee flow checklist” checkboxes (thedashboard.seamuns.site/chair → Flow checklist). */
+/** Session-progress stages chairs tick as committee unfolds; each check is shared with SMT. */
 export const CHAIR_FLOW_ITEMS: { id: string }[] = [
-  { id: "roll-call" },
-  { id: "open-floor" },
-  { id: "recognize" },
-  { id: "vote-1" },
-  { id: "engage" },
-  { id: "open-again" },
-  { id: "recognize-repeat" },
-  { id: "vote-2" },
-  { id: "cycle" },
+  { id: "opening-speeches" },
+  { id: "moderated-caucus" },
+  { id: "unmoderated-caucus" },
+  { id: "crisis" },
+  { id: "resolution-writing" },
+  { id: "resolution-debating" },
+  { id: "amendments" },
+  { id: "resolution-voting" },
+  { id: "superlatives" },
 ];

@@ -454,7 +454,7 @@
       "crisisHidden": "Vipengee vya maandalizi mahususi kwa ajili ya mgogoro vimefichwa kwa aina hii ya kamati."
     },
     "flowPage": {
-      "description": "Mtiririko wa kamati ya kawaida - weka alama kwenye hatua unapoendelea. Imeshirikiwa katika akaunti za mwenyekiti na vifaa; weka upya vifutaji kwa kila mtu."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Piga simu",
-        "open-floor": "Fungua sakafu (alama na miondoko)",
-        "recognize": "Tambua miondoko",
-        "vote-1": "Piga kura kuhusu mwendo",
-        "engage": "Shiriki katika mwendo uliochaguliwa au nenda kwa GSL",
-        "open-again": "Fungua sakafu tena",
-        "recognize-repeat": "Tambua mwendo (rudia kama inahitajika)",
-        "vote-2": "Piga kura kuhusu mwendo",
-        "cycle": "Endelea na mzunguko (shughuli za mwendo / GSL -> sakafu wazi)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Fuata",
     "guides": "Waelekezi",
     "committeeCodes": "Nambari za kamati (mwenyekiti / SMT)",
-    "committeeFlowChecklist": "📋 Orodha hakiki ya mtiririko wa kamati",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Viungo rasmi vya UN",
     "committeeRoom": "Chumba cha kamati",
     "history": "Historia",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Kamati",
     "items": {
       "prepChecklist": "Tayarisha orodha",
-      "flowChecklist": "Orodha hakiki ya mtiririko",
+      "flowChecklist": "Session progress",
       "delegates": "Wajumbe",
       "conferenceSchedule": "Ratiba",
       "digitalRoom": "Chumba cha Dijitali",
@@ -2442,8 +2457,8 @@
         "hint": "Kabla ya kongamano"
       },
       "flowChecklist": {
-        "label": "Orodha hakiki ya mtiririko",
-        "hint": "Wakati wa kikao"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Wajumbe",

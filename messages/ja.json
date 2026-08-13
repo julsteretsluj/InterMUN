@@ -454,7 +454,7 @@
       "crisisHidden": "この委員会タイプでは、危機（Crisis）専用の準備項目は非表示です。"
     },
     "flowPage": {
-      "description": "通常委員会の進行フローです。進行に合わせてチェックを入れてください。チェアのアカウント／端末間で共有され、リセットすると全員分がクリアされます。"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "点呼",
-        "open-floor": "フロアを開く（ポイント／モーション）",
-        "recognize": "モーションを認定する",
-        "vote-1": "モーションを採決する",
-        "engage": "選択されたモーションを進行する、またはGSLへ移行する",
-        "open-again": "再びフロアを開く",
-        "recognize-repeat": "モーションを認定する（必要に応じて繰り返し）",
-        "vote-2": "モーションを採決する",
-        "cycle": "進行サイクルを継続する（モーション進行／GSL → フロア再開）"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "フォローする",
     "guides": "ガイド",
     "committeeCodes": "委員会コード（委員長/SMT）",
-    "committeeFlowChecklist": "📋 委員会の流れチェックリスト",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "国連の公式リンク",
     "committeeRoom": "委員会室",
     "history": "歴史",
@@ -1288,7 +1303,7 @@
     "committeeHub": "委員会",
     "items": {
       "prepChecklist": "準備チェックリスト",
-      "flowChecklist": "フローチェックリスト",
+      "flowChecklist": "Session progress",
       "delegates": "代表者",
       "conferenceSchedule": "スケジュール",
       "digitalRoom": "デジタルルーム",
@@ -2442,8 +2457,8 @@
         "hint": "カンファレンス前"
       },
       "flowChecklist": {
-        "label": "フローチェックリスト",
-        "hint": "セッション中"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "代表者",

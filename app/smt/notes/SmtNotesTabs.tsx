@@ -10,12 +10,13 @@ import { dedupeCommitteeOptionsByLabel } from "@/lib/delegation-notes-options";
 
 const TOPIC_MSG_KEY: Record<
   NoteTopic,
-  "blocForming" | "speechPoisOrPocs" | "questions" | "informalConversations"
+  "blocForming" | "speechPoisOrPocs" | "questions" | "informalConversations" | "sessionProgress"
 > = {
   "bloc forming": "blocForming",
   "speech pois or pocs": "speechPoisOrPocs",
   questions: "questions",
   "informal conversations": "informalConversations",
+  "session progress": "sessionProgress",
 };
 
 export type SmtNotesTabId =
@@ -95,7 +96,10 @@ export function SmtNotesTabs({
     return m;
   }, [notes]);
 
-  const topicLabel = (topic: NoteTopic) => tDn(`topics.${TOPIC_MSG_KEY[topic]}`);
+  const topicLabel = (topic: NoteTopic) => {
+    const key = TOPIC_MSG_KEY[topic];
+    return key ? tDn(`topics.${key}`) : topic;
+  };
 
   const canonicalConferenceId = useCallback(
     (conferenceId: string) => conferenceIdToCanonical[conferenceId] ?? conferenceId,

@@ -454,7 +454,7 @@
       "crisisHidden": "Підготовчі елементи, пов’язані з кризою, приховано для цього типу комітету."
     },
     "flowPage": {
-      "description": "Звичайний рух комітету – відзначайте кроки по ходу. Спільний доступ між обліковими записами кафедри та пристроями; reset очищає для всіх."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Перекличка",
-        "open-floor": "Відкрийте підлогу (точки та рухи)",
-        "recognize": "Розпізнавати рухи",
-        "vote-1": "Голосування за пропозиції",
-        "engage": "Виконайте вибраний рух або перейдіть до GSL",
-        "open-again": "Знову відкрийте підлогу",
-        "recognize-repeat": "Розпізнавати рухи (повторити за потреби)",
-        "vote-2": "Голосування за пропозиції",
-        "cycle": "Продовжити цикл (задіяти рух / GSL -> відкрита підлога)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Слідуйте",
     "guides": "Посібники",
     "committeeCodes": "Коди комітетів (голова / SMT)",
-    "committeeFlowChecklist": "📋 Контрольний список руху комітету",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Офіційні посилання ООН",
     "committeeRoom": "Кімната комітету",
     "history": "історія",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Комітет",
     "items": {
       "prepChecklist": "Підготовчий контрольний список",
-      "flowChecklist": "Перелік потоків",
+      "flowChecklist": "Session progress",
       "delegates": "Делегати",
       "conferenceSchedule": "розклад",
       "digitalRoom": "Цифрова кімната",
@@ -2442,8 +2457,8 @@
         "hint": "Перед конференцією"
       },
       "flowChecklist": {
-        "label": "Перелік потоків",
-        "hint": "Під час сесії"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Делегати",

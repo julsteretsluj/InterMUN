@@ -3,8 +3,9 @@
 
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
+import { shareChairSessionProgressAction } from "@/app/actions/chairSessionProgress";
 import {
   CHAIR_FLOW_ITEMS,
   CHAIR_PREP_SECTIONS,
@@ -148,6 +149,9 @@ function PrepSectionBlock({
 
 export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: string }) {
   const t = useTranslations("chairChecklists");
+  const [pending, startTransition] = useTransition();
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
+  const [shareError, setShareError] = useState<string | null>(null);
   const legacyKey = useMemo(() => `intermun.chair.flow.${conferenceId}.v1`, [conferenceId]);
   const loadLegacy = useCallback(
     () => parseLegacyChecklistArray(typeof window !== "undefined" ? localStorage.getItem(legacyKey) : null),
@@ -169,16 +173,34 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
 
   const toggle = useCallback(
     (id: string) => {
+      const wasChecked = checked.has(id);
       const next = new Set(checked);
-      if (next.has(id)) next.delete(id);
+      if (wasChecked) next.delete(id);
       else next.add(id);
       persist(next);
+      if (wasChecked) return;
+      setShareError(null);
+      startTransition(async () => {
+        const res = await shareChairSessionProgressAction({
+          conferenceId,
+          itemId: id,
+          checkedIds: [...next],
+        });
+        if (res.error) {
+          setShareError(res.error);
+          setShareMsg(null);
+          return;
+        }
+        setShareMsg(t("flow.sharedFlash", { item: t(`flow.items.${id}`) }));
+      });
     },
-    [checked, persist]
+    [checked, persist, conferenceId, t]
   );
 
   const reset = useCallback(() => {
     persist(new Set());
+    setShareMsg(null);
+    setShareError(null);
   }, [persist]);
 
   return (
@@ -201,6 +223,23 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
           {t("common.resetChecklist")}
         </button>
       </div>
+
+      <p className="text-sm text-brand-muted dark:text-zinc-400">{t("flow.shareHint")}</p>
+      {pending ? (
+        <p className="text-sm text-brand-muted" role="status">
+          {t("flow.sharing")}
+        </p>
+      ) : null}
+      {shareMsg ? (
+        <p className="text-sm text-brand-navy dark:text-zinc-100" role="status">
+          {shareMsg}
+        </p>
+      ) : null}
+      {shareError ? (
+        <p className="text-sm text-rose-700 dark:text-rose-300" role="alert">
+          {shareError}
+        </p>
+      ) : null}
 
       <div className={surfaceCard}>
         <ul className="space-y-2 text-sm text-brand-navy dark:text-zinc-100">

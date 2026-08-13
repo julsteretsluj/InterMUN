@@ -454,7 +454,7 @@
       "crisisHidden": "ធាតុរៀបចំសម្រាប់វិបត្តិជាក់លាក់ត្រូវបានលាក់សម្រាប់ប្រភេទគណៈកម្មាធិការនេះ។"
     },
     "flowPage": {
-      "description": "លំហូរគណៈកម្មាធិការធម្មតា - គូសជំហាននៅពេលអ្នកទៅ។ ចែករំលែកនៅលើគណនីកៅអី និងឧបករណ៍; កំណត់ការជម្រះឡើងវិញសម្រាប់អ្នករាល់គ្នា។"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "ការហៅទូរស័ព្ទ",
-        "open-floor": "បើកជាន់ (ចំណុចនិងចលនា)",
-        "recognize": "ទទួលស្គាល់ចលនា",
-        "vote-1": "បោះឆ្នោត​លើ​ចលនា",
-        "engage": "ចូលរួមក្នុងចលនាដែលបានជ្រើសរើស ឬផ្លាស់ទីទៅ GSL",
-        "open-again": "បើកជាន់ម្តងទៀត",
-        "recognize-repeat": "ទទួលស្គាល់ចលនា (ធ្វើម្តងទៀតតាមតម្រូវការ)",
-        "vote-2": "បោះឆ្នោត​លើ​ចលនា",
-        "cycle": "បន្តវដ្ត (ចូលរួមចលនា / GSL -> ជាន់បើកចំហ)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "ធ្វើតាម",
     "guides": "មគ្គុទ្ទេសក៍",
     "committeeCodes": "លេខកូដគណៈកម្មាធិការ (ប្រធាន / SMT)",
-    "committeeFlowChecklist": "📋 បញ្ជីត្រួតពិនិត្យលំហូររបស់គណៈកម្មាធិការ",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "តំណភ្ជាប់ផ្លូវការរបស់អង្គការសហប្រជាជាតិ",
     "committeeRoom": "បន្ទប់គណៈកម្មាធិការ",
     "history": "ប្រវត្តិសាស្ត្រ",
@@ -1288,7 +1303,7 @@
     "committeeHub": "គណៈកម្មាធិការ",
     "items": {
       "prepChecklist": "បញ្ជីពិនិត្យត្រៀម",
-      "flowChecklist": "បញ្ជីត្រួតពិនិត្យលំហូរ",
+      "flowChecklist": "Session progress",
       "delegates": "ប្រតិភូ",
       "conferenceSchedule": "កាលវិភាគ",
       "digitalRoom": "បន្ទប់ឌីជីថល",
@@ -2442,8 +2457,8 @@
         "hint": "មុនពេលសន្និសីទ"
       },
       "flowChecklist": {
-        "label": "បញ្ជីត្រួតពិនិត្យលំហូរ",
-        "hint": "ក្នុងអំឡុងពេលសម័យប្រជុំ"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "ប្រតិភូ",

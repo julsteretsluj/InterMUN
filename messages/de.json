@@ -454,7 +454,7 @@
       "crisisHidden": "Krisenspezifische Vorbereitungselemente sind für diesen Ausschusstyp ausgeblendet."
     },
     "flowPage": {
-      "description": "Normaler Ausschussablauf – kreuzen Sie die Schritte an, während Sie fortfahren. Wird über Lehrstuhlkonten und Geräte hinweg geteilt; Zurücksetzen löscht für alle."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Appell",
-        "open-floor": "Öffnen Sie den Boden (Punkte und Bewegungen)",
-        "recognize": "Bewegungen erkennen",
-        "vote-1": "Abstimmung über Anträge",
-        "engage": "Beteiligen Sie sich an der gewählten Aktion oder wechseln Sie zu GSL",
-        "open-again": "Öffnen Sie den Boden erneut",
-        "recognize-repeat": "Bewegungen erkennen (bei Bedarf wiederholen)",
-        "vote-2": "Abstimmung über Anträge",
-        "cycle": "Zyklus fortsetzen (Bewegung einschalten / GSL -> Boden öffnen)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Folgen",
     "guides": "Führerinnen",
     "committeeCodes": "Ausschusskodizes (Vorsitzender / SMT)",
-    "committeeFlowChecklist": "📋 Checkliste für den Ausschussablauf",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Offizielle UN-Links",
     "committeeRoom": "Ausschussraum",
     "history": "Geschichte",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Ausschuss",
     "items": {
       "prepChecklist": "Checkliste für die Vorbereitung",
-      "flowChecklist": "Flow-Checkliste",
+      "flowChecklist": "Session progress",
       "delegates": "Delegierte",
       "conferenceSchedule": "Zeitplan",
       "digitalRoom": "Digitaler Raum",
@@ -2442,8 +2457,8 @@
         "hint": "Vor der Konferenz"
       },
       "flowChecklist": {
-        "label": "Flow-Checkliste",
-        "hint": "Während der Sitzung"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Delegierte",

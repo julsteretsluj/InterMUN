@@ -454,7 +454,7 @@
       "crisisHidden": "موارد آماده سازی خاص بحران برای این نوع کمیته پنهان است."
     },
     "flowPage": {
-      "description": "جریان عادی کمیته - در حین رفتن مراحل را علامت بزنید. به اشتراک گذاشته شده در حساب های صندلی و دستگاه ها؛ تنظیم مجدد برای همه پاک می شود."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "تماس تلفنی",
-        "open-floor": "باز کردن زمین (نقاط و حرکات)",
-        "recognize": "حرکات را بشناسید",
-        "vote-1": "رای دادن به حرکت(ها)",
-        "engage": "در حرکت انتخابی شرکت کنید یا به GSL بروید",
-        "open-again": "دوباره کف را باز کنید",
-        "recognize-repeat": "تشخیص حرکات (در صورت لزوم تکرار کنید)",
-        "vote-2": "رای دادن به حرکت(ها)",
-        "cycle": "ادامه چرخه (درگیر کردن حرکت / GSL -> طبقه باز)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "دنبال کنید",
     "guides": "راهنماها",
     "committeeCodes": "کدهای کمیته (رئیس / SMT)",
-    "committeeFlowChecklist": "📋 چک لیست جریان کمیته",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "پیوندهای رسمی سازمان ملل",
     "committeeRoom": "اتاق کمیته",
     "history": "تاریخچه",
@@ -1288,7 +1303,7 @@
     "committeeHub": "کمیته",
     "items": {
       "prepChecklist": "چک لیست آمادگی",
-      "flowChecklist": "چک لیست جریان",
+      "flowChecklist": "Session progress",
       "delegates": "نمایندگان",
       "conferenceSchedule": "برنامه ریزی کنید",
       "digitalRoom": "اتاق دیجیتال",
@@ -2442,8 +2457,8 @@
         "hint": "قبل از کنفرانس"
       },
       "flowChecklist": {
-        "label": "چک لیست جریان",
-        "hint": "در طول جلسه"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "نمایندگان",

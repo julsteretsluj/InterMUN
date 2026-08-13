@@ -454,7 +454,7 @@
       "crisisHidden": "이 위원회 유형에는 위기별 준비 항목이 숨겨져 있습니다."
     },
     "flowPage": {
-      "description": "일반적인 위원회 흐름 - 진행하면서 단계를 선택하세요. 의장 계정 및 장치 전반에 걸쳐 공유됩니다. 재설정하면 모든 사람이 삭제됩니다."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "점호",
-        "open-floor": "바닥 열기(포인트 및 모션)",
-        "recognize": "동작 인식",
-        "vote-1": "동의에 대한 투표",
-        "engage": "선택한 동작에 참여하거나 GSL로 이동",
-        "open-again": "다시 바닥을 열어보세요",
-        "recognize-repeat": "동작 인식(필요에 따라 반복)",
-        "vote-2": "동의에 대한 투표",
-        "cycle": "계속 사이클(결합 동작 / GSL -> 열린 바닥)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "따르다",
     "guides": "가이드",
     "committeeCodes": "위원회 코드(위원장/SMT)",
-    "committeeFlowChecklist": "📋 위원회 흐름 체크리스트",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "공식 UN 링크",
     "committeeRoom": "위원회실",
     "history": "역사",
@@ -1288,7 +1303,7 @@
     "committeeHub": "위원회",
     "items": {
       "prepChecklist": "준비 체크리스트",
-      "flowChecklist": "흐름 체크리스트",
+      "flowChecklist": "Session progress",
       "delegates": "대표자",
       "conferenceSchedule": "일정",
       "digitalRoom": "디지털실",
@@ -2442,8 +2457,8 @@
         "hint": "회의 전"
       },
       "flowChecklist": {
-        "label": "흐름 체크리스트",
-        "hint": "세션 중"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "대표자",

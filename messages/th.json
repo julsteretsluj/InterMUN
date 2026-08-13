@@ -454,7 +454,7 @@
       "crisisHidden": "รายการเตรียมการเฉพาะสำหรับภาวะวิกฤตจะถูกซ่อนไว้สำหรับคณะกรรมการประเภทนี้"
     },
     "flowPage": {
-      "description": "การไหลของคณะกรรมการปกติ - ทำเครื่องหมายตามขั้นตอนที่คุณดำเนินการ แบ่งปันระหว่างบัญชีเก้าอี้และอุปกรณ์ รีเซ็ตจะเคลียร์สำหรับทุกคน"
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "ม้วนสาย",
-        "open-floor": "เปิดพื้น (จุดและการเคลื่อนไหว)",
-        "recognize": "รับรู้การเคลื่อนไหว",
-        "vote-1": "ลงคะแนนเสียงในญัตติ",
-        "engage": "มีส่วนร่วมในการเคลื่อนไหวที่เลือกหรือย้ายไปที่ GSL",
-        "open-again": "เปิดพื้นอีกครั้ง",
-        "recognize-repeat": "รับรู้การเคลื่อนไหว (ทำซ้ำตามต้องการ)",
-        "vote-2": "ลงคะแนนเสียงในญัตติ",
-        "cycle": "ดำเนินวงจรต่อ (มีส่วนร่วม / GSL -> พื้นเปิด)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "ติดตาม",
     "guides": "ไกด์",
     "committeeCodes": "รหัสคณะกรรมการ (ประธาน / SMT)",
-    "committeeFlowChecklist": "📋 รายการตรวจสอบการไหลของคณะกรรมการ",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "ลิงก์ทางการของสหประชาชาติ",
     "committeeRoom": "ห้องกรรมการ",
     "history": "ประวัติศาสตร์",
@@ -1288,7 +1303,7 @@
     "committeeHub": "คณะกรรมการ",
     "items": {
       "prepChecklist": "รายการตรวจสอบการเตรียมการ",
-      "flowChecklist": "รายการตรวจสอบการไหล",
+      "flowChecklist": "Session progress",
       "delegates": "ผู้ได้รับมอบหมาย",
       "conferenceSchedule": "กำหนดการ",
       "digitalRoom": "ห้องดิจิตอล",
@@ -2442,8 +2457,8 @@
         "hint": "ก่อนการประชุม"
       },
       "flowChecklist": {
-        "label": "รายการตรวจสอบการไหล",
-        "hint": "ระหว่างเซสชั่น"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "ผู้ได้รับมอบหมาย",

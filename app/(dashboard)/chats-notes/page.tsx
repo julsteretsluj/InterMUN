@@ -16,7 +16,12 @@ import { createClient } from "@/lib/supabase/server";
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-type NoteTopic = "bloc forming" | "speech pois or pocs" | "questions" | "informal conversations";
+type NoteTopic =
+  | "bloc forming"
+  | "speech pois or pocs"
+  | "questions"
+  | "informal conversations"
+  | "session progress";
 
 type DelegationNoteRow = {
   id: string;
@@ -83,11 +88,12 @@ function isDaisAllocationCountry(country: string): boolean {
 export default async function ChatsNotesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ forProfile?: string; thread?: string }>;
+  searchParams: Promise<{ forProfile?: string; thread?: string; progress?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
   const tDn = await getTranslations("delegationNotes");
-  const { forProfile, thread: initialThreadId } = await searchParams;
+  const { forProfile, thread: initialThreadId, progress } = await searchParams;
+  const initialProgressToSmt = progress === "1";
   const supabase = await createClient();
   const {
     data: { user },
@@ -378,6 +384,7 @@ export default async function ChatsNotesPage({
         initialSelectedChairRecipientIds={initialSelectedChairRecipientIds}
         advisorByAllocationId={advisorByAllocationId}
         initialOpenThreadId={initialThreadId ?? null}
+        initialProgressToSmt={initialProgressToSmt}
       />
     </MunPageShell>
   );

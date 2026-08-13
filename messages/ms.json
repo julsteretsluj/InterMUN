@@ -454,7 +454,7 @@
       "crisisHidden": "Item persediaan khusus krisis disembunyikan untuk jenis jawatankuasa ini."
     },
     "flowPage": {
-      "description": "Aliran jawatankuasa biasa - tandakan langkah semasa anda pergi. Dikongsi merentas akaun dan peranti kerusi; tetapan semula dikosongkan untuk semua orang."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "Roll call",
-        "open-floor": "Buka lantai (titik & gerakan)",
-        "recognize": "Kenal pasti gerakan",
-        "vote-1": "Undi pada usul",
-        "engage": "Terlibat dalam gerakan yang dipilih atau beralih ke GSL",
-        "open-again": "Buka lantai semula",
-        "recognize-repeat": "Mengenali gerakan (ulang seperti yang diperlukan)",
-        "vote-2": "Undi pada usul",
-        "cycle": "Teruskan kitaran (libatkan gerakan / GSL -> lantai terbuka)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "Ikut",
     "guides": "Pemandu",
     "committeeCodes": "Kod jawatankuasa (kerusi / SMT)",
-    "committeeFlowChecklist": "📋 Senarai semak aliran AJK",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "Pautan rasmi PBB",
     "committeeRoom": "Bilik panitia",
     "history": "Sejarah",
@@ -1288,7 +1303,7 @@
     "committeeHub": "Jawatankuasa",
     "items": {
       "prepChecklist": "Senarai semak persediaan",
-      "flowChecklist": "Senarai semak aliran",
+      "flowChecklist": "Session progress",
       "delegates": "Perwakilan",
       "conferenceSchedule": "Jadual",
       "digitalRoom": "Bilik Digital",
@@ -2442,8 +2457,8 @@
         "hint": "Sebelum persidangan"
       },
       "flowChecklist": {
-        "label": "Senarai semak aliran",
-        "hint": "Semasa sesi"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "Perwakilan",

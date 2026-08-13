@@ -454,7 +454,7 @@
       "crisisHidden": "يتم إخفاء العناصر التحضيرية الخاصة بالأزمات لهذا النوع من اللجان."
     },
     "flowPage": {
-      "description": "التدفق الطبيعي للجنة - حدد الخطوات أثناء تقدمك. تمت مشاركتها عبر حسابات وأجهزة الكرسي؛ إعادة الضبط واضحة للجميع."
+      "description": "Tick each stage as the committee moves through it. Every check sends a progress note to secretariat. Shared across chair accounts; reset clears it for everyone."
     },
     "prep": {
       "sections": {
@@ -502,16 +502,31 @@
       }
     },
     "flow": {
+      "shareHint": "Checking a stage shares that update with SMT (From chairs in Notes).",
+      "sharing": "Sharing with secretariat…",
+      "sharedFlash": "Shared with SMT: {item}",
+      "shareHeadline": "{committee}: {item} is complete.",
+      "shareCount": "Progress {done}/{total}.",
+      "shareRemaining": "Still ahead: {remaining}.",
+      "shareAllComplete": "All session progress stages are complete.",
+      "shareByline": "Logged by {name}.",
+      "shareCommitteeFallback": "Committee",
+      "shareChairFallback": "Chair",
+      "shareMissing": "Missing committee or stage.",
+      "shareUnknownItem": "Unknown progress stage.",
+      "shareSignIn": "Sign in required.",
+      "shareOnlyChairs": "Only chairs can share session progress.",
+      "shareFailed": "Could not share this update with SMT.",
       "items": {
-        "roll-call": "نداء رول",
-        "open-floor": "افتح الكلمة (النقاط والحركات)",
-        "recognize": "التعرف على الحركات",
-        "vote-1": "التصويت على الاقتراح (الاقتراحات)",
-        "engage": "انخرط في الحركة المختارة أو انتقل إلى GSL",
-        "open-again": "افتح الأرضية مرة أخرى",
-        "recognize-repeat": "التعرف على الحركات (كرر حسب الحاجة)",
-        "vote-2": "التصويت على الاقتراح (الاقتراحات)",
-        "cycle": "مواصلة الدورة (حركة المشاركة / GSL -> أرضية مفتوحة)"
+        "opening-speeches": "Opening speeches",
+        "moderated-caucus": "Moderated caucus",
+        "unmoderated-caucus": "Unmoderated caucus",
+        "crisis": "Crisis (optional)",
+        "resolution-writing": "Resolution writing",
+        "resolution-debating": "Resolution debating",
+        "amendments": "Amendments",
+        "resolution-voting": "Resolution voting",
+        "superlatives": "Superlatives"
       }
     }
   },
@@ -800,7 +815,7 @@
     "follow": "يتبع",
     "guides": "أدلة",
     "committeeCodes": "رموز اللجنة (الرئيس/SMT)",
-    "committeeFlowChecklist": "📋 قائمة مراجعة تدفق اللجنة",
+    "committeeFlowChecklist": "Session progress",
     "officialUnLinks": "الروابط الرسمية للأمم المتحدة",
     "committeeRoom": "غرفة اللجنة",
     "history": "تاريخ",
@@ -1288,7 +1303,7 @@
     "committeeHub": "لجنة",
     "items": {
       "prepChecklist": "قائمة المراجعة الإعدادية",
-      "flowChecklist": "قائمة التحقق من التدفق",
+      "flowChecklist": "Session progress",
       "delegates": "المندوبون",
       "conferenceSchedule": "جدول",
       "digitalRoom": "الغرفة الرقمية",
@@ -2442,8 +2457,8 @@
         "hint": "قبل المؤتمر"
       },
       "flowChecklist": {
-        "label": "قائمة التحقق من التدفق",
-        "hint": "خلال الجلسة"
+        "label": "Session progress",
+        "hint": "Stages & SMT updates"
       },
       "delegates": {
         "label": "المندوبون",
