@@ -217,10 +217,11 @@ export default async function SmtAllocationPasswordsPage({
       titleAside={<PageFeatureGuideLink featureId="allocationPasswords" role="smt" />}
     >
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-        Per-allocation <strong>codes</strong> for placards, binders, or handouts. Optional <strong>third gate</strong>
-        : when enabled, each delegate and chair must enter their seat code after committee sign-in. Stored in plain
-        text so you can copy this list—treat it like a seating chart (do not share publicly). The shared committee
-        password for the second gate is managed from the chair dashboard (dais), not here.
+        Per-allocation <strong>codes</strong> for placards, binders, or handouts — read-only here; only a site admin
+        can change them. Optional <strong>third gate</strong>: when enabled, each delegate and chair must enter their
+        seat code after committee sign-in. Stored in plain text so you can copy this list—treat it like a seating
+        chart (do not share publicly). The shared committee password for the second gate is managed from the chair
+        dashboard (dais), not here.
       </p>
 
       <div className="mb-6 max-w-2xl">

@@ -83,7 +83,6 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
   const [rowsByCommittee, setRowsByCommittee] = useState<Record<string, DemoRow[]>>(() =>
     Object.fromEntries(COMMITTEE_FIXTURES.map((c) => [c.id, c.rows.map((r) => ({ ...r }))]))
   );
-  const [draftCodes, setDraftCodes] = useState<Record<string, string>>({});
   const [message, setMessage] = useState<string | null>(null);
 
   const active = useMemo(
@@ -91,25 +90,6 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
     [activeId]
   );
   const rows = rowsByCommittee[active.id] ?? [];
-
-  const updateRow = useCallback((rowId: string, patch: Partial<DemoRow>) => {
-    setRowsByCommittee((prev) => ({
-      ...prev,
-      [active.id]: (prev[active.id] ?? []).map((row) => (row.id === rowId ? { ...row, ...patch } : row)),
-    }));
-  }, [active.id]);
-
-  const saveRow = useCallback(
-    (rowId: string) => {
-      const code = draftCodes[rowId];
-      if (code !== undefined) {
-        updateRow(rowId, { code });
-      }
-      setMessage(t("updatedRow"));
-      window.setTimeout(() => setMessage(null), 2200);
-    },
-    [draftCodes, t, updateRow]
-  );
 
   const removeRow = useCallback(
     (rowId: string) => {
@@ -201,20 +181,9 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
                   <tr key={row.id} className="border-t border-zinc-100">
                     <td className="px-2.5 py-2 font-medium text-zinc-900">{row.country}</td>
                     <td className="px-2.5 py-2">
-                      {linked ? (
-                        <span className="font-mono text-[0.65rem] text-zinc-700">
-                          {row.code.trim() ? row.code : t("dash")}
-                        </span>
-                      ) : (
-                        <input
-                          value={draftCodes[row.id] ?? row.code}
-                          onChange={(e) =>
-                            setDraftCodes((prev) => ({ ...prev, [row.id]: e.target.value }))
-                          }
-                          placeholder={t("optional")}
-                          className="w-full min-w-[5rem] rounded border border-zinc-200 px-2 py-1 font-mono text-[0.65rem] text-zinc-900"
-                        />
-                      )}
+                      <span className="font-mono text-[0.65rem] text-zinc-700">
+                        {row.code.trim() ? row.code : t("dash")}
+                      </span>
                     </td>
                     <td
                       className={cn(
@@ -231,22 +200,13 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
                       {linked ? (
                         <span className="text-[0.65rem] text-zinc-400">{t("dash")}</span>
                       ) : (
-                        <div className="flex flex-wrap gap-1.5">
-                          <button
-                            type="button"
-                            onClick={() => saveRow(row.id)}
-                            className="rounded bg-[var(--accent)] px-2 py-1 text-[0.65rem] font-medium text-white"
-                          >
-                            {t("save")}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => removeRow(row.id)}
-                            className="text-[0.65rem] font-medium text-red-700 hover:underline"
-                          >
-                            {t("remove")}
-                          </button>
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeRow(row.id)}
+                          className="text-[0.65rem] font-medium text-red-700 hover:underline"
+                        >
+                          {t("remove")}
+                        </button>
                       )}
                     </td>
                   </tr>
@@ -287,14 +247,6 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
               required
               placeholder={t("countryPlaceholder")}
               className="w-40 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs text-zinc-900"
-            />
-          </div>
-          <div>
-            <label className="mb-1 block text-[0.65rem] text-zinc-500">{t("placardCodeOptional")}</label>
-            <input
-              name="code"
-              placeholder={t("placardCodePlaceholder")}
-              className="w-28 rounded-lg border border-zinc-200 px-2.5 py-1.5 font-mono text-xs text-zinc-900"
             />
           </div>
           <button

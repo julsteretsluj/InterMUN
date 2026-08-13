@@ -33,6 +33,8 @@ export async function sendTransactionalEmail(args: {
   subject: string;
   text: string;
   replyTo?: string;
+  cc?: string | string[];
+  bcc?: string | string[];
   /** Overrides SMTP_FROM / MATERIALS_EXPORT_FROM for this message. */
   from?: string;
 }): Promise<{ ok: true } | { ok: false; reason: "not_configured" | "send_failed" }> {
@@ -50,6 +52,8 @@ export async function sendTransactionalEmail(args: {
     await transporter.sendMail({
       from: args.from?.trim() || cfg.from,
       to: args.to,
+      cc: args.cc,
+      bcc: args.bcc,
       subject: args.subject,
       text: args.text,
       replyTo: args.replyTo,

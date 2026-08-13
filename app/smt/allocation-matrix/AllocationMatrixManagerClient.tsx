@@ -399,14 +399,6 @@ export function AllocationMatrixManagerClient({
               className="px-3 py-2 rounded-lg border border-brand-navy/15 text-sm w-56"
             />
           </div>
-          <div>
-            <label className="block text-xs text-brand-muted mb-1">{t("placardCodeOptional")}</label>
-            <input
-              name="code"
-              placeholder={t("placardCodePlaceholder")}
-              className="px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm w-36"
-            />
-          </div>
           <button
             type="submit"
             disabled={pending}
@@ -420,7 +412,7 @@ export function AllocationMatrixManagerClient({
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-6 space-y-4">
         <h2 className="font-sans text-lg font-semibold text-brand-navy">{t("importCsv")}</h2>
         <p className="text-sm text-brand-muted max-w-2xl">
-          {t("importHelpPrefix")} <span className="font-mono">country,optional_code</span>. {t("importHelpMiddle")}{" "}
+          {t("importHelpPrefix")} <span className="font-mono">country</span>. {t("importHelpMiddle")}{" "}
           <strong>{t("append")}</strong> {t("appendHelp")} <strong>{t("replaceUnassigned")}</strong>{" "}
           {t("replaceUnassignedHelp")}
         </p>
@@ -477,7 +469,7 @@ export function AllocationMatrixManagerClient({
           {csvPreview && csvPreview.n > 0 ? (
             <p className="text-xs text-brand-muted">
               {t("parsedRowsSample", { count: csvPreview.n })}{" "}
-              {csvPreview.sample.map((s) => s.code ? `${s.country} (${s.code})` : s.country).join(" · ")}
+              {csvPreview.sample.map((s) => s.country).join(" · ")}
             </p>
           ) : null}
           <div className="flex flex-wrap gap-2">

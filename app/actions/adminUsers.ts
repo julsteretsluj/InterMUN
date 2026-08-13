@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { getServerAppOrigin } from "@/lib/app-origin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { inviteUserByEmailWithArchive } from "@/lib/auth-invite";
 
 export type AdminUserFormState = { error?: string; success?: string };
 
@@ -65,7 +66,7 @@ export async function adminInviteSmtAction(
   }
 
   const redirectTo = `${origin}/login`;
-  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, { redirectTo });
+  const { user, error } = await inviteUserByEmailWithArchive(admin, { email, redirectTo });
 
   if (error) {
     const msg = error.message?.toLowerCase() ?? "";
@@ -78,7 +79,7 @@ export async function adminInviteSmtAction(
     return { error: error.message };
   }
 
-  const newId = data?.user?.id;
+  const newId = user?.id;
   if (newId) {
     const { error: profileErr } = await admin.from("profiles").update({ role: "smt" }).eq("id", newId);
     if (profileErr) {

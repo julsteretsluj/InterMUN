@@ -2518,7 +2518,7 @@
     "replaceUnassigned": "Replace unassigned",
     "replaceUnassignedHelp": "removes every open seat (not linked to a delegate), then loads the file while keeping linked delegates safe.",
     "replaceUnassignedOnly": "Replace unassigned only",
-    "csvPlaceholder": "France,DIS-001\\nGermany,DIS-002\\nJapan",
+    "csvPlaceholder": "France\\nGermany\\nJapan",
     "parsedRowsSample": "Parsed {count} row(s). Sample:",
     "runImport": "Run import",
     "generateMissingRandomCodes": "Generate missing random codes"

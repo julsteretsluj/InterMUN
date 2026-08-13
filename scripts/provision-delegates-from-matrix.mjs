@@ -14,6 +14,7 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { inviteUserByEmailWithArchive } from "./lib/invite-with-archive.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -86,11 +87,13 @@ function parseDelegates(xlsxPath) {
 }
 
 async function createDelegateUser(admin, origin, email, name) {
-  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
+  const { user, error } = await inviteUserByEmailWithArchive(admin, {
+    email,
     redirectTo: `${origin}/login`,
+    data: { full_name: name },
   });
   if (!error) {
-    let userId = data?.user?.id ?? null;
+    let userId = user?.id ?? null;
     if (!userId) userId = (await findUserByEmail(admin, email))?.id ?? null;
     return { userId, action: "invite email sent" };
   }

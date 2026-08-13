@@ -7,7 +7,6 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
-import { canonicalPlacardCode } from "@/lib/placard-code";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
@@ -15,7 +14,6 @@ import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committe
 import { getTranslations } from "next-intl/server";
 
 const MAX_COUNTRY_LEN = 500;
-const MAX_CODE_LEN = 120;
 const MAX_IMPORT_ROWS = 2000;
 
 type AuthOk = { supabase: Awaited<ReturnType<typeof createClient>>; ok: true };
@@ -65,16 +63,12 @@ export async function smtAddAllocationRow(formData: FormData) {
   const t = await getTranslations("serverActions.smtAllocations");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const country = String(formData.get("country") ?? "").trim();
-  const code = canonicalPlacardCode(String(formData.get("code") ?? ""));
 
   if (!conferenceId || !country) {
     return { error: t("requiredCommitteeAndCountry") };
   }
   if (country.length > MAX_COUNTRY_LEN) {
     return { error: t("countryTooLong") };
-  }
-  if (code.length > MAX_CODE_LEN) {
-    return { error: t("codeTooLong") };
   }
 
   const auth = await requireSmt(conferenceId);
@@ -90,18 +84,6 @@ export async function smtAddAllocationRow(formData: FormData) {
 
   if (insErr || !insertRow) {
     return { error: insErr?.message ?? t("couldNotCreateAllocation") };
-  }
-
-  if (code) {
-    const { error: codeErr } = await auth.supabase.from("allocation_gate_codes").upsert(
-      {
-        allocation_id: insertRow.id,
-        code,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "allocation_id" }
-    );
-    if (codeErr) return { error: codeErr.message };
   }
 
   const { data: confMeta } = await auth.supabase
@@ -212,9 +194,6 @@ export async function smtImportAllocationsCsv(formData: FormData) {
     if (r.country.length > MAX_COUNTRY_LEN) {
       return { error: t("rowTooLong", { row: r.country.slice(0, 40) }) };
     }
-    if (r.code && r.code.length > MAX_CODE_LEN) {
-      return { error: t("codeTooLongOnRow", { row: r.country }) };
-    }
   }
 
   if (mode === "replace_unassigned") {
@@ -274,20 +253,6 @@ export async function smtImportAllocationsCsv(formData: FormData) {
       return { error: insErr.message, inserted, skippedDup };
     }
     inserted += 1;
-
-    if (r.code) {
-      const { error: codeErr } = await auth.supabase.from("allocation_gate_codes").upsert(
-        {
-          allocation_id: ins.id,
-          code: r.code,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "allocation_id" }
-      );
-      if (codeErr) {
-        return { error: codeErr.message, inserted, skippedDup };
-      }
-    }
   }
 
   const { data: confMeta } = await auth.supabase

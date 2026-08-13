@@ -1,11 +1,10 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-import { canonicalPlacardCode } from "@/lib/placard-code";
-
 /**
- * Minimal CSV parsing for allocation imports: country (required), placard code (optional).
- * Supports "country,code" header row, UTF-8 BOM, and quoted fields.
+ * Minimal CSV parsing for allocation imports: country/position (required).
+ * Extra columns (including legacy placard codes) are ignored. Supports a header
+ * row with "country", UTF-8 BOM, and quoted fields.
  */
 
 function parseCsvLine(line: string): string[] {
@@ -38,7 +37,7 @@ function parseCsvLine(line: string): string[] {
   return out;
 }
 
-export type AllocationCsvRow = { country: string; code: string | null };
+export type AllocationCsvRow = { country: string };
 
 export function parseAllocationCsv(text: string): AllocationCsvRow[] {
   const raw = text.replace(/^\uFEFF/, "");
@@ -55,8 +54,7 @@ export function parseAllocationCsv(text: string): AllocationCsvRow[] {
     const cols = parseCsvLine(line);
     const country = (cols[0] ?? "").trim();
     if (!country) continue;
-    const codeRaw = canonicalPlacardCode(cols[1] ?? "");
-    rows.push({ country, code: codeRaw.length ? codeRaw : null });
+    rows.push({ country });
   }
   return rows;
 }

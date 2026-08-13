@@ -10,6 +10,7 @@ import { getServerAppOrigin } from "@/lib/app-origin";
 import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { inviteUserByEmailWithArchive } from "@/lib/auth-invite";
 import { getTranslations } from "next-intl/server";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
@@ -180,7 +181,7 @@ export async function smtInviteChairAction(
 
   const redirectTo = `${origin}/login`;
 
-  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, { redirectTo });
+  const { user, error } = await inviteUserByEmailWithArchive(admin, { email, redirectTo });
 
   if (error) {
     const msg = error.message?.toLowerCase() ?? "";
@@ -192,7 +193,7 @@ export async function smtInviteChairAction(
     return { error: error.message };
   }
 
-  const newId = data?.user?.id;
+  const newId = user?.id;
   const committeeLabel = String(confRow.committee ?? "").trim() || "—";
   const seatLabel = (match.country ?? "").trim() || countryLabel;
 

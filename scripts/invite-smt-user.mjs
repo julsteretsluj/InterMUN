@@ -11,6 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { inviteUserByEmailWithArchive } from "./lib/invite-with-archive.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -83,14 +84,16 @@ async function main() {
       console.error("Set NEXT_PUBLIC_APP_URL in .env.local for invite redirect");
       process.exit(1);
     }
-    const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
+    const { user, error } = await inviteUserByEmailWithArchive(admin, {
+      email,
       redirectTo: `${origin}/login`,
+      data: { full_name: displayName },
     });
     if (error) {
       console.error("Invite failed:", error.message);
       process.exit(1);
     }
-    userId = data?.user?.id ?? null;
+    userId = user?.id ?? null;
     action = "invite email sent";
     if (!userId) {
       userId = (await findUserByEmail(email))?.id ?? null;

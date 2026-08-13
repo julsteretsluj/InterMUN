@@ -1,0 +1,13 @@
+---
+description: Never send auth invites or account emails unless Jules explicitly asks
+alwaysApply: true
+---
+
+# No invites until asked
+
+Do **not** send emails, auth invites, password resets, or magic links unless the user explicitly says to (e.g. “invite”, “send the invite”, “email them”).
+
+- Do not call `inviteUserByEmail`, `resetPasswordForEmail`, or similar
+- Creating a seat, linking a name, or syncing the allocation matrix is **not** permission to provision a login
+- If an account is needed later, wait for an explicit ask
+- When invites **are** sent, use `inviteUserByEmailWithArchive` so `information@seamun.com` is BCC’d. Do not call `inviteUserByEmail` directly.
