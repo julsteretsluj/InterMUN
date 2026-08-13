@@ -181,7 +181,10 @@ export async function smtInviteChairAction(
 
   const redirectTo = `${origin}/login`;
 
-  const { user, error } = await inviteUserByEmailWithArchive(admin, { email, redirectTo });
+  const { user: invitedUser, error } = await inviteUserByEmailWithArchive(admin, {
+    email,
+    redirectTo,
+  });
 
   if (error) {
     const msg = error.message?.toLowerCase() ?? "";
@@ -193,7 +196,7 @@ export async function smtInviteChairAction(
     return { error: error.message };
   }
 
-  const newId = user?.id;
+  const newId = invitedUser?.id;
   const committeeLabel = String(confRow.committee ?? "").trim() || "—";
   const seatLabel = (match.country ?? "").trim() || countryLabel;
 
