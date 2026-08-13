@@ -379,7 +379,7 @@ export default async function ProfilePage({
         .filter((value): value is string => Boolean(value))
     ),
   ]);
-  const welcomeCountry = myAllocation?.country?.trim() || profile?.country || tp("fallbacks.yourCountry");
+  const welcomeCountry = myAllocation?.country?.trim() || tp("fallbacks.yourCountry");
   const welcomeFlag = flagEmojiForCountryName(welcomeCountry);
 
   const delegateWelcome = isDelegate ? (

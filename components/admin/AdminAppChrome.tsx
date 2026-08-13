@@ -16,6 +16,7 @@ type AdminNavItem = {
   href: string;
   label: string;
   priority: number;
+  emoji?: string;
 };
 
 type AdminAppChromeProps = {
@@ -66,6 +67,13 @@ export function AdminAppChrome({
                   href={item.href}
                   title={item.label}
                   detail={String(item.priority)}
+                  leading={
+                    item.emoji ? (
+                      <span className="text-base leading-none" aria-hidden>
+                        {item.emoji}
+                      </span>
+                    ) : null
+                  }
                   selected={isSelected(item.href)}
                 />
               ))}

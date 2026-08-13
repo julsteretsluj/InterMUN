@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import { createClient } from "@supabase/supabase-js";
+import { timedSupabaseFetch } from "./timed-fetch";
 
 /** Service-role client: server-only. Used for invite-by-email. */
 export function createAdminClient() {
@@ -15,6 +16,7 @@ export function createAdminClient() {
       autoRefreshToken: false,
     },
     global: {
+      fetch: timedSupabaseFetch,
       headers: { "X-Client-Info": "intermun-admin" },
     },
   });

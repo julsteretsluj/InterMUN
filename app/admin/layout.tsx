@@ -42,14 +42,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const adminNav = withSequentialPriority(
     sortNavByHrefPriority(
       [
-        { href: "/admin", label: "Overview" },
-        { href: "/smt", label: "SMT dashboard" },
-        { href: "/admin/newsroom", label: "Newsroom" },
-        { href: "/admin/press-corps", label: "Press Corps" },
-        { href: "/admin/milestones", label: "Milestones" },
-        { href: "/admin/guides", label: "Guides" },
-        { href: "/conference-setup?next=%2Fadmin", label: "New conference" },
-        { href: "/smt/profile", label: "Profile" },
+        { href: "/admin", label: "Overview", emoji: "🎛️" },
+        { href: "/smt", label: "SMT dashboard", emoji: "🛰️" },
+        { href: "/admin/newsroom", label: "Newsroom", emoji: "🗞️" },
+        { href: "/admin/press-corps", label: "Press Corps", emoji: "📸" },
+        { href: "/admin/milestones", label: "Milestones", emoji: "🏅" },
+        { href: "/admin/guides", label: "Guides", emoji: "📘" },
+        { href: "/conference-setup?next=%2Fadmin", label: "New conference", emoji: "🏗️" },
+        { href: "/smt/profile", label: "Profile", emoji: "👤" },
       ],
       ADMIN_NAV_HREF_ORDER
     )

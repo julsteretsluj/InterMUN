@@ -4,7 +4,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabasePublishableKey } from "./publishable-key";
+import { timedSupabaseFetch } from "./timed-fetch";
 import { LOCALE_COOKIE_NAME, resolveLocale } from "@/lib/i18n/locales";
+
+function hasSupabaseSessionCookie(request: NextRequest) {
+  return request.cookies.getAll().some(
+    (c) => /-auth-token(?:\.\d+)?$/.test(c.name) && Boolean(c.value)
+  );
+}
 
 export async function updateSession(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
@@ -28,6 +35,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   const supabase = createServerClient(url, anonKey, {
+    global: { fetch: timedSupabaseFetch },
     cookies: {
       getAll() {
         return request.cookies.getAll();
@@ -41,7 +49,14 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  await supabase.auth.getUser();
+  // Skip the Auth GET /user round-trip when there is nothing to refresh.
+  if (hasSupabaseSessionCookie(request)) {
+    try {
+      await supabase.auth.getUser();
+    } catch {
+      // Timed-out Auth must not 504 the whole site.
+    }
+  }
 
   return response;
 }

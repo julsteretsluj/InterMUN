@@ -3,7 +3,7 @@
 
 /**
  * Role-scoped product how-to sections for Guides.
- * i18n copy lives under `guides.roles.{role}.{sectionKey}.{title|body}`.
+ * i18n copy lives under `guides.roles.{role}.{sectionKey}.{title|body|entries}`.
  * Hash / deep-link ids are `{role}-{sectionKey}` (e.g. `chair-session`).
  */
 
@@ -19,12 +19,20 @@ export const GUIDE_ROLES: readonly GuideRole[] = [
 
 /** Ordered section keys per role (product curriculum layer). */
 export const GUIDES_CURRICULUM: Record<GuideRole, readonly string[]> = {
-  delegate: ["overview", "prep", "floor", "documents", "tools"],
-  chair: ["overview", "session", "prep", "tools"],
-  smt: ["overview", "operations", "people", "tools"],
+  delegate: ["overview", "prep", "floor", "documents", "tools", "glossary"],
+  chair: ["overview", "session", "prep", "tools", "glossary"],
+  smt: ["overview", "operations", "people", "tools", "conference"],
   advisor: ["overview", "delegation", "tools"],
   admin: ["overview", "setup", "tools"],
 };
+
+export function isGlossaryGuideSection(role: GuideRole, sectionKey: string): boolean {
+  return sectionKey === "glossary" && (role === "delegate" || role === "chair");
+}
+
+export function isSmtConferenceGuidesSection(role: GuideRole, sectionKey?: string): boolean {
+  return role === "smt" && sectionKey === "conference";
+}
 
 export function curriculumSectionId(role: GuideRole, sectionKey: string): string {
   return `${role}-${sectionKey}`;

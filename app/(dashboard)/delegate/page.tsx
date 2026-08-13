@@ -37,7 +37,7 @@ export default async function DelegateDashboardPage({
   if (!user) redirect("/login");
   const { data: profile } = await supabase
     .from("profiles")
-    .select("country, role, smt_delegate_allocation_id")
+    .select("role, smt_delegate_allocation_id")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -76,7 +76,7 @@ export default async function DelegateDashboardPage({
   const showChairEmailsTab =
     (eventRow?.event_code ?? "").trim().toUpperCase() === SEAMUN_I_2027_EVENT_CODE;
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tc("committee");
-  const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || tc("yourCountry");
+  const countryLabel = myAllocation?.country?.trim() || tc("yourCountry");
   const countryFlag = flagEmojiForCountryName(countryLabel);
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 

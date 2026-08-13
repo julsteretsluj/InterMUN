@@ -128,7 +128,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/documents", itemKey: "archive", emoji: "📁" },
   { href: "/chair/notes-moderation", itemKey: "notesModeration", emoji: "📝" },
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
-  { href: "/crisis", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
+  { href: "/crisis", itemKey: "crisis", emoji: "⚡", crisisOnly: true },
   { href: "/report", itemKey: "crisisReport", emoji: "🚨", crisisOnly: true },
   { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },
   { href: "/profile", itemKey: "settings", emoji: "👤", activeMatch: "/profile" },

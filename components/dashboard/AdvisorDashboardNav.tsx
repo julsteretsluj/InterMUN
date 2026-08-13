@@ -43,7 +43,7 @@ const ADVISOR_NAV_ITEMS: AdvisorNavItem[] = [
   { href: "/advisor/newsroom", labelKey: "newsroom", emoji: "🗞️" },
   { href: "/advisor/press-corps", labelKey: "pressCorps", emoji: "📸" },
   { href: "/advisor/milestones", labelKey: "milestones", emoji: "🏅" },
-  { href: "/advisor/guides", labelKey: "guides", emoji: "📚" },
+  { href: "/advisor/guides", labelKey: "guides", emoji: "📘" },
   { href: "/advisor/profile", labelKey: "profile", emoji: "👤" },
 ];
 

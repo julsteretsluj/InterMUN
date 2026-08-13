@@ -3247,7 +3247,7 @@
     "googleDocsUrl": "Google Docs URL",
     "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
     "googleDocsHelp": "Google Doc ໃໝ່ເປີດຢູ່ໃນແຖບອື່ນ. ວາງລິ້ງທີ່ສາມາດແບ່ງປັນໄດ້ເພື່ອໃຫ້ຜູ້ແທນສາມາດເປີດເອກະສານໄດ້ທີ່ນີ້ (ເບິ່ງ/ແກ້ໄຂແມ່ນຂຶ້ນກັບການແບ່ງປັນຂອງ Google).",
-    "markdownOptional": "ບັນທຶກ Markdown (ທາງເລືອກຖ້າທ່ານໃຊ້ Google Doc)",
+    "markdownOptional": "Markdown notes (optional if you use a Google Doc). Links: [RoP](https://example.com). Buttons: [Open RoP](https://example.com \"button\").",
     "save": "ບັນທຶກ",
     "cancel": "ຍົກເລີກ",
     "createNewGuide": "ສ້າງຄູ່ມືໃຫມ່",
@@ -3263,7 +3263,9 @@
       "sources": {
         "core": "ຫຼັກ",
         "committee": "ຄະນະກໍາມະການ",
-        "topic": "ຫົວຂໍ້"
+        "topic": "ຫົວຂໍ້",
+        "role": "role",
+        "feature": "feature"
       },
       "terms": {
         "delegation": {
@@ -3490,87 +3492,489 @@
       "delegate": {
         "overview": {
           "title": "Delegate overview",
-          "body": "## Your job in InterMUN\n\nYou represent your assigned country (or seat) in committee. Use the **delegate hub** to jump into floor tools, prep, and documents.\n\n## Start here\n- Confirm your **country**, **committee**, and **topic** on Profile / hub\n- Open **Committee room** when session is live\n- Keep **Stances**, **Speeches**, and **Sources** updated before and during debate\n\n## Tips\n- Prefer in-app notes and documents so chairs and advisors can see shared work\n- Use **Guides** (this page) for product how-tos; conference staff may add RoP docs below"
+          "body": "Who you are in committee, and where to start.",
+          "entries": {
+            "role": {
+              "term": "Delegate",
+              "definition": "You represent an assigned country or seat in committee."
+            },
+            "hub": {
+              "term": "Delegate hub",
+              "definition": "Home base for floor tools, prep, and documents."
+            },
+            "profile": {
+              "term": "Profile",
+              "definition": "Confirm your country, committee, and topic before session."
+            },
+            "committeeRoom": {
+              "term": "Committee room",
+              "definition": "Join when session is live to follow speakers, timers, and the dais."
+            },
+            "guides": {
+              "term": "Guides",
+              "definition": "Product definitions and conference RoP docs added by staff."
+            }
+          }
         },
         "prep": {
           "title": "Prep: stances, speeches, sources",
-          "body": "## Before session\n- **Stances** — map your country’s positions and allies\n- **Speeches** — draft outlines and speaking points\n- **Sources** — keep citations and research links handy\n- **Ideas** / running notes — capture clauses and talking points early\n\n## During debate\n- Update stances as blocs form\n- Reuse speech outlines when you take the floor\n- Attach sources when drafting resolution language"
+          "body": "Research and writing tools before and during debate.",
+          "entries": {
+            "stances": {
+              "term": "Stances",
+              "definition": "Map your country’s positions, allies, and red lines."
+            },
+            "speeches": {
+              "term": "Speeches",
+              "definition": "Draft outlines and speaking points for the floor."
+            },
+            "sources": {
+              "term": "Sources",
+              "definition": "Keep citations and research links ready to attach to drafts."
+            },
+            "ideas": {
+              "term": "Ideas / running notes",
+              "definition": "Capture clauses and talking points as debate unfolds."
+            }
+          }
         },
         "floor": {
           "title": "On the floor: room, voting, motions",
-          "body": "## Live session\n- **Committee room** — follow speakers, timers, and dais announcements\n- Raise placard / request to speak when your chair opens the list\n- Watch for moderated vs unmoderated caucus cues from the dais\n\n## Voting\n- Open **Voting** when a vote is open\n- Vote Yes / No / Abstain as allowed by procedure\n- Follow roll-call prompts if the chair runs a roll-call vote"
+          "body": "Live session tools while the committee is in order.",
+          "entries": {
+            "committeeRoom": {
+              "term": "Committee room",
+              "definition": "Follow speakers, timers, and dais announcements."
+            },
+            "placard": {
+              "term": "Placard",
+              "definition": "Request to speak when the chair opens the list."
+            },
+            "caucus": {
+              "term": "Caucus cues",
+              "definition": "Watch for moderated vs unmoderated caucus from the dais."
+            },
+            "voting": {
+              "term": "Voting",
+              "definition": "Cast Yes, No, or Abstain when a vote is open."
+            },
+            "rollCallVote": {
+              "term": "Roll-call vote",
+              "definition": "Answer in order if the chair runs a roll-call vote."
+            }
+          }
         },
         "documents": {
           "title": "Documents: resolutions & amendments",
-          "body": "## Resolutions\n- Create or join a draft in **Resolutions**\n- Use Google Docs links when your committee embeds them\n- Track sponsors and signatories as required by your RoP\n\n## Amendments\n- File amendments from **Amendments** while drafts are open\n- Coordinate merges during unmods; keep clause numbers clear\n\n## Other papers\n- **Documents** and **Running notes** for working text outside formal drafts"
+          "body": "Working papers and formal drafts.",
+          "entries": {
+            "resolutions": {
+              "term": "Resolutions",
+              "definition": "Create or join a draft; track sponsors and signatories."
+            },
+            "amendments": {
+              "term": "Amendments",
+              "definition": "File changes while a draft is open; keep clause numbers clear."
+            },
+            "documents": {
+              "term": "Documents",
+              "definition": "Working text outside a formal resolution draft."
+            },
+            "runningNotes": {
+              "term": "Running notes",
+              "definition": "Shared working language during debate and unmods."
+            }
+          }
         },
         "tools": {
           "title": "Tools: notes, news, milestones",
-          "body": "## Communication\n- **Chats & notes** — message seats and review chair notes\n- Stay professional; chairs and SMT can moderate\n\n## Media & progress\n- **Newsroom** / **Press Corps** — follow conference media when enabled\n- **Milestones** — track caucus, speech, and resolution checkpoints\n- **History** — review past session outcomes"
+          "body": "Communication, media, and progress trackers.",
+          "entries": {
+            "notes": {
+              "term": "Chats & notes",
+              "definition": "Message seats and review notes from the dais. Stay professional — chairs and SMT can moderate."
+            },
+            "newsroom": {
+              "term": "Newsroom",
+              "definition": "Conference media when the event enables it."
+            },
+            "pressCorps": {
+              "term": "Press Corps",
+              "definition": "Press coverage and stories from the conference press team."
+            },
+            "milestones": {
+              "term": "Milestones",
+              "definition": "Checkpoints for caucus, speeches, and resolutions."
+            },
+            "history": {
+              "term": "History",
+              "definition": "Past session outcomes for this committee."
+            }
+          }
+        },
+        "glossary": {
+          "title": "MUN glossary",
+          "body": "Floor terms matched to your committee and agenda."
         }
       },
       "chair": {
         "overview": {
           "title": "Chair overview",
-          "body": "## Dais workflow\n\nRun floor from **Session** and supporting chair tools. Prep checklists and flow checklists keep debate on track.\n\n## Start here\n- Complete **Prep checklist** before first session\n- Open **Session** for speakers, motions, timer, and announcements\n- Use **Delegates** (allocation matrix) to confirm placards\n\n## Tips\n- Prefer in-app motions and votes so history and milestones stay accurate\n- Publish dais announcements for the digital room"
+          "body": "How the dais runs committee in InterMUN.",
+          "entries": {
+            "role": {
+              "term": "Chair",
+              "definition": "Run the floor from Session and supporting dais tools."
+            },
+            "prepChecklist": {
+              "term": "Prep checklist",
+              "definition": "Complete before first session so the room is ready."
+            },
+            "session": {
+              "term": "Session",
+              "definition": "Speakers, motions, timer, and announcements while committee is open."
+            },
+            "delegates": {
+              "term": "Delegates",
+              "definition": "Allocation matrix to confirm placards and seats."
+            },
+            "announcements": {
+              "term": "Announcements",
+              "definition": "Publish dais notes to the digital room."
+            }
+          }
         },
         "session": {
           "title": "Running session",
-          "body": "## Core controls\n- **Roll call** — mark present / present & voting\n- **Speakers** — manage GSL and caucus lists\n- **Formal motions** — entertain and dispose motions\n- **Timer** — keep speeches and caucuses on time\n- **Announcements** — push markdown notes to the floor\n\n## Voting & documents\n- Open votes from **Voting**; set majority rules carefully\n- Review **Resolutions** / **Amendments** before substantive votes\n- Use **Disciplinary** tools only when needed"
+          "body": "Controls used while debate is live.",
+          "entries": {
+            "rollCall": {
+              "term": "Roll call",
+              "definition": "Mark present or present and voting."
+            },
+            "speakers": {
+              "term": "Speakers",
+              "definition": "Manage GSL and caucus speaking lists."
+            },
+            "motions": {
+              "term": "Formal motions",
+              "definition": "Entertain and dispose motions from the floor."
+            },
+            "timer": {
+              "term": "Timer",
+              "definition": "Keep speeches and caucuses on time."
+            },
+            "announcements": {
+              "term": "Announcements",
+              "definition": "Push notes to delegates in the digital room."
+            },
+            "voting": {
+              "term": "Voting",
+              "definition": "Open votes and set majority rules."
+            },
+            "resolutions": {
+              "term": "Resolutions / amendments",
+              "definition": "Review drafts before substantive votes."
+            },
+            "disciplinary": {
+              "term": "Disciplinary",
+              "definition": "Warnings and restrictions — use only when needed."
+            }
+          }
         },
         "prep": {
           "title": "Prep & committee setup",
-          "body": "## Before opening\n- **Prep checklist** and **Flow checklist**\n- **Schedule** for timed sessions when enabled\n- **Room code** / **Digital room** for remote or hybrid access\n- Confirm agenda topics and crisis tools if your committee uses them\n\n## During the day\n- Keep roll call and speaker lists current\n- Archive materials when a topic closes"
+          "body": "Setup before opening, and upkeep during the day.",
+          "entries": {
+            "prepChecklist": {
+              "term": "Prep checklist",
+              "definition": "Room, rules, and materials before opening."
+            },
+            "flowChecklist": {
+              "term": "Session progress",
+              "definition": "Tick stages as committee unfolds; each check is shared with SMT."
+            },
+            "schedule": {
+              "term": "Schedule",
+              "definition": "Timed sessions when the conference uses them."
+            },
+            "digitalRoom": {
+              "term": "Room code / digital room",
+              "definition": "Access for remote or hybrid delegates."
+            },
+            "crisis": {
+              "term": "Crisis tools",
+              "definition": "Notes and prompts if your committee runs crisis."
+            }
+          }
         },
         "tools": {
           "title": "Chair tools: awards, notes, media",
-          "body": "## Awards & feedback\n- **Score / Awards** — nominations and rubrics\n- Review notes moderation when enabled\n\n## Shared surfaces\n- **Newsroom**, **Press Corps**, **Milestones**, **History**\n- **Official links** for conference resources\n- **Guides** — keep RoP docs updated for your delegates"
+          "body": "Awards, notes, and shared conference surfaces.",
+          "entries": {
+            "awards": {
+              "term": "Score / Awards",
+              "definition": "Nominations and rubrics for recognition."
+            },
+            "notes": {
+              "term": "Notes",
+              "definition": "Review and moderate committee notes when enabled."
+            },
+            "newsroom": {
+              "term": "Newsroom",
+              "definition": "Conference media across committees."
+            },
+            "pressCorps": {
+              "term": "Press Corps",
+              "definition": "Press stories from the event."
+            },
+            "milestones": {
+              "term": "Milestones",
+              "definition": "Committee checkpoint progress."
+            },
+            "history": {
+              "term": "History",
+              "definition": "Recorded session outcomes."
+            },
+            "officialLinks": {
+              "term": "Official links",
+              "definition": "Conference resources for your delegates."
+            },
+            "guides": {
+              "term": "Guides",
+              "definition": "Keep RoP docs updated for the committee."
+            }
+          }
+        },
+        "glossary": {
+          "title": "MUN glossary",
+          "body": "Floor terms matched to your committee and agenda."
         }
       },
       "smt": {
         "overview": {
           "title": "SMT overview",
-          "body": "## Secretariat hub\n\nUse **Live committees** to monitor floors, then jump into operations (rooms, matrix, passwords) and people tools (advisors, notes, awards).\n\n## Start here\n- Confirm the **active event** code in the top bar\n- Open a committee from **Live committees** to preview chair/delegate surfaces\n- Keep allocation and room codes ready before opening ceremonies"
+          "body": "Secretariat hub for the live event.",
+          "entries": {
+            "role": {
+              "term": "Secretariat (SMT)",
+              "definition": "Monitor floors and run event operations, rooms, and people tools."
+            },
+            "liveCommittees": {
+              "term": "Live committees",
+              "definition": "Open a committee to preview chair and delegate surfaces."
+            },
+            "eventCode": {
+              "term": "Active event",
+              "definition": "Confirm the event code in the top bar before opening ceremonies."
+            },
+            "roomCodes": {
+              "term": "Room codes",
+              "definition": "Keep dais and allocation access ready."
+            }
+          }
         },
         "operations": {
           "title": "Operations: rooms, sessions, passwords",
-          "body": "## Event ops\n- **Event & sessions** — conference schedule and settings\n- **Room codes & chairs** — assign dais access\n- **Allocation passwords** — hand out seat logins securely\n\n## Live oversight\n- Watch committee status from the hub\n- Fix binding issues when chairs need a different topic row"
+          "body": "Rooms, sessions, and seat access.",
+          "entries": {
+            "eventSessions": {
+              "term": "Event & sessions",
+              "definition": "Conference schedule and event settings."
+            },
+            "roomCodes": {
+              "term": "Room codes & chairs",
+              "definition": "Assign dais access to committees."
+            },
+            "allocationPasswords": {
+              "term": "Allocation passwords",
+              "definition": "Hand out seat logins securely."
+            },
+            "liveOversight": {
+              "term": "Live oversight",
+              "definition": "Watch committee status and fix binding issues when a chair needs a different topic row."
+            }
+          }
         },
         "people": {
           "title": "People: advisors, notes, awards",
-          "body": "## Advisors & messaging\n- **Advisors** — assign schools and seats\n- **Notes** — secretariat messaging and review\n\n## Awards\n- Review chair nominations and promote/reject from **Awards**\n- Keep rubric guidance consistent across committees"
+          "body": "Advisors, messaging, and awards.",
+          "entries": {
+            "advisors": {
+              "term": "Advisors",
+              "definition": "Assign schools and seats to faculty coaches."
+            },
+            "notes": {
+              "term": "Notes",
+              "definition": "Secretariat inbox, including updates forwarded from chairs."
+            },
+            "awards": {
+              "term": "Awards",
+              "definition": "Review chair nominations and promote or reject them."
+            }
+          }
         },
         "tools": {
           "title": "SMT tools: media & milestones",
-          "body": "## Media\n- **Newsroom** and **Press Corps** across the event\n- **Milestones** — event-wide checkpoint progress\n\n## Guides\n- Publish conference RoP and templates under **Conference guides** so every role can open them"
+          "body": "Event-wide media and published docs.",
+          "entries": {
+            "newsroom": {
+              "term": "Newsroom",
+              "definition": "Media across the event."
+            },
+            "pressCorps": {
+              "term": "Press Corps",
+              "definition": "Press coverage for the conference."
+            },
+            "milestones": {
+              "term": "Milestones",
+              "definition": "Event-wide checkpoint progress."
+            },
+            "conferenceGuides": {
+              "term": "Conference guides",
+              "definition": "Publish RoP, examples, and templates so every role can open them."
+            }
+          }
+        },
+        "conference": {
+          "title": "Conference guides",
+          "body": "RoP, examples, and templates for this event. Delegates and chairs open these from their Guides page."
         }
       },
       "advisor": {
         "overview": {
           "title": "Advisor overview",
-          "body": "## Your role\n\nSupport your school’s delegates without running the floor. Use the **Advisor hub** for assigned seats, notes, and schedule.\n\n## Start here\n- Confirm which delegates you oversee\n- Skim **Milestones** and notes for coaching signals\n- Use **Guides** to point students at product how-tos"
+          "body": "How advisors support a school’s delegates.",
+          "entries": {
+            "role": {
+              "term": "Advisor",
+              "definition": "Support your school’s delegates without running the floor."
+            },
+            "hub": {
+              "term": "Advisor hub",
+              "definition": "Assigned seats, notes, and schedule."
+            },
+            "delegates": {
+              "term": "Assigned delegates",
+              "definition": "The students you oversee for this conference."
+            },
+            "guides": {
+              "term": "Guides",
+              "definition": "Point students at product definitions and conference docs."
+            }
+          }
         },
         "delegation": {
           "title": "Supporting your delegation",
-          "body": "## Coaching loop\n- Message delegates via **Notes**\n- Review schedule so students arrive on time\n- Encourage stances, speeches, and sources before session\n\n## Boundaries\n- Chairs run procedure; advisors coach policy and participation\n- Escalate logistics issues to SMT, not the dais mid-vote"
+          "body": "Coaching without taking over procedure.",
+          "entries": {
+            "notes": {
+              "term": "Notes",
+              "definition": "Message your delegates from the advisor inbox."
+            },
+            "schedule": {
+              "term": "Schedule",
+              "definition": "Help students arrive on time for sessions."
+            },
+            "coaching": {
+              "term": "Prep coaching",
+              "definition": "Encourage stances, speeches, and sources before session."
+            },
+            "boundaries": {
+              "term": "Boundaries",
+              "definition": "Chairs run procedure; advisors coach policy. Escalate logistics to SMT, not the dais mid-vote."
+            }
+          }
         },
         "tools": {
           "title": "Advisor tools: media & progress",
-          "body": "## Stay informed\n- **Newsroom** / **Press Corps** for conference media\n- **Milestones** for participation checkpoints\n- **Profile** for account and accessibility settings"
+          "body": "Stay informed during the conference.",
+          "entries": {
+            "newsroom": {
+              "term": "Newsroom",
+              "definition": "Conference media when enabled."
+            },
+            "pressCorps": {
+              "term": "Press Corps",
+              "definition": "Press stories from the event."
+            },
+            "milestones": {
+              "term": "Milestones",
+              "definition": "Participation checkpoints for your students."
+            },
+            "profile": {
+              "term": "Profile",
+              "definition": "Account and accessibility settings."
+            }
+          }
         }
       },
       "admin": {
         "overview": {
           "title": "Admin overview",
-          "body": "## Platform admin\n\nUse **Admin** for event setup, registrations, and portal checks. Jump to **SMT dashboard** for live operations.\n\n## Start here\n- Confirm the active event\n- Complete setup / checklist tabs on the admin overview\n- Open **Guides** to maintain shared conference documentation"
+          "body": "Platform setup versus live secretariat ops.",
+          "entries": {
+            "role": {
+              "term": "Admin",
+              "definition": "Event setup, registrations, and portal checks. Live ops live on the SMT dashboard."
+            },
+            "event": {
+              "term": "Active event",
+              "definition": "Confirm which conference the admin tools are scoped to."
+            },
+            "setup": {
+              "term": "Setup",
+              "definition": "Checklist tabs on the admin overview for scaffolding the event."
+            },
+            "guides": {
+              "term": "Guides",
+              "definition": "Shared conference documentation for all roles."
+            }
+          }
         },
         "setup": {
           "title": "Setup & conference portal",
-          "body": "## Creating conferences\n- **New conference** starts event scaffolding\n- Verify committees, topics, and registrations\n- Hand SMT room codes and allocation tools once seats exist\n\n## Safety\n- First admin is assigned in the database\n- Never share the service role key"
+          "body": "Creating the conference before SMT takes over.",
+          "entries": {
+            "newConference": {
+              "term": "New conference",
+              "definition": "Starts event scaffolding in Admin."
+            },
+            "committees": {
+              "term": "Committees & registrations",
+              "definition": "Verify committees, topics, and who is registered."
+            },
+            "handoff": {
+              "term": "Handoff to SMT",
+              "definition": "Give secretariat room codes and allocation tools once seats exist."
+            },
+            "safety": {
+              "term": "Safety",
+              "definition": "The first admin is assigned in the database. Never share the service role key."
+            }
+          }
         },
         "tools": {
           "title": "Admin tools: media & SMT",
-          "body": "## Shared tools\n- **Newsroom**, **Press Corps**, **Milestones** under admin chrome\n- **SMT dashboard** for live committee oversight\n- Keep **Conference guides** current for all roles"
+          "body": "Shared media and a jump to live ops.",
+          "entries": {
+            "newsroom": {
+              "term": "Newsroom",
+              "definition": "Admin chrome for conference media."
+            },
+            "pressCorps": {
+              "term": "Press Corps",
+              "definition": "Press coverage tools."
+            },
+            "milestones": {
+              "term": "Milestones",
+              "definition": "Checkpoint progress under admin."
+            },
+            "smtDashboard": {
+              "term": "SMT dashboard",
+              "definition": "Live committee oversight once the event is running."
+            }
+          }
         }
       }
     }

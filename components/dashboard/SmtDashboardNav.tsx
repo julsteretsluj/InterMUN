@@ -53,7 +53,7 @@ const SMT_NAV_ITEMS: SmtNavItem[] = [
   { href: "/smt/newsroom", navKey: "newsroom", emoji: "🗞️" },
   { href: "/smt/press-corps", navKey: "pressCorps", emoji: "📸" },
   { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },
-  { href: "/smt/guides", navKey: "guides", emoji: "📚" },
+  { href: "/smt/guides", navKey: "guides", emoji: "📘" },
   { href: "/smt/notes", navKey: "notes", emoji: "💬" },
   { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
   { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "🧩" },

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Armchair, Building2, ChevronLeft, ChevronRight, GraduationCap, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { formatAuthError } from "@/lib/auth-error-message";
 import { AuthBrandWordmark } from "@/components/auth/AuthBrandWordmark";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
@@ -27,7 +28,9 @@ const ROLES: {
   { id: "advisor", Icon: GraduationCap },
 ];
 
-const RING_VIEW = { cx: 0, cy: 0, rOuter: 47, rInner: 30 } as const;
+const RING_VIEW = { cx: 0, cy: 0, rOuter: 48, rInner: 32 } as const;
+/** Inner disc sits just inside the SVG hole so the ring stroke never covers it. */
+const RING_HOLE_INSET = `${((50 - RING_VIEW.rInner) / 100) * 100 + 1.5}%`;
 
 /**
  * The ring is a full-spectrum rainbow (hue = angle, 0–360° clockwise from top).
@@ -205,10 +208,21 @@ export function AuthEntryWizard({
       );
       return;
     }
-    const { data: authData, error: signErr } = await supabase.auth.signInWithPassword({ email, password });
+    let authData;
+    let signErr;
+    try {
+      ({ data: authData, error: signErr } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      }));
+    } catch (err) {
+      setLoading(false);
+      setError(formatAuthError(err, t("authConnectError")));
+      return;
+    }
     if (signErr) {
       setLoading(false);
-      setError(signErr.message);
+      setError(formatAuthError(signErr, t("authConnectError")));
       return;
     }
     const uid = authData.user?.id;
@@ -241,14 +255,22 @@ export function AuthEntryWizard({
       );
       return;
     }
-    const { data, error: signErr } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { name } },
-    });
+    let data;
+    let signErr;
+    try {
+      ({ data, error: signErr } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { name } },
+      }));
+    } catch (err) {
+      setLoading(false);
+      setError(formatAuthError(err, t("authConnectError")));
+      return;
+    }
     if (signErr) {
       setLoading(false);
-      setError(signErr.message);
+      setError(formatAuthError(signErr, t("authConnectError")));
       return;
     }
     const uid = data.user?.id;
@@ -397,8 +419,8 @@ export function AuthEntryWizard({
               </button>
             </div>
 
-            <div className="flex min-w-0 flex-col items-center justify-center gap-4">
-              <div className="flex w-full min-w-0 items-center justify-center gap-4 sm:gap-5">
+            <div className="flex min-w-0 flex-col items-center justify-center gap-3">
+              <div className="flex w-full min-w-0 items-center justify-center gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => cycle(-1)}
@@ -426,11 +448,11 @@ export function AuthEntryWizard({
                       cycle(-1);
                     }
                   }}
-                  className="relative aspect-square w-[min(17.5rem,calc(100%-8.5rem))] shrink-0 touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
+                  className="relative aspect-square w-[min(18rem,calc(100%-6.75rem))] shrink-0 touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
                 >
                   <svg
                     viewBox="-50 -50 100 100"
-                    className="absolute inset-0 cursor-grab rounded-full active:cursor-grabbing shadow-[inset_0_2px_14px_rgba(0,0,0,0.16)] dark:shadow-[inset_0_2px_16px_rgba(0,0,0,0.35)]"
+                    className="absolute inset-0 z-0 cursor-grab rounded-full active:cursor-grabbing shadow-[inset_0_2px_14px_rgba(0,0,0,0.16)] dark:shadow-[inset_0_2px_16px_rgba(0,0,0,0.35)]"
                     aria-hidden
                     onPointerDown={onRingPointerDown}
                     onPointerMove={onRingPointerMove}
@@ -504,21 +526,20 @@ export function AuthEntryWizard({
                       );
                     })()}
                   </svg>
-                  {/* Inner disc matches SVG hole (rInner 30 / viewBox 50 → 20% inset). */}
-                  <div className="pointer-events-none absolute inset-[22%] overflow-hidden rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
-
-                  <div className="pointer-events-none absolute inset-[22%] flex flex-col items-center justify-center overflow-hidden rounded-full px-3 py-2 text-center">
+                  <div
+                    className="pointer-events-none absolute z-[1] overflow-hidden rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner"
+                    style={{ inset: RING_HOLE_INSET }}
+                  />
+                  <div
+                    className="pointer-events-none absolute z-[1] flex items-center justify-center"
+                    style={{ inset: RING_HOLE_INSET }}
+                  >
                     <RoleIcon
-                      className="mb-1 size-8 md:size-9"
+                      className="size-[42%] max-h-14 max-w-14"
                       strokeWidth={1.25}
                       style={{ color: roleAccent(roleIndex) }}
+                      aria-hidden
                     />
-                    <p className="font-sans text-lg font-bold leading-tight tracking-tight text-brand-navy md:text-xl">
-                      {selectedRoleLabel}
-                    </p>
-                    <p className="mt-0.5 max-w-[9.5rem] text-[0.7rem] leading-snug italic text-brand-navy/85 md:text-xs">
-                      {selectedRoleHint}
-                    </p>
                   </div>
                 </div>
 
@@ -530,6 +551,14 @@ export function AuthEntryWizard({
                 >
                   <ChevronRight className="size-6" />
                 </button>
+              </div>
+              <div className="min-h-[3.25rem] px-2 text-center">
+                <p className="font-sans text-xl font-bold leading-tight tracking-tight text-brand-navy">
+                  {selectedRoleLabel}
+                </p>
+                <p className="mt-0.5 text-sm leading-snug italic text-brand-navy/80">
+                  {selectedRoleHint}
+                </p>
               </div>
               <p className="text-xs text-brand-muted text-center max-w-xs">
                 {t("dragHint")}

@@ -5,36 +5,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState, type ComponentType } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  Award,
-  BookOpen,
-  Calendar,
-  CheckSquare,
-  DoorOpen,
-  FileText,
-  Flag,
-  GraduationCap,
-  History,
-  Home,
-  Image,
-  AlertTriangle,
-  KeyRound,
-  LayoutGrid,
-  Lightbulb,
-  Link2,
-  Mic,
-  Newspaper,
-  Camera,
-  ClipboardList,
-  Pencil,
-  Compass,
-  Shield,
-  User,
-  Vote,
-  type LucideProps,
-} from "lucide-react";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
 import {
@@ -54,39 +26,38 @@ import {
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
 
-type NavIcon = ComponentType<LucideProps>;
-
-const NAV_ICONS: Record<string, NavIcon> = {
-  "/delegate": Home,
-  "/profile": User,
-  "/chats-notes": ClipboardList,
-  "/committee-room": LayoutGrid,
-  "/history": History,
-  "/newsroom": Newspaper,
-  "/press-corps": Camera,
-  "/milestones": Award,
-  "/voting": Vote,
-  "/guides": BookOpen,
-  "/documents": FileText,
-  "/stances": Compass,
-  "/ideas": Lightbulb,
-  "/sources": Link2,
-  "/resolutions": CheckSquare,
-  "/amendments": Pencil,
-  "/speeches": Mic,
-  "/running-notes": ClipboardList,
-  "/report": Flag,
-  "/crisis": AlertTriangle,
-  "/crisis-slides": Image,
-  "/advisor": GraduationCap,
-  "/advisor/notes": ClipboardList,
-  "/advisor/schedule": Calendar,
-  "/delegate/schedule": Calendar,
-  "/chair/room-code": DoorOpen,
-  "/chair/session": Shield,
-  "/smt/allocation-passwords": KeyRound,
-  "/chair/allocation-matrix": LayoutGrid,
-  "/chair/awards": Award,
+/** One emoji per tab; none repeat, and none match folder emojis 🏠 🧠 📖. */
+const NAV_EMOJIS: Record<string, string> = {
+  "/delegate": "🌐",
+  "/profile": "👤",
+  "/chats-notes": "💬",
+  "/committee-room": "🏛️",
+  "/history": "🕘",
+  "/newsroom": "🗞️",
+  "/press-corps": "📸",
+  "/milestones": "🏅",
+  "/voting": "🗳️",
+  "/guides": "📘",
+  "/documents": "📁",
+  "/stances": "🧭",
+  "/ideas": "💡",
+  "/sources": "📎",
+  "/resolutions": "📄",
+  "/amendments": "✏️",
+  "/speeches": "🎤",
+  "/running-notes": "🗒️",
+  "/report": "🚩",
+  "/crisis": "⚡",
+  "/crisis-slides": "🖼️",
+  "/advisor": "🎓",
+  "/advisor/notes": "📨",
+  "/advisor/schedule": "🗓️",
+  "/delegate/schedule": "📅",
+  "/chair/room-code": "🚪",
+  "/chair/session": "🛡️",
+  "/smt/allocation-passwords": "🔐",
+  "/chair/allocation-matrix": "🧩",
+  "/chair/awards": "🏆",
 };
 
 const BASE_TABS = [
@@ -123,8 +94,8 @@ function scheduleHrefForRole(role: UserRole | null): string | null {
   return "/delegate/schedule";
 }
 
-function iconForHref(href: string): NavIcon {
-  return NAV_ICONS[href] ?? FileText;
+function emojiForHref(href: string): string {
+  return NAV_EMOJIS[href] ?? "▫️";
 }
 
 function useNavTabs(
@@ -196,7 +167,7 @@ function AspireSidebarLink({
   isActive: boolean;
   priority: number;
 }) {
-  const Icon = iconForHref(tab.href);
+  const emoji = emojiForHref(tab.href);
   return (
     <Link
       href={tab.href}
@@ -208,8 +179,8 @@ function AspireSidebarLink({
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
-      <span className="inline-flex size-7 shrink-0 items-center justify-center text-brand-muted" aria-hidden>
-        <Icon className={cn("size-[1.125rem] stroke-[1.5]", isActive && "text-[var(--accent)]")} />
+      <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
+        {emoji}
       </span>
       <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
@@ -227,7 +198,7 @@ function DockLink({
   isActive: boolean;
   priority: number;
 }) {
-  const Icon = iconForHref(tab.href);
+  const emoji = emojiForHref(tab.href);
   return (
     <Link
       href={tab.href}
@@ -241,11 +212,12 @@ function DockLink({
       <NavPriorityBadge priority={priority} />
       <span
         className={cn(
-          "flex h-8 w-8 items-center justify-center text-brand-muted transition-apple",
+          "flex h-8 w-8 items-center justify-center text-base leading-none transition-apple",
           isActive && "text-[var(--accent)]"
         )}
+        aria-hidden
       >
-        <Icon className="size-[1.125rem] stroke-[1.5]" aria-hidden />
+        {emoji}
       </span>
       <span
         className={cn(
