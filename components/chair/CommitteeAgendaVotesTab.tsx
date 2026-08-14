@@ -12,7 +12,7 @@ import {
 } from "@/lib/i18n/committee-topic-labels";
 import type { VoteItem } from "@/types/database";
 import { VotingPanel } from "@/components/voting/VotingPanel";
-import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
+import { ensureAgendaFloorVoteItem, isAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 
 type Topic = { id: string; label: string };
 
@@ -53,8 +53,7 @@ export function CommitteeAgendaVotesTab({
   /** True when this topic has at least one vote_item row (motions may have zero ballots). */
   const [topicHasMotions, setTopicHasMotions] = useState(false);
 
-  const [votingPanelTopicId, setVotingPanelTopicId] = useState<string | null>(null);
-  const [modalVoteItems, setModalVoteItems] = useState<VoteItem[]>([]);
+  const [agendaVoteItems, setAgendaVoteItems] = useState<VoteItem[]>([]);
   const [myRole, setMyRole] = useState("delegate");
 
   useEffect(() => {
@@ -73,41 +72,28 @@ export function CommitteeAgendaVotesTab({
   }, [supabase]);
 
   useEffect(() => {
-    if (!votingPanelTopicId) {
-      setModalVoteItems([]);
-      return;
-    }
     let cancelled = false;
     void (async () => {
-      await ensureAgendaFloorVoteItem(supabase, votingPanelTopicId);
+      await ensureAgendaFloorVoteItem(supabase, selectedId);
       if (cancelled) return;
       const { data, error } = await supabase
         .from("vote_items")
         .select("*")
-        .eq("conference_id", votingPanelTopicId)
+        .eq("conference_id", selectedId)
         .order("closed_at", { ascending: true, nullsFirst: true })
         .order("created_at", { ascending: false })
         .limit(50);
       if (cancelled) return;
       if (error) {
-        setModalVoteItems([]);
+        setAgendaVoteItems([]);
         return;
       }
-      setModalVoteItems((data as VoteItem[]) ?? []);
+      setAgendaVoteItems(((data as VoteItem[]) ?? []).filter((row) => isAgendaFloorVoteItem(row)));
     })();
     return () => {
       cancelled = true;
     };
-  }, [votingPanelTopicId, supabase]);
-
-  useEffect(() => {
-    if (!votingPanelTopicId) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setVotingPanelTopicId(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [votingPanelTopicId]);
+  }, [selectedId, supabase]);
 
   const load = useCallback(
     async (topicId: string) => {
@@ -120,13 +106,13 @@ export function CommitteeAgendaVotesTab({
           .eq("conference_id", topicId)
           .order("created_at", { ascending: false });
         if (e1) throw e1;
-        const topicVoteItems = (items ?? []) as Array<{
+        const topicVoteItems = ((items ?? []) as Array<{
           id: string;
           title: string | null;
           created_at: string;
           procedure_code?: string | null;
           vote_type?: string | null;
-        }>;
+        }>).filter((row) => isAgendaFloorVoteItem(row));
         const ids = topicVoteItems.map((r) => r.id);
         if (ids.length === 0) {
           setMotions([]);
@@ -210,9 +196,6 @@ export function CommitteeAgendaVotesTab({
 
   const totalBallots = grand.yes + grand.no + grand.abstain + grand.other;
 
-  const votingPanelTopicLabel =
-    topics.find((x) => x.id === votingPanelTopicId)?.label ?? "";
-
   const committeeTrim = committeeLabelRaw?.trim() ?? "";
 
   function handleAgendaTopicPassed(topicConferenceId: string) {
@@ -248,13 +231,8 @@ export function CommitteeAgendaVotesTab({
               >
                 <button
                   type="button"
-                  onClick={() => {
-                    setSelectedId(topic.id);
-                    setVotingPanelTopicId(topic.id);
-                  }}
+                  onClick={() => setSelectedId(topic.id)}
                   className="w-full min-w-0 text-left"
-                  aria-haspopup="dialog"
-                  aria-expanded={votingPanelTopicId === topic.id}
                 >
                   <span className="text-sm font-medium text-brand-navy break-words">
                     {translateAgendaTopicLabel(tTopics, topic.label, locale)}
@@ -265,7 +243,9 @@ export function CommitteeAgendaVotesTab({
                         {t("agendaLiveBadge")}
                       </span>
                     ) : null}
-                    <span className="text-[0.65rem] text-brand-muted">{t("agendaOpenVotingPanel")}</span>
+                    {isSelected ? (
+                      <span className="text-[0.65rem] text-brand-muted">{t("agendaViewingVotes")}</span>
+                    ) : null}
                   </span>
                 </button>
                 <button
@@ -280,6 +260,16 @@ export function CommitteeAgendaVotesTab({
             );
           })}
         </ul>
+      </div>
+
+      <div className="rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4">
+        <VotingPanel
+          voteItems={agendaVoteItems}
+          myRole={myRole}
+          kind="agenda"
+          forceManageVotes
+          onAgendaTopicPassed={handleAgendaTopicPassed}
+        />
       </div>
 
       <div className="rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] p-3 space-y-3">
@@ -362,49 +352,6 @@ export function CommitteeAgendaVotesTab({
           </>
         )}
       </div>
-
-      {votingPanelTopicId ? (
-        <div
-          className="fixed inset-0 z-[90] flex items-center justify-center bg-black/55 px-3 py-6"
-          role="dialog"
-          aria-modal="true"
-          aria-label={t("agendaOpenVotingPanel")}
-          onClick={() => setVotingPanelTopicId(null)}
-        >
-          <div
-            className="flex max-h-[min(92vh,48rem)] w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-[var(--hairline)] bg-[var(--color-bg-page)] shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[var(--hairline)] px-4 py-3">
-              <div className="min-w-0">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">
-                  {t("agendaOpenVotingPanel")}
-                </p>
-                <h2 className="font-sans mt-1 text-base font-semibold leading-snug text-brand-navy line-clamp-3">
-                  {votingPanelTopicLabel
-                    ? translateAgendaTopicLabel(tTopics, votingPanelTopicLabel, locale)
-                    : "—"}
-                </h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => setVotingPanelTopicId(null)}
-                className="shrink-0 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/10 dark:hover:bg-black/30"
-              >
-                {t("agendaCloseVotingPanel")}
-              </button>
-            </div>
-            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-              <VotingPanel
-                voteItems={modalVoteItems}
-                myRole={myRole}
-                forceManageVotes
-                onAgendaTopicPassed={handleAgendaTopicPassed}
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }

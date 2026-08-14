@@ -10,6 +10,40 @@
 import { buildSeamunCommitteeDayBlocks } from "@/lib/seamun-i-2027-advisor-schedules";
 import { timeToMinutes } from "@/lib/seamun-i-2027-locked-schedule";
 
+/** Which conference day the chair is treating as “today” for reminders and the session list. */
+export const SCHEDULED_SESSIONS_DAY_KEY = "intermun-scheduled-sessions-day";
+
+export const SCHEDULE_DAY_CHANGED_EVENT = "intermun-schedule-day-changed";
+
+export function scheduledClockMs(hhmm: string, base: Date = new Date()): number {
+  const [h, m] = hhmm.split(":").map((n) => Number(n));
+  const d = new Date(base);
+  d.setHours(h, m, 0, 0);
+  return d.getTime();
+}
+
+export function readScheduledSessionsDay(): 1 | 2 {
+  try {
+    if (typeof window !== "undefined" && localStorage.getItem(SCHEDULED_SESSIONS_DAY_KEY) === "2") {
+      return 2;
+    }
+  } catch {
+    /* ignore */
+  }
+  return 1;
+}
+
+export function writeScheduledSessionsDay(day: 1 | 2): void {
+  try {
+    localStorage.setItem(SCHEDULED_SESSIONS_DAY_KEY, String(day));
+  } catch {
+    /* ignore */
+  }
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(SCHEDULE_DAY_CHANGED_EVENT, { detail: day }));
+  }
+}
+
 export type SeamunPresetSession = {
   /** Conference day the block belongs to (1 or 2). */
   day: 1 | 2;

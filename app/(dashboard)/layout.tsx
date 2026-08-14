@@ -37,6 +37,13 @@ import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { GlassPanel } from "@/components/ui/GlassPanel";
+import { TourShell } from "@/components/tour/TourShell";
+import { ChairSessionReminderHost } from "@/components/chair/ChairSessionReminderHost";
+import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
+import {
+  buildSeamunPresetSessionsForCommittee,
+  buildSeamunScheduleMilestonesForCommittee,
+} from "@/lib/seamun-preset-sessions";
 
 export default async function DashboardLayout({
   children,
@@ -122,12 +129,16 @@ export default async function DashboardLayout({
   const { data: activeEvent } = activeConf?.event_id
     ? await supabase
         .from("conference_events")
-        .select("event_code")
+        .select("id, event_code")
         .eq("id", activeConf.event_id)
         .maybeSingle()
     : { data: null };
 
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
+  const seamunScheduleEnabled = isSeamunI2027LockedScheduleEvent(
+    activeEvent?.id ?? "",
+    activeEvent?.event_code
+  );
   const navRole = showStaffNav ? role ?? null : isAdvisorRole(normalizedRole) ? "advisor" : null;
   const appName = getAppName();
   const displayName = profile?.name?.trim() || t("defaultDisplayName");
@@ -179,8 +190,11 @@ export default async function DashboardLayout({
       : 0;
 
 
+  const tourView = isChairRole(effectiveRole) ? "chair" : "delegate";
+
   return (
     <AppleAppFrame appName={appName}>
+    <TourShell view={tourView}>
     <div className="min-h-screen bg-[var(--dashboard-cream)] text-brand-navy lg:p-3">
       <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--dashboard-card)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--hairline)] lg:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.45)]">
       <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] shadow-[inset_-1px_0_0_var(--hairline)] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
@@ -255,7 +269,17 @@ export default async function DashboardLayout({
           }
         />
         <DashboardAnnouncementPopup />
-        <main className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10">
+        {isChairRole(effectiveRole) && seamunScheduleEnabled && activeConf.committee ? (
+          <ChairSessionReminderHost
+            conferenceId={liveFloorCanonicalId ?? activeConf.id}
+            presets={buildSeamunPresetSessionsForCommittee(activeConf.committee)}
+            milestones={buildSeamunScheduleMilestonesForCommittee(activeConf.committee)}
+          />
+        ) : null}
+        <main
+          data-tour="tour-main"
+          className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10"
+        >
           <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="mx-auto w-full max-w-[var(--content-max-width,82.5rem)] space-y-8">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
             <GlassPanel
@@ -297,6 +321,7 @@ export default async function DashboardLayout({
 
       <PaperSavedWidget />
     </div>
+    </TourShell>
     </AppleAppFrame>
   );
 }

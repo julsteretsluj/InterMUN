@@ -6,18 +6,16 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Clock, Megaphone, PauseCircle } from "lucide-react";
+import { Megaphone, PauseCircle } from "lucide-react";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
-import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { parseGuideResources, type GuideResource } from "@/lib/guide-resources";
+import { ActiveTimerWidgets } from "@/components/timers/ActiveTimerWidgets";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
-import {
-  committeeSessionEndTimestampMs,
-  formatCountdownOrElapsed,
-} from "@/lib/committee-session-end";
+import { committeeSessionEndTimestampMs } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 import { useNowMs } from "@/lib/hooks/useNowMs";
 import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
@@ -29,6 +27,7 @@ type Announcement = {
   body_format?: string | null;
   is_pinned?: boolean | null;
   publish_at?: string | null;
+  resources?: GuideResource[] | unknown;
 };
 type PauseEventRow = { id: string; reason: string; created_at: string };
 type ActiveMotionRow = {
@@ -42,21 +41,6 @@ type ActiveMotionRow = {
 
 type FloorTheme = "dark" | "light";
 
-function formatSessionElapsed(startIso: string, nowMs: number): string {
-  const t0 = new Date(startIso).getTime();
-  if (Number.isNaN(t0)) return "—";
-  let sec = Math.max(0, Math.floor((nowMs - t0) / 1000));
-  const h = Math.floor(sec / 3600);
-  sec %= 3600;
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  const pad = (n: number) => String(n).padStart(2, "0");
-  if (h > 0) {
-    return `${h}:${pad(m)}:${pad(s)}`;
-  }
-  return `${m}:${pad(s)}`;
-}
-
 export function FloorStatusBar({
   conferenceId,
   sessionConferenceId,
@@ -64,6 +48,7 @@ export function FloorStatusBar({
   theme = "dark",
   activeMotionVoteItemId = null,
   sessionMiniControls = "full",
+  chairSeesRawTimer = false,
 }: {
   conferenceId: string;
   /** Canonical chamber row for committee session timer (defaults to `conferenceId`). */
@@ -74,6 +59,8 @@ export function FloorStatusBar({
   activeMotionVoteItemId?: string | null;
   /** Session quick links: full for chairs/staff, minimal for compact chair panels, none for read-only delegate UI. */
   sessionMiniControls?: "full" | "minimal" | "none";
+  /** Chairs always see the committee floor clock, even when it is bound to a motion. */
+  chairSeesRawTimer?: boolean;
 }) {
   const sessionScopeId = sessionConferenceId ?? conferenceId;
   const locale = useLocale();
@@ -82,7 +69,6 @@ export function FloorStatusBar({
   const tTopics = useTranslations("agendaTopics");
   const tVoting = useTranslations("voting");
   const supabase = createClient();
-  const { timer } = useConferenceTimer(conferenceId, activeMotionVoteItemId);
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
   const [activeMotions, setActiveMotions] = useState<ActiveMotionRow[]>([]);
@@ -127,7 +113,7 @@ export function FloorStatusBar({
   const loadDais = useCallback(() => {
     return supabase
       .from("dais_announcements")
-      .select("id, body, created_at, body_format, is_pinned, publish_at")
+      .select("id, body, created_at, body_format, is_pinned, publish_at, resources")
       .eq("conference_id", conferenceId)
       .order("is_pinned", { ascending: false })
       .order("created_at", { ascending: false })
@@ -356,10 +342,6 @@ export function FloorStatusBar({
     ? "rounded-[var(--radius-md)] border border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] px-2.5 py-1.5 text-brand-navy"
     : "rounded-[var(--radius-md)] border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy";
 
-  const limitFmt =
-    sessionStartedAt != null && sessionEndMs != null && nowMs > 0
-      ? formatCountdownOrElapsed(sessionEndMs, nowMs)
-      : null;
   const quickLinkLabel = useCallback(
     (
       key:
@@ -402,48 +384,17 @@ export function FloorStatusBar({
     <div
       className={
         isLight
-          ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--apple-bg-tertiary)] px-3 py-2 text-sm text-brand-navy"
-          : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[var(--radius-xl)] border border-white/10 bg-white/5 px-3 py-2 text-sm text-brand-navy"
+          ? "flex flex-wrap items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--hairline)] bg-[var(--apple-bg-tertiary)] px-3 py-2 text-sm text-brand-navy"
+          : "flex flex-wrap items-center gap-2 rounded-[var(--radius-xl)] border border-white/10 bg-white/5 px-3 py-2 text-sm text-brand-navy"
       }
     >
-      <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
-      <span className="font-sans font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
-        {sessionStartedAt && nowMs > 0
-          ? formatSessionElapsed(sessionStartedAt, nowMs)
-          : t("sessionNotStarted")}
-      </span>
-      {sessionStartedAt && limitFmt ? (
-        <>
-          <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
-            ·
-          </span>
-          <span
-            className={`font-sans font-semibold tabular-nums tracking-tight ${
-              limitFmt.label === "passed"
-                ? isLight
-                  ? "text-amber-800"
-                  : "text-amber-200"
-                : undefined
-            }`}
-            suppressHydrationWarning
-          >
-            {limitFmt.label === "remaining"
-              ? t("limitRemaining", { value: limitFmt.text })
-              : t("limitOverBy", { value: limitFmt.text })}
-          </span>
-        </>
-      ) : null}
-      {timer?.current_speaker?.trim() ? (
-        <>
-          <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
-            ·
-          </span>
-          <span className={isLight ? "text-brand-navy/75" : "text-brand-navy/80"}>
-            {tActiveMotion("currentSpeaker")}:{" "}
-            <span className="font-medium text-brand-navy">{timer.current_speaker.trim()}</span>
-          </span>
-        </>
-      ) : null}
+      <ActiveTimerWidgets
+        conferenceId={conferenceId}
+        sessionConferenceId={sessionScopeId}
+        activeVoteItemId={activeMotionVoteItemId}
+        chairSeesRawTimer={chairSeesRawTimer}
+        theme={theme}
+      />
       {sessionMiniControls === "none" ? null : (
         <div className="ml-auto flex flex-wrap items-center gap-1">
           {sessionQuickLinks.map((link) => (
@@ -513,6 +464,8 @@ export function FloorStatusBar({
               <DaisAnnouncementBody
                 body={latestDais.body}
                 format={latestDais.body_format === "markdown" ? "markdown" : "plain"}
+                resources={parseGuideResources(latestDais.resources)}
+                compact
               />
               <button
                 type="button"
@@ -583,6 +536,7 @@ export function FloorStatusBar({
               <DaisAnnouncementBody
                 body={expandedAnnouncement.body}
                 format={expandedAnnouncement.body_format === "markdown" ? "markdown" : "plain"}
+                resources={parseGuideResources(expandedAnnouncement.resources)}
               />
             </div>
           </div>

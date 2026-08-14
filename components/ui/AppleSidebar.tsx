@@ -122,6 +122,7 @@ type AppleSidebarRowProps = {
   className?: string;
   href?: string;
   onClick?: () => void;
+  dataTour?: string;
 };
 
 export function AppleSidebarRow({
@@ -136,6 +137,7 @@ export function AppleSidebarRow({
   className,
   href,
   onClick,
+  dataTour,
 }: AppleSidebarRowProps) {
   const rowClassName = cn(
     "mun-apple-sidebar-row",
@@ -166,6 +168,7 @@ export function AppleSidebarRow({
         className={rowClassName}
         aria-current={selected ? "page" : undefined}
         onClick={onClick}
+        data-tour={dataTour}
       >
         {content}
       </Link>

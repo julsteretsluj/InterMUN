@@ -67,6 +67,17 @@ export function AdminAppChrome({
                   href={item.href}
                   title={item.label}
                   detail={String(item.priority)}
+                  dataTour={
+                    item.href === "/admin"
+                      ? "nav-admin-overview"
+                      : item.href.startsWith("/conference-setup")
+                        ? "nav-admin-conference"
+                        : item.href === "/smt"
+                          ? "nav-admin-smt"
+                          : item.href === "/admin/guides"
+                            ? "nav-admin-guides"
+                            : undefined
+                  }
                   leading={
                     item.emoji ? (
                       <span className="text-base leading-none" aria-hidden>

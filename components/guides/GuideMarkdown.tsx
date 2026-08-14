@@ -5,7 +5,7 @@
 
 import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
-import { isGuideFileUrl, isGuidePdfUrl, safeGuideHref } from "@/lib/guide-resources";
+import { guideHrefOpenProps, isGuideFileUrl, isGuidePdfUrl, safeGuideHref } from "@/lib/guide-resources";
 import { cn } from "@/lib/utils";
 
 function childText(children: ReactNode): string {
@@ -28,12 +28,11 @@ export function GuideMarkdown({ body }: { body: string }) {
               title?.toLowerCase() === "btn" ||
               /^button:\s*/i.test(childText(children));
             const asFile = isGuideFileUrl(url);
+            const open = guideHrefOpenProps(url);
             if (asButton) {
               return (
                 <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...open}
                   className="mun-btn-primary mb-2 mr-2 inline-flex no-underline"
                 >
                   {label}
@@ -42,10 +41,8 @@ export function GuideMarkdown({ body }: { body: string }) {
             }
             return (
               <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                download={asFile ? true : undefined}
+                {...open}
+                download={asFile && open.target === "_blank" ? true : undefined}
                 className={cn(asFile && "font-medium")}
               >
                 {label}
@@ -60,7 +57,7 @@ export function GuideMarkdown({ body }: { body: string }) {
   );
 }
 
-function autolinkBareUrls(markdown: string): string {
+export function autolinkBareUrls(markdown: string): string {
   return markdown.replace(
     /(^|[\s(])(https?:\/\/[^\s)<]+)/gm,
     (full, prefix: string, raw: string, offset: number, source: string) => {

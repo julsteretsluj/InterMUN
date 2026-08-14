@@ -20,6 +20,14 @@ export function motionRequiresResolutionOnly(procedureCode: string | null | unde
   return !!procedureCode && RESOLUTION_ONLY_PROCEDURE_CODES.has(procedureCode);
 }
 
+export const MIN_RESOLUTION_MAIN_SUBMITTERS = 2;
+export const MIN_RESOLUTION_CO_SUBMITTERS = 2;
+
+/** Signatories required to introduce a draft (15% of seated committee, at least 1). */
+export function minResolutionSignatories(seatedCount: number): number {
+  return Math.max(1, Math.ceil(Math.max(0, seatedCount) * 0.15));
+}
+
 export function majorityThreshold(requiredMajority: string, totalVotes: number) {
   return requiredMajority === "2/3" ? (totalVotes * 2) / 3 : totalVotes / 2;
 }

@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCard";
-import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import {
@@ -11,12 +10,10 @@ import {
   seamunChairContactMatchesCommittee,
 } from "@/lib/seamun-delegate-chair-contacts";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
-import { DelegateHubTileLink } from "@/components/delegate/DelegateHubTileLink";
 import { MilestonesSummaryCard } from "@/components/milestones/MilestonesSummaryCard";
 import { PriorityTabLink } from "@/components/PriorityTabLink";
 import {
   DELEGATE_DASHBOARD_TAB_ORDER,
-  DELEGATE_HUB_TILE_KEY_ORDER,
   sortByKeyPriority,
   withSequentialPriority,
 } from "@/lib/nav-priority-order";
@@ -78,7 +75,6 @@ export default async function DelegateDashboardPage({
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tc("committee");
   const countryLabel = myAllocation?.country?.trim() || tc("yourCountry");
   const countryFlag = flagEmojiForCountryName(countryLabel);
-  const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const chairContactsForDelegate = showChairEmailsTab
     ? SEAMUN_I_2027_DELEGATE_CHAIR_CONTACTS.filter((row) =>
@@ -86,48 +82,16 @@ export default async function DelegateDashboardPage({
       )
     : [];
 
-  const tileDefsRaw: { href: string; key: string }[] = [
-    { href: "/stances", key: "stances" },
-    { href: "/delegate#countdown", key: "countdown" },
-    { href: "/committee-room", key: "matrix" },
-    { href: "/speeches", key: "speeches" },
-    { href: "/sources", key: "sources" },
-    { href: "/guides", key: "guides" },
-    ...(showChairEmailsTab ? ([{ href: "/delegate/schedule", key: "conferenceSchedule" }] as const) : []),
-    { href: "/running-notes", key: "running" },
-    { href: "/official-links", key: "officialLinks" },
-    ...(showChairEmailsTab ? ([{ href: "/delegate?tab=chairs", key: "chairEmails" }] as const) : []),
-    { href: "/delegate/chair-feedback", key: "chairFeedback" },
-    { href: "/voting", key: "voting" },
-    { href: "/documents", key: "archive" },
-    ...(crisisReportingEnabled
-      ? [
-          { href: "/crisis-slides", key: "crisisSlides" },
-          { href: "/report", key: "crisisReport" },
-        ]
-      : []),
-  ];
-
-  const tiles = withSequentialPriority(
-    sortByKeyPriority(tileDefsRaw, "key", DELEGATE_HUB_TILE_KEY_ORDER)
-  ).map((def) => ({
-    href: def.href,
-    label: td(`tiles.${def.key}.label`),
-    hint: td(`tiles.${def.key}.hint`),
-    priority: def.priority,
-  }));
-
   const { tab } = await searchParams;
   const dashboardTabsRaw = [
     { id: "overview", label: td("tabs.overview") },
     { id: "checklist", label: td("tabs.checklist") },
-    { id: "jump", label: td("tabs.jump") },
     ...(showChairEmailsTab ? ([{ id: "chairs", label: td("tabs.chairEmails") }] as const) : []),
   ];
   const dashboardTabs = withSequentialPriority(
     sortByKeyPriority(dashboardTabsRaw, "id", DELEGATE_DASHBOARD_TAB_ORDER)
   );
-  const validTabs = new Set(["overview", "checklist", "jump", ...(showChairEmailsTab ? ["chairs"] : [])]);
+  const validTabs = new Set(["overview", "checklist", ...(showChairEmailsTab ? ["chairs"] : [])]);
   const activeTab = tab && validTabs.has(tab) ? tab : "overview";
 
   return (
@@ -168,51 +132,11 @@ export default async function DelegateDashboardPage({
         </div>
         {activeTab === "overview" ? (
           <div className="space-y-4">
-            <div className="grid gap-4 lg:grid-cols-2">
-              <DelegateCountdownCard conferenceId={conferenceId} />
-              <section className="dashboard-panel flex flex-col justify-between gap-4">
-                <div>
-                  <h2 className="dashboard-panel-title">{td("jumpTo")}</h2>
-                  <p className="mt-1 text-sm text-brand-muted">{td("activeCommitteeBody")}</p>
-                </div>
-                <ul className="grid gap-2 sm:grid-cols-2">
-                  {tiles.slice(0, 4).map((tile) => (
-                    <li key={tile.href + tile.label}>
-                      <DelegateHubTileLink
-                        href={tile.href}
-                        label={tile.label}
-                        hint={tile.hint}
-                        priority={tile.priority}
-                        variant="overview"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </div>
+            <DelegateCountdownCard conferenceId={conferenceId} />
             <MilestonesSummaryCard href="/milestones" />
           </div>
         ) : null}
         {activeTab === "checklist" ? <RoleSetupChecklist role="delegate" /> : null}
-        {activeTab === "jump" ? (
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("jumpTo")}</h2>
-          <p className="mt-1 text-xs text-brand-muted">{tc("navPriorityOrderHint")}</p>
-          <ul className="mt-2.5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {tiles.map((tile) => (
-              <li key={tile.href + tile.label} className={tile.priority % 4 === 0 ? "sm:translate-y-2" : undefined}>
-                <DelegateHubTileLink
-                  href={tile.href}
-                  label={tile.label}
-                  hint={tile.hint}
-                  priority={tile.priority}
-                  variant="jump"
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-        ) : null}
         {activeTab === "chairs" && showChairEmailsTab ? (
           <div className="space-y-3">
             <p className="text-sm text-brand-muted max-w-2xl">{td("chairContacts.intro")}</p>

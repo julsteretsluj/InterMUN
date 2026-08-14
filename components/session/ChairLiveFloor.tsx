@@ -14,8 +14,7 @@ type ProcedureRow = {
 };
 
 /**
- * Chair dashboard header: single floor strip (motion + timer when voting, or general timer in debate).
- * Renders only inside {@link FloorStatusBar} so the timer is not duplicated.
+ * Chair dashboard header: session + floor timer chips live in {@link FloorStatusBar}.
  */
 export function ChairLiveFloor({
   conferenceId,
@@ -90,6 +89,7 @@ export function ChairLiveFloor({
         theme={theme}
         observeOnly={observeFloorOnly}
         activeMotionVoteItemId={activeVoteItemId}
+        chairSeesRawTimer
       />
     </div>
   );

@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { StartGuidedTourButton } from "@/components/tour/TourShell";
 
 type RoleKey = "admin" | "smt" | "chair" | "delegate" | "advisor";
 
@@ -53,6 +54,7 @@ export function RoleSetupChecklist({ role }: { role: RoleKey }) {
           </li>
         ))}
       </ol>
+      <StartGuidedTourButton />
     </section>
   );
 }

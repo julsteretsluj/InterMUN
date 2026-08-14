@@ -5,6 +5,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { nextClauseNumber } from "@/lib/resolution-functions";
 import { isGoogleDocsDocumentUrl } from "@/lib/google-docs-embed";
 import {
@@ -341,6 +342,93 @@ export async function setResolutionDocLinkAction(input: {
   const { error } = await auth.supabase
     .from("resolutions")
     .update({ google_docs_url: url, updated_at: new Date().toISOString() })
+    .eq("id", input.resolutionId);
+  if (error) return { ok: false, error: error.message };
+
+  revalidatePath("/resolutions");
+  return { ok: true, data: { resolutionId: input.resolutionId } };
+}
+
+export type ResolutionSponsorRole = "main" | "co" | "signatory";
+
+function uniqueUuids(ids: string[]): string[] {
+  return Array.from(new Set(ids.map((s) => s.trim()).filter(isUuid)));
+}
+
+/** Add or remove a main submitter, co-submitter, or signatory on a bloc draft. */
+export async function updateResolutionSponsorsAction(input: {
+  resolutionId: string;
+  role: ResolutionSponsorRole;
+  action: "add" | "remove";
+  userId: string;
+}): Promise<ActionResult<{ resolutionId: string }>> {
+  const auth = await getAuthContext();
+  if (!auth.user) return { ok: false, error: "Not authenticated." };
+  if (!isUuid(input.resolutionId) || !isUuid(input.userId)) {
+    return { ok: false, error: "Invalid IDs." };
+  }
+  if (input.role !== "main" && input.role !== "co" && input.role !== "signatory") {
+    return { ok: false, error: "Invalid sponsor role." };
+  }
+
+  const { data: resolution, error: readErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, conference_id, status, main_submitters, co_submitters, signatories")
+    .eq("id", input.resolutionId)
+    .maybeSingle();
+  if (readErr) return { ok: false, error: readErr.message };
+  if (!resolution) return { ok: false, error: "Resolution not found." };
+  if ((resolution.status ?? "draft") === "finalized") {
+    return { ok: false, error: "This resolution is finalized." };
+  }
+
+  const { data: bloc } = await auth.supabase
+    .from("blocs")
+    .select("id")
+    .eq("resolution_id", input.resolutionId)
+    .maybeSingle();
+  let isMember = false;
+  if (bloc?.id) {
+    const { data: membership } = await auth.supabase
+      .from("bloc_memberships")
+      .select("id")
+      .eq("bloc_id", bloc.id)
+      .eq("user_id", auth.user.id)
+      .maybeSingle();
+    isMember = Boolean(membership?.id);
+  }
+
+  const selfSign =
+    input.action === "add" &&
+    input.role === "signatory" &&
+    input.userId === auth.user.id &&
+    auth.role === "delegate";
+  if (!isStaff(auth.role) && !isMember && !selfSign) {
+    return { ok: false, error: "You cannot edit sponsors on this draft." };
+  }
+
+  const main = uniqueUuids((resolution.main_submitters as string[] | null) ?? []);
+  const co = uniqueUuids((resolution.co_submitters as string[] | null) ?? []);
+  const signatories = uniqueUuids((resolution.signatories as string[] | null) ?? []);
+  const without = (ids: string[]) => ids.filter((id) => id !== input.userId);
+  let nextMain = without(main);
+  let nextCo = without(co);
+  let nextSign = without(signatories);
+  if (input.action === "add") {
+    if (input.role === "main") nextMain = uniqueUuids([...nextMain, input.userId]);
+    if (input.role === "co") nextCo = uniqueUuids([...nextCo, input.userId]);
+    if (input.role === "signatory") nextSign = uniqueUuids([...nextSign, input.userId]);
+  }
+
+  const db = createAdminClient() ?? auth.supabase;
+  const { error } = await db
+    .from("resolutions")
+    .update({
+      main_submitters: nextMain,
+      co_submitters: nextCo,
+      signatories: nextSign,
+      updated_at: new Date().toISOString(),
+    })
     .eq("id", input.resolutionId);
   if (error) return { ok: false, error: error.message };
 

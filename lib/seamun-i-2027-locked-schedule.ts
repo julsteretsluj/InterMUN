@@ -168,6 +168,21 @@ export const SEAMUN_I_2027_DAY2_COLUMNS: SeamunLockedColumn[] = [
 export const SEAMUN_I_2027_AXIS_START_MIN = 7 * 60 + 30;
 export const SEAMUN_I_2027_AXIS_END_MIN = 18 * 60 + 30;
 
+/** Conference days (venue local, UTC+7). */
+export const SEAMUN_I_2027_DAY1_ISO = "2027-01-16";
+export const SEAMUN_I_2027_DAY2_ISO = "2027-01-17";
+export const SEAMUN_I_2027_VENUE_TZ_OFFSET = "+07:00";
+
+/** Start of Day 1 local — quorum is waived until this instant. */
+const SEAMUN_I_2027_QUORUM_FROM_MS = Date.parse(
+  `${SEAMUN_I_2027_DAY1_ISO}T00:00:00${SEAMUN_I_2027_VENUE_TZ_OFFSET}`
+);
+
+/** 2/3 roll quorum is not required until committee day 1 (16 Jan 2027). */
+export function isSeamunI2027QuorumRequired(nowMs: number = Date.now()): boolean {
+  return nowMs >= SEAMUN_I_2027_QUORUM_FROM_MS;
+}
+
 export function isSeamunI2027LockedScheduleEvent(eventId: string, eventCode: string | null | undefined): boolean {
   const id = eventId.trim();
   if (id === SEAMUN_I_2027_EVENT_ID) return true;

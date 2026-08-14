@@ -10,6 +10,7 @@ import { GuidePdfEmbed } from "@/components/guides/GuideMarkdown";
 import {
   GUIDE_FILE_MAX_BYTES,
   GUIDE_FILES_BUCKET,
+  guideHrefOpenProps,
   isAllowedGuideUpload,
   isGuidePdfUrl,
   newGuideResourceId,
@@ -21,24 +22,31 @@ import {
 } from "@/lib/guide-resources";
 import { cn } from "@/lib/utils";
 
-export function GuideResourceList({ resources }: { resources: GuideResource[] }) {
+export function GuideResourceList({
+  resources,
+  embedPdfs = true,
+  compact = false,
+}: {
+  resources: GuideResource[];
+  embedPdfs?: boolean;
+  compact?: boolean;
+}) {
   const t = useTranslations("guides.resources");
   const items = parseGuideResources(resources);
   if (items.length === 0) return null;
-  const pdfs = items.filter((r) => r.kind === "file" && isGuidePdfUrl(r.url));
+  const pdfs = embedPdfs ? items.filter((r) => r.kind === "file" && isGuidePdfUrl(r.url)) : [];
 
   return (
-    <div className="space-y-3">
+    <div className={compact ? "mt-1.5 space-y-1.5" : "space-y-3"}>
       <div className="flex flex-wrap gap-2">
         {items.map((item) => {
+          const open = guideHrefOpenProps(item.url);
           if (item.kind === "button") {
             return (
               <a
                 key={item.id}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mun-btn-primary inline-flex"
+                {...open}
+                className={cn("mun-btn-primary inline-flex", compact && "px-2.5 py-1 text-xs")}
               >
                 {item.label}
               </a>
@@ -48,10 +56,11 @@ export function GuideResourceList({ resources }: { resources: GuideResource[] })
             return (
               <a
                 key={item.id}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white dark:border-white/15 dark:bg-black/30 dark:text-zinc-100 dark:hover:bg-white/10"
+                {...open}
+                className={cn(
+                  "inline-flex items-center rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] font-medium text-brand-navy hover:bg-white dark:border-white/15 dark:bg-black/30 dark:text-zinc-100 dark:hover:bg-white/10",
+                  compact ? "px-2 py-1 text-xs" : "px-3 py-1.5 text-sm"
+                )}
               >
                 {item.label}
                 <span className="ml-2 text-[0.65rem] uppercase tracking-wide text-brand-muted">
@@ -63,10 +72,11 @@ export function GuideResourceList({ resources }: { resources: GuideResource[] })
           return (
             <a
               key={item.id}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-lg px-1 py-1 text-sm font-medium text-brand-diplomatic underline underline-offset-2 hover:text-brand-navy dark:text-brand-accent-bright"
+              {...open}
+              className={cn(
+                "inline-flex items-center rounded-lg px-1 py-1 font-medium text-brand-diplomatic underline underline-offset-2 hover:text-brand-navy dark:text-brand-accent-bright",
+                compact ? "text-xs" : "text-sm"
+              )}
             >
               {item.label}
             </a>
@@ -84,10 +94,12 @@ export function GuideResourceEditor({
   resources,
   onChange,
   slugHint,
+  help,
 }: {
   resources: GuideResource[];
   onChange: (next: GuideResource[]) => void;
   slugHint: string;
+  help?: string;
 }) {
   const t = useTranslations("guides.resources");
   const supabase = createClient();
@@ -153,7 +165,7 @@ export function GuideResourceEditor({
     <div className="space-y-3 rounded-xl border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] p-3 dark:border-white/10 dark:bg-black/20">
       <div>
         <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("title")}</p>
-        <p className="mt-0.5 text-xs text-brand-muted">{t("help")}</p>
+        <p className="mt-0.5 text-xs text-brand-muted">{help ?? t("help")}</p>
       </div>
 
       {resources.length > 0 ? (
@@ -213,7 +225,8 @@ export function GuideResourceEditor({
           onChange={(e) => setUrl(e.target.value)}
           className="mun-field min-w-[12rem] flex-1"
           placeholder={t("urlPlaceholder")}
-          type="url"
+          type="text"
+          inputMode="url"
         />
         <button
           type="button"

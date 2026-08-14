@@ -10,6 +10,7 @@ import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
 import { AdvisorDashboardSidebar, AdvisorMobileDock } from "@/components/dashboard/AdvisorDashboardNav";
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
+import { TourShell } from "@/components/tour/TourShell";
 import { getTranslations } from "next-intl/server";
 
 export default async function AdvisorLayout({ children }: { children: React.ReactNode }) {
@@ -49,6 +50,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
 
   return (
     <AppleAppFrame appName={appName}>
+    <TourShell view="advisor">
     <div className="min-h-screen bg-[var(--dashboard-cream)] text-brand-navy lg:p-3">
       <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--dashboard-card)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--hairline)] lg:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.45)]">
         <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] shadow-[inset_-1px_0_0_var(--hairline)] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
@@ -108,7 +110,10 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
               </div>
             </div>
           )}
-          <main className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10">
+          <main
+            data-tour="tour-main"
+            className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10"
+          >
             <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="mx-auto w-full max-w-[var(--content-max-width,82.5rem)] space-y-8">
               {children}
             </AppleLayoutWrapper>
@@ -122,6 +127,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
 
       <PaperSavedWidget />
     </div>
+    </TourShell>
     </AppleAppFrame>
   );
 }

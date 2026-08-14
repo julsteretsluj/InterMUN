@@ -172,6 +172,7 @@ function AspireSidebarLink({
     <Link
       href={tab.href}
       aria-label={label}
+      data-tour={`nav-${tab.labelKey}`}
       className={cn(
         "nav-priority-link--rail flex w-full min-w-0 items-center justify-center gap-1.5 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
@@ -204,6 +205,7 @@ function DockLink({
       href={tab.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
+      data-tour={`nav-${tab.labelKey}`}
         className={cn(
           "nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 rounded-lg px-1.5 py-1.5 transition-all duration-300 active:scale-[0.97]",
           isActive && "bg-[color:color-mix(in_srgb,var(--accent)_10%,white)] shadow-[inset_0_1px_3px_rgba(15,23,42,0.12)]"
@@ -299,6 +301,7 @@ export function TabNav({
     return (
       <nav
         aria-label={t("mainNavigationAria")}
+        data-tour="tour-nav"
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         {folderGroups.map(({ folderId, items }) => (

@@ -3,7 +3,6 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { VotingPanel } from "@/components/voting/VotingPanel";
 import { requireActiveConferenceId } from "@/lib/active-conference";
-import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -25,8 +24,6 @@ export default async function VotingPage() {
 
   const conferenceId = await requireActiveConferenceId();
 
-  await ensureAgendaFloorVoteItem(supabase, conferenceId);
-
   const { data: voteItems } = await supabase
     .from("vote_items")
     .select("*")
@@ -41,7 +38,7 @@ export default async function VotingPage() {
       title={t("voting")}
       titleAside={<PageFeatureGuideLink featureId="voting" role={myRole} />}
     >
-      <VotingPanel voteItems={voteItems || []} myRole={myRole} />
+      <VotingPanel voteItems={voteItems || []} myRole={myRole} kind="motions" />
     </MunPageShell>
   );
 }

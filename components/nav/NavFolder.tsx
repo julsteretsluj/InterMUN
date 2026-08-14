@@ -13,6 +13,7 @@ import {
   type NavFolderId,
 } from "@/lib/nav-folder-groups";
 import { cn } from "@/lib/utils";
+import { useOptionalTour } from "@/components/tour/tour-context";
 
 /** Accordion state: one folder open at a time; expand/collapse only via click. */
 export function useNavFolderExpansion<T>(
@@ -81,13 +82,15 @@ export function NavFolder({
   const meta = NAV_FOLDER_META[folderId];
   const panelId = useId();
   const label = t(meta.labelKey);
+  const tour = useOptionalTour();
+  const isExpanded = Boolean(tour?.running) || expanded;
 
   return (
     <div className="nav-folder">
       <button
         type="button"
         id={`${panelId}-trigger`}
-        aria-expanded={expanded}
+        aria-expanded={isExpanded}
         aria-controls={panelId}
         onClick={onToggle}
         title={label}
@@ -102,7 +105,7 @@ export function NavFolder({
         <ChevronRight
           className={cn(
             "h-3.5 w-3.5 shrink-0 transition-transform duration-200",
-            expanded && "rotate-90",
+            isExpanded && "rotate-90",
             labelsHidden && "hidden",
             compact && "hidden group-hover:block"
           )}
@@ -126,7 +129,7 @@ export function NavFolder({
         aria-labelledby={`${panelId}-trigger`}
         className={cn(
           "nav-folder-panel grid transition-[grid-template-rows] duration-200 ease-out",
-          expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}
       >
         <div className="overflow-hidden">

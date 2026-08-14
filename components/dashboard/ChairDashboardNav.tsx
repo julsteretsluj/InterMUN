@@ -165,6 +165,7 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? label : undefined}
       aria-label={label}
+      data-tour={`nav-${item.itemKey}`}
       className={cn(
         "nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-lg py-2 text-sm transition-all duration-300",
         labelsHidden
@@ -312,6 +313,7 @@ export function ChairDashboardSidebar({
 
       <nav
         aria-label={t("ariaDashboard")}
+        data-tour="tour-nav"
         className={cn(
           "flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden py-2 [scrollbar-width:thin]",
           labelsHidden ? "px-2" : "px-2 group-hover:px-3"
@@ -406,6 +408,7 @@ function DockItem({
       href={item.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
+      data-tour={`nav-${item.itemKey}`}
       className="nav-priority-link nav-priority-link--dock group relative flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2 transition-apple active:scale-[0.97]"
     >
       <NavPriorityBadge priority={priority} />

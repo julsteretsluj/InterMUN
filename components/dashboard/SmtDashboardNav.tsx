@@ -83,6 +83,7 @@ function SmtSidebarLink({
     <Link
       href={item.href}
       aria-label={label}
+      data-tour={`nav-${item.navKey}`}
       className={cn(
         "nav-priority-link--rail discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm transition-all duration-300 group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
@@ -114,6 +115,7 @@ function SmtDockLink({
       href={item.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
+      data-tour={`nav-${item.navKey}`}
       className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
     >
       <NavPriorityBadge priority={priority} />
@@ -190,6 +192,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
       <nav
         aria-label={tNav("ariaDashboard")}
+        data-tour="tour-nav"
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-1 [scrollbar-width:thin] group-hover:px-3"
       >
         {folderGroups.map(({ folderId, items }) => (

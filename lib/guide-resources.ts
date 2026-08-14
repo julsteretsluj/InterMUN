@@ -58,6 +58,23 @@ export function safeGuideHref(href: string | null | undefined): string | null {
   return null;
 }
 
+export function isExternalGuideHref(href: string): boolean {
+  return /^(https?:|mailto:)/i.test(href.trim());
+}
+
+export function guideHrefOpenProps(href: string): {
+  href: string;
+  target?: "_blank";
+  rel?: "noopener noreferrer";
+} {
+  const safe = safeGuideHref(href);
+  if (!safe) return { href: "#" };
+  if (isExternalGuideHref(safe)) {
+    return { href: safe, target: "_blank", rel: "noopener noreferrer" };
+  }
+  return { href: safe };
+}
+
 export function parseGuideResources(raw: unknown): GuideResource[] {
   if (!Array.isArray(raw)) return [];
   const out: GuideResource[] = [];

@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
@@ -14,37 +14,13 @@ import {
   readTimerExpiryAlarmEnabled,
   setTimerExpiryAlarmEnabled,
 } from "@/lib/timer-expiry-alarm";
-import type {
-  SeamunPresetSession,
-  SeamunScheduleMilestone,
+import {
+  readScheduledSessionsDay,
+  scheduledClockMs,
+  writeScheduledSessionsDay,
+  type SeamunPresetSession,
+  type SeamunScheduleMilestone,
 } from "@/lib/seamun-preset-sessions";
-import { SMT_PROGRESS_NOTE_HREF } from "@/lib/smt-progress-note-reminder";
-
-const DAY_STORAGE_KEY = "intermun-scheduled-sessions-day";
-/** setTimeout ceiling we schedule reminders within (24h). */
-const MAX_REMINDER_HORIZON_MS = 24 * 60 * 60 * 1000;
-
-type ReminderCategory = "session" | "session_end" | "resolutions_due" | "closing_ceremony";
-
-type ActiveReminder = {
-  id: string;
-  category: ReminderCategory;
-  /** Minutes before the scheduled time (0 = starting now for sessions). */
-  minutesBefore: number;
-  title: string;
-  start: string;
-  /** Present only for session reminders (enables the "Start now" action). */
-  preset?: SeamunPresetSession;
-};
-
-type ScheduledReminder = ActiveReminder & { at: number };
-
-function scheduledStartMs(hhmm: string, base: Date = new Date()): number {
-  const [h, m] = hhmm.split(":").map((n) => Number(n));
-  const d = new Date(base);
-  d.setHours(h, m, 0, 0);
-  return d.getTime();
-}
 
 export function ChairScheduledSessionsPanel({
   conferenceId,
@@ -60,22 +36,14 @@ export function ChairScheduledSessionsPanel({
 
   const [selectedDay, setSelectedDay] = useState<1 | 2>(1);
   const [nowMs, setNowMs] = useState(() => Date.now());
-  const [reminders, setReminders] = useState<ActiveReminder[]>([]);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [startingKey, setStartingKey] = useState<string | null>(null);
   const [errorByKey, setErrorByKey] = useState<Record<string, string>>({});
   const [pending, startTransition] = useTransition();
-  const timeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
-    // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
     const frame = window.requestAnimationFrame(() => {
-      try {
-        const stored = localStorage.getItem(DAY_STORAGE_KEY);
-        if (stored === "2") setSelectedDay(2);
-      } catch {
-        /* ignore */
-      }
+      setSelectedDay(readScheduledSessionsDay());
       setSoundEnabled(readTimerExpiryAlarmEnabled());
     });
     return () => window.cancelAnimationFrame(frame);
@@ -83,11 +51,7 @@ export function ChairScheduledSessionsPanel({
 
   const chooseDay = useCallback((day: 1 | 2) => {
     setSelectedDay(day);
-    try {
-      localStorage.setItem(DAY_STORAGE_KEY, String(day));
-    } catch {
-      /* ignore */
-    }
+    writeScheduledSessionsDay(day);
   }, []);
 
   const toggleSound = useCallback(() => {
@@ -104,86 +68,9 @@ export function ChairScheduledSessionsPanel({
     [presets, selectedDay]
   );
 
-  const dayMilestones = useMemo(
-    () => milestones.filter((m) => m.day === selectedDay),
-    [milestones, selectedDay]
-  );
-
   useEffect(() => {
     const id = window.setInterval(() => setNowMs(Date.now()), 15_000);
     return () => window.clearInterval(id);
-  }, []);
-
-  const pushReminder = useCallback((reminder: ActiveReminder) => {
-    setReminders((prev) => {
-      if (prev.some((r) => r.id === reminder.id)) return prev;
-      return [reminder, ...prev].slice(0, 5);
-    });
-    playTimerExpiryAlarm();
-  }, []);
-
-  useEffect(() => {
-    timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-    timeoutsRef.current = [];
-
-    const now = Date.now();
-    const scheduled: ScheduledReminder[] = [];
-
-    for (const preset of dayPresets) {
-      const startMs = scheduledStartMs(preset.start);
-      for (const minutesBefore of [5, 1, 0]) {
-        scheduled.push({
-          id: `session-${preset.start}-${minutesBefore}`,
-          category: "session",
-          minutesBefore,
-          title: preset.title,
-          start: preset.start,
-          preset,
-          at: startMs - minutesBefore * 60_000,
-        });
-      }
-      const endMs = scheduledStartMs(preset.end);
-      scheduled.push({
-        id: `session-end-${preset.end}`,
-        category: "session_end",
-        minutesBefore: 0,
-        title: preset.title,
-        start: preset.end,
-        at: endMs,
-      });
-    }
-
-    for (const milestone of dayMilestones) {
-      const startMs = scheduledStartMs(milestone.start);
-      for (const minutesBefore of [30, 15, 5]) {
-        scheduled.push({
-          id: `${milestone.kind}-${milestone.start}-${minutesBefore}`,
-          category: milestone.kind,
-          minutesBefore,
-          title: milestone.title,
-          start: milestone.start,
-          at: startMs - minutesBefore * 60_000,
-        });
-      }
-    }
-
-    for (const item of scheduled) {
-      const delay = item.at - now;
-      if (delay <= 0 || delay > MAX_REMINDER_HORIZON_MS) continue;
-      const { at, ...reminder } = item;
-      void at;
-      const timeoutId = window.setTimeout(() => pushReminder(reminder), delay);
-      timeoutsRef.current.push(timeoutId);
-    }
-
-    return () => {
-      timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-      timeoutsRef.current = [];
-    };
-  }, [dayPresets, dayMilestones, pushReminder]);
-
-  const dismissReminder = useCallback((id: string) => {
-    setReminders((prev) => prev.filter((r) => r.id !== id));
   }, []);
 
   const startPreset = useCallback(
@@ -206,39 +93,14 @@ export function ChairScheduledSessionsPanel({
           setErrorByKey((prev) => ({ ...prev, [key]: res.error! }));
           return;
         }
-        setReminders((prev) =>
-          prev.filter((r) => !(r.preset && `${r.preset.day}-${r.preset.start}` === key))
-        );
         dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
         router.refresh();
       });
     },
-    [conferenceId, router, startTransition]
+    [conferenceId, router]
   );
 
   if (presets.length === 0 && milestones.length === 0) return null;
-
-  function reminderTitle(reminder: ActiveReminder): string {
-    if (reminder.category === "resolutions_due") return t("reminderTitleResolutions");
-    if (reminder.category === "closing_ceremony") return t("reminderTitleClosing");
-    if (reminder.category === "session_end") return t("reminderTitleSessionEnd");
-    return t("reminderTitle");
-  }
-
-  function reminderBody(reminder: ActiveReminder): string {
-    if (reminder.category === "resolutions_due") {
-      return t("reminderResolutionsDue", { minutes: reminder.minutesBefore, start: reminder.start });
-    }
-    if (reminder.category === "closing_ceremony") {
-      return t("reminderClosing", { minutes: reminder.minutesBefore, start: reminder.start });
-    }
-    if (reminder.category === "session_end") {
-      return t("reminderSessionEnd", { title: reminder.title, start: reminder.start });
-    }
-    if (reminder.minutesBefore === 5) return t("reminder5Min", { title: reminder.title, start: reminder.start });
-    if (reminder.minutesBefore === 1) return t("reminder1Min", { title: reminder.title, start: reminder.start });
-    return t("reminderStartNow", { title: reminder.title, start: reminder.start });
-  }
 
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 shadow-sm backdrop-blur-sm md:p-8">
@@ -247,59 +109,6 @@ export function ChairScheduledSessionsPanel({
         <HelpButton title={t("title")}>{t("help")}</HelpButton>
       </div>
       <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
-
-      {reminders.length > 0 ? (
-        <div className="mt-4 space-y-2" role="status" aria-live="polite">
-          {reminders.map((reminder) => (
-            <div
-              key={reminder.id}
-              className="flex flex-wrap items-center gap-3 rounded-xl border border-amber-400/50 bg-amber-500/15 px-4 py-3"
-            >
-              <span aria-hidden className="text-lg">
-                ⏰
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-brand-navy">{reminderTitle(reminder)}</p>
-                <p className="text-sm text-brand-navy/90">{reminderBody(reminder)}</p>
-              </div>
-              {reminder.category === "session" && reminder.preset ? (
-                <div className="flex w-full flex-col gap-1 sm:w-auto sm:min-w-[8rem]">
-                  <button
-                    type="button"
-                    onClick={() => startPreset(reminder.preset!)}
-                    disabled={pending}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95 disabled:opacity-50"
-                  >
-                    <span aria-hidden>▶️</span>
-                    {t("startNow")}
-                  </button>
-                  {errorByKey[`${reminder.preset.day}-${reminder.preset.start}`] ? (
-                    <span className="text-xs text-rose-500" role="alert">
-                      {errorByKey[`${reminder.preset.day}-${reminder.preset.start}`]}
-                    </span>
-                  ) : null}
-                </div>
-              ) : null}
-              {reminder.category === "session_end" ? (
-                <a
-                  href={SMT_PROGRESS_NOTE_HREF}
-                  onClick={() => dismissReminder(reminder.id)}
-                  className="inline-flex items-center justify-center rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
-                >
-                  {t("writeSmtNote")}
-                </a>
-              ) : null}
-              <button
-                type="button"
-                onClick={() => dismissReminder(reminder.id)}
-                className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-semibold text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15"
-              >
-                {t("dismissReminder")}
-              </button>
-            </div>
-          ))}
-        </div>
-      ) : null}
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex items-center gap-1 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] p-1">
@@ -341,8 +150,8 @@ export function ChairScheduledSessionsPanel({
         ) : (
           dayPresets.map((preset) => {
             const key = `${preset.day}-${preset.start}`;
-            const startMs = scheduledStartMs(preset.start, new Date(nowMs));
-            const endMs = scheduledStartMs(preset.end, new Date(nowMs));
+            const startMs = scheduledClockMs(preset.start, new Date(nowMs));
+            const endMs = scheduledClockMs(preset.end, new Date(nowMs));
             const minutes = Math.round(preset.durationSeconds / 60);
             const isLive = nowMs >= startMs && nowMs < endMs;
             const isPast = nowMs >= endMs;

@@ -37,12 +37,16 @@ import {
   isModeratedCaucusTimerPresetId,
 } from "@/lib/timer-presets";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
+import { GuideResourceEditor } from "@/components/guides/GuideResources";
+import { parseGuideResources, type GuideResource } from "@/lib/guide-resources";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
+import { isSeamunI2027QuorumRequired } from "@/lib/seamun-i-2027-locked-schedule";
 import {
   type RollAttendance,
   parseRollAttendance,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
+import { ActiveTimerWidgets, ActiveTimerWidgetsHeading } from "@/components/timers/ActiveTimerWidgets";
 import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
@@ -101,6 +105,7 @@ type Announcement = {
   body_format?: string | null;
   is_pinned?: boolean | null;
   publish_at?: string | null;
+  resources?: GuideResource[] | unknown;
 };
 type PauseEvent = { id: string; reason: string; created_at: string };
 type MotionRow = {
@@ -384,10 +389,12 @@ export function SessionControlClient({
   const [daisBody, setDaisBody] = useState("");
   const [daisFormat, setDaisFormat] = useState<"plain" | "markdown">("markdown");
   const [daisPublishAt, setDaisPublishAt] = useState("");
+  const [daisResources, setDaisResources] = useState<GuideResource[]>([]);
   const [daisEditingId, setDaisEditingId] = useState<string | null>(null);
   const [daisEditBody, setDaisEditBody] = useState("");
   const [daisEditFormat, setDaisEditFormat] = useState<"plain" | "markdown">("markdown");
   const [daisEditPublishAt, setDaisEditPublishAt] = useState("");
+  const [daisEditResources, setDaisEditResources] = useState<GuideResource[]>([]);
   const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
   const [timerWorkflowTab, setTimerWorkflowTab] = useState<"setup" | "clock" | "notes" | "log">("setup");
@@ -543,10 +550,12 @@ export function SessionControlClient({
       votingCallOrder.map((a) => a.id)
     );
     const required = Math.ceil((votingCallOrder.length * 2) / 3);
+    const enforced = isSeamunI2027QuorumRequired();
     return {
       present,
       required,
-      hasQuorum: votingCallOrder.length === 0 ? false : present >= required,
+      enforced,
+      hasQuorum: !enforced || (votingCallOrder.length > 0 && present >= required),
     };
   }, [rollAttendanceByAllocationId, votingCallOrder]);
 
@@ -972,7 +981,7 @@ export function SessionControlClient({
           .order("allocation_id"),
         supabase
           .from("dais_announcements")
-          .select("id, body, created_at, body_format, is_pinned, publish_at")
+          .select("id, body, created_at, body_format, is_pinned, publish_at, resources")
           .eq("conference_id", floorConferenceId)
           .order("is_pinned", { ascending: false })
           .order("created_at", { ascending: false })
@@ -1802,7 +1811,8 @@ export function SessionControlClient({
 
   function postDais() {
     const body = daisBody.trim();
-    if (!body) return;
+    const resources = parseGuideResources(daisResources);
+    if (!body && resources.length === 0) return;
     startTransition(async () => {
       if (!authUserId) {
         setMsg("You must be signed in.");
@@ -1816,10 +1826,12 @@ export function SessionControlClient({
         body_format: daisFormat,
         publish_at: publishAtIso,
         is_pinned: false,
+        resources,
       });
       if (!error) {
         setDaisBody("");
         setDaisPublishAt("");
+        setDaisResources([]);
       }
       setMsg(error ? error.message : tSessionControl("announcementPosted"));
       void refresh();
@@ -1854,18 +1866,21 @@ export function SessionControlClient({
     setDaisEditBody(a.body);
     setDaisEditFormat(a.body_format === "markdown" ? "markdown" : "plain");
     setDaisEditPublishAt(isoToDatetimeLocalValue(a.publish_at ?? null));
+    setDaisEditResources(parseGuideResources(a.resources));
   }
 
   function cancelEditDais() {
     setDaisEditingId(null);
     setDaisEditBody("");
     setDaisEditPublishAt("");
+    setDaisEditResources([]);
   }
 
   function saveDaisEdit() {
     if (!daisEditingId) return;
     const body = daisEditBody.trim();
-    if (!body) {
+    const resources = parseGuideResources(daisEditResources);
+    if (!body && resources.length === 0) {
       setMsg(tSessionControl("announcementBodyRequired"));
       return;
     }
@@ -1877,6 +1892,7 @@ export function SessionControlClient({
           body,
           body_format: daisEditFormat,
           publish_at: publishAtIso,
+          resources,
         })
         .eq("id", daisEditingId)
         .eq("conference_id", floorConferenceId);
@@ -3794,6 +3810,17 @@ export function SessionControlClient({
             {tTimer("controlsHelp")}
           </HelpButton>
         </div>
+        <div className="space-y-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-3">
+          <ActiveTimerWidgetsHeading theme="page" />
+          <ActiveTimerWidgets
+            conferenceId={floorConferenceId}
+            sessionConferenceId={canonicalConferenceId}
+            activeVoteItemId={openMotion?.id ?? null}
+            chairSeesRawTimer
+            showIdleFloorTimer
+            theme="page"
+          />
+        </div>
         <div className="flex flex-wrap gap-2">
           {(
             isEuParliamentProfile
@@ -4270,7 +4297,14 @@ export function SessionControlClient({
               value={daisBody}
               onChange={(e) => setDaisBody(e.target.value)}
             />
+            <span className="mt-1 block text-xs text-brand-muted">{tSessionControl("daisMarkdownHint")}</span>
           </label>
+          <GuideResourceEditor
+            resources={daisResources}
+            onChange={setDaisResources}
+            slugHint={`announcements/${floorConferenceId}`}
+            help={tSessionControl("daisResourcesHelp")}
+          />
           <div className="flex flex-wrap gap-4">
             <label className="block text-sm text-brand-navy">
               <span className={surfaceLabel}>{tSessionControl("format")}</span>
@@ -4336,6 +4370,13 @@ export function SessionControlClient({
                         value={daisEditBody}
                         onChange={(e) => setDaisEditBody(e.target.value)}
                       />
+                      <p className="text-xs text-brand-muted">{tSessionControl("daisMarkdownHint")}</p>
+                      <GuideResourceEditor
+                        resources={daisEditResources}
+                        onChange={setDaisEditResources}
+                        slugHint={`announcements/${floorConferenceId}`}
+                        help={tSessionControl("daisResourcesHelp")}
+                      />
                       <div className="flex flex-wrap gap-4">
                         <label className="block text-sm text-brand-navy">
                           <span className={surfaceLabel}>{tSessionControl("format")}</span>
@@ -4379,7 +4420,11 @@ export function SessionControlClient({
                     </div>
                   ) : (
                     <>
-                      <DaisAnnouncementBody body={a.body} format={fmt} />
+                      <DaisAnnouncementBody
+                        body={a.body}
+                        format={fmt}
+                        resources={parseGuideResources(a.resources)}
+                      />
                       <div className="mt-2 flex flex-wrap gap-2">
                         {a.is_pinned ? (
                           <button

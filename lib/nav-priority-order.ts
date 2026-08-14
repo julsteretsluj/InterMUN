@@ -186,10 +186,10 @@ export const CHAIR_HUB_TILE_HREF_ORDER = [
 ] as const;
 
 /** Delegate dashboard top tabs. */
-export const DELEGATE_DASHBOARD_TAB_ORDER = ["overview", "jump", "checklist", "chairs"] as const;
+export const DELEGATE_DASHBOARD_TAB_ORDER = ["overview", "checklist", "chairs"] as const;
 
 /** Chair dashboard top tabs. */
-export const CHAIR_DASHBOARD_TAB_ORDER = ["overview", "jump", "guidance"] as const;
+export const CHAIR_DASHBOARD_TAB_ORDER = ["overview", "guidance"] as const;
 
 /** Admin header links (href). */
 export const ADMIN_NAV_HREF_ORDER = [

@@ -1,8 +1,11 @@
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { ResolutionsView } from "@/components/resolutions/ResolutionsView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { requireActiveConferenceId } from "@/lib/active-conference";
+import { getChamberScope } from "@/lib/chamber-scope";
+import { fetchScorableDelegatesForCommittee } from "@/lib/seated-delegates-for-awards";
 import { getTranslations } from "next-intl/server";
 
 export default async function ResolutionsPage() {
@@ -49,12 +52,16 @@ export default async function ResolutionsPage() {
           .order("clause_number", { ascending: true })
       : { data: [] };
 
+  const chamber = await getChamberScope(supabase, conferenceId);
+  const delegates = await fetchScorableDelegatesForCommittee(supabase, chamber.siblingConferenceIds);
+
   return (
     <MunPageShell
       variant="split"
       title={t("resolutions")}
       titleAside={<PageFeatureGuideLink featureId="resolutions" role={myRole} />}
     >
+      <Suspense fallback={null}>
       <ResolutionsView
         resolutions={resolutions}
         blocs={blocs || []}
@@ -70,7 +77,9 @@ export default async function ResolutionsPage() {
         conferenceId={conferenceId}
         canCreate={canCreate}
         currentUserId={user.id}
+        delegates={delegates}
       />
+      </Suspense>
     </MunPageShell>
   );
 }

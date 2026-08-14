@@ -93,7 +93,10 @@ export function DashboardTopBar({
   }
 
   return (
-    <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[var(--dashboard-card)] shadow-[0_4px_18px_-16px_rgba(15,23,42,0.45)] transition-[background-color,box-shadow] duration-300 dark:bg-[var(--material-chrome)]">
+    <header
+      data-tour="tour-topbar"
+      className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[var(--dashboard-card)] shadow-[0_4px_18px_-16px_rgba(15,23,42,0.45)] transition-[background-color,box-shadow] duration-300 dark:bg-[var(--material-chrome)]"
+    >
       <div className="flex w-full flex-wrap items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
         <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:dark:inline-flex" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />

@@ -350,6 +350,8 @@
     "reopen": "重新開放",
     "daisAnnouncements": "講台公告",
     "daisAnnouncementsHelp": "使用 Markdown 來顯示粗體、清單和連結。 為地板條固定一條線；安排未來的發佈時間，代表們只有在該時間過去後才會看到它。 您可以編輯或刪除下面的任何行。",
+    "daisMarkdownHint": "Markdown: [Voting](/voting) for a page, [Rules](https://example.com) for a URL, or [Open](https://example.com \"button\") for a button. Bare https:// links are clickable too.",
+    "daisResourcesHelp": "Add a web link, an in-app page (/voting), a button, or upload a PDF/file. Delegates can use these from the floor strip and the full announcement.",
     "message": "訊息",
     "messageToCommittee": "給委員會的訊息...",
     "format": "格式",
@@ -1481,7 +1483,10 @@
     "perSpeaker": "（每個發言者）",
     "paused": "（停頓）",
     "pauseReason": "暫停：{原因}",
-    "dash": "—"
+    "dash": "—",
+    "activeTimers": "進行中的計時器",
+    "activeTimersAria": "會期與會場計時器",
+    "speakerClock": "發言人"
   },
   "dashboardSearch": {
     "aria": "搜尋",
@@ -1652,7 +1657,12 @@
       "noAllocations": "尚未為該委員會加載任何分配。準備好後關閉 - 您可以稍後從清單控制項中新增發言者。",
       "quickAdd": "快速新增（尚未等待或目前）",
       "alreadyQueued": "每個分配都已經有一個等待或目前的插槽。如果您需要重新排序，請刪除條目，或在完成後關閉。"
-    }
+    },
+    "noActiveSpeaker": "No one is at the mic",
+    "noTimerYet": "Save a speaker timer on Session → Timer to start the clock.",
+    "noWaitingToAdvance": "No waiting speakers in the queue to advance to.",
+    "perSpeakerShort": "per speaker",
+    "pausedParen": "(paused)"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "選擇直播主題",
@@ -3022,7 +3032,21 @@
     "finalizing": "Finalizing…",
     "finalizeNeedsDoc": "Add a Google Doc link before finalizing.",
     "extractedClausesTitle": "Extracted clauses",
-    "noBlocsYet": "No blocs have been set up for this committee yet."
+    "noBlocsYet": "No blocs have been set up for this committee yet.",
+    "blocTabsAria": "Resolution blocs",
+    "sponsorsTitle": "Submitters and signatories",
+    "mainSubmitters": "Main submitters",
+    "coSubmitters": "Co-submitters",
+    "signatories": "Signatories",
+    "mainRequired": "Need {count}",
+    "coRequired": "Need {count}",
+    "signatoriesRequired": "Need {count} (15% of committee)",
+    "emptySlot": "Open slot",
+    "addPerson": "Add",
+    "removePerson": "Remove",
+    "selectDelegate": "Select a delegation…",
+    "signMyself": "Add my name as a signatory",
+    "sponsorsLocked": "Finalized — these lists are locked."
   },
   "voting": {
     "tabs": {
@@ -4247,7 +4271,7 @@
       "reminderClosing": "Closing ceremony starts in {minutes} minutes ({start}).",
       "dismissReminder": "Dismiss",
       "startNow": "Start now",
-      "remindersHint": "Reminders show here while this page is open.",
+      "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
       "soundOff": "Reminder sound off"
     },
@@ -5117,6 +5141,174 @@
       "notifyEmailGreeting": "Hi {name},",
       "notifyEmailBody": "Your {item} for {conference} has been added to {app}. Sign in when your workspace is ready to review it.",
       "notifyEmailOutro": "Reply to this email if anything looks incorrect."
+    }
+  },
+  "guidedTour": {
+    "common": {
+      "next": "Next",
+      "back": "Back",
+      "skip": "Skip tour",
+      "done": "Got it",
+      "replay": "Take the guided tour",
+      "stepOf": "Step {current} of {total}"
+    },
+    "chair": {
+      "welcome": {
+        "title": "Chair view",
+        "body": "This is your committee workspace. Session floor, agenda, and scoring stay in the rail — we’ll walk the pieces that matter before debate opens."
+      },
+      "sidebar": {
+        "title": "The rail",
+        "body": "Folders group session, papers, and committee tools. Hover or tap a folder to open it; labels appear when the rail expands."
+      },
+      "session": {
+        "title": "Session",
+        "body": "Start and end the live session here — title, duration, and the floor clock chairs and delegates both follow."
+      },
+      "agenda": {
+        "title": "Agenda",
+        "body": "Set the live topic and open agenda votes. Topic choice lives on this page, not the chair hub."
+      },
+      "rollCall": {
+        "title": "Roll call",
+        "body": "Mark who is present before they can take the floor. Attendance locks in once you confirm it."
+      },
+      "delegates": {
+        "title": "Delegates",
+        "body": "The allocation matrix: who sits where, vacant seats, and pending sign-up requests for your chamber."
+      },
+      "timer": {
+        "title": "Timer",
+        "body": "Speech and caucus clocks. Presets you save here are what the room sees on the floor bar."
+      },
+      "notes": {
+        "title": "Notes",
+        "body": "Held delegate notes wait here. Release, bounce, or forward them before they reach the floor."
+      },
+      "score": {
+        "title": "Awards",
+        "body": "Score delegates against the conference rubric and submit nominations to secretariat when you’re ready."
+      },
+      "topbar": {
+        "title": "Top bar",
+        "body": "Search, language, accessibility, and your account stay up here on every chair page."
+      }
+    },
+    "delegate": {
+      "welcome": {
+        "title": "Delegate view",
+        "body": "Your committee tools are in the rail. We’ll point out the room, papers, voting, and notes — then you can explore at your pace."
+      },
+      "sidebar": {
+        "title": "The rail",
+        "body": "Folders keep hub, papers, and chamber tools together. Expand the rail to read labels, or use the dock on a phone."
+      },
+      "committee": {
+        "title": "Committee room",
+        "body": "The virtual chamber: placards, who’s speaking, and vacant seats. This is where debate actually lives."
+      },
+      "documents": {
+        "title": "Documents",
+        "body": "RoP, award criteria, and your own papers. SMT publishes shared files here for the whole conference."
+      },
+      "voting": {
+        "title": "Voting",
+        "body": "When the chair opens a vote, you answer here. You can only vote while you are present and the floor is in voting procedure."
+      },
+      "notes": {
+        "title": "Notes",
+        "body": "Pass notes to other delegations. Chairs may hold a note before it arrives — that’s normal, not an error."
+      },
+      "profile": {
+        "title": "Profile",
+        "body": "Your name, school, and allocation. Keep this accurate so chairs and advisors can find you."
+      },
+      "topbar": {
+        "title": "Top bar",
+        "body": "Search, language, and account settings follow you on every delegate page."
+      }
+    },
+    "smt": {
+      "welcome": {
+        "title": "Secretariat view",
+        "body": "Conference-wide controls live here. Chairs run their chambers; you keep codes, seats, and awards consistent."
+      },
+      "committees": {
+        "title": "Live committees",
+        "body": "Open any chamber to watch the floor, switch topic, or drop into chair tools without leaving secretariat."
+      },
+      "roomCodes": {
+        "title": "Room codes",
+        "body": "Committee join codes for chairs and delegates. Share these before the first session, not the placard passwords."
+      },
+      "matrix": {
+        "title": "Allocation matrix",
+        "body": "Every seat in every committee. Names can sit on a placard before a login exists — invites wait until you ask."
+      },
+      "awards": {
+        "title": "Awards",
+        "body": "Review chair nominations and the conference rubric. This is the secretariat side of scoring, not the floor."
+      },
+      "notes": {
+        "title": "Notes",
+        "body": "Session progress and messages chairs forward. Use this when a chamber needs secretariat eyes, not for routine floor notes."
+      },
+      "advisors": {
+        "title": "Advisors",
+        "body": "Link faculty advisors to their delegates so they can send guidance without sitting in committee."
+      },
+      "topbar": {
+        "title": "Top bar",
+        "body": "Search and account stay here. If you preview chair or delegate view, use the bar to return to secretariat."
+      }
+    },
+    "advisor": {
+      "welcome": {
+        "title": "Advisor view",
+        "body": "You support your school’s delegates from outside the chamber. Cards, notes, and the schedule are the whole job."
+      },
+      "hub": {
+        "title": "Your roster",
+        "body": "Each card is a delegate: country, committee, documents, and whether their account is linked yet."
+      },
+      "notes": {
+        "title": "Notes",
+        "body": "Send guidance in-app. Delegates reply in the same thread; chairs may also forward a note to you."
+      },
+      "schedule": {
+        "title": "Schedule",
+        "body": "Chamber rotation times for your advisor number. Pick the slot secretariat assigned so you know when to watch."
+      },
+      "guides": {
+        "title": "Guides",
+        "body": "MUN terms and conference references — useful when a delegate asks what a motion actually does."
+      },
+      "topbar": {
+        "title": "Top bar",
+        "body": "Search, language, and your account. The event name in the strip confirms which conference you’re advising."
+      }
+    },
+    "admin": {
+      "welcome": {
+        "title": "Admin view",
+        "body": "Website-level setup: new conferences, secretariat access, and shared guides. Day-to-day floor work stays in SMT."
+      },
+      "overview": {
+        "title": "Overview",
+        "body": "Registrations, checklist, and the status portal. Confirm what secretariat uploaded before you hand the event off."
+      },
+      "conference": {
+        "title": "New conference",
+        "body": "Create the event and first committee gates. Codes generated here are what chairs and delegates type at sign-in."
+      },
+      "smt": {
+        "title": "SMT dashboard",
+        "body": "Jump into secretariat tools for the live event — allocations, room codes, and awards — without leaving admin."
+      },
+      "guides": {
+        "title": "Guides",
+        "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
+      }
     }
   }
 }

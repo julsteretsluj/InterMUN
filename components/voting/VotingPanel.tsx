@@ -41,15 +41,18 @@ export function VotingPanel({
   includeUnseatedDelegatePlacards = true,
   forceManageVotes = false,
   onAgendaTopicPassed,
+  kind = "all",
 }: {
   voteItems: VoteItem[];
   myRole: string;
   /** When true (default), list every delegate placard from the matrix, including seats not yet linked to a user. */
   includeUnseatedDelegatePlacards?: boolean;
-  /** Force-enable chair controls in contexts that are already chair-only (e.g. chair session agenda modal). */
+  /** Force-enable chair controls in contexts that are already chair-only (e.g. chair session agenda). */
   forceManageVotes?: boolean;
   /** Optional callback fired when an agenda-setting ballot is closed and passes. */
   onAgendaTopicPassed?: (topicConferenceId: string) => void;
+  /** `motions` hides agenda ballots (use /agenda). `agenda` shows only agenda-setting votes. */
+  kind?: "all" | "motions" | "agenda";
 }) {
   const locale = useLocale();
   const t = useTranslations("voting");
@@ -277,8 +280,10 @@ export function VotingPanel({
     return { yes, no, total, passes };
   }
 
-  const agendaVoteItems = voteItems.filter((i) => isAgendaFloorVoteItem(i));
-  const motionVoteItems = voteItems.filter((i) => !isAgendaFloorVoteItem(i));
+  const agendaVoteItems =
+    kind === "motions" ? [] : voteItems.filter((i) => isAgendaFloorVoteItem(i));
+  const motionVoteItems =
+    kind === "agenda" ? [] : voteItems.filter((i) => !isAgendaFloorVoteItem(i));
   const openItems = motionVoteItems.filter((i) => !i.closed_at);
   const closedItems = motionVoteItems.filter((i) => !!i.closed_at);
 

@@ -11,6 +11,7 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AppleAppFrame } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
 import { AdminAppChrome } from "@/components/admin/AdminAppChrome";
+import { TourShell } from "@/components/tour/TourShell";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -57,6 +58,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <AppleAppFrame appName={appName} className="bg-[var(--dashboard-cream)]">
+      <TourShell view="admin">
       <AdminAppChrome
         appName={appName}
         navItems={adminNav}
@@ -66,6 +68,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         {children}
       </AdminAppChrome>
       <PaperSavedWidget />
+      </TourShell>
     </AppleAppFrame>
   );
 }

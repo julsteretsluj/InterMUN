@@ -3,8 +3,9 @@
 
 "use client";
 
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
+import { QueryTabs } from "@/components/ui/Tabs";
 import { CheckCircle2, FileCheck, Lock, Plus, Trash2, Users } from "lucide-react";
 import {
   addClauseAction,
@@ -14,7 +15,15 @@ import {
   setCommitteeBlocsAction,
   setResolutionDocLinkAction,
   updateClauseAction,
+  updateResolutionSponsorsAction,
+  type ResolutionSponsorRole,
 } from "@/app/actions/resolutions";
+import {
+  MIN_RESOLUTION_CO_SUBMITTERS,
+  MIN_RESOLUTION_MAIN_SUBMITTERS,
+  minResolutionSignatories,
+} from "@/lib/resolution-functions";
+import type { ScorableDelegateRow } from "@/lib/seated-delegates-for-awards";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import {
   DelegateResolutionBuilder,
@@ -66,6 +75,7 @@ export function ResolutionsView({
   conferenceId,
   canCreate,
   currentUserId,
+  delegates = [],
 }: {
   resolutions: Resolution[];
   blocs: Bloc[];
@@ -73,6 +83,7 @@ export function ResolutionsView({
   conferenceId: string;
   canCreate: boolean;
   currentUserId: string;
+  delegates?: ScorableDelegateRow[];
 }) {
   const t = useTranslations("resolutions");
   const [actionError, setActionError] = useState<string | null>(null);
@@ -96,6 +107,7 @@ export function ResolutionsView({
   const [finalizeError, setFinalizeError] = useState<Record<string, string>>({});
   const [newClause, setNewClause] = useState<Record<string, string>>({});
   const [editingClause, setEditingClause] = useState<Record<string, string>>({});
+  const [sponsorPick, setSponsorPick] = useState<Record<string, string>>({});
 
   const stanceLabel = (stance: string) => {
     switch (stance) {
@@ -198,6 +210,33 @@ export function ResolutionsView({
     });
   }
 
+  function delegateLabel(userId: string): string {
+    const row = delegates.find((d) => d.userId === userId);
+    if (!row) return userId.slice(0, 8);
+    const name = row.displayName.trim();
+    return name && name !== row.country ? `${row.country} — ${name}` : row.country;
+  }
+
+  function updateSponsor(resolutionId: string, role: ResolutionSponsorRole, action: "add" | "remove", userId: string) {
+    if (!userId) return;
+    setActionError(null);
+    startTransition(async () => {
+      const result = await updateResolutionSponsorsAction({ resolutionId, role, action, userId });
+      if (!result.ok) {
+        setActionError(result.error);
+        return;
+      }
+      if (action === "add") {
+        setSponsorPick((prev) => {
+          const next = { ...prev };
+          delete next[`${resolutionId}:${role}`];
+          return next;
+        });
+      }
+      location.reload();
+    });
+  }
+
   function deleteClause(clauseId: string) {
     if (!canCreate) return;
     setActionError(null);
@@ -221,6 +260,28 @@ export function ResolutionsView({
       conference_id: r.conference_id,
       google_docs_url: r.google_docs_url,
     }));
+
+  const blocTabs = useMemo(
+    () =>
+      resolutions.map((r) => {
+        const bloc = blocs.find((b) => b.resolution_id === r.id);
+        const name = bloc?.name?.trim() || t("blocFallback");
+        const isFinalized = (r.status ?? "draft") === "finalized";
+        return {
+          id: r.id,
+          label: isFinalized ? `${name} · ${t("finalizedBadge")}` : name,
+        };
+      }),
+    [resolutions, blocs, t]
+  );
+
+  const defaultBlocId = useMemo(() => {
+    const joined = resolutions.find((r) => {
+      const bloc = blocs.find((b) => b.resolution_id === r.id);
+      return bloc?.bloc_memberships?.some((m) => m.user_id === currentUserId);
+    });
+    return joined?.id ?? resolutions[0]?.id;
+  }, [resolutions, blocs, currentUserId]);
 
   return (
     <div className="space-y-4">
@@ -310,10 +371,15 @@ export function ResolutionsView({
 
       {resolutions.length === 0 ? (
         <p className="text-sm text-brand-muted">{t("noBlocsYet")}</p>
-      ) : null}
-
-      <div className="space-y-4">
-        {resolutions.map((r) => {
+      ) : (
+      <QueryTabs
+        options={blocTabs}
+        tabKey="bloc"
+        fallbackId={defaultBlocId}
+        ariaLabel={t("blocTabsAria")}
+        renderPanel={(activeId) => {
+          const r = resolutions.find((row) => row.id === activeId);
+          if (!r) return null;
           const bloc = blocs.find((b) => b.resolution_id === r.id) ?? null;
           const members = bloc?.bloc_memberships ?? [];
           const isMember = members.some((m) => m.user_id === currentUserId);
@@ -324,7 +390,7 @@ export function ResolutionsView({
           const hasDocLink = Boolean(r.google_docs_url?.trim());
 
           return (
-            <div key={r.id} className="dashboard-panel space-y-3 rounded-xl p-4">
+            <div className="dashboard-panel space-y-3 rounded-xl p-4">
               {/* Header: bloc identity + status */}
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex flex-wrap items-center gap-2">
@@ -364,6 +430,155 @@ export function ResolutionsView({
                   {t("joinThisBloc")}
                 </button>
               ) : null}
+
+              {(() => {
+                const mainIds = (r.main_submitters ?? []).filter(Boolean);
+                const coIds = (r.co_submitters ?? []).filter(Boolean);
+                const signIds = (r.signatories ?? []).filter(Boolean);
+                const listed = new Set([...mainIds, ...coIds, ...signIds]);
+                const canEditSponsors = (canCreate || isMember) && !isFinalized;
+                const minSign = minResolutionSignatories(delegates.length);
+                const available = delegates.filter((d) => !listed.has(d.userId));
+                const onThisDraft = listed.has(currentUserId);
+                const columns: {
+                  role: ResolutionSponsorRole;
+                  title: string;
+                  hint: string;
+                  ids: string[];
+                  required: number;
+                }[] = [
+                  {
+                    role: "main",
+                    title: t("mainSubmitters"),
+                    hint: t("mainRequired", { count: MIN_RESOLUTION_MAIN_SUBMITTERS }),
+                    ids: mainIds,
+                    required: MIN_RESOLUTION_MAIN_SUBMITTERS,
+                  },
+                  {
+                    role: "co",
+                    title: t("coSubmitters"),
+                    hint: t("coRequired", { count: MIN_RESOLUTION_CO_SUBMITTERS }),
+                    ids: coIds,
+                    required: MIN_RESOLUTION_CO_SUBMITTERS,
+                  },
+                  {
+                    role: "signatory",
+                    title: t("signatories"),
+                    hint: t("signatoriesRequired", { count: minSign }),
+                    ids: signIds,
+                    required: minSign,
+                  },
+                ];
+                return (
+                  <div className="space-y-2">
+                    <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
+                      {t("sponsorsTitle")}
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {columns.map((col) => {
+                        const pickKey = `${r.id}:${col.role}`;
+                        const slotCount = Math.max(col.required, col.ids.length);
+                        return (
+                          <div
+                            key={col.role}
+                            className="space-y-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-3"
+                          >
+                            <div>
+                              <p className="text-sm font-semibold text-brand-navy">{col.title}</p>
+                              <p className="text-xs text-brand-muted">
+                                {col.ids.length}/{col.required} · {col.hint}
+                              </p>
+                            </div>
+                            <ul className="space-y-1.5">
+                              {Array.from({ length: slotCount }, (_, i) => {
+                                const userId = col.ids[i];
+                                if (!userId) {
+                                  return (
+                                    <li
+                                      key={`open-${col.role}-${i}`}
+                                      className="rounded-md border border-dashed border-[var(--hairline)] px-2 py-1.5 text-xs text-brand-muted"
+                                    >
+                                      {t("emptySlot")}
+                                    </li>
+                                  );
+                                }
+                                return (
+                                  <li
+                                    key={userId}
+                                    className="flex items-start justify-between gap-2 rounded-md border border-[var(--hairline)] bg-[var(--dashboard-card)] px-2 py-1.5"
+                                  >
+                                    <span className="min-w-0 text-xs font-medium text-brand-navy">
+                                      {delegateLabel(userId)}
+                                    </span>
+                                    {canEditSponsors ? (
+                                      <button
+                                        type="button"
+                                        disabled={pending}
+                                        onClick={() => updateSponsor(r.id, col.role, "remove", userId)}
+                                        className="shrink-0 text-[0.65rem] font-medium text-red-700 hover:underline dark:text-red-300 disabled:opacity-50"
+                                      >
+                                        {t("removePerson")}
+                                      </button>
+                                    ) : null}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                            {canEditSponsors ? (
+                              <div className="flex flex-col gap-1.5">
+                                <select
+                                  className={`${inputCls} text-xs`}
+                                  value={sponsorPick[pickKey] ?? ""}
+                                  onChange={(e) =>
+                                    setSponsorPick((prev) => ({ ...prev, [pickKey]: e.target.value }))
+                                  }
+                                >
+                                  <option value="">{t("selectDelegate")}</option>
+                                  {available.map((d) => (
+                                    <option key={d.userId} value={d.userId}>
+                                      {d.country}
+                                      {d.displayName.trim() && d.displayName.trim() !== d.country
+                                        ? ` — ${d.displayName}`
+                                        : ""}
+                                    </option>
+                                  ))}
+                                </select>
+                                <button
+                                  type="button"
+                                  disabled={pending || !(sponsorPick[pickKey] ?? "").trim()}
+                                  onClick={() =>
+                                    updateSponsor(r.id, col.role, "add", sponsorPick[pickKey] ?? "")
+                                  }
+                                  className="inline-flex items-center justify-center gap-1 rounded-lg border border-[var(--hairline)] px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/5 disabled:opacity-50"
+                                >
+                                  <Plus className="h-3.5 w-3.5" />
+                                  {t("addPerson")}
+                                </button>
+                              </div>
+                            ) : null}
+                            {!canCreate &&
+                            !isFinalized &&
+                            col.role === "signatory" &&
+                            !onThisDraft ? (
+                              <button
+                                type="button"
+                                disabled={pending}
+                                onClick={() => updateSponsor(r.id, "signatory", "add", currentUserId)}
+                                className="w-full rounded-lg border border-[var(--hairline)] px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/5 disabled:opacity-50"
+                              >
+                                {t("signMyself")}
+                              </button>
+                            ) : null}
+                            {isFinalized ? (
+                              <p className="text-[0.65rem] text-brand-muted">{t("sponsorsLocked")}</p>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Google Doc link (members or staff) */}
               {isMember || canCreate ? (
@@ -514,8 +729,9 @@ export function ResolutionsView({
               </div>
             </div>
           );
-        })}
-      </div>
+        }}
+      />
+      )}
     </div>
   );
 }
