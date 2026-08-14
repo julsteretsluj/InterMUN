@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Перезагрузить"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "например СЕАМУНИ2027",
@@ -574,7 +575,8 @@
     "subtabs": "Подвкладки",
     "home": "Дом",
     "library": "Библиотека",
-    "mainNavigationAria": "Основная навигация"
+    "mainNavigationAria": "Основная навигация",
+    "crisis": "Кризис"
   },
   "dashboardLayout": {
     "helpCenter": "Справочный центр",
@@ -838,7 +840,9 @@
     "pointsLog": "• Журнал очков",
     "formalMotions": "Официальные ходатайства",
     "timer": "Таймер",
-    "smtProfile": "Профиль"
+    "smtProfile": "Профиль",
+    "crisis": "Кризис",
+    "smtDelegates": "Делегаты"
   },
   "setupPage": {
     "title": "Супабаза не настроена",
@@ -1333,7 +1337,8 @@
       "roomCode": "Код номера",
       "settings": "Настройки",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Отчет"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Мероприятия и сессии",
     "roomCodes": "Коды номеров и стулья",
     "advisors": "Советники",
-    "notes": "Notes",
+    "notes": "Примечания",
     "awards": "Награды",
     "allocationMatrix": "Матрица распределения",
     "allocationPasswords": "Пароли распределения",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Отдел новостей",
+    "pressCorps": "Пресс-корпус",
+    "milestones": "Вехи",
     "profile": "Профиль",
     "follow": "Следовать",
     "hubAbbrev": "СМТ",
-    "guides": "Guides"
+    "guides": "Путеводители",
+    "delegates": "Делегаты"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Программы и фонды",
       "specializedAgencies": "Специализированные агентства и связанные с ними",
       "peacekeepingMissions": "Поддержание мира и миссии",
-      "foundersMembers": "Основатели и члены"
+      "foundersMembers": "Основатели и члены",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Ссылки на пресс-корпус"
     },
     "links": {
       "ods": "Система официальной документации ООН (СОД)",
@@ -1471,7 +1479,29 @@
       "spm": "Специальные политические миссии ООН",
       "memberStates": "Государства-члены ООН",
       "unSystem": "Система ООН (основатели и члены)",
-      "history": "История ООН"
+      "history": "История ООН",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Веб-сайт конференции и портал комитета",
+      "documentsArticles": "СОД, цифровая библиотека, новости, пресса и ежегодник",
+      "legislationTreaties": "Договоры, хартия и международное право",
+      "mainBodies": "ГА, Совет Безопасности, ЭКОСОС, Международный Суд и другие",
+      "programmesFunds": "ПРООН, ЮНИСЕФ, УВКБ ООН, ВПП и соответствующие фонды",
+      "specializedAgencies": "ВОЗ, ЮНЕСКО, Всемирный банк, МОТ и партнеры",
+      "peacekeepingMissions": "Миротворческие и специальные политические миссии",
+      "foundersMembers": "Государства-члены, система ООН и история",
+      "pressCorpsLinks": "Три новостные службы для каждого подразделения Пресс-корпуса (мир, здравоохранение и репортажи)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Напоминание",
     "privateReminderLabel": "Личное напоминание (только стулья, синхронизируется)",
     "committeeFallback": "комитет",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Формирование блока",
       "speechPoisOrPocs": "Речевые POI или POC",
       "questions": "Вопросы",
-      "informalConversations": "Неформальные беседы"
+      "informalConversations": "Неформальные беседы",
+      "sessionProgress": "Ход сеанса (SMT)"
     },
     "concernLabel": "Концерн (автозаполнитель)",
     "concernHelpTitle": "Флаг концерна",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Вам нужно распределение, чтобы отправлять заметки (или быть председателем).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Не удалось отправить заметку."
-    }
+    },
+    "sendToSmt": "Отправить в СМТ",
+    "sendToSmtHelp": "Приземляется в секретариате заметок (С кресла). Используйте это для отслеживания прогресса в конце сеанса.",
+    "progressPrefill": "Заседание комитета только что закончилось. \n\nПрогресс: \n- \n\nВсе, что SMT должно отслеживать: \n-",
+    "progressComposeHint": "Эта записка перейдет в SMT. Кратко изложите, что обсуждалось в зале и что должен знать секретариат.",
+    "progressSent": "Записка о ходе выполнения отправлена ​​в SMT."
   },
   "adminPage": {
     "title": "Администрирование сайта",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Строки данных не найдены (в каждой строке необходимо указать хотя бы страну/должность).",
       "importLimitedRows": "Импорт ограничен {max} строками. Разделите файл.",
       "rowTooLong": "Слишком длинная строка: {row}…",
-      "codeTooLongOnRow": "Слишком длинный код в строке: {row}"
+      "codeTooLongOnRow": "Слишком длинный код в строке: {row}",
+      "chairSeatsCannotBeDeleted": "Места главного председателя и сопредседателя остаются в каждом комитете."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Сначала выберите событие с кодом конференции (ворота события).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Названия позиций и коды табло могут быть изменены только администратором сайта."
   },
   "chairAllocationMatrixPage": {
     "intro": "Матрица распределения комитетов для вашей текущей сессии. Для стульев это значение доступно только для чтения и отражает активное назначение мест и коды табло.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Запрошенное распределение",
       "account": "Счет",
       "actions": "Действия",
-      "score": "Score"
+      "score": "Счет",
+      "photo": "Фото",
+      "school": "Школа",
+      "party": "Политическая группа"
     },
     "noRows": "Для этого комитета не найдено строк распределения.",
     "pendingApprovalsTitle": "Ожидает одобрения регистрации",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Матрица распределения",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Ходатайства",
+    "pointsTitle": "Очки",
+    "resolutionsTitle": "Резолюции",
+    "noMotions": "Для этого делегата не зарегистрировано никаких предложений.",
+    "noPoints": "Для этого делегата не зарегистрировано ни одного балла.",
+    "noResolutions": "Для этого делегата не зарегистрировано участие в разрешении проблем.",
+    "untitledMotion": "Движение без названия",
+    "chairLoggedPoint": "Точка, зарегистрированная на стуле",
+    "resolutionLink": "Открыть Google Документ",
+    "resolutionNoLink": "Нет ссылки на документ",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "процедурный",
+      "delegate": "Журнал стула"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Главный отправитель",
+      "co": "Соавтор",
+      "signatory": "Подписавшееся лицо"
+    },
+    "speechesTitle": "Выступления",
+    "flagsTitle": "Комплименты и опасения",
+    "disciplineTitle": "Предупреждения и забастовки",
+    "noSpeeches": "Речи этого делегата не записаны.",
+    "noFlags": "Никаких комплиментов или замечаний в адрес этого делегата не зафиксировано.",
+    "noDiscipline": "Для этого делегата не зарегистрировано никаких предупреждений или забастовок.",
+    "untitledSpeech": "Речь",
+    "currentFlag": "Текущий",
+    "speechStatuses": {
+      "waiting": "Ожидающий",
+      "current": "Говорящий",
+      "done": "Доставленный"
+    },
+    "flagKinds": {
+      "compliment": "Комплимент",
+      "concern": "Беспокойство",
+      "reminder": "Напоминание"
+    },
+    "disciplineActions": {
+      "warning": "Предупреждение",
+      "strike": "Ударять",
+      "revoke_warning": "Предупреждение отозвано",
+      "revoke_strike": "Забастовка отменена",
+      "reset": "Перезагрузить"
+    },
+    "disciplineCounts": "{warnings} предупреждение(я) · {strikes} предупреждение(я)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "ваш комитет",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Зал заседаний (полный)",
         "hint": "Виртуальная планировка и этаж для делегатов"
+      },
+      "crisisReport": {
+        "label": "Отчет",
+        "hint": "Отчеты об инцидентах"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Примечания",
     "noGoogleDocYet": "Документ Google пока не связан. Используйте «Изменить», чтобы добавить URL-адрес docs.google.com/document/d/….",
     "chairFeedbackHeading": "Отзыв председателя",
-    "noFeedbackYet": "Отзыв еще не добавлен."
+    "noFeedbackYet": "Отзыв еще не добавлен.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Присутствует — может воздержаться (перекат)",
       "present_voting": "Присутствие и голосование (список)",
       "unknown": "- (рулон)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Ссылки, кнопки и файлы",
+      "help": "Добавьте веб-ссылку, кнопку или загрузите PDF-файл или файл. Любой, кто откроет это руководство, может использовать их.",
+      "kindLink": "Связь",
+      "kindButton": "Кнопка",
+      "kindFile": "Файл",
+      "label": "Этикетка",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Добавлять",
+      "upload": "Загрузите PDF или файл",
+      "uploading": "Загрузка…",
+      "remove": "Удалять",
+      "download": "Открыть",
+      "empty": "Ссылок и файлов пока нет.",
+      "errorType": "Используйте PDF, документ Office, текстовый файл или файл изображения.",
+      "errorSize": "Файл слишком велик (максимум 15 МБ).",
+      "errorUpload": "Не удалось загрузить этот файл.",
+      "markdownHelp": "В заметках вы также можете написать [label](https://url) для ссылки или [label](https://url «кнопка») для кнопки. Вставьте URL-адрес файла или загрузите его выше."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Проверка статуса вашего рулона...",
       "rollPromptSaving": "Сохранение...",
       "rollPromptPresent": "Подарок",
-      "rollPromptPresentVoting": "Присутствуем и голосуем"
+      "rollPromptPresentVoting": "Присутствуем и голосуем",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Процедура голосования",
@@ -4241,7 +4382,11 @@
       "timer": "Таймер",
       "sidebarAnd": "и",
       "announcements": "Объявления",
-      "sidebarUseSuffix": "— по одному инструменту на вкладке."
+      "sidebarUseSuffix": "— по одному инструменту на вкладке.",
+      "smtProgressReminderTitle": "Обновить SMT в этом сеансе",
+      "smtProgressReminderBody": "Отправьте краткую записку о ходе работы, чтобы секретариат знал, как прошел комитет и что делать дальше.",
+      "smtProgressReminderWrite": "Написать заметку",
+      "smtProgressReminderDismiss": "Позже"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Сеанс завершен — обновите SMT",
+      "reminderSessionEnd": "{title} должно было закончиться в {start}. Отправьте SMT короткую заметку о ходе работы.",
+      "writeSmtNote": "Написать заметку"
     },
     "history": {
       "title": "История сеансов",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Мест для выдвижения кандидатов в этот комитет пока нет.",
+    "stepProgress": "Номинация {current} из {total}",
+    "requiredProgress": "{done}/{total} необходимые слоты заполнены",
+    "gotoStep": "Перейти к {label}",
+    "lockedTitle": "Сначала завершите каждую карточку делегата",
+    "lockedBody": "Заполните критерии сессии для каждого сидящего делегата выше, а затем вернитесь сюда, чтобы назначить награды по одному месту за раз.",
+    "optional": "необязательный",
+    "submittedLocked": "Отправлено в SMT — редактирование заблокировано.",
+    "topSuggestions": "Топ-5 из рубрики сессии",
+    "topSuggestionsHint": "Самые высокие матричные итоги в этом комитете. Выберите один или выполните поиск ниже.",
+    "noSuggestions": "Рейтинговых делегатов пока нет. Сначала оцените матрицу или выполните поиск по имени.",
+    "searchLabel": "Поиск делегатов",
+    "searchPlaceholder": "Имя или распределение",
+    "searchEmpty": "Ни один делегат не соответствует этому запросу.",
+    "selectedNominee": "Выбранный номинант",
+    "pickNomineeHint": "Выберите номинанта из топ-5 или выполните поиск, чтобы открыть его рубрику и войти.",
+    "rubricHeading": "Рубрика номинации",
+    "rubricTotal": "Всего по рубрике: {total}/{max} (оценка критериев {scored}/{criteria} — 1–8 баллов за каждый критерий)",
+    "evidenceLabel": "Заявление о подтверждении/доказательстве",
+    "evidencePlaceholder": "Приведите конкретные фактические данные (разработанные статьи, достигнутые компромиссы, ключевые вмешательства). Минимум {min} символов — требуется для утверждения SMT.",
+    "previous": "Предыдущий",
+    "skipOptional": "Пропустить дополнительный слот",
+    "next": "Следующий",
+    "locked": "Заблокировано",
+    "matrixRequired": "Сначала требуется матрица",
+    "saving": "Сохранение…",
+    "saveAndNext": "Сохранить и дальше",
+    "save": "Сохранять",
+    "allSlotsSummary": "Все слоты номинаций",
+    "statusDone": "Сделанный",
+    "statusTodo": "Делать",
+    "errors": {
+      "selectNominee": "Выберите кандидата на этот слот.",
+      "completeRubric": "Перед сохранением выберите диапазон для каждого критерия.",
+      "evidenceMin": "Добавьте не менее {min} символов доказательства."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Общее завершение награждений",
+    "completeCount": "{completed}/{total} завершено",
+    "requiredLabel": "Прогресс (обязательно)",
+    "optionalSlots": "Дополнительные слоты: {completed}/{total} заполнены."
+  },
+  "chairAwardsSubmit": {
+    "title": "Отправить в СМТ",
+    "intro": "Сохранение слота записывает только черновик; SMT не увидит его, пока вы не отправите пакет ниже. Когда необходимые слоты будут заполнены, отправьте партию на проверку SMT. Автоматическая отправка также запускается после {deadline} (UTC), когда вы открываете эту страницу, или через запланированное задание, если это настроено в вашем развертывании.",
+    "requiredSlotsIncomplete": "Обязательные слоты заполнены: {done}/{total} — завершите остальные, затем отправьте, чтобы SMT мог проверить.",
+    "requiredSlotsReady": "Необходимые слоты заполнены: {done}/{total} — пакет номинаций готов (убедитесь, что приведенная выше матрица делегатов заполнена).",
+    "matrixIncomplete": "Матрица делегатов (каждый сидящий делегат): {done}/{total} — оцените каждого делегата выше перед отправкой.",
+    "matrixComplete": "Матрица делегатов (каждый сидящий делегат): {done}/{total} — заполнено.",
+    "alreadySubmitted": "Отправлено в SMT{when}. Редактирование заблокировано; свяжитесь с SMT, если вам нужны изменения.",
+    "submittedAt": "— {time}",
+    "submitButton": "Подать заявки в SMT",
+    "submitting": "Отправка…",
+    "needComplete": "Заполните все необходимые слоты для номинаций и матрицу делегатов, а затем подайте заявку.",
+    "deadlinePassed": "Срок истек — отправьте заявку сейчас, если вы еще этого не сделали."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "У вас еще нет места в комитете. Попросите секретариат назначить вас в матрицу распределения, а затем вернитесь сюда.",
+    "intro": "Каждый комитет имеет код комитета внутри своей конференции (вторые ворота после того, как делегаты вводят код конференции). Коды должны быть уникальными в рамках одного мероприятия конференции.",
+    "testingOverride": "Включено переопределение тестирования: вы можете переключать коды комитетов и управлять ими между комитетами без проверок распределения мест.",
+    "chairScope": "Будучи помостом, вы видите только комитеты, в которых у вас есть место. Сохранение отправляет вас в ваш профиль; делегаты, которые уже прошли через ворота комитета, остаются в системе до тех пор, пока не выйдут из системы.",
+    "staffAfterSave": "После сохранения вы можете войти в этот комитет или поделиться кодом на помосте."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Список копирования (TSV)",
+    "copied": "Скопировал таблицу в буфер обмена.",
+    "helpTitle": "Коды входа для распределения",
+    "helpBody": "Это коды табло для каждого распределения, используемые делегатами и председателями во время пропуска кода распределения. Коды могут быть изменены только администратором сайта.",
+    "copyHeader": "Конференция: {conference}",
+    "copyColumns": "Код делегата страны",
+    "columnCountry": "Страна/распределение",
+    "columnDelegate": "Делегат (распределение)",
+    "columnCode": "Пароль/код",
+    "codeFieldHelpTitle": "Поле пароля/кода",
+    "codeFieldHelpBody": "Делегаты вводят этот код для назначенного им распределения. Изменить его может только администратор сайта.",
+    "empty": "На эту конференцию пока нет ассигнований."
+  },
+  "chairSessionError": {
+    "title": "Не удалось загрузить этаж сеанса.",
+    "fallback": "Произошла непредвиденная ошибка при загрузке элементов управления сеансом председателя.",
+    "reference": "Ссылка: {digest}",
+    "backToDashboard": "Вернуться к приборной панели кресла"
+  },
+  "smtDelegatesPage": {
+    "title": "Делегаты",
+    "intro": "Выполните поиск каждого связанного делегата на этом мероприятии по имени, распределению, адресу электронной почты или комитету. Откройте карточку с его фотографией и профилем.",
+    "selectEventFirst": "Сначала выберите активное мероприятие конференции.",
+    "enterConferenceCode": "Введите код конференции",
+    "searchLabel": "Поиск делегатов",
+    "searchPlaceholder": "Имя, распределение, адрес электронной почты или комитет",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "В этом мероприятии пока нет связанных делегатов.",
+    "noMatches": "Ни один делегат не соответствует этому запросу.",
+    "unnamed": "Неназванный делегат"
   }
 }

@@ -27,6 +27,7 @@ export type SmtNavKey =
   | "eventSessions"
   | "roomCodes"
   | "advisors"
+  | "delegates"
   | "notes"
   | "awards"
   | "allocationMatrix"
@@ -50,6 +51,7 @@ const SMT_NAV_ITEMS: SmtNavItem[] = [
   { href: "/smt/conference", navKey: "eventSessions", emoji: "📅" },
   { href: "/smt/room-codes", navKey: "roomCodes", emoji: "🚪" },
   { href: "/smt/advisors", navKey: "advisors", emoji: "🎓" },
+  { href: "/smt/delegates", navKey: "delegates", emoji: "🧑‍🎓" },
   { href: "/smt/newsroom", navKey: "newsroom", emoji: "🗞️" },
   { href: "/smt/press-corps", navKey: "pressCorps", emoji: "📸" },
   { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },

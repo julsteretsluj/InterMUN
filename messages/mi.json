@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Utaina ano"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "e.g. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Riparoto",
     "home": "Kainga",
     "library": "Whare Pukapuka",
-    "mainNavigationAria": "Te whakatere matua"
+    "mainNavigationAria": "Te whakatere matua",
+    "crisis": "Te raruraru"
   },
   "dashboardLayout": {
     "helpCenter": "Pokapū awhina",
@@ -838,7 +840,9 @@
     "pointsLog": "• Rangitaki tohu",
     "formalMotions": "Motini okawa",
     "timer": "Matawā",
-    "smtProfile": "Kōtaha"
+    "smtProfile": "Kōtaha",
+    "crisis": "Te raruraru",
+    "smtDelegates": "Nga Kai-whakahaere"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -1333,7 +1337,8 @@
       "roomCode": "Waehere ruma",
       "settings": "Tautuhinga",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Ripoata"
     }
   },
   "smtNav": {
@@ -1346,13 +1351,14 @@
     "awards": "Tohu",
     "allocationMatrix": "Matrix tohatoha",
     "allocationPasswords": "Kupuhipa tohatoha",
-    "newsroom": "Newsroom",
+    "newsroom": "Whare Karere",
     "pressCorps": "Press Corps",
     "milestones": "Milestones",
     "profile": "Kōtaha",
     "follow": "Whaia",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Kaitohutohu",
+    "delegates": "Nga Kai-whakahaere"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Nga kaupapa me nga putea",
       "specializedAgencies": "Nga tari motuhake me nga hononga",
       "peacekeepingMissions": "Te rangimarie me te misioni",
-      "foundersMembers": "Nga Kaihanga me nga mema"
+      "foundersMembers": "Nga Kaihanga me nga mema",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Hononga Press Corps"
     },
     "links": {
       "ods": "Pūnaha Tuhinga Whaimana UN (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Nga Miihana Torangapu Motuhake a UN",
       "memberStates": "Whenua Mema UN",
       "unSystem": "UN Pūnaha (nga kaiwhakarewa me nga mema)",
-      "history": "UN History"
+      "history": "UN History",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Pae tukutuku hui me te tomokanga komiti",
+      "documentsArticles": "ODS, Te Puna Mamati, nga korero, te perehi, me te pukapuka tau",
+      "legislationTreaties": "Nga Tiriti, te tūtohinga, me te ture o te ao",
+      "mainBodies": "GA, Kaunihera Haumarutanga, ECOSOC, ICJ, me etahi atu",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP, me nga putea e pa ana",
+      "specializedAgencies": "WHO, UNESCO, World Bank, ILO, me nga hoa",
+      "peacekeepingMissions": "Ko nga misioni torangapu motuhake me te tiaki rangimarie",
+      "foundersMembers": "Nga whenua mema, te punaha UN, me te hitori",
+      "pressCorpsLinks": "E toru nga papa korero mo ia roopu Press Corps (te ao, te hauora, me nga ahuatanga)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Whakamaumahara",
     "privateReminderLabel": "Whakamaumahara tūmataiti (tūru anake, tukutahi)",
     "committeeFallback": "Komiti",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Te hanga poraka",
       "speechPoisOrPocs": "Nga POI korero, POC ranei",
       "questions": "Nga patai",
-      "informalConversations": "Kōrero ōpaki"
+      "informalConversations": "Kōrero ōpaki",
+      "sessionProgress": "Te ahunga whakamua Wātū (SMT)"
     },
     "concernLabel": "Āwangawanga (puriwāhi aunoa)",
     "concernHelpTitle": "haki āwangawanga",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Me toha koe ki te tuku tuhipoka (he tuuru ranei).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "I rahua te tuku tuhipoka."
-    }
+    },
+    "sendToSmt": "Tukuna ki SMT",
+    "sendToSmtHelp": "Nga whenua kei roto i te pouaka korero a te hekeretari (Mai i nga tuuru). Whakamahia tenei mo te ahunga whakamua mutunga-o-waahanga.",
+    "progressPrefill": "Katahi ano ka mutu te huihuinga o te komiti. \n\nTe ahunga whakamua: \n- \n\nKo nga mea katoa me whai a SMT: \n-",
+    "progressComposeHint": "Ka haere tenei tuhipoka ki SMT. Whakarāpopotohia ngā mea i hipokina e te rūma me ngā mea me mōhio te hēkeretari.",
+    "progressSent": "I tukuna te tuhipoka ahu whakamua ki SMT."
   },
   "adminPage": {
     "title": "Whakahaere paetukutuku",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Karekau he rarangi raraunga i kitea (me whai whenua/turanga mo ia raina).",
       "importLimitedRows": "Kawemai iti ki te {max} haupae. Wehea to kōnae.",
       "rowTooLong": "Roa rawa te rarangi: {row}…",
-      "codeTooLongOnRow": "He roa rawa te Waehere i te rarangi: {row}"
+      "codeTooLongOnRow": "He roa rawa te Waehere i te rarangi: {row}",
+      "chairSeatsCannotBeDeleted": "Ka noho te Heamana Tumuaki me nga tuuru takirua ki ia komiti."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Kōwhiria he huihuinga me te waehere hui (keeti takahanga) tuatahi.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Ko nga ingoa tuunga me nga tohu tohu ka taea anake te whakarereke e te kaiwhakahaere o te pae."
   },
   "chairAllocationMatrixPage": {
     "intro": "Matrix tohatoha komiti mo to huihuinga o naianei. He panui-anake tenei mo nga tuuru me te whakaata i nga taumahi nohoanga hohe me nga tohu tohu.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "I tono toha",
       "account": "Pūkete",
       "actions": "Nga Mahi",
-      "score": "Score"
+      "score": "Tohu",
+      "photo": "Whakaahua",
+      "school": "Kura",
+      "party": "Rōpū tōrangapū"
     },
     "noRows": "Karekau he rarangi tohatoha i kitea mo tenei komiti.",
     "pendingApprovalsTitle": "E tatari ana mo nga whakaaetanga hainatanga",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Matrix tohatoha",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Motini",
+    "pointsTitle": "Nga tohu",
+    "resolutionsTitle": "Nga Whakatau",
+    "noMotions": "Karekau he motini i tuhia mo tenei kaikawe.",
+    "noPoints": "Karekau he tohu i tuhia mo tenei kaikawe.",
+    "noResolutions": "Karekau he whakaurunga whakatau i tuhia mo tenei kaikawe.",
+    "untitledMotion": "Motini kore taitara",
+    "chairLoggedPoint": "Te waahi kua tuhia e te heamana",
+    "resolutionLink": "Whakatuwheratia a Google Doc",
+    "resolutionNoLink": "Karekau he hononga tuhinga",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Tikanga",
+      "delegate": "Rangitaki nohoanga"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Kaituku matua",
+      "co": "Kaituku tahi",
+      "signatory": "Kaitohu"
+    },
+    "speechesTitle": "Nga Korero",
+    "flagsTitle": "Nga mihi me nga awangawanga",
+    "disciplineTitle": "Whakatupato & patu",
+    "noSpeeches": "Karekau he korero i tuhia mo tenei kaikawe.",
+    "noFlags": "Karekau he mihi, he awangawanga ranei mo tenei kaitono.",
+    "noDiscipline": "Karekau he whakatupato, he whiu ranei mo tenei kaikawe.",
+    "untitledSpeech": "Korero",
+    "currentFlag": "o nāianei",
+    "speechStatuses": {
+      "waiting": "E tatari ana",
+      "current": "Te korero",
+      "done": "Kua tukuna"
+    },
+    "flagKinds": {
+      "compliment": "Whakamoemiti",
+      "concern": "Awangawanga",
+      "reminder": "Whakamaumahara"
+    },
+    "disciplineActions": {
+      "warning": "Whakatupato",
+      "strike": "Patua",
+      "revoke_warning": "Kua whakakorehia te whakatupato",
+      "revoke_strike": "Ka whakakorehia te patu",
+      "reset": "Tautuhi Anō"
+    },
+    "disciplineCounts": "{warnings}(ng) whakatūpato · {strikes} patu(ng)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "to komiti",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Rua komiti (ki tonu)",
         "hint": "Tahora mariko me te papa tuku"
+      },
+      "crisisReport": {
+        "label": "Ripoata",
+        "hint": "Te ripoata mai i nga aitua"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Notes",
     "noGoogleDocYet": "Kaore ano kia honohia a Google Doc. Whakamahia te Whakatika hei taapiri i te docs.google.com/document/d/… URL.",
     "chairFeedbackHeading": "He urupare a te heamana",
-    "noFeedbackYet": "Kaore ano kia taapirihia he urupare."
+    "noFeedbackYet": "Kaore ano kia taapirihia he urupare.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "I tenei wa — ka taea te karo (ka huri)",
       "present_voting": "Whakaatu me te pooti",
       "unknown": "— (roll)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Hononga, paatene me nga konae",
+      "help": "Tāpirihia he hononga tukutuku, he paatene, he tukuake PDF/kōnae ranei. Ka taea e te tangata e whakatuwhera ana i tenei aratohu te whakamahi.",
+      "kindLink": "Hononga",
+      "kindButton": "Pātene",
+      "kindFile": "Kōnae",
+      "label": "Tapanga",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Tāpiri",
+      "upload": "Tukuake PDF, konae ranei",
+      "uploading": "Tukuake ana…",
+      "remove": "Tango",
+      "download": "Tuwhera",
+      "empty": "Kaore ano he hononga, he konae ranei.",
+      "errorType": "Whakamahia he PDF, he tuhinga Office, he tuhinga, he konae whakaahua ranei.",
+      "errorSize": "He nui rawa te kōnae (he 15 MB te teitei).",
+      "errorUpload": "Kāore i taea te tuku ake i taua kōnae.",
+      "markdownHelp": "Ka taea hoki te tuhi [tapanga](https://url) mo te hono, [tapanga](https://url \"patene\") ranei mo te paatene. Whakapirihia he URL kōnae, tukuake ranei ki runga."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Kei te taki i to tuunga rarangi ingoa...",
       "rollPromptSaving": "Tiaki ana...",
       "rollPromptPresent": "Ko tenei wa",
-      "rollPromptPresentVoting": "Te whakaatu me te pooti"
+      "rollPromptPresentVoting": "Te whakaatu me te pooti",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Te tikanga pooti",
@@ -4241,7 +4382,11 @@
       "timer": "Matawā",
       "sidebarAnd": "a",
       "announcements": "Panuitanga",
-      "sidebarUseSuffix": "— kotahi taputapu mo ia ripa."
+      "sidebarUseSuffix": "— kotahi taputapu mo ia ripa.",
+      "smtProgressReminderTitle": "Whakahoutia te SMT i tenei wahanga",
+      "smtProgressReminderBody": "Tukuna he tuhipoka poto mo te ahunga whakamua kia mohio ai te hekeretari i te haere o te komiti me nga mahi hei whai atu.",
+      "smtProgressReminderWrite": "Tuhia he tuhipoka",
+      "smtProgressReminderDismiss": "I muri mai"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Kua mutu te wahanga — whakahou SMT",
+      "reminderSessionEnd": "{title} i whakaritea kia mutu i te {start}. Tukuna SMT he tuhipoka ahunga whakamua poto.",
+      "writeSmtNote": "Tuhia he tuhipoka"
     },
     "history": {
       "title": "Hītori wātū",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Karekau he waahi whakaingoa mo tenei komiti.",
+    "stepProgress": "Whakaingoa {current} o {total}",
+    "requiredProgress": "{done}/{total} kua oti nga mokamoka",
+    "gotoStep": "Haere ki {label}",
+    "lockedTitle": "Whakaotihia ia kaari kaikawe i te tuatahi",
+    "lockedBody": "Whakaotia te riipene wahanga mo ia kaikawe e noho ana i runga ake nei, katahi ka hoki mai ki konei ki te tohu tohu kotahi mokamoka i ia wa.",
+    "optional": "kōwhiringa",
+    "submittedLocked": "I tukuna ki a SMT - kua maukati te whakatika.",
+    "topSuggestions": "Top 5 mai i te rubric wātū",
+    "topSuggestionsHint": "Ko nga tapeke matrix teitei rawa atu i tenei komiti. Whiriwhiria tetahi, rapu ranei i raro.",
+    "noSuggestions": "Karekau ano nga kaikawe kua tohua. Tohua te matrix i te tuatahi, rapua ranei ma te ingoa.",
+    "searchLabel": "Rapua nga kaitono",
+    "searchPlaceholder": "Ingoa, tohatoha ranei",
+    "searchEmpty": "Karekau he kaikawe e taurite ana ki tera rapunga.",
+    "selectedNominee": "Ko te kaitono i tohua",
+    "pickNomineeHint": "Whiriwhiria he tautapa mai i te 5 o runga, rapua ranei hei whakatuwhera i a raatau panui me te raarangi.",
+    "rubricHeading": "Te rarangi ingoa",
+    "rubricTotal": "Te tapeke o te Rubric: {total}/{max} ({scored}/{criteria} paearu i piro — 1–8 mo ia paearu)",
+    "evidenceLabel": "Tauākī whakaū / taunakitanga",
+    "evidencePlaceholder": "Tuhia nga taunakitanga o te papa raima (kua tuhia nga rara, kua whakatauhia nga tauhokohoko, nga wawaotanga matua). I te iti rawa {min} pūāhua — me hiahia i mua i te whakaae a SMT.",
+    "previous": "Tuhinga o mua",
+    "skipOptional": "Tīpoka mokamoka kōwhiringa",
+    "next": "Whai muri",
+    "locked": "Kua maukati",
+    "matrixRequired": "Matrix e hiahiatia ana i te tuatahi",
+    "saving": "Tiaki…",
+    "saveAndNext": "Tiaki & muri",
+    "save": "Tiaki",
+    "allSlotsSummary": "Nga waahi whakaingoatanga katoa",
+    "statusDone": "Kua oti",
+    "statusTodo": "Hei mahi",
+    "errors": {
+      "selectNominee": "Tīpakohia he tautapa mo tenei mokowhiti.",
+      "completeRubric": "Tīpakohia he roopu mo ia paearu i mua i te penapena.",
+      "evidenceMin": "Tāpirihia kia {min} ngā pūāhua taunakitanga."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Te otinga o nga tohu katoa",
+    "completeCount": "{completed}/{total} oti",
+    "requiredLabel": "Te ahunga whakamua (hiahia)",
+    "optionalSlots": "Ko nga waahi whiriwhiri: {completed}/{total} kua whakakiia"
+  },
+  "chairAwardsSubmit": {
+    "title": "Tukuna ki SMT",
+    "intro": "Ko te tiaki i te mokamoka ka tuhia he tauira anake; Kare a SMT e kite kia tukuna ra ano e koe te puranga i raro nei. Ina oti nga waahi e hiahiatia ana, tukuna te puranga ki SMT mo te arotake. Ka haere ano te tukunga aunoa i muri i te {deadline} (UTC) ina whakatuwhera koe i tenei wharangi, ma te mahi kua whakaritea mena ka whirihora e to tono.",
+    "requiredSlotsIncomplete": "Kua oti nga waahi e hiahiatia ana: {done}/{total} — whakaoti te toenga, ka tuku kia taea e SMT te arotake.",
+    "requiredSlotsReady": "Kua oti nga waahi e hiahiatia ana: {done}/{total} — kua reri te roopu whakaingoatanga (me whakarite kua oti te matrix kaikawe i runga).",
+    "matrixIncomplete": "Matrix Delegate (ia kaitapaa e noho ana): {done}/{total} — piro ia kaikawe i runga ake i mua i te tuku.",
+    "matrixComplete": "Matrix Delegate (katoa kaitapa e noho ana): {done}/{total} — oti.",
+    "alreadySubmitted": "Kua tukuna ki a SMT{when}. Kua maukati te whakatika; whakapā atu ki a SMT mena ka hiahia koe ki te whakarereke.",
+    "submittedAt": "— {time}",
+    "submitButton": "Tukuna nga whakaingoatanga ki a SMT",
+    "submitting": "Kei te tuku…",
+    "needComplete": "Whakaotia ia mokamoka whakaingoa me te matrix kaikawe, ka tuku.",
+    "deadlinePassed": "Kua hipa te wa — tukuna mai mena kaore ano koe."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Kaore ano koe i te tuuru komiti. Tonoa te hekeretari kia tautapa koe ki te matrix toha, katahi ka hoki mai ki konei.",
+    "intro": "Kei ia komiti he waehere komiti i roto i tana huihuinga (te rua o nga keeti i muri i te whakaurunga o nga kaikawe ki te waehere huihuinga). Me ahurei nga waehere i roto i te huihuinga huihuinga kotahi.",
+    "testingOverride": "Ka taea te whakakore i nga whakamatautau: ka taea e koe te huri me te whakahaere i nga waehere komiti puta noa i nga komiti kaore he arowhai toha nohoanga.",
+    "chairScope": "Hei raahi, ka kite noa koe i nga komiti kei reira to tuuru. Ko te penapena ka tukuna koe ki to kōtaha; ko nga kaikawe kua paahitia i mua i te keeti o te komiti ka noho haina kia puta ra ano.",
+    "staffAfterSave": "I muri i te penapena, ka taea e koe te whakauru ki taua komiti, ka tohatoha ranei i te waehere ki runga i te raahi."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Tārua rārangi (TSV)",
+    "copied": "I kapea te ripanga ki te papatopenga.",
+    "helpTitle": "Waehere takiuru toha",
+    "helpBody": "He tohu tohu tohu mo ia tohatanga e whakamahia ana e nga kaikawe me nga tuuru i te wa o te keeti tohatoha-waehere. Ka taea anake te whakarereke i nga waehere e te kaiwhakahaere o te pae.",
+    "copyHeader": "Huihuinga: {conference}",
+    "copyColumns": "Waehere Kaituku Whenua",
+    "columnCountry": "Whenua / tohatoha",
+    "columnDelegate": "Kaituku (toha)",
+    "columnCode": "Kupuhipa / waehere",
+    "codeFieldHelpTitle": "Kupuhipa / waehere mara",
+    "codeFieldHelpBody": "Ka whakauruhia e nga kaitakawaenga tenei waehere mo to raatau tohatoha. Ka taea e te kaiwhakahaere pae anake te huri.",
+    "empty": "Kaore ano kia tohatohahia mo tenei huihuinga."
+  },
+  "chairSessionError": {
+    "title": "I rahua te uta o te papa wahanga",
+    "fallback": "I puta he hapa ohorere i te wa e utaina ana nga mana whakahaere tuuru.",
+    "reference": "Tohutoro: {digest}",
+    "backToDashboard": "Hoki ki te papatohu nohoanga"
+  },
+  "smtDelegatesPage": {
+    "title": "Nga Kai-whakahaere",
+    "intro": "Rapua nga kaikawe hono katoa i tenei huihuinga ma te ingoa, te tohatoha, te imeera, te komiti ranei. Whakatuwherahia he kaari mo o raatau whakaahua me o raatau korero.",
+    "selectEventFirst": "Kōwhirihia he huihuinga hui kaha i te tuatahi.",
+    "enterConferenceCode": "Whakauruhia te waehere hui",
+    "searchLabel": "Rapua nga kaitono",
+    "searchPlaceholder": "Ingoa, tohatoha, imeera, komiti ranei",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Karekau ano nga kaikawe hono i tenei huihuinga.",
+    "noMatches": "Karekau he kaikawe e taurite ana ki tera rapunga.",
+    "unnamed": "Kaituku kore ingoa"
   }
 }

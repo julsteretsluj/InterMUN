@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Yeniden yükle"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "örneğin SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Alt sekmeler",
     "home": "Ev",
     "library": "Kütüphane",
-    "mainNavigationAria": "Ana gezinme"
+    "mainNavigationAria": "Ana gezinme",
+    "crisis": "Kriz"
   },
   "dashboardLayout": {
     "helpCenter": "Yardım merkezi",
@@ -838,7 +840,9 @@
     "pointsLog": "• Puan günlüğü",
     "formalMotions": "Resmi hareketler",
     "timer": "Zamanlayıcı",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "crisis": "Kriz",
+    "smtDelegates": "Delegeler"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -1333,7 +1337,8 @@
       "roomCode": "Oda kodu",
       "settings": "Ayarlar",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Rapor"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Etkinlik ve oturumlar",
     "roomCodes": "Oda kodları ve sandalyeler",
     "advisors": "Danışmanlar",
-    "notes": "Notes",
+    "notes": "Notlar",
     "awards": "Ödüller",
     "allocationMatrix": "Tahsis matrisi",
     "allocationPasswords": "Tahsis şifreleri",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Haber odası",
+    "pressCorps": "Basın Birliği",
+    "milestones": "Kilometre Taşları",
     "profile": "Profil",
     "follow": "Takip etmek",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Kılavuzlar",
+    "delegates": "Delegeler"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Programlar ve fonlar",
       "specializedAgencies": "Uzmanlaşmış ajanslar ve ilgili",
       "peacekeepingMissions": "Barışı koruma ve görevler",
-      "foundersMembers": "Kurucular ve üyeler"
+      "foundersMembers": "Kurucular ve üyeler",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Basın Birliği Bağlantıları"
     },
     "links": {
       "ods": "BM Resmi Belge Sistemi (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "BM Özel Siyasi Misyonları",
       "memberStates": "BM Üye Devletleri",
       "unSystem": "BM Sistemi (kurucular ve üyeler)",
-      "history": "BM Tarihi"
+      "history": "BM Tarihi",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Konferans web sitesi ve komite portalı",
+      "documentsArticles": "ODS, Dijital Kütüphane, haberler, basın ve yıllık",
+      "legislationTreaties": "Antlaşmalar, tüzük ve uluslararası hukuk",
+      "mainBodies": "GA, Güvenlik Konseyi, ECOSOC, ICJ ve daha fazlası",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP ve ilgili fonlar",
+      "specializedAgencies": "DSÖ, UNESCO, Dünya Bankası, ILO ve ortaklar",
+      "peacekeepingMissions": "Barışı koruma ve özel siyasi görevler",
+      "foundersMembers": "Üye devletler, BM sistemi ve tarih",
+      "pressCorpsLinks": "Her Basın Birliği tahsisi için üç haber masası (dünya, sağlık ve özellikler)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Hatırlatma",
     "privateReminderLabel": "Özel hatırlatıcı (yalnızca sandalyeler, senkronize edilmiş)",
     "committeeFallback": "Komite",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Blok oluşturma",
       "speechPoisOrPocs": "Konuşma POI'leri veya POC'ler",
       "questions": "Sorular",
-      "informalConversations": "Gayri resmi konuşmalar"
+      "informalConversations": "Gayri resmi konuşmalar",
+      "sessionProgress": "Oturum ilerlemesi (SMT)"
     },
     "concernLabel": "Endişe (otomatik yer tutucu)",
     "concernHelpTitle": "Endişe bayrağı",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Not göndermek (veya başkan olmak) için bir tahsise ihtiyacınız var.",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Not gönderilemedi."
-    }
+    },
+    "sendToSmt": "SMT'ye gönder",
+    "sendToSmtHelp": "Sekretarya notları gelen kutusuna iner (Sandalyelerden). Oturum sonu ilerlemesi için bunu kullanın.",
+    "progressPrefill": "Komite oturumu yeni sona erdi. \n\nİlerleme: \n- \n\nSMT'nin takip etmesi gereken her şey: \n-",
+    "progressComposeHint": "Bu not SMT'ye gidecek. Odanın neleri kapsadığını ve sekreterliğin neleri bilmesi gerektiğini özetleyin.",
+    "progressSent": "İlerleme notu SMT'ye gönderildi."
   },
   "adminPage": {
     "title": "Web sitesi yönetimi",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Hiçbir veri satırı bulunamadı (satır başına en az bir ülke/pozisyon gereklidir).",
       "importLimitedRows": "İçe aktarma {max} satırla sınırlıdır. Dosyanızı bölün.",
       "rowTooLong": "Satır çok uzun: {satır}…",
-      "codeTooLongOnRow": "Satırdaki kod çok uzun: {row}"
+      "codeTooLongOnRow": "Satırdaki kod çok uzun: {row}",
+      "chairSeatsCannotBeDeleted": "Başkan ve Eşbaşkan koltukları her komitede kalır."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Önce konferans koduna (olay kapısı) sahip bir etkinlik seçin.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Pozisyon adları ve afiş kodları yalnızca site yöneticisi tarafından değiştirilebilir."
   },
   "chairAllocationMatrixPage": {
     "intro": "Mevcut oturumunuz için komite tahsis matrisi. Bu, sandalyeler için salt okunurdur ve aktif koltuk atamalarını ve afiş kodlarını yansıtır.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Talep edilen tahsis",
       "account": "Hesap",
       "actions": "Eylemler",
-      "score": "Score"
+      "score": "Gol",
+      "photo": "Fotoğraf",
+      "school": "Okul",
+      "party": "Siyasi grup"
     },
     "noRows": "Bu komite için tahsis satırı bulunamadı.",
     "pendingApprovalsTitle": "Kayıt onayları bekleniyor",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Tahsis matrisi",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Hareketler",
+    "pointsTitle": "Puanlar",
+    "resolutionsTitle": "Çözünürlükler",
+    "noMotions": "Bu delege için herhangi bir önerge kaydedilmedi.",
+    "noPoints": "Bu delege için puan kaydedilmedi.",
+    "noResolutions": "Bu delege için herhangi bir çözüm katılımı kaydedilmedi.",
+    "untitledMotion": "Başlıksız hareket",
+    "chairLoggedPoint": "Sandalyeyle kaydedilen nokta",
+    "resolutionLink": "Google Dokümanını aç",
+    "resolutionNoLink": "Belge bağlantısı yok",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Usul",
+      "delegate": "Sandalye günlüğü"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Ana gönderen",
+      "co": "Ortak gönderen",
+      "signatory": "İmza Sahibi"
+    },
+    "speechesTitle": "Konuşmalar",
+    "flagsTitle": "Övgüler ve endişeler",
+    "disciplineTitle": "Uyarılar ve ihtarlar",
+    "noSpeeches": "Bu delege için kayıtlı konuşma yok.",
+    "noFlags": "Bu delege için herhangi bir iltifat veya endişe kaydedilmedi.",
+    "noDiscipline": "Bu delege için herhangi bir uyarı veya ihtar kaydedilmedi.",
+    "untitledSpeech": "Konuşma",
+    "currentFlag": "Akım",
+    "speechStatuses": {
+      "waiting": "Beklemek",
+      "current": "Konuşuyorum",
+      "done": "Teslim edilmiş"
+    },
+    "flagKinds": {
+      "compliment": "İltifat",
+      "concern": "Kaygı",
+      "reminder": "Hatırlatma"
+    },
+    "disciplineActions": {
+      "warning": "Uyarı",
+      "strike": "Çarpmak",
+      "revoke_warning": "Uyarı iptal edildi",
+      "revoke_strike": "Grev iptal edildi",
+      "reset": "Sıfırla"
+    },
+    "disciplineCounts": "{warnings} uyarı(lar) · {strikes} ihtar(lar)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "senin komiten",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Komite odası (dolu)",
         "hint": "Sanal düzen ve delege katı"
+      },
+      "crisisReport": {
+        "label": "Rapor",
+        "hint": "Olay raporlama"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Notlar",
     "noGoogleDocYet": "Henüz bağlı bir Google Dokümanı yok. docs.google.com/document/d/… URL'si eklemek için Düzenle'yi kullanın.",
     "chairFeedbackHeading": "Sandalye geribildirimi",
-    "noFeedbackYet": "Henüz geri bildirim eklenmedi."
+    "noFeedbackYet": "Henüz geri bildirim eklenmedi.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Mevcut - çekimser kalabilir (yuvarlanır)",
       "present_voting": "Sunum ve oylama (roll)",
       "unknown": "- (rulo)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Bağlantılar, düğmeler ve dosyalar",
+      "help": "Bir web bağlantısı, düğme ekleyin veya bir PDF/dosya yükleyin. Bu kılavuzu açan herkes bunları kullanabilir.",
+      "kindLink": "Bağlantı",
+      "kindButton": "Düğme",
+      "kindFile": "Dosya",
+      "label": "Etiket",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Eklemek",
+      "upload": "PDF veya dosya yükleyin",
+      "uploading": "Yükleniyor…",
+      "remove": "Kaldırmak",
+      "download": "Açık",
+      "empty": "Henüz bağlantı veya dosya yok.",
+      "errorType": "Bir PDF, Office belgesi, metin veya resim dosyası kullanın.",
+      "errorSize": "Dosya çok büyük (en fazla 15 MB).",
+      "errorUpload": "Bu dosya yüklenemedi.",
+      "markdownHelp": "Notlarda ayrıca bir bağlantı için [label](https://url) veya bir düğme için [label](https://url \"button\") yazabilirsiniz. Bir dosya URL'si yapıştırın veya yukarıya yükleyin."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Yuvarlanma durumunuz kontrol ediliyor...",
       "rollPromptSaving": "Kaydediliyor...",
       "rollPromptPresent": "Sunmak",
-      "rollPromptPresentVoting": "Sunum ve oylama"
+      "rollPromptPresentVoting": "Sunum ve oylama",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Oylama prosedürü",
@@ -4241,7 +4382,11 @@
       "timer": "Zamanlayıcı",
       "sidebarAnd": "Ve",
       "announcements": "Duyurular",
-      "sidebarUseSuffix": "— sekme başına bir araç."
+      "sidebarUseSuffix": "— sekme başına bir araç.",
+      "smtProgressReminderTitle": "Bu oturumda SMT'yi güncelleyin",
+      "smtProgressReminderBody": "Sekretaryanın komitenin nasıl gittiğini ve neleri takip etmesi gerektiğini bilmesi için kısa bir ilerleme notu gönderin.",
+      "smtProgressReminderWrite": "Bir not yaz",
+      "smtProgressReminderDismiss": "Daha sonra"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Oturum sona erdi — SMT'yi güncelleyin",
+      "reminderSessionEnd": "{title}'nin {start}'de bitmesi planlandı. SMT'ye kısa bir ilerleme notu gönderin.",
+      "writeSmtNote": "Bir not yaz"
     },
     "history": {
       "title": "Oturum geçmişi",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Bu komite için henüz adaylık kontenjanı yok.",
+    "stepProgress": "Adaylık {current} / {total}",
+    "requiredProgress": "{done}/{total} gerekli slotlar tamamlandı",
+    "gotoStep": "{label}'a git",
+    "lockedTitle": "Önce her delege kartını bitirin",
+    "lockedBody": "Yukarıda oturan her delege için oturum değerlendirme tablosunu doldurun ve ardından ödülleri tek tek aday göstermek için buraya dönün.",
+    "optional": "isteğe bağlı",
+    "submittedLocked": "SMT'ye gönderildi — düzenleme kilitli.",
+    "topSuggestions": "Oturum değerlendirme anahtarından ilk 5",
+    "topSuggestionsHint": "Bu komitedeki en yüksek matris toplamları. Birini seçin veya aşağıda arama yapın.",
+    "noSuggestions": "Henüz sıralanmış delege yok. Önce matrisi puanlayın veya ada göre arayın.",
+    "searchLabel": "Delegeleri ara",
+    "searchPlaceholder": "Ad veya tahsis",
+    "searchEmpty": "Bu aramayla eşleşen delege yok.",
+    "selectedNominee": "Seçilen aday",
+    "pickNomineeHint": "İlk 5 adaydan birini seçin veya değerlendirme tablosunu ve günlüğünü açmak için arama yapın.",
+    "rubricHeading": "Adaylık değerlendirme tablosu",
+    "rubricTotal": "Puan anahtarı toplamı: {total}/{max} (puanlanan {scored}/{criteria} kriter — kriter başına 1-8)",
+    "evidenceLabel": "Onay / kanıt beyanı",
+    "evidencePlaceholder": "Somut delillerden alıntı yapın (maddeler hazırlandı, uzlaşmalar sağlandı, önemli müdahaleler). En az {min} karakter — SMT'nin onaylayabilmesi için gereklidir.",
+    "previous": "Öncesi",
+    "skipOptional": "İsteğe bağlı yuvayı atla",
+    "next": "Sonraki",
+    "locked": "Kilitli",
+    "matrixRequired": "Önce matris gerekli",
+    "saving": "Kaydediliyor…",
+    "saveAndNext": "Kaydet ve sonraki",
+    "save": "Kaydetmek",
+    "allSlotsSummary": "Tüm adaylık alanları",
+    "statusDone": "Tamamlamak",
+    "statusTodo": "yapmak",
+    "errors": {
+      "selectNominee": "Bu slot için bir aday seçin.",
+      "completeRubric": "Kaydetmeden önce her kriter için bir bant seçin.",
+      "evidenceMin": "En az {min} karakterlik kanıt ekleyin."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Genel ödüllerin tamamlanması",
+    "completeCount": "{completed}/{total} tamamlandı",
+    "requiredLabel": "İlerleme durumu (gerekli)",
+    "optionalSlots": "İsteğe bağlı yuvalar: {completed}/{total} dolu"
+  },
+  "chairAwardsSubmit": {
+    "title": "SMT'ye gönder",
+    "intro": "Bir alanı kaydetmek yalnızca bir taslak yazar; Siz aşağıdaki partiyi gönderene kadar SMT bunu görmez. Gerekli slotlar tamamlandığında partiyi inceleme için SMT'ye gönderin. Otomatik gönderim, bu sayfayı açtığınızda {deadline} (UTC) tarihinden sonra veya dağıtımınız bunu yapılandırıyorsa zamanlanmış bir iş aracılığıyla da çalışır.",
+    "requiredSlotsIncomplete": "Gerekli slotların tamamlanması: {done}/{total} — geri kalanını tamamlayın, ardından SMT'nin inceleyebilmesi için gönderin.",
+    "requiredSlotsReady": "Gerekli slotlar tamamlandı: {done}/{total} — adaylık grubu hazır (yukarıdaki delege matrisinin tamamlandığından emin olun).",
+    "matrixIncomplete": "Delege matrisi (oturan her delege): {done}/{total} — göndermeden önce yukarıdaki her delegeyi puanlayın.",
+    "matrixComplete": "Delege matrisi (oturan her delege): {done}/{total} — tamamlandı.",
+    "alreadySubmitted": "SMT{when}'ye gönderildi. Düzenleme kilitli; Bir değişikliğe ihtiyacınız varsa SMT ile iletişime geçin.",
+    "submittedAt": "— {time}",
+    "submitButton": "Adaylıkları SMT'ye gönderin",
+    "submitting": "Gönderiliyor…",
+    "needComplete": "Gerekli tüm aday gösterme alanlarını ve delege matrisini doldurun ve ardından gönderin.",
+    "deadlinePassed": "Son tarih geçti; henüz göndermediyseniz şimdi gönderin."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Henüz komite koltuğunuz yok. Sekretaryadan sizi tahsis matrisinde atamasını isteyin, sonra buraya dönün.",
+    "intro": "Her komitenin kendi konferansında bir komite kodu vardır (delegelerin konferans kodunu girdikten sonraki ikinci kapı). Kodlar aynı konferans etkinliğinde benzersiz olmalıdır.",
+    "testingOverride": "Testi geçersiz kılma etkinleştirildi: Komite kodlarını, koltuk tahsis kontrolleri olmadan komiteler arasında değiştirebilir ve yönetebilirsiniz.",
+    "chairScope": "Dais olarak sadece sandalyenizin olduğu komiteleri görürsünüz. Kaydettiğinizde profilinize yönlendirilirsiniz; Komite kapısını zaten geçmiş olan delegeler, çıkış yapana kadar oturumları açık kalır.",
+    "staffAfterSave": "Kaydettikten sonra o komiteye girebilir veya kodu kürsüde paylaşabilirsiniz."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Listeyi kopyala (TSV)",
+    "copied": "Tablo panoya kopyalandı.",
+    "helpTitle": "Tahsis oturum açma kodları",
+    "helpBody": "Bunlar, tahsis kodu kapısı sırasında delegeler ve başkanlar tarafından kullanılan tahsis başına afiş kodlarıdır. Kodlar yalnızca site yöneticisi tarafından değiştirilebilir.",
+    "copyHeader": "Konferans: {conference}",
+    "copyColumns": "Ülke Delege Kodu",
+    "columnCountry": "Ülke / tahsis",
+    "columnDelegate": "Delege (tahsis)",
+    "columnCode": "Şifre / kod",
+    "codeFieldHelpTitle": "Şifre / kod alanı",
+    "codeFieldHelpBody": "Delegeler kendilerine atanan tahsis için bu kodu girerler. Yalnızca site yöneticisi bunu değiştirebilir.",
+    "empty": "Bu konferans için henüz yer tahsisi yapılmamıştır."
+  },
+  "chairSessionError": {
+    "title": "Oturum tabanı yüklenemedi",
+    "fallback": "Başkan oturum kontrolleri yüklenirken beklenmeyen bir hata oluştu.",
+    "reference": "Referans: {digest}",
+    "backToDashboard": "Sandalye kontrol paneline geri dön"
+  },
+  "smtDelegatesPage": {
+    "title": "Delegeler",
+    "intro": "Bu etkinlikteki tüm bağlantılı delegeleri ada, tahsise, e-postaya veya komiteye göre arayın. Fotoğrafları ve profilleri için bir kart açın.",
+    "selectEventFirst": "Önce aktif bir konferans etkinliği seçin.",
+    "enterConferenceCode": "Konferans kodunu girin",
+    "searchLabel": "Delegeleri ara",
+    "searchPlaceholder": "Ad, tahsis, e-posta veya komite",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Bu etkinlikte henüz bağlantılı delege yok.",
+    "noMatches": "Bu aramayla eşleşen delege yok.",
+    "unnamed": "İsimsiz temsilci"
   }
 }

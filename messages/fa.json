@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "بارگذاری مجدد"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "به عنوان مثال SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "زیربرگه ها",
     "home": "صفحه اصلی",
     "library": "کتابخانه",
-    "mainNavigationAria": "ناوبری اصلی"
+    "mainNavigationAria": "ناوبری اصلی",
+    "crisis": "بحران"
   },
   "dashboardLayout": {
     "helpCenter": "مرکز راهنمایی",
@@ -838,7 +840,9 @@
     "pointsLog": "• ثبت امتیاز",
     "formalMotions": "حرکات رسمی",
     "timer": "تایمر",
-    "smtProfile": "نمایه"
+    "smtProfile": "نمایه",
+    "crisis": "بحران",
+    "smtDelegates": "نمایندگان"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -1333,7 +1337,8 @@
       "roomCode": "کد اتاق",
       "settings": "تنظیمات",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "گزارش دهید"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "رویداد و جلسات",
     "roomCodes": "کد اتاق و صندلی",
     "advisors": "مشاوران",
-    "notes": "Notes",
+    "notes": "یادداشت ها",
     "awards": "جوایز",
     "allocationMatrix": "ماتریس تخصیص",
     "allocationPasswords": "پسوردهای تخصیص",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "اتاق خبر",
+    "pressCorps": "سپاه مطبوعات",
+    "milestones": "نقاط عطف",
     "profile": "نمایه",
     "follow": "دنبال کنید",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "راهنماها",
+    "delegates": "نمایندگان"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "برنامه ها و بودجه",
       "specializedAgencies": "نمایندگی های تخصصی و مرتبط",
       "peacekeepingMissions": "حفظ صلح و ماموریت",
-      "foundersMembers": "بنیانگذاران و اعضا"
+      "foundersMembers": "بنیانگذاران و اعضا",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "پیوندهای سپاه را فشار دهید"
     },
     "links": {
       "ods": "سیستم اسناد رسمی سازمان ملل متحد (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "ماموریت های ویژه سیاسی سازمان ملل",
       "memberStates": "کشورهای عضو سازمان ملل",
       "unSystem": "سیستم سازمان ملل متحد (بنیانگذاران و اعضا)",
-      "history": "تاریخ سازمان ملل متحد"
+      "history": "تاریخ سازمان ملل متحد",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "وب سایت و پورتال کمیته کنفرانس",
+      "documentsArticles": "ODS، کتابخانه دیجیتال، اخبار، مطبوعات و سالنامه",
+      "legislationTreaties": "معاهدات، منشور و حقوق بین الملل",
+      "mainBodies": "GA، شورای امنیت، ECOSOC، ICJ، و بیشتر",
+      "programmesFunds": "UNDP، یونیسف، UNHCR، WFP، و صندوق های مرتبط",
+      "specializedAgencies": "سازمان جهانی بهداشت، یونسکو، بانک جهانی، سازمان بین المللی کار و شرکا",
+      "peacekeepingMissions": "حافظ صلح و مأموریت های سیاسی ویژه",
+      "foundersMembers": "کشورهای عضو، سیستم سازمان ملل متحد، و تاریخ",
+      "pressCorpsLinks": "سه میز خبری برای هر تخصیص سپاه مطبوعات (جهان، سلامت و ویژگی ها)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "یادآوری",
     "privateReminderLabel": "یادآوری خصوصی (فقط صندلی، همگام‌سازی شده)",
     "committeeFallback": "کمیته",
-    "dash": "-"
+    "dash": "-",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "-",
@@ -1751,7 +1785,8 @@
       "blocForming": "تشکیل بلوک",
       "speechPoisOrPocs": "POI یا POC سخنرانی",
       "questions": "سوالات",
-      "informalConversations": "گفتگوهای غیر رسمی"
+      "informalConversations": "گفتگوهای غیر رسمی",
+      "sessionProgress": "پیشرفت جلسه (SMT)"
     },
     "concernLabel": "نگرانی (جایگزین خودکار)",
     "concernHelpTitle": "پرچم نگرانی",
@@ -1848,7 +1883,12 @@
       "needAllocation": "برای ارسال یادداشت ها (یا یک صندلی باشید) به یک تخصیص نیاز دارید.",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "یادداشت ارسال نشد."
-    }
+    },
+    "sendToSmt": "ارسال به SMT",
+    "sendToSmtHelp": "زمین در صندوق یادداشت دبیرخانه (از صندلی). از این برای پیشرفت در پایان جلسه استفاده کنید.",
+    "progressPrefill": "جلسه کمیته به تازگی به پایان رسید \n\nپیشرفت: \n- \n\nهر چیزی که SMT باید آن را دنبال کند: \n-",
+    "progressComposeHint": "این یادداشت به SMT می رود. آنچه را که اتاق پوشش داده و دبیرخانه باید بداند را خلاصه کنید.",
+    "progressSent": "یادداشت پیشرفت به SMT ارسال شد."
   },
   "adminPage": {
     "title": "مدیریت وب سایت",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "هیچ ردیف داده ای یافت نشد (حداقل به یک کشور/موقعیت در هر خط نیاز است).",
       "importLimitedRows": "واردات محدود به {max} ردیف است. فایل خود را تقسیم کنید",
       "rowTooLong": "ردیف خیلی طولانی است: {row}…",
-      "codeTooLongOnRow": "کد خیلی طولانی در ردیف: {row}"
+      "codeTooLongOnRow": "کد خیلی طولانی در ردیف: {row}",
+      "chairSeatsCannotBeDeleted": "صندلی های رئیس و رئیس مشترک در هر کمیته باقی می ماند."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "ابتدا رویدادی را با کد کنفرانس (دروازه رویداد) انتخاب کنید.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "نام موقعیت و کد پلاکارد فقط توسط مدیر سایت قابل تغییر است."
   },
   "chairAllocationMatrixPage": {
     "intro": "ماتریس تخصیص کمیته برای جلسه فعلی شما. این فقط برای صندلی ها خواندنی است و منعکس کننده تخصیص صندلی های فعال و کدهای پلاکارد است.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "تخصیص درخواست کرد",
       "account": "حساب",
       "actions": "اقدامات",
-      "score": "Score"
+      "score": "امتیاز",
+      "photo": "عکس",
+      "school": "مدرسه",
+      "party": "گروه سیاسی"
     },
     "noRows": "هیچ ردیف تخصیصی برای این کمیته یافت نشد.",
     "pendingApprovalsTitle": "تاییدیه های ثبت نام در انتظار",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "ماتریس تخصیص",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "حرکات",
+    "pointsTitle": "امتیاز",
+    "resolutionsTitle": "قطعنامه ها",
+    "noMotions": "هیچ حرکتی برای این نماینده ثبت نشده است.",
+    "noPoints": "امتیازی برای این نماینده ثبت نشده است.",
+    "noResolutions": "هیچ دخالت قطعنامه ای برای این نماینده ثبت نشده است.",
+    "untitledMotion": "حرکت بدون عنوان",
+    "chairLoggedPoint": "نقطه ثبت شده از صندلی",
+    "resolutionLink": "Google Doc را باز کنید",
+    "resolutionNoLink": "لینک سند وجود ندارد",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "رویه ای",
+      "delegate": "سیاهه صندلی"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "ارسال کننده اصلی",
+      "co": "ارسال کننده مشترک",
+      "signatory": "امضا کننده"
+    },
+    "speechesTitle": "سخنرانی ها",
+    "flagsTitle": "تعارف و نگرانی",
+    "disciplineTitle": "هشدارها و اعتصابات",
+    "noSpeeches": "هیچ سخنرانی برای این نماینده ثبت نشده است.",
+    "noFlags": "هیچ تعارف یا نگرانی برای این نماینده ثبت نشده است.",
+    "noDiscipline": "هیچ هشدار یا اعتصابی برای این نماینده ثبت نشده است.",
+    "untitledSpeech": "گفتار",
+    "currentFlag": "فعلی",
+    "speechStatuses": {
+      "waiting": "در انتظار",
+      "current": "صحبت کردن",
+      "done": "تحویل داده شد"
+    },
+    "flagKinds": {
+      "compliment": "تعریف کنید",
+      "concern": "نگرانی",
+      "reminder": "یادآوری"
+    },
+    "disciplineActions": {
+      "warning": "هشدار",
+      "strike": "اعتصاب کنید",
+      "revoke_warning": "اخطار لغو شد",
+      "revoke_strike": "اعتصاب لغو شد",
+      "reset": "بازنشانی کنید"
+    },
+    "disciplineCounts": "{warnings} هشدار(های) · {strikes} اعتصاب(ها)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "کمیته شما",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "اتاق کمیته (پر)",
         "hint": "چیدمان مجازی و طبقه نمایندگی"
+      },
+      "crisisReport": {
+        "label": "گزارش دهید",
+        "hint": "گزارش حوادث"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "یادداشت ها",
     "noGoogleDocYet": "هنوز Google Doc پیوند داده نشده است. از ویرایش برای افزودن URL docs.google.com/document/d/… استفاده کنید.",
     "chairFeedbackHeading": "بازخورد صندلی",
-    "noFeedbackYet": "هنوز بازخوردی اضافه نشده است."
+    "noFeedbackYet": "هنوز بازخوردی اضافه نشده است.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "حاضر - ممکن است پرهیز کند (رول)",
       "present_voting": "ارائه و رای دادن (رول)",
       "unknown": "- (رول)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "پیوندها، دکمه ها و فایل ها",
+      "help": "یک پیوند وب، یک دکمه، یا آپلود یک PDF/فایل اضافه کنید. هر کسی که این راهنما را باز کند می تواند از آنها استفاده کند.",
+      "kindLink": "پیوند",
+      "kindButton": "دکمه",
+      "kindFile": "فایل",
+      "label": "برچسب بزنید",
+      "urlPlaceholder": "https://… or /page",
+      "add": "اضافه کنید",
+      "upload": "PDF یا فایل را آپلود کنید",
+      "uploading": "در حال آپلود…",
+      "remove": "حذف کنید",
+      "download": "باز کنید",
+      "empty": "هنوز لینک یا فایلی وجود ندارد.",
+      "errorType": "از PDF، سند آفیس، متن یا فایل تصویری استفاده کنید.",
+      "errorSize": "فایل خیلی بزرگ است (حداکثر 15 مگابایت).",
+      "errorUpload": "نمی توان آن فایل را آپلود کرد.",
+      "markdownHelp": "در یادداشت‌ها همچنین می‌توانید [label](https://url) را برای پیوند، یا [label](https://url \"button\") را برای یک دکمه بنویسید. URL فایل را جایگذاری کنید یا در بالا آپلود کنید."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "در حال بررسی وضعیت رول شما...",
       "rollPromptSaving": "در حال ذخیره...",
       "rollPromptPresent": "حاضر شود",
-      "rollPromptPresentVoting": "حضور و رای دادن"
+      "rollPromptPresentVoting": "حضور و رای دادن",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "روش رای گیری",
@@ -4241,7 +4382,11 @@
       "timer": "تایمر",
       "sidebarAnd": "و",
       "announcements": "اطلاعیه ها",
-      "sidebarUseSuffix": "- یک ابزار در هر برگه"
+      "sidebarUseSuffix": "- یک ابزار در هر برگه",
+      "smtProgressReminderTitle": "SMT را در این جلسه به روز کنید",
+      "smtProgressReminderBody": "یک یادداشت پیشرفت کوتاه ارسال کنید تا دبیرخانه بداند کمیته چگونه کار کرد و چه مواردی را پیگیری کرد.",
+      "smtProgressReminderWrite": "یادداشت بنویسید",
+      "smtProgressReminderDismiss": "بعدا"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "جلسه به پایان رسید - به روز رسانی SMT",
+      "reminderSessionEnd": "{title} قرار بود در {start} به پایان برسد. یک یادداشت پیشرفت کوتاه به SMT ارسال کنید.",
+      "writeSmtNote": "یادداشت بنویسید"
     },
     "history": {
       "title": "تاریخچه جلسه",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "هنوز جای نامزدی برای این کمیته وجود ندارد.",
+    "stepProgress": "نامزدی {current} از {total}",
+    "requiredProgress": "{done}/{total} اسلات‌های لازم تکمیل شد",
+    "gotoStep": "برو به {label}",
+    "lockedTitle": "ابتدا هر کارت نماینده را تمام کنید",
+    "lockedBody": "روبریک جلسه را برای هر نماینده نشسته در بالا تکمیل کنید، سپس برای نامزد کردن جوایز هر بار به اینجا بازگردید.",
+    "optional": "اختیاری",
+    "submittedLocked": "ارسال شده به SMT — ویرایش قفل شده است.",
+    "topSuggestions": "5 برتر از روبریک جلسه",
+    "topSuggestionsHint": "بالاترین مجموع ماتریس در این کمیته. یکی را انتخاب کنید یا در زیر جستجو کنید.",
+    "noSuggestions": "هنوز هیچ نماینده ای رتبه بندی نشده است. ابتدا به ماتریس امتیاز دهید یا با نام جستجو کنید.",
+    "searchLabel": "نمایندگان را جستجو کنید",
+    "searchPlaceholder": "نام یا تخصیص",
+    "searchEmpty": "هیچ نماینده ای با آن جستجو مطابقت ندارد.",
+    "selectedNominee": "نامزد منتخب",
+    "pickNomineeHint": "نامزدی را از بین 5 مورد برتر انتخاب کنید یا برای باز کردن روبریک و ثبت نام آنها جستجو کنید.",
+    "rubricHeading": "روبریک نامزدی",
+    "rubricTotal": "کل روبریک: {total}/{max} ({scored}/{criteria} معیارهای امتیازدهی شده — 1-8 در هر معیار)",
+    "evidenceLabel": "بیانیه تایید / شواهد",
+    "evidencePlaceholder": "شواهد کف بتنی را ذکر کنید (بندهای پیش نویس، سازش میانجیگری، مداخلات کلیدی). حداقل {min} نویسه — قبل از تایید SMT لازم است.",
+    "previous": "قبلی",
+    "skipOptional": "رد شدن از اسلات اختیاری",
+    "next": "بعدی",
+    "locked": "قفل شده است",
+    "matrixRequired": "ابتدا ماتریس مورد نیاز است",
+    "saving": "در حال ذخیره…",
+    "saveAndNext": "ذخیره و بعدی",
+    "save": "ذخیره کنید",
+    "allSlotsSummary": "همه جاهای نامزدی",
+    "statusDone": "انجام شد",
+    "statusTodo": "انجام دادن",
+    "errors": {
+      "selectNominee": "یک نامزد برای این اسلات انتخاب کنید.",
+      "completeRubric": "قبل از ذخیره برای هر معیار یک باند انتخاب کنید.",
+      "evidenceMin": "حداقل {min} نویسه شواهد را اضافه کنید."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "تکمیل جوایز کلی",
+    "completeCount": "{completed}/{total} کامل شد",
+    "requiredLabel": "پیشرفت (الزامی)",
+    "optionalSlots": "اسلات اختیاری: {completed}/{total} پر شده است"
+  },
+  "chairAwardsSubmit": {
+    "title": "به SMT ارسال کنید",
+    "intro": "ذخیره یک شکاف فقط یک پیش نویس می نویسد. SMT تا زمانی که دسته زیر را ارسال نکنید آن را نمی بیند. هنگامی که اسلات های مورد نیاز کامل شد، دسته را برای بررسی به SMT ارسال کنید. ارسال خودکار همچنین پس از {deadline} (UTC) هنگامی که این صفحه را باز می‌کنید، یا از طریق یک کار زمان‌بندی‌شده در صورتی که استقرار شما آن را پیکربندی کرده باشد، اجرا می‌شود.",
+    "requiredSlotsIncomplete": "اسلات های مورد نیاز تکمیل شد: {done}/{total} — بقیه را تمام کنید، سپس ارسال کنید تا SMT بتواند بررسی کند.",
+    "requiredSlotsReady": "اسلات های مورد نیاز تکمیل شد: {done}/{total} — دسته نامزدی آماده است (مطمئن شوید که ماتریس نماینده در بالا کامل است).",
+    "matrixIncomplete": "ماتریس نماینده (هر نماینده نشسته): {done}/{total} - به هر نماینده قبل از ارسال امتیاز بالاتر بزنید.",
+    "matrixComplete": "ماتریس نماینده (هر نماینده نشسته): {done}/{total} — کامل شد.",
+    "alreadySubmitted": "ارسال شده به SMT{when}. ویرایش قفل شده است. در صورت نیاز به تغییر با SMT تماس بگیرید.",
+    "submittedAt": "- {time}",
+    "submitButton": "نامزدی را به SMT ارسال کنید",
+    "submitting": "در حال ارسال…",
+    "needComplete": "هر شکاف نامزدی مورد نیاز و ماتریس نماینده را تکمیل کنید، سپس ارسال کنید.",
+    "deadlinePassed": "مهلت به پایان رسید - اگر قبلاً ارسال نکرده اید، اکنون ارسال کنید."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "شما هنوز یک صندلی کمیته ندارید. از دبیرخانه بخواهید که ماتریس تخصیص را به شما اختصاص دهد، سپس به اینجا بازگردید.",
+    "intro": "هر کمیته یک کد کمیته در کنفرانس خود دارد (دروازه دوم پس از ورود نمایندگان کد کنفرانس). کدها باید در همان رویداد کنفرانس منحصر به فرد باشند.",
+    "testingOverride": "لغو آزمایش فعال شد: می‌توانید کدهای کمیته را در بین کمیته‌ها بدون بررسی تخصیص صندلی تغییر داده و مدیریت کنید.",
+    "chairScope": "به عنوان دایس، شما فقط کمیته هایی را می بینید که در آن صندلی دارید. ذخیره شما را به نمایه شما می فرستد. نمایندگانی که قبلاً از گیت کمیته عبور کرده‌اند، تا زمانی که از سیستم خارج نشوند، وارد سیستم می‌شوند.",
+    "staffAfterSave": "پس از ذخیره، می توانید وارد آن کمیته شوید یا کد را در دایس به اشتراک بگذارید."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "فهرست کپی (TSV)",
+    "copied": "جدول در کلیپ بورد کپی شد.",
+    "helpTitle": "کدهای ورود به سیستم تخصیص",
+    "helpBody": "اینها کدهای پلاکارد برای هر تخصیص هستند که توسط نمایندگان و صندلی‌ها در طول دروازه کد تخصیص استفاده می‌شوند. کدها فقط توسط مدیر سایت قابل تغییر است.",
+    "copyHeader": "کنفرانس: {conference}",
+    "copyColumns": "کد نماینده کشور",
+    "columnCountry": "کشور / تخصیص",
+    "columnDelegate": "نماینده (تخصیص)",
+    "columnCode": "رمز / کد",
+    "codeFieldHelpTitle": "قسمت رمز / کد",
+    "codeFieldHelpBody": "نمایندگان این کد را برای تخصیص اختصاص داده شده خود وارد می کنند. فقط یک مدیر سایت می تواند آن را تغییر دهد.",
+    "empty": "هنوز تخصیصی برای این کنفرانس وجود ندارد."
+  },
+  "chairSessionError": {
+    "title": "طبقه جلسه بارگیری نشد",
+    "fallback": "هنگام بارگیری کنترل‌های جلسه صندلی، خطای غیرمنتظره‌ای روی داد.",
+    "reference": "مرجع: {digest}",
+    "backToDashboard": "بازگشت به داشبورد صندلی"
+  },
+  "smtDelegatesPage": {
+    "title": "نمایندگان",
+    "intro": "هر نماینده مرتبط در این رویداد را با نام، تخصیص، ایمیل یا کمیته جستجو کنید. یک کارت برای عکس و نمایه آنها باز کنید.",
+    "selectEventFirst": "ابتدا یک رویداد کنفرانس فعال را انتخاب کنید.",
+    "enterConferenceCode": "کد کنفرانس را وارد کنید",
+    "searchLabel": "نمایندگان را جستجو کنید",
+    "searchPlaceholder": "نام، تخصیص، ایمیل، یا کمیته",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "هنوز هیچ نماینده مرتبطی در این رویداد وجود ندارد.",
+    "noMatches": "هیچ نماینده ای با آن جستجو مطابقت ندارد.",
+    "unnamed": "نماینده بی نام"
   }
 }

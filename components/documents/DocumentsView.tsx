@@ -11,6 +11,9 @@ import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDo
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { QueryTabs } from "@/components/ui/Tabs";
 
+/** Sentinel id for the always-visible RoP Archives slot when no RoP doc exists yet. */
+const ROP_PLACEHOLDER_ID = "__rop_placeholder__";
+
 interface Document {
   id: string;
   user_id: string;
@@ -97,11 +100,6 @@ export function DocumentsView({
     }
   }
 
-  const displaySelectedId =
-    selectedId != null && docs.some((d) => d.id === selectedId)
-      ? selectedId
-      : (docs[0]?.id ?? null);
-  const selected = docs.find((d) => d.id === displaySelectedId) ?? null;
   const chairReportDocs = docs.filter((d) => d.doc_type === "chair_report");
   const ropDocs = docs.filter((d) => d.doc_type === "rop");
   const awardCriteriaDocs = docs.filter((d) => d.doc_type === "award_criteria");
@@ -115,6 +113,15 @@ export function DocumentsView({
       d.doc_type !== "prep_doc" &&
       d.doc_type !== "chair_notes"
   );
+  const showRopPlaceholder = ropDocs.length === 0;
+  const displaySelectedId =
+    selectedId === ROP_PLACEHOLDER_ID && showRopPlaceholder
+      ? ROP_PLACEHOLDER_ID
+      : selectedId != null && docs.some((d) => d.id === selectedId)
+        ? selectedId
+        : (docs[0]?.id ?? (showRopPlaceholder ? ROP_PLACEHOLDER_ID : null));
+  const selected = docs.find((d) => d.id === displaySelectedId) ?? null;
+  const ropPlaceholderSelected = displaySelectedId === ROP_PLACEHOLDER_ID && showRopPlaceholder;
 
   async function refreshDocs() {
     let q = supabase.from("documents").select("*").order("updated_at", { ascending: false });
@@ -422,8 +429,6 @@ export function DocumentsView({
               )}
               {!showForm && !editing ? <p className="text-sm text-brand-muted">{t("tabs.composeHint")}</p> : null}
             </div>
-          ) : docs.length === 0 ? (
-            <p className="mun-empty-state text-sm">{t("empty")}</p>
           ) : (
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-64">
@@ -435,6 +440,11 @@ export function DocumentsView({
               value={displaySelectedId ?? ""}
               onChange={(e) => setSelectedId(e.target.value || null)}
             >
+              {showRopPlaceholder ? (
+                <option value={ROP_PLACEHOLDER_ID}>
+                  {t("ropPlaceholderTitle")} ({t("types.rop")})
+                </option>
+              ) : null}
               {docs.map((d) => (
                 <option key={d.id} value={d.id}>
                   {d.title || t("untitled")} ({labelForDocType(d.doc_type)})
@@ -465,29 +475,45 @@ export function DocumentsView({
                   </span>
                 </button>
               ))}
-              {ropDocs.length > 0 ? (
-                <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  {t("sections.rop")}
-                </p>
-              ) : null}
-              {ropDocs.map((d) => (
+              <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted first:pt-2">
+                {t("sections.rop")}
+              </p>
+              {showRopPlaceholder ? (
                 <button
-                  key={d.id}
                   type="button"
-                  onClick={() => setSelectedId(d.id)}
-                  className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
-                    displaySelectedId === d.id
-                      ? "border-cyan-300 bg-cyan-50 font-medium text-cyan-900 dark:border-cyan-500/40 dark:bg-cyan-950/30 dark:text-cyan-100"
-                      : "border-[var(--hairline)] bg-[var(--material-thin)] hover:border-[color:color-mix(in_srgb,var(--accent)_25%,var(--hairline))]"
+                  onClick={() => setSelectedId(ROP_PLACEHOLDER_ID)}
+                  className={`flex w-full items-start gap-2 rounded-xl border border-dashed px-3 py-2.5 text-left text-sm transition ${
+                    ropPlaceholderSelected
+                      ? "border-cyan-400/70 bg-cyan-50/80 font-medium text-cyan-900 dark:border-cyan-500/50 dark:bg-cyan-950/30 dark:text-cyan-100"
+                      : "border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,#DFF2FC_55%,transparent)] hover:border-[color:color-mix(in_srgb,var(--accent)_45%,var(--hairline))] dark:bg-cyan-950/15"
                   }`}
                 >
-                  <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
+                  <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-60" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || t("untitled")}</span>
-                    <span className="text-xs capitalize text-brand-muted">{t("types.rop")}</span>
+                    <span className="block truncate">{t("ropPlaceholderTitle")}</span>
+                    <span className="text-xs text-brand-muted">{t("ropPlaceholderHint")}</span>
                   </span>
                 </button>
-              ))}
+              ) : (
+                ropDocs.map((d) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    onClick={() => setSelectedId(d.id)}
+                    className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
+                      displaySelectedId === d.id
+                        ? "border-cyan-300 bg-cyan-50 font-medium text-cyan-900 dark:border-cyan-500/40 dark:bg-cyan-950/30 dark:text-cyan-100"
+                        : "border-[var(--hairline)] bg-[var(--material-thin)] hover:border-[color:color-mix(in_srgb,var(--accent)_25%,var(--hairline))]"
+                    }`}
+                  >
+                    <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
+                    <span className="min-w-0">
+                      <span className="block truncate">{d.title || t("untitled")}</span>
+                      <span className="text-xs capitalize text-brand-muted">{t("types.rop")}</span>
+                    </span>
+                  </button>
+                ))
+              )}
               {awardCriteriaDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
                   {t("sections.awardCriteria")}
@@ -580,10 +606,31 @@ export function DocumentsView({
                   </span>
                 </button>
               ))}
+              {docs.length === 0 ? (
+                <p className="px-1 pt-3 text-xs text-brand-muted">{t("empty")}</p>
+              ) : null}
             </div>
           </div>
 
-              {selected ? (
+              {ropPlaceholderSelected ? (
+                <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-dashed border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,#DFF2FC_70%,var(--dashboard-card))] p-5 shadow-[var(--dashboard-shadow)] sm:p-7 dark:bg-cyan-950/20">
+                  <div>
+                    <h3 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
+                      {t("ropPlaceholderTitle")}
+                    </h3>
+                    <p className="text-sm text-brand-muted">{t("types.rop")}</p>
+                  </div>
+                  <p className="text-sm leading-relaxed text-brand-navy/90 dark:text-zinc-200">
+                    {t("ropPlaceholderBlurb")}
+                  </p>
+                  {canManageRop && !readOnlyViewer ? (
+                    <p className="text-sm text-brand-muted">{t("ropPlaceholderComposeHint")}</p>
+                  ) : null}
+                  <p className="inline-flex rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-muted">
+                    {t("ropPlaceholderHint")}
+                  </p>
+                </div>
+              ) : selected ? (
                 <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 shadow-[var(--dashboard-shadow)] sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>

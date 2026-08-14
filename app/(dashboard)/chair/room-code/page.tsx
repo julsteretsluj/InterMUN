@@ -41,11 +41,11 @@ export default async function ChairRoomCodePage() {
       ),
     ];
     if (allowedIds.length === 0) {
+      const tRoom = await getTranslations("chairRoomCodePage");
       return (
         <MunPageShell title={t("committeeCodes")} variant="default">
           <p className="text-sm text-brand-muted mb-4 max-w-xl">
-            You don&apos;t have a committee seat yet. Ask secretariat to assign you on the allocation
-            matrix, then return here.
+            {tRoom("noSeat")}
           </p>
         </MunPageShell>
       );
@@ -54,26 +54,24 @@ export default async function ChairRoomCodePage() {
   }
 
   const { data: conferences } = await conferencesQuery;
+  const tRoom = await getTranslations("chairRoomCodePage");
 
   return (
     <MunPageShell title={t("committeeCodes")} variant="offset">
       <p className="text-sm text-brand-muted mb-6 max-w-xl">
-        Each committee has a <strong>committee code</strong> within its conference (second gate after
-        delegates enter the conference code). Codes must be unique within the same conference event.
+        {tRoom("intro")}
         {role === "chair" && bypassSeatRestriction ? (
           <>
             {" "}
-            Testing override enabled: you can switch and manage committee codes across committees
-            without seat allocation checks.
+            {tRoom("testingOverride")}
           </>
         ) : role === "chair" ? (
           <>
             {" "}
-            As dais, you only see committees where you have a seat. Saving sends you to your profile;
-            delegates who already passed the committee gate stay signed in until they log out.
+            {tRoom("chairScope")}
           </>
         ) : (
-          <> After saving, you can enter that committee or share the code on the dais.</>
+          <> {tRoom("staffAfterSave")}</>
         )}
       </p>
       <RoomCodeChairForm conferences={conferences ?? []} />

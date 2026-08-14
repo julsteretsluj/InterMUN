@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Перезавантажити"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "напр. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Підвкладки",
     "home": "додому",
     "library": "Бібліотека",
-    "mainNavigationAria": "Основна навігація"
+    "mainNavigationAria": "Основна навігація",
+    "crisis": "Криза"
   },
   "dashboardLayout": {
     "helpCenter": "Довідковий центр",
@@ -838,7 +840,9 @@
     "pointsLog": "• Журнал очок",
     "formalMotions": "Офіційні клопотання",
     "timer": "Таймер",
-    "smtProfile": "Профіль"
+    "smtProfile": "Профіль",
+    "crisis": "Криза",
+    "smtDelegates": "Делегати"
   },
   "setupPage": {
     "title": "Supabase не налаштовано",
@@ -1333,7 +1337,8 @@
       "roomCode": "Код кімнати",
       "settings": "Налаштування",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "звіт"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Подія та сесії",
     "roomCodes": "Коди кімнат і стільці",
     "advisors": "Радники",
-    "notes": "Notes",
+    "notes": "Примітки",
     "awards": "Нагороди",
     "allocationMatrix": "Матриця розподілу",
     "allocationPasswords": "Паролі розподілу",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Новини",
+    "pressCorps": "Корпус преси",
+    "milestones": "Віхи",
     "profile": "Профіль",
     "follow": "Слідуйте",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Посібники",
+    "delegates": "Делегати"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Програми та кошти",
       "specializedAgencies": "Спеціалізовані агентства та пов'язані з ними",
       "peacekeepingMissions": "Миротворча діяльність і місії",
-      "foundersMembers": "Засновники та члени"
+      "foundersMembers": "Засновники та члени",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Press Corps Links"
     },
     "links": {
       "ods": "Система офіційних документів ООН (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Спеціальні політичні місії ООН",
       "memberStates": "Держави-члени ООН",
       "unSystem": "Система ООН (засновники та члени)",
-      "history": "Історія ООН"
+      "history": "Історія ООН",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Сайт конференції та портал комітету",
+      "documentsArticles": "ODS, цифрова бібліотека, новини, преса та щорічник",
+      "legislationTreaties": "Договори, хартії та міжнародне право",
+      "mainBodies": "GA, Рада Безпеки, ECOSOC, ICJ тощо",
+      "programmesFunds": "ПРООН, ЮНІСЕФ, УВКБ ООН, ВПП та відповідні фонди",
+      "specializedAgencies": "ВООЗ, ЮНЕСКО, Світовий банк, МОП та партнери",
+      "peacekeepingMissions": "Миротворчі та спеціальні політичні місії",
+      "foundersMembers": "Держави-члени, система ООН та історія",
+      "pressCorpsLinks": "Три відділи новин для кожного розподілу Прес-корпусу (світ, здоров’я та функції)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Нагадування",
     "privateReminderLabel": "Приватне нагадування (лише стільці, синхронізовано)",
     "committeeFallback": "Комітет",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Формування блоку",
       "speechPoisOrPocs": "Мовні POI або POC",
       "questions": "Питання",
-      "informalConversations": "Неформальні розмови"
+      "informalConversations": "Неформальні розмови",
+      "sessionProgress": "Перебіг сеансу (SMT)"
     },
     "concernLabel": "Занепокоєння (автоматичний заповнювач)",
     "concernHelpTitle": "Прапор концерну",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Вам потрібен розподіл, щоб надсилати нотатки (або бути головою).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Не вдалося надіслати нотатку."
-    }
+    },
+    "sendToSmt": "Надіслати до SMT",
+    "sendToSmtHelp": "Приземляється в скриньку записок секретаріату (Зі стільців). Використовуйте це для прогресу в кінці сеансу.",
+    "progressPrefill": "Щойно завершилося засідання комісії. \n\nПрогрес: \n- \n\nБудь-яке питання, на яке SMT має звернути увагу: \n-",
+    "progressComposeHint": "Ця нотатка буде передана SMT. Підсумуйте, що охоплювало кімната і що має знати секретаріат.",
+    "progressSent": "Повідомлення про хід роботи надіслано SMT."
   },
   "adminPage": {
     "title": "Адміністрація сайту",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Не знайдено рядків даних (потрібно принаймні країну/позицію на рядок).",
       "importLimitedRows": "Імпорт обмежено до {max} рядків. Розділіть файл.",
       "rowTooLong": "Ряд надто довгий: {row}…",
-      "codeTooLongOnRow": "Задовгий код у рядку: {row}"
+      "codeTooLongOnRow": "Задовгий код у рядку: {row}",
+      "chairSeatsCannotBeDeleted": "Місця голови та співголови залишаються в кожному комітеті."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Спершу виберіть подію з кодом конференції (вхід для події).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Назви посад і коди плакатів можуть бути змінені лише адміністратором сайту."
   },
   "chairAllocationMatrixPage": {
     "intro": "Матриця розподілу комітетів для вашої поточної сесії. Це лише для читання для стільців і відображає активні призначення місць і коди плакатів.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Запитаний розподіл",
       "account": "Обліковий запис",
       "actions": "Дії",
-      "score": "Score"
+      "score": "Оцінка",
+      "photo": "Фото",
+      "school": "Школа",
+      "party": "Політична група"
     },
     "noRows": "Для цього комітету не знайдено рядків розподілу.",
     "pendingApprovalsTitle": "Очікує схвалення реєстрації",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Матриця розподілу",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Рухи",
+    "pointsTitle": "Очки",
+    "resolutionsTitle": "Резолюції",
+    "noMotions": "Для цього делегата не зареєстровано жодних пропозицій.",
+    "noPoints": "Немає очок для цього делегата.",
+    "noResolutions": "Для цього делегата не зареєстровано участі у вирішенні питань.",
+    "untitledMotion": "Рух без назви",
+    "chairLoggedPoint": "Стілець-логований пункт",
+    "resolutionLink": "Відкрийте документ Google",
+    "resolutionNoLink": "Немає посилання на документ",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Процедурний",
+      "delegate": "Стілець колода"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Основний подавач",
+      "co": "Співподавач",
+      "signatory": "Підписант"
+    },
+    "speechesTitle": "Виступи",
+    "flagsTitle": "Компліменти та занепокоєння",
+    "disciplineTitle": "Попередження та попередження",
+    "noSpeeches": "Промови цього делегата не записані.",
+    "noFlags": "Немає жодних компліментів чи занепокоєнь для цього делегата.",
+    "noDiscipline": "Для цього делегата не зареєстровано жодних попереджень чи попереджень.",
+    "untitledSpeech": "Виступ",
+    "currentFlag": "поточний",
+    "speechStatuses": {
+      "waiting": "Очікування",
+      "current": "Говорячи",
+      "done": "Доставлено"
+    },
+    "flagKinds": {
+      "compliment": "комплімент",
+      "concern": "Занепокоєння",
+      "reminder": "Нагадування"
+    },
+    "disciplineActions": {
+      "warning": "УВАГА",
+      "strike": "Страйк",
+      "revoke_warning": "Попередження скасовано",
+      "revoke_strike": "Страйк скасовано",
+      "reset": "Скинути"
+    },
+    "disciplineCounts": "{warnings} попередження · {strikes} попередження"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "ваш комітет",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Кімната комітетів (повна)",
         "hint": "Віртуальний макет і поверх делегатів"
+      },
+      "crisisReport": {
+        "label": "звіт",
+        "hint": "Звіт про інцидент"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Примітки",
     "noGoogleDocYet": "Документи Google ще не пов’язані. Скористайтеся Редагувати, щоб додати URL-адресу docs.google.com/document/d/….",
     "chairFeedbackHeading": "Відгук про стілець",
-    "noFeedbackYet": "Ще немає відгуків."
+    "noFeedbackYet": "Ще немає відгуків.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Присутній — може утриматися",
       "present_voting": "Присутні та голосують (реєстрація)",
       "unknown": "— (рол)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Посилання, кнопки та файли",
+      "help": "Додайте веб-посилання, кнопку або завантажте PDF/файл. Кожен, хто відкрив цей посібник, може ними скористатися.",
+      "kindLink": "Посилання",
+      "kindButton": "Кнопка",
+      "kindFile": "Файл",
+      "label": "Мітка",
+      "urlPlaceholder": "https://… or /page",
+      "add": "додати",
+      "upload": "Завантажте PDF або файл",
+      "uploading": "Завантаження…",
+      "remove": "видалити",
+      "download": "ВІДЧИНЕНО",
+      "empty": "Поки немає посилань чи файлів.",
+      "errorType": "Використовуйте файл PDF, документ Office, текст або файл зображення.",
+      "errorSize": "Файл завеликий (макс. 15 МБ).",
+      "errorUpload": "Не вдалося завантажити цей файл.",
+      "markdownHelp": "У примітках ви також можете написати [мітка](https://url) для посилання або [мітка](https://url \"кнопка\") для кнопки. Вставте URL-адресу файлу або завантажте вище."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Перевірка статусу вашого ролика...",
       "rollPromptSaving": "Збереження...",
       "rollPromptPresent": "присутній",
-      "rollPromptPresentVoting": "Присутні та голосують"
+      "rollPromptPresentVoting": "Присутні та голосують",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Процедура голосування",
@@ -4241,7 +4382,11 @@
       "timer": "Таймер",
       "sidebarAnd": "і",
       "announcements": "Оголошення",
-      "sidebarUseSuffix": "— один інструмент на вкладку."
+      "sidebarUseSuffix": "— один інструмент на вкладку.",
+      "smtProgressReminderTitle": "Оновіть SMT на цьому сеансі",
+      "smtProgressReminderBody": "Надішліть коротку доповідь про хід роботи, щоб секретаріат знав, як пройшов комітет і що потрібно зробити далі.",
+      "smtProgressReminderWrite": "Напишіть записку",
+      "smtProgressReminderDismiss": "Пізніше"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Сеанс закінчився — оновіть SMT",
+      "reminderSessionEnd": "{title} було заплановано на {start}. Надішліть SMT коротке повідомлення про хід.",
+      "writeSmtNote": "Напишіть записку"
     },
     "history": {
       "title": "Історія сесії",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Ще немає місць для висунення кандидатів у цей комітет.",
+    "stepProgress": "Номінація {current} з {total}",
+    "requiredProgress": "{done}/{total} необхідні слоти заповнено",
+    "gotoStep": "Перейти до {label}",
+    "lockedTitle": "Спершу завершіть кожну картку делегата",
+    "lockedBody": "Заповніть рубрику сеансу для кожного делегата вище, а потім поверніться сюди, щоб призначити нагороди по одному.",
+    "optional": "необов'язковий",
+    "submittedLocked": "Надіслано до SMT — редагування заблоковано.",
+    "topSuggestions": "Топ 5 з рубрики сесії",
+    "topSuggestionsHint": "Найвищі результати матриці в цьому комітеті. Виберіть один або здійсніть пошук нижче.",
+    "noSuggestions": "Рейтингових делегатів ще немає. Спочатку оцініть матрицю або здійсніть пошук за назвою.",
+    "searchLabel": "Пошук делегатів",
+    "searchPlaceholder": "Назва або призначення",
+    "searchEmpty": "Жоден делегат не відповідає цьому запиту.",
+    "selectedNominee": "Вибраний номінант",
+    "pickNomineeHint": "Виберіть номінанта з 5 найкращих або здійсніть пошук, щоб відкрити його рубрику та внести журнал.",
+    "rubricHeading": "Рубрика номінації",
+    "rubricTotal": "Усього за рубрикою: {total}/{max} (набрано {scored}/{criteria} критеріїв — 1–8 за критерій)",
+    "evidenceLabel": "Заява про підтвердження / докази",
+    "evidencePlaceholder": "Наведіть докази конкретної підлоги (розроблені положення, досягнуті компроміси, ключові втручання). Принаймні {min} символів — необхідно, перш ніж SMT зможе схвалити.",
+    "previous": "Попередній",
+    "skipOptional": "Пропустити додатковий слот",
+    "next": "Далі",
+    "locked": "Заблоковано",
+    "matrixRequired": "Спочатку потрібна матриця",
+    "saving": "Збереження…",
+    "saveAndNext": "Зберегти та далі",
+    "save": "зберегти",
+    "allSlotsSummary": "Усі номінаційні слоти",
+    "statusDone": "Готово",
+    "statusTodo": "робити",
+    "errors": {
+      "selectNominee": "Виберіть номінанта на цей слот.",
+      "completeRubric": "Перед збереженням виберіть діапазон для кожного критерію.",
+      "evidenceMin": "Додайте принаймні {min} символів доказів."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Загальне завершення нагородження",
+    "completeCount": "{completed}/{total} завершено",
+    "requiredLabel": "Прогрес (обов'язково)",
+    "optionalSlots": "Додаткові слоти: {completed}/{total} заповнено"
+  },
+  "chairAwardsSubmit": {
+    "title": "Надішліть до SMT",
+    "intro": "Під час збереження слота записується лише чернетка; SMT не побачить його, доки ви не надішлете пакет нижче. Коли потрібні слоти заповнені, надішліть партію до SMT для перевірки. Автоматичне надсилання також виконується після {deadline} (UTC), коли ви відкриваєте цю сторінку, або через заплановане завдання, якщо це налаштовано у вашому розгортанні.",
+    "requiredSlotsIncomplete": "Виконано необхідні слоти: {done}/{total} — закінчіть решту, а потім надішліть, щоб SMT міг переглянути.",
+    "requiredSlotsReady": "Необхідні слоти заповнено: {done}/{total} — номінаційна партія готова (переконайтеся, що матриця делегатів заповнена).",
+    "matrixIncomplete": "Матриця делегатів (кожен сидить делегат): {done}/{total} — оцініть кожного делегата вище перед поданням.",
+    "matrixComplete": "Матриця делегатів (кожен сидить делегат): {done}/{total} — повно.",
+    "alreadySubmitted": "Надіслано до SMT{when}. Редагування заблоковано; зверніться до SMT, якщо вам потрібна зміна.",
+    "submittedAt": "— {time}",
+    "submitButton": "Подати кандидатури до SMT",
+    "submitting": "Надсилання…",
+    "needComplete": "Заповніть кожну необхідну позицію для номінації та матрицю делегатів, а потім надішліть.",
+    "deadlinePassed": "Дедлайн минув — подайте зараз, якщо ви ще цього не зробили."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Ви ще не маєте місця в комітеті. Попросіть секретаріат включити вас до матриці розподілу, а потім поверніться сюди.",
+    "intro": "Кожен комітет має код комітету в рамках своєї конференції (другі ворота після того, як делегати вводять код конференції). Коди мають бути унікальними в рамках однієї події конференції.",
+    "testingOverride": "Перевизначення тестування ввімкнено: ви можете перемикати та керувати кодами комітетів між комітетами без перевірки розподілу місць.",
+    "chairScope": "Ви бачите тільки ті комітети, у яких ви маєте місце. Під час збереження ви перейдете до свого профілю; делегати, які вже пройшли ворота комітету, залишаються в системі, доки не вийдуть.",
+    "staffAfterSave": "Після збереження ви можете увійти до цього комітету або поділитися кодом на трибуні."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Копіювати список (TSV)",
+    "copied": "Таблицю скопійовано в буфер обміну.",
+    "helpTitle": "Коди входу в розподіл",
+    "helpBody": "Це коди плакатів для кожного розподілу, які використовуються делегатами та головами під час проходження коду розподілу. Коди може змінити лише адміністратор сайту.",
+    "copyHeader": "Конференція: {conference}",
+    "copyColumns": "Код представника країни",
+    "columnCountry": "Країна / розподіл",
+    "columnDelegate": "Делегат (розподіл)",
+    "columnCode": "Пароль/код",
+    "codeFieldHelpTitle": "Поле пароля/коду",
+    "codeFieldHelpBody": "Делегати вводять цей код для призначеного їм розподілу. Змінити його може лише адміністратор сайту.",
+    "empty": "На цю конференцію ще не виділено кошти."
+  },
+  "chairSessionError": {
+    "title": "Не вдалося завантажити поверх сеансу",
+    "fallback": "Під час завантаження елементів керування сеансом крісла сталася неочікувана помилка.",
+    "reference": "Посилання: {digest}",
+    "backToDashboard": "Назад до приладової панелі крісла"
+  },
+  "smtDelegatesPage": {
+    "title": "Делегати",
+    "intro": "Шукайте всіх пов’язаних делегатів у цій події за іменем, розподілом, електронною поштою чи комітетом. Відкрийте картку для фото та профілю.",
+    "selectEventFirst": "Спочатку виберіть активну подію конференції.",
+    "enterConferenceCode": "Введіть код конференції",
+    "searchLabel": "Пошук делегатів",
+    "searchPlaceholder": "Ім’я, призначення, адреса електронної пошти або комітет",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "У цій події ще немає пов’язаних делегатів.",
+    "noMatches": "Жоден делегат не відповідає цьому запиту.",
+    "unnamed": "Делегат без назви"
   }
 }

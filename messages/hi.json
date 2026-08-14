@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "पुनः लोड करें"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "जैसे SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "उपटैब",
     "home": "घर",
     "library": "पुस्तकालय",
-    "mainNavigationAria": "मुख्य नेविगेशन"
+    "mainNavigationAria": "मुख्य नेविगेशन",
+    "crisis": "संकट"
   },
   "dashboardLayout": {
     "helpCenter": "सहायता केंद्र",
@@ -838,7 +840,9 @@
     "pointsLog": "• अंक लॉग",
     "formalMotions": "औपचारिक प्रस्ताव",
     "timer": "घड़ी",
-    "smtProfile": "प्रोफ़ाइल"
+    "smtProfile": "प्रोफ़ाइल",
+    "crisis": "संकट",
+    "smtDelegates": "प्रतिनिधियों"
   },
   "setupPage": {
     "title": "सुपाबेस कॉन्फ़िगर नहीं है",
@@ -1333,7 +1337,8 @@
       "roomCode": "कक्ष कोड",
       "settings": "सेटिंग्स",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "प्रतिवेदन"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "घटना एवं सत्र",
     "roomCodes": "कमरे के कोड और कुर्सियाँ",
     "advisors": "सलाहकार",
-    "notes": "Notes",
+    "notes": "टिप्पणियाँ",
     "awards": "पुरस्कार",
     "allocationMatrix": "आवंटन मैट्रिक्स",
     "allocationPasswords": "आवंटन पासवर्ड",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "न्यूज़रूम",
+    "pressCorps": "प्रेस कोर",
+    "milestones": "मील के पत्थर",
     "profile": "प्रोफ़ाइल",
     "follow": "अनुसरण करना",
     "hubAbbrev": "श्रीमती",
-    "guides": "Guides"
+    "guides": "गाइड",
+    "delegates": "प्रतिनिधियों"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "कार्यक्रम एवं निधि",
       "specializedAgencies": "विशिष्ट एजेंसियाँ और संबंधित",
       "peacekeepingMissions": "शांति स्थापना और मिशन",
-      "foundersMembers": "संस्थापक एवं सदस्य"
+      "foundersMembers": "संस्थापक एवं सदस्य",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "कोर लिंक दबाएँ"
     },
     "links": {
       "ods": "संयुक्त राष्ट्र आधिकारिक दस्तावेज़ प्रणाली (ओडीएस)",
@@ -1471,7 +1479,29 @@
       "spm": "संयुक्त राष्ट्र के विशेष राजनीतिक मिशन",
       "memberStates": "संयुक्त राष्ट्र के सदस्य देश",
       "unSystem": "संयुक्त राष्ट्र प्रणाली (संस्थापक एवं सदस्य)",
-      "history": "संयुक्त राष्ट्र इतिहास"
+      "history": "संयुक्त राष्ट्र इतिहास",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "सम्मेलन की वेबसाइट और समिति पोर्टल",
+      "documentsArticles": "ओडीएस, डिजिटल लाइब्रेरी, समाचार, प्रेस और वार्षिक पुस्तक",
+      "legislationTreaties": "संधियाँ, चार्टर और अंतर्राष्ट्रीय कानून",
+      "mainBodies": "जीए, सुरक्षा परिषद, ईसीओएसओसी, आईसीजे, और बहुत कुछ",
+      "programmesFunds": "यूएनडीपी, यूनिसेफ, यूएनएचसीआर, डब्ल्यूएफपी, और संबंधित फंड",
+      "specializedAgencies": "WHO, यूनेस्को, विश्व बैंक, ILO, और भागीदार",
+      "peacekeepingMissions": "शांति स्थापना और विशेष राजनीतिक मिशन",
+      "foundersMembers": "सदस्य देश, संयुक्त राष्ट्र प्रणाली और इतिहास",
+      "pressCorpsLinks": "प्रत्येक प्रेस कोर आवंटन (विश्व, स्वास्थ्य और सुविधाएँ) के लिए तीन समाचार डेस्क।"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "अनुस्मारक",
     "privateReminderLabel": "निजी अनुस्मारक (केवल कुर्सियाँ, समन्वयित)",
     "committeeFallback": "समिति",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "ब्लॉक बनाना",
       "speechPoisOrPocs": "भाषण POI या POCs",
       "questions": "प्रश्न",
-      "informalConversations": "अनौपचारिक बातचीत"
+      "informalConversations": "अनौपचारिक बातचीत",
+      "sessionProgress": "सत्र प्रगति (एसएमटी)"
     },
     "concernLabel": "चिंता (ऑटो प्लेसहोल्डर)",
     "concernHelpTitle": "चिंता का झंडा",
@@ -1848,7 +1883,12 @@
       "needAllocation": "आपको नोट्स भेजने (या कुर्सी बनने) के लिए आवंटन की आवश्यकता है।",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "नोट भेजने में विफल."
-    }
+    },
+    "sendToSmt": "श्रीमती को भेजें",
+    "sendToSmtHelp": "सचिवालय नोट्स इनबॉक्स में भूमि (कुर्सियों से)। सत्र के अंत की प्रगति के लिए इसका उपयोग करें।",
+    "progressPrefill": "समिति का सत्र अभी समाप्त हुआ। \n\nप्रगति: \n- \n\nश्रीमती को किसी भी चीज़ का अनुसरण करना चाहिए: \n-",
+    "progressComposeHint": "यह नोट एसएमटी के पास जाएगा। संक्षेप में बताएं कि कमरे में क्या शामिल है और सचिवालय को क्या पता होना चाहिए।",
+    "progressSent": "प्रगति नोट श्रीमती को भेजा गया।"
   },
   "adminPage": {
     "title": "वेबसाइट प्रशासन",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "कोई डेटा पंक्तियाँ नहीं मिलीं (प्रति पंक्ति कम से कम एक देश/स्थिति की आवश्यकता है)।",
       "importLimitedRows": "आयात {अधिकतम} पंक्तियों तक सीमित है। अपनी फ़ाइल विभाजित करें.",
       "rowTooLong": "पंक्ति बहुत लंबी: {पंक्ति}...",
-      "codeTooLongOnRow": "पंक्ति में कोड बहुत लंबा है: {पंक्ति}"
+      "codeTooLongOnRow": "पंक्ति में कोड बहुत लंबा है: {पंक्ति}",
+      "chairSeatsCannotBeDeleted": "हर समिति में प्रमुख अध्यक्ष और सह-अध्यक्ष की सीटें रहती हैं।"
     },
     "smtStaffAccess": {
       "chooseEventFirst": "पहले कॉन्फ़्रेंस कोड (इवेंट गेट) वाला एक इवेंट चुनें।",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "स्थिति के नाम और प्लेकार्ड कोड केवल साइट व्यवस्थापक द्वारा ही बदले जा सकते हैं।"
   },
   "chairAllocationMatrixPage": {
     "intro": "आपके वर्तमान सत्र के लिए समिति आवंटन मैट्रिक्स। यह कुर्सियों के लिए केवल पढ़ने योग्य है और सक्रिय सीट असाइनमेंट और प्लेकार्ड कोड को दर्शाता है।",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "आवंटन का अनुरोध किया",
       "account": "खाता",
       "actions": "कार्रवाई",
-      "score": "Score"
+      "score": "अंक",
+      "photo": "तस्वीर",
+      "school": "विद्यालय",
+      "party": "राजनीतिक समूह"
     },
     "noRows": "इस समिति के लिए कोई आवंटन पंक्तियाँ नहीं मिलीं.",
     "pendingApprovalsTitle": "लंबित साइन-अप अनुमोदन",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "आवंटन मैट्रिक्स",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "प्रस्ताव",
+    "pointsTitle": "अंक",
+    "resolutionsTitle": "प्रस्तावों",
+    "noMotions": "इस प्रतिनिधि के लिए कोई प्रस्ताव दर्ज नहीं किया गया।",
+    "noPoints": "इस प्रतिनिधि के लिए कोई अंक दर्ज नहीं किया गया।",
+    "noResolutions": "इस प्रतिनिधि के लिए कोई समाधान भागीदारी दर्ज नहीं की गई।",
+    "untitledMotion": "शीर्षक रहित प्रस्ताव",
+    "chairLoggedPoint": "चेयर-लॉग पॉइंट",
+    "resolutionLink": "Google डॉक खोलें",
+    "resolutionNoLink": "कोई दस्तावेज़ लिंक नहीं",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "ि यात्मक",
+      "delegate": "चेयर लॉग"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "मुख्य प्रस्तुतकर्ता",
+      "co": "सह-प्रस्तुतकर्ता",
+      "signatory": "हस्ताक्षरकर्ता"
+    },
+    "speechesTitle": "भाषण",
+    "flagsTitle": "प्रशंसा एवं चिंताएँ",
+    "disciplineTitle": "चेतावनियाँ और हमले",
+    "noSpeeches": "इस प्रतिनिधि के लिए कोई भाषण रिकॉर्ड नहीं किया गया।",
+    "noFlags": "इस प्रतिनिधि के लिए कोई प्रशंसा या चिंता दर्ज नहीं की गई।",
+    "noDiscipline": "इस प्रतिनिधि के लिए कोई चेतावनी या हड़ताल दर्ज नहीं की गई।",
+    "untitledSpeech": "भाषण",
+    "currentFlag": "मौजूदा",
+    "speechStatuses": {
+      "waiting": "इंतज़ार में",
+      "current": "बोला जा रहा है",
+      "done": "पहुंचा दिया"
+    },
+    "flagKinds": {
+      "compliment": "प्रशंसा",
+      "concern": "चिंता",
+      "reminder": "अनुस्मारक"
+    },
+    "disciplineActions": {
+      "warning": "चेतावनी",
+      "strike": "हड़ताल",
+      "revoke_warning": "चेतावनी निरस्त कर दी गई",
+      "revoke_strike": "हड़ताल रद्द",
+      "reset": "रीसेट करें"
+    },
+    "disciplineCounts": "{warnings} चेतावनी(चेतावनियां) · {strikes} हड़ताल(हड़तालें)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "आपकी समिति",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "समिति कक्ष (पूर्ण)",
         "hint": "वर्चुअल लेआउट और प्रतिनिधि तल"
+      },
+      "crisisReport": {
+        "label": "प्रतिवेदन",
+        "hint": "घटना की रिपोर्टिंग"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "टिप्पणियाँ",
     "noGoogleDocYet": "अभी तक कोई Google दस्तावेज़ लिंक नहीं किया गया है. Docs.google.com/document/d/… URL जोड़ने के लिए संपादन का उपयोग करें।",
     "chairFeedbackHeading": "अध्यक्ष की प्रतिक्रिया",
-    "noFeedbackYet": "अभी तक कोई प्रतिक्रिया नहीं जोड़ी गई."
+    "noFeedbackYet": "अभी तक कोई प्रतिक्रिया नहीं जोड़ी गई.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "उपस्थित - अनुपस्थित रह सकते हैं (रोल)",
       "present_voting": "प्रस्तुति और मतदान (रोल)",
       "unknown": "- (रोल)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "लिंक, बटन और फ़ाइलें",
+      "help": "एक वेब लिंक, एक बटन जोड़ें, या एक पीडीएफ/फ़ाइल अपलोड करें। इस गाइड को खोलने वाला कोई भी व्यक्ति इनका उपयोग कर सकता है।",
+      "kindLink": "जोड़ना",
+      "kindButton": "बटन",
+      "kindFile": "फ़ाइल",
+      "label": "लेबल",
+      "urlPlaceholder": "https://… or /page",
+      "add": "जोड़ना",
+      "upload": "पीडीएफ या फ़ाइल अपलोड करें",
+      "uploading": "अपलोड हो रहा है...",
+      "remove": "निकालना",
+      "download": "खुला",
+      "empty": "अभी तक कोई लिंक या फ़ाइल नहीं.",
+      "errorType": "एक पीडीएफ, कार्यालय दस्तावेज़, पाठ, या छवि फ़ाइल का उपयोग करें।",
+      "errorSize": "फ़ाइल बहुत बड़ी है (अधिकतम 15 एमबी)।",
+      "errorUpload": "वह फ़ाइल अपलोड नहीं हो सकी.",
+      "markdownHelp": "नोट्स में आप किसी लिंक के लिए [लेबल](https://url), या किसी बटन के लिए [लेबल](https://url \"बटन\") भी लिख सकते हैं। फ़ाइल URL चिपकाएँ या ऊपर अपलोड करें।"
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "आपके रोल की स्थिति जाँची जा रही है...",
       "rollPromptSaving": "सहेजा जा रहा है...",
       "rollPromptPresent": "उपस्थित",
-      "rollPromptPresentVoting": "उपस्थित रहें और मतदान करें"
+      "rollPromptPresentVoting": "उपस्थित रहें और मतदान करें",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "मतदान प्रक्रिया",
@@ -4241,7 +4382,11 @@
       "timer": "घड़ी",
       "sidebarAnd": "और",
       "announcements": "घोषणाएं",
-      "sidebarUseSuffix": "- प्रति टैब एक उपकरण।"
+      "sidebarUseSuffix": "- प्रति टैब एक उपकरण।",
+      "smtProgressReminderTitle": "इस सत्र पर श्रीमती को अद्यतन करें",
+      "smtProgressReminderBody": "एक संक्षिप्त प्रगति नोट भेजें ताकि सचिवालय को पता चले कि समिति कैसे आगे बढ़ी और क्या कार्रवाई करनी है।",
+      "smtProgressReminderWrite": "एक लेख लिखो",
+      "smtProgressReminderDismiss": "बाद में"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "सत्र समाप्त - श्रीमती अद्यतन करें",
+      "reminderSessionEnd": "{title} {start} पर समाप्त होने वाला था। श्रीमती को एक संक्षिप्त प्रगति नोट भेजें।",
+      "writeSmtNote": "एक लेख लिखो"
     },
     "history": {
       "title": "सत्र इतिहास",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "इस समिति के लिए अभी तक कोई नामांकन स्लॉट नहीं है।",
+    "stepProgress": "नामांकन {current} का {total}",
+    "requiredProgress": "{done}/{total} आवश्यक स्लॉट पूर्ण",
+    "gotoStep": "{label} पर जाएं",
+    "lockedTitle": "प्रत्येक प्रतिनिधि कार्ड को पहले समाप्त करें",
+    "lockedBody": "ऊपर बैठे प्रत्येक प्रतिनिधि के लिए सत्र रूब्रिक को पूरा करें, फिर एक समय में एक स्लॉट के लिए पुरस्कार नामांकित करने के लिए यहां वापस आएं।",
+    "optional": "वैकल्पिक",
+    "submittedLocked": "एसएमटी को सबमिट किया गया - संपादन लॉक किया गया।",
+    "topSuggestions": "सत्र रूब्रिक से शीर्ष 5",
+    "topSuggestionsHint": "इस समिति में उच्चतम मैट्रिक्स योग। एक चुनें, या नीचे खोजें।",
+    "noSuggestions": "अभी तक कोई रैंक वाला प्रतिनिधि नहीं. पहले मैट्रिक्स स्कोर करें, या नाम से खोजें।",
+    "searchLabel": "प्रतिनिधियों को खोजें",
+    "searchPlaceholder": "नाम या आवंटन",
+    "searchEmpty": "कोई भी प्रतिनिधि उस खोज से मेल नहीं खाता।",
+    "selectedNominee": "चयनित उम्मीदवार",
+    "pickNomineeHint": "शीर्ष 5 में से एक नामांकित व्यक्ति चुनें या उनके रूब्रिक और लॉग को खोलने के लिए खोजें।",
+    "rubricHeading": "नामांकन रूब्रिक",
+    "rubricTotal": "रूब्रिक कुल: {total}/{max} ({scored}/{criteria} मानदंड स्कोर - 1-8 प्रति मानदंड)",
+    "evidenceLabel": "पुष्टि/साक्ष्य का कथन",
+    "evidencePlaceholder": "ठोस आधार साक्ष्य उद्धृत करें (खंडों का मसौदा तैयार किया गया, समझौते की मध्यस्थता की गई, प्रमुख हस्तक्षेप)। एसएमटी के अनुमोदन से पहले कम से कम {min} अक्षर आवश्यक हैं।",
+    "previous": "पहले का",
+    "skipOptional": "वैकल्पिक स्लॉट छोड़ें",
+    "next": "अगला",
+    "locked": "बंद",
+    "matrixRequired": "सबसे पहले मैट्रिक्स की आवश्यकता है",
+    "saving": "सहेजा जा रहा है...",
+    "saveAndNext": "सहेजें और अगला",
+    "save": "बचाना",
+    "allSlotsSummary": "सभी नामांकन स्लॉट",
+    "statusDone": "हो गया",
+    "statusTodo": "करने के लिए",
+    "errors": {
+      "selectNominee": "इस स्लॉट के लिए एक नामांकित व्यक्ति का चयन करें.",
+      "completeRubric": "बचत करने से पहले प्रत्येक मानदंड के लिए एक बैंड चुनें।",
+      "evidenceMin": "साक्ष्य के कम से कम {min} अक्षर जोड़ें।"
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "कुल मिलाकर पुरस्कार समापन",
+    "completeCount": "{completed}/{total} पूर्ण",
+    "requiredLabel": "प्रगति (आवश्यक)",
+    "optionalSlots": "वैकल्पिक स्लॉट: {completed}/{total} भरा हुआ"
+  },
+  "chairAwardsSubmit": {
+    "title": "श्रीमती को जमा करें",
+    "intro": "किसी स्लॉट को सहेजने से केवल ड्राफ्ट लिखा जाता है; जब तक आप नीचे दिया गया बैच सबमिट नहीं करते, SMT इसे नहीं देखता है। जब आवश्यक स्लॉट पूरे हो जाएं, तो बैच को समीक्षा के लिए एसएमटी को भेजें। जब आप इस पृष्ठ को खोलते हैं तो स्वचालित सबमिशन {deadline} (UTC) के बाद भी चलता है, या यदि आपकी तैनाती इसे कॉन्फ़िगर करती है तो एक निर्धारित कार्य के माध्यम से।",
+    "requiredSlotsIncomplete": "आवश्यक स्लॉट पूर्ण: {done}/{total} - बाकी पूरा करें, फिर सबमिट करें ताकि श्रीमती समीक्षा कर सकें।",
+    "requiredSlotsReady": "आवश्यक स्लॉट पूर्ण: {done}/{total} - नामांकन बैच तैयार है (सुनिश्चित करें कि उपरोक्त प्रतिनिधि मैट्रिक्स पूरा हो गया है)।",
+    "matrixIncomplete": "प्रतिनिधि मैट्रिक्स (प्रत्येक बैठा प्रतिनिधि): {done}/{total} - सबमिट करने से पहले प्रत्येक प्रतिनिधि को ऊपर स्कोर करें।",
+    "matrixComplete": "प्रतिनिधि मैट्रिक्स (प्रत्येक बैठा प्रतिनिधि): {done}/{total} - पूर्ण।",
+    "alreadySubmitted": "SMT{when} को प्रस्तुत किया गया। संपादन लॉक है; यदि आपको परिवर्तन की आवश्यकता है तो एसएमटी से संपर्क करें।",
+    "submittedAt": "— {time}",
+    "submitButton": "श्रीमती को नामांकन जमा करें",
+    "submitting": "सबमिट किया जा रहा है...",
+    "needComplete": "प्रत्येक आवश्यक नामांकन स्लॉट और प्रतिनिधि मैट्रिक्स को पूरा करें, फिर सबमिट करें।",
+    "deadlinePassed": "समय सीमा बीत चुकी है - यदि आपने पहले से सबमिट नहीं किया है तो अभी सबमिट करें।"
+  },
+  "chairRoomCodePage": {
+    "noSeat": "आपके पास अभी तक समिति की सीट नहीं है. सचिवालय से आपको आवंटन मैट्रिक्स पर नियुक्त करने के लिए कहें, फिर यहां वापस आएं।",
+    "intro": "प्रत्येक समिति के सम्मेलन में एक समिति कोड होता है (प्रतिनिधियों के सम्मेलन कोड में प्रवेश के बाद दूसरा द्वार)। एक ही कॉन्फ़्रेंस इवेंट में कोड अद्वितीय होने चाहिए.",
+    "testingOverride": "परीक्षण ओवरराइड सक्षम: आप सीट आवंटन जांच के बिना समितियों में समिति कोड स्विच और प्रबंधित कर सकते हैं।",
+    "chairScope": "मंच के रूप में, आप केवल वही समितियाँ देखते हैं जहाँ आपकी सीट होती है। सहेजना आपको आपकी प्रोफ़ाइल पर भेजता है; जो प्रतिनिधि पहले ही समिति गेट पार कर चुके हैं वे लॉग आउट होने तक साइन इन रहते हैं।",
+    "staffAfterSave": "सेव करने के बाद आप उस समिति में प्रवेश कर सकते हैं या कोड को मंच पर साझा कर सकते हैं।"
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "प्रतिलिपि सूची (टीएसवी)",
+    "copied": "तालिका को क्लिपबोर्ड पर कॉपी किया गया.",
+    "helpTitle": "आवंटन साइन-इन कोड",
+    "helpBody": "ये आवंटन-कोड गेट के दौरान प्रतिनिधियों और अध्यक्षों द्वारा उपयोग किए जाने वाले प्रति-आवंटन प्लेकार्ड कोड हैं। कोड केवल साइट व्यवस्थापक द्वारा ही बदला जा सकता है।",
+    "copyHeader": "सम्मेलन: {conference}",
+    "copyColumns": "देश प्रतिनिधि कोड",
+    "columnCountry": "देश/आवंटन",
+    "columnDelegate": "प्रतिनिधि (आवंटन)",
+    "columnCode": "पासवर्ड/कोड",
+    "codeFieldHelpTitle": "पासवर्ड/कोड फ़ील्ड",
+    "codeFieldHelpBody": "प्रतिनिधि अपने निर्धारित आवंटन के लिए इस कोड को दर्ज करते हैं। केवल साइट व्यवस्थापक ही इसे बदल सकता है.",
+    "empty": "इस सम्मेलन के लिए अभी तक कोई आवंटन नहीं हुआ है।"
+  },
+  "chairSessionError": {
+    "title": "सत्र तल लोड होने में विफल रहा",
+    "fallback": "कुर्सी सत्र नियंत्रण लोड करते समय एक अप्रत्याशित त्रुटि उत्पन्न हुई।",
+    "reference": "संदर्भ: {digest}",
+    "backToDashboard": "कुर्सी डैशबोर्ड पर वापस जाएँ"
+  },
+  "smtDelegatesPage": {
+    "title": "प्रतिनिधियों",
+    "intro": "इस इवेंट में प्रत्येक जुड़े हुए प्रतिनिधि को नाम, आवंटन, ईमेल या समिति के आधार पर खोजें। उनकी फ़ोटो और प्रोफ़ाइल के लिए एक कार्ड खोलें.",
+    "selectEventFirst": "पहले एक सक्रिय सम्मेलन कार्यक्रम चुनें।",
+    "enterConferenceCode": "कॉन्फ़्रेंस कोड दर्ज करें",
+    "searchLabel": "प्रतिनिधियों को खोजें",
+    "searchPlaceholder": "नाम, आवंटन, ईमेल, या समिति",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "इस इवेंट में अभी तक कोई जुड़ा हुआ प्रतिनिधि नहीं है।",
+    "noMatches": "कोई भी प्रतिनिधि उस खोज से मेल नहीं खाता।",
+    "unnamed": "अनाम प्रतिनिधि"
   }
 }

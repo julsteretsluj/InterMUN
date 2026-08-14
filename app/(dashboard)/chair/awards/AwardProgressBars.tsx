@@ -2,6 +2,7 @@
 
 import { type NominationRubricType } from "@/lib/seamuns-award-scoring";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const SAVED_EVENT = "chair-awards-slot-saved";
 
@@ -20,6 +21,7 @@ type OverallProps = {
 };
 
 export function OverallAwardsProgress({ serverCompletedKeys, allRequiredKeys }: OverallProps) {
+  const t = useTranslations("chairAwardsProgress");
   const [optimisticKeys, setOptimisticKeys] = useState<string[]>([]);
 
   useEffect(() => {
@@ -51,9 +53,9 @@ export function OverallAwardsProgress({ serverCompletedKeys, allRequiredKeys }: 
   return (
     <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/11 p-3">
       <div className="mb-2 flex items-center justify-between text-xs text-brand-navy/85">
-        <span className="font-semibold uppercase tracking-wide">Overall awards completion</span>
+        <span className="font-semibold uppercase tracking-wide">{t("overall")}</span>
         <span>
-          {completed}/{total} complete
+          {t("completeCount", { completed, total })}
         </span>
       </div>
       <div className="h-2.5 overflow-hidden rounded-full bg-brand-navy/10">
@@ -76,6 +78,7 @@ export function SectionAwardsProgress({
   optionalRanks,
   serverCompletedKeys,
 }: SectionProps) {
+  const t = useTranslations("chairAwardsProgress");
   const [optimisticKeys, setOptimisticKeys] = useState<string[]>([]);
   const prefix = `${nominationType}:`;
 
@@ -119,9 +122,9 @@ export function SectionAwardsProgress({
   return (
     <div className="mt-3 rounded-lg border border-brand-navy/10 bg-logo-cyan/9 p-3">
       <div className="flex items-center justify-between text-xs text-brand-navy/85 mb-2">
-        <span className="font-semibold">Progress (required)</span>
+        <span className="font-semibold">{t("requiredLabel")}</span>
         <span>
-          {requiredCompleted}/{requiredTotal} complete
+          {t("completeCount", { completed: requiredCompleted, total: requiredTotal })}
         </span>
       </div>
       <div className="h-2 rounded-full bg-brand-navy/10 overflow-hidden">
@@ -129,7 +132,7 @@ export function SectionAwardsProgress({
       </div>
       {optionalTotal > 0 ? (
         <p className="mt-2 text-[0.72rem] text-brand-muted">
-          Optional slots: {optionalCompleted}/{optionalTotal} filled
+          {t("optionalSlots", { completed: optionalCompleted, total: optionalTotal })}
         </p>
       ) : null}
     </div>

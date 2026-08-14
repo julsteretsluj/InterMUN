@@ -1,21 +1,21 @@
 # i18n Audit Report
 
-Generated: 2026-07-05T14:58:52.218Z
+Generated: 2026-08-14T07:00:54.661Z
 
 ## Summary
 
 - Locales: 31
-- Hardcoded string findings: 550
+- Hardcoded string findings: 700
 - Placeholder mismatches: 700
 - Locales with parity issues: 0
 
 ### Hardcoded Findings by Domain
 
-- page_or_layout: 85
-- server_action: 210
-- api: 7
-- component: 80
-- library_surface: 168
+- page_or_layout: 123
+- server_action: 223
+- api: 10
+- component: 90
+- library_surface: 254
 
 ## Locale Parity
 
@@ -105,34 +105,25 @@ Generated: 2026-07-05T14:58:52.218Z
 
 ## Hardcoded Inventory (Top 200)
 
+- app/(auth)/layout.tsx:29 [jsx_text] "Est. 2026 — Conference platform" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/allocation-matrix/ChairAllocationMatrixScoring.tsx:45 [error_literal] "ChairAllocationMatrixScoring components must be used within Root" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-matrix/ChairDelegateApprovalByEmailForm.tsx:41 [jsx_text] "Delegate email" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-matrix/page.tsx:458 [jsx_text] "Party" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:117 [attribute_literal] "Allocation sign-in codes" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:138 [jsx_text] "Country / allocation" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:139 [jsx_text] "Delegate (allocation)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:143 [attribute_literal] "Password / code field" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardProgressBars.tsx:54 [jsx_text] "Overall awards completion" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardProgressBars.tsx:122 [jsx_text] "Progress (required)" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:77 [jsx_text] "= 1 && v" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:84 [jsx_text] ", keys: string[]): Record" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:88 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:232 [attribute_literal] "Expand to edit nomination" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:256 [jsx_text] "(optional)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:276 [attribute_literal] "Minimize; show summary only" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:278 [jsx_text] "Minimize" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:292 [jsx_text] "Nominee" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:337 [jsx_text] "Statement of confirmation / evidence" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx:61 [jsx_text] "Submit to SMT" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx:63 [jsx_text] "draft" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:240 [attribute_literal] "Expand to edit nomination" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:264 [jsx_text] "(optional)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:284 [attribute_literal] "Minimize; show summary only" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:286 [jsx_text] "Minimize" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:300 [jsx_text] "Nominee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:345 [jsx_text] "Statement of confirmation / evidence" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationsWizard.tsx:60 [jsx_text] ", keys: string[]): Record" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationsWizard.tsx:64 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationsWizard.tsx:78 [jsx_text] "= 1 && v" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/page.tsx:64 [object_message_literal] "${d.country} — ${name}" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/page.tsx:192 [object_message_literal] "${delegateByUserId[uid]?.country ??" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/room-code/page.tsx:61 [jsx_text] "committee code" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/room-code/page.tsx:76 [jsx_text] "After saving, you can enter that committee or share the code on the dais." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2459 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2551 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2841 [attribute_literal] "Dismiss message" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/error.tsx:14 [jsx_text] "Session floor failed to load" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2445 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2537 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2828 [attribute_literal] "Dismiss message" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:160 [attribute_literal] "In committee" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:209 [attribute_literal] "Country" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:210 [attribute_literal] "Name" -> suggested prefix: `pageTitles`
@@ -146,164 +137,173 @@ Generated: 2026-07-05T14:58:52.218Z
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:245 [attribute_literal] "Role" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:246 [attribute_literal] "Name" -> suggested prefix: `pageTitles`
 - app/(dashboard)/crisis-slides/page.tsx:57 [jsx_text] "No slides linked yet" -> suggested prefix: `pageTitles`
-- app/actions/activeDebateTopic.ts:11 [object_message_literal] "Choose a topic." -> suggested prefix: `serverActions.activeDebateTopic`
-- app/actions/activeDebateTopic.ts:17 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.activeDebateTopic`
-- app/actions/activeDebateTopic.ts:27 [object_message_literal] "Only chairs can change the live debate topic." -> suggested prefix: `serverActions.activeDebateTopic`
-- app/actions/activeDebateTopic.ts:31 [object_message_literal] "No active committee." -> suggested prefix: `serverActions.activeDebateTopic`
-- app/actions/activeDebateTopic.ts:35 [object_message_literal] "That topic is not part of this committee." -> suggested prefix: `serverActions.activeDebateTopic`
-- app/actions/adminUsers.ts:40 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:45 [object_message_literal] "Only website admins can invite SMT members." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:83 [object_message_literal] "Invite sent, but could not set SMT role: ${profileErr.message}. Use “Set role” after they accept." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:102 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:105 [object_message_literal] "Choose delegate, chair, SMT, or advisor." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:110 [object_message_literal] "Only website admins can change user roles." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:121 [object_message_literal] "No account with that email yet. Send an invite first." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/adminUsers.ts:124 [object_message_literal] "You cannot change your own role from here." -> suggested prefix: `serverActions.adminUsers`
-- app/actions/advisorStaff.ts:164 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.advisorStaff`
-- app/actions/advisorStaff.ts:168 [object_message_literal] "Only chair or SMT can forward notes." -> suggested prefix: `serverActions.advisorStaff`
-- app/actions/allocationCodeGate.ts:28 [object_message_literal] "Missing committee context." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:36 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:48 [object_message_literal] "Only delegates and chairs use this step." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:73 [object_message_literal] "Your conference selection does not match this committee. Re-enter your codes if needed." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:82 [object_message_literal] "Your conference selection does not match this committee. Start from the event gate again." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:111 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:118 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:128 [object_message_literal] "Only chairs, SMT, and admins can change this." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodeGate.ts:141 [object_message_literal] "You do not have a seat on this committee." -> suggested prefix: `serverActions.allocationCodeGate`
-- app/actions/allocationCodes.ts:48 [object_message_literal] "You can only manage codes for your committee." -> suggested prefix: `serverActions.allocationCodes`
-- app/actions/allocationCodes.ts:56 [object_message_literal] "You can only manage codes for your committee." -> suggested prefix: `serverActions.allocationCodes`
-- app/actions/allocationCodes.ts:64 [object_message_literal] "Only chairs, SMT, and website admins can update allocation codes." -> suggested prefix: `serverActions.allocationCodes`
-- app/actions/allocationCodes.ts:76 [object_message_literal] "Allocation not found." -> suggested prefix: `serverActions.allocationCodes`
-- app/actions/allocationCodes.ts:106 [object_message_literal] "Only chairs, SMT, and website admins can generate codes." -> suggested prefix: `serverActions.allocationCodes`
-- app/actions/amendments.ts:34 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:36 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:39 [object_message_literal] "Invalid amendment type." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:45 [object_message_literal] "A proposed clause is required for Add and Replace amendments." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:48 [object_message_literal] "Reference the clause you want to replace or delete." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:94 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:95 [object_message_literal] "Invalid amendment id." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:97 [object_message_literal] "Invalid status." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:115 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
-- app/actions/amendments.ts:116 [object_message_literal] "Invalid amendment id." -> suggested prefix: `serverActions.amendments`
-- app/actions/award-participation.ts:26 [jsx_text] "= 1 && n" -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:62 [object_message_literal] "Sign in required." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:66 [object_message_literal] "Invalid scope." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:70 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:80 [object_message_literal] "Missing subject profile." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:86 [object_message_literal] "Pick a band and low/high for every criterion." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:89 [object_message_literal] "Every criterion must be scored 1–8." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:97 [object_message_literal] "Add a brief evidence statement (${DELEGATE_CHAIR_EVIDENCE_MIN_LEN}+ characters): concrete observations from committee session(s)." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:106 [object_message_literal] "Only chairs can save delegate evaluations." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:115 [object_message_literal] "That delegate is not seated in your committee." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:119 [object_message_literal] "Your chair account is not linked to this committee. Open the room gate for your committee first." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:122 [object_message_literal] "Only delegates can submit chair feedback." -> suggested prefix: `serverActions.award-participation`
-- app/actions/award-participation.ts:124 [object_message_literal] "Only SMT can save chair / chair report evaluations." -> suggested prefix: `serverActions.award-participation`
-- app/actions/awards.ts:36 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:64 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:131 [object_message_literal] "This award can only be given to a committee chair." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:137 [object_message_literal] "Award recipients must be delegates seated in scope, not staff." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:142 [object_message_literal] "Select a committee for this award." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:153 [object_message_literal] "That delegate is not seated in the selected committee." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:172 [object_message_literal] "That delegate is not seated in this conference." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:191 [object_message_literal] "Only chairs, SMT, and website admins can edit awards." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:203 [object_message_literal] "Invalid award category." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:209 [object_message_literal] "Select a committee for this award." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:280 [object_message_literal] "Only chairs, SMT, and website admins can delete awards." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:352 [object_message_literal] "You must be signed in as a chair, SMT member, or admin." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:366 [object_message_literal] "Only committee chairs (or admins) can submit nominations to SMT." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:376 [object_message_literal] "You must be allocated as chair for this committee to submit." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:397 [object_message_literal] "These nominations were already sent to SMT." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:400 [object_message_literal] "Nothing to submit yet. Save your required slots first." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:402 [object_message_literal] "Could not submit nominations. Ensure every required slot is complete." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:410 [object_message_literal] "You must be signed in as a chair, SMT member, or admin." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:430 [object_message_literal] "Invalid nomination form data." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:433 [object_message_literal] "Invalid rank for overall Best Delegate." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:439 [object_message_literal] "Invalid rank for this nomination type." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:442 [object_message_literal] "Invalid rank for Honourable Mention." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:465 [object_message_literal] "Select a nominee for this slot." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:472 [object_message_literal] "Choose a band and Low or High for every criterion (scores 1–8 each)." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:493 [object_message_literal] "You must be allocated to this committee as chair to save nominations." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:506 [object_message_literal] "That delegate is not seated in this committee." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:516 [object_message_literal] "Nominees must be delegates or country seats, not the committee chair." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:519 [object_message_literal] "SMT, admins, and advisors cannot receive award nominations." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:530 [object_message_literal] "Score every seated delegate in the matrix first (${matrixStatus.missing.length} of ${matrixStatus.total} still incomplete). Award nominations do not replace the full-delegate matrix." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:538 [object_message_literal] "This Honourable Mention slot is not used for your committee size." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:567 [object_message_literal] "This nomination was already submitted to SMT and cannot be edited here." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:611 [object_message_literal] "Only SMT and website admins can reject nominations." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:616 [object_message_literal] "Missing nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:626 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:629 [object_message_literal] "This nomination is no longer pending." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:659 [object_message_literal] "Only SMT and website admins can run the ladder." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:665 [object_message_literal] "Invalid ladder matchup." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:676 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:679 [object_message_literal] "Ladder matchups are only for overall Best Delegate nominations." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:682 [object_message_literal] "Both nominees must still be pending." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:685 [object_message_literal] "Both nominees need a valid chair evidence statement before SMT can advance the ladder." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:715 [object_message_literal] "Only SMT and website admins can approve nominations." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:721 [object_message_literal] "Missing nomination or award type." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:724 [object_message_literal] "Invalid award category." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:732 [object_message_literal] "This award type cannot be set from a chair nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:741 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:744 [object_message_literal] "This nomination is no longer pending." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:770 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:778 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:782 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
+- app/(marketing)/about/page.tsx:7 [object_message_literal] "About InterMUN" -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:8 [object_message_literal] "Learn why InterMUN exists and how it supports Model United Nations conferences." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:17 [attribute_literal] "Built for the whole conference team." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:21 [object_message_literal] "Our purpose" -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:38 [object_message_literal] "Designed around every role" -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:41 [jsx_text] "Delegates can research, draft, collaborate, and follow committee activity." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:42 [jsx_text] "Chairs can run roll call, speakers lists, motions, timers, and votes." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:43 [jsx_text] "Advisors can support their delegations with appropriate visibility." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:44 [jsx_text] "Secretariat teams can coordinate committees and understand conference-wide progress." -> suggested prefix: `pageTitles`
+- app/(marketing)/about/page.tsx:49 [object_message_literal] "Conference-first technology" -> suggested prefix: `pageTitles`
+- app/(marketing)/layout.tsx:37 [jsx_text] "About" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:6 [object_message_literal] "Privacy Policy | InterMUN" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:7 [object_message_literal] "How InterMUN collects, uses, stores, and protects personal information." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:24 [attribute_literal] "Privacy Policy" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:29 [object_message_literal] "Information we collect" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:32 [jsx_text] "Depending on how you use the service, we may collect:" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:34 [jsx_text] "Account details such as your name, email address, profile, and role." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:35 [jsx_text] "Conference information, committee assignments, and participation records." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:36 [jsx_text] "Content you create, including documents, notes, messages, votes, and submissions." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:37 [jsx_text] "Files you upload and communications you send to conference teams or to us." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:38 [jsx_text] "Technical and usage data needed to operate, secure, and improve the service." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:44 [object_message_literal] "How we use information" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:47 [jsx_text] "Provide accounts, conference workspaces, and role-based features." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:48 [jsx_text] "Deliver content to the participants and staff authorised to access it." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:49 [jsx_text] "Maintain security, prevent abuse, troubleshoot problems, and improve reliability." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:50 [jsx_text] "Respond to support, partnership, and conference enquiries." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:51 [jsx_text] "Comply with applicable law and enforce our Terms of Service." -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:56 [object_message_literal] "Sharing and conference access" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:72 [object_message_literal] "Retention and security" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:89 [object_message_literal] "Your choices and rights" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:105 [object_message_literal] "Children and student participants" -> suggested prefix: `pageTitles`
+- app/(marketing)/privacy/page.tsx:116 [object_message_literal] "Changes and contact" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:7 [object_message_literal] "Terms of Service | InterMUN" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:8 [object_message_literal] "The terms governing access to and use of InterMUN." -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:25 [attribute_literal] "Terms of Service" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:30 [object_message_literal] "Using the service" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:46 [object_message_literal] "Accounts and access" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:49 [jsx_text] "Keep your credentials and conference access codes confidential." -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:50 [jsx_text] "Do not impersonate another person or misrepresent your role." -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:51 [jsx_text] "Do not access data, committees, or administrative tools you are not authorised to use." -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:52 [jsx_text] "Tell us or your organiser promptly if you suspect unauthorised account use." -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:57 [object_message_literal] "Your content" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:74 [object_message_literal] "Acceptable use" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:85 [object_message_literal] "Conference organisers" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:95 [object_message_literal] "Availability and changes" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:106 [object_message_literal] "Suspension and termination" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:116 [object_message_literal] "Disclaimers and liability" -> suggested prefix: `pageTitles`
+- app/(marketing)/terms/page.tsx:133 [object_message_literal] "Privacy and contact" -> suggested prefix: `pageTitles`
+- app/actions/activeDebateTopic.ts:14 [object_message_literal] "Choose a topic." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:20 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:30 [object_message_literal] "Only chairs can change the live debate topic." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:34 [object_message_literal] "No active committee." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:38 [object_message_literal] "That topic is not part of this committee." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/adminUsers.ts:44 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:49 [object_message_literal] "Only website admins can invite SMT members." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:87 [object_message_literal] "Invite sent, but could not set SMT role: ${profileErr.message}. Use “Set role” after they accept." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:106 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:109 [object_message_literal] "Choose delegate, chair, SMT, or advisor." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:114 [object_message_literal] "Only website admins can change user roles." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:125 [object_message_literal] "No account with that email yet. Send an invite first." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:128 [object_message_literal] "You cannot change your own role from here." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/advisorStaff.ts:169 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.advisorStaff`
+- app/actions/advisorStaff.ts:173 [object_message_literal] "Only chair or SMT can forward notes." -> suggested prefix: `serverActions.advisorStaff`
+- app/actions/allocationCodeGate.ts:31 [object_message_literal] "Missing committee context." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:39 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:51 [object_message_literal] "Only delegates and chairs use this step." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:76 [object_message_literal] "Your conference selection does not match this committee. Re-enter your codes if needed." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:85 [object_message_literal] "Your conference selection does not match this committee. Start from the event gate again." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:114 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:121 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:131 [object_message_literal] "Only chairs, SMT, and admins can change this." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:144 [object_message_literal] "You do not have a seat on this committee." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodes.ts:53 [object_message_literal] "You can only manage codes for your committee." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:61 [object_message_literal] "You can only manage codes for your committee." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:69 [object_message_literal] "Only chairs, SMT, and website admins can update allocation codes." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:73 [object_message_literal] "Placard codes can only be changed by a site admin." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:85 [object_message_literal] "Allocation not found." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:115 [object_message_literal] "Only chairs, SMT, and website admins can generate codes." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:119 [object_message_literal] "Placard codes can only be changed by a site admin." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/amendments.ts:37 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:39 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:42 [object_message_literal] "Invalid amendment type." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:48 [object_message_literal] "A proposed clause is required for Add and Replace amendments." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:51 [object_message_literal] "Reference the clause you want to replace or delete." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:97 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:98 [object_message_literal] "Invalid amendment id." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:100 [object_message_literal] "Invalid status." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:118 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.amendments`
+- app/actions/amendments.ts:119 [object_message_literal] "Invalid amendment id." -> suggested prefix: `serverActions.amendments`
+- app/actions/award-participation.ts:29 [jsx_text] "= 1 && n" -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:65 [object_message_literal] "Sign in required." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:69 [object_message_literal] "Invalid scope." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:73 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:83 [object_message_literal] "Missing subject profile." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:89 [object_message_literal] "Pick a band and low/high for every criterion." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:92 [object_message_literal] "Every criterion must be scored 1–8." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:100 [object_message_literal] "Add a brief evidence statement (${DELEGATE_CHAIR_EVIDENCE_MIN_LEN}+ characters): concrete observations from committee session(s)." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:109 [object_message_literal] "Only chairs can save delegate evaluations." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:118 [object_message_literal] "That delegate is not seated in your committee." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:122 [object_message_literal] "Your chair account is not linked to this committee. Open the room gate for your committee first." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:125 [object_message_literal] "Only delegates can submit chair feedback." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:127 [object_message_literal] "Only SMT can save chair / chair report evaluations." -> suggested prefix: `serverActions.award-participation`
+- app/actions/awards.ts:39 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:67 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:134 [object_message_literal] "This award can only be given to a committee chair." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:140 [object_message_literal] "Award recipients must be delegates seated in scope, not staff." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:145 [object_message_literal] "Select a committee for this award." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:156 [object_message_literal] "That delegate is not seated in the selected committee." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:175 [object_message_literal] "That delegate is not seated in this conference." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:194 [object_message_literal] "Only chairs, SMT, and website admins can edit awards." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:206 [object_message_literal] "Invalid award category." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:212 [object_message_literal] "Select a committee for this award." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:283 [object_message_literal] "Only chairs, SMT, and website admins can delete awards." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:355 [object_message_literal] "You must be signed in as a chair, SMT member, or admin." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:369 [object_message_literal] "Only committee chairs (or admins) can submit nominations to SMT." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:379 [object_message_literal] "You must be allocated as chair for this committee to submit." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:400 [object_message_literal] "These nominations were already sent to SMT." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:403 [object_message_literal] "Nothing to submit yet. Save your required slots first." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:405 [object_message_literal] "Could not submit nominations. Ensure every required slot is complete." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:413 [object_message_literal] "You must be signed in as a chair, SMT member, or admin." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:433 [object_message_literal] "Invalid nomination form data." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:436 [object_message_literal] "Invalid rank for overall Best Delegate." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:442 [object_message_literal] "Invalid rank for this nomination type." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:445 [object_message_literal] "Invalid rank for Honourable Mention." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:468 [object_message_literal] "Select a nominee for this slot." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:475 [object_message_literal] "Choose a band and Low or High for every criterion (scores 1–8 each)." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:496 [object_message_literal] "You must be allocated to this committee as chair to save nominations." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:509 [object_message_literal] "That delegate is not seated in this committee." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:519 [object_message_literal] "Nominees must be delegates or country seats, not the committee chair." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:522 [object_message_literal] "SMT, admins, and advisors cannot receive award nominations." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:533 [object_message_literal] "Score every seated delegate in the matrix first (${matrixStatus.missing.length} of ${matrixStatus.total} still incomplete). Award nominations do not replace the full-delegate matrix." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:541 [object_message_literal] "This Honourable Mention slot is not used for your committee size." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:570 [object_message_literal] "This nomination was already submitted to SMT and cannot be edited here." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:614 [object_message_literal] "Only SMT and website admins can reject nominations." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:619 [object_message_literal] "Missing nomination." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:629 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:632 [object_message_literal] "This nomination is no longer pending." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:662 [object_message_literal] "Only SMT and website admins can run the ladder." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:668 [object_message_literal] "Invalid ladder matchup." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:679 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:682 [object_message_literal] "Ladder matchups are only for overall Best Delegate nominations." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:685 [object_message_literal] "Both nominees must still be pending." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:688 [object_message_literal] "Both nominees need a valid chair evidence statement before SMT can advance the ladder." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:718 [object_message_literal] "Only SMT and website admins can approve nominations." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:724 [object_message_literal] "Missing nomination or award type." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:727 [object_message_literal] "Invalid award category." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:735 [object_message_literal] "This award type cannot be set from a chair nomination." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:744 [object_message_literal] "Nomination not found." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:747 [object_message_literal] "This nomination is no longer pending." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:773 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:781 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
 - app/actions/awards.ts:785 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/awards.ts:791 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
-- app/actions/committee-session.ts:118 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.committee-session`
-- app/actions/committee-session.ts:124 [object_message_literal] "Sign in required." -> suggested prefix: `serverActions.committee-session`
-- app/actions/committee-session.ts:134 [object_message_literal] "Only chairs can manage a committee session." -> suggested prefix: `serverActions.committee-session`
-- app/actions/committee-session.ts:229 [object_message_literal] "End time must be in the future." -> suggested prefix: `serverActions.committee-session`
-- app/actions/committee-session.ts:309 [object_message_literal] "End time must be in the future, or choose no limit." -> suggested prefix: `serverActions.committee-session`
-- app/actions/committee-session.ts:338 [object_message_literal] "Missing session title." -> suggested prefix: `serverActions.committee-session`
-- app/actions/conferenceSetup.ts:32 [object_message_literal] "Enter a conference / event name (at least 2 characters)." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:35 [object_message_literal] "Conference code must be at least 4 characters (spaces ignored)." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:38 [object_message_literal] "Enter a committee session title (at least 2 characters)." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:41 [object_message_literal] "Committee code must be exactly 6 letters or digits (e.g. ECO741 from chamber initials + 3 digits)." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:44 [object_message_literal] "Committee password must be at least 6 characters, or leave both password fields empty." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:47 [object_message_literal] "Committee password and confirmation do not match." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:55 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:65 [object_message_literal] "Only secretariat or website admins can create a new conference event." -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/conferenceSetup.ts:91 [object_message_literal] "Conference was created but committee password could not be set: ${hashErr.message}" -> suggested prefix: `serverActions.conferenceSetup`
-- app/actions/delegationNoteModeration.ts:16 [object_message_literal] "Note id is required." -> suggested prefix: `serverActions.delegationNoteModeration`
-- app/actions/delegationNoteModeration.ts:22 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.delegationNoteModeration`
-- app/actions/delegationNoteThreads.ts:10 [object_message_literal] "Name cannot be empty." -> suggested prefix: `serverActions.delegationNoteThreads`
-- app/actions/delegationNoteThreads.ts:11 [object_message_literal] "Name is too long (max 120 characters)." -> suggested prefix: `serverActions.delegationNoteThreads`
-- app/actions/delegationNoteThreads.ts:17 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.delegationNoteThreads`
-- app/actions/delegationNoteThreads.ts:26 [object_message_literal] "Chat not found." -> suggested prefix: `serverActions.delegationNoteThreads`
-- app/actions/delegationNoteThreads.ts:28 [object_message_literal] "Name this chat after at least three messages have been exchanged." -> suggested prefix: `serverActions.delegationNoteThreads`
-- app/actions/exportMaterials.ts:178 [object_message_literal] "Untitled speech" -> suggested prefix: `serverActions.exportMaterials`
-- app/actions/exportMaterials.ts:302 [error_literal] "Missing env var: ${name}" -> suggested prefix: `serverActions.exportMaterials`
-- app/actions/exportMaterials.ts:343 [object_message_literal] "Unknown email sending error" -> suggested prefix: `serverActions.exportMaterials`
-- app/actions/noteMessaging.ts:25 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.noteMessaging`
-- app/actions/noteMessaging.ts:43 [object_message_literal] "Could not create message." -> suggested prefix: `serverActions.noteMessaging`
-- app/actions/noteMessaging.ts:55 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.noteMessaging`
-- app/actions/noteMessaging.ts:74 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.noteMessaging`
-- app/actions/noteMessaging.ts:98 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.noteMessaging`
-- app/actions/resolutions.ts:51 [object_message_literal] "Only staff can create resolutions." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:53 [object_message_literal] "Invalid conference id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:60 [object_message_literal] "Maximum of 3 draft resolutions per committee." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:99 [object_message_literal] "Only staff can edit clauses." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:102 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:105 [object_message_literal] "Clause text is required." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:136 [object_message_literal] "Only staff can edit clauses." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:138 [object_message_literal] "Invalid clause id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:140 [object_message_literal] "Clause text is required." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:155 [object_message_literal] "Only staff can delete clauses." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:157 [object_message_literal] "Invalid clause id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:169 [object_message_literal] "Only delegates can sign resolutions." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:171 [object_message_literal] "Invalid resolution id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:188 [object_message_literal] "Only delegates can join blocs." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:191 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:201 [object_message_literal] "Resolution not found." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:217 [object_message_literal] "Bloc does not belong to this committee." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:252 [object_message_literal] "Only chairs can configure blocs." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:254 [object_message_literal] "Invalid conference id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:329 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:330 [object_message_literal] "Invalid resolution id." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:333 [object_message_literal] "A Google Docs link is required." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:335 [object_message_literal] "Enter a valid Google Docs link." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:356 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.resolutions`
-- app/actions/resolutions.ts:357 [object_message_literal] "Invalid resolution id." -> suggested prefix: `serverActions.resolutions`
+- app/actions/awards.ts:788 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:794 [object_message_literal] "Award type does not match this nomination." -> suggested prefix: `serverActions.awards`
+- app/actions/committee-session.ts:121 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.committee-session`
+- app/actions/committee-session.ts:127 [object_message_literal] "Sign in required." -> suggested prefix: `serverActions.committee-session`
+- app/actions/committee-session.ts:137 [object_message_literal] "Only chairs and secretariat can manage a committee session." -> suggested prefix: `serverActions.committee-session`
+- app/actions/committee-session.ts:232 [object_message_literal] "End time must be in the future." -> suggested prefix: `serverActions.committee-session`
+- app/actions/committee-session.ts:312 [object_message_literal] "End time must be in the future, or choose no limit." -> suggested prefix: `serverActions.committee-session`
+- app/actions/committee-session.ts:341 [object_message_literal] "Missing session title." -> suggested prefix: `serverActions.committee-session`
+- app/actions/conferenceSetup.ts:35 [object_message_literal] "Enter a conference / event name (at least 2 characters)." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:38 [object_message_literal] "Conference code must be at least 4 characters (spaces ignored)." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:41 [object_message_literal] "Enter a committee session title (at least 2 characters)." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:44 [object_message_literal] "Committee code must be exactly 6 letters or digits (e.g. ECO741 from chamber initials + 3 digits)." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:47 [object_message_literal] "Committee password must be at least 6 characters, or leave both password fields empty." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:50 [object_message_literal] "Committee password and confirmation do not match." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:58 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.conferenceSetup`
+- app/actions/conferenceSetup.ts:68 [object_message_literal] "Only secretariat or website admins can create a new conference event." -> suggested prefix: `serverActions.conferenceSetup`
 
 Full machine-readable inventory is available at `reports/i18n/i18n-audit.json`.

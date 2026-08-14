@@ -25,9 +25,11 @@ import {
 import {
   SEAMUN_I_2027_LUNCH_GROUPS,
   seamunI2027LunchGroupDefinition,
+  seamunI2027LunchGroupForChamber,
   seamunI2027LunchTimingTrack,
   type SeamunLunchGroupId,
 } from "@/lib/seamun-i-2027-lunch-groups";
+import { sortCommitteeLabelsByDifficultyThenAlpha } from "@/lib/committee-difficulty-sort";
 
 /** Two advisors per chamber slot in the lunch cohort (partners). */
 export const ADVISORS_PER_PAIR = 2;
@@ -382,9 +384,11 @@ export function seamunDefaultGroupForCommittee(committee: string | null | undefi
   return seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(committee));
 }
 
-/** All chamber labels on the locked timetable (10 committees). */
+/** All chamber labels on the locked timetable (10 committees), difficulty then A–Z. */
 export function seamunAllScheduleCommittees(): string[] {
-  return SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.flatMap((g) => [...g.chambers]);
+  return sortCommitteeLabelsByDifficultyThenAlpha(
+    SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.flatMap((g) => [...g.chambers])
+  );
 }
 
 /**
@@ -396,5 +400,8 @@ export function buildSeamunCommitteeDayBlocks(day: 1 | 2, committee: string): Se
   if (!groupId) return [];
 
   const teamCol = seamunTeamColumnForGroup(day, groupId);
-  return teamCol.blocks.map((block) => withoutLocation(block));
+  const mapped = teamCol.blocks.map((block) => withoutLocation(block));
+  const lunchGroupId = seamunI2027LunchGroupForChamber(key);
+  if (!lunchGroupId) return mapped;
+  return applyLunchGroupMeals(mapped, day, lunchGroupId);
 }

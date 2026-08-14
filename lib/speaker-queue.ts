@@ -2,6 +2,11 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import type { SupabaseClient } from "@supabase/supabase-js";
+import {
+  canRequestOrJoinSpeakerList,
+  disciplineSpeakBlockMessage,
+  fetchDisciplineForAllocation,
+} from "@/lib/delegate-discipline";
 
 export type SpeakerQueueEntry = {
   id: string;
@@ -47,6 +52,20 @@ export async function addAllocationToSpeakerQueue(
     return {
       ok: false,
       message: "That delegation is already on the list (waiting or current).",
+    };
+  }
+  try {
+    const discipline = await fetchDisciplineForAllocation(supabase, conferenceId, allocationId);
+    if (!canRequestOrJoinSpeakerList(discipline)) {
+      return {
+        ok: false,
+        message: disciplineSpeakBlockMessage(discipline) ?? "Speaking rights are suspended.",
+      };
+    }
+  } catch (e) {
+    return {
+      ok: false,
+      message: e instanceof Error ? e.message : "Could not check disciplinary status.",
     };
   }
   const max = existingRows.reduce((m, r) => Math.max(m, r.sort_order), 0);

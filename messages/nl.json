@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Herladen"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "bijv. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Subtabbladen",
     "home": "Thuis",
     "library": "Bibliotheek",
-    "mainNavigationAria": "Hoofdnavigatie"
+    "mainNavigationAria": "Hoofdnavigatie",
+    "crisis": "Crisis"
   },
   "dashboardLayout": {
     "helpCenter": "Helpcentrum",
@@ -838,7 +840,9 @@
     "pointsLog": "• Puntenlog",
     "formalMotions": "Formele moties",
     "timer": "Timer",
-    "smtProfile": "Profiel"
+    "smtProfile": "Profiel",
+    "crisis": "Crisis",
+    "smtDelegates": "Afgevaardigden"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -1333,7 +1337,8 @@
       "roomCode": "Kamercode",
       "settings": "Instellingen",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Rapport"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Evenement & sessies",
     "roomCodes": "Kamercodes en stoelen",
     "advisors": "Adviseurs",
-    "notes": "Notes",
+    "notes": "Opmerkingen",
     "awards": "Onderscheidingen",
     "allocationMatrix": "Toewijzingsmatrix",
     "allocationPasswords": "Wachtwoorden toewijzen",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Nieuwskamer",
+    "pressCorps": "Pers Korps",
+    "milestones": "Mijlpalen",
     "profile": "Profiel",
     "follow": "Volgen",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Gidsen",
+    "delegates": "Afgevaardigden"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Programma's & fondsen",
       "specializedAgencies": "Gespecialiseerde bureaus & aanverwanten",
       "peacekeepingMissions": "Vredeshandhaving en missies",
-      "foundersMembers": "Oprichters & leden"
+      "foundersMembers": "Oprichters & leden",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Pers Korpslinks"
     },
     "links": {
       "ods": "Officieel VN-documentsysteem (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Speciale politieke missies van de VN",
       "memberStates": "VN-lidstaten",
       "unSystem": "VN-systeem (oprichters en leden)",
-      "history": "VN-geschiedenis"
+      "history": "VN-geschiedenis",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Conferentiewebsite en commissieportaal",
+      "documentsArticles": "ODS, Digitale Bibliotheek, nieuws, pers en jaarboek",
+      "legislationTreaties": "Verdragen, handvest en internationaal recht",
+      "mainBodies": "GA, Veiligheidsraad, ECOSOC, ICJ en meer",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP en aanverwante fondsen",
+      "specializedAgencies": "WHO, UNESCO, Wereldbank, ILO en partners",
+      "peacekeepingMissions": "Vredeshandhaving en speciale politieke missies",
+      "foundersMembers": "Lidstaten, VN-systeem en geschiedenis",
+      "pressCorpsLinks": "Drie nieuwsbureaus voor elke toewijzing van het Perskorps (wereld, gezondheid en kenmerken)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Herinnering",
     "privateReminderLabel": "Privéherinnering (alleen stoelen, gesynchroniseerd)",
     "committeeFallback": "Commissie",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Blokvorming",
       "speechPoisOrPocs": "Spraak-POI's of POC's",
       "questions": "Vragen",
-      "informalConversations": "Informele gesprekken"
+      "informalConversations": "Informele gesprekken",
+      "sessionProgress": "Sessievoortgang (SMT)"
     },
     "concernLabel": "Zorg (automatische tijdelijke aanduiding)",
     "concernHelpTitle": "Bezorgdheidsvlag",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Je hebt een toewijzing nodig om notities te kunnen versturen (of voorzitter te kunnen zijn).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Kan notitie niet verzenden."
-    }
+    },
+    "sendToSmt": "Verzenden naar SMT",
+    "sendToSmtHelp": "Belandt in de notitie-inbox van het secretariaat (Van stoelen). Gebruik dit voor de voortgang aan het einde van de sessie.",
+    "progressPrefill": "De commissievergadering is net afgelopen. \n\nVooruitgang: \n- \n\nAlles wat SMT moet opvolgen: \n-",
+    "progressComposeHint": "Dit briefje gaat naar SMT. Vat samen wat de zaal behandelde en wat het secretariaat zou moeten weten.",
+    "progressSent": "Voortgangsnota verzonden naar SMT."
   },
   "adminPage": {
     "title": "Websitebeheer",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Geen gegevensrijen gevonden (minimaal een land/positie per regel nodig).",
       "importLimitedRows": "Importeren beperkt tot {max} rijen. Splits uw bestand.",
       "rowTooLong": "Rij te lang: {row}…",
-      "codeTooLongOnRow": "Code te lang op rij: {row}"
+      "codeTooLongOnRow": "Code te lang op rij: {row}",
+      "chairSeatsCannotBeDeleted": "De zetels van de hoofdvoorzitter en de covoorzitter blijven in elke commissie bestaan."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Kies eerst een evenement met de conferentiecode (evenementpoort).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Positienamen en plakkaatcodes kunnen alleen worden gewijzigd door een sitebeheerder."
   },
   "chairAllocationMatrixPage": {
     "intro": "Comitétoewijzingsmatrix voor uw huidige sessie. Dit is alleen-lezen voor stoelen en weerspiegelt actieve stoeltoewijzingen en plakkaatcodes.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Gevraagde toewijzing",
       "account": "Rekening",
       "actions": "Acties",
-      "score": "Score"
+      "score": "Scoren",
+      "photo": "Foto",
+      "school": "School",
+      "party": "Politieke groep"
     },
     "noRows": "Er zijn geen toewijzingsrijen gevonden voor deze commissie.",
     "pendingApprovalsTitle": "In afwachting van aanmeldingsgoedkeuringen",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Toewijzingsmatrix",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Bewegingen",
+    "pointsTitle": "Punten",
+    "resolutionsTitle": "Resoluties",
+    "noMotions": "Er zijn geen moties geregistreerd voor deze afgevaardigde.",
+    "noPoints": "Er zijn geen punten genoteerd voor deze afgevaardigde.",
+    "noResolutions": "Er is geen betrokkenheid bij de afwikkeling geregistreerd voor deze afgevaardigde.",
+    "untitledMotion": "Naamloze beweging",
+    "chairLoggedPoint": "Stoel-gelogd punt",
+    "resolutionLink": "Open Google Document",
+    "resolutionNoLink": "Geen documentlink",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Procedureel",
+      "delegate": "Stoel logboek"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Hoofdinzender",
+      "co": "Mede-indiener",
+      "signatory": "Ondertekenaar"
+    },
+    "speechesTitle": "Toespraken",
+    "flagsTitle": "Complimenten & zorgen",
+    "disciplineTitle": "Waarschuwingen en stakingen",
+    "noSpeeches": "Er zijn geen toespraken opgenomen voor deze afgevaardigde.",
+    "noFlags": "Er zijn geen complimenten of zorgen geregistreerd voor deze afgevaardigde.",
+    "noDiscipline": "Er zijn geen waarschuwingen of stakingen geregistreerd voor deze afgevaardigde.",
+    "untitledSpeech": "Toespraak",
+    "currentFlag": "Huidig",
+    "speechStatuses": {
+      "waiting": "Wachten",
+      "current": "Spreken",
+      "done": "Afgeleverd"
+    },
+    "flagKinds": {
+      "compliment": "Compliment",
+      "concern": "Zorg",
+      "reminder": "Herinnering"
+    },
+    "disciplineActions": {
+      "warning": "Waarschuwing",
+      "strike": "Staking",
+      "revoke_warning": "Waarschuwing ingetrokken",
+      "revoke_strike": "Staking ingetrokken",
+      "reset": "Opnieuw instellen"
+    },
+    "disciplineCounts": "{warnings} waarschuwing(en) · {strikes} staking(en)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "jouw commissie",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Commissiekamer (vol)",
         "hint": "Virtuele indeling en deelnemersvloer"
+      },
+      "crisisReport": {
+        "label": "Rapport",
+        "hint": "Incidentrapportage"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Opmerkingen",
     "noGoogleDocYet": "Nog geen Google-document gekoppeld. Gebruik Bewerken om een ​​docs.google.com/document/d/… URL toe te voegen.",
     "chairFeedbackHeading": "Feedback van de voorzitter",
-    "noFeedbackYet": "Nog geen feedback toegevoegd."
+    "noFeedbackYet": "Nog geen feedback toegevoegd.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Aanwezig - kan zich onthouden (rollen)",
       "present_voting": "Aanwezig en stemmen (rol)",
       "unknown": "- (rol)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Links, knoppen en bestanden",
+      "help": "Voeg een weblink, een knop toe of upload een PDF/bestand. Iedereen die deze handleiding opent, kan deze gebruiken.",
+      "kindLink": "Link",
+      "kindButton": "Knop",
+      "kindFile": "Bestand",
+      "label": "Label",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Toevoegen",
+      "upload": "Upload PDF of bestand",
+      "uploading": "Uploaden…",
+      "remove": "Verwijderen",
+      "download": "Open",
+      "empty": "Nog geen links of bestanden.",
+      "errorType": "Gebruik een PDF-, Office-document, tekst- of afbeeldingsbestand.",
+      "errorSize": "Bestand is te groot (max. 15 MB).",
+      "errorUpload": "Kan dat bestand niet uploaden.",
+      "markdownHelp": "In notities kunt u ook [label](https://url) schrijven voor een link, of [label](https://url \"button\") voor een knop. Plak een bestands-URL of upload deze hierboven."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Uw rolstatus controleren...",
       "rollPromptSaving": "Besparing...",
       "rollPromptPresent": "Aanwezig",
-      "rollPromptPresentVoting": "Presenteren en stemmen"
+      "rollPromptPresentVoting": "Presenteren en stemmen",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Stemprocedure",
@@ -4241,7 +4382,11 @@
       "timer": "Timer",
       "sidebarAnd": "En",
       "announcements": "Aankondigingen",
-      "sidebarUseSuffix": "— één hulpmiddel per tabblad."
+      "sidebarUseSuffix": "— één hulpmiddel per tabblad.",
+      "smtProgressReminderTitle": "Update SMT voor deze sessie",
+      "smtProgressReminderBody": "Stuur een korte voortgangsnota, zodat het secretariaat weet hoe de commissie is gegaan en wat er moet worden opgevolgd.",
+      "smtProgressReminderWrite": "Schrijf een notitie",
+      "smtProgressReminderDismiss": "Later"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Sessie beëindigd: update SMT",
+      "reminderSessionEnd": "{title} zou eindigen op {start}. Stuur SMT een korte voortgangsnotitie.",
+      "writeSmtNote": "Schrijf een notitie"
     },
     "history": {
       "title": "Sessiegeschiedenis",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Er zijn nog geen nominaties voor deze commissie.",
+    "stepProgress": "Nominatie {current} van {total}",
+    "requiredProgress": "{done}/{total} vereiste slots voltooid",
+    "gotoStep": "Ga naar {label}",
+    "lockedTitle": "Werk eerst elke deelnemerskaart af",
+    "lockedBody": "Vul de sessierubriek hierboven in voor elke zittende afgevaardigde en kom dan hier terug om prijzen één voor één te nomineren.",
+    "optional": "optioneel",
+    "submittedLocked": "Verzonden naar SMT - bewerken vergrendeld.",
+    "topSuggestions": "Top 5 uit de sessierubriek",
+    "topSuggestionsHint": "Hoogste matrixtotalen in deze commissie. Kies er één, of zoek hieronder.",
+    "noSuggestions": "Nog geen gerangschikte afgevaardigden. Scoor eerst de matrix, of zoek op naam.",
+    "searchLabel": "Zoek afgevaardigden",
+    "searchPlaceholder": "Naam of toewijzing",
+    "searchEmpty": "Er zijn geen afgevaardigden die aan die zoekopdracht voldoen.",
+    "selectedNominee": "Geselecteerde genomineerde",
+    "pickNomineeHint": "Kies een genomineerde uit de top 5 of zoek om hun rubriek en logboek te openen.",
+    "rubricHeading": "Nominatierubriek",
+    "rubricTotal": "Rubriektotaal: {total}/{max} ({scored}/{criteria} criteria gescoord — 1–8 per criterium)",
+    "evidenceLabel": "Verklaring van bevestiging/bewijs",
+    "evidencePlaceholder": "Citeer bewijsmateriaal op de betonnen vloer (opgestelde clausules, compromissen gesloten, belangrijke interventies). Minimaal {min} tekens — vereist voordat SMT kan goedkeuren.",
+    "previous": "Vorig",
+    "skipOptional": "Optioneel slot overslaan",
+    "next": "Volgende",
+    "locked": "Vergrendeld",
+    "matrixRequired": "Matrix eerst vereist",
+    "saving": "Besparing…",
+    "saveAndNext": "Opslaan en volgende",
+    "save": "Redden",
+    "allSlotsSummary": "Alle nominatieslots",
+    "statusDone": "Klaar",
+    "statusTodo": "Te doen",
+    "errors": {
+      "selectNominee": "Selecteer een genomineerde voor deze slot.",
+      "completeRubric": "Kies een band voor elk criterium voordat u opslaat.",
+      "evidenceMin": "Voeg minimaal {min} bewijstekens toe."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Algemene voltooiing van de prijzen",
+    "completeCount": "{completed}/{total} voltooid",
+    "requiredLabel": "Voortgang (vereist)",
+    "optionalSlots": "Optionele slots: {completed}/{total} gevuld"
+  },
+  "chairAwardsSubmit": {
+    "title": "Verzenden naar SMT",
+    "intro": "Door een slot op te slaan, wordt alleen een concept geschreven; SMT ziet het pas als u de onderstaande batch verzendt. Wanneer de vereiste slots compleet zijn, stuurt u de batch ter beoordeling naar SMT. Automatische indiening wordt ook uitgevoerd na {deadline} (UTC) wanneer u deze pagina opent, of via een geplande taak als uw implementatie dit configureert.",
+    "requiredSlotsIncomplete": "Vereiste slots voltooid: {done}/{total} — voltooi de rest en verzend deze zodat SMT deze kan beoordelen.",
+    "requiredSlotsReady": "Vereiste slots voltooid: {done}/{total} — nominatiebatch is klaar (zorg ervoor dat de bovenstaande deelnemersmatrix compleet is).",
+    "matrixIncomplete": "Deelnemersmatrix (elke zittende afgevaardigde): {done}/{total} — geef elke afgevaardigde een score hierboven alvorens deze in te dienen.",
+    "matrixComplete": "Deelnemersmatrix (elke zittende deelnemer): {done}/{total} — compleet.",
+    "alreadySubmitted": "Verzonden naar SMT{when}. Bewerken is vergrendeld; Neem contact op met SMT als u een wijziging nodig heeft.",
+    "submittedAt": "— {time}",
+    "submitButton": "Nominaties indienen bij SMT",
+    "submitting": "Verzenden…",
+    "needComplete": "Vul elk vereist nominatieslot en de deelnemersmatrix in en verzend deze vervolgens.",
+    "deadlinePassed": "Deadline verstreken: dien nu in als u dat nog niet heeft gedaan."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "U heeft nog geen commissiezetel. Vraag het secretariaat om u op de toewijzingsmatrix toe te wijzen en kom dan hier terug.",
+    "intro": "Elke commissie heeft een commissiecode binnen de conferentie (tweede poort nadat de deelnemers de conferentiecode hebben ingevoerd). Codes moeten uniek zijn binnen hetzelfde conferentiegebeurtenis.",
+    "testingOverride": "Testoverschrijving ingeschakeld: u kunt commissiecodes tussen commissies wisselen en beheren zonder controles op de stoeltoewijzing.",
+    "chairScope": "Als podium zie je alleen commissies waar jij een zetel hebt. Door op te slaan wordt u naar uw profiel gestuurd; afgevaardigden die de commissiepoort al zijn gepasseerd, blijven aangemeld totdat ze uitloggen.",
+    "staffAfterSave": "Na het opslaan kun je die commissie betreden of de code op het podium delen."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Kopieerlijst (TSV)",
+    "copied": "Tabel naar klembord gekopieerd.",
+    "helpTitle": "Toekennen van inlogcodes",
+    "helpBody": "Dit zijn plakkaatcodes per toewijzing die door afgevaardigden en voorzitters worden gebruikt tijdens de toewijzingscodepoort. Codes kunnen alleen worden gewijzigd door een sitebeheerder.",
+    "copyHeader": "Conferentie: {conference}",
+    "copyColumns": "Landafgevaardigdecode",
+    "columnCountry": "Land / toewijzing",
+    "columnDelegate": "Gedelegeerde (toewijzing)",
+    "columnCode": "Wachtwoord/code",
+    "codeFieldHelpTitle": "Wachtwoord/codeveld",
+    "codeFieldHelpBody": "Deelnemers voeren deze code in voor hun toegewezen toewijzing. Alleen een sitebeheerder kan dit wijzigen.",
+    "empty": "Er zijn nog geen toewijzingen voor deze conferentie."
+  },
+  "chairSessionError": {
+    "title": "Sessievloer kan niet worden geladen",
+    "fallback": "Er heeft zich een onverwachte fout voorgedaan tijdens het laden van stoelsessiebedieningen.",
+    "reference": "Referentie: {digest}",
+    "backToDashboard": "Terug naar het stoeldashboard"
+  },
+  "smtDelegatesPage": {
+    "title": "Afgevaardigden",
+    "intro": "Zoek elke gekoppelde afgevaardigde in dit evenement op naam, toewijzing, e-mailadres of commissie. Open een kaart voor hun foto en profiel.",
+    "selectEventFirst": "Kies eerst een actief conferentie-evenement.",
+    "enterConferenceCode": "Voer de conferentiecode in",
+    "searchLabel": "Zoek afgevaardigden",
+    "searchPlaceholder": "Naam, toewijzing, e-mailadres of commissie",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Er zijn nog geen gekoppelde afgevaardigden in dit evenement.",
+    "noMatches": "Er zijn geen afgevaardigden die aan die zoekopdracht voldoen.",
+    "unnamed": "Naamloze afgevaardigde"
   }
 }

@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "ໂຫຼດໃໝ່"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "ຕົວຢ່າງ: SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "ແຖບຍ່ອຍ",
     "home": "ບ້ານ",
     "library": "ຫໍສະໝຸດ",
-    "mainNavigationAria": "ການນໍາທາງຕົ້ນຕໍ"
+    "mainNavigationAria": "ການນໍາທາງຕົ້ນຕໍ",
+    "crisis": "ວິກິດການ"
   },
   "dashboardLayout": {
     "helpCenter": "ສູນຊ່ວຍເຫຼືອ",
@@ -838,7 +840,9 @@
     "pointsLog": "• ບັນທຶກຄະແນນ",
     "formalMotions": "ການເຄື່ອນໄຫວຢ່າງເປັນທາງການ",
     "timer": "ໂມງຈັບເວລາ",
-    "smtProfile": "ໂປຣໄຟລ໌"
+    "smtProfile": "ໂປຣໄຟລ໌",
+    "crisis": "ວິກິດການ",
+    "smtDelegates": "ຜູ້ແທນ"
   },
   "setupPage": {
     "title": "Supabase ບໍ່ໄດ້ຕັ້ງຄ່າ",
@@ -1333,7 +1337,8 @@
       "roomCode": "ລະຫັດຫ້ອງ",
       "settings": "ການຕັ້ງຄ່າ",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "ລາຍງານ"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "ເຫດການ ແລະກອງປະຊຸມ",
     "roomCodes": "ລະຫັດຫ້ອງ ແລະເກົ້າອີ້",
     "advisors": "ທີ່ປຶກສາ",
-    "notes": "Notes",
+    "notes": "ບັນທຶກ",
     "awards": "ລາງວັນ",
     "allocationMatrix": "ຕາຕະລາງການຈັດສັນ",
     "allocationPasswords": "ລະຫັດຜ່ານການຈັດສັນ",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "ຫ້ອງຂ່າວ",
+    "pressCorps": "ອົງການຂ່າວ",
+    "milestones": "ເປົ້າໝາຍ",
     "profile": "ໂປຣໄຟລ໌",
     "follow": "ປະຕິບັດຕາມ",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "ຜູ້ແນະນຳ",
+    "delegates": "ຜູ້ແທນ"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "ໂຄງການ ແລະກອງທຶນ",
       "specializedAgencies": "ອົງການສະເພາະ ແລະທີ່ກ່ຽວຂ້ອງ",
       "peacekeepingMissions": "ການຮັກສາສັນຕິພາບ ແລະພາລະກິດ",
-      "foundersMembers": "ຜູ້ກໍ່ຕັ້ງ ແລະສະມາຊິກ"
+      "foundersMembers": "ຜູ້ກໍ່ຕັ້ງ ແລະສະມາຊິກ",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "ກົດເຊື່ອມຕໍ່ Corps"
     },
     "links": {
       "ods": "ລະບົບເອກະສານທາງການຂອງສະຫະປະຊາຊາດ (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "ພາລະກິດການເມືອງພິເສດຂອງສະຫະປະຊາຊາດ",
       "memberStates": "ປະເທດສະມາຊິກ ສະຫະປະຊາຊາດ",
       "unSystem": "ລະບົບສະຫະປະຊາຊາດ (ຜູ້ກໍ່ຕັ້ງ ແລະສະມາຊິກ)",
-      "history": "ປະຫວັດສາດຂອງສະຫະປະຊາຊາດ"
+      "history": "ປະຫວັດສາດຂອງສະຫະປະຊາຊາດ",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "ເວັບໄຊທ໌ກອງປະຊຸມແລະປະຕູຄະນະກໍາມະການ",
+      "documentsArticles": "ODS, ຫໍສະໝຸດດິຈິຕອລ, ຂ່າວ, ໜັງສືພິມ, ແລະປຶ້ມປະຈຳປີ",
+      "legislationTreaties": "ສົນທິສັນຍາ, ກົດບັດ, ແລະກົດໝາຍສາກົນ",
+      "mainBodies": "GA, ສະພາຄວາມໝັ້ນຄົງ, ECOSOC, ICJ, ແລະອື່ນໆ",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP, ແລະກອງທຶນທີ່ກ່ຽວຂ້ອງ",
+      "specializedAgencies": "WHO, UNESCO, ທະນາຄານໂລກ, ILO, ແລະຄູ່ຮ່ວມງານ",
+      "peacekeepingMissions": "ຮັກສາ​ສັນຕິພາບ​ແລະ​ພາລະກິດ​ການ​ເມືອງ​ພິ​ເສດ",
+      "foundersMembers": "ປະເທດສະມາຊິກ, ລະບົບສະຫະປະຊາຊາດ, ແລະປະຫວັດສາດ",
+      "pressCorpsLinks": "ໂຕະຂ່າວ 3 ໜ່ວຍ ສຳລັບການຈັດສັນແຕ່ລະໜ່ວຍຂ່າວ (ໂລກ, ສຸຂະພາບ, ແລະຄຸນສົມບັດ)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "ເຕືອນ",
     "privateReminderLabel": "ການແຈ້ງເຕືອນສ່ວນຕົວ (ເກົ້າອີ້ເທົ່ານັ້ນ, ຊິ້ງແລ້ວ)",
     "committeeFallback": "ຄະນະກໍາມະການ",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "ການສ້າງກຸ່ມ",
       "speechPoisOrPocs": "Speech POIs ຫຼື POCs",
       "questions": "ຄຳຖາມ",
-      "informalConversations": "ການສົນທະນາທີ່ບໍ່ເປັນທາງການ"
+      "informalConversations": "ການສົນທະນາທີ່ບໍ່ເປັນທາງການ",
+      "sessionProgress": "ຄວາມຄືບໜ້າຂອງເຊດຊັນ (SMT)"
     },
     "concernLabel": "ຄວາມກັງວົນ (ຕົວຍຶດອັດຕະໂນມັດ)",
     "concernHelpTitle": "ທຸງຄວາມເປັນຫ່ວງ",
@@ -1848,7 +1883,12 @@
       "needAllocation": "ທ່ານຕ້ອງການການຈັດສັນເພື່ອສົ່ງບັນທຶກ (ຫຼືເປັນເກົ້າອີ້).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "ສົ່ງບັນທຶກບໍ່ສຳເລັດ."
-    }
+    },
+    "sendToSmt": "ສົ່ງໄປທີ່ SMT",
+    "sendToSmtHelp": "ທີ່ດິນຢູ່ໃນບັນທຶກຂອງເລຂາທິການ inbox (ຈາກປະທານ). ໃຊ້ອັນນີ້ເພື່ອຄວາມຄືບໜ້າໃນຕອນທ້າຍຂອງເຊດຊັນ.",
+    "progressPrefill": "ກອງປະຊຸມຄະນະກຳມາທິການຫາກໍ່ສິ້ນສຸດລົງ. \n\nຄວາມຄືບໜ້າ: \n- \n\nທຸກຢ່າງ SMT ຄວນຕິດຕາມ: \n-",
+    "progressComposeHint": "ບັນທຶກນີ້ຈະໄປຫາ SMT. ສະຫຼຸບສິ່ງທີ່ຫ້ອງກວມເອົາແລະສິ່ງທີ່ເລຂາທິການຄວນຮູ້.",
+    "progressSent": "ບັນທຶກຄວາມຄືບຫນ້າຖືກສົ່ງໄປຫາ SMT."
   },
   "adminPage": {
     "title": "ການບໍລິຫານເວັບໄຊທ໌",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "ບໍ່ພົບແຖວຂໍ້ມູນ (ຕ້ອງການຢ່າງໜ້ອຍປະເທດ/ຕຳແໜ່ງຕໍ່ແຖວ).",
       "importLimitedRows": "ຈໍາກັດການນໍາເຂົ້າພຽງແຕ່ {max} ແຖວ. ແຍກໄຟລ໌ຂອງທ່ານ.",
       "rowTooLong": "ແຖວຍາວເກີນໄປ: {row}…",
-      "codeTooLongOnRow": "ລະຫັດຍາວເກີນໄປໃນແຖວ: {row}"
+      "codeTooLongOnRow": "ລະຫັດຍາວເກີນໄປໃນແຖວ: {row}",
+      "chairSeatsCannotBeDeleted": "ປະທານ​ປະ​ເທດ​ແລະ​ປະທານ​ຮ່ວມ​ແມ່ນ​ຢູ່​ໃນ​ຄະນະ​ກຳມະການ​ແຕ່ລະຄົນ."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "ເລືອກເຫດການທີ່ມີລະຫັດກອງປະຊຸມ (ປະຕູເຫດການ) ກ່ອນ.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "ຊື່ຕຳແໜ່ງ ແລະລະຫັດປ້າຍຊື່ສາມາດປ່ຽນໄດ້ໂດຍຜູ້ເບິ່ງແຍງເວັບໄຊເທົ່ານັ້ນ."
   },
   "chairAllocationMatrixPage": {
     "intro": "ຕາຕະລາງການຈັດສັນຄະນະກໍາມະການສໍາລັບກອງປະຊຸມປັດຈຸບັນຂອງທ່ານ. ນີ້ແມ່ນການອ່ານເທົ່ານັ້ນສໍາລັບເກົ້າອີ້ແລະສະທ້ອນໃຫ້ເຫັນເຖິງການມອບຫມາຍບ່ອນນັ່ງທີ່ຫ້າວຫັນແລະລະຫັດປ້າຍ.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "ຮ້ອງຂໍການຈັດສັນ",
       "account": "ບັນຊີ",
       "actions": "ການກະທໍາ",
-      "score": "Score"
+      "score": "ຄະແນນ",
+      "photo": "ຮູບ",
+      "school": "ໂຮງຮຽນ",
+      "party": "ກຸ່ມການເມືອງ"
     },
     "noRows": "ບໍ່ພົບແຖວການຈັດສັນສໍາລັບຄະນະກໍາມະການນີ້.",
     "pendingApprovalsTitle": "ລໍຖ້າການອະນຸມັດການລົງທະບຽນ",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "ຕາຕະລາງການຈັດສັນ",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "ການເຄື່ອນໄຫວ",
+    "pointsTitle": "ຄະແນນ",
+    "resolutionsTitle": "ການແກ້ໄຂ",
+    "noMotions": "ບໍ່ມີການເຄື່ອນໄຫວທີ່ບັນທຶກໄວ້ສຳລັບຜູ້ແທນນີ້.",
+    "noPoints": "ບໍ່ມີຄະແນນບັນທຶກສໍາລັບຜູ້ແທນນີ້.",
+    "noResolutions": "ບໍ່ມີການບັນທຶກການມີສ່ວນຮ່ວມໃນການແກ້ໄຂສໍາລັບຜູ້ແທນນີ້.",
+    "untitledMotion": "ການເຄື່ອນໄຫວທີ່ບໍ່ມີຫົວຂໍ້",
+    "chairLoggedPoint": "ຈຸດ​ທີ່​ມີ​ການ​ຕັດ​ໄມ້​ຢືນ​ຕົ້ນ​",
+    "resolutionLink": "ເປີດ Google Doc",
+    "resolutionNoLink": "ບໍ່ມີການເຊື່ອມໂຍງເອກະສານ",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "ຂັ້ນຕອນ",
+      "delegate": "ບັນທຶກຂອງເກົ້າອີ້"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "ຜູ້ສົ່ງຫຼັກ",
+      "co": "ຜູ້​ຮ່ວມ​ສະ​ເຫນີ​",
+      "signatory": "ຜູ້ລົງນາມ"
+    },
+    "speechesTitle": "ຄຳປາໄສ",
+    "flagsTitle": "ຄຳຍ້ອງຍໍ & ຄວາມເປັນຫ່ວງ",
+    "disciplineTitle": "ຄຳເຕືອນ ແລະການປະທ້ວງ",
+    "noSpeeches": "ບໍ່​ມີ​ບັນ​ທຶກ​ການ​ກ່າວ​ປາ​ໄສ​ສໍາ​ລັບ​ຜູ້​ແທນ​ນີ້​.",
+    "noFlags": "ບໍ່ມີການຍ້ອງຍໍ ຫຼືຄວາມກັງວົນຕໍ່ຜູ້ແທນນີ້.",
+    "noDiscipline": "ບໍ່ມີການເຕືອນ ຫຼືການປະທ້ວງທີ່ບັນທຶກໄວ້ສຳລັບຜູ້ແທນນີ້.",
+    "untitledSpeech": "ຄຳເວົ້າ",
+    "currentFlag": "ປະຈຸບັນ",
+    "speechStatuses": {
+      "waiting": "ລໍຖ້າ",
+      "current": "ເວົ້າ",
+      "done": "ຈັດສົ່ງແລ້ວ"
+    },
+    "flagKinds": {
+      "compliment": "ຊົມເຊີຍ",
+      "concern": "ຄວາມກັງວົນ",
+      "reminder": "ເຕືອນ"
+    },
+    "disciplineActions": {
+      "warning": "ຄຳເຕືອນ",
+      "strike": "ປະທ້ວງ",
+      "revoke_warning": "ຍົກເລີກຄຳເຕືອນແລ້ວ",
+      "revoke_strike": "ຍົກເລີກການປະທ້ວງແລ້ວ",
+      "reset": "ຣີເຊັດ"
+    },
+    "disciplineCounts": "{warnings} ເຕືອນ · {strikes} ການປະທ້ວງ"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "ຄະ​ນະ​ກໍາ​ມະ​ຂອງ​ທ່ານ​",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "ຫ້ອງປະຊຸມ (ເຕັມ)",
         "hint": "ຮູບແບບສະເໝືອນ ແລະຊັ້ນຜູ້ແທນ"
+      },
+      "crisisReport": {
+        "label": "ລາຍງານ",
+        "hint": "ລາຍງານເຫດການ"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "ບັນທຶກ",
     "noGoogleDocYet": "ບໍ່ມີການເຊື່ອມໂຍງກັບ Google Doc ເທື່ອ. ໃຊ້ Edit ເພື່ອເພີ່ມ docs.google.com/document/d/… URL.",
     "chairFeedbackHeading": "ຄວາມຄິດເຫັນຂອງປະທານ",
-    "noFeedbackYet": "ບໍ່ມີການເພີ່ມຄຳຕິຊົມເທື່ອ."
+    "noFeedbackYet": "ບໍ່ມີການເພີ່ມຄຳຕິຊົມເທື່ອ.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "ປະຈຸບັນ - ອາດຈະງົດ (ມ້ວນ)",
       "present_voting": "ປະຈຸບັນ ແລະ ການລົງຄະແນນສຽງ (ມ້ວນ)",
       "unknown": "— (ມ້ວນ​)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "ລິ້ງ, ປຸ່ມ ແລະໄຟລ໌",
+      "help": "ເພີ່ມລິ້ງເວັບ, ປຸ່ມ, ຫຼືອັບໂຫລດ PDF/ໄຟລ໌. ທຸກຄົນທີ່ເປີດຄູ່ມືນີ້ສາມາດໃຊ້ພວກມັນໄດ້.",
+      "kindLink": "ເຊື່ອມຕໍ່",
+      "kindButton": "ປຸ່ມ",
+      "kindFile": "ໄຟລ໌",
+      "label": "ປ້າຍກຳກັບ",
+      "urlPlaceholder": "https://… or /page",
+      "add": "ຕື່ມ",
+      "upload": "ອັບໂຫລດ PDF ຫຼືໄຟລ໌",
+      "uploading": "ກຳລັງອັບໂຫລດ...",
+      "remove": "ເອົາອອກ",
+      "download": "ເປີດ",
+      "empty": "ບໍ່ມີລິ້ງ ຫຼືໄຟລ໌ເທື່ອ.",
+      "errorType": "ໃຊ້ໄຟລ໌ PDF, ເອກະສານ Office, ຂໍ້ຄວາມ, ຫຼືຮູບພາບ.",
+      "errorSize": "ໄຟລ໌ໃຫຍ່ເກີນໄປ (ສູງສຸດ 15 MB).",
+      "errorUpload": "ບໍ່ສາມາດອັບໂຫລດໄຟລ໌ນັ້ນໄດ້.",
+      "markdownHelp": "ໃນບັນທຶກທ່ານສາມາດຂຽນ [label](https://url) ສໍາລັບການເຊື່ອມຕໍ່, ຫຼື [label](https://url \"button\") ສໍາລັບປຸ່ມ. ວາງ URL ໄຟລ໌ ຫຼືອັບໂຫລດຂ້າງເທິງ."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "ກຳລັງກວດສອບສະຖານະມ້ວນຂອງເຈົ້າ...",
       "rollPromptSaving": "ກຳລັງບັນທຶກ...",
       "rollPromptPresent": "ປະຈຸບັນ",
-      "rollPromptPresentVoting": "ປະຈຸບັນແລະການລົງຄະແນນສຽງ"
+      "rollPromptPresentVoting": "ປະຈຸບັນແລະການລົງຄະແນນສຽງ",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "ຂັ້ນຕອນການລົງຄະແນນສຽງ",
@@ -4241,7 +4382,11 @@
       "timer": "ໂມງຈັບເວລາ",
       "sidebarAnd": "ແລະ",
       "announcements": "ປະກາດ",
-      "sidebarUseSuffix": "— ຫນຶ່ງ​ເຄື່ອງ​ມື​ຕໍ່​ແຖບ​."
+      "sidebarUseSuffix": "— ຫນຶ່ງ​ເຄື່ອງ​ມື​ຕໍ່​ແຖບ​.",
+      "smtProgressReminderTitle": "ອັບເດດ SMT ໃນເຊດຊັນນີ້",
+      "smtProgressReminderBody": "ສົ່ງບົດບັນທຶກຄວາມຄືບໜ້າສັ້ນໆ ເພື່ອໃຫ້ກອງເລຂາຮູ້ວ່າຄະນະກຳມາທິການໄປແນວໃດ ແລະຈະຕິດຕາມອັນໃດແດ່.",
+      "smtProgressReminderWrite": "ຂຽນບັນທຶກ",
+      "smtProgressReminderDismiss": "ຕໍ່ມາ"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "ເຊດຊັນສິ້ນສຸດແລ້ວ — ອັບເດດ SMT",
+      "reminderSessionEnd": "{title} ກຳນົດຈະສິ້ນສຸດໃນເວລາ {start}. ສົ່ງ SMT ບັນທຶກຄວາມຄືບຫນ້າສັ້ນ.",
+      "writeSmtNote": "ຂຽນບັນທຶກ"
     },
     "history": {
       "title": "ປະຫວັດເຊດຊັນ",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "ຍັງບໍ່ທັນມີການສະເໜີຊື່ໃຫ້ຄະນະກໍາມະນີ້ເທື່ອ.",
+    "stepProgress": "ການສະເໜີຊື່ {current} ຂອງ {total}",
+    "requiredProgress": "{done}/{total} ຊ່ອງທີ່ຕ້ອງການສໍາເລັດ",
+    "gotoStep": "ໄປທີ່ {label}",
+    "lockedTitle": "ສໍາເລັດບັດຜູ້ແທນທຸກຄັ້ງກ່ອນ",
+    "lockedBody": "ຕື່ມຂໍ້ມູນຄະແນນຂອງກອງປະຊຸມສໍາລັບຜູ້ແທນທີ່ນັ່ງຢູ່ຂ້າງເທິງ, ຈາກນັ້ນກັບຄືນທີ່ນີ້ເພື່ອສະເໜີຊື່ໃຫ້ລາງວັນເທື່ອລະອັນ.",
+    "optional": "ທາງເລືອກ",
+    "submittedLocked": "ສົ່ງໄປທີ່ SMT — ການແກ້ໄຂຖືກລັອກ.",
+    "topSuggestions": "ອັນດັບ 5 ຈາກຄະແນນເຊດຊັນ",
+    "topSuggestionsHint": "ຈໍານວນ matrix ສູງສຸດໃນຄະນະກໍາມະການນີ້. ເລືອກອັນໜຶ່ງ, ຫຼືຊອກຫາທາງລຸ່ມ.",
+    "noSuggestions": "ຍັງບໍ່ມີຜູ້ແທນອັນດັບ. ຄະແນນ matrix ທໍາອິດ, ຫຼືຄົ້ນຫາໂດຍຊື່.",
+    "searchLabel": "ຊອກຫາຜູ້ແທນ",
+    "searchPlaceholder": "ຊື່ ຫຼື ການຈັດສັນ",
+    "searchEmpty": "ບໍ່ມີຜູ້ແທນທີ່ກົງກັບການຄົ້ນຫານັ້ນ.",
+    "selectedNominee": "ຜູ້ຖືກຄັດເລືອກ",
+    "pickNomineeHint": "ເລືອກຜູ້ຖືກສະເໜີຊື່ຈາກອັນດັບ 5 ຫຼືຊອກຫາເພື່ອເປີດ rubric ແລະບັນທຶກຂອງເຂົາເຈົ້າ.",
+    "rubricHeading": "rubric ນາມ",
+    "rubricTotal": "ທັງໝົດ rubric: {total}/{max} ({scored}/{criteria} ມາດຖານຄະແນນ — 1–8 ຕໍ່ເກນ)",
+    "evidenceLabel": "ຖະແຫຼງການຢືນຢັນ / ຫຼັກຖານ",
+    "evidencePlaceholder": "ອ້າງເຖິງຫຼັກຖານພື້ນເຮືອນຊີມັງ (ຂໍ້ທີ່ຮ່າງ, ການປະນີປະນອມ, ການແຊກແຊງຫຼັກ). ຢ່າງໜ້ອຍ {min} ຕົວອັກສອນ — ຕ້ອງໃຊ້ກ່ອນທີ່ SMT ສາມາດອະນຸມັດ.",
+    "previous": "ທີ່ຜ່ານມາ",
+    "skipOptional": "ຂ້າມຊ່ອງທາງເລືອກ",
+    "next": "ຕໍ່ໄປ",
+    "locked": "ລັອກ",
+    "matrixRequired": "Matrix ຕ້ອງການກ່ອນ",
+    "saving": "ກຳລັງບັນທຶກ...",
+    "saveAndNext": "ບັນທຶກ & ຕໍ່ໄປ",
+    "save": "ບັນທຶກ",
+    "allSlotsSummary": "ຊ່ອງການສະເໜີຊື່ທັງໝົດ",
+    "statusDone": "ສຳເລັດແລ້ວ",
+    "statusTodo": "ເຮັດ",
+    "errors": {
+      "selectNominee": "ເລືອກຜູ້ຖືກແຕ່ງຕັ້ງສໍາລັບຊ່ອງນີ້.",
+      "completeRubric": "ເລືອກແຖບສໍາລັບທຸກເງື່ອນໄຂກ່ອນທີ່ຈະບັນທຶກ.",
+      "evidenceMin": "ເພີ່ມຢ່າງໜ້ອຍ {min} ຕົວອັກສອນຂອງຫຼັກຖານ."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "ສະຫຼຸບລາງວັນລວມ",
+    "completeCount": "{completed}/{total} ສຳເລັດ",
+    "requiredLabel": "ຄວາມຄືບໜ້າ (ຕ້ອງການ)",
+    "optionalSlots": "ຊ່ອງທາງເລືອກ: {completed}/{total} ເຕັມ"
+  },
+  "chairAwardsSubmit": {
+    "title": "ສົ່ງໃຫ້ SMT",
+    "intro": "ບັນທຶກສະລັອດຕິງພຽງແຕ່ຂຽນຮ່າງ; SMT ບໍ່ເຫັນມັນຈົນກວ່າທ່ານຈະສົ່ງ batch ຂ້າງລຸ່ມນີ້. ເມື່ອສະລັອດຕິງທີ່ຕ້ອງການສໍາເລັດ, ສົ່ງຊຸດໃຫ້ SMT ສໍາລັບການທົບທວນຄືນ. ການຍື່ນສະເຫນີອັດຕະໂນມັດຍັງດໍາເນີນການຫຼັງຈາກ {deadline} (UTC) ເມື່ອທ່ານເປີດຫນ້ານີ້, ຫຼືຜ່ານວຽກທີ່ກໍານົດເວລາຖ້າການຕິດຕັ້ງຂອງທ່ານກໍານົດມັນ.",
+    "requiredSlotsIncomplete": "ສະລັອດຕິງທີ່ຕ້ອງການສໍາເລັດ: {done}/{total} — ສໍາເລັດສ່ວນທີ່ເຫຼືອ, ຫຼັງຈາກນັ້ນສົ່ງເພື່ອໃຫ້ SMT ສາມາດທົບທວນໄດ້.",
+    "requiredSlotsReady": "ສະລັອດຕິງທີ່ຕ້ອງການສໍາເລັດ: {done}/{total} — ຊຸດການສະເໜີຊື່ແມ່ນພ້ອມແລ້ວ (ໃຫ້ແນ່ໃຈວ່າ matrix ຕົວແທນຂ້າງເທິງແມ່ນສໍາເລັດ).",
+    "matrixIncomplete": "delegate matrix (ທຸກໆຜູ້ແທນທີ່ນັ່ງ): {done}/{total} — ໃຫ້ຄະແນນຜູ້ແທນແຕ່ລະຄົນຂ້າງເທິງກ່ອນສົ່ງ.",
+    "matrixComplete": "delegate matrix (ທຸກໆຕົວແທນທີ່ນັ່ງ): {done}/{total} — ສົມບູນ.",
+    "alreadySubmitted": "ສົ່ງໄປທີ່ SMT{when}. ການແກ້ໄຂຖືກລັອກ; ຕິດຕໍ່ SMT ຖ້າທ່ານຕ້ອງການການປ່ຽນແປງ.",
+    "submittedAt": "—{time}",
+    "submitButton": "ສົ່ງການສະເໜີຊື່ໃຫ້ SMT",
+    "submitting": "ກຳລັງສົ່ງ...",
+    "needComplete": "ຕື່ມຂໍ້ມູນໃສ່ທຸກຊ່ອງການສະເໜີຊື່ທີ່ຕ້ອງການ ແລະ matrix ຂອງຜູ້ແທນ, ຈາກນັ້ນສົ່ງ.",
+    "deadlinePassed": "ເສັ້ນ​ຕາຍ​ຜ່ານ​ໄປ — ສົ່ງ​ດຽວ​ນີ້​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຍັງ​ບໍ່​ໄດ້​."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "ທ່ານຍັງບໍ່ມີບ່ອນນັ່ງຄະນະກໍາມະການເທື່ອ. ຂໍໃຫ້ເລຂານຸການມອບໝາຍໃຫ້ທ່ານຢູ່ໃນຕາຕະລາງການຈັດສັນ, ຈາກນັ້ນກັບຄືນມາທີ່ນີ້.",
+    "intro": "ແຕ່ລະຄະນະກໍາມະການມີລະຫັດຄະນະກໍາມະການພາຍໃນກອງປະຊຸມຂອງຕົນ (ປະຕູທີສອງຫຼັງຈາກຜູ້ແທນເຂົ້າລະຫັດກອງປະຊຸມ). ລະຫັດຕ້ອງເປັນເອກະລັກພາຍໃນເຫດການກອງປະຊຸມດຽວກັນ.",
+    "testingOverride": "ເປີດໃຊ້ການທົດສອບ override: ທ່ານສາມາດສະຫຼັບ ແລະຈັດການລະຫັດຄະນະກໍາມະໃນທົ່ວຄະນະກໍາມະໂດຍບໍ່ມີການກວດສອບການຈັດສັນບ່ອນນັ່ງ.",
+    "chairScope": "ໃນຖານະເປັນ dais, ທ່ານພຽງແຕ່ເຫັນຄະນະກໍາມະການບ່ອນທີ່ທ່ານມີບ່ອນນັ່ງ. ປະຢັດສົ່ງໃຫ້ທ່ານໄປຫາໂປຣໄຟລ໌ຂອງທ່ານ; ຜູ້ແທນທີ່ຜ່ານປະຕູຄະນະກໍາມະການແລ້ວຈະຢູ່ໃນລະບົບຈົນກ່ວາພວກເຂົາອອກຈາກລະບົບ.",
+    "staffAfterSave": "ຫຼັງຈາກບັນທຶກ, ທ່ານສາມາດເຂົ້າໄປໃນຄະນະກໍາມະການນັ້ນຫຼືແບ່ງປັນລະຫັດໃນ dais."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "ສຳເນົາລາຍການ (TSV)",
+    "copied": "ສຳເນົາຕາຕະລາງໃສ່ຄລິບບອດແລ້ວ.",
+    "helpTitle": "ລະຫັດເຂົ້າສູ່ລະບົບການຈັດສັນ",
+    "helpBody": "ເຫຼົ່ານີ້ແມ່ນລະຫັດແຜ່ນປ້າຍການຈັດສັນຕໍ່ທີ່ໃຊ້ໂດຍຜູ້ແທນ ແລະປະທານໃນລະຫວ່າງປະຕູລະຫັດການຈັດສັນ. ລະຫັດສາມາດປ່ຽນແປງໄດ້ໂດຍຜູ້ເບິ່ງແຍງເວັບໄຊທ໌ເທົ່ານັ້ນ.",
+    "copyHeader": "ກອງປະຊຸມ: {conference}",
+    "copyColumns": "ລະຫັດຕົວແທນປະເທດ",
+    "columnCountry": "ປະເທດ / ການຈັດສັນ",
+    "columnDelegate": "ຜູ້ແທນ (ຈັດສັນ)",
+    "columnCode": "ລະຫັດຜ່ານ / ລະຫັດ",
+    "codeFieldHelpTitle": "ພາກສະຫນາມລະຫັດຜ່ານ / ລະຫັດ",
+    "codeFieldHelpBody": "ຜູ້ແທນໃສ່ລະຫັດນີ້ສໍາລັບການຈັດສັນຂອງພວກເຂົາ. ພຽງແຕ່ຜູ້ເບິ່ງແຍງເວັບໄຊທ໌ສາມາດປ່ຽນແປງມັນໄດ້.",
+    "empty": "ບໍ່ມີການຈັດສັນສໍາລັບກອງປະຊຸມນີ້ເທື່ອ."
+  },
+  "chairSessionError": {
+    "title": "ໂຫຼດຊັ້ນເຊສຊັນບໍ່ສຳເລັດ",
+    "fallback": "ເກີດຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດຂຶ້ນໃນຂະນະທີ່ໂຫຼດການຄວບຄຸມເຊດຊັນຂອງປະທານ.",
+    "reference": "ອ້າງອີງ: {digest}",
+    "backToDashboard": "ກັບໄປຫາ dashboard ປະທານ"
+  },
+  "smtDelegatesPage": {
+    "title": "ຜູ້ແທນ",
+    "intro": "ຄົ້ນຫາຜູ້ແທນທີ່ເຊື່ອມໂຍງທຸກຄົນໃນເຫດການນີ້ໂດຍຊື່, ການຈັດສັນ, ອີເມວ, ຫຼືຄະນະກໍາມະການ. ເປີດບັດສຳລັບຮູບ ແລະໂປຣໄຟລ໌ຂອງເຂົາເຈົ້າ.",
+    "selectEventFirst": "ເລືອກເຫດການກອງປະຊຸມທີ່ມີການເຄື່ອນໄຫວກ່ອນ.",
+    "enterConferenceCode": "ໃສ່ລະຫັດກອງປະຊຸມ",
+    "searchLabel": "ຊອກຫາຜູ້ແທນ",
+    "searchPlaceholder": "ຊື່, ການຈັດສັນ, ອີເມວ, ຫຼືຄະນະກໍາມະການ",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "ບໍ່ມີຜູ້ແທນທີ່ເຊື່ອມໂຍງໃນເຫດການນີ້ເທື່ອ.",
+    "noMatches": "ບໍ່ມີຜູ້ແທນທີ່ກົງກັບການຄົ້ນຫານັ້ນ.",
+    "unnamed": "ຕົວແທນທີ່ບໍ່ມີຊື່"
   }
 }

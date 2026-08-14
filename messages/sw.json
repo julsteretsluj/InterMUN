@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Pakia upya"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "k.m. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Vichupo vidogo",
     "home": "Nyumbani",
     "library": "Maktaba",
-    "mainNavigationAria": "Urambazaji mkuu"
+    "mainNavigationAria": "Urambazaji mkuu",
+    "crisis": "Mgogoro"
   },
   "dashboardLayout": {
     "helpCenter": "Kituo cha usaidizi",
@@ -838,7 +840,9 @@
     "pointsLog": "• Kumbukumbu ya pointi",
     "formalMotions": "Mwendo rasmi",
     "timer": "Kipima muda",
-    "smtProfile": "Wasifu"
+    "smtProfile": "Wasifu",
+    "crisis": "Mgogoro",
+    "smtDelegates": "Wajumbe"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -1333,7 +1337,8 @@
       "roomCode": "Msimbo wa chumba",
       "settings": "Mipangilio",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Ripoti"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Tukio na vipindi",
     "roomCodes": "Misimbo ya vyumba na viti",
     "advisors": "Washauri",
-    "notes": "Notes",
+    "notes": "Vidokezo",
     "awards": "Tuzo",
     "allocationMatrix": "Matrix ya ugawaji",
     "allocationPasswords": "Nywila za ugawaji",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
+    "newsroom": "Chumba cha habari",
+    "pressCorps": "Kikosi cha Waandishi wa Habari",
     "milestones": "Milestones",
     "profile": "Wasifu",
     "follow": "Fuata",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Waelekezi",
+    "delegates": "Wajumbe"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Mipango na fedha",
       "specializedAgencies": "Mashirika maalumu & kuhusiana",
       "peacekeepingMissions": "Ulinzi wa amani na misheni",
-      "foundersMembers": "Waanzilishi na wanachama"
+      "foundersMembers": "Waanzilishi na wanachama",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Vyombo vya habari Corps viungo"
     },
     "links": {
       "ods": "Mfumo Rasmi wa Hati wa Umoja wa Mataifa (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Misheni Maalum za Kisiasa za Umoja wa Mataifa",
       "memberStates": "Nchi Wanachama wa Umoja wa Mataifa",
       "unSystem": "Mfumo wa UN (waanzilishi na wanachama)",
-      "history": "Historia ya Umoja wa Mataifa"
+      "history": "Historia ya Umoja wa Mataifa",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Tovuti ya mkutano na tovuti ya kamati",
+      "documentsArticles": "ODS, Maktaba ya Dijiti, habari, vyombo vya habari na kijitabu cha mwaka",
+      "legislationTreaties": "Mikataba, mkataba na sheria za kimataifa",
+      "mainBodies": "GA, Baraza la Usalama, ECOSOC, ICJ, na zaidi",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP, na fedha zinazohusiana",
+      "specializedAgencies": "WHO, UNESCO, Benki ya Dunia, ILO, na washirika",
+      "peacekeepingMissions": "Ulinzi wa amani na misheni maalum ya kisiasa",
+      "foundersMembers": "Nchi wanachama, mfumo wa Umoja wa Mataifa, na historia",
+      "pressCorpsLinks": "Madawati matatu ya habari kwa kila mgao wa Press Corps (ulimwengu, afya na vipengele)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Kikumbusho",
     "privateReminderLabel": "Kikumbusho cha faragha (viti pekee, vilivyosawazishwa)",
     "committeeFallback": "Kamati",
-    "dash": "-"
+    "dash": "-",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "-",
@@ -1751,7 +1785,8 @@
       "blocForming": "Uundaji wa kambi",
       "speechPoisOrPocs": "POI za Hotuba au POCs",
       "questions": "Maswali",
-      "informalConversations": "Mazungumzo yasiyo rasmi"
+      "informalConversations": "Mazungumzo yasiyo rasmi",
+      "sessionProgress": "Maendeleo ya kikao (SMT)"
     },
     "concernLabel": "Wasiwasi (kishika nafasi kiotomatiki)",
     "concernHelpTitle": "Bendera ya wasiwasi",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Unahitaji mgao kutuma maelezo (au kuwa mwenyekiti).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Imeshindwa kutuma dokezo."
-    }
+    },
+    "sendToSmt": "Tuma kwa SMT",
+    "sendToSmtHelp": "Inatua kwenye kisanduku pokezi cha maelezo ya sekretarieti (Kutoka kwenye viti). Tumia hii kwa maendeleo ya mwisho wa kipindi.",
+    "progressPrefill": "Kikao cha kamati kimeisha. \n\nMaendeleo: \n- \n\nKitu chochote cha SMT kinapaswa kufuata: \n-",
+    "progressComposeHint": "Dokezo hili litaenda kwa SMT. Fanya muhtasari wa kile chumba kilifunikwa na kile sekretarieti inapaswa kujua.",
+    "progressSent": "Dokezo la maendeleo limetumwa kwa SMT."
   },
   "adminPage": {
     "title": "Utawala wa tovuti",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Hakuna safu mlalo za data zilizopatikana (zinahitaji angalau nchi/nafasi kwa kila mstari).",
       "importLimitedRows": "Ingiza hadi safu mlalo {max} chache. Gawanya faili yako.",
       "rowTooLong": "Safu mlalo ni ndefu sana: {row}…",
-      "codeTooLongOnRow": "Msimbo ni mrefu sana kwenye safu mlalo: {row}"
+      "codeTooLongOnRow": "Msimbo ni mrefu sana kwenye safu mlalo: {row}",
+      "chairSeatsCannotBeDeleted": "Viti vya Mwenyekiti na Wenyeviti vinabaki kwenye kila kamati."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Chagua tukio kwa kutumia msimbo wa mkutano (lango la tukio) kwanza.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Majina ya nafasi na misimbo ya mabango yanaweza tu kubadilishwa na msimamizi wa tovuti."
   },
   "chairAllocationMatrixPage": {
     "intro": "Matrix ya ugawaji wa kamati kwa kikao chako cha sasa. Hii ni ya kusoma pekee kwa viti na inaonyesha migawo inayotumika ya viti na misimbo ya mabango.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Umeomba mgao",
       "account": "Akaunti",
       "actions": "Vitendo",
-      "score": "Score"
+      "score": "Alama",
+      "photo": "Picha",
+      "school": "Shule",
+      "party": "Kundi la kisiasa"
     },
     "noRows": "Hakuna safu mlalo za ugawaji zilizopatikana kwa kamati hii.",
     "pendingApprovalsTitle": "Inasubiri idhini za kujisajili",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Matrix ya ugawaji",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Mwendo",
+    "pointsTitle": "Pointi",
+    "resolutionsTitle": "Maazimio",
+    "noMotions": "Hakuna hoja zilizorekodiwa kwa mjumbe huyu.",
+    "noPoints": "Hakuna pointi zilizorekodiwa kwa mjumbe huyu.",
+    "noResolutions": "Hakuna uhusika wa azimio uliorekodiwa kwa mjumbe huyu.",
+    "untitledMotion": "Mwendo usio na jina",
+    "chairLoggedPoint": "Pointi iliyowekwa na mwenyekiti",
+    "resolutionLink": "Fungua Hati ya Google",
+    "resolutionNoLink": "Hakuna kiungo cha hati",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Kitaratibu",
+      "delegate": "Logi ya mwenyekiti"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Mwasilishaji mkuu",
+      "co": "Mwasilishaji mwenza",
+      "signatory": "Mtia saini"
+    },
+    "speechesTitle": "Hotuba",
+    "flagsTitle": "Pongezi & wasiwasi",
+    "disciplineTitle": "Maonyo na maonyo",
+    "noSpeeches": "Hakuna hotuba zilizorekodiwa kwa mjumbe huyu.",
+    "noFlags": "Hakuna pongezi au wasiwasi uliorekodiwa kwa mjumbe huyu.",
+    "noDiscipline": "Hakuna maonyo au maonyo yaliyorekodiwa kwa mjumbe huyu.",
+    "untitledSpeech": "Hotuba",
+    "currentFlag": "Ya sasa",
+    "speechStatuses": {
+      "waiting": "Kusubiri",
+      "current": "Akizungumza",
+      "done": "Imewasilishwa"
+    },
+    "flagKinds": {
+      "compliment": "Pongezi",
+      "concern": "Wasiwasi",
+      "reminder": "Kikumbusho"
+    },
+    "disciplineActions": {
+      "warning": "Onyo",
+      "strike": "Mgomo",
+      "revoke_warning": "Onyo limebatilishwa",
+      "revoke_strike": "Mgomo umebatilishwa",
+      "reset": "Weka upya"
+    },
+    "disciplineCounts": "{warnings} onyo · {strikes} mgomo (ma)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "kamati yako",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Chumba cha kamati (kimejaa)",
         "hint": "Mpangilio pepe na sakafu ya kukabidhi"
+      },
+      "crisisReport": {
+        "label": "Ripoti",
+        "hint": "Kuripoti tukio"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Vidokezo",
     "noGoogleDocYet": "Bado hakuna Hati ya Google iliyounganishwa. Tumia Hariri kuongeza docs.google.com/document/d/… URL.",
     "chairFeedbackHeading": "Maoni ya mwenyekiti",
-    "noFeedbackYet": "Bado hakuna maoni yaliyoongezwa."
+    "noFeedbackYet": "Bado hakuna maoni yaliyoongezwa.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Sasa - inaweza kuacha (kusonga)",
       "present_voting": "Kuwasilisha na kupiga kura (orodha)",
       "unknown": "- (roll)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Viungo, vifungo na faili",
+      "help": "Ongeza kiungo cha wavuti, kitufe, au pakia PDF/faili. Yeyote anayefungua mwongozo huu anaweza kuzitumia.",
+      "kindLink": "Kiungo",
+      "kindButton": "Kitufe",
+      "kindFile": "Faili",
+      "label": "Lebo",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Ongeza",
+      "upload": "Pakia PDF au faili",
+      "uploading": "Inapakia...",
+      "remove": "Ondoa",
+      "download": "Fungua",
+      "empty": "Bado hakuna viungo au faili.",
+      "errorType": "Tumia PDF, Hati ya Ofisi, maandishi, au faili ya picha.",
+      "errorSize": "Faili ni kubwa sana (isizidi MB 15).",
+      "errorUpload": "Haikuweza kupakia faili hiyo.",
+      "markdownHelp": "Katika madokezo unaweza pia kuandika [lebo](https://url) kwa kiungo, au [lebo](https://url \"button\") kwa kitufe. Bandika URL ya faili au upakie hapo juu."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Inakagua hali ya orodha yako...",
       "rollPromptSaving": "Inahifadhi...",
       "rollPromptPresent": "Wasilisha",
-      "rollPromptPresentVoting": "Kuwasilisha na kupiga kura"
+      "rollPromptPresentVoting": "Kuwasilisha na kupiga kura",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Utaratibu wa kupiga kura",
@@ -4241,7 +4382,11 @@
       "timer": "Kipima muda",
       "sidebarAnd": "na",
       "announcements": "Matangazo",
-      "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo."
+      "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo.",
+      "smtProgressReminderTitle": "Sasisha SMT kwenye kipindi hiki",
+      "smtProgressReminderBody": "Tuma maelezo mafupi ya maendeleo ili sekretarieti ijue kamati iliendaje na nini cha kufuatilia.",
+      "smtProgressReminderWrite": "Andika dokezo",
+      "smtProgressReminderDismiss": "Baadaye"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Kipindi kimeisha — sasisha SMT",
+      "reminderSessionEnd": "{title} iliratibiwa kuisha saa {start}. Tuma SMT dokezo fupi la maendeleo.",
+      "writeSmtNote": "Andika dokezo"
     },
     "history": {
       "title": "Historia ya kikao",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Bado hakuna nafasi za uteuzi za kamati hii.",
+    "stepProgress": "Uteuzi {current} wa {total}",
+    "requiredProgress": "{done}/{total} nafasi zinazohitajika zimekamilika",
+    "gotoStep": "Nenda kwa {label}",
+    "lockedTitle": "Maliza kila kadi ya mjumbe kwanza",
+    "lockedBody": "Kamilisha rubri ya kikao kwa kila mjumbe aliyeketi hapo juu, kisha urudi hapa ili kuteua nafasi moja kwa wakati mmoja.",
+    "optional": "hiari",
+    "submittedLocked": "Imewasilishwa kwa SMT - uhariri umefungwa.",
+    "topSuggestions": "5 bora kutoka kwa rubri ya kikao",
+    "topSuggestionsHint": "Jumla ya matrix ya juu zaidi katika kamati hii. Chagua moja, au utafute hapa chini.",
+    "noSuggestions": "Bado hakuna wajumbe walioorodheshwa. Alama matrix kwanza, au utafute kwa jina.",
+    "searchLabel": "Tafuta wajumbe",
+    "searchPlaceholder": "Jina au mgao",
+    "searchEmpty": "Hakuna wajumbe wanaolingana na utafutaji huo.",
+    "selectedNominee": "Mteule aliyechaguliwa",
+    "pickNomineeHint": "Chagua mteule kutoka 5 bora au utafute ili kufungua rubriki yao na kumbukumbu.",
+    "rubricHeading": "Rubri ya uteuzi",
+    "rubricTotal": "Jumla ya rubriki: {total}/{max} ({scored}/{criteria} vigezo vilivyopigwa — 1–8 kwa kila kigezo)",
+    "evidenceLabel": "Taarifa ya uthibitisho / ushahidi",
+    "evidencePlaceholder": "Taja ushahidi halisi wa sakafu (vifungu vilivyotayarishwa, maelewano yaliyopitishwa, hatua muhimu). Angalau vibambo {min} — vinahitajika kabla ya SMT kuidhinisha.",
+    "previous": "Iliyotangulia",
+    "skipOptional": "Ruka yanayopangwa kwa hiari",
+    "next": "Inayofuata",
+    "locked": "Imefungwa",
+    "matrixRequired": "Matrix inahitajika kwanza",
+    "saving": "Inahifadhi...",
+    "saveAndNext": "Hifadhi na inayofuata",
+    "save": "Hifadhi",
+    "allSlotsSummary": "Nafasi zote za uteuzi",
+    "statusDone": "Imekamilika",
+    "statusTodo": "Kufanya",
+    "errors": {
+      "selectNominee": "Chagua mteule wa nafasi hii.",
+      "completeRubric": "Chagua bendi kwa kila kigezo kabla ya kuhifadhi.",
+      "evidenceMin": "Ongeza angalau vibambo {min} vya ushahidi."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Kukamilika kwa tuzo kwa ujumla",
+    "completeCount": "{completed}/{total} imekamilika",
+    "requiredLabel": "Maendeleo (inahitajika)",
+    "optionalSlots": "Nafasi za hiari: {completed}/{total} zimejaa"
+  },
+  "chairAwardsSubmit": {
+    "title": "Peana kwa SMT",
+    "intro": "Kuokoa slot huandika rasimu tu; SMT haiioni hadi uwasilishe kundi lililo hapa chini. Nafasi zinazohitajika zinapokamilika, tuma kundi kwa SMT kwa ukaguzi. Uwasilishaji otomatiki pia hutekelezwa baada ya {deadline} (UTC) unapofungua ukurasa huu, au kupitia kazi iliyoratibiwa ikiwa utumaji wako utausanidi.",
+    "requiredSlotsIncomplete": "Nafasi zinazohitajika zimekamilika: {done}/{total} — malizia mengine, kisha uwasilishe ili SMT iweze kukagua.",
+    "requiredSlotsReady": "Nafasi zinazohitajika zimekamilika: {done}/{total} — bechi ya uteuzi iko tayari (hakikisha matrix ya mjumbe hapo juu imekamilika).",
+    "matrixIncomplete": "Toa majukumu (kila mjumbe aliyeketi): {done}/{total} — weka alama kwa kila mjumbe hapo juu kabla ya kuwasilisha.",
+    "matrixComplete": "Matrix ya kukabidhi (kila mjumbe aliyeketi): {done}/{total} — imekamilika.",
+    "alreadySubmitted": "Imewasilishwa kwa SMT{when}. Uhariri umefungwa; wasiliana na SMT ikiwa unahitaji mabadiliko.",
+    "submittedAt": "- {time}",
+    "submitButton": "Peana mapendekezo kwa SMT",
+    "submitting": "Inawasilisha...",
+    "needComplete": "Kamilisha kila nafasi ya uteuzi inayohitajika na matrix ya mjumbe, kisha uwasilishe.",
+    "deadlinePassed": "Tarehe ya mwisho imepitishwa - wasilisha sasa ikiwa bado hujafanya hivyo."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Bado huna kiti cha kamati. Uliza sekretarieti ikugawie matrix ya ugawaji, kisha urudi hapa.",
+    "intro": "Kila kamati ina kanuni za kamati ndani ya kongamano lake (lango la pili baada ya wajumbe kuingiza kanuni za mkutano). Misimbo lazima iwe ya kipekee ndani ya tukio sawa la mkutano.",
+    "testingOverride": "Ubatilishaji wa majaribio umewashwa: unaweza kubadilisha na kudhibiti misimbo ya kamati katika kamati zote bila ukaguzi wa mgao wa viti.",
+    "chairScope": "Kama jukwaa, unaona tu kamati ambapo una kiti. Kuhifadhi hukutuma kwa wasifu wako; wajumbe ambao tayari wamepita kwenye lango la kamati wawe wameingia hadi watoke nje.",
+    "staffAfterSave": "Baada ya kuhifadhi, unaweza kuingiza kamati hiyo au kushiriki msimbo kwenye jukwaa."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Orodha ya nakala (TSV)",
+    "copied": "Jedwali limenakiliwa kwenye ubao wa kunakili.",
+    "helpTitle": "Misimbo ya kuingia ya ugawaji",
+    "helpBody": "Hizi ni misimbo ya mabango ya kila mgao inayotumiwa na wajumbe na viti wakati wa lango la msimbo wa mgao. Misimbo inaweza tu kubadilishwa na msimamizi wa tovuti.",
+    "copyHeader": "Mkutano: {conference}",
+    "copyColumns": "Msimbo wa Mjumbe wa Nchi",
+    "columnCountry": "Nchi / mgao",
+    "columnDelegate": "Mjumbe (mgao)",
+    "columnCode": "Nenosiri / msimbo",
+    "codeFieldHelpTitle": "Nenosiri / sehemu ya msimbo",
+    "codeFieldHelpBody": "Wajumbe huweka msimbo huu kwa mgao wao waliokabidhiwa. Msimamizi wa tovuti pekee ndiye anayeweza kuibadilisha.",
+    "empty": "Bado hakuna mgao wa kongamano hili."
+  },
+  "chairSessionError": {
+    "title": "Sakafu ya kipindi imeshindwa kupakia",
+    "fallback": "Hitilafu isiyotarajiwa imetokea wakati wa kupakia vidhibiti vya kikao cha mwenyekiti.",
+    "reference": "Marejeleo: {digest}",
+    "backToDashboard": "Rudi kwenye dashibodi ya mwenyekiti"
+  },
+  "smtDelegatesPage": {
+    "title": "Wajumbe",
+    "intro": "Tafuta kila mjumbe aliyeunganishwa katika tukio hili kwa jina, mgao, barua pepe au kamati. Fungua kadi kwa picha na wasifu wao.",
+    "selectEventFirst": "Chagua tukio linaloendelea la mkutano kwanza.",
+    "enterConferenceCode": "Weka msimbo wa mkutano",
+    "searchLabel": "Tafuta wajumbe",
+    "searchPlaceholder": "Jina, mgao, barua pepe au kamati",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Bado hakuna wajumbe waliounganishwa katika tukio hili.",
+    "noMatches": "Hakuna wajumbe wanaolingana na utafutaji huo.",
+    "unnamed": "Mjumbe ambaye hajatajwa jina"
   }
 }

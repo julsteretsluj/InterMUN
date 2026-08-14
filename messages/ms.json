@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Muat semula"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "cth. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Subtab",
     "home": "Rumah",
     "library": "Perpustakaan",
-    "mainNavigationAria": "Navigasi utama"
+    "mainNavigationAria": "Navigasi utama",
+    "crisis": "Krisis"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -838,7 +840,9 @@
     "pointsLog": "• Log mata",
     "formalMotions": "usul rasmi",
     "timer": "Pemasa",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "crisis": "Krisis",
+    "smtDelegates": "Perwakilan"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -1333,7 +1337,8 @@
       "roomCode": "Kod bilik",
       "settings": "tetapan",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Laporan"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Acara & sesi",
     "roomCodes": "Kod bilik & kerusi",
     "advisors": "Penasihat",
-    "notes": "Notes",
+    "notes": "Nota",
     "awards": "Anugerah",
     "allocationMatrix": "Matriks peruntukan",
     "allocationPasswords": "Kata laluan peruntukan",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Bilik berita",
+    "pressCorps": "Kor Akhbar",
+    "milestones": "Pencapaian",
     "profile": "Profil",
     "follow": "Ikut",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Pemandu",
+    "delegates": "Perwakilan"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Program & dana",
       "specializedAgencies": "Agensi khusus & berkaitan",
       "peacekeepingMissions": "Pengaman & misi",
-      "foundersMembers": "Pengasas & ahli"
+      "foundersMembers": "Pengasas & ahli",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Pautan Press Corps"
     },
     "links": {
       "ods": "Sistem Dokumen Rasmi PBB (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Misi Politik Khas PBB",
       "memberStates": "Negara Anggota PBB",
       "unSystem": "Sistem PBB (pengasas & ahli)",
-      "history": "Sejarah PBB"
+      "history": "Sejarah PBB",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Laman web persidangan dan portal jawatankuasa",
+      "documentsArticles": "ODS, Perpustakaan Digital, berita, akhbar dan buku tahunan",
+      "legislationTreaties": "Perjanjian, piagam, dan undang-undang antarabangsa",
+      "mainBodies": "GA, Majlis Keselamatan, ECOSOC, ICJ dan banyak lagi",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP dan dana berkaitan",
+      "specializedAgencies": "WHO, UNESCO, Bank Dunia, ILO dan rakan kongsi",
+      "peacekeepingMissions": "Pengaman dan misi politik khas",
+      "foundersMembers": "Negara anggota, sistem PBB, dan sejarah",
+      "pressCorpsLinks": "Tiga meja berita untuk setiap peruntukan Press Corps (dunia, kesihatan dan ciri)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Peringatan",
     "privateReminderLabel": "Peringatan peribadi (kerusi sahaja, disegerakkan)",
     "committeeFallback": "Jawatankuasa",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Pembentukan blok",
       "speechPoisOrPocs": "POI pertuturan atau POC",
       "questions": "Soalan",
-      "informalConversations": "Perbualan tidak formal"
+      "informalConversations": "Perbualan tidak formal",
+      "sessionProgress": "Kemajuan sesi (SMT)"
     },
     "concernLabel": "Kebimbangan (pemegang tempat auto)",
     "concernHelpTitle": "Bendera kebimbangan",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Anda memerlukan peruntukan untuk menghantar nota (atau menjadi kerusi).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Gagal menghantar nota."
-    }
+    },
+    "sendToSmt": "Hantar ke SMT",
+    "sendToSmtHelp": "Mendarat di peti masuk nota urusetia (Dari kerusi). Gunakan ini untuk kemajuan akhir sesi.",
+    "progressPrefill": "Sesi AJK baru sahaja tamat. \n\nKemajuan: \n- \n\nApa-apa perkara yang perlu dibuat susulan oleh SMT: \n-",
+    "progressComposeHint": "Nota ini akan pergi ke SMT. Ringkaskan perkara yang diliputi oleh bilik dan perkara yang perlu diketahui oleh urusetia.",
+    "progressSent": "Nota kemajuan dihantar kepada SMT."
   },
   "adminPage": {
     "title": "Pentadbiran laman web",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Tiada baris data ditemui (memerlukan sekurang-kurangnya negara/kedudukan setiap baris).",
       "importLimitedRows": "Import terhad kepada {max} baris. Pisahkan fail anda.",
       "rowTooLong": "Baris terlalu panjang: {row}…",
-      "codeTooLongOnRow": "Kod terlalu panjang pada baris: {row}"
+      "codeTooLongOnRow": "Kod terlalu panjang pada baris: {row}",
+      "chairSeatsCannotBeDeleted": "Kerusi Ketua dan Pengerusi Bersama kekal pada setiap jawatankuasa."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Pilih acara dengan kod persidangan (pintu acara) dahulu.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Nama kedudukan dan kod pelekat hanya boleh ditukar oleh pentadbir tapak."
   },
   "chairAllocationMatrixPage": {
     "intro": "Matriks peruntukan jawatankuasa untuk sesi semasa anda. Ini adalah baca sahaja untuk kerusi dan menggambarkan tugasan tempat duduk aktif dan kod pelekat.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Peruntukan yang diminta",
       "account": "Akaun",
       "actions": "Tindakan",
-      "score": "Score"
+      "score": "skor",
+      "photo": "Foto",
+      "school": "Sekolah",
+      "party": "Kumpulan politik"
     },
     "noRows": "Tiada baris peruntukan ditemui untuk jawatankuasa ini.",
     "pendingApprovalsTitle": "Menunggu kelulusan pendaftaran",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Matriks peruntukan",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "usul",
+    "pointsTitle": "mata",
+    "resolutionsTitle": "Resolusi",
+    "noMotions": "Tiada usul direkodkan untuk perwakilan ini.",
+    "noPoints": "Tiada mata dicatatkan untuk perwakilan ini.",
+    "noResolutions": "Tiada penglibatan resolusi direkodkan untuk perwakilan ini.",
+    "untitledMotion": "Usul tanpa tajuk",
+    "chairLoggedPoint": "Titik log kerusi",
+    "resolutionLink": "Buka Dokumen Google",
+    "resolutionNoLink": "Tiada pautan dokumen",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Prosedur",
+      "delegate": "Log kerusi"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Penghantar utama",
+      "co": "Penyerah bersama",
+      "signatory": "Penandatangan"
+    },
+    "speechesTitle": "Ucapan",
+    "flagsTitle": "Pujian & kebimbangan",
+    "disciplineTitle": "Amaran & bantahan",
+    "noSpeeches": "Tiada ucapan direkodkan untuk perwakilan ini.",
+    "noFlags": "Tiada pujian atau kebimbangan direkodkan untuk perwakilan ini.",
+    "noDiscipline": "Tiada amaran atau bantahan direkodkan untuk perwakilan ini.",
+    "untitledSpeech": "ucapan",
+    "currentFlag": "semasa",
+    "speechStatuses": {
+      "waiting": "Menunggu",
+      "current": "Bercakap",
+      "done": "Dihantar"
+    },
+    "flagKinds": {
+      "compliment": "Pujian",
+      "concern": "Kebimbangan",
+      "reminder": "Peringatan"
+    },
+    "disciplineActions": {
+      "warning": "Amaran",
+      "strike": "mogok",
+      "revoke_warning": "Amaran dibatalkan",
+      "revoke_strike": "Mogok dibatalkan",
+      "reset": "Tetapkan semula"
+    },
+    "disciplineCounts": "{warnings} amaran · {strikes} mogok"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "jawatankuasa anda",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Bilik panitia (penuh)",
         "hint": "Susun atur maya & lantai perwakilan"
+      },
+      "crisisReport": {
+        "label": "Laporan",
+        "hint": "Pelaporan kejadian"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Nota",
     "noGoogleDocYet": "Tiada Dokumen Google dipautkan lagi. Gunakan Edit untuk menambah URL docs.google.com/document/d/…",
     "chairFeedbackHeading": "Maklum balas kerusi",
-    "noFeedbackYet": "Tiada maklum balas ditambah lagi."
+    "noFeedbackYet": "Tiada maklum balas ditambah lagi.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Hadir — boleh berpantang (gulung)",
       "present_voting": "Hadir dan undian (gulungan)",
       "unknown": "- (gulung)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Pautan, butang & fail",
+      "help": "Tambahkan pautan web, butang atau muat naik PDF/fail. Sesiapa sahaja yang membuka panduan ini boleh menggunakannya.",
+      "kindLink": "Pautan",
+      "kindButton": "Butang",
+      "kindFile": "Fail",
+      "label": "Label",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Tambah",
+      "upload": "Muat naik PDF atau fail",
+      "uploading": "Memuat naik…",
+      "remove": "Alih keluar",
+      "download": "Buka",
+      "empty": "Tiada pautan atau fail lagi.",
+      "errorType": "Gunakan PDF, dokumen Office, teks atau fail imej.",
+      "errorSize": "Fail terlalu besar (maks 15 MB).",
+      "errorUpload": "Tidak dapat memuat naik fail itu.",
+      "markdownHelp": "Dalam nota, anda juga boleh menulis [label](https://url) untuk pautan atau [label](https://url \"butang\") untuk butang. Tampalkan URL fail atau muat naik di atas."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Menyemak status senarai anda...",
       "rollPromptSaving": "Menyimpan...",
       "rollPromptPresent": "Hadir",
-      "rollPromptPresentVoting": "Hadir dan mengundi"
+      "rollPromptPresentVoting": "Hadir dan mengundi",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Prosedur pengundian",
@@ -4241,7 +4382,11 @@
       "timer": "Pemasa",
       "sidebarAnd": "dan",
       "announcements": "Pengumuman",
-      "sidebarUseSuffix": "— satu alat setiap tab."
+      "sidebarUseSuffix": "— satu alat setiap tab.",
+      "smtProgressReminderTitle": "Kemas kini SMT pada sesi ini",
+      "smtProgressReminderBody": "Hantar nota kemajuan pendek supaya urusetia tahu bagaimana jawatankuasa berjalan dan tindakan susulan.",
+      "smtProgressReminderWrite": "Tulis nota",
+      "smtProgressReminderDismiss": "Nanti"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Sesi tamat — kemas kini SMT",
+      "reminderSessionEnd": "{title} dijadualkan tamat pada {start}. Hantar SMT nota kemajuan pendek.",
+      "writeSmtNote": "Tulis nota"
     },
     "history": {
       "title": "Sejarah sesi",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Tiada slot pencalonan untuk jawatankuasa ini lagi.",
+    "stepProgress": "Pencalonan {current} daripada {total}",
+    "requiredProgress": "{done}/{total} slot diperlukan lengkap",
+    "gotoStep": "Pergi ke {label}",
+    "lockedTitle": "Selesaikan setiap kad perwakilan dahulu",
+    "lockedBody": "Lengkapkan rubrik sesi untuk setiap perwakilan yang duduk di atas, kemudian kembali ke sini untuk mencalonkan anugerah satu slot pada satu masa.",
+    "optional": "pilihan",
+    "submittedLocked": "Dihantar kepada SMT — pengeditan dikunci.",
+    "topSuggestions": "5 teratas daripada rubrik sesi",
+    "topSuggestionsHint": "Jumlah matriks tertinggi dalam jawatankuasa ini. Pilih satu, atau cari di bawah.",
+    "noSuggestions": "Tiada perwakilan peringkat lagi. Skor matriks dahulu, atau cari mengikut nama.",
+    "searchLabel": "Cari perwakilan",
+    "searchPlaceholder": "Nama atau peruntukan",
+    "searchEmpty": "Tiada perwakilan yang sepadan dengan carian itu.",
+    "selectedNominee": "Penama terpilih",
+    "pickNomineeHint": "Pilih penama daripada 5 teratas atau cari untuk membuka rubrik dan log mereka.",
+    "rubricHeading": "Rubrik pencalonan",
+    "rubricTotal": "Jumlah rubrik: {total}/{max} ({scored}/{criteria} kriteria dijaringkan — 1–8 setiap kriteria)",
+    "evidenceLabel": "Kenyataan pengesahan / bukti",
+    "evidencePlaceholder": "Petik bukti lantai konkrit (klausa digubal, kompromi diurus, campur tangan utama). Sekurang-kurangnya {min} aksara — diperlukan sebelum SMT boleh meluluskan.",
+    "previous": "Sebelumnya",
+    "skipOptional": "Langkau slot pilihan",
+    "next": "Seterusnya",
+    "locked": "Terkunci",
+    "matrixRequired": "Matriks diperlukan terlebih dahulu",
+    "saving": "Menyimpan…",
+    "saveAndNext": "Simpan & seterusnya",
+    "save": "Jimat",
+    "allSlotsSummary": "Semua slot pencalonan",
+    "statusDone": "Selesai",
+    "statusTodo": "untuk melakukan",
+    "errors": {
+      "selectNominee": "Pilih penama untuk slot ini.",
+      "completeRubric": "Pilih jalur untuk setiap kriteria sebelum menyimpan.",
+      "evidenceMin": "Tambahkan sekurang-kurangnya {min} aksara bukti."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Selesai keseluruhan anugerah",
+    "completeCount": "{completed}/{total} selesai",
+    "requiredLabel": "Kemajuan (diperlukan)",
+    "optionalSlots": "Slot pilihan: {completed}/{total} diisi"
+  },
+  "chairAwardsSubmit": {
+    "title": "Hantar kepada SMT",
+    "intro": "Menyimpan slot hanya menulis draf; SMT tidak melihatnya sehingga anda menyerahkan kumpulan di bawah. Apabila slot yang diperlukan telah lengkap, hantar kumpulan ke SMT untuk semakan. Penyerahan automatik juga dijalankan selepas {deadline} (UTC) apabila anda membuka halaman ini, atau melalui kerja yang dijadualkan jika penempatan anda mengkonfigurasinya.",
+    "requiredSlotsIncomplete": "Slot yang diperlukan lengkap: {done}/{total} — selesaikan selebihnya, kemudian serahkan supaya SMT boleh menyemak.",
+    "requiredSlotsReady": "Slot yang diperlukan lengkap: {done}/{total} — kumpulan pencalonan sedia (pastikan matriks perwakilan di atas telah lengkap).",
+    "matrixIncomplete": "Matriks perwakilan (setiap perwakilan duduk): {done}/{total} — skor setiap perwakilan di atas sebelum menyerahkan.",
+    "matrixComplete": "Matriks perwakilan (setiap perwakilan duduk): {done}/{total} — lengkap.",
+    "alreadySubmitted": "Diserahkan kepada SMT{when}. Penyuntingan dikunci; hubungi SMT jika anda memerlukan perubahan.",
+    "submittedAt": "— {time}",
+    "submitButton": "Serahkan pencalonan kepada SMT",
+    "submitting": "Menyerahkan…",
+    "needComplete": "Lengkapkan setiap slot pencalonan yang diperlukan dan matriks perwakilan, kemudian serahkan.",
+    "deadlinePassed": "Tarikh akhir berlalu — serahkan sekarang jika anda belum berbuat demikian."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Anda belum mempunyai kerusi jawatankuasa. Minta urusetia untuk memberikan anda pada matriks peruntukan, kemudian kembali ke sini.",
+    "intro": "Setiap jawatankuasa mempunyai kod jawatankuasa dalam persidangannya (pintu kedua selepas perwakilan memasukkan kod persidangan). Kod mestilah unik dalam acara persidangan yang sama.",
+    "testingOverride": "Penggantian ujian didayakan: anda boleh menukar dan mengurus kod jawatankuasa merentas jawatankuasa tanpa semakan peruntukan tempat duduk.",
+    "chairScope": "Sebagai pelamin, anda hanya melihat jawatankuasa di mana anda mempunyai kerusi. Menyimpan menghantar anda ke profil anda; perwakilan yang telah melepasi pintu masuk jawatankuasa kekal dilog masuk sehingga mereka log keluar.",
+    "staffAfterSave": "Selepas menyimpan, anda boleh memasuki jawatankuasa itu atau berkongsi kod di pelamin."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Salin senarai (TSV)",
+    "copied": "Menyalin jadual ke papan keratan.",
+    "helpTitle": "Kod log masuk peruntukan",
+    "helpBody": "Ini ialah kod plakat setiap peruntukan yang digunakan oleh perwakilan dan kerusi semasa pintu kod peruntukan. Kod hanya boleh ditukar oleh pentadbir tapak.",
+    "copyHeader": "Persidangan: {conference}",
+    "copyColumns": "Kod Perwakilan Negara",
+    "columnCountry": "Negara / peruntukan",
+    "columnDelegate": "Perwakilan (peruntukan)",
+    "columnCode": "Kata laluan / kod",
+    "codeFieldHelpTitle": "Medan kata laluan / kod",
+    "codeFieldHelpBody": "Perwakilan memasukkan kod ini untuk peruntukan yang diberikan kepada mereka. Hanya pentadbir tapak boleh mengubahnya.",
+    "empty": "Tiada peruntukan untuk persidangan ini lagi."
+  },
+  "chairSessionError": {
+    "title": "Lantai sesi gagal dimuatkan",
+    "fallback": "Ralat yang tidak dijangka berlaku semasa memuatkan kawalan sesi kerusi.",
+    "reference": "Rujukan: {digest}",
+    "backToDashboard": "Kembali ke papan pemuka kerusi"
+  },
+  "smtDelegatesPage": {
+    "title": "Perwakilan",
+    "intro": "Cari setiap perwakilan yang dipautkan dalam acara ini mengikut nama, peruntukan, e-mel atau jawatankuasa. Buka kad untuk foto dan profil mereka.",
+    "selectEventFirst": "Pilih acara persidangan yang aktif dahulu.",
+    "enterConferenceCode": "Masukkan kod persidangan",
+    "searchLabel": "Cari perwakilan",
+    "searchPlaceholder": "Nama, peruntukan, e-mel atau jawatankuasa",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Tiada perwakilan terpaut dalam acara ini lagi.",
+    "noMatches": "Tiada perwakilan yang sepadan dengan carian itu.",
+    "unnamed": "Perwakilan tanpa nama"
   }
 }

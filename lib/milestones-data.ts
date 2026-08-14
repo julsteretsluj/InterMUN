@@ -15,6 +15,7 @@ import {
 } from "@/lib/conference-committee-canonical";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import {
   computeMilestonesForScope,
   type MilestoneCounts,
@@ -375,7 +376,10 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
 
     committees.sort((a, b) => {
       if (a.kind !== b.kind) return a.kind === "council" ? 1 : -1;
-      return a.label.localeCompare(b.label);
+      return compareCommitteeRowsByDifficultyThenLabel(
+        { committee: a.label, name: a.label },
+        { committee: b.label, name: b.label }
+      );
     });
     return { role, self: null, committees };
   }
@@ -419,7 +423,12 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
 
     committees.sort((a, b) => {
       if (a.kind !== b.kind) return a.kind === "council" ? 1 : -1;
-      return a.label.localeCompare(b.label);
+      const aCommittee = metaById.get(a.conferenceId)?.committee ?? a.label;
+      const bCommittee = metaById.get(b.conferenceId)?.committee ?? b.label;
+      return compareCommitteeRowsByDifficultyThenLabel(
+        { committee: aCommittee, name: a.label },
+        { committee: bCommittee, name: b.label }
+      );
     });
 
     return { role, self: null, committees };

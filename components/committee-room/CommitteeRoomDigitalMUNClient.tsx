@@ -23,6 +23,11 @@ import type { RollAttendance } from "@/lib/roll-attendance";
 import { parseRollAttendance } from "@/lib/roll-attendance";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
+import {
+  canRequestOrJoinSpeakerList,
+  fetchDisciplineForAllocation,
+  type DelegateDisciplineFlags,
+} from "@/lib/delegate-discipline";
 
 function StatMiniCard({
   label,
@@ -131,6 +136,7 @@ export function CommitteeRoomDigitalMUNClient({
   const [myRollApprovalLoaded, setMyRollApprovalLoaded] = useState(false);
   const [rollChoicePending, setRollChoicePending] = useState(false);
   const [rollChoiceError, setRollChoiceError] = useState<string | null>(null);
+  const [myDiscipline, setMyDiscipline] = useState<DelegateDisciplineFlags | null>(null);
 
   const delegateFloorUnlocked =
     isDelegate && (myRollAttendance === "present_abstain" || myRollAttendance === "present_voting");
@@ -273,6 +279,40 @@ export function CommitteeRoomDigitalMUNClient({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, isDelegate, myAllocationId]);
+
+  useEffect(() => {
+    if (!isDelegate || !myAllocationId) {
+      setMyDiscipline(null);
+      return;
+    }
+    let active = true;
+    async function loadDiscipline() {
+      try {
+        const row = await fetchDisciplineForAllocation(supabase, floorConferenceId, myAllocationId!);
+        if (active) setMyDiscipline(row);
+      } catch {
+        if (active) setMyDiscipline(null);
+      }
+    }
+    void loadDiscipline();
+    const ch = supabase
+      .channel(`discipline-self-${floorConferenceId}-${myAllocationId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "chair_delegate_discipline",
+          filter: `conference_id=eq.${floorConferenceId}`,
+        },
+        () => void loadDiscipline()
+      )
+      .subscribe();
+    return () => {
+      active = false;
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, floorConferenceId, isDelegate, myAllocationId]);
 
   const votingProcedureActive = procedureState === "voting_procedure";
   const shouldPromptDelegateRollChoice =
@@ -559,7 +599,23 @@ export function CommitteeRoomDigitalMUNClient({
                         conferenceId={floorConferenceId}
                         allocationId={myAllocationId}
                         allocationCountry={myAllocationCountry}
-                        disabled={procedureState === "voting_procedure"}
+                        disabled={
+                          procedureState === "voting_procedure" ||
+                          !canRequestOrJoinSpeakerList(myDiscipline)
+                        }
+                        disabledReason={
+                          myDiscipline?.removed_from_committee
+                            ? trRequestToSpeak(
+                                "removedFromCommittee",
+                                "You were removed from committee and cannot request the floor."
+                              )
+                            : myDiscipline?.speaking_rights_suspended
+                              ? trRequestToSpeak(
+                                  "speakingSuspended",
+                                  "Speaking rights are suspended due to disciplinary strikes."
+                                )
+                              : null
+                        }
                       />
                     </>
                   ) : null}

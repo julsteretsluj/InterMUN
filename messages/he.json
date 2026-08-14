@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "לִטעוֹן מִחָדָשׁ"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "לְמָשָׁל SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "כרטיסיות משנה",
     "home": "בַּיִת",
     "library": "סִפְרִיָה",
-    "mainNavigationAria": "ניווט ראשי"
+    "mainNavigationAria": "ניווט ראשי",
+    "crisis": "מַשׁבֵּר"
   },
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
@@ -838,7 +840,9 @@
     "pointsLog": "• יומן נקודות",
     "formalMotions": "הצעות פורמליות",
     "timer": "שָׁעוֹן עֶצֶר",
-    "smtProfile": "פּרוֹפִיל"
+    "smtProfile": "פּרוֹפִיל",
+    "crisis": "מַשׁבֵּר",
+    "smtDelegates": "נציגים"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -1333,7 +1337,8 @@
       "roomCode": "קוד חדר",
       "settings": "הגדרות",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "דִוּוּחַ"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "אירועים והפעלות",
     "roomCodes": "קודי חדרים וכיסאות",
     "advisors": "יועצים",
-    "notes": "Notes",
+    "notes": "הערות",
     "awards": "פרסים",
     "allocationMatrix": "מטריצת הקצאה",
     "allocationPasswords": "הקצאת סיסמאות",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "חדר חדשות",
+    "pressCorps": "חיל העיתונות",
+    "milestones": "אבני דרך",
     "profile": "פּרוֹפִיל",
     "follow": "לַעֲקוֹב",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "מדריכים",
+    "delegates": "נציגים"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "תוכניות וקרנות",
       "specializedAgencies": "סוכנויות מיוחדות וקשורים",
       "peacekeepingMissions": "שמירת שלום ומשימות",
-      "foundersMembers": "מייסדים וחברים"
+      "foundersMembers": "מייסדים וחברים",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "קישורי חיל העיתונות"
     },
     "links": {
       "ods": "מערכת המסמכים הרשמית של האו\"ם (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "משלחות פוליטיות מיוחדות של האו\"ם",
       "memberStates": "המדינות החברות באו\"ם",
       "unSystem": "מערכת האו\"ם (מייסדים וחברים)",
-      "history": "היסטוריה של האו\"ם"
+      "history": "היסטוריה של האו\"ם",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "אתר הכנס ופורטל הוועדה",
+      "documentsArticles": "ODS, ספרייה דיגיטלית, חדשות, עיתונות ושנתון",
+      "legislationTreaties": "אמנות, אמנה ומשפט בינלאומי",
+      "mainBodies": "GA, מועצת הביטחון, ECOSOC, ICJ ועוד",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP וקרנות קשורות",
+      "specializedAgencies": "WHO, אונסק\"ו, הבנק העולמי, ILO ושותפים",
+      "peacekeepingMissions": "שמירת שלום ומשימות פוליטיות מיוחדות",
+      "foundersMembers": "מדינות חברות, מערכת האו\"ם והיסטוריה",
+      "pressCorpsLinks": "שלושה דסקי חדשות עבור כל הקצאת חיל העיתונות (עולם, בריאות ותכונות)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "תִזכּוֹרֶת",
     "privateReminderLabel": "תזכורת פרטית (כסאות בלבד, מסונכרנת)",
     "committeeFallback": "וַעֲדָה",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "יצירת גוש",
       "speechPoisOrPocs": "דיבור POIs או POCs",
       "questions": "שאלות",
-      "informalConversations": "שיחות לא רשמיות"
+      "informalConversations": "שיחות לא רשמיות",
+      "sessionProgress": "התקדמות הפעלה (SMT)"
     },
     "concernLabel": "דאגה (מציין מיקום אוטומטי)",
     "concernHelpTitle": "דגל דאגה",
@@ -1848,7 +1883,12 @@
       "needAllocation": "אתה צריך הקצאה כדי לשלוח הערות (או להיות כיסא).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "שליחת ההערה נכשלה."
-    }
+    },
+    "sendToSmt": "שלח ל-SMT",
+    "sendToSmtHelp": "נוחת בתיבת הפתקים של המזכירות (מכיסאות). השתמש בזה להתקדמות בסוף הפגישה.",
+    "progressPrefill": "מושב הוועדה הסתיים זה עתה. \n\nהתקדמות: \n- \n\nכל דבר ש-SMT צריך לעקוב אחריו: \n-",
+    "progressComposeHint": "הערה זו תעבור ל-SMT. סכמו מה כיסה החדר ומה המזכירות צריכה לדעת.",
+    "progressSent": "הערת התקדמות נשלחה ל-SMT."
   },
   "adminPage": {
     "title": "ניהול אתר אינטרנט",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "לא נמצאו שורות נתונים (צריך לפחות מדינה/מיקום בכל שורה).",
       "importLimitedRows": "הייבוא ​​מוגבל ל-{max} שורות. פצל את הקובץ שלך.",
       "rowTooLong": "שורה ארוכה מדי: {row}…",
-      "codeTooLongOnRow": "קוד ארוך מדי בשורה: {row}"
+      "codeTooLongOnRow": "קוד ארוך מדי בשורה: {row}",
+      "chairSeatsCannotBeDeleted": "מושבי יו\"ר ראש ויו\"ר משותף נשארים בכל ועדה."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "תחילה בחר אירוע עם קוד הכנס (שער האירוע).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "ניתן לשנות את שמות התפקידים ואת קודי השלטים רק על ידי מנהל האתר."
   },
   "chairAllocationMatrixPage": {
     "intro": "מטריצת הקצאת הוועדות למושב הנוכחי שלך. זה מיועד לקריאה בלבד עבור כיסאות ומשקף הקצאות מושבים אקטיביות וקודי שלטים.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "הקצאה מבוקשת",
       "account": "חֶשְׁבּוֹן",
       "actions": "פעולות",
-      "score": "Score"
+      "score": "צִיוּן",
+      "photo": "תַצלוּם",
+      "school": "בֵּית סֵפֶר",
+      "party": "סיעה"
     },
     "noRows": "לא נמצאו שורות הקצאה לוועדה זו.",
     "pendingApprovalsTitle": "ממתינים לאישורי הרשמה",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "מטריצת הקצאה",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "תנועות",
+    "pointsTitle": "נקודות",
+    "resolutionsTitle": "החלטות",
+    "noMotions": "לא נרשמו הצעות לנציג זה.",
+    "noPoints": "לא נרשמו נקודות עבור הנציג הזה.",
+    "noResolutions": "לא נרשמה מעורבות בהחלטה עבור נציג זה.",
+    "untitledMotion": "תנועה ללא כותרת",
+    "chairLoggedPoint": "נקודה רשום בכיסא",
+    "resolutionLink": "פתח את Google Doc",
+    "resolutionNoLink": "אין קישור למסמך",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "נוֹהָלִי",
+      "delegate": "יומן כיסא"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "מגיש ראשי",
+      "co": "מוסר שותף",
+      "signatory": "חוֹתֵם"
+    },
+    "speechesTitle": "נאומים",
+    "flagsTitle": "מחמאות ודאגות",
+    "disciplineTitle": "אזהרות ושביתות",
+    "noSpeeches": "לא הוקלטו נאומים עבור הנציג הזה.",
+    "noFlags": "לא נרשמו מחמאות או דאגות עבור הנציג הזה.",
+    "noDiscipline": "לא נרשמו אזהרות או התראות עבור הנציג הזה.",
+    "untitledSpeech": "נְאוּם",
+    "currentFlag": "נוֹכְחִי",
+    "speechStatuses": {
+      "waiting": "הַמתָנָה",
+      "current": "מדבר",
+      "done": "נמסר"
+    },
+    "flagKinds": {
+      "compliment": "מַחֲמָאָה",
+      "concern": "דְאָגָה",
+      "reminder": "תִזכּוֹרֶת"
+    },
+    "disciplineActions": {
+      "warning": "אַזהָרָה",
+      "strike": "לְהַכּוֹת",
+      "revoke_warning": "האזהרה בוטלה",
+      "revoke_strike": "השביתה בוטלה",
+      "reset": "אִתחוּל"
+    },
+    "disciplineCounts": "{warnings} אזהרות · {strikes} תקיפות"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "הוועדה שלך",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "חדר ועדות (מלא)",
         "hint": "פריסה וירטואלית וקומת נציגים"
+      },
+      "crisisReport": {
+        "label": "דִוּוּחַ",
+        "hint": "דיווח על תקריות"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "הערות",
     "noGoogleDocYet": "Google Doc לא מקושר עדיין. השתמש ב-Edit כדי להוסיף כתובת URL של docs.google.com/document/d/….",
     "chairFeedbackHeading": "משוב יושב ראש",
-    "noFeedbackYet": "עדיין לא נוספו משוב."
+    "noFeedbackYet": "עדיין לא נוספו משוב.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "הווה - רשאי להימנע (להתגלגל)",
       "present_voting": "נוכח והצביע (רול)",
       "unknown": "- (גלגול)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "קישורים, כפתורים וקבצים",
+      "help": "הוסף קישור אינטרנט, כפתור או העלה קובץ PDF/קובץ. כל מי שפותח את המדריך הזה יכול להשתמש בהם.",
+      "kindLink": "לְקַשֵׁר",
+      "kindButton": "לַחְצָן",
+      "kindFile": "קוֹבֶץ",
+      "label": "מַדבֵּקָה",
+      "urlPlaceholder": "https://… or /page",
+      "add": "לְהוֹסִיף",
+      "upload": "העלה PDF או קובץ",
+      "uploading": "מעלה...",
+      "remove": "לְהַסִיר",
+      "download": "לִפְתוֹחַ",
+      "empty": "עדיין אין קישורים או קבצים.",
+      "errorType": "השתמש בקובץ PDF, מסמך Office, טקסט או תמונה.",
+      "errorSize": "הקובץ גדול מדי (מקסימום 15 MB).",
+      "errorUpload": "לא ניתן להעלות את הקובץ.",
+      "markdownHelp": "בהערות אתה יכול גם לכתוב [label](https://url) עבור קישור, או [label](https://url \"button\") עבור כפתור. הדבק כתובת אתר של קובץ או העלה למעלה."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "בודק את סטטוס הגלישה שלך...",
       "rollPromptSaving": "חִסָכוֹן...",
       "rollPromptPresent": "לְהַצִיג",
-      "rollPromptPresentVoting": "נוכחים ומצביעים"
+      "rollPromptPresentVoting": "נוכחים ומצביעים",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "הליך ההצבעה",
@@ -4241,7 +4382,11 @@
       "timer": "שָׁעוֹן עֶצֶר",
       "sidebarAnd": "ו",
       "announcements": "הכרזות",
-      "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה."
+      "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה.",
+      "smtProgressReminderTitle": "עדכן SMT בהפעלה זו",
+      "smtProgressReminderBody": "שלח הערת התקדמות קצרה כדי שהמזכירות תדע איך התנהלה הוועדה ועל מה לעקוב.",
+      "smtProgressReminderWrite": "כתוב הערה",
+      "smtProgressReminderDismiss": "מְאוּחָר יוֹתֵר"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "הסשן הסתיים - עדכן SMT",
+      "reminderSessionEnd": "{title} היה אמור להסתיים ב{start}. שלח ל-SMT הערת התקדמות קצרה.",
+      "writeSmtNote": "כתוב הערה"
     },
     "history": {
       "title": "היסטוריית הפעלות",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "אין עדיין משבצות מועמדות לוועדה זו.",
+    "stepProgress": "מועמדות {current} מתוך {total}",
+    "requiredProgress": "{done}/{total} המשבצות הנדרשות הושלמו",
+    "gotoStep": "עבור אל {label}",
+    "lockedTitle": "סיים קודם כל כרטיס נציג",
+    "lockedBody": "השלם את רובריקת הפגישה עבור כל נציג יושב למעלה, ואז חזור לכאן כדי למנות פרסים משבצת אחת בכל פעם.",
+    "optional": "אופציונלי",
+    "submittedLocked": "נשלח ל-SMT - העריכה נעולה.",
+    "topSuggestions": "5 המובילים מתוך רובריקת הפגישה",
+    "topSuggestionsHint": "סיכומי המטריצה ​​הגבוהים ביותר בוועדה זו. בחר אחד, או חפש למטה.",
+    "noSuggestions": "עדיין אין צירים מדורגים. נקדו תחילה את המטריצה, או חפשו לפי שם.",
+    "searchLabel": "חפש נציגים",
+    "searchPlaceholder": "שם או הקצאה",
+    "searchEmpty": "אין נציגים שתואמים לחיפוש זה.",
+    "selectedNominee": "מועמד נבחר",
+    "pickNomineeHint": "בחר מועמד מ-5 המובילים או חפש כדי לפתוח את הכותרת והיומן שלו.",
+    "rubricHeading": "רובריקת מועמדות",
+    "rubricTotal": "סך הכל: {total}/{max} (קריטריונים של {scored}/{criteria} - 1–8 לכל קריטריון)",
+    "evidenceLabel": "הצהרת אישור / ראיה",
+    "evidencePlaceholder": "ציטו ראיות לרצפת בטון (סעיפים שנוסחו, תיווכו של פשרות, התערבויות מרכזיות). לפחות {min} תווים - נדרשים לפני ש-SMT יוכל לאשר.",
+    "previous": "קוֹדֵם",
+    "skipOptional": "דלג על משבצת אופציונלית",
+    "next": "הַבָּא",
+    "locked": "נָעוּל",
+    "matrixRequired": "תחילה נדרשת מטריקס",
+    "saving": "חִסָכוֹן…",
+    "saveAndNext": "שמור והבא",
+    "save": "לְהַצִיל",
+    "allSlotsSummary": "כל משבצות המועמדות",
+    "statusDone": "נַעֲשָׂה",
+    "statusTodo": "לעשות",
+    "errors": {
+      "selectNominee": "בחר מועמד למשבצת זו.",
+      "completeRubric": "בחר להקה לכל קריטריון לפני השמירה.",
+      "evidenceMin": "הוסף לפחות {min} תווים של ראיות."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "השלמת הפרסים הכוללת",
+    "completeCount": "{completed}/{total} הושלם",
+    "requiredLabel": "התקדמות (חובה)",
+    "optionalSlots": "משבצות אופציונליות: {completed}/{total} מולאו"
+  },
+  "chairAwardsSubmit": {
+    "title": "שלח ל-SMT",
+    "intro": "שמירת משבצת רק כותבת טיוטה; SMT לא רואה את זה עד שאתה שולח את האצווה למטה. כאשר החריצים הנדרשים הושלמו, שלח את האצווה ל-SMT לבדיקה. הגשה אוטומטית פועלת גם לאחר {deadline} (UTC) כאשר אתה פותח דף זה, או באמצעות עבודה מתוזמנת אם הפריסה שלך מגדירה אותה.",
+    "requiredSlotsIncomplete": "משבצות נדרשות הושלמו: {done}/{total} - סיים את השאר, ואז שלח כדי ש-SMT יוכל לבדוק.",
+    "requiredSlotsReady": "משבצות נדרשות הושלמו: {done}/{total} — אצווה מועמדות מוכנה (ודא שמטריצת הנציגים למעלה הושלמה).",
+    "matrixIncomplete": "מטריצת נציגים (כל נציג יושב): {done}/{total} - ציון כל נציג למעלה לפני ההגשה.",
+    "matrixComplete": "מטריצת נציגים (כל נציג יושב): {done}/{total} - הושלם.",
+    "alreadySubmitted": "הוגש ל-SMT{when}. העריכה נעולה; צור קשר עם SMT אם אתה צריך שינוי.",
+    "submittedAt": "— {time}",
+    "submitButton": "הגש מועמדויות ל-SMT",
+    "submitting": "הַגָשָׁה…",
+    "needComplete": "השלם כל משבצת מועמדות נדרשת ואת מטריצת הנציגים, ולאחר מכן שלח.",
+    "deadlinePassed": "המועד האחרון חלף - שלח עכשיו אם עדיין לא עשית זאת."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "עדיין אין לך מושב בוועדה. בקש מהמזכירות להקצות אותך למטריצת ההקצאה, ואז חזור לכאן.",
+    "intro": "לכל ועדה יש ​​קוד ועדה בתוך הוועידה שלה (שער שני לאחר שהנציגים הזינו את קוד הוועידה). הקודים חייבים להיות ייחודיים באותו אירוע כנס.",
+    "testingOverride": "עקיפה של בדיקות מופעלת: אתה יכול להחליף ולנהל קודי ועדות בוועדות ללא בדיקות הקצאת מושבים.",
+    "chairScope": "כבמה, אתה רואה רק ועדות שבהן יש לך מושב. שמירה שולחת אותך לפרופיל שלך; נציגים שכבר עברו את שער הוועדה נשארים מחוברים עד שהם מתנתקים.",
+    "staffAfterSave": "לאחר השמירה, תוכלו להיכנס לאותה ועדה או לשתף את הקוד על הבמה."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "העתק רשימה (TSV)",
+    "copied": "הועתק טבלה ללוח.",
+    "helpTitle": "קודי כניסה להקצאה",
+    "helpBody": "אלו הם קודי שלט לכל הקצאה המשמשים נציגים וכיסאות במהלך שער קוד ההקצאה. ניתן לשנות קודים רק על ידי מנהל האתר.",
+    "copyHeader": "ועידה: {conference}",
+    "copyColumns": "קוד נציג מדינה",
+    "columnCountry": "מדינה / הקצאה",
+    "columnDelegate": "נציג (הקצאה)",
+    "columnCode": "סיסמא/קוד",
+    "codeFieldHelpTitle": "שדה סיסמה / קוד",
+    "codeFieldHelpBody": "נציגים מזינים קוד זה עבור ההקצאה שהוקצתה להם. רק מנהל אתר יכול לשנות את זה.",
+    "empty": "אין עדיין הקצאות לוועידה זו."
+  },
+  "chairSessionError": {
+    "title": "הטעינה של רצפת הפעילות נכשלה",
+    "fallback": "אירעה שגיאה בלתי צפויה בעת טעינת בקרות ההפעלה של הכיסא.",
+    "reference": "סימוכין: {digest}",
+    "backToDashboard": "חזרה ללוח המחוונים של הכיסא"
+  },
+  "smtDelegatesPage": {
+    "title": "נציגים",
+    "intro": "חפש בכל נציג מקושר באירוע זה לפי שם, הקצאה, דוא\"ל או ועדה. פתחו כרטיס לתמונה ולפרופיל שלהם.",
+    "selectEventFirst": "בחר תחילה אירוע ועידה פעיל.",
+    "enterConferenceCode": "הזן קוד ועידה",
+    "searchLabel": "חפש נציגים",
+    "searchPlaceholder": "שם, הקצאה, אימייל או ועדה",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "אין עדיין נציגים מקושרים באירוע הזה.",
+    "noMatches": "אין נציגים שתואמים לחיפוש זה.",
+    "unnamed": "נציג ללא שם"
   }
 }

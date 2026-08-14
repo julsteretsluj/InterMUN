@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "ပြန်တင်ပါ။"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "ဥပမာ SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "စာတန်းများ",
     "home": "အိမ်",
     "library": "စာကြည့်တိုက်",
-    "mainNavigationAria": "ပင်မလမ်းကြောင်း"
+    "mainNavigationAria": "ပင်မလမ်းကြောင်း",
+    "crisis": "အကျပ်အတည်း"
   },
   "dashboardLayout": {
     "helpCenter": "အကူအညီစင်တာ",
@@ -838,7 +840,9 @@
     "pointsLog": "• အမှတ်စာရင်း",
     "formalMotions": "တရားဝင်လှုပ်ရှားမှုများ",
     "timer": "အချိန်တိုင်း",
-    "smtProfile": "ကိုယ်ရေးအကျဉ်း"
+    "smtProfile": "ကိုယ်ရေးအကျဉ်း",
+    "crisis": "အကျပ်အတည်း",
+    "smtDelegates": "ကိုယ်စားလှယ်တွေ"
   },
   "setupPage": {
     "title": "Supabase ကို စီစဉ်မထားပါ။",
@@ -1333,7 +1337,8 @@
       "roomCode": "အခန်းကုဒ်",
       "settings": "ဆက်တင်များ",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "သတင်းပို့တယ်။"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "ပွဲနှင့် အစည်းအဝေးများ",
     "roomCodes": "အခန်းကုဒ်များနှင့် ကုလားထိုင်များ",
     "advisors": "အကြံပေးများ",
-    "notes": "Notes",
+    "notes": "မှတ်စုများ",
     "awards": "ဆုများ",
     "allocationMatrix": "ခွဲဝေ matrix",
     "allocationPasswords": "စကားဝှက်များခွဲဝေခြင်း။",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "သတင်းခန်း",
+    "pressCorps": "စာနယ်ဇင်းတပ်ဖွဲ့",
+    "milestones": "မှတ်တိုင်များ",
     "profile": "ကိုယ်ရေးအကျဉ်း",
     "follow": "လိုက်နာပါ။",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "လမ်းညွှန်များ",
+    "delegates": "ကိုယ်စားလှယ်တွေ"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "အစီအစဉ်များနှင့် ရန်ပုံငွေများ",
       "specializedAgencies": "အထူးပြုအေဂျင်စီများနှင့် ဆက်စပ်",
       "peacekeepingMissions": "ငြိမ်းချမ်းရေးထိန်းသိမ်းမှုနှင့် တာဝန်များ",
-      "foundersMembers": "တည်ထောင်သူများနှင့် အဖွဲ့ဝင်များ"
+      "foundersMembers": "တည်ထောင်သူများနှင့် အဖွဲ့ဝင်များ",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Corps Links ကိုနှိပ်ပါ။"
     },
     "links": {
       "ods": "ကုလသမဂ္ဂတရားဝင်စာရွက်စာတမ်းစနစ် (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "ကုလသမဂ္ဂ အထူးနိုင်ငံရေး မစ်ရှင်များ",
       "memberStates": "ကုလသမဂ္ဂအဖွဲ့ဝင်နိုင်ငံများ",
       "unSystem": "ကုလသမဂ္ဂစနစ် (တည်ထောင်သူများနှင့် အဖွဲ့ဝင်များ)",
-      "history": "ကုလသမဂ္ဂသမိုင်း"
+      "history": "ကုလသမဂ္ဂသမိုင်း",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "ညီလာခံဝဘ်ဆိုဒ်နှင့် ကော်မတီပေါ်တယ်",
+      "documentsArticles": "ODS၊ ဒစ်ဂျစ်တယ်စာကြည့်တိုက်၊ သတင်း၊ သတင်းစာနှင့် နှစ်ချုပ်စာအုပ်",
+      "legislationTreaties": "စာချုပ်များ၊ ပဋိဉာဉ်များနှင့် နိုင်ငံတကာဥပဒေများ",
+      "mainBodies": "GA၊ လုံခြုံရေးကောင်စီ၊ ECOSOC၊ ICJ နှင့် အခြားအရာများ",
+      "programmesFunds": "UNDP၊ UNICEF၊ UNHCR၊ WFP နှင့် ဆက်စပ်ရန်ပုံငွေများ",
+      "specializedAgencies": "WHO၊ UNESCO၊ World Bank၊ ILO နှင့် မိတ်ဖက်များ",
+      "peacekeepingMissions": "ငြိမ်းချမ်းရေး ထိန်းသိမ်းခြင်းနှင့် အထူးနိုင်ငံရေး မစ်ရှင်များ",
+      "foundersMembers": "အဖွဲ့ဝင်နိုင်ငံများ၊ ကုလသမဂ္ဂစနစ်နှင့် သမိုင်း",
+      "pressCorpsLinks": "Press Corps ခွဲဝေမှုတစ်ခုစီအတွက် သတင်းစားပွဲသုံးခု (ကမ္ဘာ၊ ကျန်းမာရေးနှင့် အင်္ဂါရပ်များ)။"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "သတိပေးချက်",
     "privateReminderLabel": "သီးသန့်သတိပေးချက် (ကုလားထိုင်များသာ၊ ထပ်တူပြုထားသည်)",
     "committeeFallback": "ကော်မတီ",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "အုပ်စုဖွဲ့ခြင်း။",
       "speechPoisOrPocs": "Speech POIs သို့မဟုတ် POCs",
       "questions": "မေးခွန်းများ",
-      "informalConversations": "အလွတ်သဘော ပြောဆိုမှုများ"
+      "informalConversations": "အလွတ်သဘော ပြောဆိုမှုများ",
+      "sessionProgress": "စက်ရှင်တိုးတက်မှု (SMT)"
     },
     "concernLabel": "စိုးရိမ်မှု (အလိုအလျောက် နေရာယူသူ)",
     "concernHelpTitle": "စိုးရိမ်စရာအလံ",
@@ -1848,7 +1883,12 @@
       "needAllocation": "မှတ်စုများပေးပို့ရန် (သို့မဟုတ် ကုလားထိုင်ဖြစ်ရန်) ခွဲဝေပေးရန်လိုအပ်သည်။",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "မှတ်စု ပို့၍မရပါ။"
-    }
+    },
+    "sendToSmt": "SMT သို့ ပို့ပါ။",
+    "sendToSmtHelp": "အတွင်းရေးမှုးရုံးအတွင်းမှ မြေကွက်များ ဝင်စာပုံး (ကုလားထိုင်များမှ)။ အဆုံးပိုင်း တိုးတက်မှုအတွက် ၎င်းကို အသုံးပြုပါ။",
+    "progressPrefill": "ကော်မတီအစည်းအဝေး ပြီးသွားပါပြီ။ \n\nတိုးတက်မှု- \n- \n\nSMT တွင် မည်သည့်အရာမဆို ဆက်လက်လုပ်ဆောင်သင့်သည်- \n-",
+    "progressComposeHint": "ဤမှတ်စုသည် SMT သို့သွားပါမည်။ အခန်းကို ဖုံးအုပ်ထားပြီး အတွင်းရေးမှူးအဖွဲ့ သိသင့်သည်များကို အကျဉ်းချုပ်ဖော်ပြပါ။",
+    "progressSent": "တိုးတက်မှုမှတ်စုကို SMT သို့ ပေးပို့ခဲ့သည်။"
   },
   "adminPage": {
     "title": "ဝဘ်ဆိုဒ်အုပ်ချုပ်ရေး",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "ဒေတာအတန်းများမတွေ့ပါ (တစ်ကြောင်းလျှင် အနည်းဆုံး နိုင်ငံ/နေရာ လိုအပ်သည်)။",
       "importLimitedRows": "တင်သွင်းမှုကို {max} အတန်းအထိ ကန့်သတ်ထားသည်။ သင်၏ဖိုင်ကိုခွဲပါ။",
       "rowTooLong": "အတန်းရှည်လွန်းသည်- {row}…",
-      "codeTooLongOnRow": "အတန်းပေါ်တွင် ကုဒ်ရှည်လွန်းသည်- {row}"
+      "codeTooLongOnRow": "အတန်းပေါ်တွင် ကုဒ်ရှည်လွန်းသည်- {row}",
+      "chairSeatsCannotBeDeleted": "ဦးခေါင်းသဘာပတိနှင့် ပူးတွဲသဘာပတိထိုင်ခုံများသည် ကော်မတီတိုင်းတွင် ရှိနေသည်။"
     },
     "smtStaffAccess": {
       "chooseEventFirst": "ညီလာခံကုဒ် (ဖြစ်ရပ်ဂိတ်) ကို ဦးစွာရွေးချယ်ပါ။",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "ရာထူးအမည်များနှင့် စာတန်းကုဒ်များကို ဆိုက်စီမံခန့်ခွဲသူမှသာလျှင် ပြောင်းလဲနိုင်သည်။"
   },
   "chairAllocationMatrixPage": {
     "intro": "သင်၏လက်ရှိအစည်းအဝေးအတွက် ကော်မတီခွဲဝေသတ်မှတ်မှုမက်ထရစ်။ ၎င်းသည် ထိုင်ခုံများအတွက်သာ ဖတ်ရန်ဖြစ်ပြီး တက်ကြွသောထိုင်ခုံတာဝန်များနှင့် စာတန်းကုဒ်များကို ထင်ဟပ်စေသည်။",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "ခွဲဝေပေးရန် တောင်းဆိုခဲ့သည်။",
       "account": "အကောင့်",
       "actions": "လုပ်ဆောင်ချက်များ",
-      "score": "Score"
+      "score": "နိုင်ပြီ",
+      "photo": "ဓာတ်ပုံ",
+      "school": "ကျောင်း",
+      "party": "နိုင်ငံရေးအုပ်စု"
     },
     "noRows": "ဤကော်မတီအတွက် ခွဲဝေပေးသည့်အတန်းများ မတွေ့ပါ။",
     "pendingApprovalsTitle": "ဆိုင်းငံ့ထားသော စာရင်းသွင်းအတည်ပြုချက်များ",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "ခွဲဝေ matrix",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "လှုပ်ရှားမှုများ",
+    "pointsTitle": "အမှတ်များ",
+    "resolutionsTitle": "ဆုံးဖြတ်ချက်များ",
+    "noMotions": "ဤကိုယ်စားလှယ်အတွက် လှုပ်ရှားမှုများကို မှတ်တမ်းတင်ထားခြင်းမရှိပါ။",
+    "noPoints": "ဤကိုယ်စားလှယ်အတွက် မှတ်မှတ်မထားပါ။",
+    "noResolutions": "ဤကိုယ်စားလှယ်အတွက် ဆုံးဖြတ်ချက်တွင် ပါဝင်ပတ်သက်မှု မှတ်တမ်းမရှိပါ။",
+    "untitledMotion": "ခေါင်းစဉ်မဲ့ လှုပ်ရှားမှု",
+    "chairLoggedPoint": "သဘာပတိ-အချက်",
+    "resolutionLink": "Google Doc ကိုဖွင့်ပါ။",
+    "resolutionNoLink": "စာရွက်စာတမ်းလင့်ခ်မရှိပါ။",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "လုပ်ထုံးလုပ်နည်း",
+      "delegate": "ထိုင်ခုံမှတ်တမ်း"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "အဓိကတင်ပြသူ",
+      "co": "ပူးတွဲတင်ပြသူ",
+      "signatory": "လက်မှတ်ရေးထိုးသည်။"
+    },
+    "speechesTitle": "မိန့်ခွန်းများ",
+    "flagsTitle": "ချီးကျူးမှုများနှင့် စိုးရိမ်မှုများ",
+    "disciplineTitle": "သတိပေးချက်များနှင့် သတိပေးချက်များ",
+    "noSpeeches": "ဤကိုယ်စားလှယ်အတွက် မိန့်ခွန်းများကို မှတ်တမ်းတင်ထားခြင်းမရှိပါ။",
+    "noFlags": "ဤကိုယ်စားလှယ်အတွက် ချီးကျူးစကား သို့မဟုတ် စိုးရိမ်ပူပန်မှုများကို မှတ်တမ်းတင်ထားခြင်းမရှိပါ။",
+    "noDiscipline": "ဤကိုယ်စားလှယ်အတွက် သတိပေးချက်များ သို့မဟုတ် သတိပေးချက်များ မှတ်တမ်းတင်ထားခြင်းမရှိပါ။",
+    "untitledSpeech": "အပြောအဆို",
+    "currentFlag": "လက်ရှိ",
+    "speechStatuses": {
+      "waiting": "စောင့်နေသည်။",
+      "current": "ပြောရမယ်ဆိုရင်",
+      "done": "ပေးပို့ခဲ့သည်။"
+    },
+    "flagKinds": {
+      "compliment": "ချီးကျူးပါတယ်။",
+      "concern": "စိုးရိမ်စရာ",
+      "reminder": "သတိပေးချက်"
+    },
+    "disciplineActions": {
+      "warning": "သတိပေးချက်",
+      "strike": "သပိတ်",
+      "revoke_warning": "သတိပေးချက် ရုပ်သိမ်းလိုက်ပါပြီ။",
+      "revoke_strike": "သပိတ်ကို ရုပ်သိမ်းလိုက်သည်။",
+      "reset": "ပြန်လည်သတ်မှတ်ပါ။"
+    },
+    "disciplineCounts": "{warnings} သတိပေးချက် · {strikes} သပိတ်မှောက်ခြင်း(များ)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "မင်းရဲ့ကော်မတီ",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "ကော်မတီအခန်း (အပြည့်)၊",
         "hint": "အသွင်အပြင်နှင့် ကိုယ်စားလှယ်ထပ်"
+      },
+      "crisisReport": {
+        "label": "သတင်းပို့တယ်။",
+        "hint": "အဖြစ်အပျက်သတင်းပေးပို့ခြင်း။"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "မှတ်စုများ",
     "noGoogleDocYet": "Google Doc လင့်ခ်မရသေးပါ။ docs.google.com/document/d/… URL တစ်ခုထည့်ရန် တည်းဖြတ်ခြင်းကို အသုံးပြုပါ။",
     "chairFeedbackHeading": "သဘာပတိ တုံ့ပြန်ချက်",
-    "noFeedbackYet": "တုံ့ပြန်ချက် မထည့်ရသေးပါ။"
+    "noFeedbackYet": "တုံ့ပြန်ချက် မထည့်ရသေးပါ။",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "ပစ္စုပ္ပန်- ကြဉ်ရှောင်ခြင်း (လိပ်)၊",
       "present_voting": "ပစ္စုပ္ပန်နှင့် မဲပေးခြင်း (အလိပ်)",
       "unknown": "— (လိပ်)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "လင့်ခ်များ၊ ခလုတ်များနှင့် ဖိုင်များ",
+      "help": "ဝဘ်လင့်ခ်တစ်ခု၊ ခလုတ်တစ်ခု ထည့်ပါ သို့မဟုတ် PDF/ဖိုင်ကို အပ်လုဒ်လုပ်ပါ။ ဤလမ်းညွှန်ချက်ကိုဖွင့်သူတိုင်း ၎င်းတို့ကို အသုံးပြုနိုင်ပါသည်။",
+      "kindLink": "လင့်",
+      "kindButton": "ခလုတ်",
+      "kindFile": "ဖို",
+      "label": "တံဆိပ်",
+      "urlPlaceholder": "https://… or /page",
+      "add": "ထည့်ပါ။",
+      "upload": "PDF သို့မဟုတ် ဖိုင်ကို တင်ပါ။",
+      "uploading": "အပ်လုဒ်လုပ်နေသည်...",
+      "remove": "ဖယ်ရှားပါ။",
+      "download": "ဖွင့်သည်။",
+      "empty": "လင့်ခ်များ သို့မဟုတ် ဖိုင်များ မရှိသေးပါ။",
+      "errorType": "PDF၊ Office စာရွက်စာတမ်း၊ စာသား သို့မဟုတ် ရုပ်ပုံဖိုင်ကို အသုံးပြုပါ။",
+      "errorSize": "ဖိုင်သည် ကြီးလွန်းသည် (အများဆုံး 15 MB)။",
+      "errorUpload": "ထိုဖိုင်ကို အပ်လုဒ်လုပ်၍မရပါ။",
+      "markdownHelp": "မှတ်စုများတွင် လင့်ခ်တစ်ခုအတွက် [label](https://url) သို့မဟုတ် ခလုတ်တစ်ခုအတွက် [label](https://url \"button\") ကိုလည်း ရေးသားနိုင်သည်။ ဖိုင် URL ကို ကူးထည့်ပါ သို့မဟုတ် အပေါ်မှ အပ်လုဒ်လုပ်ပါ။"
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "သင့်လိပ်မှုအခြေအနေကို စစ်ဆေးနေသည်...",
       "rollPromptSaving": "သိမ်းဆည်းနေသည်...",
       "rollPromptPresent": "ပစ္စုပ္ပန်",
-      "rollPromptPresentVoting": "တင်ပြခြင်းနှင့် မဲပေးခြင်း။"
+      "rollPromptPresentVoting": "တင်ပြခြင်းနှင့် မဲပေးခြင်း။",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "မဲပေးခြင်းလုပ်ငန်းစဉ်",
@@ -4241,7 +4382,11 @@
       "timer": "အချိန်တိုင်း",
       "sidebarAnd": "နှင့်",
       "announcements": "ကြေငြာချက်များ",
-      "sidebarUseSuffix": "- တက်ဘ်တစ်ခုလျှင် ကိရိယာတစ်ခု။"
+      "sidebarUseSuffix": "- တက်ဘ်တစ်ခုလျှင် ကိရိယာတစ်ခု။",
+      "smtProgressReminderTitle": "ဤစက်ရှင်တွင် SMT ကို အပ်ဒိတ်လုပ်ပါ။",
+      "smtProgressReminderBody": "ကော်မတီသည် မည်သို့ဆောင်ရွက်သွားသည်ကို သိရှိစေရန်အတွက် တိုးတက်မှုမှတ်စုတိုကို ပေးပို့ပါ။",
+      "smtProgressReminderWrite": "မှတ်စုရေးပါ။",
+      "smtProgressReminderDismiss": "နောက်တော့"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "စက်ရှင်ပြီးဆုံးပါပြီ — SMT ကို အပ်ဒိတ်လုပ်ပါ။",
+      "reminderSessionEnd": "{title} ကို {start} တွင် အဆုံးသတ်ရန် စီစဉ်ထားပါသည်။ တိုးတက်မှုမှတ်စုတိုကို SMT ပို့ပါ။",
+      "writeSmtNote": "မှတ်စုရေးပါ။"
     },
     "history": {
       "title": "ဆက်ရှင်မှတ်တမ်း",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "ဤကော်မတီအတွက် အမည်စာရင်းတင်သွင်းရန် နေရာများ မရှိသေးပါ။",
+    "stepProgress": "အမည်စာရင်းတင်သွင်းခြင်း {current} {total}",
+    "requiredProgress": "{done}/{total} လိုအပ်သော အပေါက်များ ပြီးပါပြီ။",
+    "gotoStep": "{label} သို့ သွားပါ",
+    "lockedTitle": "ကိုယ်စားလှယ်ကတ်တိုင်းကို ဦးစွာ အပြီးသတ်ပါ။",
+    "lockedBody": "အထက်တွင်ထိုင်သည့် ကိုယ်စားလှယ်တိုင်းအတွက် စက်ရှင်စည်းမျဉ်းကို ဖြည့်သွင်းပြီး တစ်ကြိမ်လျှင် ဆုများအမည်စာရင်းတင်သွင်းရန် ဤနေရာကို ပြန်လာပါ။",
+    "optional": "ရွေးချယ်ခွင့်",
+    "submittedLocked": "SMT သို့ တင်သွင်းခဲ့သည် — တည်းဖြတ်ခြင်းကို လော့ခ်ချထားသည်။",
+    "topSuggestions": "စက်ရှင် စည်းမျဉ်းမှ ထိပ်ဆုံး ၅ ခု",
+    "topSuggestionsHint": "ဤကော်မတီရှိ အမြင့်ဆုံးမက်ထရစ်စုစုပေါင်း။ တစ်ခုကို ရွေးပါ၊ သို့မဟုတ် အောက်တွင် ရှာဖွေပါ။",
+    "noSuggestions": "အဆင့်သတ်မှတ်ပေးမယ့် ကိုယ်စားလှယ်တွေ မရှိသေးပါဘူး။ မက်ထရစ်ကို ဦးစွာအမှတ်ပါ သို့မဟုတ် အမည်ဖြင့် ရှာဖွေပါ။",
+    "searchLabel": "ကိုယ်စားလှယ်များကို ရှာဖွေပါ။",
+    "searchPlaceholder": "အမည် သို့မဟုတ် ခွဲဝေပေးခြင်း",
+    "searchEmpty": "ထိုရှာဖွေမှုနှင့် ကိုက်ညီသော ကိုယ်စားလှယ် မရှိပါ။",
+    "selectedNominee": "ဆန်ခါတင် ရွေးချယ်ခံရသူ",
+    "pickNomineeHint": "ထိပ်တန်း 5 မှ ဆန်ခါတင်တစ်ဦးကို ရွေးချယ်ပါ သို့မဟုတ် ၎င်းတို့၏ ရူဘယ်နှင့် မှတ်တမ်းကိုဖွင့်ရန် ရှာဖွေပါ။",
+    "rubricHeading": "အခုလည်း Nomination ပေါ့။",
+    "rubricTotal": "ရူဘယ်စုစုပေါင်း- {total}/{max} ({scored}/{criteria} စံနှုန်းများ — သတ်မှတ်ချက်တစ်ခုလျှင် 1–8)",
+    "evidenceLabel": "အတည်ပြုချက်/အထောက်အထားများ ထုတ်ပြန်ချက်",
+    "evidencePlaceholder": "ကွန်ကရစ်ကြမ်းပြင် အထောက်အထားများ (ရေးဆွဲထားသော အပိုဒ်များ၊ အပေးအယူ အပေးအယူများ၊ အဓိက ဝင်ရောက်စွက်ဖက်မှုများ) ကို ကိုးကားပါ။ SMT အတည်မပြုမီ အနည်းဆုံး {min} စာလုံးများ လိုအပ်သည်။",
+    "previous": "အရင်",
+    "skipOptional": "ရွေးချယ်နိုင်သော အထိုင်ကို ကျော်ပါ။",
+    "next": "နောက်တစ်ခု",
+    "locked": "သော့ခတ်ထားသည်။",
+    "matrixRequired": "Matrix ကို အရင်လိုအပ်ပါတယ်။",
+    "saving": "သိမ်းဆည်းနေသည်...",
+    "saveAndNext": "သိမ်း & နောက်",
+    "save": "သိမ်းဆည်းပါ။",
+    "allSlotsSummary": "အမည်စာရင်းတင်သွင်းသည့်နေရာများအားလုံး",
+    "statusDone": "ပြီးပြီ။",
+    "statusTodo": "လုပ်ဖို့",
+    "errors": {
+      "selectNominee": "ဤအထိုင်အတွက် ဆန်ခါတင်တစ်ဦးကို ရွေးချယ်ပါ။",
+      "completeRubric": "မသိမ်းဆည်းမီ စံသတ်မှတ်ချက်တိုင်းအတွက် တီးဝိုင်းတစ်ခုကို ရွေးပါ။",
+      "evidenceMin": "အထောက်အထားများ၏ အနည်းဆုံး {min} စာလုံးများ ထည့်ပါ။"
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "စုစုပေါင်းဆုများ ပြီးမြောက်ခြင်း။",
+    "completeCount": "{completed}/{total} ပြီးပါပြီ။",
+    "requiredLabel": "တိုးတက်မှု (လိုအပ်သည်)",
+    "optionalSlots": "ရွေးချယ်နိုင်သော အပေါက်များ- {completed}/{total} ဖြည့်ထားသည်။"
+  },
+  "chairAwardsSubmit": {
+    "title": "SMT သို့ တင်ပြပါ။",
+    "intro": "အထိုင်တစ်ခုကို သိမ်းဆည်းခြင်းသည် မူကြမ်းတစ်ခုသာ ရေးသည်။ အောက်ပါအသုတ်ကို သင်မတင်ပြမချင်း SMT သည် ၎င်းကို မမြင်ပါ။ လိုအပ်သော slot များ ပြီးပါက၊ ပြန်လည်သုံးသပ်ရန်အတွက် SMT သို့ batch ကို ပေးပို့ပါ။ ဤစာမျက်နှာကိုဖွင့်သောအခါ၊ သို့မဟုတ် သင်၏အသုံးချမှုသည် ၎င်းကိုစီစဉ်သတ်မှတ်ထားလျှင် အစီအစဉ်ဆွဲထားသည့်အလုပ်မှတစ်ဆင့် {deadline} (UTC) ပြီးနောက်တွင် အလိုအလျောက်တင်ပြမှုသည်လည်း လုပ်ဆောင်ပါသည်။",
+    "requiredSlotsIncomplete": "လိုအပ်သော slot များ ပြီးမြောက်သည်- {done}/{total} — ကျန်တာကို အပြီးသတ်ပါ၊ ထို့နောက် SMT ပြန်လည်သုံးသပ်နိုင်စေရန် တင်ပြပါ။",
+    "requiredSlotsReady": "လိုအပ်သော slot များ ပြီးမြောက်သည်- {done}/{total} — အမည်စာရင်းတင်သွင်းသည့်အသုတ် အဆင်သင့်ဖြစ်ပါပြီ (အထက်ပါ ကိုယ်စားလှယ်မက်ထရစ်သည် ပြီးပြည့်စုံကြောင်း သေချာပါစေ)။",
+    "matrixIncomplete": "ကိုယ်စားလှယ် matrix (ထိုင်ခုံကိုယ်စားလှယ်တိုင်း)- {done}/{total} — မတင်ပြမီ အထက်ဖော်ပြပါ ကိုယ်စားလှယ်တစ်ဦးစီကို အမှတ်ပေးပါ။",
+    "matrixComplete": "ကိုယ်စားလှယ် matrix (ထိုင်ခုံကိုယ်စားလှယ်တိုင်း): {done}/{total} — ပြီးပါပြီ။",
+    "alreadySubmitted": "SMT{when}သို့ တင်ပြခဲ့သည်။ တည်းဖြတ်ခြင်းကို သော့ခတ်ထားသည်။ အပြောင်းအလဲ လိုအပ်ပါက SMT သို့ ဆက်သွယ်ပါ။",
+    "submittedAt": "—{time}",
+    "submitButton": "SMT သို့ အမည်စာရင်းတင်သွင်းပါ။",
+    "submitting": "တင်သွင်းနေသည်...",
+    "needComplete": "လိုအပ်သော အမည်စာရင်းတင်သွင်းသည့်နေရာတိုင်းနှင့် ကိုယ်စားလှယ်မက်ထရစ်ကို ဖြည့်သွင်းပြီး တင်သွင်းပါ။",
+    "deadlinePassed": "Deadline ကျော်သွားပါပြီ — မရသေးပါက ယခုတင်ပါ။"
+  },
+  "chairRoomCodePage": {
+    "noSeat": "မင်းမှာ ကော်မတီထိုင်ခုံ မရှိသေးဘူး။ ခွဲဝေသတ်မှတ်မှုမက်ထရစ်တွင် သင့်အား တာဝန်ပေးရန်အတွက် အတွင်းရေးမှူးအဖွဲ့ကို တောင်းဆိုပါ၊ ထို့နောက် ဤနေရာတွင် ပြန်လာပါ။",
+    "intro": "ကော်မတီတစ်ခုစီတွင် ၎င်း၏ ကွန်ဖရင့်အတွင်း ကော်မတီကုဒ်တစ်ခု ရှိသည် (ကိုယ်စားလှယ်များက ညီလာခံကုဒ်ကို ထည့်ပြီးနောက် ဒုတိယတံခါး)။ ကုဒ်များသည် တူညီသော ကွန်ဖရင့်ပွဲအတွင်း ထူးခြားရပါမည်။",
+    "testingOverride": "စမ်းသပ်ခြင်း override ဖွင့်ထားသည်- ထိုင်ခုံခွဲဝေမှုစစ်ဆေးမှုများမပါဘဲ ကော်မတီများတစ်လျှောက် ကော်မတီကုဒ်များကို သင်ပြောင်းပြီး စီမံခန့်ခွဲနိုင်သည်။",
+    "chairScope": "Dais အနေဖြင့် သင့်တွင် ထိုင်ခုံရှိသည့် ကော်မတီများကိုသာ သင်မြင်ရသည်။ သိမ်းဆည်းခြင်းသည် သင့်ပရိုဖိုင်သို့ ပို့ပေးသည်။ ကော်မတီဂိတ်ကို ကျော်ဖြတ်ပြီးသော ကိုယ်စားလှယ်များသည် ၎င်းတို့ ထွက်ခွာချိန်အထိ ဝင်ရောက်နေမည်ဖြစ်သည်။",
+    "staffAfterSave": "သိမ်းဆည်းပြီးနောက်၊ သင်သည် ထိုကော်မတီကိုဝင်နိုင်သည် သို့မဟုတ် Dais တွင် ကုဒ်ကိုမျှဝေနိုင်သည်။"
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "စာရင်းကူးယူခြင်း (TSV)",
+    "copied": "ဇယားကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
+    "helpTitle": "ခွဲဝေခြင်း ဆိုင်းအင်ကုဒ်များ",
+    "helpBody": "ဤအရာများသည် ခွဲဝေသတ်မှတ်ရေး-ကုဒ်ဂိတ်အတွင်း ကိုယ်စားလှယ်များနှင့် ကုလားထိုင်များအသုံးပြုသော ခွဲဝေသတ်မှတ်ရေး ကတ်ကုဒ်များဖြစ်သည်။ ကုဒ်များကို ဆိုက်စီမံခန့်ခွဲသူမှသာ ပြောင်းလဲနိုင်သည်။",
+    "copyHeader": "ညီလာခံ- {conference}",
+    "copyColumns": "နိုင်ငံကိုယ်စားလှယ်ကုဒ်",
+    "columnCountry": "နိုင်ငံ/ ခွဲဝေမှု",
+    "columnDelegate": "ကိုယ်စားလှယ် (ခွဲဝေပေးခြင်း)၊",
+    "columnCode": "စကားဝှက်/ကုဒ်",
+    "codeFieldHelpTitle": "စကားဝှက်/ကုဒ် အကွက်",
+    "codeFieldHelpBody": "ကိုယ်စားလှယ်များသည် ၎င်းတို့၏ တာဝန်ခွဲဝေမှုအတွက် ဤကုဒ်ကို ထည့်သွင်းပါ။ ဝဘ်ဆိုက်စီမံခန့်ခွဲသူတစ်ဦးကသာ ၎င်းကို ပြောင်းလဲနိုင်သည်။",
+    "empty": "ဒီညီလာခံအတွက် ခွဲဝေပေးတာမျိုး မရှိသေးပါဘူး။"
+  },
+  "chairSessionError": {
+    "title": "စက်ရှင်ကြမ်းပြင်ကို တင်၍မရပါ။",
+    "fallback": "ထိုင်ခုံစက်ရှင် ထိန်းချုပ်မှုများကို တင်နေစဉ် မမျှော်လင့်ထားသော အမှားတစ်ခု ဖြစ်ပေါ်ခဲ့သည်။",
+    "reference": "ကိုးကား- {digest}",
+    "backToDashboard": "ထိုင်ခုံ ဒက်ရှ်ဘုတ်သို့ ပြန်သွားရန်"
+  },
+  "smtDelegatesPage": {
+    "title": "ကိုယ်စားလှယ်တွေ",
+    "intro": "အမည်၊ ခွဲဝေမှု၊ အီးမေးလ် သို့မဟုတ် ကော်မတီဖြင့် ဤအစီအစဉ်ရှိ လင့်ခ်ချိတ်ထားသော ကိုယ်စားလှယ်တိုင်းကို ရှာဖွေပါ။ ၎င်းတို့၏ဓာတ်ပုံနှင့် ပရိုဖိုင်အတွက် ကတ်တစ်ခုဖွင့်ပါ။",
+    "selectEventFirst": "အသက်ဝင်သော ကွန်ဖရင့်ပွဲကို ဦးစွာရွေးချယ်ပါ။",
+    "enterConferenceCode": "ညီလာခံကုဒ်ကို ထည့်ပါ။",
+    "searchLabel": "ကိုယ်စားလှယ်များကို ရှာဖွေပါ။",
+    "searchPlaceholder": "အမည်၊ ခွဲဝေမှု၊ အီးမေးလ် သို့မဟုတ် ကော်မတီ",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "ဤအစီအစဉ်တွင် ချိတ်ဆက်ထားသော ကိုယ်စားလှယ်များ မရှိသေးပါ။",
+    "noMatches": "ထိုရှာဖွေမှုနှင့် ကိုက်ညီသော ကိုယ်စားလှယ် မရှိပါ။",
+    "unnamed": "အမည်မဖော်လိုသူ ကိုယ်စားလှယ်"
   }
 }

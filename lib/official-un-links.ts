@@ -1,23 +1,65 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-/** Curated official UN & system links — labels resolved via next-intl (`officialLinks.groups.*`, `officialLinks.links.*`). */
+/**
+ * Curated official links by category.
+ * Labels resolve via next-intl (`officialLinks.groups.*`, `officialLinks.categoryHints.*`,
+ * `officialLinks.links.*`, optional `officialLinks.linkDescriptions.*`).
+ *
+ * SEAMUN main site + role-aware committee portals come from `lib/seamun-conference-links`.
+ */
 
-export type OfficialLinkGroupDef = {
-  groupKey:
-    | "documentsArticles"
-    | "legislationTreaties"
-    | "mainBodies"
-    | "programmesFunds"
-    | "specializedAgencies"
-    | "peacekeepingMissions"
-    | "foundersMembers";
-  links: { linkKey: string; href: string }[];
+import { SEAMUN_SITE_URL } from "@/lib/seamun-conference-links";
+import { pressCorpsOfficialLinks } from "@/lib/press-corps-official-links";
+
+export type OfficialLinkDef = {
+  linkKey: string;
+  href: string;
+  /** Optional i18n key under `officialLinks.linkDescriptions.*`. */
+  descriptionKey?: string;
+  /** Literal title (skips `officialLinks.links.*`). */
+  title?: string;
+  /** Group heading on the category library (e.g. Press Corps outlet). */
+  group?: string;
 };
 
-export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
+export type OfficialLinkCategoryDef = {
+  /** URL slug under `/official-links/[category]`. */
+  id: string;
+  /** i18n key under `officialLinks.groups.*`. */
+  labelKey: string;
+  /** i18n key under `officialLinks.categoryHints.*`. */
+  hintKey: string;
+  emoji?: string;
+  links: OfficialLinkDef[];
+};
+
+export const OFFICIAL_LINK_CATEGORIES: OfficialLinkCategoryDef[] = [
   {
-    groupKey: "documentsArticles",
+    id: "seamun",
+    labelKey: "seamun",
+    hintKey: "seamun",
+    emoji: "🌏",
+    links: [
+      {
+        linkKey: "seamunWebsite",
+        href: SEAMUN_SITE_URL,
+        descriptionKey: "seamunWebsite",
+      },
+    ],
+  },
+  {
+    id: "press-corps-links",
+    labelKey: "pressCorpsLinks",
+    hintKey: "pressCorpsLinks",
+    emoji: "📰",
+    links: pressCorpsOfficialLinks(),
+  },
+  {
+    id: "documents-articles",
+    labelKey: "documentsArticles",
+    hintKey: "documentsArticles",
+    emoji: "📄",
     links: [
       { linkKey: "ods", href: "https://documents.un.org/" },
       { linkKey: "digitalLibrary", href: "https://digitallibrary.un.org/" },
@@ -27,7 +69,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "legislationTreaties",
+    id: "legislation-treaties",
+    labelKey: "legislationTreaties",
+    hintKey: "legislationTreaties",
+    emoji: "⚖️",
     links: [
       { linkKey: "treatyCollection", href: "https://treaties.un.org/" },
       { linkKey: "avl", href: "https://legal.un.org/avl/" },
@@ -36,7 +81,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "mainBodies",
+    id: "main-bodies",
+    labelKey: "mainBodies",
+    hintKey: "mainBodies",
+    emoji: "🏛️",
     links: [
       { linkKey: "ga", href: "https://www.un.org/ga/" },
       { linkKey: "sc", href: "https://www.un.org/securitycouncil/" },
@@ -47,7 +95,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "programmesFunds",
+    id: "programmes-funds",
+    labelKey: "programmesFunds",
+    hintKey: "programmesFunds",
+    emoji: "🌐",
     links: [
       { linkKey: "undp", href: "https://www.undp.org/" },
       { linkKey: "unicef", href: "https://www.unicef.org/" },
@@ -60,7 +111,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "specializedAgencies",
+    id: "specialized-agencies",
+    labelKey: "specializedAgencies",
+    hintKey: "specializedAgencies",
+    emoji: "🏢",
     links: [
       { linkKey: "who", href: "https://www.who.int/" },
       { linkKey: "unesco", href: "https://www.unesco.org/" },
@@ -75,7 +129,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "peacekeepingMissions",
+    id: "peacekeeping-missions",
+    labelKey: "peacekeepingMissions",
+    hintKey: "peacekeepingMissions",
+    emoji: "🕊️",
     links: [
       { linkKey: "peacekeeping", href: "https://peacekeeping.un.org/" },
       { linkKey: "peacekeepingCurrent", href: "https://peacekeeping.un.org/en/missions" },
@@ -83,7 +140,10 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
   {
-    groupKey: "foundersMembers",
+    id: "founders-members",
+    labelKey: "foundersMembers",
+    hintKey: "foundersMembers",
+    emoji: "🗺️",
     links: [
       { linkKey: "memberStates", href: "https://www.un.org/en/about-us/member-states" },
       { linkKey: "unSystem", href: "https://www.un.org/en/about-us/un-system" },
@@ -91,3 +151,64 @@ export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
     ],
   },
 ];
+
+/** @deprecated Prefer `OFFICIAL_LINK_CATEGORIES`. Kept for any lingering imports. */
+export type OfficialLinkGroupDef = {
+  groupKey: string;
+  links: { linkKey: string; href: string }[];
+};
+
+/** @deprecated Prefer `OFFICIAL_LINK_CATEGORIES`. */
+export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] =
+  OFFICIAL_LINK_CATEGORIES.map((category) => ({
+    groupKey: category.labelKey,
+    links: category.links.map(({ linkKey, href }) => ({ linkKey, href })),
+  }));
+
+export function getOfficialLinkCategory(
+  categoryId: string
+): OfficialLinkCategoryDef | undefined {
+  return OFFICIAL_LINK_CATEGORIES.find((category) => category.id === categoryId);
+}
+
+/**
+ * Resolve a category, appending the role-aware SEAMUN committee portal when provided.
+ */
+export function resolveOfficialLinkCategory(
+  categoryId: string,
+  opts?: { committeeSiteUrl?: string | null }
+): OfficialLinkCategoryDef | undefined {
+  const category = getOfficialLinkCategory(categoryId);
+  if (!category) return undefined;
+  if (category.id !== "seamun") return category;
+
+  const committeeSiteUrl = opts?.committeeSiteUrl?.trim();
+  if (!committeeSiteUrl) return category;
+
+  return {
+    ...category,
+    links: [
+      ...category.links,
+      {
+        linkKey: "seamunCommittee",
+        href: committeeSiteUrl,
+        descriptionKey: "seamunCommittee",
+      },
+    ],
+  };
+}
+
+export function isOfficialLinkCategoryId(value: string): boolean {
+  return OFFICIAL_LINK_CATEGORIES.some((category) => category.id === value);
+}
+
+/** Display link count on hub cards (SEAMUN may grow when a committee portal applies). */
+export function officialLinkCategoryDisplayCount(
+  category: OfficialLinkCategoryDef,
+  opts?: { committeeSiteUrl?: string | null }
+): number {
+  if (category.id === "seamun" && opts?.committeeSiteUrl) {
+    return category.links.length + 1;
+  }
+  return category.links.length;
+}

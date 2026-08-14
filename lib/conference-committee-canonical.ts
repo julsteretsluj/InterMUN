@@ -8,6 +8,7 @@ import {
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 type ConfRow = {
   id: string;
@@ -151,7 +152,7 @@ export function canonicalCommitteesForEventConferenceRows<
     }
   }
 
-  committees.sort((a, b) => a.label.localeCompare(b.label));
+  committees.sort((a, b) => compareCommitteeRowsByDifficultyThenLabel(a, b));
 
   return dedupeCanonicalCommitteesByDisplayLabel(committees, conferenceIdToCanonical);
 }
@@ -193,7 +194,7 @@ export function dedupeCanonicalCommitteesByDisplayLabel(
     committeesOut.push({ id: winner, label: labelByCanonicalId.get(winner) ?? winner });
   }
 
-  committeesOut.sort((a, b) => a.label.localeCompare(b.label));
+  committeesOut.sort((a, b) => compareCommitteeRowsByDifficultyThenLabel(a, b));
 
   const mapOut = new Map<string, string>();
   for (const [confId, canonicalId] of conferenceIdToCanonical) {

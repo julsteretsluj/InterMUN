@@ -135,6 +135,7 @@ export const SMT_NAV_KEY_ORDER = [
   "roomCodes",
   "awards",
   "advisors",
+  "delegates",
   "newsroom",
   "pressCorps",
   "milestones",

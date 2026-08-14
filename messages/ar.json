@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "إعادة تحميل"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "على سبيل المثال سيماوني2027",
@@ -574,7 +575,8 @@
     "subtabs": "علامات التبويب الفرعية",
     "home": "بيت",
     "library": "مكتبة",
-    "mainNavigationAria": "الملاحة الرئيسية"
+    "mainNavigationAria": "الملاحة الرئيسية",
+    "crisis": "مصيبة"
   },
   "dashboardLayout": {
     "helpCenter": "مركز المساعدة",
@@ -838,7 +840,9 @@
     "pointsLog": "• سجل النقاط",
     "formalMotions": "الاقتراحات الرسمية",
     "timer": "الموقت",
-    "smtProfile": "حساب تعريفي"
+    "smtProfile": "حساب تعريفي",
+    "crisis": "مصيبة",
+    "smtDelegates": "المندوبون"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -1333,7 +1337,8 @@
       "roomCode": "رمز الغرفة",
       "settings": "إعدادات",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "تقرير"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "الفعاليات والجلسات",
     "roomCodes": "رموز الغرفة والكراسي",
     "advisors": "المستشارين",
-    "notes": "Notes",
+    "notes": "ملحوظات",
     "awards": "الجوائز",
     "allocationMatrix": "مصفوفة التخصيص",
     "allocationPasswords": "تخصيص كلمات المرور",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "غرفة الأخبار",
+    "pressCorps": "فيلق الصحافة",
+    "milestones": "المعالم",
     "profile": "حساب تعريفي",
     "follow": "يتبع",
     "hubAbbrev": "سمت",
-    "guides": "Guides"
+    "guides": "أدلة",
+    "delegates": "المندوبون"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "البرامج والتمويل",
       "specializedAgencies": "الوكالات المتخصصة وذات الصلة",
       "peacekeepingMissions": "حفظ السلام والبعثات",
-      "foundersMembers": "المؤسسون والأعضاء"
+      "foundersMembers": "المؤسسون والأعضاء",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "روابط فيلق الصحافة"
     },
     "links": {
       "ods": "نظام الوثائق الرسمية للأمم المتحدة (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "البعثات السياسية الخاصة للأمم المتحدة",
       "memberStates": "الدول الأعضاء في الأمم المتحدة",
       "unSystem": "منظومة الأمم المتحدة (المؤسسون والأعضاء)",
-      "history": "تاريخ الأمم المتحدة"
+      "history": "تاريخ الأمم المتحدة",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "موقع المؤتمر وبوابة اللجنة",
+      "documentsArticles": "المواد المستنفدة للأوزون، والمكتبة الرقمية، والأخبار، والصحافة، والكتاب السنوي",
+      "legislationTreaties": "المعاهدات والميثاق والقانون الدولي",
+      "mainBodies": "الجمعية العامة، ومجلس الأمن، والمجلس الاقتصادي والاجتماعي، ومحكمة العدل الدولية، والمزيد",
+      "programmesFunds": "برنامج الأمم المتحدة الإنمائي، واليونيسيف، ومفوضية الأمم المتحدة لشؤون اللاجئين، وبرنامج الأغذية العالمي، والصناديق ذات الصلة",
+      "specializedAgencies": "منظمة الصحة العالمية، واليونسكو، والبنك الدولي، ومنظمة العمل الدولية، والشركاء",
+      "peacekeepingMissions": "حفظ السلام والبعثات السياسية الخاصة",
+      "foundersMembers": "الدول الأعضاء ومنظومة الأمم المتحدة والتاريخ",
+      "pressCorpsLinks": "ثلاثة مكاتب أخبار لكل تخصيص من هيئة الصحافة (العالم، والصحة، والمقالات)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "تذكير",
     "privateReminderLabel": "تذكير خاص (الكراسي فقط، متزامنة)",
     "committeeFallback": "لجنة",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "تشكيل الكتلة",
       "speechPoisOrPocs": "نقاط الاهتمام في الكلام أو نقاط الاتصال (POCs).",
       "questions": "أسئلة",
-      "informalConversations": "محادثات غير رسمية"
+      "informalConversations": "محادثات غير رسمية",
+      "sessionProgress": "تقدم الجلسة (SMT)"
     },
     "concernLabel": "قلق (عنصر نائب تلقائي)",
     "concernHelpTitle": "علم القلق",
@@ -1848,7 +1883,12 @@
       "needAllocation": "أنت بحاجة إلى تخصيص لإرسال الملاحظات (أو أن تكون رئيسًا).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "فشل في إرسال الملاحظة."
-    }
+    },
+    "sendToSmt": "أرسل إلى سمت",
+    "sendToSmtHelp": "الأراضي في صندوق مذكرات الأمانة على الخاص (من الكراسي). استخدم هذا للتقدم في نهاية الجلسة.",
+    "progressPrefill": "انتهت للتو جلسة اللجنة. \n\nالتقدم: \n- \n\nأي شيء يجب على SMT متابعته: \n-",
+    "progressComposeHint": "سيتم إرسال هذه المذكرة إلى SMT. لخّص ما غطته الغرفة وما يجب أن تعرفه الأمانة.",
+    "progressSent": "تم إرسال مذكرة التقدم إلى SMT."
   },
   "adminPage": {
     "title": "إدارة الموقع",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "لم يتم العثور على صفوف بيانات (تحتاج على الأقل إلى بلد/موضع في كل سطر).",
       "importLimitedRows": "يقتصر الاستيراد على {max} من الصفوف. قم بتقسيم الملف الخاص بك.",
       "rowTooLong": "الصف طويل جدًا: {row}...",
-      "codeTooLongOnRow": "الرمز طويل جدًا في الصف: {row}"
+      "codeTooLongOnRow": "الرمز طويل جدًا في الصف: {row}",
+      "chairSeatsCannotBeDeleted": "تبقى مقاعد الرئيس والرئيس المشارك في كل لجنة."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "اختر حدثًا باستخدام رمز المؤتمر (بوابة الحدث) أولاً.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "لا يمكن تغيير أسماء المناصب ورموز اللافتات إلا بواسطة مسؤول الموقع."
   },
   "chairAllocationMatrixPage": {
     "intro": "مصفوفة تخصيص اللجنة لدورتك الحالية. هذا للقراءة فقط للكراسي ويعكس تخصيصات المقاعد النشطة ورموز اللافتات.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "التخصيص المطلوب",
       "account": "حساب",
       "actions": "الإجراءات",
-      "score": "Score"
+      "score": "نتيجة",
+      "photo": "صورة",
+      "school": "مدرسة",
+      "party": "مجموعة سياسية"
     },
     "noRows": "لم يتم العثور على صفوف تخصيص لهذه اللجنة.",
     "pendingApprovalsTitle": "في انتظار موافقات التسجيل",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "مصفوفة التخصيص",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "الحركات",
+    "pointsTitle": "نقاط",
+    "resolutionsTitle": "القرارات",
+    "noMotions": "لم يتم تسجيل أي اقتراحات لهذا المندوب.",
+    "noPoints": "لم يتم تسجيل أي نقاط لهذا المندوب.",
+    "noResolutions": "لم يتم تسجيل أي مشاركة في الحل لهذا المفوض.",
+    "untitledMotion": "حركة بلا عنوان",
+    "chairLoggedPoint": "نقطة تسجيل الكرسي",
+    "resolutionLink": "افتح مستند جوجل",
+    "resolutionNoLink": "لا يوجد رابط الوثيقة",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "إجرائية",
+      "delegate": "سجل الكرسي"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "المقدم الرئيسي",
+      "co": "مقدم مشارك",
+      "signatory": "الموقع"
+    },
+    "speechesTitle": "الخطب",
+    "flagsTitle": "المجاملات والمخاوف",
+    "disciplineTitle": "تحذيرات وضربات",
+    "noSpeeches": "لم يتم تسجيل أي خطابات لهذا المندوب.",
+    "noFlags": "لم يتم تسجيل أي مجاملات أو مخاوف لهذا المندوب.",
+    "noDiscipline": "لم يتم تسجيل أي تحذيرات أو مخالفات لهذا المندوب.",
+    "untitledSpeech": "خطاب",
+    "currentFlag": "حاضِر",
+    "speechStatuses": {
+      "waiting": "منتظر",
+      "current": "تكلم",
+      "done": "تم التوصيل"
+    },
+    "flagKinds": {
+      "compliment": "إطراء",
+      "concern": "هَم",
+      "reminder": "تذكير"
+    },
+    "disciplineActions": {
+      "warning": "تحذير",
+      "strike": "يضرب",
+      "revoke_warning": "تم إلغاء التحذير",
+      "revoke_strike": "تم إلغاء الإضراب",
+      "reset": "إعادة ضبط"
+    },
+    "disciplineCounts": "{warnings} تحذير (تحذيرات) · {strikes} ضربة (ضربات)"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "لجنتك",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "قاعة اللجنة (كاملة)",
         "hint": "التخطيط الافتراضي وطابق المندوبين"
+      },
+      "crisisReport": {
+        "label": "تقرير",
+        "hint": "الإبلاغ عن الحوادث"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "ملحوظات",
     "noGoogleDocYet": "لم يتم ربط مستند Google حتى الآن. استخدم \"تحرير\" لإضافة عنوان URL docs.google.com/document/d/....",
     "chairFeedbackHeading": "ردود فعل الكرسي",
-    "noFeedbackYet": "لم تتم إضافة أي تعليقات حتى الآن."
+    "noFeedbackYet": "لم تتم إضافة أي تعليقات حتى الآن.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "حاضر - قد يمتنع عن التصويت (لفة)",
       "present_voting": "الحاضر والتصويت (لفة)",
       "unknown": "- (لفافة)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "الروابط والأزرار والملفات",
+      "help": "أضف رابط ويب أو زرًا أو قم بتحميل ملف PDF/. يمكن لأي شخص يفتح هذا الدليل استخدامه.",
+      "kindLink": "وصلة",
+      "kindButton": "زر",
+      "kindFile": "ملف",
+      "label": "ملصق",
+      "urlPlaceholder": "https://… or /page",
+      "add": "يضيف",
+      "upload": "تحميل PDF أو ملف",
+      "uploading": "جارٍ التحميل…",
+      "remove": "يزيل",
+      "download": "يفتح",
+      "empty": "لا توجد روابط أو ملفات حتى الآن.",
+      "errorType": "استخدم ملف PDF أو مستند Office أو ملف نصي أو صورة.",
+      "errorSize": "الملف كبير جدًا (بحد أقصى 15 ميجابايت).",
+      "errorUpload": "تعذر تحميل هذا الملف.",
+      "markdownHelp": "في الملاحظات، يمكنك أيضًا كتابة [label](https://url) للرابط، أو [label](https://url \"button\") للزر. الصق عنوان URL للملف أو قم بتحميله أعلاه."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "التحقق من حالة لفة الخاص بك...",
       "rollPromptSaving": "توفير...",
       "rollPromptPresent": "حاضر",
-      "rollPromptPresentVoting": "الحضور والتصويت"
+      "rollPromptPresentVoting": "الحضور والتصويت",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "إجراءات التصويت",
@@ -4241,7 +4382,11 @@
       "timer": "الموقت",
       "sidebarAnd": "و",
       "announcements": "إعلانات",
-      "sidebarUseSuffix": "- أداة واحدة لكل علامة تبويب."
+      "sidebarUseSuffix": "- أداة واحدة لكل علامة تبويب.",
+      "smtProgressReminderTitle": "قم بتحديث SMT في هذه الجلسة",
+      "smtProgressReminderBody": "أرسل مذكرة تقدم قصيرة حتى تعرف الأمانة كيف سارت الأمور في اللجنة وما يجب متابعته.",
+      "smtProgressReminderWrite": "اكتب ملاحظة",
+      "smtProgressReminderDismiss": "لاحقاً"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "انتهت الجلسة - تحديث SMT",
+      "reminderSessionEnd": "كان من المقرر أن ينتهي {title} عند {start}. أرسل إلى SMT مذكرة تقدم قصيرة.",
+      "writeSmtNote": "اكتب ملاحظة"
     },
     "history": {
       "title": "تاريخ الجلسة",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "ولا توجد أماكن ترشيح لهذه اللجنة حتى الآن.",
+    "stepProgress": "الترشيح {current} من {total}",
+    "requiredProgress": "{done}/{total} اكتملت الفتحات المطلوبة",
+    "gotoStep": "اذهب إلى {label}",
+    "lockedTitle": "قم بإنهاء كل بطاقة مندوب أولاً",
+    "lockedBody": "أكمل نموذج تقييم الجلسة لكل مندوب جالس أعلاه، ثم ارجع هنا لترشيح الجوائز في وقت واحد.",
+    "optional": "خياري",
+    "submittedLocked": "تم الإرسال إلى SMT - التحرير مغلق.",
+    "topSuggestions": "أعلى 5 من عنوان الجلسة",
+    "topSuggestionsHint": "أعلى مجاميع المصفوفة في هذه اللجنة. اختر واحدًا، أو ابحث أدناه.",
+    "noSuggestions": "لا يوجد مندوبين مصنفين حتى الآن. سجل المصفوفة أولا، أو ابحث بالاسم.",
+    "searchLabel": "بحث المندوبين",
+    "searchPlaceholder": "الاسم أو التخصيص",
+    "searchEmpty": "لا يوجد مفوضون يطابقون هذا البحث.",
+    "selectedNominee": "المرشح المختار",
+    "pickNomineeHint": "اختر مرشحًا من بين الخمسة الأوائل أو ابحث لفتح نموذج التقييم والتسجيل الخاص به.",
+    "rubricHeading": "عنوان الترشيح",
+    "rubricTotal": "إجمالي الموضوع: {total}/{max} ({scored}/{criteria} تم تسجيل المعايير — 1–8 لكل معيار)",
+    "evidenceLabel": "بيان التأكيد / الأدلة",
+    "evidencePlaceholder": "استشهد بالأدلة الملموسة (صياغة البنود، والتسويات التي تم التوصل إليها، والتدخلات الرئيسية). ما لا يقل عن {min} حرف — مطلوب قبل أن تتمكن SMT من الموافقة.",
+    "previous": "سابق",
+    "skipOptional": "تخطي الفتحة الاختيارية",
+    "next": "التالي",
+    "locked": "مغلق",
+    "matrixRequired": "المصفوفة مطلوبة أولاً",
+    "saving": "توفير…",
+    "saveAndNext": "حفظ والتالي",
+    "save": "يحفظ",
+    "allSlotsSummary": "جميع فتحات الترشيح",
+    "statusDone": "منتهي",
+    "statusTodo": "للقيام به",
+    "errors": {
+      "selectNominee": "حدد مرشحًا لهذه الفتحة.",
+      "completeRubric": "اختر نطاقًا لكل معيار قبل الحفظ.",
+      "evidenceMin": "أضف على الأقل {min} حرفًا من الأدلة."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "الانتهاء من الجوائز الشاملة",
+    "completeCount": "{completed}/{total} كاملة",
+    "requiredLabel": "التقدم (مطلوب)",
+    "optionalSlots": "الفتحات الاختيارية: {completed}/{total} مملوءة"
+  },
+  "chairAwardsSubmit": {
+    "title": "أرسل إلى SMT",
+    "intro": "يؤدي حفظ فتحة إلى كتابة مسودة فقط؛ SMT لا يراها حتى تقوم بإرسال الدفعة أدناه. عند اكتمال الخانات المطلوبة، أرسل الدفعة إلى SMT للمراجعة. يتم تشغيل الإرسال التلقائي أيضًا بعد {deadline} (UTC) عندما تفتح هذه الصفحة، أو عبر مهمة مجدولة إذا قام النشر بتكوينها.",
+    "requiredSlotsIncomplete": "اكتملت الخانات المطلوبة: {done}/{total} — أكمل الباقي، ثم أرسل حتى يتمكن SMT من المراجعة.",
+    "requiredSlotsReady": "الخانات المطلوبة كاملة: {done}/{total} — دفعة الترشيح جاهزة (تأكد من اكتمال مصفوفة المندوبين أعلاه).",
+    "matrixIncomplete": "مصفوفة المندوب (كل مندوب جالس): {done}/{total} — سجل كل مندوب أعلاه قبل الإرسال.",
+    "matrixComplete": "مصفوفة المندوبين (كل مندوب جالس): {done}/{total} — كاملة.",
+    "alreadySubmitted": "تم تقديمه إلى SMT{when}. التحرير مغلق. اتصل بـ SMT إذا كنت بحاجة إلى التغيير.",
+    "submittedAt": "— {time}",
+    "submitButton": "تقديم الترشيحات إلى SMT",
+    "submitting": "تقديم…",
+    "needComplete": "أكمل كل خانة الترشيح المطلوبة ومصفوفة المندوبين، ثم أرسلها.",
+    "deadlinePassed": "لقد انقضى الموعد النهائي - أرسل الآن إذا لم تكن قد قمت بذلك بالفعل."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "ليس لديك مقعد في اللجنة بعد. اطلب من الأمانة تعيينك في مصفوفة التخصيص، ثم ارجع هنا.",
+    "intro": "لكل لجنة رمز اللجنة داخل مؤتمرها (البوابة الثانية بعد إدخال المندوبين رمز المؤتمر). يجب أن تكون الرموز فريدة ضمن نفس حدث المؤتمر.",
+    "testingOverride": "تم تمكين تجاوز الاختبار: يمكنك تبديل رموز اللجنة وإدارتها عبر اللجان دون التحقق من تخصيص المقاعد.",
+    "chairScope": "على المنصة، أنت ترى فقط اللجان التي لديك مقعد فيها. يرسلك الحفظ إلى ملفك الشخصي؛ المندوبون الذين اجتازوا بوابة اللجنة بالفعل يظلون مسجلين الدخول حتى يقوموا بتسجيل الخروج.",
+    "staffAfterSave": "بعد الحفظ، يمكنك الدخول إلى تلك اللجنة أو مشاركة الرمز على المنصة."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "قائمة النسخ (TSV)",
+    "copied": "تم نسخ الجدول إلى الحافظة.",
+    "helpTitle": "تخصيص رموز تسجيل الدخول",
+    "helpBody": "وهي عبارة عن رموز لافتة لكل تخصيص يستخدمها المندوبون والرؤساء أثناء بوابة رمز التخصيص. لا يمكن تغيير الرموز إلا من قبل مسؤول الموقع.",
+    "copyHeader": "المؤتمر: {conference}",
+    "copyColumns": "رمز مندوب البلد",
+    "columnCountry": "البلد / التخصيص",
+    "columnDelegate": "مندوب (تخصيص)",
+    "columnCode": "كلمة المرور / الرمز",
+    "codeFieldHelpTitle": "حقل كلمة المرور / الرمز",
+    "codeFieldHelpBody": "يقوم المندوبون بإدخال هذا الرمز للتخصيص المخصص لهم. فقط مدير الموقع يمكنه تغييره.",
+    "empty": "لا يوجد مخصصات لهذا المؤتمر حتى الآن."
+  },
+  "chairSessionError": {
+    "title": "فشل تحميل أرضية الجلسة",
+    "fallback": "حدث خطأ غير متوقع أثناء تحميل عناصر تحكم جلسة الرئاسة.",
+    "reference": "المرجع: {digest}",
+    "backToDashboard": "العودة إلى لوحة الكرسي"
+  },
+  "smtDelegatesPage": {
+    "title": "المندوبون",
+    "intro": "ابحث عن كل مندوب مرتبط في هذا الحدث بالاسم أو التخصيص أو البريد الإلكتروني أو اللجنة. افتح بطاقة لصورتهم وملفهم الشخصي.",
+    "selectEventFirst": "اختر حدث مؤتمر نشط أولاً.",
+    "enterConferenceCode": "أدخل رمز المؤتمر",
+    "searchLabel": "بحث المندوبين",
+    "searchPlaceholder": "الاسم أو التخصيص أو البريد الإلكتروني أو اللجنة",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "لا يوجد مندوبين مرتبطين في هذا الحدث حتى الآن.",
+    "noMatches": "لا يوجد مفوضون يطابقون هذا البحث.",
+    "unnamed": "مندوب بدون اسم"
   }
 }

@@ -20,6 +20,12 @@ import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { isAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 import { isStaffRole } from "@/lib/roles";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import {
+  canRecordVote,
+  disciplineVoteBlockMessage,
+  fetchDisciplineByAllocationIds,
+  type DelegateDisciplineFlags,
+} from "@/lib/delegate-discipline";
 
 interface Vote {
   value: string;
@@ -33,6 +39,7 @@ type VotingRosterEntry = {
   userId: string | null;
   country: string;
   rollAttendance: RollAttendance;
+  discipline: DelegateDisciplineFlags | null;
 };
 
 export function VotingPanel({
@@ -128,7 +135,7 @@ export function VotingPanel({
           rollMap.set(row.allocation_id, att);
         }
 
-        const roster = ((allocations ?? []) as Array<{
+        const rosterBase = ((allocations ?? []) as Array<{
           id: string;
           country: string;
           user_id: string | null;
@@ -145,13 +152,26 @@ export function VotingPanel({
             if (isDaisSeat) return false;
             if (!includeUnseatedDelegatePlacards && !a.user_id) return false;
             return true;
-          })
-          .map((a) => ({
-            allocationId: a.id,
-            userId: a.user_id,
-            country: a.country?.trim() || "—",
-            rollAttendance: rollMap.get(a.id) ?? "absent",
-          }));
+          });
+
+        let disciplineMap: Record<string, DelegateDisciplineFlags> = {};
+        try {
+          disciplineMap = await fetchDisciplineByAllocationIds(
+            supabase,
+            conferenceId,
+            rosterBase.map((a) => a.id)
+          );
+        } catch {
+          disciplineMap = {};
+        }
+
+        const roster = rosterBase.map((a) => ({
+          allocationId: a.id,
+          userId: a.user_id,
+          country: a.country?.trim() || "—",
+          rollAttendance: rollMap.get(a.id) ?? ("absent" as RollAttendance),
+          discipline: disciplineMap[a.id] ?? null,
+        }));
 
         next[conferenceId] = sortAllocationsByDisplayCountry(roster);
       }
@@ -225,7 +245,7 @@ export function VotingPanel({
 
   async function recordVoteForMotion(
     itemId: string,
-    row: Pick<VotingRosterEntry, "allocationId" | "userId">,
+    row: Pick<VotingRosterEntry, "allocationId" | "userId" | "discipline">,
     value: "yes" | "no" | "abstain"
   ) {
     const item = voteItems.find((v) => v.id === itemId);
@@ -233,6 +253,10 @@ export function VotingPanel({
     const isMustVote = isAgendaFloor || !!item?.must_vote;
     if (value === "abstain" && isMustVote) {
       setVoteError(t("abstainNotApplicableMotionType"));
+      return;
+    }
+    if (!canRecordVote(row.discipline)) {
+      setVoteError(disciplineVoteBlockMessage(row.discipline) ?? t("votingRightsLost"));
       return;
     }
     const { error } = await supabase
@@ -519,6 +543,22 @@ export function VotingPanel({
                         votes[item.id]?.find((v) => v.allocation_id === row.allocationId)?.value ??
                         (row.userId ? votes[item.id]?.find((v) => v.user_id === row.userId)?.value : undefined) ??
                         null;
+                      const voteBlocked = !canRecordVote(row.discipline);
+                      const disciplineHint = row.discipline
+                        ? [
+                            row.discipline.warning_count > 0
+                              ? t("disciplineWarnings", { count: row.discipline.warning_count })
+                              : null,
+                            row.discipline.strike_count > 0
+                              ? t("disciplineStrikes", { count: row.discipline.strike_count })
+                              : null,
+                            row.discipline.voting_rights_lost ? t("votingRightsLostShort") : null,
+                            row.discipline.speaking_rights_suspended ? t("speakingSuspendedShort") : null,
+                            row.discipline.removed_from_committee ? t("removedShort") : null,
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")
+                        : "";
                       return (
                         <div
                           key={`${item.id}-${row.allocationId}`}
@@ -544,6 +584,9 @@ export function VotingPanel({
                                           : t("recordedNone")}
                                 </span>
                               </p>
+                              {disciplineHint ? (
+                                <p className="mt-0.5 text-xs text-rose-700 dark:text-rose-300">{disciplineHint}</p>
+                              ) : null}
                             </div>
                             <div
                               className="flex min-w-0 flex-col items-stretch gap-1.5 sm:items-end"
@@ -556,16 +599,20 @@ export function VotingPanel({
                               <div className="flex flex-wrap gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--color-bg-page)] p-2 sm:justify-end">
                                 <button
                                   type="button"
+                                  disabled={voteBlocked}
+                                  title={voteBlocked ? disciplineVoteBlockMessage(row.discipline) ?? undefined : undefined}
                                   onClick={() => void recordVoteForMotion(item.id, row, "yes")}
-                                  className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
+                                  className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                                 >
                                   {t("yes")}
                                 </button>
                                 {abstainAllowedForItem ? (
                                   <button
                                     type="button"
+                                    disabled={voteBlocked}
+                                    title={voteBlocked ? disciplineVoteBlockMessage(row.discipline) ?? undefined : undefined}
                                     onClick={() => void recordVoteForMotion(item.id, row, "abstain")}
-                                    className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
+                                    className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                                   >
                                     {t("abstain")}
                                   </button>
@@ -581,8 +628,10 @@ export function VotingPanel({
                                 )}
                                 <button
                                   type="button"
+                                  disabled={voteBlocked}
+                                  title={voteBlocked ? disciplineVoteBlockMessage(row.discipline) ?? undefined : undefined}
                                   onClick={() => void recordVoteForMotion(item.id, row, "no")}
-                                  className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
+                                  className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                                 >
                                   {t("no")}
                                 </button>

@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Tải lại"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "ví dụ. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Tab phụ",
     "home": "Trang chủ",
     "library": "Thư viện",
-    "mainNavigationAria": "Điều hướng chính"
+    "mainNavigationAria": "Điều hướng chính",
+    "crisis": "Khủng hoảng"
   },
   "dashboardLayout": {
     "helpCenter": "Trung tâm trợ giúp",
@@ -838,7 +840,9 @@
     "pointsLog": "• Nhật ký điểm",
     "formalMotions": "Kiến nghị chính thức",
     "timer": "hẹn giờ",
-    "smtProfile": "Hồ sơ"
+    "smtProfile": "Hồ sơ",
+    "crisis": "Khủng hoảng",
+    "smtDelegates": "Đại biểu"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -1333,7 +1337,8 @@
       "roomCode": "Mã phòng",
       "settings": "Cài đặt",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Báo cáo"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Sự kiện & phiên",
     "roomCodes": "Mã phòng & ghế",
     "advisors": "cố vấn",
-    "notes": "Notes",
+    "notes": "Ghi chú",
     "awards": "Giải thưởng",
     "allocationMatrix": "Ma trận phân bổ",
     "allocationPasswords": "Mật khẩu phân bổ",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Phòng tin tức",
+    "pressCorps": "Quân đoàn báo chí",
+    "milestones": "Các cột mốc quan trọng",
     "profile": "Hồ sơ",
     "follow": "Theo",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Hướng dẫn",
+    "delegates": "Đại biểu"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Chương trình & quỹ",
       "specializedAgencies": "Cơ quan chuyên môn & liên quan",
       "peacekeepingMissions": "Gìn giữ hòa bình và sứ mệnh",
-      "foundersMembers": "Người sáng lập & thành viên"
+      "foundersMembers": "Người sáng lập & thành viên",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Liên kết Quân đoàn Báo chí"
     },
     "links": {
       "ods": "Hệ thống tài liệu chính thức của Liên hợp quốc (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Phái đoàn chính trị đặc biệt của Liên hợp quốc",
       "memberStates": "Các quốc gia thành viên Liên hợp quốc",
       "unSystem": "Hệ thống LHQ (người sáng lập và thành viên)",
-      "history": "Lịch sử LHQ"
+      "history": "Lịch sử LHQ",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Trang web hội nghị và cổng thông tin ủy ban",
+      "documentsArticles": "ODS, Thư viện số, tin tức, báo chí và kỷ yếu",
+      "legislationTreaties": "Điều ước, hiến chương và luật pháp quốc tế",
+      "mainBodies": "GA, Hội đồng Bảo an, ECOSOC, ICJ, v.v.",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP và các quỹ liên quan",
+      "specializedAgencies": "WHO, UNESCO, Ngân hàng Thế giới, ILO và các đối tác",
+      "peacekeepingMissions": "Gìn giữ hòa bình và các nhiệm vụ chính trị đặc biệt",
+      "foundersMembers": "Các quốc gia thành viên, hệ thống LHQ và lịch sử",
+      "pressCorpsLinks": "Ba bàn tin tức cho mỗi phân bổ của Press Corps (thế giới, sức khỏe và tính năng)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Lời nhắc nhở",
     "privateReminderLabel": "Lời nhắc riêng tư (chỉ dành cho ghế, đã đồng bộ hóa)",
     "committeeFallback": "Ủy ban",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Hình thành khối",
       "speechPoisOrPocs": "POI lời nói hoặc POC",
       "questions": "Câu hỏi",
-      "informalConversations": "cuộc trò chuyện không chính thức"
+      "informalConversations": "cuộc trò chuyện không chính thức",
+      "sessionProgress": "Tiến trình phiên (SMT)"
     },
     "concernLabel": "Mối quan tâm (trình giữ chỗ tự động)",
     "concernHelpTitle": "Cờ quan tâm",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Bạn cần phân bổ để gửi ghi chú (hoặc làm ghế).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Không gửi được ghi chú."
-    }
+    },
+    "sendToSmt": "Gửi tới SMT",
+    "sendToSmtHelp": "Đất trong hộp thư đến của thư ký (Từ ghế). Sử dụng điều này cho tiến độ cuối phiên.",
+    "progressPrefill": "Phiên họp của Ủy ban vừa kết thúc. \n\nTiến độ: \n- \n\nBất cứ điều gì SMT nên theo dõi: \n-",
+    "progressComposeHint": "Ghi chú này sẽ được chuyển đến SMT. Tóm tắt những nội dung trong phòng và những nội dung mà ban thư ký nên biết.",
+    "progressSent": "Ghi chú tiến độ được gửi tới SMT."
   },
   "adminPage": {
     "title": "Quản trị trang web",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Không tìm thấy hàng dữ liệu nào (cần ít nhất một quốc gia/vị trí trên mỗi dòng).",
       "importLimitedRows": "Nhập giới hạn ở {max} hàng. Chia tập tin của bạn.",
       "rowTooLong": "Hàng quá dài: {row}…",
-      "codeTooLongOnRow": "Mã quá dài trên hàng: {row}"
+      "codeTooLongOnRow": "Mã quá dài trên hàng: {row}",
+      "chairSeatsCannotBeDeleted": "Các ghế Chủ tịch và Đồng chủ tịch vẫn thuộc về mỗi ủy ban."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Trước tiên hãy chọn sự kiện có mã hội nghị (cổng sự kiện).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Tên vị trí và mã bảng hiệu chỉ có thể được thay đổi bởi quản trị viên trang."
   },
   "chairAllocationMatrixPage": {
     "intro": "Ma trận phân bổ ủy ban cho phiên họp hiện tại của bạn. Đây là tùy chọn chỉ đọc dành cho ghế và phản ánh việc phân công chỗ ngồi đang hoạt động cũng như mã bảng hiệu.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Phân bổ được yêu cầu",
       "account": "Tài khoản",
       "actions": "hành động",
-      "score": "Score"
+      "score": "Điểm",
+      "photo": "Ảnh",
+      "school": "Trường học",
+      "party": "Nhóm chính trị"
     },
     "noRows": "Không tìm thấy hàng phân bổ nào cho ủy ban này.",
     "pendingApprovalsTitle": "Đang chờ phê duyệt đăng ký",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Ma trận phân bổ",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "chuyển động",
+    "pointsTitle": "Điểm",
+    "resolutionsTitle": "Nghị quyết",
+    "noMotions": "Không có chuyển động nào được ghi lại cho đại biểu này.",
+    "noPoints": "Không có điểm nào được ghi cho đại biểu này.",
+    "noResolutions": "Không có sự tham gia giải quyết nào được ghi lại cho đại biểu này.",
+    "untitledMotion": "Chuyển động không có tiêu đề",
+    "chairLoggedPoint": "Điểm ghi trên ghế",
+    "resolutionLink": "Mở Google Tài liệu",
+    "resolutionNoLink": "Không có liên kết tài liệu",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "thủ tục",
+      "delegate": "Nhật ký ghế"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Người nộp chính",
+      "co": "Người đồng gửi",
+      "signatory": "Người ký"
+    },
+    "speechesTitle": "Bài phát biểu",
+    "flagsTitle": "Khen ngợi và quan tâm",
+    "disciplineTitle": "Cảnh báo và đình công",
+    "noSpeeches": "Không có bài phát biểu nào được ghi lại cho đại biểu này.",
+    "noFlags": "Không có lời khen ngợi hay quan ngại nào được ghi nhận đối với đại biểu này.",
+    "noDiscipline": "Không có cảnh cáo hoặc đình công nào được ghi nhận đối với đại biểu này.",
+    "untitledSpeech": "Lời nói",
+    "currentFlag": "Hiện hành",
+    "speechStatuses": {
+      "waiting": "Chờ",
+      "current": "Nói",
+      "done": "Đã giao hàng"
+    },
+    "flagKinds": {
+      "compliment": "Lời khen",
+      "concern": "Bận tâm",
+      "reminder": "Lời nhắc nhở"
+    },
+    "disciplineActions": {
+      "warning": "Cảnh báo",
+      "strike": "Đánh đập",
+      "revoke_warning": "Đã thu hồi cảnh báo",
+      "revoke_strike": "Đã thu hồi cảnh cáo",
+      "reset": "Cài lại"
+    },
+    "disciplineCounts": "{warnings} (các) cảnh báo · {strikes} (các) cảnh cáo"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "ủy ban của bạn",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Phòng ủy ban (đầy đủ)",
         "hint": "Bố trí ảo & sàn đại biểu"
+      },
+      "crisisReport": {
+        "label": "Báo cáo",
+        "hint": "Báo cáo sự cố"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Ghi chú",
     "noGoogleDocYet": "Chưa có tài liệu Google nào được liên kết. Sử dụng Chỉnh sửa để thêm URL docs.google.com/document/d/….",
     "chairFeedbackHeading": "Phản hồi về ghế",
-    "noFeedbackYet": "Chưa có phản hồi nào được thêm vào."
+    "noFeedbackYet": "Chưa có phản hồi nào được thêm vào.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Hiện tại - có thể bỏ phiếu trắng (cuộn)",
       "present_voting": "Trình bày và biểu quyết (cuộn)",
       "unknown": "- (cuộn)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Liên kết, nút và tập tin",
+      "help": "Thêm liên kết web, nút hoặc tải lên tệp PDF/tệp. Bất cứ ai mở hướng dẫn này đều có thể sử dụng chúng.",
+      "kindLink": "liên kết",
+      "kindButton": "Cái nút",
+      "kindFile": "Tài liệu",
+      "label": "Nhãn",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Thêm vào",
+      "upload": "Tải lên tệp PDF hoặc tệp",
+      "uploading": "Đang tải lên…",
+      "remove": "Di dời",
+      "download": "Mở",
+      "empty": "Chưa có liên kết hoặc tập tin.",
+      "errorType": "Sử dụng tệp PDF, tài liệu Office, văn bản hoặc hình ảnh.",
+      "errorSize": "Tệp quá lớn (tối đa 15 MB).",
+      "errorUpload": "Không thể tải tập tin đó lên.",
+      "markdownHelp": "Trong ghi chú, bạn cũng có thể viết [nhãn](https://url) cho một liên kết hoặc [nhãn](https://url \"button\") cho một nút. Dán URL tệp hoặc tải lên ở trên."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Đang kiểm tra trạng thái cuộn của bạn...",
       "rollPromptSaving": "Đang lưu...",
       "rollPromptPresent": "Hiện tại",
-      "rollPromptPresentVoting": "Trình bày và bỏ phiếu"
+      "rollPromptPresentVoting": "Trình bày và bỏ phiếu",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Thủ tục biểu quyết",
@@ -4241,7 +4382,11 @@
       "timer": "hẹn giờ",
       "sidebarAnd": "Và",
       "announcements": "Thông báo",
-      "sidebarUseSuffix": "- một công cụ trên mỗi tab."
+      "sidebarUseSuffix": "- một công cụ trên mỗi tab.",
+      "smtProgressReminderTitle": "Cập nhật SMT trong phiên này",
+      "smtProgressReminderBody": "Gửi một bản ghi chú tiến độ ngắn để ban thư ký biết ủy ban đã tiến hành như thế nào và những gì cần theo dõi.",
+      "smtProgressReminderWrite": "Viết ghi chú",
+      "smtProgressReminderDismiss": "Sau đó"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Phiên kết thúc - cập nhật SMT",
+      "reminderSessionEnd": "{title} dự kiến ​​kết thúc vào {start}. Gửi cho SMT một ghi chú tiến độ ngắn.",
+      "writeSmtNote": "Viết ghi chú"
     },
     "history": {
       "title": "Lịch sử phiên",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Chưa có vị trí đề cử nào cho ủy ban này.",
+    "stepProgress": "Đề cử {current} của {total}",
+    "requiredProgress": "{done}/{total} các ô yêu cầu đã hoàn thành",
+    "gotoStep": "Đi đến {label}",
+    "lockedTitle": "Hoàn thành mọi thẻ đại biểu trước",
+    "lockedBody": "Hoàn thành phiếu tự đánh giá phiên họp cho mọi đại biểu ngồi ở trên, sau đó quay lại đây để đề cử giải thưởng từng vị trí một.",
+    "optional": "không bắt buộc",
+    "submittedLocked": "Đã gửi tới SMT — việc chỉnh sửa đã bị khóa.",
+    "topSuggestions": "Top 5 từ phiếu tự đánh giá phiên",
+    "topSuggestionsHint": "Tổng số ma trận cao nhất trong ủy ban này. Chọn một hoặc tìm kiếm bên dưới.",
+    "noSuggestions": "Chưa có đại biểu xếp hạng nào. Cho điểm ma trận trước hoặc tìm kiếm theo tên.",
+    "searchLabel": "Tìm kiếm đại biểu",
+    "searchPlaceholder": "Tên hoặc phân bổ",
+    "searchEmpty": "Không có đại biểu nào phù hợp với tìm kiếm đó.",
+    "selectedNominee": "Người được đề cử đã chọn",
+    "pickNomineeHint": "Chọn một người được đề cử từ top 5 hoặc tìm kiếm để mở phiếu tự đánh giá và nhật ký của họ.",
+    "rubricHeading": "phiếu đề cử",
+    "rubricTotal": "Tổng số phiếu tự đánh giá: {total}/{max} ({scored}/{criteria} tiêu chí được ghi - 1–8 cho mỗi tiêu chí)",
+    "evidenceLabel": "Tuyên bố xác nhận/bằng chứng",
+    "evidencePlaceholder": "Trích dẫn bằng chứng sàn cụ thể (các điều khoản được soạn thảo, các thỏa hiệp được môi giới, các biện pháp can thiệp chính). Ít nhất {min} ký tự — bắt buộc trước khi SMT có thể phê duyệt.",
+    "previous": "Trước",
+    "skipOptional": "Bỏ qua khe tùy chọn",
+    "next": "Kế tiếp",
+    "locked": "Đã khóa",
+    "matrixRequired": "Ma trận được yêu cầu đầu tiên",
+    "saving": "Đang lưu…",
+    "saveAndNext": "Lưu & tiếp theo",
+    "save": "Cứu",
+    "allSlotsSummary": "Tất cả các vị trí đề cử",
+    "statusDone": "Xong",
+    "statusTodo": "để làm",
+    "errors": {
+      "selectNominee": "Chọn một người được đề cử cho vị trí này.",
+      "completeRubric": "Chọn một băng tần cho mọi tiêu chí trước khi lưu.",
+      "evidenceMin": "Thêm ít nhất {min} ký tự bằng chứng."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Hoàn thành giải thưởng chung cuộc",
+    "completeCount": "{completed}/{total} hoàn thành",
+    "requiredLabel": "Tiến độ (bắt buộc)",
+    "optionalSlots": "Các khe tùy chọn: đã lấp đầy {completed}/{total}"
+  },
+  "chairAwardsSubmit": {
+    "title": "Gửi tới SMT",
+    "intro": "Lưu một vị trí chỉ ghi một bản nháp; SMT không nhìn thấy nó cho đến khi bạn gửi lô bên dưới. Khi các vị trí yêu cầu đã hoàn tất, hãy gửi lô đến SMT để xem xét. Tự động gửi cũng chạy sau {deadline} (UTC) khi bạn mở trang này hoặc thông qua công việc đã lên lịch nếu quá trình triển khai của bạn định cấu hình nó.",
+    "requiredSlotsIncomplete": "Hoàn thành các vị trí bắt buộc: {done}/{total} - hoàn thành phần còn lại, sau đó gửi để SMT có thể xem xét.",
+    "requiredSlotsReady": "Các vị trí bắt buộc đã hoàn thành: {done}/{total} — đợt đề cử đã sẵn sàng (đảm bảo ma trận đại biểu ở trên đã hoàn tất).",
+    "matrixIncomplete": "Ma trận đại biểu (mỗi đại biểu ngồi): {done}/{total} — cho điểm từng đại biểu ở trên trước khi gửi.",
+    "matrixComplete": "Ma trận đại biểu (mỗi đại biểu ngồi): {done}/{total} — hoàn thành.",
+    "alreadySubmitted": "Đã gửi tới SMT{when}. Chỉnh sửa bị khóa; liên hệ với SMT nếu bạn cần thay đổi.",
+    "submittedAt": "— {time}",
+    "submitButton": "Gửi đề cử tới SMT",
+    "submitting": "Đang gửi…",
+    "needComplete": "Hoàn thành mọi vị trí đề cử được yêu cầu và ma trận đại biểu, sau đó gửi.",
+    "deadlinePassed": "Đã qua thời hạn - hãy gửi ngay bây giờ nếu bạn chưa nộp."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Bạn chưa có ghế trong ủy ban. Yêu cầu Ban thư ký giao cho bạn bảng phân bổ rồi quay lại đây.",
+    "intro": "Mỗi ủy ban có một mã ủy ban trong hội nghị của mình (cổng thứ hai sau khi các đại biểu nhập mã hội nghị). Mã phải là duy nhất trong cùng một sự kiện hội nghị.",
+    "testingOverride": "Đã bật ghi đè kiểm tra: bạn có thể chuyển đổi và quản lý mã ủy ban giữa các ủy ban mà không cần kiểm tra phân bổ chỗ ngồi.",
+    "chairScope": "Với tư cách là người đứng đầu, bạn chỉ nhìn thấy các ủy ban nơi bạn có ghế. Việc lưu sẽ đưa bạn đến hồ sơ của bạn; các đại biểu đã vượt qua cổng ủy ban vẫn đăng nhập cho đến khi đăng xuất.",
+    "staffAfterSave": "Sau khi lưu, bạn có thể vào ủy ban đó hoặc chia sẻ mã trên dais."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Sao chép danh sách (TSV)",
+    "copied": "Đã sao chép bảng vào clipboard.",
+    "helpTitle": "Mã đăng nhập phân bổ",
+    "helpBody": "Đây là mã bảng phân bổ theo phân bổ được sử dụng bởi các đại biểu và chủ tọa trong cổng mã phân bổ. Mã chỉ có thể được thay đổi bởi quản trị viên trang web.",
+    "copyHeader": "Hội nghị: {conference}",
+    "copyColumns": "Mã đại biểu quốc gia",
+    "columnCountry": "Quốc gia/phân bổ",
+    "columnDelegate": "Đại biểu (phân bổ)",
+    "columnCode": "Mật khẩu/mã",
+    "codeFieldHelpTitle": "Trường mật khẩu/mã",
+    "codeFieldHelpBody": "Các đại biểu nhập mã này cho phân bổ được chỉ định của họ. Chỉ quản trị viên trang web mới có thể thay đổi nó.",
+    "empty": "Chưa có phân bổ cho hội nghị này."
+  },
+  "chairSessionError": {
+    "title": "Tầng phiên không tải được",
+    "fallback": "Đã xảy ra lỗi không mong muốn khi tải các điều khiển phiên họp của ghế.",
+    "reference": "Tham khảo: {digest}",
+    "backToDashboard": "Quay lại bảng điều khiển ghế"
+  },
+  "smtDelegatesPage": {
+    "title": "Đại biểu",
+    "intro": "Tìm kiếm mọi đại biểu được liên kết trong sự kiện này theo tên, phân bổ, email hoặc ủy ban. Mở thẻ cho ảnh và hồ sơ của họ.",
+    "selectEventFirst": "Trước tiên, hãy chọn một sự kiện hội nghị đang hoạt động.",
+    "enterConferenceCode": "Nhập mã hội nghị",
+    "searchLabel": "Tìm kiếm đại biểu",
+    "searchPlaceholder": "Tên, phân bổ, email hoặc ủy ban",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Chưa có đại biểu nào được liên kết trong sự kiện này.",
+    "noMatches": "Không có đại biểu nào phù hợp với tìm kiếm đó.",
+    "unnamed": "Đại biểu giấu tên"
   }
 }

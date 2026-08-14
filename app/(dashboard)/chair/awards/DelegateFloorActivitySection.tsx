@@ -39,6 +39,9 @@ export function DelegateFloorActivitySection({ activity }: Props) {
   const locale = useLocale();
 
   const data = activity ?? EMPTY_DELEGATE_FLOOR_ACTIVITY;
+  const speeches = data.speeches ?? [];
+  const flags = data.flags ?? [];
+  const discipline = data.discipline ?? [];
 
   const sessionPointLabel = useCallback(
     (code: string) => {
@@ -69,6 +72,32 @@ export function DelegateFloorActivitySection({ activity }: Props) {
     [locale, t, tTopics]
   );
 
+  const speechStatusLabel = useCallback(
+    (status: string) => {
+      if (status === "waiting" || status === "current" || status === "done") {
+        return t(`speechStatuses.${status}`);
+      }
+      return status.replace(/_/g, " ");
+    },
+    [t]
+  );
+
+  const disciplineActionLabel = useCallback(
+    (action: string) => {
+      if (
+        action === "warning" ||
+        action === "strike" ||
+        action === "revoke_warning" ||
+        action === "revoke_strike" ||
+        action === "reset"
+      ) {
+        return t(`disciplineActions.${action}`);
+      }
+      return action.replace(/_/g, " ");
+    },
+    [t]
+  );
+
   const resolutionRoleLabel = useMemo(
     () => ({
       main: t("resolutionRoles.main"),
@@ -88,6 +117,113 @@ export function DelegateFloorActivitySection({ activity }: Props) {
       </div>
 
       <div className="space-y-3">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+            {t("speechesTitle")}
+          </p>
+          {speeches.length === 0 ? (
+            <p className="mt-1.5 text-xs text-brand-muted">{t("noSpeeches")}</p>
+          ) : (
+            <ul className="mt-1.5 space-y-2">
+              {speeches.map((speech) => (
+                <li
+                  key={speech.id}
+                  className="rounded-lg border border-brand-navy/8 bg-brand-paper/70 px-3 py-2 text-xs"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-medium text-brand-navy">
+                      {speech.label?.trim() || t("untitledSpeech")}
+                    </span>
+                    <span className="rounded-full bg-logo-cyan/20 px-2 py-0.5 text-[10px] font-medium text-brand-navy">
+                      {speechStatusLabel(speech.status)}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[10px] text-brand-muted">{formatTimestamp(speech.createdAt)}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+            {t("flagsTitle")}
+          </p>
+          {flags.length === 0 ? (
+            <p className="mt-1.5 text-xs text-brand-muted">{t("noFlags")}</p>
+          ) : (
+            <ul className="mt-1.5 space-y-2">
+              {flags.map((flag) => (
+                <li
+                  key={flag.id}
+                  className="rounded-lg border border-brand-navy/8 bg-brand-paper/70 px-3 py-2 text-xs"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={
+                        flag.kind === "concern"
+                          ? "rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-medium text-amber-900"
+                          : flag.kind === "compliment"
+                            ? "rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-900"
+                            : "rounded-full bg-brand-accent/15 px-2 py-0.5 text-[10px] font-medium text-brand-navy"
+                      }
+                    >
+                      {t(`flagKinds.${flag.kind}`)}
+                    </span>
+                    {flag.active ? (
+                      <span className="text-[10px] text-brand-muted">{t("currentFlag")}</span>
+                    ) : null}
+                  </div>
+                  {flag.reason?.trim() ? (
+                    <p className="mt-1 text-brand-muted whitespace-pre-wrap break-words">
+                      {flag.reason.trim()}
+                    </p>
+                  ) : null}
+                  {flag.createdAt ? (
+                    <p className="mt-1 text-[10px] text-brand-muted">{formatTimestamp(flag.createdAt)}</p>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+            {t("disciplineTitle")}
+          </p>
+          {discipline.length === 0 ? (
+            <p className="mt-1.5 text-xs text-brand-muted">{t("noDiscipline")}</p>
+          ) : (
+            <ul className="mt-1.5 space-y-2">
+              {discipline.map((event) => (
+                <li
+                  key={event.id}
+                  className="rounded-lg border border-brand-navy/8 bg-brand-paper/70 px-3 py-2 text-xs"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-medium text-rose-900">
+                      {disciplineActionLabel(event.action)}
+                    </span>
+                    <span className="text-[10px] text-brand-muted">
+                      {t("disciplineCounts", {
+                        warnings: event.warningCountAfter,
+                        strikes: event.strikeCountAfter,
+                      })}
+                    </span>
+                  </div>
+                  {event.reason?.trim() ? (
+                    <p className="mt-1 text-brand-muted whitespace-pre-wrap break-words">
+                      {event.reason.trim()}
+                    </p>
+                  ) : null}
+                  <p className="mt-1 text-[10px] text-brand-muted">{formatTimestamp(event.createdAt)}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
             {t("motionsTitle")}

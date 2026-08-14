@@ -17,6 +17,7 @@ import {
   mergeAllocationsAcrossSiblingConferences,
   pickCanonicalConferenceRowByAllocationScore,
 } from "@/lib/conference-committee-canonical";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import {
   translateAgendaTopicLabel,
@@ -144,11 +145,12 @@ export default async function SmtAllocationPasswordsPage({
     for (const r of groupRows) resolveToCanonical.set(r.id, primary.id);
   }
 
-  tabRows.sort((a, b) => {
-    const la = [a.committee, a.name].filter(Boolean).join(" — ") || a.id;
-    const lb = [b.committee, b.name].filter(Boolean).join(" — ") || b.id;
-    return la.localeCompare(lb);
-  });
+  tabRows.sort((a, b) =>
+    compareCommitteeRowsByDifficultyThenLabel(
+      { committee: a.committee, name: a.name },
+      { committee: b.committee, name: b.name }
+    )
+  );
 
   const conferenceId =
     conferenceParam && rawList.some((c) => c.id === conferenceParam)

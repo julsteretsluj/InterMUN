@@ -94,6 +94,7 @@ export const SMT_ITEM_FOLDER: Record<string, NavFolderId> = {
   allocationMatrix: "operations",
   allocationPasswords: "operations",
   advisors: "people",
+  delegates: "people",
   notes: "people",
   awards: "people",
   newsroom: "media",

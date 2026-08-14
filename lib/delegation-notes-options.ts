@@ -6,6 +6,7 @@ import {
   mergeAllocationsAcrossSiblingConferences,
 } from "@/lib/conference-committee-canonical";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 export type AllocationRecipientOption = { id: string; country: string };
 export type ChairRecipientOption = { id: string; name: string };
@@ -42,7 +43,7 @@ export function dedupeCommitteeOptionsByLabel<T extends { id: string; label: str
     if (!key || byLabel.has(key)) continue;
     byLabel.set(key, c);
   }
-  return [...byLabel.values()].sort((a, b) => a.label.localeCompare(b.label));
+  return [...byLabel.values()].sort((a, b) => compareCommitteeRowsByDifficultyThenLabel(a, b));
 }
 
 export function buildChairRecipientOptions(

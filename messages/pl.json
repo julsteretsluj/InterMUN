@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "Przeładować"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "np. SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "Podzakładki",
     "home": "Dom",
     "library": "Biblioteka",
-    "mainNavigationAria": "Główna nawigacja"
+    "mainNavigationAria": "Główna nawigacja",
+    "crisis": "Kryzys"
   },
   "dashboardLayout": {
     "helpCenter": "Centrum pomocy",
@@ -838,7 +840,9 @@
     "pointsLog": "• Dziennik punktów",
     "formalMotions": "Wnioski formalne",
     "timer": "Regulator czasowy",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "crisis": "Kryzys",
+    "smtDelegates": "Delegaci"
   },
   "setupPage": {
     "title": "Supabase nie jest skonfigurowany",
@@ -1333,7 +1337,8 @@
       "roomCode": "Kod pokoju",
       "settings": "Ustawienia",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "Raport"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "Wydarzenia i sesje",
     "roomCodes": "Kody pokojowe i krzesła",
     "advisors": "Doradcy",
-    "notes": "Notes",
+    "notes": "Notatki",
     "awards": "Nagrody",
     "allocationMatrix": "Macierz alokacji",
     "allocationPasswords": "Hasła alokacyjne",
     "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "pressCorps": "Korpus Prasowy",
+    "milestones": "Kamienie milowe",
     "profile": "Profil",
     "follow": "Podążać",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "Przewodniki",
+    "delegates": "Delegaci"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "Programy i fundusze",
       "specializedAgencies": "Agencje wyspecjalizowane i powiązane",
       "peacekeepingMissions": "Utrzymywanie pokoju i misje",
-      "foundersMembers": "Założyciele i członkowie"
+      "foundersMembers": "Założyciele i członkowie",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Naciśnij Linki Korpusu"
     },
     "links": {
       "ods": "System dokumentów urzędowych ONZ (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "Specjalne misje polityczne ONZ",
       "memberStates": "Państwa członkowskie ONZ",
       "unSystem": "System ONZ (założyciele i członkowie)",
-      "history": "Historia ONZ"
+      "history": "Historia ONZ",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "Strona internetowa konferencji i portal komisji",
+      "documentsArticles": "ODS, Biblioteka Cyfrowa, aktualności, prasa i rocznik",
+      "legislationTreaties": "Traktaty, karty i prawo międzynarodowe",
+      "mainBodies": "Zgromadzenie Ogólne, Rada Bezpieczeństwa, ECOSOC, MTS i inne",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP i powiązane fundusze",
+      "specializedAgencies": "WHO, UNESCO, Bank Światowy, MOP i partnerzy",
+      "peacekeepingMissions": "Misje pokojowe i specjalne misje polityczne",
+      "foundersMembers": "Państwa członkowskie, system ONZ i historia",
+      "pressCorpsLinks": "Trzy punkty informacyjne dla każdego przydziału Korpusu Prasowego (świat, zdrowie i funkcje)."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "Przypomnienie",
     "privateReminderLabel": "Prywatne przypomnienie (tylko krzesła, zsynchronizowane)",
     "committeeFallback": "Komisja",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "Tworzenie bloku",
       "speechPoisOrPocs": "Mowa punktów POI lub POC",
       "questions": "Pytania",
-      "informalConversations": "Nieformalne rozmowy"
+      "informalConversations": "Nieformalne rozmowy",
+      "sessionProgress": "Postęp sesji (SMT)"
     },
     "concernLabel": "Problem (automatyczny symbol zastępczy)",
     "concernHelpTitle": "Flaga obaw",
@@ -1848,7 +1883,12 @@
       "needAllocation": "Potrzebujesz przydziału, aby wysyłać notatki (lub być przewodniczącym).",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Nie udało się wysłać notatki."
-    }
+    },
+    "sendToSmt": "Wyślij do SMT",
+    "sendToSmtHelp": "Ląduje w sekretariacie skrzynki odbiorczej notatek (Z krzeseł). Użyj tego, aby sprawdzić postęp na koniec sesji.",
+    "progressPrefill": "Właśnie zakończyło się posiedzenie komisji. \n\nPostęp: \n- \n\nWszystko, co SMT powinno monitorować: \n-",
+    "progressComposeHint": "Ta notatka trafi do SMT. Podsumuj, czego dotyczyła sala i co powinien wiedzieć sekretariat.",
+    "progressSent": "Notatka o postępie wysłana do SMT."
   },
   "adminPage": {
     "title": "Administracja stroną internetową",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "Nie znaleziono wierszy danych (potrzebny jest co najmniej kraj/pozycja w każdym wierszu).",
       "importLimitedRows": "Import ograniczony do {max} wierszy. Podziel swój plik.",
       "rowTooLong": "Wiersz za długi: {wiersz}…",
-      "codeTooLongOnRow": "Kod jest za długi w wierszu: {wiersz}"
+      "codeTooLongOnRow": "Kod jest za długi w wierszu: {wiersz}",
+      "chairSeatsCannotBeDeleted": "Miejsca głównego przewodniczącego i współprzewodniczącego pozostają w każdej komisji."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "Najpierw wybierz wydarzenie z kodem konferencji (bramką zdarzenia).",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "Nazwy stanowisk i kody na tabliczkach mogą zmieniać wyłącznie administratorzy witryny."
   },
   "chairAllocationMatrixPage": {
     "intro": "Macierz przydziału komisji dla bieżącej sesji. Jest to informacja tylko do odczytu dla krzeseł i odzwierciedla aktywne przydziały miejsc oraz kody tabliczek.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "Żądany przydział",
       "account": "Konto",
       "actions": "Działania",
-      "score": "Score"
+      "score": "Wynik",
+      "photo": "Zdjęcie",
+      "school": "Szkoła",
+      "party": "Grupa polityczna"
     },
     "noRows": "Nie znaleziono wierszy alokacji dla tego komitetu.",
     "pendingApprovalsTitle": "Oczekujące zatwierdzenie rejestracji",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Macierz alokacji",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "Ruchy",
+    "pointsTitle": "Zwrotnica",
+    "resolutionsTitle": "Postanowienia",
+    "noMotions": "Dla tego delegata nie zarejestrowano żadnych wniosków.",
+    "noPoints": "Dla tego delegata nie zarejestrowano żadnych punktów.",
+    "noResolutions": "Dla tego delegata nie zarejestrowano żadnego zaangażowania w rozstrzygnięcie.",
+    "untitledMotion": "Ruch bez tytułu",
+    "chairLoggedPoint": "Punkt logowany na krześle",
+    "resolutionLink": "Otwórz Dokument Google",
+    "resolutionNoLink": "Brak łącza do dokumentu",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "Proceduralny",
+      "delegate": "Dziennik krzesła"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "Główny zgłaszający",
+      "co": "Współsyłający",
+      "signatory": "Sygnatariusz"
+    },
+    "speechesTitle": "Przemówienia",
+    "flagsTitle": "Komplementy i obawy",
+    "disciplineTitle": "Ostrzeżenia i strajki",
+    "noSpeeches": "Nie nagrano żadnych przemówień tego delegata.",
+    "noFlags": "Nie zarejestrowano żadnych komplementów ani obaw w stosunku do tego delegata.",
+    "noDiscipline": "Dla tego delegata nie zarejestrowano żadnych ostrzeżeń ani ostrzeżeń.",
+    "untitledSpeech": "Przemówienie",
+    "currentFlag": "Aktualny",
+    "speechStatuses": {
+      "waiting": "Czekanie",
+      "current": "Mówienie",
+      "done": "Dostarczony"
+    },
+    "flagKinds": {
+      "compliment": "Komplement",
+      "concern": "Obawa",
+      "reminder": "Przypomnienie"
+    },
+    "disciplineActions": {
+      "warning": "Ostrzeżenie",
+      "strike": "Strajk",
+      "revoke_warning": "Ostrzeżenie cofnięte",
+      "revoke_strike": "Strajk odwołany",
+      "reset": "Nastawić"
+    },
+    "disciplineCounts": "{warnings} ostrzeżeń · {strikes} ostrzeżeń"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "twoja komisja",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "Sala komisji (pełna)",
         "hint": "Wirtualny układ i piętro delegata"
+      },
+      "crisisReport": {
+        "label": "Raport",
+        "hint": "Zgłaszanie incydentów"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "Notatki",
     "noGoogleDocYet": "Nie powiązano jeszcze żadnego Dokumentu Google. Użyj opcji Edytuj, aby dodać adres URL docs.google.com/document/d/….",
     "chairFeedbackHeading": "Informacje zwrotne od krzesła",
-    "noFeedbackYet": "Nie dodano jeszcze żadnej opinii."
+    "noFeedbackYet": "Nie dodano jeszcze żadnej opinii.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "Obecny — może wstrzymać się od głosu (roll)",
       "present_voting": "Obecność i głosowanie (rolka)",
       "unknown": "- (rolka)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "Linki, przyciski i pliki",
+      "help": "Dodaj łącze internetowe, przycisk lub prześlij plik PDF/plik. Każdy, kto otworzy ten przewodnik, będzie mógł z niego skorzystać.",
+      "kindLink": "Połączyć",
+      "kindButton": "Przycisk",
+      "kindFile": "Plik",
+      "label": "Etykieta",
+      "urlPlaceholder": "https://… or /page",
+      "add": "Dodać",
+      "upload": "Prześlij plik PDF lub plik",
+      "uploading": "Przesyłanie…",
+      "remove": "Usunąć",
+      "download": "Otwarte",
+      "empty": "Nie ma jeszcze żadnych linków ani plików.",
+      "errorType": "Użyj pliku PDF, dokumentu pakietu Office, pliku tekstowego lub obrazu.",
+      "errorSize": "Plik jest za duży (maks. 15 MB).",
+      "errorUpload": "Nie można przesłać tego pliku.",
+      "markdownHelp": "W notatkach możesz także wpisać [label](https://url) dla linku lub [label](https://url \"button\") dla przycisku. Wklej adres URL pliku lub prześlij go powyżej."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "Sprawdzam status rolki...",
       "rollPromptSaving": "Oszczędność...",
       "rollPromptPresent": "Obecny",
-      "rollPromptPresentVoting": "Obecny i głosujący"
+      "rollPromptPresentVoting": "Obecny i głosujący",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "Procedura głosowania",
@@ -4241,7 +4382,11 @@
       "timer": "Regulator czasowy",
       "sidebarAnd": "I",
       "announcements": "Ogłoszenia",
-      "sidebarUseSuffix": "— jedno narzędzie na kartę."
+      "sidebarUseSuffix": "— jedno narzędzie na kartę.",
+      "smtProgressReminderTitle": "Zaktualizuj SMT w tej sesji",
+      "smtProgressReminderBody": "Wyślij krótką notatkę o postępie, aby sekretariat wiedział, jak poszła komisja i jakie działania należy podjąć.",
+      "smtProgressReminderWrite": "Napisz notatkę",
+      "smtProgressReminderDismiss": "Później"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "Sesja zakończona — zaktualizuj SMT",
+      "reminderSessionEnd": "{title} miał zakończyć się o {start}. Wyślij do SMT krótką notatkę o postępie.",
+      "writeSmtNote": "Napisz notatkę"
     },
     "history": {
       "title": "Historia sesji",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "Nie ma jeszcze miejsc na nominacje dla tej komisji.",
+    "stepProgress": "Nominacja {current} z {total}",
+    "requiredProgress": "{done}/{total} wymagane miejsca zostały ukończone",
+    "gotoStep": "Przejdź do {label}",
+    "lockedTitle": "Najpierw zakończ każdą kartę delegata",
+    "lockedBody": "Wypełnij powyższy rubryk sesji dla każdego siedzącego delegata, a następnie wróć tutaj, aby nominować nagrody po jednym miejscu na raz.",
+    "optional": "fakultatywny",
+    "submittedLocked": "Przesłano do SMT — edycja zablokowana.",
+    "topSuggestions": "Top 5 z rubryki sesji",
+    "topSuggestionsHint": "Najwyższe sumy matryc w tej komisji. Wybierz jeden lub wyszukaj poniżej.",
+    "noSuggestions": "Nie ma jeszcze rankingowych delegatów. Najpierw oceń macierz lub wyszukaj według nazwy.",
+    "searchLabel": "Szukaj delegatów",
+    "searchPlaceholder": "Nazwa lub przydział",
+    "searchEmpty": "Żaden delegat nie pasuje do tego wyszukiwania.",
+    "selectedNominee": "Wybrany kandydat",
+    "pickNomineeHint": "Wybierz kandydata z 5 najlepszych lub wyszukaj, aby otworzyć jego rubrykę i dziennik.",
+    "rubricHeading": "Rubryka nominacji",
+    "rubricTotal": "Suma rubryk: {total}/{max} (punktacja według kryteriów {scored}/{criteria} — 1–8 na kryterium)",
+    "evidenceLabel": "Oświadczenie o potwierdzeniu/dowodzie",
+    "evidencePlaceholder": "Przytocz konkretne dowody (sporządzone klauzule, wynegocjowane kompromisy, kluczowe interwencje). Co najmniej {min} znaków — wymagane, aby SMT mogło zatwierdzić.",
+    "previous": "Poprzedni",
+    "skipOptional": "Pomiń opcjonalne miejsce",
+    "next": "Następny",
+    "locked": "Zamknięty",
+    "matrixRequired": "Najpierw wymagana jest matryca",
+    "saving": "Oszczędność…",
+    "saveAndNext": "Zapisz i dalej",
+    "save": "Ratować",
+    "allSlotsSummary": "Wszystkie miejsca na nominacje",
+    "statusDone": "Zrobione",
+    "statusTodo": "Zrobić",
+    "errors": {
+      "selectNominee": "Wybierz kandydata na ten slot.",
+      "completeRubric": "Przed zapisaniem wybierz pasmo dla każdego kryterium.",
+      "evidenceMin": "Dodaj co najmniej {min} znaków dowodu."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Całkowite ukończenie nagród",
+    "completeCount": "{completed}/{total} ukończone",
+    "requiredLabel": "Postęp (wymagane)",
+    "optionalSlots": "Opcjonalne miejsca: {completed}/{total} wypełnione"
+  },
+  "chairAwardsSubmit": {
+    "title": "Prześlij do SMT",
+    "intro": "Zapisanie miejsca powoduje jedynie zapisanie wersji roboczej; SMT nie zobaczy tego, dopóki nie prześlesz poniższej partii. Po zapełnieniu wymaganych miejsc wyślij partię do SMT w celu sprawdzenia. Automatyczne przesyłanie jest również uruchamiane po {deadline} (UTC), kiedy otwierasz tę stronę, lub poprzez zaplanowane zadanie, jeśli Twoje wdrożenie to konfiguruje.",
+    "requiredSlotsIncomplete": "Ukończono wymagane sloty: {done}/{total} — dokończ resztę, a następnie prześlij, aby SMT mogło je sprawdzić.",
+    "requiredSlotsReady": "Wymagane miejsca są kompletne: {done}/{total} — partia nominacji jest gotowa (upewnij się, że powyższa macierz delegatów jest kompletna).",
+    "matrixIncomplete": "Matryca delegatów (każdy delegat siedzący): {done}/{total} — przed przesłaniem punktacji dla każdego delegata powyżej.",
+    "matrixComplete": "Macierz delegatów (każdy delegat siedzący): {done}/{total} – kompletna.",
+    "alreadySubmitted": "Przesłano do SMT{when}. Edycja jest zablokowana; skontaktuj się z SMT, jeśli potrzebujesz zmiany.",
+    "submittedAt": "— {time}",
+    "submitButton": "Zgłaszajcie nominacje do SMT",
+    "submitting": "Przedkładający…",
+    "needComplete": "Wypełnij wszystkie wymagane miejsca na nominacje i matrycę delegatów, a następnie prześlij.",
+    "deadlinePassed": "Termin minął — prześlij teraz, jeśli jeszcze tego nie zrobiłeś."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "Nie masz jeszcze miejsca w komisji. Poproś sekretariat o przypisanie Cię do matrycy alokacji, a następnie wróć tutaj.",
+    "intro": "Każdy komitet posiada kod komitetu w ramach swojej konferencji (druga bramka po wpisaniu przez delegatów kodu konferencji). Kody muszą być unikalne w ramach tego samego wydarzenia konferencyjnego.",
+    "testingOverride": "Włączono obejście testów: możesz przełączać kody komisji między komisjami i zarządzać nimi bez sprawdzania przydziału miejsc.",
+    "chairScope": "Na podwyższeniu widzisz tylko komisje, w których masz miejsce. Zapisanie powoduje przejście do Twojego profilu; delegaci, którzy przeszli już przez bramę komisji, pozostają zalogowani do czasu wylogowania.",
+    "staffAfterSave": "Po zapisaniu możesz wejść do tego komitetu lub udostępnić kod na podium."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Kopiuj listę (TSV)",
+    "copied": "Skopiowano tabelę do schowka.",
+    "helpTitle": "Kody logowania do alokacji",
+    "helpBody": "Są to plakietki z kodami przydziału używane przez delegatów i przewodniczących podczas bramki z kodami alokacji. Kody może zmienić wyłącznie administrator witryny.",
+    "copyHeader": "Konferencja: {conference}",
+    "copyColumns": "Kod delegata krajowego",
+    "columnCountry": "Kraj / przydział",
+    "columnDelegate": "Delegat (przydział)",
+    "columnCode": "Hasło / kod",
+    "codeFieldHelpTitle": "Pole hasła/kodu",
+    "codeFieldHelpBody": "Delegaci wprowadzają ten kod dla przypisanego im przydziału. Tylko administrator witryny może to zmienić.",
+    "empty": "Nie ma jeszcze przydziałów na tę konferencję."
+  },
+  "chairSessionError": {
+    "title": "Nie udało się wczytać piętra sesji",
+    "fallback": "Wystąpił nieoczekiwany błąd podczas ładowania elementów sterujących sesji przewodniczącego.",
+    "reference": "Referencja: {digest}",
+    "backToDashboard": "Powrót do deski rozdzielczej krzesła"
+  },
+  "smtDelegatesPage": {
+    "title": "Delegaci",
+    "intro": "Wyszukaj każdego połączonego delegata w tym wydarzeniu według nazwiska, przydziału, adresu e-mail lub komitetu. Otwórz kartę ze zdjęciem i profilem tej osoby.",
+    "selectEventFirst": "Najpierw wybierz aktywne wydarzenie konferencyjne.",
+    "enterConferenceCode": "Wprowadź kod konferencji",
+    "searchLabel": "Szukaj delegatów",
+    "searchPlaceholder": "Imię i nazwisko, przydział, adres e-mail lub komisja",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "Nie ma jeszcze połączonych delegatów w tym wydarzeniu.",
+    "noMatches": "Żaden delegat nie pasuje do tego wyszukiwania.",
+    "unnamed": "Bezimienny delegat"
   }
 }

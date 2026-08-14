@@ -38,7 +38,7 @@ export function ChairDelegateApprovalByEmailForm({
         <input type="hidden" name="conference_id" value={conferenceId} />
         <div>
           <div className="mb-1 flex items-center justify-between gap-2">
-            <label className="block text-xs text-brand-muted">Delegate email</label>
+            <label className="block text-xs text-brand-muted">{t("delegateEmailLabel")}</label>
             <HelpButton title={t("delegateEmailLabel")}>
               {t("delegateEmailHelp")}
             </HelpButton>

@@ -14,6 +14,7 @@ import type { AwardAssignment } from "@/types/database";
 import { Trash2, Plus, Award } from "lucide-react";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
 import { useTranslations } from "next-intl";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
@@ -138,7 +139,12 @@ export function AwardsManagerClient({
     if (form.recipient_committee_id) neededIds.add(form.recipient_committee_id);
     const extras = conferences.filter((c) => isConferenceEventPlaceholderRow(c) && neededIds.has(c.id));
     const merged = [...base, ...extras];
-    merged.sort((a, b) => committeeOptionLabel(a).localeCompare(committeeOptionLabel(b)));
+    merged.sort((a, b) =>
+      compareCommitteeRowsByDifficultyThenLabel(
+        { committee: a.committee, name: a.name },
+        { committee: b.committee, name: b.name }
+      )
+    );
     return merged;
   }, [
     conferences,

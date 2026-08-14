@@ -20,6 +20,7 @@
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
     "clear": "Clear",
+    "reload": "Reload",
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
@@ -852,7 +853,7 @@
     "guides": "Guides",
     "committeeCodes": "Committee codes (chair / SMT)",
     "committeeFlowChecklist": "Session progress",
-    "officialUnLinks": "Official UN links",
+    "officialUnLinks": "Official links",
     "committeeRoom": "Committee room",
     "history": "History",
     "newsroom": "Newsroom",
@@ -872,7 +873,8 @@
     "pointsLog": "• Points log",
     "formalMotions": "Formal motions",
     "timer": "Timer",
-    "smtProfile": "Profile"
+    "smtProfile": "Profile",
+    "smtDelegates": "Delegates"
   },
   "setupPage": {
     "title": "Supabase is not configured",
@@ -1146,8 +1148,8 @@
         "hint": "Session scratch pad"
       },
       "officialLinks": {
-        "label": "Official UN links",
-        "hint": "Documents, bodies, programmes"
+        "label": "Official links",
+        "hint": "SEAMUN, UN bodies, research"
       },
       "chairEmails": {
         "label": "Chair emails",
@@ -1362,6 +1364,7 @@
       "voting": "Voting",
       "score": "Score",
       "crisis": "Crisis",
+      "crisisSlides": "Crisis slides",
       "crisisReport": "Report",
       "archive": "Archive",
       "notesModeration": "Note review",
@@ -1376,6 +1379,7 @@
     "eventSessions": "Event & sessions",
     "roomCodes": "Room codes & chairs",
     "advisors": "Advisors",
+    "delegates": "Delegates",
     "notes": "Notes",
     "awards": "Awards",
     "allocationMatrix": "Allocation matrix",
@@ -1458,8 +1462,13 @@
     "attribution": "Headlines from {source} (news.un.org), refreshed automatically."
   },
   "officialLinks": {
-    "intro": "Documents, treaties, main bodies, programmes, missions, and member info. Opens in a new tab.",
+    "intro": "Browse by category — SEAMUN conference sites, UN documents, bodies, programmes, and more. Each library opens links in a new tab.",
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
     "groups": {
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "Press Corps Links",
       "documentsArticles": "Documents & articles",
       "legislationTreaties": "Legislation & treaties",
       "mainBodies": "Main bodies",
@@ -1468,7 +1477,20 @@
       "peacekeepingMissions": "Peacekeeping & missions",
       "foundersMembers": "Founders & members"
     },
+    "categoryHints": {
+      "seamun": "Conference website and committee portal",
+      "pressCorpsLinks": "Three news desks for each Press Corps allocation (world, health, and features).",
+      "documentsArticles": "ODS, Digital Library, news, press, and yearbook",
+      "legislationTreaties": "Treaties, charter, and international law",
+      "mainBodies": "GA, Security Council, ECOSOC, ICJ, and more",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP, and related funds",
+      "specializedAgencies": "WHO, UNESCO, World Bank, ILO, and partners",
+      "peacekeepingMissions": "Peacekeeping and special political missions",
+      "foundersMembers": "Member states, UN system, and history"
+    },
     "links": {
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
       "ods": "UN Official Document System (ODS)",
       "digitalLibrary": "UN Digital Library",
       "unNews": "UN News",
@@ -1485,6 +1507,7 @@
       "secretariat": "UN Secretariat",
       "trusteeship": "UN Trusteeship Council",
       "undp": "UNDP",
+      "unicef": "UNICEF",
       "unhcr": "UNHCR",
       "wfp": "WFP (World Food Programme)",
       "unfpa": "UNFPA",
@@ -1492,6 +1515,7 @@
       "unwomen": "UN Women",
       "unhabitat": "UN-Habitat",
       "who": "WHO",
+      "unesco": "UNESCO",
       "iom": "IOM (International Organization for Migration)",
       "unodc": "UN Office on Drugs and Crime (UNODC)",
       "unoda": "UN Office for Disarmament Affairs (UNODA)",
@@ -1506,7 +1530,19 @@
       "memberStates": "UN Member States",
       "unSystem": "UN System (founders & members)",
       "history": "UN History"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Your chamber’s SEAMUN portal (for example disec.seamun.com) when assigned as chair or delegate."
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
   },
   "timersWidget": {
     "timer": "Timer",
@@ -1643,12 +1679,16 @@
     "notesSyncSuffix": "— chair notes sync for this committee (all chair accounts and devices).",
     "compliment": "Compliment",
     "concern": "Concern",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
     "adding": "Adding...",
     "addToSpeakerList": "Add to speaker list",
     "reminder": "Reminder",
     "privateReminderLabel": "Private reminder (chairs only, synced)",
     "committeeFallback": "Committee",
-    "dash": "—"
+    "dash": "—",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -2574,8 +2614,11 @@
     "columns": {
       "allocation": "Allocation",
       "flag": "Flag",
+      "photo": "Photo",
+      "party": "Political group",
       "email": "Email",
       "name": "Name",
+      "school": "School",
       "grade": "Grade",
       "notes": "Notes",
       "score": "Score",
@@ -2589,7 +2632,38 @@
     "noPendingRequests": "No pending requests.",
     "unknownAllocation": "Unknown allocation",
     "approve": "Approve",
-    "reject": "Reject"
+    "reject": "Reject",
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "committee": "Committee",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes"
+      }
+    },
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "Allocation matrix",
@@ -2604,20 +2678,24 @@
       "submissionRulePrefix": "Submission to SMT is manual (button below) or automatic after",
       "submissionRuleSuffix": "UTC when you next open this page (if all required slots are complete).",
       "steps": {
-        "step1": "Score every seated delegate in the matrix (required for all, not only nominees).",
-        "step2": "Select a nominee for each required Top slot.",
-        "step3": "Pick exactly one band for every criterion row.",
+        "step1": "Open each delegate card and complete the session rubric (required for everyone, not only nominees).",
+        "step2": "When every card is scored, nominate awards one slot at a time.",
+        "step3": "Use the top-5 suggestions or search to pick a nominee, then score that nomination rubric.",
         "step4": "Add concise evidence from debate, drafting, and diplomacy.",
         "step5": "When ready, submit the full batch to SMT."
       }
     },
     "matrixGate": {
-      "title": "Finish the delegate matrix before nominations",
-      "body": "Every linked country seat must have a complete session rubric in the matrix above — whether or not you plan to nominate that delegate for an award."
+      "title": "Finish every delegate card before nominations",
+      "body": "Every linked country seat must have a complete session rubric — whether or not you plan to nominate that delegate for an award. Click a card to open the scoring rubric."
     },
     "matrixChairOnly": {
-      "title": "Every-delegate matrix is chair-only",
+      "title": "Every-delegate scoring is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     },
     "ranking": {
       "title": "Committee ranking (matrix totals)",
@@ -2695,19 +2773,130 @@
     "nextCriterion": "Next criterion",
     "guidedAutoAdvanceNote": "Advances to the next criterion and delegate when saved."
   },
+  "chairAwardsNominations": {
+    "empty": "No nomination slots for this committee yet.",
+    "stepProgress": "Nomination {current} of {total}",
+    "requiredProgress": "{done}/{total} required slots complete",
+    "gotoStep": "Go to {label}",
+    "lockedTitle": "Finish every delegate card first",
+    "lockedBody": "Complete the session rubric for every seated delegate above, then return here to nominate awards one slot at a time.",
+    "optional": "optional",
+    "submittedLocked": "Submitted to SMT — editing locked.",
+    "topSuggestions": "Top 5 from the session rubric",
+    "topSuggestionsHint": "Highest matrix totals in this committee. Pick one, or search below.",
+    "noSuggestions": "No ranked delegates yet. Score the matrix first, or search by name.",
+    "searchLabel": "Search delegates",
+    "searchPlaceholder": "Name or allocation",
+    "searchEmpty": "No delegates match that search.",
+    "selectedNominee": "Selected nominee",
+    "pickNomineeHint": "Choose a nominee from the top 5 or search to open their rubric and log.",
+    "rubricHeading": "Nomination rubric",
+    "rubricTotal": "Rubric total: {total}/{max} ({scored}/{criteria} criteria scored — 1–8 per criterion)",
+    "evidenceLabel": "Statement of confirmation / evidence",
+    "evidencePlaceholder": "Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions). At least {min} characters — required before SMT can approve.",
+    "previous": "Previous",
+    "skipOptional": "Skip optional slot",
+    "next": "Next",
+    "locked": "Locked",
+    "matrixRequired": "Matrix required first",
+    "saving": "Saving…",
+    "saveAndNext": "Save & next",
+    "save": "Save",
+    "allSlotsSummary": "All nomination slots",
+    "statusDone": "Done",
+    "statusTodo": "To do",
+    "errors": {
+      "selectNominee": "Select a nominee for this slot.",
+      "completeRubric": "Pick a band for every criterion before saving.",
+      "evidenceMin": "Add at least {min} characters of evidence."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "Overall awards completion",
+    "completeCount": "{completed}/{total} complete",
+    "requiredLabel": "Progress (required)",
+    "optionalSlots": "Optional slots: {completed}/{total} filled"
+  },
+  "chairAwardsSubmit": {
+    "title": "Submit to SMT",
+    "intro": "Saving a slot only writes a draft; SMT does not see it until you submit the batch below. When required slots are complete, send the batch to SMT for review. Automatic submission also runs after {deadline} (UTC) when you open this page, or via a scheduled job if your deployment configures it.",
+    "requiredSlotsIncomplete": "Required slots complete: {done}/{total} — finish the rest, then submit so SMT can review.",
+    "requiredSlotsReady": "Required slots complete: {done}/{total} — nomination batch is ready (ensure the delegate matrix above is complete).",
+    "matrixIncomplete": "Delegate matrix (every seated delegate): {done}/{total} — score each delegate above before submitting.",
+    "matrixComplete": "Delegate matrix (every seated delegate): {done}/{total} — complete.",
+    "alreadySubmitted": "Submitted to SMT{when}. Editing is locked; contact SMT if you need a change.",
+    "submittedAt": " — {time}",
+    "submitButton": "Submit nominations to SMT",
+    "submitting": "Submitting…",
+    "needComplete": "Complete every required nomination slot and the delegate matrix, then submit.",
+    "deadlinePassed": "Deadline passed — submit now if you have not already."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "You don't have a committee seat yet. Ask secretariat to assign you on the allocation matrix, then return here.",
+    "intro": "Each committee has a committee code within its conference (second gate after delegates enter the conference code). Codes must be unique within the same conference event.",
+    "testingOverride": "Testing override enabled: you can switch and manage committee codes across committees without seat allocation checks.",
+    "chairScope": "As dais, you only see committees where you have a seat. Saving sends you to your profile; delegates who already passed the committee gate stay signed in until they log out.",
+    "staffAfterSave": "After saving, you can enter that committee or share the code on the dais."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "Copy list (TSV)",
+    "copied": "Copied table to clipboard.",
+    "helpTitle": "Allocation sign-in codes",
+    "helpBody": "These are per-allocation placard codes used by delegates and chairs during the allocation-code gate. Codes can only be changed by a site admin.",
+    "copyHeader": "Conference: {conference}",
+    "copyColumns": "Country\tDelegate\tCode",
+    "columnCountry": "Country / allocation",
+    "columnDelegate": "Delegate (allocation)",
+    "columnCode": "Password / code",
+    "codeFieldHelpTitle": "Password / code field",
+    "codeFieldHelpBody": "Delegates enter this code for their assigned allocation. Only a site admin can change it.",
+    "empty": "No allocations for this conference yet."
+  },
+  "chairSessionError": {
+    "title": "Session floor failed to load",
+    "fallback": "An unexpected error occurred while loading chair session controls.",
+    "reference": "Reference: {digest}",
+    "backToDashboard": "Back to chair dashboard"
+  },
   "chairAwardsFloorActivity": {
-    "title": "Floor activity",
-    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "title": "Delegate log",
+    "description": "Speeches, motions, points, compliments, concerns, warnings, strikes, and resolution roles for this delegate.",
     "motionsTitle": "Motions",
     "pointsTitle": "Points",
     "resolutionsTitle": "Resolutions",
+    "speechesTitle": "Speeches",
+    "flagsTitle": "Compliments & concerns",
+    "disciplineTitle": "Warnings & strikes",
     "noMotions": "No motions recorded for this delegate.",
     "noPoints": "No points recorded for this delegate.",
     "noResolutions": "No resolution involvement recorded for this delegate.",
+    "noSpeeches": "No speeches recorded for this delegate.",
+    "noFlags": "No compliments or concerns recorded for this delegate.",
+    "noDiscipline": "No warnings or strikes recorded for this delegate.",
     "untitledMotion": "Untitled motion",
+    "untitledSpeech": "Speech",
     "chairLoggedPoint": "Chair-logged point",
     "resolutionLink": "Open Google Doc",
     "resolutionNoLink": "No document link",
+    "currentFlag": "Current",
+    "speechStatuses": {
+      "waiting": "Waiting",
+      "current": "Speaking",
+      "done": "Delivered"
+    },
+    "flagKinds": {
+      "compliment": "Compliment",
+      "concern": "Concern",
+      "reminder": "Reminder"
+    },
+    "disciplineActions": {
+      "warning": "Warning",
+      "strike": "Strike",
+      "revoke_warning": "Warning revoked",
+      "revoke_strike": "Strike revoked",
+      "reset": "Reset"
+    },
+    "disciplineCounts": "{warnings} warning(s) · {strikes} strike(s)",
     "pointKinds": {
       "session": "Procedural",
       "delegate": "Chair log"
@@ -2717,6 +2906,18 @@
       "co": "Co-submitter",
       "signatory": "Signatory"
     }
+  },
+  "smtDelegatesPage": {
+    "title": "Delegates",
+    "intro": "Search every linked delegate in this event by name, allocation, email, or committee. Open a card for their photo and profile.",
+    "selectEventFirst": "Choose an active conference event first.",
+    "enterConferenceCode": "Enter conference code",
+    "searchLabel": "Search delegates",
+    "searchPlaceholder": "Name, allocation, email, or committee",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "No linked delegates in this event yet.",
+    "noMatches": "No delegates match that search.",
+    "unnamed": "Unnamed delegate"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "your committee",
@@ -2802,8 +3003,8 @@
         "hint": "Committee documents"
       },
       "officialUnLinks": {
-        "label": "Official UN links",
-        "hint": "Documents & bodies"
+        "label": "Official links",
+        "hint": "SEAMUN, UN bodies & research"
       },
       "roomCode": {
         "label": "Room code",
@@ -3188,7 +3389,7 @@
     "types": {
       "position_paper": "Position paper",
       "chair_report": "Chair report",
-      "rop": "RoP",
+      "rop": "Rules of Procedure (RoP)",
       "award_criteria": "Award criteria",
       "chair_notes": "Chair notes",
       "prep_doc": "Prep document"
@@ -3209,12 +3410,16 @@
     "sidebarDocumentLabel": "Document",
     "sections": {
       "chairReports": "Chair reports",
-      "rop": "RoP",
+      "rop": "Rules of Procedure",
       "awardCriteria": "Award criteria",
       "prepDocuments": "Prep documents",
       "chairNotes": "Chair notes",
       "otherDocuments": "Other documents"
     },
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link.",
     "untitled": "Untitled",
     "linkedDocumentHeading": "Linked document",
     "notesHeading": "Notes",
@@ -3372,6 +3577,12 @@
     "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
     "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll.",
     "closeAgendaBallot": "Close agenda ballot",
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)",
     "voteTypes": {
       "motion": "Motion",
       "amendment": "Amendment",
@@ -4419,6 +4630,8 @@
       "purposeHelpBody": "This text is appended to your country name so chairs can see why you are requesting the floor.",
       "purposePlaceholder": "e.g. support + amendment overview",
       "requesting": "Requesting...",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor.",
       "rollPromptTitle": "Chair approval required",
       "rollPromptBodyPickStatus": "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed.",
       "rollPromptBodyWaitSessionStart": "Waiting for the chair to start the committee session.",
@@ -4941,7 +5154,7 @@
             "title": "Delegate scoring before secretariat review",
             "description": "Rate each delegate against the rubric during session. Chair nominations flow to secretariat with evidence attached for final Best Delegate decisions.",
             "bullet1": "Six SEAMUN criteria scored 1–8 per delegate",
-            "bullet2": "List or guided scoring with autosave",
+            "bullet2": "Delegate cards with rubric popup and autosave",
             "bullet3": "Feeds secretariat awards review queue",
             "previewLabel": "Awards desk"
           }

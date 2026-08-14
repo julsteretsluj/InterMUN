@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "重新載入"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "例如SEAMUNI2027",
@@ -574,7 +575,8 @@
     "subtabs": "子選項卡",
     "home": "家",
     "library": "圖書館",
-    "mainNavigationAria": "主導航"
+    "mainNavigationAria": "主導航",
+    "crisis": "危機"
   },
   "dashboardLayout": {
     "helpCenter": "幫助中心",
@@ -838,7 +840,9 @@
     "pointsLog": "• 積分記錄",
     "formalMotions": "正式動議",
     "timer": "定時器",
-    "smtProfile": "輪廓"
+    "smtProfile": "輪廓",
+    "crisis": "危機",
+    "smtDelegates": "代表們"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1333,7 +1337,8 @@
       "roomCode": "房間代碼",
       "settings": "設定",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "報告"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "活動和會議",
     "roomCodes": "房間代碼和椅子",
     "advisors": "顧問",
-    "notes": "Notes",
+    "notes": "筆記",
     "awards": "獎項",
     "allocationMatrix": "分配矩陣",
     "allocationPasswords": "分配密碼",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "編輯部",
+    "pressCorps": "記者團",
+    "milestones": "里程碑",
     "profile": "輪廓",
     "follow": "跟隨",
     "hubAbbrev": "表面貼裝技術",
-    "guides": "Guides"
+    "guides": "指南",
+    "delegates": "代表們"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "計劃和基金",
       "specializedAgencies": "專門機構及相關機構",
       "peacekeepingMissions": "維持和平與特派團",
-      "foundersMembers": "創辦人及成員"
+      "foundersMembers": "創辦人及成員",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "新聞團連結"
     },
     "links": {
       "ods": "聯合國正式文件系統（ODS）",
@@ -1471,7 +1479,29 @@
       "spm": "聯合國特別政治任務",
       "memberStates": "聯合國會員國",
       "unSystem": "聯合國體系（創始人和成員）",
-      "history": "聯合國歷史"
+      "history": "聯合國歷史",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "會議網站和委員會門戶",
+      "documentsArticles": "ODS、數位圖書館、新聞、新聞和年鑑",
+      "legislationTreaties": "條約、憲章和國際法",
+      "mainBodies": "大會、安理會、經社理事會、國際法院等",
+      "programmesFunds": "開發計畫署、兒童基金會、難民署、糧食計畫署和相關基金",
+      "specializedAgencies": "世界衛生組織、聯合國教科文組織、世界銀行、國際勞工組織和合作夥伴",
+      "peacekeepingMissions": "維持和平和特別政治任務",
+      "foundersMembers": "會員國、聯合國系統和歷史",
+      "pressCorpsLinks": "每個新聞團分配三個新聞台（世界、健康和專題）。"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "提醒",
     "privateReminderLabel": "私人提醒（限椅子，已同步）",
     "committeeFallback": "委員會",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "團塊形成",
       "speechPoisOrPocs": "語音 POI 或 POC",
       "questions": "問題",
-      "informalConversations": "非正式談話"
+      "informalConversations": "非正式談話",
+      "sessionProgress": "會話進度 (SMT)"
     },
     "concernLabel": "關注（自動佔位符）",
     "concernHelpTitle": "注意標誌",
@@ -1848,7 +1883,12 @@
       "needAllocation": "您需要分配來發送筆記（或擔任主席）。",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "發送便條失敗。"
-    }
+    },
+    "sendToSmt": "發送至SMT",
+    "sendToSmtHelp": "登陸秘書處備註收件匣（來自主席）。 使用它來獲取會話結束的進度。",
+    "progressPrefill": "委員會會議剛結束。 \n\n進展：\n-\n\nSMT 應跟進的任何事項：\n-",
+    "progressComposeHint": "此註釋將寄至 SMT。 總結會議討論的內容以及秘書處應該了解的內容。",
+    "progressSent": "進度說明已發送至 SMT。"
   },
   "adminPage": {
     "title": "網站管理",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "未找到資料行（每行至少需要一個國家/地區/位置）。",
       "importLimitedRows": "導入限制為 {max} 行。 分割你的文件。",
       "rowTooLong": "行太長：{行}...",
-      "codeTooLongOnRow": "行中的程式碼太長：{row}"
+      "codeTooLongOnRow": "行中的程式碼太長：{row}",
+      "chairSeatsCannotBeDeleted": "每個委員會均保留主席和聯合主席席位。"
     },
     "smtStaffAccess": {
       "chooseEventFirst": "首先選擇具有會議代碼（活動門）的活動。",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "職位名稱和標誌代碼只能由網站管理員更改。"
   },
   "chairAllocationMatrixPage": {
     "intro": "目前會議的委員會分配矩陣。 這對於椅子來說是唯讀的，反映了有效的座位分配和標誌代碼。",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "請求的分配",
       "account": "帳戶",
       "actions": "行動",
-      "score": "Score"
+      "score": "分數",
+      "photo": "照片",
+      "school": "學校",
+      "party": "政治團體"
     },
     "noRows": "沒有找到該委員會的分配行。",
     "pendingApprovalsTitle": "等待註冊批准",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "分配矩陣",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "議案",
+    "pointsTitle": "積分",
+    "resolutionsTitle": "決議",
+    "noMotions": "沒有記錄該代表的動議。",
+    "noPoints": "該代表沒有記錄任何分數。",
+    "noResolutions": "該代表沒有參與決議的記錄。",
+    "untitledMotion": "無標題動議",
+    "chairLoggedPoint": "主席記錄點",
+    "resolutionLink": "開啟Google文檔",
+    "resolutionNoLink": "沒有文件連結",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "程式",
+      "delegate": "椅子原木"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "主要提交者",
+      "co": "共同提交者",
+      "signatory": "簽署人"
+    },
+    "speechesTitle": "演講",
+    "flagsTitle": "讚揚和擔憂",
+    "disciplineTitle": "警告和罷工",
+    "noSpeeches": "沒有記錄該代表的發言。",
+    "noFlags": "沒有記錄到對該代表的讚揚或擔憂。",
+    "noDiscipline": "沒有對該代表的警告或罷工記錄。",
+    "untitledSpeech": "演講",
+    "currentFlag": "目前的",
+    "speechStatuses": {
+      "waiting": "等待",
+      "current": "請講",
+      "done": "發表"
+    },
+    "flagKinds": {
+      "compliment": "讚揚",
+      "concern": "憂慮",
+      "reminder": "提醒"
+    },
+    "disciplineActions": {
+      "warning": "警告",
+      "strike": "罷工",
+      "revoke_warning": "警告撤銷",
+      "revoke_strike": "罷工被撤銷",
+      "reset": "重置"
+    },
+    "disciplineCounts": "{warnings} 警告 · {strikes} 罷工"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "你的委員會",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "委員會室（已滿）",
         "hint": "虛擬佈局和代表樓層"
+      },
+      "crisisReport": {
+        "label": "報告",
+        "hint": "事件報告"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "筆記",
     "noGoogleDocYet": "尚未連結 Google 文件。 使用「編輯」新增 docs.google.com/document/d/... 網址。",
     "chairFeedbackHeading": "主席回饋",
-    "noFeedbackYet": "尚未添加反饋。"
+    "noFeedbackYet": "尚未添加反饋。",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "出席 — 可以棄權（投擲）",
       "present_voting": "出席並投票（點名）",
       "unknown": "- （卷）"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "連結、按鈕和文件",
+      "help": "新增網頁連結、按鈕或上傳 PDF/檔案。 任何打開本指南的人都可以使用它們。",
+      "kindLink": "關聯",
+      "kindButton": "按鈕",
+      "kindFile": "文件",
+      "label": "標籤",
+      "urlPlaceholder": "https://… or /page",
+      "add": "添加",
+      "upload": "上傳 PDF 或文件",
+      "uploading": "正在上傳...",
+      "remove": "消除",
+      "download": "打開",
+      "empty": "還沒有連結或文件。",
+      "errorType": "使用 PDF、Office 文件、文字或圖像檔案。",
+      "errorSize": "文件太大（最大 15 MB）。",
+      "errorUpload": "無法上傳該文件。",
+      "markdownHelp": "在註解中，您也可以為連結編寫 [label](https://url)，或為按鈕編寫 [label](https://url \"button\")。 在上面貼上文件 URL 或上傳。"
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "正在檢查您的磁碟區狀態...",
       "rollPromptSaving": "儲存...",
       "rollPromptPresent": "展示",
-      "rollPromptPresentVoting": "出席並投票"
+      "rollPromptPresentVoting": "出席並投票",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "投票程序",
@@ -4241,7 +4382,11 @@
       "timer": "定時器",
       "sidebarAnd": "和",
       "announcements": "公告",
-      "sidebarUseSuffix": "— 每個選項卡一個工具。"
+      "sidebarUseSuffix": "— 每個選項卡一個工具。",
+      "smtProgressReminderTitle": "更新此會話的 SMT",
+      "smtProgressReminderBody": "發送簡短的進度說明，以便秘書處了解委員會的進展以及後續工作。",
+      "smtProgressReminderWrite": "寫一個註釋",
+      "smtProgressReminderDismiss": "之後"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "會議結束 — 更新 SMT",
+      "reminderSessionEnd": "{title}原定於{start}結束。 向 SMT 發送簡短的進度說明。",
+      "writeSmtNote": "寫一個註釋"
     },
     "history": {
       "title": "會話歷史記錄",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "該委員會尚無提名名額。",
+    "stepProgress": "{total} 提名{current}",
+    "requiredProgress": "{done}/{total} 所需槽位已完成",
+    "gotoStep": "前往{label}",
+    "lockedTitle": "首先完成每張代表卡",
+    "lockedBody": "為上述每位就座代表完成會議標題，然後再返回此處一次提名一個獎項。",
+    "optional": "選修的",
+    "submittedLocked": "已提交至 SMT — 編輯已鎖定。",
+    "topSuggestions": "會議標題的前 5 名",
+    "topSuggestionsHint": "該委員會中矩陣總數最高的。 選擇一個，或在下面搜尋。",
+    "noSuggestions": "尚無代表排名。 首先對矩陣進行評分，或依名稱搜尋。",
+    "searchLabel": "搜尋代表",
+    "searchPlaceholder": "名稱或分配",
+    "searchEmpty": "沒有代表與該搜尋相符。",
+    "selectedNominee": "選定的提名人",
+    "pickNomineeHint": "從前 5 名中選擇一名被提名者，或搜尋以開啟他們的標題和日誌。",
+    "rubricHeading": "提名細則",
+    "rubricTotal": "評分標準總計：{total}/{max}（{scored}/{criteria} 標準評分 — 每個標準 1-8 分）",
+    "evidenceLabel": "確認/證據聲明",
+    "evidencePlaceholder": "引用具體的證據（起草的條款、達成的妥協、關鍵幹預措施）。 至少 {min} 個字元 — SMT 批准之前需要。",
+    "previous": "以前的",
+    "skipOptional": "跳過可選插槽",
+    "next": "下一個",
+    "locked": "鎖定",
+    "matrixRequired": "首先需要矩陣",
+    "saving": "保存…",
+    "saveAndNext": "儲存並下一步",
+    "save": "節省",
+    "allSlotsSummary": "所有提名名額",
+    "statusDone": "完畢",
+    "statusTodo": "要做的事",
+    "errors": {
+      "selectNominee": "為此位置選擇一名提名人。",
+      "completeRubric": "保存前為每個標準選擇一個範圍。",
+      "evidenceMin": "添加至少{min}個字符的證據。"
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "總評獎完成情況",
+    "completeCount": "{completed}/{total} 已完成",
+    "requiredLabel": "進展（必填）",
+    "optionalSlots": "可選槽位：{completed}/{total}已滿"
+  },
+  "chairAwardsSubmit": {
+    "title": "提交至SMT",
+    "intro": "儲存槽位只是寫草稿；在您提交下面的批次之前，SMT 不會看到它。 當所需槽位完成後，將批次傳送至 SMT 進行審核。 當您開啟此頁面時，自動提交也會在 {deadline} (UTC) 之後運行，或透過排程作業（如果您的部署配置了它）運行。",
+    "requiredSlotsIncomplete": "所需槽位已完成：{done}/{total} — 完成其餘部分，然後提交以便 SMT 審核。",
+    "requiredSlotsReady": "所需插槽已完成：{done}/{total} — 提名批次已準備就緒（確保上面的代表矩陣完整）。",
+    "matrixIncomplete": "代表矩陣（每位就座代表）：{done}/{total} — 在提交之前對上述每位代表進行評分。",
+    "matrixComplete": "代表矩陣（每位就座代表）：{done}/{total} — 完整。",
+    "alreadySubmitted": "已提交至SMT{when}。 編輯被鎖定；如果您需要更改，請聯絡 SMT。",
+    "submittedAt": "— {time}",
+    "submitButton": "向 SMT 提交提名",
+    "submitting": "正在提交...",
+    "needComplete": "完成每個必需的提名位置和代表矩陣，然後提交。",
+    "deadlinePassed": "截止日期已過—如果您還沒有提交，請立即提交。"
+  },
+  "chairRoomCodePage": {
+    "noSeat": "您還沒有委員會席位。 請秘書處在分配矩陣上為您分配，然後返回此處。",
+    "intro": "每個委員會在其會議內都有一個委員會代碼（代表輸入會議代碼後的第二個門）。 代碼在同一會議活動中必須是唯一的。",
+    "testingOverride": "啟用測試覆蓋：您可以跨委員會切換和管理委員會代碼，而無需檢查席位分配。",
+    "chairScope": "身為主席台，您只能看到您擁有席位的委員會。 儲存後會將您轉到您的個人資料；已經通過委員會大門的代表將保持登入狀態，直到登出為止。",
+    "staffAfterSave": "儲存後，您可以進入該委員會或在講台上分享代碼。"
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "複製列表 (TSV)",
+    "copied": "已將表複製到剪貼簿。",
+    "helpTitle": "分配登入碼",
+    "helpBody": "這些是代表和主席在分配代碼門禁期間使用的每次分配標誌代碼。 程式碼只能由網站管理員更改。",
+    "copyHeader": "會議：{conference}",
+    "copyColumns": "國家/地區代表代碼",
+    "columnCountry": "國家 / 分配",
+    "columnDelegate": "委託（分配）",
+    "columnCode": "密碼/代碼",
+    "codeFieldHelpTitle": "密碼/代碼字段",
+    "codeFieldHelpBody": "代表們為其分配的分配輸入此代碼。 只有網站管理員可以更改它。",
+    "empty": "本次會議尚未有任何分配。"
+  },
+  "chairSessionError": {
+    "title": "會話樓層載入失敗",
+    "fallback": "載入主席會話控制項時發生意外錯誤。",
+    "reference": "參考：{digest}",
+    "backToDashboard": "回到椅子儀表板"
+  },
+  "smtDelegatesPage": {
+    "title": "代表們",
+    "intro": "按姓名、分配、電子郵件或委員會搜尋此活動中每個連結的代表。 打開一張卡片，存放他們的照片和個人資料。",
+    "selectEventFirst": "首先選擇一個正在進行的會議活動。",
+    "enterConferenceCode": "輸入會議代碼",
+    "searchLabel": "搜尋代表",
+    "searchPlaceholder": "Name, allocation, email, or committee",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "此活動中尚未連結代表。",
+    "noMatches": "沒有代表與該搜尋相符。",
+    "unnamed": "未透露姓名的代表"
   }
 }

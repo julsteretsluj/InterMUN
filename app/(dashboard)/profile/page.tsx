@@ -29,6 +29,7 @@ import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 type DashboardPickerConferenceRow = {
   id: string;
@@ -60,7 +61,7 @@ function mergeConferenceRowsToCommitteePickerOptions(
     buckets.set(k, arr);
   }
 
-  const out: { id: string; label: string }[] = [];
+  const out: { id: string; label: string; committee: string | null }[] = [];
   for (const group of buckets.values()) {
     const sortedGroup = [...group].sort((a, b) => a.name.localeCompare(b.name));
     let chosen = sortedGroup[0]!;
@@ -73,9 +74,16 @@ function mergeConferenceRowsToCommitteePickerOptions(
     }
     const label =
       translateCommitteeLabel(opts.tCommitteeLabels, chosen.committee).trim() || opts.fallbackLabel;
-    out.push({ id: chosen.id, label });
+    out.push({ id: chosen.id, label, committee: chosen.committee });
   }
-  return out.sort((a, b) => a.label.localeCompare(b.label));
+  return out
+    .sort((a, b) =>
+      compareCommitteeRowsByDifficultyThenLabel(
+        { committee: a.committee, name: a.label },
+        { committee: b.committee, name: b.label }
+      )
+    )
+    .map(({ id, label }) => ({ id, label }));
 }
 
 export default async function ProfilePage({

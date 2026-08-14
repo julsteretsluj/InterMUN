@@ -26,6 +26,8 @@ export type DigitalRoomAllocation = {
 type PlacardFlags = {
   compliment?: boolean;
   concern?: boolean;
+  complimentReason?: string;
+  concernReason?: string;
   reminder?: string;
 };
 
@@ -51,7 +53,14 @@ function parseFlagsPayload(raw: unknown): Record<string, PlacardFlags> {
 }
 
 function flagsMeaningful(f: Record<string, PlacardFlags>): boolean {
-  return Object.keys(f).length > 0;
+  return Object.values(f).some(
+    (flags) =>
+      Boolean(flags?.compliment) ||
+      Boolean(flags?.concern) ||
+      Boolean(flags?.complimentReason?.trim()) ||
+      Boolean(flags?.concernReason?.trim()) ||
+      Boolean(flags?.reminder?.trim())
+  );
 }
 
 export function ChairDigitalRoomClient({
@@ -95,14 +104,31 @@ export function ChairDigitalRoomClient({
   const toggle = useCallback(
     (allocationId: string, key: "compliment" | "concern") => {
       const prev = flagsByAlloc[allocationId] ?? {};
-      const nextVal = !prev[key];
-      const next = {
+      const turningOn = !prev[key];
+      const reasonKey = key === "compliment" ? "complimentReason" : "concernReason";
+      if (turningOn) {
+        const drafted = window.prompt(
+          key === "compliment" ? t("complimentReasonPrompt") : t("concernReasonPrompt"),
+          prev[reasonKey]?.trim() || ""
+        );
+        if (drafted === null) return;
+        const reason = drafted.trim();
+        if (!reason) {
+          window.alert(t("reasonRequired"));
+          return;
+        }
+        persist({
+          ...flagsByAlloc,
+          [allocationId]: { ...prev, [key]: true, [reasonKey]: reason },
+        });
+        return;
+      }
+      persist({
         ...flagsByAlloc,
-        [allocationId]: { ...prev, [key]: nextVal },
-      };
-      persist(next);
+        [allocationId]: { ...prev, [key]: false, [reasonKey]: undefined },
+      });
     },
-    [flagsByAlloc, persist]
+    [flagsByAlloc, persist, t]
   );
 
   const clearAllFlags = useCallback(() => {
@@ -217,9 +243,9 @@ export function ChairDigitalRoomClient({
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <label className="relative block min-w-[12rem] flex-1">
+        <label className="flex min-w-[12rem] flex-1 items-center gap-2 rounded-xl border border-[var(--hairline)] bg-white px-3 py-2.5 shadow-inner focus-within:border-brand-accent focus-within:ring-2 focus-within:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950">
           <Search
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-muted"
+            className="pointer-events-none h-4 w-4 shrink-0 text-brand-muted"
             strokeWidth={1.75}
             aria-hidden
           />
@@ -228,7 +254,7 @@ export function ChairDigitalRoomClient({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("searchCountry")}
-            className="w-full rounded-xl border border-[var(--hairline)] bg-white py-2.5 pl-10 pr-3 text-sm text-brand-navy shadow-inner placeholder:text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-brand-navy placeholder:text-brand-muted focus:outline-none focus:ring-0 dark:text-zinc-100"
           />
         </label>
         <p className="text-sm text-brand-muted dark:text-zinc-400">
@@ -346,6 +372,18 @@ export function ChairDigitalRoomClient({
                     </button>
                   </div>
                 </div>
+                {f.compliment && f.complimentReason?.trim() ? (
+                  <p className="mt-2 rounded-lg bg-brand-accent/10 px-3 py-2 text-sm text-brand-navy dark:bg-brand-accent/14 dark:text-brand-accent-bright">
+                    <span className="font-medium">{t("compliment")}: </span>
+                    {f.complimentReason.trim()}
+                  </p>
+                ) : null}
+                {f.concern && f.concernReason?.trim() ? (
+                  <p className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-950 dark:bg-amber-950/45 dark:text-amber-100">
+                    <span className="font-medium">{t("concern")}: </span>
+                    {f.concernReason.trim()}
+                  </p>
+                ) : null}
                 {f.reminder && expandedReminderId !== a.id ? (
                   <p className="mt-2 rounded-lg bg-[var(--apple-bg-secondary)] px-3 py-2 text-sm text-brand-navy dark:bg-zinc-800/80 dark:text-zinc-200">
                     {f.reminder}

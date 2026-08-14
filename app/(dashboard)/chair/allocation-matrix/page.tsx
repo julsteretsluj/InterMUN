@@ -22,6 +22,13 @@ import {
 } from "@/app/actions/allocationSignup";
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
 import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
+import { ChairAllocationCopyToolbar } from "@/components/chair/ChairAllocationCopyToolbar";
+import { ChairDelegateAvatar } from "@/components/chair/ChairDelegateAvatar";
+import {
+  ChairDelegateProfileSheetProvider,
+  ChairDelegateProfileTrigger,
+  type ChairDelegateProfileInfo,
+} from "@/components/chair/ChairDelegateProfileSheet";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
@@ -39,8 +46,12 @@ type AllocationRow = {
   flag: string;
   email: string | null;
   name: string | null;
+  username: string | null;
+  pronouns: string | null;
+  school: string | null;
   grade: string | null;
   notes: string | null;
+  profile_picture_url: string | null;
   user_id: string | null;
   linked_role: string | null;
   linked_name: string | null;
@@ -322,7 +333,7 @@ export default async function ChairAllocationMatrixPage() {
   const { data: profiles } = userIds.length
     ? await supabase
         .from("profiles")
-        .select("id, role, name, grade, notes")
+    .select("id, role, name, grade, notes, username, pronouns, school, profile_picture_url")
         .in("id", userIds)
     : {
         data: [] as {
@@ -331,6 +342,10 @@ export default async function ChairAllocationMatrixPage() {
           name: string | null;
           grade: string | null;
           notes: string | null;
+          username: string | null;
+          pronouns: string | null;
+          school: string | null;
+          profile_picture_url: string | null;
         }[],
       };
   const emailByUserId = new Map<string, string>();
@@ -357,6 +372,10 @@ export default async function ChairAllocationMatrixPage() {
         name: p.name ?? null,
         grade: p.grade ?? null,
         notes: p.notes ?? null,
+        username: p.username ?? null,
+        pronouns: p.pronouns ?? null,
+        school: p.school ?? null,
+        profile_picture_url: p.profile_picture_url ?? null,
       },
     ])
   );
@@ -394,8 +413,12 @@ export default async function ChairAllocationMatrixPage() {
         flag: flagEmojiForCountryName(countryDisplay),
         email: r.user_id ? (emailByUserId.get(r.user_id) ?? null) : null,
         name: displayName,
-        grade: r.user_id ? (profileById.get(r.user_id)?.grade ?? null) : null,
-        notes: r.user_id ? (profileById.get(r.user_id)?.notes ?? null) : null,
+        username: profile?.username ?? null,
+        pronouns: profile?.pronouns ?? null,
+        school: profile?.school ?? null,
+        grade: r.user_id ? (profile?.grade ?? null) : null,
+        notes: r.user_id ? (profile?.notes ?? null) : null,
+        profile_picture_url: profile?.profile_picture_url ?? null,
         linked_role: profile?.role ?? (displayName && isChairSeat ? "chair" : null),
         linked_name: displayName,
         country_display: countryDisplay,
@@ -463,6 +486,14 @@ export default async function ChairAllocationMatrixPage() {
         )}
       </p>
 
+      <ChairAllocationCopyToolbar
+        rows={rows.map((r) => ({
+          country: r.country,
+          email: r.email,
+          linkedRole: r.linked_role,
+        }))}
+      />
+
       <ChairAllocationScoringRoot
         committeeConferenceId={awardConferenceId}
         delegates={scorableDelegates}
@@ -470,13 +501,15 @@ export default async function ChairAllocationMatrixPage() {
         floorActivityByProfileId={floorActivityByProfileId}
         scoringEnabled={isChairViewer}
       >
+        <ChairDelegateProfileSheetProvider>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-paper">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
                 <th className="px-3 py-2">{tMatrix("columns.allocation")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.flag")}</th>
-                <th className="px-3 py-2">Party</th>
+                <th className="px-3 py-2">{tMatrix("columns.photo")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.party")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.email")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.name")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.grade")}</th>
@@ -487,7 +520,7 @@ export default async function ChairAllocationMatrixPage() {
             <tbody>
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={isChairViewer ? 8 : 7} className="px-3 py-6 text-center text-brand-muted">
+                  <td colSpan={isChairViewer ? 9 : 8} className="px-3 py-6 text-center text-brand-muted">
                     {tMatrix("noRows")}
                   </td>
                 </tr>
@@ -495,6 +528,23 @@ export default async function ChairAllocationMatrixPage() {
                 rows.map((r) => {
                   const scorable = isScorableAllocationSeat(r.country, r.linked_role, r.user_id);
                   const isChairSeat = isCommitteeChairSeatLabel(r.country);
+                  const profileInfo: ChairDelegateProfileInfo | null = r.user_id
+                    ? {
+                        userId: r.user_id,
+                        country: r.country,
+                        countryDisplay: r.country_display,
+                        partyLabel: r.party_label,
+                        email: r.email,
+                        name: r.name,
+                        username: r.username,
+                        pronouns: r.pronouns,
+                        school: r.school,
+                        grade: r.grade,
+                        notes: r.notes,
+                        profilePictureUrl: r.profile_picture_url,
+                        linkedRole: r.linked_role,
+                      }
+                    : null;
                   return (
                     <tr
                       key={r.id}
@@ -506,9 +556,36 @@ export default async function ChairAllocationMatrixPage() {
                     >
                       <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
                       <td className="px-3 py-2 text-base">{r.flag}</td>
+                      <td className="px-3 py-2">
+                        {profileInfo ? (
+                          <ChairDelegateProfileTrigger
+                            delegate={profileInfo}
+                            className="rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#119ED3]"
+                          >
+                            <ChairDelegateAvatar
+                              name={profileInfo.name || r.country}
+                              profilePictureUrl={profileInfo.profilePictureUrl}
+                              size="sm"
+                            />
+                          </ChairDelegateProfileTrigger>
+                        ) : (
+                          <span className="text-xs text-brand-muted">{tMatrix("dash")}</span>
+                        )}
+                      </td>
                       <td className="px-3 py-2 text-xs text-brand-muted">{r.party_label || tMatrix("dash")}</td>
                       <td className="px-3 py-2 text-xs text-brand-muted">{r.email || tMatrix("dash")}</td>
-                      <td className="px-3 py-2 text-xs text-brand-muted">{r.name || tMatrix("dash")}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">
+                        {profileInfo ? (
+                          <ChairDelegateProfileTrigger
+                            delegate={profileInfo}
+                            className="text-left font-medium text-brand-navy underline decoration-[#C9DDE9] underline-offset-2 hover:decoration-[#119ED3]"
+                          >
+                            {r.name || tMatrix("dash")}
+                          </ChairDelegateProfileTrigger>
+                        ) : (
+                          r.name || tMatrix("dash")
+                        )}
+                      </td>
                       <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || tMatrix("dash")}</td>
                       <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
                         {r.notes?.trim() || tMatrix("dash")}
@@ -529,6 +606,7 @@ export default async function ChairAllocationMatrixPage() {
             </tbody>
           </table>
         </div>
+        </ChairDelegateProfileSheetProvider>
 
       <ChairDelegateApprovalByEmailForm
         conferenceId={allocationsConferenceId}

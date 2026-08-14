@@ -13,7 +13,16 @@ export function difficultySortRank(
   return 99;
 }
 
-type CommitteeSortRow = { committee?: string | null; name?: string | null };
+type CommitteeSortRow = {
+  committee?: string | null;
+  /** Alias for `committee` when the row uses a display `label` field. */
+  label?: string | null;
+  name?: string | null;
+};
+
+function chamberLabel(row: CommitteeSortRow): string | null | undefined {
+  return row.committee ?? row.label;
+}
 
 /** Mirrors `acronymLookupKey` in committee-card-display for label tie-breaks only. */
 function committeeLookupKeys(committee: string): string[] {
@@ -59,8 +68,8 @@ export function compareExplicitCommitteeLabelOrder(
   a: CommitteeSortRow,
   b: CommitteeSortRow
 ): number | null {
-  const ar = explicitLabelOrderRank(a.committee);
-  const br = explicitLabelOrderRank(b.committee);
+  const ar = explicitLabelOrderRank(chamberLabel(a));
+  const br = explicitLabelOrderRank(chamberLabel(b));
   if (ar !== undefined && br !== undefined && ar !== br) return ar - br;
   return null;
 }
@@ -73,13 +82,22 @@ export function compareCommitteeRowsByDifficultyThenLabel(
   a: CommitteeSortRow,
   b: CommitteeSortRow
 ): number {
-  const aTags = resolveCommitteeDisplayTags(a.committee);
-  const bTags = resolveCommitteeDisplayTags(b.committee);
+  const aChamber = chamberLabel(a);
+  const bChamber = chamberLabel(b);
+  const aTags = resolveCommitteeDisplayTags(aChamber);
+  const bTags = resolveCommitteeDisplayTags(bChamber);
   const d = difficultySortRank(aTags?.difficulty) - difficultySortRank(bTags?.difficulty);
   if (d !== 0) return d;
   const explicit = compareExplicitCommitteeLabelOrder(a, b);
   if (explicit !== null) return explicit;
-  const ac = (a.committee ?? "").trim().toLowerCase() || (a.name ?? "").trim().toLowerCase();
-  const bc = (b.committee ?? "").trim().toLowerCase() || (b.name ?? "").trim().toLowerCase();
+  const ac = (aChamber ?? "").trim().toLowerCase() || (a.name ?? "").trim().toLowerCase();
+  const bc = (bChamber ?? "").trim().toLowerCase() || (b.name ?? "").trim().toLowerCase();
   return ac.localeCompare(bc, undefined, { sensitivity: "base" });
+}
+
+/** Sort chamber label strings with the shared difficulty → label order. */
+export function sortCommitteeLabelsByDifficultyThenAlpha(labels: readonly string[]): string[] {
+  return [...labels].sort((a, b) =>
+    compareCommitteeRowsByDifficultyThenLabel({ committee: a }, { committee: b })
+  );
 }

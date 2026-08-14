@@ -8,6 +8,7 @@ import {
   DelegationNoteModerationQueue,
   type HeldDelegationNote,
 } from "@/components/delegation-notes/DelegationNoteModerationQueue";
+import { isChairRole } from "@/lib/roles";
 import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
@@ -46,19 +47,12 @@ export default async function ChairNotesModerationPage() {
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "chair") redirect("/profile");
+  // Match moderate_delegation_note RPC + staff RLS: chair role is enough.
+  // Do not require a linked allocation seat — many chairs (incl. review/temp) have none.
+  if (!isChairRole(profile?.role)) redirect("/profile");
 
   const conferenceId = await requireActiveConferenceId();
   const scope = await getChamberScope(supabase, conferenceId);
-
-  const { data: chairSeat } = await supabase
-    .from("allocations")
-    .select("id")
-    .in("conference_id", scope.siblingConferenceIds)
-    .eq("user_id", user.id)
-    .limit(1)
-    .maybeSingle();
-  if (!chairSeat?.id) redirect("/chair");
 
   const { data: heldRows } = await supabase
     .from("delegation_notes")

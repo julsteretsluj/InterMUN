@@ -7,17 +7,23 @@ import { useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { HelpButton } from "@/components/HelpButton";
 import { useTranslations } from "next-intl";
+import {
+  canRequestOrJoinSpeakerList,
+  fetchDisciplineForAllocation,
+} from "@/lib/delegate-discipline";
 
 export function RequestToSpeakClient({
   conferenceId,
   allocationId,
   allocationCountry,
   disabled,
+  disabledReason,
 }: {
   conferenceId: string;
   allocationId: string | null;
   allocationCountry: string | null;
   disabled?: boolean;
+  disabledReason?: string | null;
 }) {
   const t = useTranslations("session.requestToSpeak");
   const supabase = useMemo(() => createClient(), []);
@@ -26,16 +32,29 @@ export function RequestToSpeakClient({
   const [pending, setPending] = useState(false);
 
   const country = allocationCountry ?? t("delegateFallback");
+  const blocked = Boolean(disabled);
 
   async function request() {
     if (!allocationId) {
       setMsg(t("needAllocation"));
       return;
     }
+    if (blocked) {
+      setMsg(disabledReason?.trim() || t("speakingSuspended"));
+      return;
+    }
 
     setPending(true);
     setMsg(null);
     try {
+      const discipline = await fetchDisciplineForAllocation(supabase, conferenceId, allocationId);
+      if (!canRequestOrJoinSpeakerList(discipline)) {
+        setMsg(
+          discipline?.removed_from_committee ? t("removedFromCommittee") : t("speakingSuspended")
+        );
+        return;
+      }
+
       // Dedupe: one active waiting/current entry per allocation.
       const { data: existing, error: existingErr } = await supabase
         .from("speaker_queue_entries")
@@ -92,6 +111,11 @@ export function RequestToSpeakClient({
           {t("helpBody")}
         </HelpButton>
       </div>
+      {blocked && disabledReason ? (
+        <p className="text-xs text-amber-800 dark:text-amber-200/90 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2">
+          {disabledReason}
+        </p>
+      ) : null}
       <div className="flex items-center justify-between gap-2">
         <label className="block text-xs text-brand-muted uppercase tracking-wider">
           {t("purposeLabel")}
@@ -105,12 +129,12 @@ export function RequestToSpeakClient({
         value={purpose}
         onChange={(e) => setPurpose(e.target.value)}
         placeholder={t("purposePlaceholder")}
-        disabled={pending || !allocationId || disabled}
+        disabled={pending || !allocationId || blocked}
       />
       <button
         type="button"
         onClick={() => void request()}
-        disabled={pending || !allocationId || disabled}
+        disabled={pending || !allocationId || blocked}
         className="w-full px-3 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
       >
         {pending ? t("requesting") : t("title")}

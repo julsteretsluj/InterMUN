@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "ផ្ទុកឡើងវិញ"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "ឧ. ស៊ីម៉ានី ២០២៧",
@@ -574,7 +575,8 @@
     "subtabs": "ផ្ទាំងរង",
     "home": "ផ្ទះ",
     "library": "បណ្ណាល័យ",
-    "mainNavigationAria": "ការរុករកចម្បង"
+    "mainNavigationAria": "ការរុករកចម្បង",
+    "crisis": "វិបត្តិ"
   },
   "dashboardLayout": {
     "helpCenter": "មជ្ឈមណ្ឌលជំនួយ",
@@ -838,7 +840,9 @@
     "pointsLog": "• កំណត់ហេតុពិន្ទុ",
     "formalMotions": "ចលនាផ្លូវការ",
     "timer": "កម្មវិធីកំណត់ម៉ោង",
-    "smtProfile": "ប្រវត្តិរូប"
+    "smtProfile": "ប្រវត្តិរូប",
+    "crisis": "វិបត្តិ",
+    "smtDelegates": "ប្រតិភូ"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -1333,7 +1337,8 @@
       "roomCode": "លេខកូដបន្ទប់",
       "settings": "ការកំណត់",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "រាយការណ៍"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "ព្រឹត្តិការណ៍ និងវគ្គ",
     "roomCodes": "លេខកូដបន្ទប់ និងកៅអី",
     "advisors": "ទីប្រឹក្សា",
-    "notes": "Notes",
+    "notes": "កំណត់ចំណាំ",
     "awards": "រង្វាន់",
     "allocationMatrix": "ម៉ាទ្រីសបែងចែក",
     "allocationPasswords": "ការបែងចែកពាក្យសម្ងាត់",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "បន្ទប់ព័ត៌មាន",
+    "pressCorps": "សារព័ត៌មាន Corps",
+    "milestones": "ចំណុចសំខាន់",
     "profile": "ប្រវត្តិរូប",
     "follow": "ធ្វើតាម",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "មគ្គុទ្ទេសក៍",
+    "delegates": "ប្រតិភូ"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "កម្មវិធី និងថវិកា",
       "specializedAgencies": "ទីភ្នាក់ងារឯកទេស និងពាក់ព័ន្ធ",
       "peacekeepingMissions": "ការរក្សាសន្តិភាព និងបេសកកម្ម",
-      "foundersMembers": "ស្ថាបនិក និងសមាជិក"
+      "foundersMembers": "ស្ថាបនិក និងសមាជិក",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "ចុច Corps Links"
     },
     "links": {
       "ods": "ប្រព័ន្ធឯកសារផ្លូវការរបស់អង្គការសហប្រជាជាតិ (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "បេសកកម្មនយោបាយពិសេសរបស់អង្គការសហប្រជាជាតិ",
       "memberStates": "ប្រទេសសមាជិកអង្គការសហប្រជាជាតិ",
       "unSystem": "ប្រព័ន្ធអង្គការសហប្រជាជាតិ (ស្ថាបនិក និងសមាជិក)",
-      "history": "ប្រវត្តិសាស្រ្តរបស់អង្គការសហប្រជាជាតិ"
+      "history": "ប្រវត្តិសាស្រ្តរបស់អង្គការសហប្រជាជាតិ",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "គេហទំព័រសន្និសីទ និងវិបផតថលគណៈកម្មាធិការ",
+      "documentsArticles": "ODS បណ្ណាល័យឌីជីថល ព័ត៌មានសារព័ត៌មាន និងសៀវភៅប្រចាំឆ្នាំ",
+      "legislationTreaties": "សន្ធិសញ្ញា ធម្មនុញ្ញ និងច្បាប់អន្តរជាតិ",
+      "mainBodies": "GA, ក្រុមប្រឹក្សាសន្តិសុខ, ECOSOC, ICJ និងច្រើនទៀត",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP និងមូលនិធិពាក់ព័ន្ធ",
+      "specializedAgencies": "WHO, UNESCO, World Bank, ILO, និងដៃគូ",
+      "peacekeepingMissions": "ការរក្សាសន្តិភាព និងបេសកកម្មនយោបាយពិសេស",
+      "foundersMembers": "រដ្ឋជាសមាជិក ប្រព័ន្ធអង្គការសហប្រជាជាតិ និងប្រវត្តិសាស្ត្រ",
+      "pressCorpsLinks": "តុព័ត៌មានចំនួនបីសម្រាប់ការបែងចែកអង្គភាពសារព័ត៌មាននីមួយៗ (ពិភពលោក សុខភាព និងលក្ខណៈពិសេស)។"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "ការរំលឹក",
     "privateReminderLabel": "ការរំលឹកឯកជន (កៅអីតែប៉ុណ្ណោះ បានធ្វើសមកាលកម្ម)",
     "committeeFallback": "គណៈកម្មាធិការ",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "ការបង្កើតប្លុក",
       "speechPoisOrPocs": "Speech POIs ឬ POCs",
       "questions": "សំណួរ",
-      "informalConversations": "ការសន្ទនាក្រៅផ្លូវការ"
+      "informalConversations": "ការសន្ទនាក្រៅផ្លូវការ",
+      "sessionProgress": "វឌ្ឍនភាពសម័យ (SMT)"
     },
     "concernLabel": "កង្វល់ (កន្លែងដាក់ដោយស្វ័យប្រវត្តិ)",
     "concernHelpTitle": "ទង់កង្វល់",
@@ -1848,7 +1883,12 @@
       "needAllocation": "អ្នកត្រូវការការបែងចែកដើម្បីផ្ញើកំណត់ចំណាំ (ឬធ្វើជាកៅអី)។",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "បរាជ័យក្នុងការផ្ញើចំណាំ។"
-    }
+    },
+    "sendToSmt": "ផ្ញើទៅ SMT",
+    "sendToSmtHelp": "ដី​នៅ​ក្នុង​ប្រអប់​សំបុត្រ​កំណត់​ត្រា​លេខាធិការដ្ឋាន (ពី​កៅអី)។ ប្រើវាសម្រាប់ដំណើរការបញ្ចប់វគ្គ។",
+    "progressPrefill": "សម័យប្រជុំគណៈកម្មាធិការទើបតែបញ្ចប់។ \n\nវឌ្ឍនភាព៖ \n- \n\nអ្វីក៏ដោយ SMT គួរតែតាមដានលើ៖ \n-",
+    "progressComposeHint": "ចំណាំនេះនឹងទៅកាន់ SMT ។ សង្ខេបអំពីអ្វីដែលបន្ទប់គ្របដណ្តប់ និងអ្វីដែលលេខាធិការគួរដឹង។",
+    "progressSent": "កំណត់ត្រាវឌ្ឍនភាពបានផ្ញើទៅ SMT ។"
   },
   "adminPage": {
     "title": "ការគ្រប់គ្រងគេហទំព័រ",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "រកមិនឃើញជួរទិន្នន័យទេ (ត្រូវការយ៉ាងហោចណាស់ប្រទេស/ទីតាំងក្នុងមួយជួរ)។",
       "importLimitedRows": "ការនាំចូលបានកំណត់ត្រឹម {max} ជួរ។ បំបែកឯកសាររបស់អ្នក។",
       "rowTooLong": "ជួរដេកវែងពេក៖ {row}…",
-      "codeTooLongOnRow": "កូដវែងពេកនៅលើជួរ៖ {row}"
+      "codeTooLongOnRow": "កូដវែងពេកនៅលើជួរ៖ {row}",
+      "chairSeatsCannotBeDeleted": "កៅអីប្រធាន និងសហប្រធានស្ថិតនៅលើគ្រប់គណៈកម្មាធិការ។"
     },
     "smtStaffAccess": {
       "chooseEventFirst": "ជ្រើសរើសព្រឹត្តិការណ៍ដែលមានលេខកូដសន្និសីទ (ច្រកព្រឹត្តិការណ៍) ជាមុនសិន។",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "ឈ្មោះទីតាំង និងលេខកូដផ្លាកសញ្ញាអាចត្រូវបានផ្លាស់ប្តូរដោយអ្នកគ្រប់គ្រងគេហទំព័រតែប៉ុណ្ណោះ។"
   },
   "chairAllocationMatrixPage": {
     "intro": "ម៉ាទ្រីសបែងចែកគណៈកម្មាធិការសម្រាប់វគ្គបច្ចុប្បន្នរបស់អ្នក។ នេះគឺបានតែអានសម្រាប់កៅអី និងឆ្លុះបញ្ចាំងពីការចាត់តាំងកៅអីសកម្ម និងលេខកូដផ្លាកសញ្ញា។",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "បានស្នើសុំការបែងចែក",
       "account": "គណនី",
       "actions": "សកម្មភាព",
-      "score": "Score"
+      "score": "ពិន្ទុ",
+      "photo": "រូបថត",
+      "school": "សាលា",
+      "party": "ក្រុមនយោបាយ"
     },
     "noRows": "រកមិនឃើញជួរបែងចែកសម្រាប់គណៈកម្មាធិការនេះទេ។",
     "pendingApprovalsTitle": "រង់ចាំការយល់ព្រមលើការចុះឈ្មោះ",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "ម៉ាទ្រីសបែងចែក",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "ចលនា",
+    "pointsTitle": "ពិន្ទុ",
+    "resolutionsTitle": "ដំណោះស្រាយ",
+    "noMotions": "មិនមានការកត់ត្រាចលនាសម្រាប់ប្រតិភូនេះទេ។",
+    "noPoints": "គ្មានពិន្ទុត្រូវបានកត់ត្រាសម្រាប់ប្រតិភូនេះទេ។",
+    "noResolutions": "គ្មាន​ការ​ពាក់ព័ន្ធ​ដំណោះស្រាយ​ត្រូវ​បាន​កត់ត្រា​សម្រាប់​ប្រតិភូ​នេះ​ទេ។",
+    "untitledMotion": "ចលនាគ្មានចំណងជើង",
+    "chairLoggedPoint": "ចំណុចទាញកៅអី",
+    "resolutionLink": "បើក Google Doc",
+    "resolutionNoLink": "គ្មានតំណឯកសារ",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "នីតិវិធី",
+      "delegate": "កំណត់ហេតុកៅអី"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "អ្នកបញ្ជូនសំខាន់",
+      "co": "សហអ្នកបញ្ជូន",
+      "signatory": "ហត្ថលេខី"
+    },
+    "speechesTitle": "សុន្ទរកថា",
+    "flagsTitle": "ការសរសើរ និងកង្វល់",
+    "disciplineTitle": "ការព្រមាន & កូដកម្ម",
+    "noSpeeches": "គ្មានសុន្ទរកថាត្រូវបានកត់ត្រាសម្រាប់ប្រតិភូនេះទេ។",
+    "noFlags": "គ្មានការសរសើរ ឬការព្រួយបារម្ភដែលបានកត់ត្រាទុកសម្រាប់ប្រតិភូនេះទេ។",
+    "noDiscipline": "គ្មានការព្រមាន ឬការព្រមានដែលបានកត់ត្រាទុកសម្រាប់ប្រតិភូនេះទេ។",
+    "untitledSpeech": "សុន្ទរកថា",
+    "currentFlag": "បច្ចុប្បន្ន",
+    "speechStatuses": {
+      "waiting": "កំពុងរង់ចាំ",
+      "current": "ការនិយាយ",
+      "done": "ចែកចាយ"
+    },
+    "flagKinds": {
+      "compliment": "សរសើរ",
+      "concern": "កង្វល់",
+      "reminder": "ការរំលឹក"
+    },
+    "disciplineActions": {
+      "warning": "ការព្រមាន",
+      "strike": "កូដកម្ម",
+      "revoke_warning": "ការព្រមានត្រូវបានលុបចោល",
+      "revoke_strike": "កូដកម្មត្រូវបានដកហូត",
+      "reset": "កំណត់ឡើងវិញ"
+    },
+    "disciplineCounts": "ការព្រមាន {warnings} · {strikes} កូដកម្ម"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "គណៈកម្មាធិការរបស់អ្នក។",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "បន្ទប់ប្រជុំ (ពេញ)",
         "hint": "ប្លង់និម្មិត & ជាន់តំណាង"
+      },
+      "crisisReport": {
+        "label": "រាយការណ៍",
+        "hint": "ការរាយការណ៍អំពីឧប្បត្តិហេតុ"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "កំណត់ចំណាំ",
     "noGoogleDocYet": "មិន​ទាន់​មាន​តំណ Google Doc នៅ​ឡើយ​ទេ។ ប្រើ កែសម្រួល ដើម្បីបន្ថែម docs.google.com/document/d/… URL ។",
     "chairFeedbackHeading": "មតិកែលម្អរបស់ប្រធាន",
-    "noFeedbackYet": "មិន​មាន​ការ​បន្ថែម​មតិ​ត្រឡប់​នៅ​ឡើយ​ទេ។"
+    "noFeedbackYet": "មិន​មាន​ការ​បន្ថែម​មតិ​ត្រឡប់​នៅ​ឡើយ​ទេ។",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "បច្ចុប្បន្ន - អាចបដិសេធ (វិល)",
       "present_voting": "វត្តមាន និងការបោះឆ្នោត (វិល)",
       "unknown": "- (រមៀល)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "តំណភ្ជាប់ ប៊ូតុង និងឯកសារ",
+      "help": "បន្ថែមបណ្តាញភ្ជាប់ ប៊ូតុង ឬផ្ទុកឯកសារ PDF ។ នរណាម្នាក់ដែលបើកសៀវភៅណែនាំនេះអាចប្រើវាបាន។",
+      "kindLink": "តំណភ្ជាប់",
+      "kindButton": "ប៊ូតុង",
+      "kindFile": "ឯកសារ",
+      "label": "ស្លាក",
+      "urlPlaceholder": "https://… or /page",
+      "add": "បន្ថែម",
+      "upload": "ផ្ទុកឯកសារ PDF ឬឯកសារ",
+      "uploading": "កំពុងបង្ហោះ...",
+      "remove": "ដកចេញ",
+      "download": "បើក",
+      "empty": "មិនទាន់មានតំណ ឬឯកសារនៅឡើយទេ។",
+      "errorType": "ប្រើឯកសារ PDF ឯកសារការិយាល័យ អត្ថបទ ឬឯកសាររូបភាព។",
+      "errorSize": "ឯកសារធំពេក (អតិបរមា 15 MB)។",
+      "errorUpload": "មិន​អាច​ផ្ទុក​ឡើង​ឯកសារ​នោះ​ទេ។",
+      "markdownHelp": "នៅក្នុងកំណត់ចំណាំ អ្នកក៏អាចសរសេរ [label](https://url) សម្រាប់តំណ ឬ [label](https://url \"button\") សម្រាប់ប៊ូតុងមួយ។ បិទភ្ជាប់ URL ឯកសារ ឬផ្ទុកឡើងខាងលើ។"
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "កំពុងពិនិត្យមើលស្ថានភាពវិលរបស់អ្នក...",
       "rollPromptSaving": "កំពុងរក្សាទុក...",
       "rollPromptPresent": "បច្ចុប្បន្ន",
-      "rollPromptPresentVoting": "វត្តមាន និងការបោះឆ្នោត"
+      "rollPromptPresentVoting": "វត្តមាន និងការបោះឆ្នោត",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "នីតិវិធីបោះឆ្នោត",
@@ -4241,7 +4382,11 @@
       "timer": "កម្មវិធីកំណត់ម៉ោង",
       "sidebarAnd": "និង",
       "announcements": "សេចក្តីប្រកាស",
-      "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។"
+      "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។",
+      "smtProgressReminderTitle": "ធ្វើបច្ចុប្បន្នភាព SMT នៅលើវគ្គនេះ។",
+      "smtProgressReminderBody": "ផ្ញើ​កំណត់​ត្រា​ដំណើរ​ការ​ខ្លី​មួយ ដើម្បី​ឱ្យ​លេខាធិការដ្ឋាន​ដឹង​ពី​របៀប​ដែល​គណៈកម្មាធិការ​បាន​ទៅ និង​អ្វី​ដែល​ត្រូវ​តាម​ដាន។",
+      "smtProgressReminderWrite": "សរសេរកំណត់ចំណាំ",
+      "smtProgressReminderDismiss": "ពេលក្រោយ"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "វគ្គបានបញ្ចប់ — ធ្វើបច្ចុប្បន្នភាព SMT",
+      "reminderSessionEnd": "{title}ត្រូវបានកំណត់ពេលបញ្ចប់នៅ{start}។ ផ្ញើ SMT នូវកំណត់ត្រាដំណើរការខ្លី។",
+      "writeSmtNote": "សរសេរកំណត់ចំណាំ"
     },
     "history": {
       "title": "ប្រវត្តិសម័យ",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "មិន​ទាន់​មាន​ការ​ដាក់​ឈ្មោះ​សម្រាប់​គណៈកម្មាធិការ​នេះ​នៅ​ឡើយ​ទេ។",
+    "stepProgress": "ការតែងតាំង{current}នៃ{total}",
+    "requiredProgress": "រន្ធដែលត្រូវការ {done}/{total} បានបញ្ចប់",
+    "gotoStep": "ចូលទៅកាន់ {label}",
+    "lockedTitle": "បញ្ចប់កាតប្រតិភូនីមួយៗជាមុនសិន",
+    "lockedBody": "បំពេញតារាងមេរៀនសម្រាប់គ្រប់ប្រតិភូដែលអង្គុយនៅខាងលើ បន្ទាប់មកត្រឡប់មកទីនេះដើម្បីជ្រើសរើសរង្វាន់ម្តងមួយៗ។",
+    "optional": "ស្រេចចិត្ត",
+    "submittedLocked": "បានបញ្ជូនទៅកាន់ SMT — ការកែសម្រួលត្រូវបានចាក់សោ។",
+    "topSuggestions": "កំពូល 5 ពីរូបិយវត្ថុសម័យ",
+    "topSuggestionsHint": "សរុបម៉ាទ្រីសខ្ពស់បំផុតនៅក្នុងគណៈកម្មាធិការនេះ។ ជ្រើសរើសមួយ ឬស្វែងរកខាងក្រោម។",
+    "noSuggestions": "មិន​ទាន់​មាន​ប្រតិភូ​ជាប់​ចំណាត់​ថ្នាក់​នៅ​ឡើយ​ទេ។ ដាក់ពិន្ទុម៉ាទ្រីសជាមុន ឬស្វែងរកតាមឈ្មោះ។",
+    "searchLabel": "ស្វែងរកប្រតិភូ",
+    "searchPlaceholder": "ឈ្មោះឬការបែងចែក",
+    "searchEmpty": "គ្មានតំណាងត្រូវគ្នានឹងការស្វែងរកនោះទេ។",
+    "selectedNominee": "បេក្ខភាពដែលបានជ្រើសរើស",
+    "pickNomineeHint": "ជ្រើសរើសអ្នកដែលត្រូវបានតែងតាំងពីកំពូលទាំង 5 ឬស្វែងរកដើម្បីបើកតារាង និងកំណត់ហេតុរបស់ពួកគេ។",
+    "rubricHeading": "រូបិយបណ្ណការតែងតាំង",
+    "rubricTotal": "តារាងសរុប៖ {total}/{max} ({scored}/{criteria} លក្ខណៈវិនិច្ឆ័យបានពិន្ទុ — 1–8 ក្នុងមួយលក្ខណៈវិនិច្ឆ័យ)",
+    "evidenceLabel": "សេចក្តីថ្លែងការណ៍នៃការបញ្ជាក់ / ភស្តុតាង",
+    "evidencePlaceholder": "ដកស្រង់ភស្តុតាងជាន់បេតុង (ឃ្លាដែលបានព្រាង ការសម្របសម្រួលអន្តរការី អន្តរាគមន៍សំខាន់ៗ)។ យ៉ាងហោចណាស់តួអក្សរ{min} — ទាមទារ មុនពេល SMT អាចយល់ព្រម។",
+    "previous": "មុន",
+    "skipOptional": "រំលងរន្ធដោតស្រេចចិត្ត",
+    "next": "បន្ទាប់",
+    "locked": "ចាក់សោ",
+    "matrixRequired": "ម៉ាទ្រីស​ត្រូវ​ការ​ដំបូង",
+    "saving": "កំពុងរក្សាទុក...",
+    "saveAndNext": "រក្សាទុក & បន្ទាប់",
+    "save": "រក្សាទុក",
+    "allSlotsSummary": "រន្ធដាក់ឈ្មោះទាំងអស់។",
+    "statusDone": "រួចរាល់",
+    "statusTodo": "ដើម្បីធ្វើ",
+    "errors": {
+      "selectNominee": "ជ្រើសរើសបេក្ខជនសម្រាប់រន្ធដោតនេះ។",
+      "completeRubric": "ជ្រើសរើសក្រុមសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗ មុនពេលរក្សាទុក។",
+      "evidenceMin": "បន្ថែមយ៉ាងហោចណាស់ {min} តួអក្សរនៃភស្តុតាង។"
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "ការបញ្ចប់ពានរង្វាន់សរុប",
+    "completeCount": "{completed}/{total} បញ្ចប់",
+    "requiredLabel": "វឌ្ឍនភាព (ទាមទារ)",
+    "optionalSlots": "រន្ធស្រេចចិត្ត៖ {completed}/{total} បំពេញ"
+  },
+  "chairAwardsSubmit": {
+    "title": "ដាក់ស្នើទៅ SMT",
+    "intro": "ការរក្សាទុករន្ធដោតគ្រាន់តែសរសេរសេចក្តីព្រាង; SMT មិនឃើញវាទេ រហូតដល់អ្នកដាក់បាច់ខាងក្រោម។ នៅពេលដែលរន្ធដែលត្រូវការត្រូវបានបញ្ចប់ សូមផ្ញើបាច់ទៅ SMT ដើម្បីពិនិត្យ។ ការបញ្ជូនដោយស្វ័យប្រវត្តិក៏ដំណើរការបន្ទាប់ពី {deadline} (UTC) នៅពេលអ្នកបើកទំព័រនេះ ឬតាមរយៈការងារដែលបានកំណត់ពេល ប្រសិនបើការដាក់ពង្រាយរបស់អ្នកកំណត់រចនាសម្ព័ន្ធវា។",
+    "requiredSlotsIncomplete": "បំពេញរន្ធដែលត្រូវការ៖ {done}/{total} — បញ្ចប់ផ្នែកដែលនៅសល់ បន្ទាប់មកដាក់បញ្ជូន ដូច្នេះ SMT អាចពិនិត្យបាន។",
+    "requiredSlotsReady": "រន្ធដែលត្រូវការត្រូវបានបញ្ចប់៖ {done}/{total} — កញ្ចប់ការតែងតាំងរួចរាល់ហើយ (ត្រូវប្រាកដថាម៉ាទ្រីសតំណាងខាងលើបានបញ្ចប់)។",
+    "matrixIncomplete": "ម៉ាទ្រីស delegate (រាល់ប្រតិភូអង្គុយ): {done}/{total} — ដាក់ពិន្ទុប្រតិភូនីមួយៗខាងលើមុនពេលដាក់ស្នើ។",
+    "matrixComplete": "ម៉ាទ្រីស delegate (រាល់ប្រតិភូអង្គុយ): {done}/{total} — បញ្ចប់។",
+    "alreadySubmitted": "បានបញ្ជូនទៅ SMT{when}។ ការកែសម្រួលត្រូវបានចាក់សោ; ទាក់ទង SMT ប្រសិនបើអ្នកត្រូវការការផ្លាស់ប្តូរ។",
+    "submittedAt": "—{time}",
+    "submitButton": "បញ្ជូនការតែងតាំងទៅ SMT",
+    "submitting": "កំពុងបញ្ជូន...",
+    "needComplete": "បំពេញរាល់រន្ធដោតការតែងតាំងដែលត្រូវការ និងម៉ាទ្រីសប្រតិភូ បន្ទាប់មកដាក់ស្នើ។",
+    "deadlinePassed": "កាល​បរិច្ឆេទ​បាន​កន្លង​ផុត — ដាក់​ស្នើ​ឥឡូវ​នេះ ប្រសិន​បើ​អ្នក​មិន​ទាន់​មាន។"
+  },
+  "chairRoomCodePage": {
+    "noSeat": "អ្នកមិនទាន់មានកៅអីគណៈកម្មាធិការនៅឡើយទេ។ សុំឱ្យលេខាធិការដ្ឋានចាត់តាំងអ្នកលើម៉ាទ្រីសបែងចែក បន្ទាប់មកត្រឡប់មកទីនេះ។",
+    "intro": "គណៈកម្មាធិការនីមួយៗមានកូដគណៈកម្មាធិការនៅក្នុងសន្និសីទរបស់ខ្លួន (ច្រកទីពីរបន្ទាប់ពីប្រតិភូបញ្ចូលលេខកូដសន្និសីទ) ។ លេខកូដត្រូវតែមានតែមួយគត់នៅក្នុងព្រឹត្តិការណ៍សន្និសីទដូចគ្នា។",
+    "testingOverride": "ការធ្វើតេស្តបដិសេធបានបើក៖ អ្នកអាចប្តូរ និងគ្រប់គ្រងកូដគណៈកម្មាធិការនៅទូទាំងគណៈកម្មាធិការដោយមិនចាំបាច់ពិនិត្យការបែងចែកកៅអី។",
+    "chairScope": "ក្នុងនាមជា dais អ្នកឃើញតែគណៈកម្មការដែលអ្នកមានកៅអី។ ការរក្សាទុកបញ្ជូនអ្នកទៅកាន់ប្រវត្តិរូបរបស់អ្នក; គណៈប្រតិភូដែលបានឆ្លងកាត់ច្រករបស់គណៈកម្មាធិការរួចហើយ ស្នាក់នៅក្នុងគណនីរហូតដល់ពួកគេចេញ។",
+    "staffAfterSave": "បន្ទាប់​ពី​រក្សា​ទុក អ្នក​អាច​ចូល​ក្នុង​គណៈកម្មាធិការ​នោះ ឬ​ចែក​រំលែក​លេខ​កូដ​នៅ​លើ dais។"
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "បញ្ជីចម្លង (TSV)",
+    "copied": "បានចម្លងតារាងទៅក្ដារតម្បៀតខ្ទាស់។",
+    "helpTitle": "ការបែងចែកលេខកូដចូល",
+    "helpBody": "ទាំងនេះគឺជាលេខកូដប្លាកែតនីមួយៗដែលប្រើដោយប្រតិភូ និងកៅអីក្នុងអំឡុងពេលច្រកលេខកូដបែងចែក។ លេខកូដអាចត្រូវបានផ្លាស់ប្តូរដោយអ្នកគ្រប់គ្រងគេហទំព័រតែប៉ុណ្ណោះ។",
+    "copyHeader": "សន្និសីទ៖ {conference}",
+    "copyColumns": "លេខកូដតំណាងប្រទេស",
+    "columnCountry": "ប្រទេស / ការបែងចែក",
+    "columnDelegate": "ប្រតិភូ (ការបែងចែក)",
+    "columnCode": "ពាក្យសម្ងាត់ / លេខកូដ",
+    "codeFieldHelpTitle": "វាលពាក្យសម្ងាត់ / លេខកូដ",
+    "codeFieldHelpBody": "ប្រតិភូបញ្ចូលលេខកូដនេះសម្រាប់ការបែងចែកដែលបានកំណត់របស់ពួកគេ។ មានតែអ្នកគ្រប់គ្រងគេហទំព័រទេដែលអាចផ្លាស់ប្តូរវាបាន។",
+    "empty": "មិនទាន់មានការបែងចែកសម្រាប់សន្និសីទនេះនៅឡើយទេ។"
+  },
+  "chairSessionError": {
+    "title": "ជាន់នៃវគ្គមិនបានផ្ទុកទេ។",
+    "fallback": "កំហុសដែលមិននឹកស្មានដល់បានកើតឡើង ខណៈពេលកំពុងផ្ទុកការគ្រប់គ្រងសម័យកៅអី។",
+    "reference": "ឯកសារយោង៖ {digest}",
+    "backToDashboard": "ត្រលប់ទៅផ្ទាំងគ្រប់គ្រងកៅអី"
+  },
+  "smtDelegatesPage": {
+    "title": "ប្រតិភូ",
+    "intro": "ស្វែងរករាល់ប្រតិភូដែលបានភ្ជាប់នៅក្នុងព្រឹត្តិការណ៍នេះតាមឈ្មោះ ការបែងចែក អ៊ីមែល ឬគណៈកម្មាធិការ។ បើកកាតសម្រាប់រូបថត និងប្រវត្តិរូបរបស់ពួកគេ។",
+    "selectEventFirst": "ជ្រើសរើសព្រឹត្តិការណ៍សន្និសីទសកម្មជាមុនសិន។",
+    "enterConferenceCode": "បញ្ចូលលេខកូដសន្និសីទ",
+    "searchLabel": "ស្វែងរកប្រតិភូ",
+    "searchPlaceholder": "ឈ្មោះ ការបែងចែក អ៊ីមែល ឬគណៈកម្មាធិការ",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "មិន​ទាន់​មាន​តំណាង​ដែល​បាន​ភ្ជាប់​ក្នុង​ព្រឹត្តិការណ៍​នេះ​នៅ​ឡើយ​ទេ។",
+    "noMatches": "គ្មានតំណាងត្រូវគ្នានឹងការស្វែងរកនោះទេ។",
+    "unnamed": "ប្រតិភូមិនបញ្ចេញឈ្មោះ"
   }
 }

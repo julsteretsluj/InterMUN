@@ -17,6 +17,7 @@ import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { EventTwoDayScheduleEditor } from "@/components/smt/EventTwoDayScheduleEditor";
 import { SeamunI2027LockedScheduleVisual } from "@/components/smt/SeamunI2027LockedScheduleVisual";
 import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 type EventRow = {
   id: string;
@@ -64,12 +65,12 @@ export function SmtConferenceSettingsClient({
         (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
       );
     }
-    return Array.from(m.entries()).sort(([ka], [kb]) => {
-      const aUng = ka.startsWith("__id:");
-      const bUng = kb.startsWith("__id:");
-      if (aUng !== bUng) return aUng ? 1 : -1;
-      return ka.localeCompare(kb);
-    });
+    return Array.from(m.entries()).sort(([, aRows], [, bRows]) =>
+      compareCommitteeRowsByDifficultyThenLabel(
+        { committee: aRows[0]?.committee, name: aRows[0]?.name },
+        { committee: bRows[0]?.committee, name: bRows[0]?.name }
+      )
+    );
   }, [committees]);
 
   return (

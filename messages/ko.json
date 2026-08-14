@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "새로고침"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "예를 들어 씨무니2027",
@@ -574,7 +575,8 @@
     "subtabs": "하위 탭",
     "home": "집",
     "library": "도서관",
-    "mainNavigationAria": "메인 네비게이션"
+    "mainNavigationAria": "메인 네비게이션",
+    "crisis": "위기"
   },
   "dashboardLayout": {
     "helpCenter": "도움말 센터",
@@ -838,7 +840,9 @@
     "pointsLog": "• 포인트 로그",
     "formalMotions": "공식적인 동의",
     "timer": "시간제 노동자",
-    "smtProfile": "윤곽"
+    "smtProfile": "윤곽",
+    "crisis": "위기",
+    "smtDelegates": "대표자"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -1333,7 +1337,8 @@
       "roomCode": "객실 코드",
       "settings": "설정",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "보고서"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "이벤트 및 세션",
     "roomCodes": "객실 코드 및 의자",
     "advisors": "고문",
-    "notes": "Notes",
+    "notes": "메모",
     "awards": "수상 내역",
     "allocationMatrix": "할당 매트릭스",
     "allocationPasswords": "할당 비밀번호",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "뉴스 편집실",
+    "pressCorps": "기자단",
+    "milestones": "마일스톤",
     "profile": "윤곽",
     "follow": "따르다",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "가이드",
+    "delegates": "대표자"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "프로그램 및 자금",
       "specializedAgencies": "전문기관 및 관련기관",
       "peacekeepingMissions": "평화 유지 및 임무",
-      "foundersMembers": "창립자 및 회원"
+      "foundersMembers": "창립자 및 회원",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "기자단 링크"
     },
     "links": {
       "ods": "UN 공식 문서 시스템(ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "UN 특별 정치 사절단",
       "memberStates": "UN 회원국",
       "unSystem": "UN 시스템(설립자 및 회원)",
-      "history": "유엔 역사"
+      "history": "유엔 역사",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "컨퍼런스 웹사이트 및 위원회 포털",
+      "documentsArticles": "ODS, 디지털 도서관, 뉴스, 언론, 연감",
+      "legislationTreaties": "조약, 헌장 및 국제법",
+      "mainBodies": "GA, 안보리, ECOSOC, ICJ 등",
+      "programmesFunds": "UNDP, UNICEF, UNHCR, WFP 및 관련 기금",
+      "specializedAgencies": "WHO, 유네스코, 세계은행, ILO 및 파트너",
+      "peacekeepingMissions": "평화 유지 및 특별 정치 임무",
+      "foundersMembers": "회원국, UN 체제, 역사",
+      "pressCorpsLinks": "각 기자단 할당(세계, 건강 및 기능)에 대한 3개의 뉴스 데스크."
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "알림",
     "privateReminderLabel": "비공개 알림(의자만, 동기화됨)",
     "committeeFallback": "위원회",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "블록 형성",
       "speechPoisOrPocs": "음성 POI 또는 POC",
       "questions": "질문",
-      "informalConversations": "비공식 대화"
+      "informalConversations": "비공식 대화",
+      "sessionProgress": "세션 진행(SMT)"
     },
     "concernLabel": "우려 사항(자동 자리 표시자)",
     "concernHelpTitle": "우려 플래그",
@@ -1848,7 +1883,12 @@
       "needAllocation": "메모를 보내거나 의장이 되려면 할당이 필요합니다.",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "메모를 보내지 못했습니다."
-    }
+    },
+    "sendToSmt": "SMT로 보내기",
+    "sendToSmtHelp": "사무국 메모 받은 편지함에 들어갑니다(의자에서). 세션 종료 진행에 이를 사용합니다.",
+    "progressPrefill": "위원회 회의가 방금 끝났습니다. \n\n진행 상황: \n- \n\nSMT가 후속 조치를 취해야 할 사항: \n-",
+    "progressComposeHint": "이 메모는 SMT로 전달됩니다. 방에서 다룬 내용과 사무국이 알아야 할 내용을 요약합니다.",
+    "progressSent": "진행 상황 메모가 SMT로 전송되었습니다."
   },
   "adminPage": {
     "title": "웹사이트 관리",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "데이터 행을 찾을 수 없습니다(라인당 최소한 국가/위치가 필요함).",
       "importLimitedRows": "가져오기는 {max}개 행으로 제한됩니다. 파일을 분할하세요.",
       "rowTooLong": "행이 너무 깁니다: {행}…",
-      "codeTooLongOnRow": "행의 코드가 너무 깁니다: {row}"
+      "codeTooLongOnRow": "행의 코드가 너무 깁니다: {row}",
+      "chairSeatsCannotBeDeleted": "위원장과 공동위원장 자리는 모든 위원회에 유지됩니다."
     },
     "smtStaffAccess": {
       "chooseEventFirst": "컨퍼런스 코드(이벤트 게이트)가 있는 이벤트를 먼저 선택하세요.",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "직위 이름과 플래카드 코드는 사이트 관리자만 변경할 수 있습니다."
   },
   "chairAllocationMatrixPage": {
     "intro": "현재 세션에 대한 위원회 할당 매트릭스입니다. 이는 의자에 대한 읽기 전용이며 활성 좌석 할당 및 플래카드 코드를 반영합니다.",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "요청된 할당",
       "account": "계정",
       "actions": "행위",
-      "score": "Score"
+      "score": "점수",
+      "photo": "사진",
+      "school": "학교",
+      "party": "정당 그룹"
     },
     "noRows": "이 위원회에 대한 할당 행을 찾을 수 없습니다.",
     "pendingApprovalsTitle": "가입 승인 대기 중",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "할당 매트릭스",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "변",
+    "pointsTitle": "전철기",
+    "resolutionsTitle": "결의안",
+    "noMotions": "이 대리인에 대해 기록된 동의가 없습니다.",
+    "noPoints": "이 대리인에 대해 기록된 포인트가 없습니다.",
+    "noResolutions": "이 대리인에 대해 기록된 해결 관련 내용이 없습니다.",
+    "untitledMotion": "제목 없는 모션",
+    "chairLoggedPoint": "체어 로그 포인트",
+    "resolutionLink": "Google 문서 열기",
+    "resolutionNoLink": "문서 링크가 없습니다",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "절차적",
+      "delegate": "의자 통나무"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "주요 제출자",
+      "co": "공동 제출자",
+      "signatory": "서명자"
+    },
+    "speechesTitle": "연설",
+    "flagsTitle": "칭찬과 우려",
+    "disciplineTitle": "경고 및 경고",
+    "noSpeeches": "이 대표에 대해 녹음된 연설이 없습니다.",
+    "noFlags": "이 대리인에 대해 기록된 칭찬이나 우려 사항이 없습니다.",
+    "noDiscipline": "이 대리인에 대해 기록된 경고나 경고가 없습니다.",
+    "untitledSpeech": "연설",
+    "currentFlag": "현재의",
+    "speechStatuses": {
+      "waiting": "대기 중",
+      "current": "말하기",
+      "done": "배달됨"
+    },
+    "flagKinds": {
+      "compliment": "칭찬",
+      "concern": "우려",
+      "reminder": "알림"
+    },
+    "disciplineActions": {
+      "warning": "경고",
+      "strike": "스트라이크",
+      "revoke_warning": "경고가 취소되었습니다.",
+      "revoke_strike": "파업이 취소됨",
+      "reset": "다시 놓기"
+    },
+    "disciplineCounts": "{warnings} 경고 · {strikes} 경고"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "당신의 위원회",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "위원회실(가득 차 있음)",
         "hint": "가상 레이아웃 및 참석자 층"
+      },
+      "crisisReport": {
+        "label": "보고서",
+        "hint": "사고 보고"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "메모",
     "noGoogleDocYet": "아직 연결된 Google 문서가 없습니다. 편집을 사용하여 docs.google.com/document/d/… URL을 추가하세요.",
     "chairFeedbackHeading": "의자 피드백",
-    "noFeedbackYet": "아직 추가된 피드백이 없습니다."
+    "noFeedbackYet": "아직 추가된 피드백이 없습니다.",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "있음 — 기권할 수 있음(롤)",
       "present_voting": "현재 및 투표(롤)",
       "unknown": "— (롤)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "링크, 버튼 및 파일",
+      "help": "웹 링크, 버튼을 추가하거나 PDF/파일을 업로드하세요. 이 가이드를 여는 사람은 누구나 사용할 수 있습니다.",
+      "kindLink": "링크",
+      "kindButton": "단추",
+      "kindFile": "파일",
+      "label": "상표",
+      "urlPlaceholder": "https://… or /page",
+      "add": "추가하다",
+      "upload": "PDF 또는 파일 업로드",
+      "uploading": "업로드 중…",
+      "remove": "제거하다",
+      "download": "열려 있는",
+      "empty": "아직 링크나 파일이 없습니다.",
+      "errorType": "PDF, Office 문서, 텍스트 또는 이미지 파일을 사용하세요.",
+      "errorSize": "파일이 너무 큽니다(최대 15MB).",
+      "errorUpload": "해당 파일을 업로드할 수 없습니다.",
+      "markdownHelp": "노트에서 링크에 [라벨](https://url)을 쓰거나 버튼에 [라벨](https://url \"버튼\")을 쓸 수도 있습니다. 파일 URL을 붙여넣거나 위에 업로드하세요."
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "롤 상태를 확인하는 중...",
       "rollPromptSaving": "절약...",
       "rollPromptPresent": "현재의",
-      "rollPromptPresentVoting": "출석 및 투표"
+      "rollPromptPresentVoting": "출석 및 투표",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "투표 절차",
@@ -4241,7 +4382,11 @@
       "timer": "시간제 노동자",
       "sidebarAnd": "그리고",
       "announcements": "공지사항",
-      "sidebarUseSuffix": "— 탭당 하나의 도구."
+      "sidebarUseSuffix": "— 탭당 하나의 도구.",
+      "smtProgressReminderTitle": "이 세션에서 SMT 업데이트",
+      "smtProgressReminderBody": "사무국이 위원회의 진행 상황과 후속 조치에 대해 알 수 있도록 짧은 진행 상황 메모를 보내세요.",
+      "smtProgressReminderWrite": "메모 쓰기",
+      "smtProgressReminderDismiss": "나중에"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "세션 종료됨 - SMT 업데이트",
+      "reminderSessionEnd": "{title}은 {start}에 종료될 예정이었습니다. SMT에 간단한 진행 상황 메모를 보냅니다.",
+      "writeSmtNote": "메모 쓰기"
     },
     "history": {
       "title": "세션 기록",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "아직 이 위원회에 대한 지명 자리가 없습니다.",
+    "stepProgress": "{total} 중 {current} 추천",
+    "requiredProgress": "{done}/{total} 필수 슬롯 완료",
+    "gotoStep": "{label}로 이동",
+    "lockedTitle": "모든 대표 카드를 먼저 완성하세요",
+    "lockedBody": "위의 모든 참석자에 대한 세션 기준표를 작성한 후 여기로 돌아와서 한 번에 한 슬롯씩 수상 후보를 지명하세요.",
+    "optional": "선택 과목",
+    "submittedLocked": "SMT에 제출됨 — 편집이 잠겼습니다.",
+    "topSuggestions": "세션 기준표의 상위 5개",
+    "topSuggestionsHint": "이 위원회에서 가장 높은 매트릭스 합계입니다. 하나를 선택하거나 아래에서 검색하세요.",
+    "noSuggestions": "아직 순위가 매겨진 대의원이 없습니다. 먼저 행렬에 점수를 매기거나 이름으로 검색하세요.",
+    "searchLabel": "대리인 검색",
+    "searchPlaceholder": "이름 또는 할당",
+    "searchEmpty": "해당 검색과 일치하는 대리인이 없습니다.",
+    "selectedNominee": "선정된 후보자",
+    "pickNomineeHint": "상위 5개 중에서 후보자를 선택하거나 검색하여 기준표를 열고 기록하세요.",
+    "rubricHeading": "추천 기준표",
+    "rubricTotal": "루브릭 합계: {total}/{max} ({scored}/{criteria} 기준 점수 — 기준당 1~8)",
+    "evidenceLabel": "확인/증거 진술",
+    "evidencePlaceholder": "구체적인 증거를 인용합니다(조항 초안 작성, 타협 중개, 주요 개입). SMT가 승인하려면 최소 {min}자 이상이 필요합니다.",
+    "previous": "이전의",
+    "skipOptional": "선택적 슬롯 건너뛰기",
+    "next": "다음",
+    "locked": "잠김",
+    "matrixRequired": "먼저 매트릭스가 필요합니다.",
+    "saving": "절약…",
+    "saveAndNext": "저장하고 다음",
+    "save": "구하다",
+    "allSlotsSummary": "모든 후보 슬롯",
+    "statusDone": "완료",
+    "statusTodo": "해야 할 일",
+    "errors": {
+      "selectNominee": "이 슬롯의 후보자를 선택하십시오.",
+      "completeRubric": "저장하기 전에 모든 기준에 맞는 밴드를 선택하세요.",
+      "evidenceMin": "증거를 {min}자 이상 추가하세요."
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "종합 시상 완료",
+    "completeCount": "{completed}/{total} 완료",
+    "requiredLabel": "진행상황 (필수)",
+    "optionalSlots": "선택 슬롯: {completed}/{total} 채워짐"
+  },
+  "chairAwardsSubmit": {
+    "title": "SMT에 제출",
+    "intro": "슬롯을 저장하면 초안만 작성됩니다. SMT는 아래 배치를 제출할 때까지 이를 볼 수 없습니다. 필요한 슬롯이 완료되면 검토를 위해 배치를 SMT로 보냅니다. 자동 제출은 이 페이지를 열 때 {deadline}(UTC) 이후에 실행되거나 배포에서 구성한 경우 예약된 작업을 통해서도 실행됩니다.",
+    "requiredSlotsIncomplete": "필수 슬롯 완료: {done}/{total} — 나머지를 완료한 후 SMT가 검토할 수 있도록 제출하세요.",
+    "requiredSlotsReady": "필수 슬롯 완료: {done}/{total} — 후보 배치가 준비되었습니다(위의 대의원 매트릭스가 완전한지 확인하세요).",
+    "matrixIncomplete": "대의원 매트릭스(앉은 모든 대의원): {done}/{total} — 제출하기 전에 위의 각 대의원에게 점수를 매기세요.",
+    "matrixComplete": "대의원 행렬(좌석에 있는 모든 대의원): {done}/{total} — 완료.",
+    "alreadySubmitted": "SMT{when}에 제출되었습니다. 편집이 잠겨 있습니다. 변경이 필요한 경우 SMT에 문의하세요.",
+    "submittedAt": "— {time}",
+    "submitButton": "SMT에 후보 제출",
+    "submitting": "제출 중…",
+    "needComplete": "모든 필수 추천 슬롯과 대의원 매트릭스를 작성한 후 제출하세요.",
+    "deadlinePassed": "마감일이 지났습니다. 아직 제출하지 않았다면 지금 제출하세요."
+  },
+  "chairRoomCodePage": {
+    "noSeat": "아직 위원회 자리가 없습니다. 사무국에 할당 매트릭스에 대한 할당을 요청한 후 여기로 돌아오십시오.",
+    "intro": "각 위원회에는 컨퍼런스 내에 위원회 코드가 있습니다(대표자가 컨퍼런스 코드를 입력한 후 두 번째 게이트). 코드는 동일한 컨퍼런스 이벤트 내에서 고유해야 합니다.",
+    "testingOverride": "테스트 재정의 활성화: 좌석 할당 확인 없이 위원회 전체에서 위원회 코드를 전환하고 관리할 수 있습니다.",
+    "chairScope": "데이지로서 당신은 자신이 자리를 잡은 위원회만 볼 수 있습니다. 저장하면 프로필로 이동됩니다. 이미 위원회 게이트를 통과한 대표자는 로그아웃할 때까지 로그인 상태를 유지합니다.",
+    "staffAfterSave": "저장 후 해당 위원회에 입장하거나 단상에서 코드를 공유할 수 있습니다."
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "목록 복사(TSV)",
+    "copied": "테이블을 클립보드에 복사했습니다.",
+    "helpTitle": "할당 로그인 코드",
+    "helpBody": "이는 할당 코드 게이트에서 대의원과 의장이 사용하는 할당별 플래카드 코드입니다. 코드는 사이트 관리자만 변경할 수 있습니다.",
+    "copyHeader": "컨퍼런스: {conference}",
+    "copyColumns": "국가 대표 코드",
+    "columnCountry": "국가/할당",
+    "columnDelegate": "위임(할당)",
+    "columnCode": "비밀번호/코드",
+    "codeFieldHelpTitle": "비밀번호/코드 필드",
+    "codeFieldHelpBody": "대리인은 할당된 할당에 대해 이 코드를 입력합니다. 사이트 관리자만 변경할 수 있습니다.",
+    "empty": "아직 이 회의에 대한 할당이 없습니다."
+  },
+  "chairSessionError": {
+    "title": "세션 플로어를 로드하지 못했습니다.",
+    "fallback": "의장 세션 컨트롤을 로드하는 동안 예상치 못한 오류가 발생했습니다.",
+    "reference": "참고: {digest}",
+    "backToDashboard": "의자 대시보드로 돌아가기"
+  },
+  "smtDelegatesPage": {
+    "title": "대표자",
+    "intro": "이름, 배정, 이메일 또는 위원회별로 이 이벤트에 연결된 모든 대표를 검색하세요. 사진과 프로필을 위한 카드를 엽니다.",
+    "selectEventFirst": "활성 컨퍼런스 이벤트를 먼저 선택하세요.",
+    "enterConferenceCode": "회의 코드를 입력하세요",
+    "searchLabel": "대리인 검색",
+    "searchPlaceholder": "이름, 배정, 이메일 또는 위원회",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "이 이벤트에는 아직 연결된 대리인이 없습니다.",
+    "noMatches": "해당 검색과 일치하는 대리인이 없습니다.",
+    "unnamed": "이름이 없는 대리인"
   }
 }

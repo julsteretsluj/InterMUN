@@ -3,38 +3,75 @@
 
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { OFFICIAL_UN_LINK_GROUPS_DEF } from "@/lib/official-un-links";
+import { SeamunConferenceLinksCta } from "@/components/SeamunConferenceLinksCta";
+import {
+  OFFICIAL_LINK_CATEGORIES,
+  officialLinkCategoryDisplayCount,
+} from "@/lib/official-un-links";
+import { cn } from "@/lib/utils";
 
-export function OfficialLinksPanel() {
+export function OfficialLinksPanel({
+  committeeSiteUrl = null,
+}: {
+  /** When set (chairs/delegates with a mapped chamber), show the committee portal CTA. */
+  committeeSiteUrl?: string | null;
+}) {
   const t = useTranslations("officialLinks");
 
   return (
     <>
-      <p className="mb-6 text-sm text-brand-muted dark:text-zinc-400">{t("intro")}</p>
-      <div className="space-y-8">
-        {OFFICIAL_UN_LINK_GROUPS_DEF.map((group) => (
-          <section key={group.groupKey}>
-            <h3 className="font-sans text-base font-semibold text-brand-navy dark:text-zinc-50">
-              {t(`groups.${group.groupKey}`)}
-            </h3>
-            <ul className="mt-2 space-y-1.5 text-sm">
-              {group.links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 hover:decoration-brand-diplomatic dark:text-brand-accent-bright dark:decoration-brand-accent-bright/45"
+      <SeamunConferenceLinksCta committeeSiteUrl={committeeSiteUrl} className="mb-8" />
+      <p className="mb-6 max-w-2xl text-sm leading-relaxed text-brand-muted dark:text-zinc-400">
+        {t("intro")}
+      </p>
+      <ul className="grid list-none gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {OFFICIAL_LINK_CATEGORIES.map((category, index) => {
+          const stagger = (index % 3) + 1;
+          const linkCount = officialLinkCategoryDisplayCount(category, {
+            committeeSiteUrl,
+          });
+          return (
+            <li key={category.id}>
+              <Link
+                href={`/official-links/${category.id}`}
+                className={cn(
+                  "mun-lift mun-animate-rise group flex h-full min-h-[7rem] flex-col rounded-[var(--radius-md)] border border-[#C9DDE9] bg-[color-mix(in_srgb,#F8FBFF_88%,white)] px-5 py-5 shadow-[var(--dashboard-shadow)] transition-[transform,box-shadow,border-color] duration-[var(--dur-base)] ease-[var(--ease-apple-out)] hover:-translate-y-1 hover:border-[color-mix(in_srgb,#119ED3_35%,#C9DDE9)] hover:shadow-[var(--dashboard-shadow-hover)] dark:border-zinc-700 dark:bg-zinc-900/60",
+                  stagger === 1 && "mun-animate-delay-1",
+                  stagger === 2 && "mun-animate-delay-2",
+                  stagger === 3 && "mun-animate-delay-3"
+                )}
+              >
+                <span className="flex items-start justify-between gap-3">
+                  <span className="flex min-w-0 items-center gap-2.5">
+                    {category.emoji ? (
+                      <span aria-hidden className="text-xl leading-none">
+                        {category.emoji}
+                      </span>
+                    ) : null}
+                    <span className="font-sans text-[1.02rem] font-semibold tracking-[-0.01em] text-brand-navy dark:text-zinc-50">
+                      {t(`groups.${category.labelKey}`)}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="shrink-0 translate-x-0 text-brand-muted opacity-0 transition-all duration-[var(--dur-base)] ease-[var(--ease-apple)] group-hover:translate-x-0.5 group-hover:text-[#119ED3] group-hover:opacity-100 dark:text-zinc-500"
                   >
-                    {t(`links.${link.linkKey}`)} ↗
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+                    →
+                  </span>
+                </span>
+                <span className="mt-2 text-xs leading-relaxed text-brand-muted dark:text-zinc-400">
+                  {t(`categoryHints.${category.hintKey}`)}
+                </span>
+                <span className="mt-auto pt-4 text-[0.7rem] font-medium uppercase tracking-[0.06em] text-[#35516B] dark:text-zinc-500">
+                  {t("linkCount", { count: linkCount })}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }

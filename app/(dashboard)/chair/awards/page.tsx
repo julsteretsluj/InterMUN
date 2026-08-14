@@ -9,9 +9,8 @@ import {
   type NominationRubricType,
   type RubricCriterion,
 } from "@/lib/seamuns-award-scoring";
-import { OverallAwardsProgress, SectionAwardsProgress } from "./AwardProgressBars";
-import { ChairNominationSlotForm } from "./ChairNominationSlotForm";
 import { ChairSubmitToSmtPanel } from "./ChairSubmitToSmtPanel";
+import { ChairNominationsWizard } from "./ChairNominationsWizard";
 import { runChairAwardAutoSubmitIfDue } from "@/app/actions/awards";
 import { AWARD_SUBMISSION_DEADLINE_ISO } from "@/lib/award-submission";
 import {
@@ -361,6 +360,50 @@ export default async function ChairAwardsPage() {
             <p className="mt-1 text-xs leading-relaxed">{tPage("matrixGate.body")}</p>
           </div>
         ) : null}
+        <p className="text-xs text-brand-muted">
+          {tPage("committeeLabel")}: {activeConf.committee?.trim() || activeConf.name}
+          {activeConf.committee?.trim() && activeConf.name?.trim() ? (
+            <span className="text-brand-muted/80"> · {activeConf.name}</span>
+          ) : null}
+        </p>
+
+        {profile?.role === "chair" && delegateMatrixComplete ? (
+          <ChairNominationsWizard
+            committeeConferenceId={awardConferenceId}
+            rankingDesc={rankingDesc}
+            delegateByUserId={delegateByUserId}
+            floorActivityByProfileId={floorActivityByProfileId}
+            nominationsLocked={!delegateMatrixComplete}
+            serverCompletedKeys={serverCompletedKeys}
+            allRequiredKeys={allRequiredKeys}
+            slots={nominationTypes.flatMap((type) =>
+              type.slots.map((slot) => {
+                const existing = nominationByKey.get(`${type.id}:${slot.rank}`);
+                const selectedId = existing?.nominee_profile_id ?? "";
+                return {
+                  nominationType: type.id,
+                  rank: slot.rank,
+                  required: slot.required,
+                  slotLabel: slot.label,
+                  typeLabel: type.label,
+                  helper: type.helper,
+                  criteria: type.criteria,
+                  options: nomineeOptionsForSlot(delegateRows, delegateRowsAll, selectedId),
+                  selectedNomineeId: selectedId,
+                  scoreMap: (existing?.rubric_scores ?? {}) as Record<string, number>,
+                  evidenceNote: existing?.evidence_note ?? null,
+                  nominationRowId: existing?.id ?? null,
+                  locked: existing?.status === "pending",
+                };
+              })
+            )}
+          />
+        ) : profile?.role === "chair" ? null : (
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-paper px-4 py-3 text-sm text-brand-muted">
+            <p className="font-semibold text-brand-navy">{tPage("nominationsChairOnly.title")}</p>
+            <p className="mt-1 text-xs leading-relaxed">{tPage("nominationsChairOnly.body")}</p>
+          </div>
+        )}
         <ChairSubmitToSmtPanel
           committeeConferenceId={awardConferenceId}
           canSubmit={canSubmitToSmt}
@@ -374,82 +417,6 @@ export default async function ChairAwardsPage() {
           ).length}
           delegateMatrixTotal={delegateMatrixPayload.length}
         />
-        {rankingDesc.length > 0 ? (
-          <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-            <h3 className="font-sans text-base font-semibold text-brand-navy mb-2">
-              {tPage("ranking.title")}
-            </h3>
-            <p className="text-xs text-brand-muted mb-3">
-              {tPage("ranking.description")}
-            </p>
-            <ol className="space-y-1.5 text-sm">
-              {rankingDesc.map((r, i) => (
-                <li
-                  key={r.uid}
-                  className="flex justify-between gap-3 border-b border-brand-navy/5 pb-1.5 last:border-0"
-                >
-                  <span className="text-brand-muted tabular-nums w-6 shrink-0">{i + 1}.</span>
-                  <span className="flex-1 min-w-0 text-brand-navy">{r.label}</span>
-                  <span className="font-mono tabular-nums text-brand-accent font-semibold shrink-0">{r.total}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
-        ) : null}
-        <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
-        <p className="text-xs text-brand-muted">
-          {tPage("committeeLabel")}: {activeConf.committee?.trim() || activeConf.name}
-          {activeConf.committee?.trim() && activeConf.name?.trim() ? (
-            <span className="text-brand-muted/80"> · {activeConf.name}</span>
-          ) : null}
-        </p>
-
-        {nominationTypes.map((type) => {
-          return (
-            <section
-              key={type.id}
-              className="rounded-xl border border-brand-navy/10 bg-logo-cyan/7 p-4 md:p-4 space-y-3"
-            >
-              <div>
-                <h3 className="font-sans text-lg font-semibold text-brand-navy">{type.label}</h3>
-                <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
-                <SectionAwardsProgress
-                  nominationType={type.id}
-                  requiredRanks={type.slots.filter((s) => s.required).map((s) => s.rank)}
-                  optionalRanks={type.slots.filter((s) => !s.required).map((s) => s.rank)}
-                  serverCompletedKeys={serverCompletedKeys}
-                />
-              </div>
-              {type.slots.map((slot) => {
-                const rank = slot.rank;
-                const existing = nominationByKey.get(`${type.id}:${rank}`);
-                const selectedId = existing?.nominee_profile_id ?? "";
-                const scoreMap = existing?.rubric_scores ?? {};
-                return (
-                  <ChairNominationSlotForm
-                    key={`${type.id}-${rank}`}
-                    committeeConferenceId={awardConferenceId}
-                    nominationType={type.id}
-                    rank={rank}
-                    slotRequired={slot.required}
-                    slotLabel={slot.label}
-                    typeLabel={type.label}
-                    options={nomineeOptionsForSlot(delegateRows, delegateRowsAll, selectedId)}
-                    delegateByUserId={delegateByUserId}
-                    selectedNomineeId={selectedId}
-                    scoreMap={scoreMap as Record<string, number>}
-                    evidenceNote={existing?.evidence_note ?? null}
-                    nominationRowId={existing?.id ?? null}
-                    criteria={type.criteria}
-                    locked={existing?.status === "pending"}
-                    nominationsLocked={!delegateMatrixComplete}
-                    floorActivityByProfileId={floorActivityByProfileId}
-                  />
-                );
-              })}
-            </section>
-          );
-        })}
           </div>
         }
         rubric={<AwardsRubricReference />}

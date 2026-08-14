@@ -20,7 +20,8 @@
     "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
     "chooseFile": "Choose File",
     "noFileChosen": "No file chosen",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reload": "リロード"
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "例えば シームニ2027",
@@ -574,7 +575,8 @@
     "subtabs": "サブタブ",
     "home": "家",
     "library": "図書館",
-    "mainNavigationAria": "メインナビゲーション"
+    "mainNavigationAria": "メインナビゲーション",
+    "crisis": "危機"
   },
   "dashboardLayout": {
     "helpCenter": "ヘルプセンター",
@@ -838,7 +840,9 @@
     "pointsLog": "• ポイントログ",
     "formalMotions": "正式な動作",
     "timer": "タイマー",
-    "smtProfile": "プロフィール"
+    "smtProfile": "プロフィール",
+    "crisis": "危機",
+    "smtDelegates": "代表者"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -1333,7 +1337,8 @@
       "roomCode": "ルームコード",
       "settings": "設定",
       "resolutions": "Resolutions",
-      "guides": "Guides"
+      "guides": "Guides",
+      "crisisReport": "報告"
     }
   },
   "smtNav": {
@@ -1342,17 +1347,18 @@
     "eventSessions": "イベントとセッション",
     "roomCodes": "ルームコードと椅子",
     "advisors": "アドバイザー",
-    "notes": "Notes",
+    "notes": "注意事項",
     "awards": "受賞歴",
     "allocationMatrix": "割り当てマトリックス",
     "allocationPasswords": "パスワードの割り当て",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "ニュースルーム",
+    "pressCorps": "記者団",
+    "milestones": "マイルストーン",
     "profile": "プロフィール",
     "follow": "フォローする",
     "hubAbbrev": "SMT",
-    "guides": "Guides"
+    "guides": "ガイド",
+    "delegates": "代表者"
   },
   "milestones": {
     "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
@@ -1432,7 +1438,9 @@
       "programmesFunds": "プログラムと資金",
       "specializedAgencies": "専門機関および関連機関",
       "peacekeepingMissions": "平和維持と任務",
-      "foundersMembers": "創設者とメンバー"
+      "foundersMembers": "創設者とメンバー",
+      "seamun": "SEAMUN",
+      "pressCorpsLinks": "報道陣リンク"
     },
     "links": {
       "ods": "国連公式文書システム (ODS)",
@@ -1471,7 +1479,29 @@
       "spm": "国連特別政治ミッション",
       "memberStates": "国連加盟国",
       "unSystem": "国連システム (創設者とメンバー)",
-      "history": "国連の歴史"
+      "history": "国連の歴史",
+      "seamunWebsite": "SEAMUN website",
+      "seamunCommittee": "SEAMUN committee portal",
+      "unicef": "UNICEF",
+      "unesco": "UNESCO"
+    },
+    "libraryIntro": "Opens in a new tab.",
+    "backToCategories": "All categories",
+    "linkCount": "{count, plural, one {# link} other {# links}}",
+    "categoryHints": {
+      "seamun": "会議のウェブサイトと委員会のポータル",
+      "documentsArticles": "ODS、デジタル ライブラリ、ニュース、プレス、年鑑",
+      "legislationTreaties": "条約、憲章、国際法",
+      "mainBodies": "GA、安全保障理事会、ECOSOC、ICJ など",
+      "programmesFunds": "UNDP、ユニセフ、UNHCR、WFP、および関連基金",
+      "specializedAgencies": "WHO、ユネスコ、世界銀行、ILO、およびパートナー",
+      "peacekeepingMissions": "平和維持と特別な政治的任務",
+      "foundersMembers": "加盟国、国連の制度、歴史",
+      "pressCorpsLinks": "各記者団の割り当て (世界、健康、特集) ごとに 3 つのニュース デスク。"
+    },
+    "linkDescriptions": {
+      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
   "timersWidget": {
@@ -1614,7 +1644,11 @@
     "reminder": "リマインダー",
     "privateReminderLabel": "プライベートリマインダー（椅子のみ、同期済み）",
     "committeeFallback": "委員会",
-    "dash": "—"
+    "dash": "—",
+    "complimentReasonPrompt": "Reason for this compliment (required):",
+    "concernReasonPrompt": "Reason for this concern (required):",
+    "reasonRequired": "Add a reason before saving a compliment or concern.",
+    "unnamedDelegate": "Unnamed"
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -1751,7 +1785,8 @@
       "blocForming": "ブロック形成",
       "speechPoisOrPocs": "音声 POI または POC",
       "questions": "質問",
-      "informalConversations": "カジュアルな会話"
+      "informalConversations": "カジュアルな会話",
+      "sessionProgress": "セッションの進行状況 (SMT)"
     },
     "concernLabel": "懸念事項 (自動プレースホルダー)",
     "concernHelpTitle": "懸念フラグ",
@@ -1848,7 +1883,12 @@
       "needAllocation": "メモを送る（または議長になる）には割り当てが必要です。",
       "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "メモの送信に失敗しました。"
-    }
+    },
+    "sendToSmt": "SMTに送信",
+    "sendToSmtHelp": "事務局のメモの受信箱に着陸します（椅子から）。 これをセッション終了時の進行状況に使用します。",
+    "progressPrefill": "先ほど委員会が終了しました。 \n\n進捗状況:\n -\n\n SMT がフォローアップすべき事項は次のとおりです。 \n-",
+    "progressComposeHint": "このメモは SMT に送信されます。 会議室で取り上げられた内容と事務局が知っておくべきことをまとめます。",
+    "progressSent": "進捗メモが SMT に送信されました。"
   },
   "adminPage": {
     "title": "ウェブサイト管理",
@@ -1972,7 +2012,8 @@
       "noDataRowsFound": "データ行が見つかりません (行ごとに少なくとも国/位置が必要です)。",
       "importLimitedRows": "インポートは {max} 行に制限されています。 ファイルを分割します。",
       "rowTooLong": "行が長すぎます: {行}…",
-      "codeTooLongOnRow": "行のコードが長すぎます: {row}"
+      "codeTooLongOnRow": "行のコードが長すぎます: {row}",
+      "chairSeatsCannotBeDeleted": "委員長と副委員長の席はすべての委員会に残ります。"
     },
     "smtStaffAccess": {
       "chooseEventFirst": "最初に会議コード (イベント ゲート) を持つイベントを選択します。",
@@ -2289,7 +2330,8 @@
     "secretariatCouncilTab": "Secretariat Council",
     "councilsTabGroup": "Councils",
     "committeesTabGroup": "Committees",
-    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs."
+    "showingOneChamberAtATime": "Showing one chamber at a time. Switch committee or council using the bottom tabs.",
+    "positionNamesLocked": "ポジション名とプラカードコードはサイト管理者のみが変更できます。"
   },
   "chairAllocationMatrixPage": {
     "intro": "現在のセッションの委員会割り当てマトリックス。 これは椅子の読み取り専用であり、アクティブな座席の割り当てとプラカード コードを反映します。",
@@ -2305,7 +2347,10 @@
       "requestedAllocation": "要求された割り当て",
       "account": "アカウント",
       "actions": "アクション",
-      "score": "Score"
+      "score": "スコア",
+      "photo": "写真",
+      "school": "学校",
+      "party": "会派"
     },
     "noRows": "この委員会の割り当て行が見つかりません。",
     "pendingApprovalsTitle": "保留中のサインアップ承認",
@@ -2326,7 +2371,38 @@
     "nextDelegate": "Next delegate",
     "closeScoring": "Close",
     "scoreStatusComplete": "Complete",
-    "scoreStatusIncomplete": "Incomplete"
+    "scoreStatusIncomplete": "Incomplete",
+    "copy": {
+      "title": "Copy for email or lists",
+      "help": "Emails copy as a comma-separated list. Allocations copy as one country per line (dais seats excluded).",
+      "emailsIncludingChairs": "Copy all emails (incl. chairs)",
+      "emailsExcludingChairs": "Copy emails (excl. chairs)",
+      "allocationsExcludingChairs": "Copy allocations (excl. chairs)",
+      "copied": "Copied {count} item(s).",
+      "empty": "Nothing to copy for that option.",
+      "failed": "Could not copy to the clipboard."
+    },
+    "viewProfile": "View profile",
+    "delegateProfile": {
+      "title": "Delegate profile",
+      "close": "Close",
+      "dash": "—",
+      "unnamed": "Unnamed delegate",
+      "viewAria": "View profile for {name}",
+      "openFullProfile": "Open full profile page",
+      "openChat": "Open chat",
+      "fields": {
+        "allocation": "Seat",
+        "email": "Email",
+        "username": "Username",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "role": "Role",
+        "notes": "Notes",
+        "committee": "Committee"
+      }
+    }
   },
   "smtAllocationMatrixPage": {
     "title": "割り当てマトリックス",
@@ -2395,6 +2471,10 @@
     "matrixChairOnly": {
       "title": "Every-delegate matrix is chair-only",
       "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
+    "nominationsChairOnly": {
+      "title": "Nominations are chair-only",
+      "body": "SMT can review submitted nominations elsewhere. Chairs complete the sequential nomination flow after every delegate card is scored."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2435,25 +2515,51 @@
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
     "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
+    "motionsTitle": "モーション",
+    "pointsTitle": "ポイント",
+    "resolutionsTitle": "決議",
+    "noMotions": "この代理人に対して記録された動議はありません。",
+    "noPoints": "この代理人にはポイントが記録されていません。",
+    "noResolutions": "この代表者に関する決議への関与は記録されていません。",
+    "untitledMotion": "無題のモーション",
+    "chairLoggedPoint": "椅子のログポイント",
+    "resolutionLink": "Googleドキュメントを開く",
+    "resolutionNoLink": "ドキュメントリンクがありません",
     "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
+      "session": "手続き的",
+      "delegate": "椅子のログ"
     },
     "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
-    }
+      "main": "主要提出者",
+      "co": "共同提出者",
+      "signatory": "署名者"
+    },
+    "speechesTitle": "スピーチ",
+    "flagsTitle": "褒め言葉と懸念",
+    "disciplineTitle": "警告とストライキ",
+    "noSpeeches": "この代表のスピーチは記録されていません。",
+    "noFlags": "この代表者に対する賛辞や懸念は記録されていません。",
+    "noDiscipline": "この代表に対して警告やストライキは記録されていません。",
+    "untitledSpeech": "スピーチ",
+    "currentFlag": "現在",
+    "speechStatuses": {
+      "waiting": "待っている",
+      "current": "話し中",
+      "done": "納品済み"
+    },
+    "flagKinds": {
+      "compliment": "褒め言葉",
+      "concern": "懸念",
+      "reminder": "リマインダー"
+    },
+    "disciplineActions": {
+      "warning": "警告",
+      "strike": "ストライク",
+      "revoke_warning": "警告が取り消されました",
+      "revoke_strike": "ストライキは取り消されました",
+      "reset": "リセット"
+    },
+    "disciplineCounts": "{warnings} 警告 · {strikes} ストライキ"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "あなたの委員会",
@@ -2545,6 +2651,10 @@
       "committeeRoomFull": {
         "label": "委員会室（満員）",
         "hint": "仮想レイアウトと参加者フロア"
+      },
+      "crisisReport": {
+        "label": "報告",
+        "hint": "インシデントの報告"
       }
     }
   },
@@ -2953,7 +3063,11 @@
     "notesHeading": "注意事項",
     "noGoogleDocYet": "まだ Google ドキュメントがリンクされていません。 [編集] を使用して、docs.google.com/document/d/… URL を追加します。",
     "chairFeedbackHeading": "議長のフィードバック",
-    "noFeedbackYet": "まだフィードバックは追加されていません。"
+    "noFeedbackYet": "まだフィードバックは追加されていません。",
+    "ropPlaceholderTitle": "Rules of Procedure",
+    "ropPlaceholderHint": "Not uploaded yet",
+    "ropPlaceholderBlurb": "Conference Rules of Procedure belong in Archives. This slot stays visible so chairs and delegates always know where RoP will live — SMT can upload or link it later from Compose.",
+    "ropPlaceholderComposeHint": "Open Compose and choose the RoP document type to add the official file or Google Doc link."
   },
   "amendments": {
     "submitTitle": "Submit an amendment",
@@ -3116,7 +3230,13 @@
       "present_abstain": "出席 — 棄権してもよい (ロール)",
       "present_voting": "プレゼントと投票（ロール）",
       "unknown": "— (ロール)"
-    }
+    },
+    "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
+    "votingRightsLostShort": "voting disabled",
+    "speakingSuspendedShort": "speaking suspended",
+    "removedShort": "removed",
+    "disciplineWarnings": "{count} warning(s)",
+    "disciplineStrikes": "{count} strike(s)"
   },
   "profile": {
     "fallbacks": {
@@ -4001,6 +4121,25 @@
           }
         }
       }
+    },
+    "resources": {
+      "title": "リンク、ボタン、ファイル",
+      "help": "Web リンク、ボタンを追加するか、PDF/ファイルをアップロードします。 このガイドを開いた人は誰でも使用できます。",
+      "kindLink": "リンク",
+      "kindButton": "ボタン",
+      "kindFile": "ファイル",
+      "label": "ラベル",
+      "urlPlaceholder": "https://… or /page",
+      "add": "追加",
+      "upload": "PDFまたはファイルをアップロードする",
+      "uploading": "アップロード中…",
+      "remove": "取り除く",
+      "download": "開ける",
+      "empty": "まだリンクやファイルはありません。",
+      "errorType": "PDF、Office ドキュメント、テキスト、または画像ファイルを使用します。",
+      "errorSize": "ファイルが大きすぎます (最大 15 MB)。",
+      "errorUpload": "そのファイルをアップロードできませんでした。",
+      "markdownHelp": "メモには、リンクの場合は [label](https://url) 、ボタンの場合は [label](https://url \"button\") と記述することもできます。 ファイルの URL を貼り付けるか、上にアップロードします。"
     }
   },
   "ideas": {
@@ -4141,7 +4280,9 @@
       "rollPromptBodyChecking": "ロールのステータスを確認しています...",
       "rollPromptSaving": "保存中...",
       "rollPromptPresent": "現在",
-      "rollPromptPresentVoting": "プレゼンと投票"
+      "rollPromptPresentVoting": "プレゼンと投票",
+      "speakingSuspended": "Speaking rights are suspended due to disciplinary strikes.",
+      "removedFromCommittee": "You were removed from committee and cannot request the floor."
     },
     "motionVoting": {
       "votingProcedure": "投票手順",
@@ -4241,7 +4382,11 @@
       "timer": "タイマー",
       "sidebarAnd": "そして",
       "announcements": "お知らせ",
-      "sidebarUseSuffix": "— タブごとに 1 つのツール。"
+      "sidebarUseSuffix": "— タブごとに 1 つのツール。",
+      "smtProgressReminderTitle": "このセッションで SMT を更新する",
+      "smtProgressReminderBody": "短い進捗メモを送信して、委員会がどのように進んだのか、何をフォローアップすべきかを事務局が把握できるようにします。",
+      "smtProgressReminderWrite": "メモを書く",
+      "smtProgressReminderDismiss": "後で"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4273,7 +4418,10 @@
       "startNow": "Start now",
       "remindersHint": "Reminders pop up anywhere in the chair dashboard — you don't need to stay on this page.",
       "soundOn": "Reminder sound on",
-      "soundOff": "Reminder sound off"
+      "soundOff": "Reminder sound off",
+      "reminderTitleSessionEnd": "セッションが終了しました - SMT を更新します",
+      "reminderSessionEnd": "{title}は{start}に終了する予定でした。 SMT に短い進捗メモを送信します。",
+      "writeSmtNote": "メモを書く"
     },
     "history": {
       "title": "セッション履歴",
@@ -5310,5 +5458,110 @@
         "body": "Publish how-to and glossary content every role can open. Keep this current so chairs are not guessing."
       }
     }
+  },
+  "seamunConferenceLinks": {
+    "heading": "SEAMUN conference sites",
+    "intro": "Open the main conference site or your committee’s portal in a new tab.",
+    "introMainOnly": "Open the official SEAMUN conference website in a new tab.",
+    "mainSite": "SEAMUN website",
+    "committeeSite": "Committee portal",
+    "committeeHost": "{host}"
+  },
+  "chairAwardsNominations": {
+    "empty": "この委員会にはまだ指名枠がありません。",
+    "stepProgress": "指名 {current}/{total}",
+    "requiredProgress": "{done}/{total} 必要なスロットが完了しました",
+    "gotoStep": "{label} へ",
+    "lockedTitle": "最初にすべての参加者カードを完成させます",
+    "lockedBody": "上記の着席参加者全員のセッション ルーブリックを完成させてから、ここに戻って一度に 1 枠ずつ賞を指名してください。",
+    "optional": "オプション",
+    "submittedLocked": "SMT に送信されました — 編集はロックされています。",
+    "topSuggestions": "セッションルーブリックのトップ 5",
+    "topSuggestionsHint": "この委員会での最高のマトリックスの合計。 1 つ選択するか、以下で検索してください。",
+    "noSuggestions": "まだランク付けされた代表者はいません。 最初に行列にスコアを付けるか、名前で検索します。",
+    "searchLabel": "代理人の検索",
+    "searchPlaceholder": "名前または割り当て",
+    "searchEmpty": "その検索に一致するデリゲートはありません。",
+    "selectedNominee": "選ばれた候補者",
+    "pickNomineeHint": "上位 5 人から候補者を選択するか、検索してルーブリックとログを開きます。",
+    "rubricHeading": "指名ルーブリック",
+    "rubricTotal": "ルーブリック合計: {total}/{max} ({scored}/{criteria} 基準スコア — 基準ごとに 1 ～ 8)",
+    "evidenceLabel": "確認書・証拠",
+    "evidencePlaceholder": "具体的な証拠を引用します（条文の起草、妥協の仲介、主要な介入）。 SMT が承認するには少なくとも {min} 文字が必要です。",
+    "previous": "前の",
+    "skipOptional": "オプションのスロットをスキップする",
+    "next": "次",
+    "locked": "ロックされています",
+    "matrixRequired": "最初に行列が必要です",
+    "saving": "保存中…",
+    "saveAndNext": "保存して次へ",
+    "save": "保存",
+    "allSlotsSummary": "すべての指名枠",
+    "statusDone": "終わり",
+    "statusTodo": "やること",
+    "errors": {
+      "selectNominee": "このスロットの候補者を選択してください。",
+      "completeRubric": "保存する前に、すべての基準に応じてバンドを選択します。",
+      "evidenceMin": "少なくとも {min} 文字の証拠を追加してください。"
+    }
+  },
+  "chairAwardsProgress": {
+    "overall": "全体的な賞の完了",
+    "completeCount": "{completed}/{total} 完了",
+    "requiredLabel": "進捗状況 (必須)",
+    "optionalSlots": "オプションのスロット: {completed}/{total} が埋まっています"
+  },
+  "chairAwardsSubmit": {
+    "title": "SMTに提出",
+    "intro": "スロットを保存すると、ドラフトが書き込まれるだけです。 以下のバッチを送信するまで、SMT はこれを認識しません。 必要なスロットが完了したら、レビューのためにバッチを SMT に送信します。 自動送信は、このページを開いたときに {deadline} (UTC) 以降に実行されるか、展開で構成されている場合はスケジュールされたジョブによっても実行されます。",
+    "requiredSlotsIncomplete": "必要なスロットが完了しました: {done}/{total} — 残りを完了してから、SMT がレビューできるように送信します。",
+    "requiredSlotsReady": "必要なスロットが完了しました: {done}/{total} — 推薦バッチの準備ができました (上記の代表者マトリックスが完了していることを確認してください)。",
+    "matrixIncomplete": "参加者マトリックス (着席した各参加者): {done}/{total} — 送信する前に上記の各参加者にスコアを付けます。",
+    "matrixComplete": "参加者マトリックス (着席した各参加者): {done}/{total} — 完了。",
+    "alreadySubmitted": "SMT{when} に提出されました。 編集はロックされています。 変更が必要な場合は、SMT にお問い合わせください。",
+    "submittedAt": "— {time}",
+    "submitButton": "SMT に推薦を提出する",
+    "submitting": "送信中…",
+    "needComplete": "必要なすべての推薦枠と代表者マトリックスに記入し、送信します。",
+    "deadlinePassed": "締め切りが過ぎました。まだ提出していない場合は、今すぐ提出してください。"
+  },
+  "chairRoomCodePage": {
+    "noSeat": "まだ委員会の席がありません。 事務局に割り当てマトリックスへの割り当てを依頼して、戻ってください。",
+    "intro": "各委員会には、その会議内に委員会コードがあります (参加者が会議コードを入力した後の 2 番目のゲート)。 コードは同じ会議イベント内で一意である必要があります。",
+    "testingOverride": "テスト オーバーライドの有効化: 座席割り当てチェックを行わずに、委員会間で委員会コードを切り替えて管理できます。",
+    "chairScope": "演壇としては、自分が席を持っている委員会のみが表示されます。 保存すると、自分のプロフィールが表示されます。 すでに委員会のゲートを通過した参加者は、ログアウトするまでサインインしたままになります。",
+    "staffAfterSave": "保存後、その委員会に参加したり、演壇でコードを共有したりできます。"
+  },
+  "chairAllocationPasswordsPage": {
+    "copyList": "コピーリスト(TSV)",
+    "copied": "テーブルをクリップボードにコピーしました。",
+    "helpTitle": "サインイン コードの割り当て",
+    "helpBody": "これらは、割り当てコードのゲート中に参加者と議長によって使用される割り当てごとのプラカード コードです。 コードを変更できるのはサイト管理者のみです。",
+    "copyHeader": "カンファレンス: {conference}",
+    "copyColumns": "国別代表コード",
+    "columnCountry": "国・割り当て",
+    "columnDelegate": "デリゲート（割り当て）",
+    "columnCode": "パスワード/コード",
+    "codeFieldHelpTitle": "パスワード/コード欄",
+    "codeFieldHelpBody": "参加者は、割り当てられた割り当てに対してこのコードを入力します。 サイト管理者のみが変更できます。",
+    "empty": "このカンファレンスにはまだ割り当てがありません。"
+  },
+  "chairSessionError": {
+    "title": "セッションフロアの読み込みに失敗しました",
+    "fallback": "チェア セッション コントロールの読み込み中に予期しないエラーが発生しました。",
+    "reference": "参照: {digest}",
+    "backToDashboard": "椅子のダッシュボードに戻る"
+  },
+  "smtDelegatesPage": {
+    "title": "代表者",
+    "intro": "このイベントにリンクされているすべての参加者を名前、割り当て、電子メール、または委員会で検索します。 写真とプロフィールのカードを開きます。",
+    "selectEventFirst": "最初にアクティブな会議イベントを選択します。",
+    "enterConferenceCode": "会議コードを入力してください",
+    "searchLabel": "代理人の検索",
+    "searchPlaceholder": "名前、割り当て、電子メール、または委員会",
+    "resultCount": "{count, plural, one {# match} other {# matches}}",
+    "empty": "このイベントにはまだリンクされた参加者がいません。",
+    "noMatches": "その検索に一致するデリゲートはありません。",
+    "unnamed": "名前のない代表者"
   }
 }

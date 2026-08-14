@@ -47,6 +47,10 @@ import {
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
 import { ActiveTimerWidgets, ActiveTimerWidgetsHeading } from "@/components/timers/ActiveTimerWidgets";
+import {
+  canRecordVote,
+  disciplineVoteBlockMessage,
+} from "@/lib/delegate-discipline";
 import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
@@ -1551,8 +1555,8 @@ export function SessionControlClient({
     }
     const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "present_voting";
     const discipline = disciplineByAllocationId[allocation.id];
-    if (discipline?.voting_rights_lost) {
-      setMsg("This delegate lost voting rights due to disciplinary strike(s).");
+    if (!canRecordVote(discipline)) {
+      setMsg(disciplineVoteBlockMessage(discipline) ?? "This delegate cannot vote.");
       return;
     }
     const abstainAllowedByVoteType =
@@ -3575,7 +3579,12 @@ export function SessionControlClient({
                                 <span className="text-brand-navy">{rights.statement}</span>
                               </p>
                             ) : null}
-                            {discipline?.strike_count ? (
+                            {discipline &&
+                            (discipline.warning_count > 0 ||
+                              discipline.strike_count > 0 ||
+                              discipline.voting_rights_lost ||
+                              discipline.speaking_rights_suspended ||
+                              discipline.removed_from_committee) ? (
                               <p className="mt-1 text-xs text-rose-700 dark:text-rose-300">
                                 Discipline: {discipline.warning_count} warning(s), {discipline.strike_count} strike(s)
                                 {discipline.voting_rights_lost ? " · voting disabled" : ""}
@@ -3592,7 +3601,7 @@ export function SessionControlClient({
                           <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              disabled={pending || discipline?.voting_rights_lost || absent}
+                              disabled={pending || !canRecordVote(discipline) || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
                               className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
@@ -3601,7 +3610,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
+                                disabled={pending || !call.user_id || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "yes", true)}
                                 className="rounded-lg border border-brand-accent/45 bg-brand-accent/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >
@@ -3611,7 +3620,7 @@ export function SessionControlClient({
                             {canAbstain ? (
                               <button
                                 type="button"
-                                disabled={pending || discipline?.voting_rights_lost || absent}
+                                disabled={pending || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
                                 className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                               >
@@ -3620,7 +3629,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || discipline?.voting_rights_lost || absent}
+                              disabled={pending || !canRecordVote(discipline) || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "no")}
                               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                             >
@@ -3629,7 +3638,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
+                                disabled={pending || !call.user_id || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "no", true)}
                                 className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >
@@ -3638,7 +3647,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || discipline?.voting_rights_lost}
+                              disabled={pending}
                               onClick={() => clearDelegateVoteForAllocation(call)}
                               className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15 disabled:opacity-50"
                             >

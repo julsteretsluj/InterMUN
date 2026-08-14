@@ -37,6 +37,7 @@ import {
   seamunI2027LunchGroupDefinition,
   type SeamunLunchGroupId,
 } from "@/lib/seamun-i-2027-lunch-groups";
+import { sortCommitteeLabelsByDifficultyThenAlpha } from "@/lib/committee-difficulty-sort";
 import { CanteenLeaveNotice } from "@/components/schedule/CanteenLeaveNotice";
 import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOverlapCompare";
 
@@ -102,34 +103,41 @@ const LEGEND_DEF: { cat: SeamunLockedBlockCategory; msg: string }[] = [
   { cat: "sweep", msg: "legendSweep" },
 ];
 
+const SCHEDULE_COLUMN_MIN_H = "min-h-[56rem]";
+
 function ScheduleColumnBody({ col }: { col: SeamunLockedColumn }) {
   return (
-    <div className="relative min-h-[32rem] border-b border-dotted border-brand-navy/10">
+    <div className={cn("relative isolate border-b border-dotted border-brand-navy/10", SCHEDULE_COLUMN_MIN_H)}>
       {AXIS_TICKS.map((tick) => {
         const top = ((timeToMinutes(tick) - SEAMUN_I_2027_AXIS_START_MIN) / AXIS_RANGE) * 100;
         return (
           <div
             key={`${col.header}-${tick}`}
-            className="pointer-events-none absolute left-0 right-0 border-t border-dotted border-brand-navy/[0.12]"
+            className="pointer-events-none absolute left-0 right-0 z-0 border-t border-dotted border-brand-navy/[0.12]"
             style={{ top: `${top}%` }}
           />
         );
       })}
       {col.blocks.map((b) => {
         const st = blockStyle(b);
+        const minutes = timeToMinutes(b.end) - timeToMinutes(b.start);
+        const compact = minutes <= 20;
         return (
           <div
             key={`${b.start}-${b.end}-${b.title}`}
+            title={`${b.title} ${b.start}–${b.end}`}
             className={cn(
-              "absolute left-0.5 right-0.5 overflow-hidden rounded-md border px-1 py-0.5 shadow-sm",
+              "absolute left-0.5 right-0.5 z-[1] overflow-hidden rounded-md border px-1 py-0.5 shadow-sm",
               categoryClass(b.category)
             )}
             style={{ top: st.top, height: st.height }}
           >
-            <p className="text-[0.58rem] font-bold leading-tight sm:text-[0.62rem]">{b.title}</p>
-            <p className="mt-0.5 font-mono text-[0.52rem] tabular-nums opacity-80 sm:text-[0.55rem]">
-              {b.start}–{b.end}
-            </p>
+            <p className="line-clamp-2 text-[0.58rem] font-bold leading-tight sm:text-[0.62rem]">{b.title}</p>
+            {compact ? null : (
+              <p className="mt-0.5 font-mono text-[0.52rem] tabular-nums leading-none opacity-80 sm:text-[0.55rem]">
+                {b.start}–{b.end}
+              </p>
+            )}
           </div>
         );
       })}
@@ -143,7 +151,7 @@ function ScheduleGrid({ columns }: { columns: SeamunLockedColumn[] }) {
       <div className="inline-flex min-w-full gap-0">
         <div className="sticky left-0 z-[1] w-14 shrink-0 border-r border-brand-navy/10 bg-brand-paper pr-1 sm:w-16">
           <div className="h-10 border-b border-brand-navy/10" aria-hidden />
-          <div className="relative min-h-[32rem]">
+          <div className={cn("relative", SCHEDULE_COLUMN_MIN_H)}>
             {AXIS_TICKS.map((tick) => {
               const top = ((timeToMinutes(tick) - SEAMUN_I_2027_AXIS_START_MIN) / AXIS_RANGE) * 100;
               return (
@@ -255,7 +263,7 @@ export function SeamunI2027LockedScheduleVisual({
       if (teamsScope === "all") return teamColumns;
       if (teamsScope === "l1" || teamsScope === "l2" || teamsScope === "l3") {
         const lg = seamunI2027LunchGroupDefinition(teamsScope);
-        return lg.chambers.map((ch) => ({
+        return sortCommitteeLabelsByDifficultyThenAlpha(lg.chambers).map((ch) => ({
           header: ch,
           blocks: buildSeamunCommitteeDayBlocks(day, ch),
         }));
@@ -474,7 +482,9 @@ export function SeamunI2027LockedScheduleVisual({
                   <td className="py-2 pr-4 align-top font-semibold text-brand-navy dark:text-zinc-100">
                     {t(`lunchGroupTitle.${lg.id}`)}
                   </td>
-                  <td className="py-2 text-brand-navy/90 dark:text-zinc-200">{lg.chambers.join(" · ")}</td>
+                  <td className="py-2 text-brand-navy/90 dark:text-zinc-200">
+                    {sortCommitteeLabelsByDifficultyThenAlpha(lg.chambers).join(" · ")}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -18,6 +18,7 @@ import {
   pickCanonicalConferenceRowByAllocationScore,
   resolveCanonicalCommitteeConferenceId,
 } from "@/lib/conference-committee-canonical";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
@@ -326,7 +327,7 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
   }
 
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
-  const committees: { id: string; label: string }[] = [];
+  const committeesRaw: { id: string; label: string; committee: string | null }[] = [];
   for (const groupRows of groupsByTab.values()) {
     const primary = pickCanonicalConferenceRowByAllocationScore(
       groupRows,
@@ -339,9 +340,18 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
       primary.committee_code?.trim() ||
       primary.name?.trim() ||
       primary.id.slice(0, 8);
-    committees.push({ id: primary.id, label });
+    committeesRaw.push({ id: primary.id, label, committee: primary.committee });
   }
-  committees.sort((a, b) => a.label.localeCompare(b.label));
+  committeesRaw.sort((a, b) =>
+    compareCommitteeRowsByDifficultyThenLabel(
+      { committee: a.committee, name: a.label },
+      { committee: b.committee, name: b.label }
+    )
+  );
+  const committees: { id: string; label: string }[] = committeesRaw.map(({ id, label }) => ({
+    id,
+    label,
+  }));
 
   const conferenceIds = filtered.map((c) => c.id);
   const { data: allocRows } =
