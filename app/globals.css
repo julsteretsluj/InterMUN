@@ -1791,10 +1791,6 @@ html.colorblind-mode .schedule-swatch-session {
   will-change: transform;
 }
 
-.marketing-shell .mun-marketing-glass-orb.mun-marketing-spline-interactive {
-  pointer-events: auto;
-}
-
 .marketing-shell .mun-marketing-glass-orb--sm {
   width: min(18vw, 5.5rem);
   height: min(18vw, 5.5rem);

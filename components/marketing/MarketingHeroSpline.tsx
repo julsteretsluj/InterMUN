@@ -19,7 +19,7 @@ export function MarketingHeroSpline({ className }: { className?: string }) {
     >
       <div className="mun-marketing-hero-spline-glass mun-apple-material mun-apple-material-thin">
         <div className="mun-marketing-hero-spline-inner">
-          <MarketingSplineScene scene={MARKETING_HERO_SPLINE_SCENE} className="h-full w-full" />
+          <MarketingSplineScene scene={MARKETING_HERO_SPLINE_SCENE} className="h-full w-full" lazy />
         </div>
         <span className="mun-marketing-hero-spline-shine" aria-hidden />
         <span className="mun-marketing-hero-spline-edge" aria-hidden />

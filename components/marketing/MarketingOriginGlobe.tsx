@@ -45,6 +45,7 @@ export function MarketingOriginGlobe({ className }: { className?: string }) {
               <MarketingSplineScene
                 scene={MARKETING_ORIGIN_GLOBE_SPLINE_SCENE}
                 className="h-full w-full"
+                lazy
                 onLoad={() => setLoaded(true)}
               />
             </div>

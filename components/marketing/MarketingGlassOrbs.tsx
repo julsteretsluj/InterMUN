@@ -9,7 +9,7 @@ type MarketingGlassOrbsProps = {
   variant: "hero" | "steps" | "origin" | "contact" | "footer";
 };
 
-/** Ambient glass orbs — Spline when exported, CSS glass fallback otherwise. */
+/** Ambient glass circles placed around key marketing sections. */
 export function MarketingGlassOrbs({ variant }: MarketingGlassOrbsProps) {
   switch (variant) {
     case "hero":

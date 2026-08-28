@@ -15,7 +15,11 @@ export function MarketingClockSpline({ className }: { className?: string }) {
     >
       <div className="mun-marketing-clock-glass mun-apple-material mun-apple-material-thin">
         <div className="mun-marketing-clock-inner">
-          <MarketingSplineScene scene={MARKETING_CLOCK_SPLINE_SCENE} className="h-full w-full" />
+          <MarketingSplineScene
+            scene={MARKETING_CLOCK_SPLINE_SCENE}
+            className="h-full w-full"
+            priority
+          />
         </div>
         <span className="mun-marketing-clock-shine" aria-hidden />
         <span className="mun-marketing-clock-edge" aria-hidden />

@@ -447,7 +447,6 @@ export async function MarketingHome() {
           <div className="max-w-2xl">
             <p className="mun-marketing-eyebrow">{t("origin.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("origin.title")}</h2>
-            <p className="mt-3 text-base font-medium text-[color:var(--accent-text)]">{t("origin.location")}</p>
           </div>
           <MarketingOriginMap
             className="mt-12 max-w-4xl"
