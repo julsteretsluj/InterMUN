@@ -11,3 +11,10 @@ export function isCrisisCommittee(committee: string | null | undefined): boolean
   const u = raw.toUpperCase().replace(/\s+/g, " ");
   return /\bFWC\b/.test(u) || /\bUNSC\b/.test(u);
 }
+
+/** FWC (e.g. “FWC - Stranger Things”) is the only chamber that shows political group on the matrix. */
+export function isFwcCommittee(committee: string | null | undefined): boolean {
+  const raw = (committee ?? "").trim();
+  if (!raw) return false;
+  return /\bFWC\b/.test(raw.toUpperCase().replace(/\s+/g, " "));
+}

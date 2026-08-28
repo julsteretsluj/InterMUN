@@ -485,7 +485,7 @@ export function DocumentsView({
                   className={`flex w-full items-start gap-2 rounded-xl border border-dashed px-3 py-2.5 text-left text-sm transition ${
                     ropPlaceholderSelected
                       ? "border-cyan-400/70 bg-cyan-50/80 font-medium text-cyan-900 dark:border-cyan-500/50 dark:bg-cyan-950/30 dark:text-cyan-100"
-                      : "border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,#DFF2FC_55%,transparent)] hover:border-[color:color-mix(in_srgb,var(--accent)_45%,var(--hairline))] dark:bg-cyan-950/15"
+                      : "border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,#F2F2F7_55%,transparent)] hover:border-[color:color-mix(in_srgb,var(--accent)_45%,var(--hairline))] dark:bg-cyan-950/15"
                   }`}
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-60" />
@@ -613,7 +613,7 @@ export function DocumentsView({
           </div>
 
               {ropPlaceholderSelected ? (
-                <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-dashed border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,#DFF2FC_70%,var(--dashboard-card))] p-5 shadow-[var(--dashboard-shadow)] sm:p-7 dark:bg-cyan-950/20">
+                <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-xl)] border border-dashed border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,#F2F2F7_70%,var(--dashboard-card))] p-5 shadow-[var(--dashboard-shadow)] sm:p-7 dark:bg-cyan-950/20">
                   <div>
                     <h3 className="font-sans text-lg font-semibold text-brand-navy dark:text-zinc-100">
                       {t("ropPlaceholderTitle")}

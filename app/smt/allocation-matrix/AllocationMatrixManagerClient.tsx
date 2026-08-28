@@ -323,7 +323,7 @@ export function AllocationMatrixManagerClient({
                       key={r.id}
                       className={
                         isChairSeat
-                          ? "border-t border-[#C9DDE9] bg-[#DFF2FC]"
+                          ? "border-t border-[#D1D1D6] bg-[#F2F2F7]"
                           : "border-t border-brand-navy/5"
                       }
                     >

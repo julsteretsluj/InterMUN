@@ -1,7 +1,6 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
@@ -27,6 +26,7 @@ import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
 import { MarketingEmph } from "@/components/marketing/MarketingEmph";
+import { MarketingHeroSpline } from "@/components/marketing/MarketingHeroSpline";
 import { MarketingOriginMap } from "@/components/marketing/MarketingOriginMap";
 import { getPartnershipContactEmail } from "@/lib/branding";
 import {
@@ -356,15 +356,7 @@ export async function MarketingHome() {
             </div>
 
             <div className="mun-marketing-hero-visual mun-animate-from-right mun-animate-delay-1 order-1 flex justify-center lg:order-2 lg:justify-end lg:-mr-4">
-              <Image
-                src="/marketing/hero-laptop.png"
-                alt=""
-                width={975}
-                height={975}
-                priority
-                aria-hidden
-                className="mun-marketing-hero-accent w-full max-w-[18rem] rounded-[var(--radius-xl)] shadow-[var(--dashboard-shadow)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
-              />
+              <MarketingHeroSpline className="w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]" />
             </div>
           </div>
 

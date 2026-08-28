@@ -3,9 +3,10 @@
 
 "use client";
 
-import { forwardRef, useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronUp, ListOrdered, Pause, Play, SkipForward } from "lucide-react";
+import { ChevronDown, ChevronUp, ListOrdered, SkipForward } from "lucide-react";
+import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
@@ -16,9 +17,11 @@ import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages"
 import {
   activeAllocationIdsInQueue,
   addAllocationToSpeakerQueue,
+  currentAndNextQueueRows,
   fetchSpeakerQueue,
   type SpeakerQueueEntry,
 } from "@/lib/speaker-queue";
+import { upsertAlignedSpeakerTimer } from "@/lib/timer-speakers";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 
 type Alloc = { id: string; country: string; userRole?: string | null };
@@ -140,6 +143,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       allocations,
       variant,
       isEuParliament = false,
+      isCrisisCommittee = false,
       speakerListPromptKind = null,
       onDismissSpeakerListPrompt,
       onNotify,
@@ -160,6 +164,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     const [queue, setQueue] = useState<SpeakerQueueEntry[]>([]);
     const [pickAlloc, setPickAlloc] = useState("");
     const [caucusBulkPick, setCaucusBulkPick] = useState<string[]>([]);
+    const [capM, setCapM] = useState("1");
+    const [capS, setCapS] = useState("0");
+    const lastSyncedSpeakerKey = useRef("");
     const [localFeedback, setLocalFeedback] = useState<string | null>(null);
     const [pending, startTransition] = useTransition();
 
@@ -211,7 +218,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         if (isDaisSeat) return false;
 
         const role = alloc.userRole?.toString().trim().toLowerCase();
-        if (role === "chair") return false;
+        if (role === "chair" && !isCrisisCommittee) return false;
         return true;
       });
       const decorated = filtered.map((alloc) => {
@@ -242,7 +249,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         if (aOrder !== bOrder) return aOrder - bOrder;
         return a.countryName.localeCompare(b.countryName);
       });
-    }, [allocations, isEuParliament, t, tEuParty]);
+    }, [allocations, isEuParliament, isCrisisCommittee, t, tEuParty]);
     const allocationById = useMemo(() => {
       const map = new Map<string, SpeakerAllocation>();
       for (const alloc of speakerAllocations) map.set(alloc.id, alloc);
@@ -257,16 +264,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       [sortedQueue]
     );
     const nextWaitingRow = useMemo(() => {
-      if (!currentQueueRow) {
-        return sortedQueue.find((r) => r.status === "waiting") ?? null;
-      }
-      const curIdx = sortedQueue.findIndex((r) => r.id === currentQueueRow.id);
-      return (
-        sortedQueue.find((r, i) => r.status === "waiting" && i > curIdx) ??
-        sortedQueue.find((r) => r.status === "waiting") ??
-        null
-      );
-    }, [sortedQueue, currentQueueRow]);
+      const { next } = currentAndNextQueueRows(sortedQueue);
+      return next;
+    }, [sortedQueue]);
     const queueLabelForRow = useCallback(
       (row: SpeakerQueueEntry) => {
         if (row.allocation_id) {
@@ -277,6 +277,48 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       },
       [allocationById, t]
     );
+    useEffect(() => {
+      if (!liveTimer) return;
+      const cap = Math.max(1, liveTimer.total_time_seconds || 60);
+      setCapM(String(Math.floor(cap / 60)));
+      setCapS(String(cap % 60));
+    }, [liveTimer]);
+
+    const alignedCurrentLabel = currentQueueRow
+      ? queueLabelForRow(currentQueueRow)
+      : liveTimer?.current_speaker?.trim() || null;
+    const alignedNextLabel = nextWaitingRow
+      ? queueLabelForRow(nextWaitingRow)
+      : currentQueueRow
+        ? null
+        : liveTimer?.next_speaker?.trim() || null;
+
+    useEffect(() => {
+      if (!currentQueueRow) return;
+      const currentLabel = queueLabelForRow(currentQueueRow);
+      const nextLabel = nextWaitingRow ? queueLabelForRow(nextWaitingRow) : "";
+      const key = `${currentLabel}|${nextLabel}`;
+      const timerKey = `${liveTimer?.current_speaker?.trim() ?? ""}|${liveTimer?.next_speaker?.trim() ?? ""}`;
+      if (key === timerKey) {
+        lastSyncedSpeakerKey.current = key;
+        return;
+      }
+      if (lastSyncedSpeakerKey.current === key) return;
+      lastSyncedSpeakerKey.current = key;
+      void upsertAlignedSpeakerTimer(supabase, conferenceId, {
+        currentSpeaker: currentLabel,
+        nextSpeaker: nextLabel || null,
+        existing: liveTimer,
+        namesOnly: true,
+      });
+    }, [
+      conferenceId,
+      currentQueueRow,
+      nextWaitingRow,
+      liveTimer,
+      queueLabelForRow,
+      supabase,
+    ]);
     const statusLabel = useCallback(
       (status: string | null | undefined) => {
         if (status === "current") return t("status.current");
@@ -345,7 +387,19 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     function removeQueue(id: string) {
       startTransition(async () => {
+        const removed = queue.find((r) => r.id === id);
         await supabase.from("speaker_queue_entries").delete().eq("id", id);
+        if (removed?.status === "current") {
+          const leftover = queue.filter((r) => r.id !== id);
+          const { next } = currentAndNextQueueRows(leftover);
+          lastSyncedSpeakerKey.current = `|${next ? queueLabelForRow(next) : ""}`;
+          await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+            currentSpeaker: null,
+            nextSpeaker: next ? queueLabelForRow(next) : null,
+            existing: liveTimer,
+            namesOnly: true,
+          });
+        }
         void loadQueue();
       });
     }
@@ -358,7 +412,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("id", existingCurrent.id);
         }
         await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", id);
-        const target = rows.find((r) => r.id === id);
+        const target = rows.find((r) => r.id === id) ?? null;
         if (target && target.status !== "current") {
           void logCommitteeSpeech(supabase, {
             conferenceId,
@@ -366,27 +420,29 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             speakerLabel: target.label,
           });
         }
-        const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
-        const targetIdx = sorted.findIndex((r) => r.id === id);
-        const after = sorted.slice(targetIdx + 1).find((r) => r.status === "waiting");
-        await supabase
-          .from("timers")
-          .update({
-            current_speaker: target ? queueLabelForRow(target) : null,
-            next_speaker: after ? queueLabelForRow(after) : null,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("conference_id", conferenceId);
+        const nextRows = rows.map((r) =>
+          r.id === id ? { ...r, status: "current" } : r.id === existingCurrent?.id ? { ...r, status: "waiting" } : r
+        );
+        const { next } = currentAndNextQueueRows(nextRows);
+        const cap = Math.max(1, speakerCap || remaining || 60);
+        const currentLabel = target ? queueLabelForRow(target) : null;
+        const nextLabel = next ? queueLabelForRow(next) : null;
+        lastSyncedSpeakerKey.current = `${currentLabel ?? ""}|${nextLabel ?? ""}`;
+        await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+          currentSpeaker: currentLabel,
+          nextSpeaker: nextLabel,
+          existing: liveTimer,
+          timeLeftSeconds: cap,
+          totalTimeSeconds: cap,
+          perSpeakerMode: true,
+          isRunning: true,
+        });
         void loadQueue();
       });
     }
 
     function pauseSpeakerClock() {
-      if (!liveTimer) {
-        notify(t("noTimerYet"));
-        return;
-      }
-      if (!isRunning) {
+      if (!liveTimer || remaining <= 0 || !isRunning) {
         notify(tTimer("alreadyPaused"));
         return;
       }
@@ -404,24 +460,44 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function startSpeakerClock() {
-      if (!liveTimer) {
-        notify(t("noTimerYet"));
-        return;
-      }
-      if (isRunning) {
+      const currentLabel = alignedCurrentLabel;
+      const nextLabel = alignedNextLabel;
+      const cap = Math.max(1, speakerCap || remaining || 60);
+      const resumeLeft = liveTimer && remaining > 0 ? Math.max(1, Math.round(remaining)) : cap;
+      if (liveTimer && isRunning && remaining > 0) {
         notify(tTimer("alreadyRunning"));
         return;
       }
       startTransition(async () => {
-        const { error } = await supabase
-          .from("timers")
-          .update({
-            is_running: true,
-            current_pause_reason: null,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("conference_id", conferenceId);
+        const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+          currentSpeaker: currentLabel,
+          nextSpeaker: nextLabel,
+          existing: liveTimer,
+          timeLeftSeconds: resumeLeft,
+          totalTimeSeconds: cap,
+          perSpeakerMode: true,
+          isRunning: true,
+        });
         notify(error ? error.message : tTimer("runningForCommittee"));
+      });
+    }
+
+    function applyPerSpeakerTime() {
+      const cap = Math.max(
+        1,
+        (Math.max(0, parseInt(capM, 10) || 0) * 60) + Math.max(0, parseInt(capS, 10) || 0)
+      );
+      startTransition(async () => {
+        const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+          currentSpeaker: alignedCurrentLabel,
+          nextSpeaker: alignedNextLabel,
+          existing: liveTimer,
+          timeLeftSeconds: cap,
+          totalTimeSeconds: cap,
+          perSpeakerMode: true,
+          isRunning: Boolean(liveTimer) && isRunning && remaining > 0,
+        });
+        notify(error ? error.message : t("perSpeakerTimeApplied", { clock: formatSpeakerClock(cap) }));
       });
     }
 
@@ -431,9 +507,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
         const curIdx = sorted.findIndex((r) => r.status === "current");
         const currentRow = curIdx >= 0 ? sorted[curIdx] : null;
-        const nextWaiting = sorted.find((r, i) => r.status === "waiting" && (!currentRow || i > curIdx));
-        const firstWaiting = sorted.find((r) => r.status === "waiting");
-        const nextCurrent = nextWaiting ?? firstWaiting;
+        const { next: nextCurrent } = currentAndNextQueueRows(sorted);
         if (!nextCurrent) {
           notify(t("noWaitingToAdvance"));
           return;
@@ -447,24 +521,25 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           allocationId: nextCurrent.allocation_id,
           speakerLabel: nextCurrent.label,
         });
-        const nextIdx = sorted.indexOf(nextCurrent);
-        const afterNext = sorted.slice(nextIdx + 1).find((r) => r.status === "waiting");
+        const afterAdvance = sorted.map((r) => {
+          if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
+          if (r.id === nextCurrent.id) return { ...r, status: "current" };
+          return r;
+        });
+        const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
         const cap = Math.max(1, speakerCap || remaining || 60);
-        const { error } = await supabase.from("timers").upsert(
-          {
-            conference_id: conferenceId,
-            current_speaker: queueLabelForRow(nextCurrent),
-            next_speaker: afterNext ? queueLabelForRow(afterNext) : null,
-            time_left_seconds: cap,
-            total_time_seconds: cap,
-            vote_item_id: liveTimer?.vote_item_id ?? null,
-            per_speaker_mode: true,
-            is_running: true,
-            floor_label: liveTimer?.floor_label ?? null,
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "conference_id" }
-        );
+        const currentLabel = queueLabelForRow(nextCurrent);
+        const nextLabel = afterNext ? queueLabelForRow(afterNext) : null;
+        lastSyncedSpeakerKey.current = `${currentLabel}|${nextLabel ?? ""}`;
+        const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+          currentSpeaker: currentLabel,
+          nextSpeaker: nextLabel,
+          existing: liveTimer,
+          timeLeftSeconds: cap,
+          totalTimeSeconds: cap,
+          perSpeakerMode: true,
+          isRunning: true,
+        });
         notify(error ? error.message : tEuParty("advancedSpeakerResetClock"));
         void loadQueue();
       });
@@ -506,9 +581,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     return (
       <section ref={ref} className="space-y-3">
         <div>
-          <h3 className={headingClass}>{t("speakerList")}</h3>
+          {isSession ? null : <h3 className={headingClass}>{t("speakerList")}</h3>}
           <p
-            className={`mt-1 text-sm ${
+            className={`${isSession ? "" : "mt-1 "}text-sm ${
               isSession ? "text-brand-muted" : "text-brand-muted dark:text-zinc-400"
             }`}
           >
@@ -531,7 +606,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             >
               {t("sessionTimerLink")}
             </Link>{" "}
-            {t("introSuffixPrefix")} <strong className="font-medium">{t("advanceSpeaker")}</strong>.
+            {isSession ? t("introSuffixPrefix") : t("introSuffixDigitalRoom")} <strong className="font-medium">{t("advanceSpeaker")}</strong>.
           </p>
         </div>
 
@@ -540,15 +615,11 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             <div className="min-w-0 flex-1">
               <p className={labelClass}>{tTimer("currentSpeaker")}</p>
               <p className="mt-1 font-sans text-lg font-semibold text-brand-navy">
-                {currentQueueRow
-                  ? queueLabelForRow(currentQueueRow)
-                  : liveTimer?.current_speaker?.trim() || t("noActiveSpeaker")}
+                {alignedCurrentLabel || t("noActiveSpeaker")}
               </p>
               <p className="mt-1 text-sm text-brand-muted">
                 <span className="font-medium text-brand-navy/70">{tTimer("nextSpeaker")}: </span>
-                {nextWaitingRow
-                  ? queueLabelForRow(nextWaitingRow)
-                  : liveTimer?.next_speaker?.trim() || t("dash")}
+                {alignedNextLabel || t("dash")}
               </p>
             </div>
             <div className="text-right">
@@ -562,25 +633,18 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               <p className="mt-0.5 text-xs text-brand-muted">
                 {liveTimer
                   ? `${formatSpeakerClock(speakerCap || remaining)}${perSpeakerMode ? ` ${t("perSpeakerShort")}` : ""}`
-                  : t("noTimerYet")}
+                  : isSession ? t("noTimerYet") : t("noTimerYetDigitalRoom")}
                 {liveTimer && !isRunning ? ` ${t("pausedParen")}` : null}
               </p>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={pending || !liveTimer}
-              onClick={isRunning ? pauseSpeakerClock : startSpeakerClock}
-              className={
-                isSession
-                  ? "inline-flex items-center gap-1.5 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-navy/5 disabled:opacity-50"
-                  : "mun-btn-outline inline-flex items-center gap-1.5 px-3 py-2 text-sm disabled:opacity-50"
-              }
-            >
-              {isRunning ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
-              {isRunning ? tTimer("pauseClock") : tTimer("startClock")}
-            </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <FloorTimerRunButtons
+              running={Boolean(liveTimer) && isRunning && remaining > 0}
+              pending={pending}
+              onStart={startSpeakerClock}
+              onPause={pauseSpeakerClock}
+            />
             <button
               type="button"
               disabled={pending}
@@ -595,6 +659,41 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               {tTimer("advanceSpeakerReset")}
             </button>
           </div>
+          {!isSession ? (
+            <div className="space-y-2 border-t border-[var(--hairline)] pt-3">
+              <p className={labelClass}>{t("perSpeakerTime")}</p>
+              <p className="text-xs text-brand-muted">{t("perSpeakerTimeHelp")}</p>
+              <div className="flex flex-wrap items-end gap-2">
+                <label className="text-sm text-brand-navy">
+                  <span className="sr-only">{tTimer("totalTime")}</span>
+                  <div className="flex items-center gap-1">
+                    <input
+                      className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
+                      inputMode="numeric"
+                      value={capM}
+                      onChange={(e) => setCapM(e.target.value)}
+                    />
+                    <span className="text-xs text-brand-muted">{tEuParty("unitMinutesShort")}</span>
+                    <input
+                      className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
+                      inputMode="numeric"
+                      value={capS}
+                      onChange={(e) => setCapS(e.target.value)}
+                    />
+                    <span className="text-xs text-brand-muted">{tEuParty("unitSecondsShort")}</span>
+                  </div>
+                </label>
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={applyPerSpeakerTime}
+                  className="rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+                >
+                  {t("applyPerSpeakerTime")}
+                </button>
+              </div>
+            </div>
+          ) : null}
         </div>
 
         {!isSession && localFeedback ? (

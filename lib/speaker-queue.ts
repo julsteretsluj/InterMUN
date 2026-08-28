@@ -29,6 +29,20 @@ export async function fetchSpeakerQueue(
   return (data as SpeakerQueueEntry[]) ?? [];
 }
 
+export function currentAndNextQueueRows<T extends { id: string; status: string; sort_order: number }>(
+  rows: T[]
+): { current: T | null; next: T | null } {
+  const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
+  const current = sorted.find((r) => r.status === "current") ?? null;
+  const curIdx = current ? sorted.findIndex((r) => r.id === current.id) : -1;
+  const next = current
+    ? (sorted.find((r, i) => r.status === "waiting" && i > curIdx) ??
+        sorted.find((r) => r.status === "waiting") ??
+        null)
+    : (sorted.find((r) => r.status === "waiting") ?? null);
+  return { current, next };
+}
+
 export function activeAllocationIdsInQueue(rows: SpeakerQueueEntry[]): Set<string> {
   const s = new Set<string>();
   for (const r of rows) {

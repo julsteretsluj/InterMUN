@@ -34,7 +34,7 @@ export function OfficialLinksCategoryLibrary({
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/official-links"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-[#35516B] underline decoration-[#C9DDE9] underline-offset-4 transition-colors hover:text-brand-navy hover:decoration-[#119ED3] dark:text-zinc-400 dark:hover:text-zinc-100"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-[#6E6E73] underline decoration-[#D1D1D6] underline-offset-4 transition-colors hover:text-brand-navy hover:decoration-[#007AFF] dark:text-zinc-400 dark:hover:text-zinc-100"
         >
           ← {t("backToCategories")}
         </Link>
@@ -53,7 +53,7 @@ export function OfficialLinksCategoryLibrary({
                 {group.heading}
               </h3>
             ) : null}
-            <ul className="divide-y divide-[#C9DDE9] overflow-hidden rounded-[var(--radius-md)] border border-[#C9DDE9] bg-[color-mix(in_srgb,#F8FBFF_92%,white)] dark:divide-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/50">
+            <ul className="divide-y divide-[#D1D1D6] overflow-hidden rounded-[var(--radius-md)] border border-[#D1D1D6] bg-[color-mix(in_srgb,#FBFBFD_92%,white)] dark:divide-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/50">
               {group.links.map((link) => {
                 const description =
                   link.descriptionKey != null ? t(`linkDescriptions.${link.descriptionKey}`) : null;
@@ -64,10 +64,10 @@ export function OfficialLinksCategoryLibrary({
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex flex-col gap-1 px-4 py-3.5 transition-colors hover:bg-[color-mix(in_srgb,#119ED3_6%,transparent)] sm:flex-row sm:items-start sm:justify-between sm:gap-6 dark:hover:bg-zinc-800/70"
+                      className="group flex flex-col gap-1 px-4 py-3.5 transition-colors hover:bg-[color-mix(in_srgb,#007AFF_6%,transparent)] sm:flex-row sm:items-start sm:justify-between sm:gap-6 dark:hover:bg-zinc-800/70"
                     >
                       <span className="min-w-0">
-                        <span className="font-sans text-sm font-semibold text-brand-navy group-hover:text-[#17324A] dark:text-zinc-50">
+                        <span className="font-sans text-sm font-semibold text-brand-navy group-hover:text-[#007AFF] dark:text-zinc-50">
                           {label}
                           <span aria-hidden className="ml-1.5 text-brand-muted opacity-70">
                             ↗
@@ -79,7 +79,7 @@ export function OfficialLinksCategoryLibrary({
                           </span>
                         ) : null}
                       </span>
-                      <span className="shrink-0 break-all font-mono text-[0.7rem] text-[#4D6174] sm:max-w-[42%] sm:text-right dark:text-zinc-500">
+                      <span className="shrink-0 break-all font-mono text-[0.7rem] text-[#6E6E73] sm:max-w-[42%] sm:text-right dark:text-zinc-500">
                         {link.href.replace(/^https?:\/\//, "")}
                       </span>
                     </a>

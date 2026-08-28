@@ -10,6 +10,8 @@ import { SmtBestDelegateComparison, type BestDelegateComparisonRow } from "./Smt
 import { SmtBestDelegateLadder } from "./SmtBestDelegateLadder";
 import type { OverallBestDelegateLadderRow } from "@/lib/award-best-delegate-ladder";
 import type { ChairSeat, DelegateChairFeedbackAggregate } from "@/lib/award-participation-scoring";
+import { SmtForwardedResolutionsPanel, type SmtForwardedResolutionRow } from "./SmtForwardedResolutionsPanel";
+import { useTranslations } from "next-intl";
 
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
@@ -25,7 +27,7 @@ type EligibleRecipients = {
   conferenceChairs: Prof[];
 };
 
-type TabId = "final" | "pending" | "scoring" | "rubric";
+type TabId = "final" | "pending" | "resolutions" | "scoring" | "rubric";
 
 type ParticipationBundle = {
   committees: CommitteeOpt[];
@@ -54,6 +56,7 @@ type Props = {
   eligibleRecipients: EligibleRecipients;
   bestDelegateComparisonRows: BestDelegateComparisonRow[];
   overallBestDelegateLadderRows: OverallBestDelegateLadderRow[];
+  forwardedResolutionRows: SmtForwardedResolutionRow[];
 };
 
 export function SmtAwardsTabs({
@@ -69,7 +72,9 @@ export function SmtAwardsTabs({
   eligibleRecipients,
   bestDelegateComparisonRows,
   overallBestDelegateLadderRows,
+  forwardedResolutionRows,
 }: Props) {
+  const tResolutions = useTranslations("smtAwardsResolutions");
   const [tab, setTab] = useState<TabId>("pending");
 
   const tabBtn = (id: TabId, label: string, domId: string) => (
@@ -94,6 +99,13 @@ export function SmtAwardsTabs({
       <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label="SMT awards">
         {tabBtn("final", "Final awards", "tab-smt-final")}
         {tabBtn("pending", "Pending awards", "tab-smt-pending")}
+        {tabBtn(
+          "resolutions",
+          forwardedResolutionRows.length > 0
+            ? `${tResolutions("tab")} (${forwardedResolutionRows.length})`
+            : tResolutions("tab"),
+          "tab-smt-resolutions"
+        )}
         {tabBtn("scoring", "Scoring", "tab-smt-scoring")}
         {tabBtn("rubric", "Rubric", "tab-smt-rubric")}
       </div>
@@ -114,6 +126,12 @@ export function SmtAwardsTabs({
             eligibleRecipients={eligibleRecipients}
             conferenceIdToCanonical={conferenceIdToCanonical}
             enableCertificatePrint
+            submittedResolutions={forwardedResolutionRows.map((r) => ({
+              id: r.id,
+              conferenceId: r.conferenceId,
+              displayLabel: r.displayLabel,
+              firstMainSubmitterId: r.firstMainSubmitterId,
+            }))}
           />
         </div>
       ) : tab === "pending" ? (
@@ -136,6 +154,14 @@ export function SmtAwardsTabs({
             conferenceIdToCanonical={conferenceIdToCanonical}
             committeeTabs={participation.committees}
           />
+        </div>
+      ) : tab === "resolutions" ? (
+        <div role="tabpanel" aria-labelledby="tab-smt-resolutions" className="space-y-4">
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/50 p-4 text-sm text-brand-muted">
+            <h2 className="mb-1 font-sans text-lg font-semibold text-brand-navy">{tResolutions("title")}</h2>
+            <p>{tResolutions("help")}</p>
+          </div>
+          <SmtForwardedResolutionsPanel rows={forwardedResolutionRows} />
         </div>
       ) : tab === "scoring" ? (
         <div role="tabpanel" aria-labelledby="tab-smt-scoring" className="space-y-8">

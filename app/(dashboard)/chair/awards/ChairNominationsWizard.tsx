@@ -268,7 +268,7 @@ export function ChairNominationsWizard({
 
   if (slots.length === 0) {
     return (
-      <div className="rounded-xl border border-[#C9DDE9] bg-[#F8FBFF] px-4 py-3 text-sm text-[#4D6174]">
+      <div className="rounded-xl border border-[#D1D1D6] bg-[#FBFBFD] px-4 py-3 text-sm text-[#6E6E73]">
         {t("empty")}
       </div>
     );
@@ -280,9 +280,9 @@ export function ChairNominationsWizard({
     <div className="space-y-5">
       <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
 
-      <div className="rounded-xl border border-[#C9DDE9] bg-[#EDF8FF]/70 px-4 py-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#4D6174]">
-          <span className="font-semibold uppercase tracking-wide text-[#183148]">
+      <div className="rounded-xl border border-[#D1D1D6] bg-[#F5F5F7]/70 px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#6E6E73]">
+          <span className="font-semibold uppercase tracking-wide text-[#1D1D1F]">
             {t("stepProgress", { current: stepIndex + 1, total: slots.length })}
           </span>
           <span>
@@ -304,8 +304,8 @@ export function ChairNominationsWizard({
                 title={`${s.typeLabel} · ${s.slotLabel}`}
                 className={cn(
                   "h-2.5 w-2.5 rounded-full border transition-colors",
-                  i === stepIndex ? "ring-2 ring-[#119ED3]/55 ring-offset-1 ring-offset-[#EDF8FF]" : "",
-                  done ? "border-emerald-500 bg-emerald-500" : "border-[#183148]/30 bg-transparent"
+                  i === stepIndex ? "ring-2 ring-[#007AFF]/55 ring-offset-1 ring-offset-[#F5F5F7]" : "",
+                  done ? "border-emerald-500 bg-emerald-500" : "border-[#1D1D1F]/30 bg-transparent"
                 )}
                 aria-label={t("gotoStep", { label: s.slotLabel })}
                 aria-current={i === stepIndex}
@@ -322,16 +322,16 @@ export function ChairNominationsWizard({
         </div>
       ) : null}
 
-      <section className="rounded-xl border border-[#C9DDE9] bg-[#F8FBFF] p-4 md:p-5 space-y-4">
+      <section className="rounded-xl border border-[#D1D1D6] bg-[#FBFBFD] p-4 md:p-5 space-y-4">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-[#4D6174]">{slot.typeLabel}</p>
-          <h3 className="mt-0.5 font-sans text-lg font-semibold text-[#183148]">
+          <p className="text-xs font-medium uppercase tracking-wide text-[#6E6E73]">{slot.typeLabel}</p>
+          <h3 className="mt-0.5 font-sans text-lg font-semibold text-[#1D1D1F]">
             {slot.slotLabel}
             {!slot.required ? (
-              <span className="ml-2 text-xs font-normal text-[#4D6174]">({t("optional")})</span>
+              <span className="ml-2 text-xs font-normal text-[#6E6E73]">({t("optional")})</span>
             ) : null}
           </h3>
-          <p className="mt-1 text-xs text-[#4D6174] leading-relaxed">{slot.helper}</p>
+          <p className="mt-1 text-xs text-[#6E6E73] leading-relaxed">{slot.helper}</p>
           <div className="mt-2">
             <SectionAwardsProgress
               nominationType={slot.nominationType}
@@ -351,11 +351,11 @@ export function ChairNominationsWizard({
         ) : null}
 
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#35516B]">{t("topSuggestions")}</p>
-          <p className="text-xs text-[#4D6174]">{t("topSuggestionsHint")}</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73]">{t("topSuggestions")}</p>
+          <p className="text-xs text-[#6E6E73]">{t("topSuggestionsHint")}</p>
           <ul className="flex flex-wrap gap-2">
             {topSuggestions.length === 0 ? (
-              <li className="text-xs text-[#4D6174]">{t("noSuggestions")}</li>
+              <li className="text-xs text-[#6E6E73]">{t("noSuggestions")}</li>
             ) : (
               topSuggestions.map((r, i) => {
                 const info = delegateByUserId[r.uid];
@@ -369,15 +369,15 @@ export function ChairNominationsWizard({
                       className={cn(
                         "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-left text-xs transition-colors",
                         selected
-                          ? "border-[#17324A] bg-[#17324A] text-white"
-                          : "border-[#C9DDE9] bg-white text-[#183148] hover:border-[#119ED3]/50",
+                          ? "border-[#007AFF] bg-[#007AFF] text-white"
+                          : "border-[#D1D1D6] bg-white text-[#1D1D1F] hover:border-[#007AFF]/50",
                         formDisabled && "opacity-60"
                       )}
                     >
                       <span className="tabular-nums text-[0.65rem] opacity-80">#{i + 1}</span>
                       <span aria-hidden>{flagEmojiForCountryName(info?.country)}</span>
                       <span className="font-medium">{info?.country ?? r.label}</span>
-                      <span className={cn("font-mono tabular-nums", selected ? "text-white/85" : "text-[#119ED3]")}>
+                      <span className={cn("font-mono tabular-nums", selected ? "text-white/85" : "text-[#007AFF]")}>
                         {r.total}
                       </span>
                       {selected ? <Check className="h-3.5 w-3.5" aria-hidden /> : null}
@@ -390,11 +390,11 @@ export function ChairNominationsWizard({
         </div>
 
         <div className="space-y-2">
-          <label className="block text-xs font-semibold uppercase tracking-wide text-[#35516B]" htmlFor="nomination-search">
+          <label className="block text-xs font-semibold uppercase tracking-wide text-[#6E6E73]" htmlFor="nomination-search">
             {t("searchLabel")}
           </label>
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#4D6174]" aria-hidden />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6E6E73]" aria-hidden />
             <input
               id="nomination-search"
               type="search"
@@ -402,13 +402,13 @@ export function ChairNominationsWizard({
               disabled={formDisabled}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t("searchPlaceholder")}
-              className="w-full rounded-lg border border-[#C9DDE9] bg-white py-2 pl-9 pr-3 text-sm text-[#183148] placeholder:text-[#4D6174]/70 disabled:opacity-60"
+              className="w-full rounded-lg border border-[#D1D1D6] bg-white py-2 pl-9 pr-3 text-sm text-[#1D1D1F] placeholder:text-[#6E6E73]/70 disabled:opacity-60"
             />
           </div>
           {search.trim() ? (
-            <ul className="max-h-48 overflow-y-auto rounded-lg border border-[#C9DDE9] bg-white divide-y divide-[#C9DDE9]/80">
+            <ul className="max-h-48 overflow-y-auto rounded-lg border border-[#D1D1D6] bg-white divide-y divide-[#D1D1D6]/80">
               {searchResults.length === 0 ? (
-                <li className="px-3 py-2 text-xs text-[#4D6174]">{t("searchEmpty")}</li>
+                <li className="px-3 py-2 text-xs text-[#6E6E73]">{t("searchEmpty")}</li>
               ) : (
                 searchResults.map((o) => {
                   const info = delegateByUserId[o.userId];
@@ -423,13 +423,13 @@ export function ChairNominationsWizard({
                           setSearch("");
                         }}
                         className={cn(
-                          "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-[#EDF8FF]",
-                          selected && "bg-[#EDF8FF]"
+                          "flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-[#F5F5F7]",
+                          selected && "bg-[#F5F5F7]"
                         )}
                       >
                         <span aria-hidden>{flagEmojiForCountryName(info?.country)}</span>
-                        <span className="min-w-0 flex-1 truncate text-[#183148]">{o.label}</span>
-                        {selected ? <Check className="h-4 w-4 shrink-0 text-[#17324A]" aria-hidden /> : null}
+                        <span className="min-w-0 flex-1 truncate text-[#1D1D1F]">{o.label}</span>
+                        {selected ? <Check className="h-4 w-4 shrink-0 text-[#007AFF]" aria-hidden /> : null}
                       </button>
                     </li>
                   );
@@ -440,9 +440,9 @@ export function ChairNominationsWizard({
         </div>
 
         {nomineeId ? (
-          <div className="rounded-xl border border-[#119ED3]/30 bg-[#EDF8FF]/80 px-3 py-2.5">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-[#35516B]">{t("selectedNominee")}</p>
-            <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm font-semibold text-[#183148]">
+          <div className="rounded-xl border border-[#007AFF]/30 bg-[#F5F5F7]/80 px-3 py-2.5">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-[#6E6E73]">{t("selectedNominee")}</p>
+            <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm font-semibold text-[#1D1D1F]">
               <span aria-hidden>{flagEmojiForCountryName(summaryDelegate?.country)}</span>
               <span>
                 {summaryDelegate
@@ -455,12 +455,12 @@ export function ChairNominationsWizard({
             </div>
           </div>
         ) : (
-          <p className="text-xs text-[#4D6174]">{t("pickNomineeHint")}</p>
+          <p className="text-xs text-[#6E6E73]">{t("pickNomineeHint")}</p>
         )}
 
         {nomineeId ? (
-          <div className="rounded-xl border border-[#C9DDE9] bg-white/70 p-3 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#35516B]">{t("rubricHeading")}</p>
+          <div className="rounded-xl border border-[#D1D1D6] bg-white/70 p-3 space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73]">{t("rubricHeading")}</p>
             {slot.criteria.map((criterion) => (
               <RubricCriterionPicker
                 key={`${slot.nominationType}-${slot.rank}-${nomineeId}-${criterion.key}`}
@@ -470,7 +470,7 @@ export function ChairNominationsWizard({
                 disabled={formDisabled}
               />
             ))}
-            <p className="text-xs text-[#4D6174]">
+            <p className="text-xs text-[#6E6E73]">
               {t("rubricTotal", {
                 total: criteriaTotal,
                 max: maxTotal,
@@ -479,7 +479,7 @@ export function ChairNominationsWizard({
               })}
             </p>
             <label className="block text-sm">
-              <span className="text-xs font-semibold uppercase tracking-wide text-[#35516B]">
+              <span className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73]">
                 {t("evidenceLabel")}
               </span>
               <textarea
@@ -490,7 +490,7 @@ export function ChairNominationsWizard({
                 required={!formDisabled}
                 readOnly={formDisabled}
                 disabled={formDisabled}
-                className="mt-1 w-full rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm text-[#183148] placeholder:text-[#4D6174]/70 read-only:opacity-70"
+                className="mt-1 w-full rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm text-[#1D1D1F] placeholder:text-[#6E6E73]/70 read-only:opacity-70"
                 placeholder={t("evidencePlaceholder", { min: MIN_AWARD_EVIDENCE_CHARS })}
               />
             </label>
@@ -508,7 +508,7 @@ export function ChairNominationsWizard({
             type="button"
             onClick={() => goToStep(stepIndex - 1)}
             disabled={stepIndex === 0}
-            className="rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm font-medium text-[#183148] disabled:opacity-40"
+            className="rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-[#1D1D1F] disabled:opacity-40"
           >
             {t("previous")}
           </button>
@@ -518,7 +518,7 @@ export function ChairNominationsWizard({
                 type="button"
                 disabled={pending}
                 onClick={() => saveNomination({ clearOptional: true })}
-                className="rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm font-medium text-[#183148] disabled:opacity-50"
+                className="rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-[#1D1D1F] disabled:opacity-50"
               >
                 {t("skipOptional")}
               </button>
@@ -527,7 +527,7 @@ export function ChairNominationsWizard({
               <button
                 type="button"
                 onClick={() => goToStep(stepIndex + 1)}
-                className="rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm font-medium text-[#183148]"
+                className="rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-[#1D1D1F]"
               >
                 {t("next")}
               </button>
@@ -536,7 +536,7 @@ export function ChairNominationsWizard({
               type="button"
               disabled={pending || formDisabled || (slot.required && !nomineeId)}
               onClick={() => saveNomination()}
-              className="rounded-lg bg-[#17324A] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              className="rounded-lg bg-[#007AFF] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
             >
               {slot.locked
                 ? t("locked")
@@ -552,12 +552,12 @@ export function ChairNominationsWizard({
         </div>
       </section>
 
-      <details className="rounded-xl border border-[#C9DDE9] bg-[#F8FBFF] px-4 py-3">
-        <summary className="cursor-pointer text-sm font-semibold text-[#183148]">{t("allSlotsSummary")}</summary>
+      <details className="rounded-xl border border-[#D1D1D6] bg-[#FBFBFD] px-4 py-3">
+        <summary className="cursor-pointer text-sm font-semibold text-[#1D1D1F]">{t("allSlotsSummary")}</summary>
         <ul className="mt-3 space-y-2 text-sm">
           {typesForProgress.map(([typeId, typeSlots]) => (
             <li key={typeId} className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#4D6174]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73]">
                 {typeSlots[0]?.typeLabel}
               </p>
               <ul className="space-y-1 pl-1">
@@ -573,9 +573,9 @@ export function ChairNominationsWizard({
                       <button
                         type="button"
                         onClick={() => goToStep(idx)}
-                        className="flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left hover:bg-[#EDF8FF]"
+                        className="flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left hover:bg-[#F5F5F7]"
                       >
-                        <span className="min-w-0 truncate text-[#183148]">
+                        <span className="min-w-0 truncate text-[#1D1D1F]">
                           {s.slotLabel}
                           {nom ? ` — ${nom.country}` : ""}
                         </span>

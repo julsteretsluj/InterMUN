@@ -37,7 +37,7 @@ export function SeamunConferenceLinksCta({
   return (
     <section
       className={cn(
-        "rounded-[var(--radius-lg)] border border-brand-navy/10 bg-gradient-to-br from-white via-[color:color-mix(in_srgb,#DFF2FC_55%,white)] to-brand-cream/40 shadow-[0_10px_28px_-22px_rgba(24,49,72,0.45)] dark:border-white/10 dark:from-zinc-900/70 dark:via-zinc-900/40 dark:to-zinc-950/30",
+        "rounded-[var(--radius-lg)] border border-brand-navy/10 bg-gradient-to-br from-white via-[color:color-mix(in_srgb,#F2F2F7_55%,white)] to-brand-cream/40 shadow-[0_10px_28px_-22px_rgba(24,49,72,0.45)] dark:border-white/10 dark:from-zinc-900/70 dark:via-zinc-900/40 dark:to-zinc-950/30",
         compact ? "px-3.5 py-3" : "px-4 py-4 sm:px-5 sm:py-4",
         className
       )}

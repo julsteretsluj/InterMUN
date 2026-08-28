@@ -67,10 +67,35 @@ export const AWARD_CATEGORIES: {
     description: "Strongest committee-level position paper.",
     scope: "committee",
   },
+  {
+    id: "committee_best_resolution",
+    label: "Best Resolution (committee)",
+    description: "Strongest passed or forwarded resolution in this committee.",
+    scope: "committee",
+  },
+  {
+    id: "conference_best_resolution",
+    label: "Best Resolution (conference-wide)",
+    description: "Outstanding operative draft chosen by secretariat from chair-forwarded resolutions.",
+    scope: "conference_wide",
+  },
 ];
 
 export function awardCategoryMeta(id: string) {
   return AWARD_CATEGORIES.find((c) => c.id === id);
+}
+
+export function isBestResolutionAwardCategory(
+  id: string
+): id is "committee_best_resolution" | "conference_best_resolution" {
+  return id === "committee_best_resolution" || id === "conference_best_resolution";
+}
+
+/** Display submitted drafts as `Bloc name (Committee)`. */
+export function submittedResolutionLabel(blocName: string, committeeLabel: string): string {
+  const name = blocName.trim() || "Resolution";
+  const committee = committeeLabel.trim();
+  return committee ? `${name} (${committee})` : name;
 }
 
 /**

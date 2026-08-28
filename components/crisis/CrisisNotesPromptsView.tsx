@@ -38,7 +38,7 @@ export function CrisisNotesPromptsView({ pack }: { pack: CrisisNotesPack }) {
             {pack.subjectTags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-md border border-brand-line/80 bg-[#EDF8FF]/90 px-2 py-0.5 text-xs font-medium text-[#35516B] dark:border-white/15 dark:bg-white/5 dark:text-zinc-300"
+                className="rounded-md border border-brand-line/80 bg-[#F5F5F7]/90 px-2 py-0.5 text-xs font-medium text-[#6E6E73] dark:border-white/15 dark:bg-white/5 dark:text-zinc-300"
               >
                 {tag}
               </li>
@@ -93,7 +93,7 @@ export function CrisisNotesPromptsView({ pack }: { pack: CrisisNotesPack }) {
             {pack.seatPrompts.map((row) => (
               <li
                 key={row.seat}
-                className="rounded-xl border border-brand-line/70 bg-gradient-to-br from-white/80 to-[#F8FBFF]/90 px-4 py-3 dark:border-white/10 dark:from-white/[0.05] dark:to-transparent"
+                className="rounded-xl border border-brand-line/70 bg-gradient-to-br from-white/80 to-[#FBFBFD]/90 px-4 py-3 dark:border-white/10 dark:from-white/[0.05] dark:to-transparent"
               >
                 <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{row.seat}</p>
                 <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-brand-muted dark:text-zinc-300">

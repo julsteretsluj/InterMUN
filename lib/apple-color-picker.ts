@@ -4,7 +4,7 @@
 import type { ThemeHue } from "@/lib/theme-storage";
 
 export const THEME_HUE_HEX: Record<ThemeHue, string> = {
-  blue: "#0071e3",
+  blue: "#007aff",
   green: "#059669",
   red: "#dc2626",
   orange: "#f97316",

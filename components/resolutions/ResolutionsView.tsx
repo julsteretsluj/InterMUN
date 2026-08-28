@@ -6,11 +6,12 @@
 import { useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { QueryTabs } from "@/components/ui/Tabs";
-import { CheckCircle2, FileCheck, Lock, Plus, Trash2, Users } from "lucide-react";
+import { CheckCircle2, FileCheck, Lock, Plus, Send, Trash2, Users } from "lucide-react";
 import {
   addClauseAction,
   deleteClauseAction,
   finalizeResolutionAction,
+  forwardCompleteResolutionsToSmtAction,
   joinBlocAction,
   setCommitteeBlocsAction,
   setResolutionDocLinkAction,
@@ -21,7 +22,9 @@ import {
 import {
   MIN_RESOLUTION_CO_SUBMITTERS,
   MIN_RESOLUTION_MAIN_SUBMITTERS,
+  isResolutionReadyToForwardToSmt,
   minResolutionSignatories,
+  resolutionSmtForwardGaps,
 } from "@/lib/resolution-functions";
 import type { ScorableDelegateRow } from "@/lib/seated-delegates-for-awards";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
@@ -42,6 +45,7 @@ interface Resolution {
   visible_to_other_bloc: boolean;
   status?: string | null;
   finalized_at?: string | null;
+  forwarded_to_smt_at?: string | null;
 }
 
 interface Bloc {
@@ -105,6 +109,7 @@ export function ResolutionsView({
   );
   const [docLinkStatus, setDocLinkStatus] = useState<Record<string, string>>({});
   const [finalizeError, setFinalizeError] = useState<Record<string, string>>({});
+  const [forwardStatus, setForwardStatus] = useState<string | null>(null);
   const [newClause, setNewClause] = useState<Record<string, string>>({});
   const [editingClause, setEditingClause] = useState<Record<string, string>>({});
   const [sponsorPick, setSponsorPick] = useState<Record<string, string>>({});
@@ -175,6 +180,21 @@ export function ResolutionsView({
         setFinalizeError((s) => ({ ...s, [resolutionId]: result.error }));
         return;
       }
+      location.reload();
+    });
+  }
+
+  function forwardCompleteToSmt() {
+    if (!canCreate) return;
+    setActionError(null);
+    setForwardStatus(null);
+    startTransition(async () => {
+      const result = await forwardCompleteResolutionsToSmtAction({ conferenceId });
+      if (!result.ok) {
+        setActionError(result.error);
+        return;
+      }
+      setForwardStatus(t("forwardToSmtSuccess", { count: result.data.forwarded }));
       location.reload();
     });
   }
@@ -267,13 +287,52 @@ export function ResolutionsView({
         const bloc = blocs.find((b) => b.resolution_id === r.id);
         const name = bloc?.name?.trim() || t("blocFallback");
         const isFinalized = (r.status ?? "draft") === "finalized";
+        const forwarded = Boolean(r.forwarded_to_smt_at);
         return {
           id: r.id,
-          label: isFinalized ? `${name} · ${t("finalizedBadge")}` : name,
+          label: forwarded
+            ? `${name} · ${t("forwardedBadge")}`
+            : isFinalized
+              ? `${name} · ${t("finalizedBadge")}`
+              : name,
         };
       }),
     [resolutions, blocs, t]
   );
+
+  const clauseCountByResolutionId = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const c of clauses) {
+      map.set(c.resolution_id, (map.get(c.resolution_id) ?? 0) + 1);
+    }
+    return map;
+  }, [clauses]);
+
+  const seatedCount = delegates.length;
+
+  const forwardSummary = useMemo(() => {
+    let ready = 0;
+    let already = 0;
+    let incomplete = 0;
+    for (const r of resolutions) {
+      if (r.forwarded_to_smt_at) {
+        already += 1;
+        continue;
+      }
+      const gaps = resolutionSmtForwardGaps({
+        status: r.status,
+        googleDocsUrl: r.google_docs_url,
+        clauseCount: clauseCountByResolutionId.get(r.id) ?? 0,
+        mainSubmitterCount: (r.main_submitters ?? []).filter(Boolean).length,
+        coSubmitterCount: (r.co_submitters ?? []).filter(Boolean).length,
+        signatoryCount: (r.signatories ?? []).filter(Boolean).length,
+        seatedCount,
+      });
+      if (isResolutionReadyToForwardToSmt(gaps)) ready += 1;
+      else incomplete += 1;
+    }
+    return { ready, already, incomplete };
+  }, [resolutions, clauseCountByResolutionId, seatedCount]);
 
   const defaultBlocId = useMemo(() => {
     const joined = resolutions.find((r) => {
@@ -285,6 +344,58 @@ export function ResolutionsView({
 
   return (
     <div className="space-y-4">
+      <div className="dashboard-panel space-y-3 rounded-xl p-4">
+        <div className="space-y-1">
+          <h2 className="text-base font-semibold text-brand-navy">{t("howToTitle")}</h2>
+          <p className="text-sm leading-relaxed text-brand-muted">
+            {canCreate ? t("chairIntro") : t("delegateIntro")}
+          </p>
+        </div>
+        <ol className="list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-brand-navy">
+          {(canCreate
+            ? [t("chairStep1"), t("chairStep2"), t("chairStep3"), t("chairStep4")]
+            : [
+                t("delegateStep1"),
+                t("delegateStep2"),
+                t("delegateStep3"),
+                t("delegateStep4"),
+                t("delegateStep5"),
+              ]
+          ).map((step) => (
+            <li key={step}>{step}</li>
+          ))}
+        </ol>
+      </div>
+
+      {canCreate ? (
+        <div className="dashboard-panel space-y-3 rounded-xl p-4">
+          <div className="space-y-1">
+            <h2 className="text-base font-semibold text-brand-navy">{t("forwardToSmtTitle")}</h2>
+            <p className="text-sm leading-relaxed text-brand-muted">{t("forwardToSmtHelp")}</p>
+          </div>
+          <p className="text-sm text-brand-navy">
+            {t("forwardToSmtCounts", {
+              ready: forwardSummary.ready,
+              already: forwardSummary.already,
+              incomplete: forwardSummary.incomplete,
+            })}
+          </p>
+          <button
+            type="button"
+            onClick={forwardCompleteToSmt}
+            disabled={pending || forwardSummary.ready === 0}
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
+          >
+            <Send className="h-4 w-4" />
+            {pending ? t("forwardingToSmt") : t("forwardToSmtButton")}
+          </button>
+          {forwardStatus ? <p className="text-xs text-brand-diplomatic">{forwardStatus}</p> : null}
+          {actionError ? (
+            <p className="text-xs text-red-700 dark:text-red-300">{actionError}</p>
+          ) : null}
+        </div>
+      ) : null}
+
       <DelegateResolutionBuilder
         resolutions={draftResolutionPicks}
         conferenceId={conferenceId}
@@ -296,7 +407,7 @@ export function ResolutionsView({
         <div className="dashboard-panel space-y-3 rounded-xl p-4">
           <div className="space-y-1">
             <h2 className="text-base font-semibold text-brand-navy">{t("blocsConfigTitle")}</h2>
-            <p className="text-sm text-brand-muted">{t("blocsConfigHelp")}</p>
+            <p className="text-sm leading-relaxed text-brand-muted">{t("blocsConfigHelp")}</p>
           </div>
           <div className="space-y-2">
             {blocDrafts.map((b, idx) => (
@@ -359,9 +470,7 @@ export function ResolutionsView({
             {blocsStatus ? <span className="text-xs text-brand-diplomatic">{blocsStatus}</span> : null}
           </div>
         </div>
-      ) : (
-        <p className="text-sm text-brand-muted">{t("chooseBlocHelp")}</p>
-      )}
+      ) : null}
 
       {actionError ? (
         <p className="rounded border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
@@ -384,6 +493,7 @@ export function ResolutionsView({
           const members = bloc?.bloc_memberships ?? [];
           const isMember = members.some((m) => m.user_id === currentUserId);
           const isFinalized = (r.status ?? "draft") === "finalized";
+          const isForwarded = Boolean(r.forwarded_to_smt_at);
           const resolutionClauses = clauses
             .filter((c) => c.resolution_id === r.id)
             .sort((a, b) => a.clause_number - b.clause_number);
@@ -407,7 +517,12 @@ export function ResolutionsView({
                     {t("membersCount", { count: members.length })}
                   </span>
                 </div>
-                {isFinalized ? (
+                {isForwarded ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-accent/15 px-2.5 py-0.5 text-xs font-medium text-brand-diplomatic dark:text-brand-accent-bright">
+                    <Send className="h-3.5 w-3.5" />
+                    {t("forwardedBadge")}
+                  </span>
+                ) : isFinalized ? (
                   <span className="inline-flex items-center gap-1 rounded-full bg-brand-accent/15 px-2.5 py-0.5 text-xs font-medium text-brand-diplomatic dark:text-brand-accent-bright">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     {t("finalizedBadge")}
@@ -474,6 +589,7 @@ export function ResolutionsView({
                     <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
                       {t("sponsorsTitle")}
                     </p>
+                    <p className="text-xs leading-relaxed text-brand-muted">{t("sponsorsHelp")}</p>
                     <div className="grid gap-3 sm:grid-cols-3">
                       {columns.map((col) => {
                         const pickKey = `${r.id}:${col.role}`;
@@ -586,6 +702,7 @@ export function ResolutionsView({
                   <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted">
                     {t("docLinkLabel")}
                   </label>
+                  <p className="text-xs leading-relaxed text-brand-muted">{t("docLinkHelp")}</p>
                   {isFinalized ? (
                     <p className="inline-flex items-center gap-1.5 text-xs text-brand-muted">
                       <Lock className="h-3.5 w-3.5" />
@@ -637,6 +754,7 @@ export function ResolutionsView({
               {/* Finalize (members or staff) */}
               {(isMember || canCreate) && !isFinalized ? (
                 <div className="space-y-1">
+                  <p className="text-xs leading-relaxed text-brand-muted">{t("finalizeHelp")}</p>
                   <button
                     type="button"
                     onClick={() => finalize(r.id)}

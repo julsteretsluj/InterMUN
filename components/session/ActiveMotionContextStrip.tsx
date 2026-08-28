@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Clock, Gavel } from "lucide-react";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
+import { useSpeakerQueueLabels } from "@/lib/use-speaker-queue-labels";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
@@ -38,6 +39,7 @@ export function ActiveMotionContextStrip({
     conferenceId,
     voteItemId
   );
+  const { currentLabel: queueCurrent, nextLabel: queueNext } = useSpeakerQueueLabels(conferenceId);
   const [row, setRow] = useState<VoteMotionRow | null>(null);
   const [motionerCountry, setMotionerCountry] = useState<string | null>(null);
 
@@ -151,11 +153,11 @@ export function ActiveMotionContextStrip({
               ) : null}
               <div>
                 <span className={timerLabel}>{t("currentSpeaker")}</span>
-                <p className="font-medium">{timer.current_speaker || "—"}</p>
+                <p className="font-medium">{queueCurrent?.trim() || timer.current_speaker || "—"}</p>
               </div>
               <div>
                 <span className={timerLabel}>{t("nextSpeaker")}</span>
-                <p className="font-medium">{timer.next_speaker || "—"}</p>
+                <p className="font-medium">{queueNext?.trim() || timer.next_speaker || "—"}</p>
               </div>
               <div>
                 <span className={timerLabel}>

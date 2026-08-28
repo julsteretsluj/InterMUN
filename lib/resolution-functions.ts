@@ -66,3 +66,44 @@ export function nextClauseNumber(existingClauseNumbers: number[]) {
   return existingClauseNumbers.length > 0 ? Math.max(...existingClauseNumbers) + 1 : 1;
 }
 
+/** Gaps that block forwarding a draft to secretariat for Best Resolution review. */
+export type ResolutionSmtForwardGaps = {
+  notFinalized: boolean;
+  missingDoc: boolean;
+  missingClauses: boolean;
+  missingMainSubmitters: boolean;
+  missingCoSubmitters: boolean;
+  missingSignatories: boolean;
+};
+
+export function resolutionSmtForwardGaps(input: {
+  status?: string | null;
+  googleDocsUrl?: string | null;
+  clauseCount: number;
+  mainSubmitterCount: number;
+  coSubmitterCount: number;
+  signatoryCount: number;
+  seatedCount: number;
+}): ResolutionSmtForwardGaps {
+  const minSign = minResolutionSignatories(input.seatedCount);
+  return {
+    notFinalized: (input.status ?? "draft") !== "finalized",
+    missingDoc: !input.googleDocsUrl?.trim(),
+    missingClauses: input.clauseCount < 1,
+    missingMainSubmitters: input.mainSubmitterCount < MIN_RESOLUTION_MAIN_SUBMITTERS,
+    missingCoSubmitters: input.coSubmitterCount < MIN_RESOLUTION_CO_SUBMITTERS,
+    missingSignatories: input.signatoryCount < minSign,
+  };
+}
+
+export function isResolutionReadyToForwardToSmt(gaps: ResolutionSmtForwardGaps): boolean {
+  return (
+    !gaps.notFinalized &&
+    !gaps.missingDoc &&
+    !gaps.missingClauses &&
+    !gaps.missingMainSubmitters &&
+    !gaps.missingCoSubmitters &&
+    !gaps.missingSignatories
+  );
+}
+

@@ -5,9 +5,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
+import { useSpeakerQueueLabels } from "@/lib/use-speaker-queue-labels";
 import {
   committeeSessionEndTimestampMs,
   formatCountdownOrElapsed,
@@ -49,14 +49,14 @@ function chipClass(theme: WidgetTheme, live: boolean) {
   }
   if (theme === "light") {
     return cn(
-      "min-w-[8rem] max-w-[13rem] rounded-[var(--radius-md)] border px-2.5 py-1.5",
+      "min-w-[8.5rem] max-w-[16rem] rounded-[var(--radius-md)] border px-2.5 py-1.5",
       live
         ? "border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)]"
         : "border-[var(--hairline)] bg-white"
     );
   }
   return cn(
-    "min-w-[8rem] max-w-[13rem] rounded-[var(--radius-md)] border px-2.5 py-1.5",
+    "min-w-[8.5rem] max-w-[16rem] rounded-[var(--radius-md)] border px-2.5 py-1.5",
     live ? "border-brand-accent/40 bg-brand-accent/10" : "border-white/10 bg-black/20"
   );
 }
@@ -68,6 +68,7 @@ function TimerChip({
   live,
   paused,
   theme,
+  clockMono = true,
 }: {
   label: string;
   clock: string;
@@ -75,13 +76,21 @@ function TimerChip({
   live?: boolean;
   paused?: boolean;
   theme: WidgetTheme;
+  clockMono?: boolean;
 }) {
   const t = useTranslations("timersWidget");
   return (
     <div className={chipClass(theme, !!live && !paused)}>
       <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted">{label}</p>
-      <p className="mt-0.5 flex items-baseline gap-1.5 font-mono text-lg font-semibold tabular-nums leading-none text-brand-navy">
-        <span suppressHydrationWarning>{clock}</span>
+      <p
+        className={cn(
+          "mt-0.5 flex items-baseline gap-1.5 text-lg font-semibold leading-none text-brand-navy",
+          clockMono ? "font-mono tabular-nums" : "font-sans tracking-tight"
+        )}
+      >
+        <span className={clockMono ? undefined : "truncate"} suppressHydrationWarning>
+          {clock}
+        </span>
         {live && !paused ? (
           <span className="inline-block size-1.5 shrink-0 rounded-full bg-brand-accent" aria-hidden />
         ) : null}
@@ -119,6 +128,7 @@ export function ActiveTimerWidgets({
     activeVoteItemId,
     chairSeesRawTimer
   );
+  const { currentLabel: queueCurrentLabel, nextLabel: queueNextLabel } = useSpeakerQueueLabels(conferenceId);
   const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
   const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
   const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
@@ -200,21 +210,19 @@ export function ActiveTimerWidgets({
         : tf("limitOverBy", { value: limitFmt.text })
       : null;
 
-  const showFloor =
-    timer != null && (showIdleFloorTimer || shouldShowLiveFloorTimerUI(timer, isRunning));
+  const currentSpeaker =
+    queueCurrentLabel?.trim() || timer?.current_speaker?.trim() || null;
+  const nextSpeaker = queueNextLabel?.trim() || timer?.next_speaker?.trim() || null;
+  const speakerHint = nextSpeaker ? t("nextSpeakerHint", { name: nextSpeaker }) : null;
+
+  const showFloor = showIdleFloorTimer || (timer != null && shouldShowLiveFloorTimerUI(timer, isRunning));
   const floorLabel = timer?.floor_label?.trim() || (perSpeakerMode ? t("speakerClock") : t("timer"));
   const floorClock = timer
     ? `${formatMmSs(remaining)} / ${formatMmSs(total)}`
     : t("dash");
-  const floorHint = [
-    timer?.current_speaker?.trim(),
-    timer?.next_speaker?.trim() ? `→ ${timer.next_speaker.trim()}` : null,
-    timer?.current_pause_reason?.trim()
-      ? t("pauseReason", { reason: timer.current_pause_reason.trim() })
-      : null,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const floorHint = timer?.current_pause_reason?.trim()
+    ? t("pauseReason", { reason: timer.current_pause_reason.trim() })
+    : null;
 
   return (
     <div className="flex flex-wrap items-stretch gap-2" aria-label={t("activeTimersAria")}>
@@ -225,29 +233,24 @@ export function ActiveTimerWidgets({
         hint={sessionHint}
         live={sessionLive}
       />
+      <TimerChip
+        theme={theme}
+        label={t("currentSpeaker")}
+        clock={currentSpeaker || t("noActiveSpeaker")}
+        hint={speakerHint}
+        live={Boolean(currentSpeaker)}
+        clockMono={false}
+      />
       {showFloor ? (
         <TimerChip
           theme={theme}
           label={floorLabel}
           clock={floorClock}
-          hint={floorHint || null}
-          live={isRunning}
-          paused={!isRunning && shouldShowLiveFloorTimerUI(timer, isRunning)}
+          hint={floorHint}
+          live={Boolean(timer) && isRunning}
+          paused={timer != null && !isRunning && shouldShowLiveFloorTimerUI(timer, isRunning)}
         />
       ) : null}
-    </div>
-  );
-}
-
-export function ActiveTimerWidgetsHeading({ theme = "page" }: { theme?: WidgetTheme }) {
-  const t = useTranslations("timersWidget");
-  return (
-    <div className="flex items-center gap-2">
-      <Clock
-        className={theme === "dark" ? "h-4 w-4 text-brand-accent-bright" : "h-4 w-4 text-brand-accent"}
-        aria-hidden
-      />
-      <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{t("activeTimers")}</p>
     </div>
   );
 }

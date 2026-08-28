@@ -26,11 +26,12 @@ export default async function ResolutionsPage() {
   const canCreate = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
   const conferenceId = await requireActiveConferenceId();
+  const chamber = await getChamberScope(supabase, conferenceId);
 
   const { data: initialResolutions } = await supabase
     .from("resolutions")
     .select("*")
-    .eq("conference_id", conferenceId)
+    .in("conference_id", chamber.siblingConferenceIds)
     .order("created_at", { ascending: false });
   const resolutions = initialResolutions ?? [];
 
@@ -52,7 +53,6 @@ export default async function ResolutionsPage() {
           .order("clause_number", { ascending: true })
       : { data: [] };
 
-  const chamber = await getChamberScope(supabase, conferenceId);
   const delegates = await fetchScorableDelegatesForCommittee(supabase, chamber.siblingConferenceIds);
 
   return (

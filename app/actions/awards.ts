@@ -4,7 +4,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { AWARD_CATEGORIES, type AwardScope } from "@/lib/awards";
+import { AWARD_CATEGORIES, isBestResolutionAwardCategory, type AwardScope } from "@/lib/awards";
 import {
   rubricKeysForAwardAssignmentCategory,
   smtShouldCollectRubric,
@@ -199,7 +199,8 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
   const committeeConferenceId = String(formData.get("committee_conference_id") ?? "").trim();
   const recipientProfileId = String(formData.get("recipient_profile_id") ?? "").trim();
   const recipientCommitteeId = String(formData.get("recipient_committee_id") ?? "").trim();
-  const notes = String(formData.get("notes") ?? "").trim();
+  const resolutionId = String(formData.get("resolution_id") ?? "").trim();
+  let notes = String(formData.get("notes") ?? "").trim();
   const sortOrder = parseInt(String(formData.get("sort_order") ?? "0"), 10) || 0;
 
   if (!category || !AWARD_CATEGORIES.some((c) => c.id === category)) {
@@ -207,19 +208,58 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
   }
 
   const scope = scopeForCategory(category)!;
+  const bestResolution = isBestResolutionAwardCategory(category);
 
-  if (scope === "committee" && !committeeConferenceId) {
-    return { error: "Select a committee for this award." };
-  }
-
-  const committee_conference_id =
-    scope === "committee"
+  let committee_conference_id: string | null =
+    scope === "committee" && committeeConferenceId
       ? await resolveCanonicalCommitteeConferenceId(auth.supabase, committeeConferenceId)
       : null;
-  const recipient_committee_id =
+  let recipient_committee_id =
     scope === "collective_committee" ? recipientCommitteeId || null : null;
-  const recipient_profile_id =
+  let recipient_profile_id =
     scope === "collective_committee" ? null : recipientProfileId || null;
+  let resolution_id: string | null = null;
+
+  if (bestResolution) {
+    if (!resolutionId) return { error: "Select a submitted resolution." };
+    const { data: resolution, error: resolutionErr } = await auth.supabase
+      .from("resolutions")
+      .select("id, conference_id, google_docs_url, main_submitters, status, forwarded_to_smt_at")
+      .eq("id", resolutionId)
+      .maybeSingle();
+    if (resolutionErr) return { error: resolutionErr.message };
+    if (!resolution) return { error: "Resolution not found." };
+    const submitted =
+      (resolution.status ?? "draft") === "finalized" || Boolean(resolution.forwarded_to_smt_at);
+    if (!submitted) {
+      return { error: "Only submitted (finalized) resolutions can receive Best Resolution." };
+    }
+    const mains = (resolution.main_submitters ?? []).filter(Boolean);
+    if (!mains[0]) {
+      return { error: "This resolution has no main submitter to record as recipient." };
+    }
+    const canonicalId = await resolveCanonicalCommitteeConferenceId(
+      auth.supabase,
+      resolution.conference_id
+    );
+    resolution_id = resolution.id;
+    recipient_profile_id = mains[0];
+    committee_conference_id = category === "committee_best_resolution" ? canonicalId : null;
+    recipient_committee_id = null;
+    const { data: bloc } = await auth.supabase
+      .from("blocs")
+      .select("name")
+      .eq("resolution_id", resolution.id)
+      .maybeSingle();
+    if (!notes) {
+      const blocName = bloc?.name?.trim() || "Resolution";
+      notes = resolution.google_docs_url?.trim()
+        ? `${blocName} — ${resolution.google_docs_url.trim()}`
+        : blocName;
+    }
+  } else if (scope === "committee" && !committee_conference_id) {
+    return { error: "Select a committee for this award." };
+  }
 
   if (recipient_profile_id) {
     const scopeCheck = await recipientProfileInScope(auth.supabase, {
@@ -255,6 +295,7 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
     sort_order: sortOrder,
     rubric_scores,
     updated_at: new Date().toISOString(),
+    ...(bestResolution ? { resolution_id } : {}),
   };
 
   const supabase = auth.supabase;
@@ -914,6 +955,98 @@ export async function promoteNominationToAwardAction(
   revalidatePath("/smt/awards");
   revalidatePath("/smt");
   revalidatePath("/chair/awards");
+  revalidatePath("/profile");
+  return { success: true };
+}
+
+export async function selectBestResolutionAwardAction(input: {
+  resolutionId: string;
+  category: "committee_best_resolution" | "conference_best_resolution";
+}): Promise<{ success: boolean; error?: string }> {
+  const auth = await requireSmtOrAdmin();
+  if (!auth.ok || !auth.user) {
+    return { success: false, error: "Only SMT and website admins can record Best Resolution." };
+  }
+  if (input.category !== "committee_best_resolution" && input.category !== "conference_best_resolution") {
+    return { success: false, error: "Invalid Best Resolution award type." };
+  }
+
+  const { data: resolution, error: readErr } = await auth.supabase
+    .from("resolutions")
+    .select(
+      "id, conference_id, google_docs_url, main_submitters, forwarded_to_smt_at"
+    )
+    .eq("id", input.resolutionId)
+    .maybeSingle();
+  if (readErr) return { success: false, error: readErr.message };
+  if (!resolution) return { success: false, error: "Resolution not found." };
+  if (!resolution.forwarded_to_smt_at) {
+    return { success: false, error: "Chairs must forward this resolution to secretariat first." };
+  }
+
+  const mains = (resolution.main_submitters ?? []).filter(Boolean);
+  const recipientProfileId = mains[0] ?? null;
+  if (!recipientProfileId) {
+    return { success: false, error: "This resolution has no main submitter to record as recipient." };
+  }
+
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(
+    auth.supabase,
+    resolution.conference_id
+  );
+  const committeeForAssignment =
+    input.category === "committee_best_resolution" ? canonicalId : null;
+
+  const { data: bloc } = await auth.supabase
+    .from("blocs")
+    .select("name")
+    .eq("resolution_id", resolution.id)
+    .maybeSingle();
+  const blocName = bloc?.name?.trim() || "Resolution";
+  const notes = resolution.google_docs_url?.trim()
+    ? `${blocName} — ${resolution.google_docs_url.trim()}`
+    : blocName;
+
+  const now = new Date().toISOString();
+  let existingQuery = auth.supabase.from("award_assignments").select("id").eq("category", input.category);
+  if (committeeForAssignment === null) {
+    existingQuery = existingQuery.is("committee_conference_id", null);
+  } else {
+    existingQuery = existingQuery.eq("committee_conference_id", committeeForAssignment);
+  }
+  const { data: existing, error: existingErr } = await existingQuery
+    .order("updated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (existingErr) return { success: false, error: existingErr.message };
+
+  const payload = {
+    category: input.category,
+    committee_conference_id: committeeForAssignment,
+    recipient_profile_id: recipientProfileId,
+    recipient_committee_id: null,
+    resolution_id: resolution.id,
+    notes,
+    sort_order: 0,
+    updated_at: now,
+  };
+
+  if (existing?.id) {
+    const { error } = await auth.supabase.from("award_assignments").update(payload).eq("id", existing.id);
+    if (error) return { success: false, error: error.message };
+  } else {
+    const { error } = await auth.supabase.from("award_assignments").insert({
+      ...payload,
+      created_by: auth.user.id,
+      created_at: now,
+    });
+    if (error) return { success: false, error: error.message };
+  }
+
+  revalidatePath("/smt/awards");
+  revalidatePath("/smt");
+  revalidatePath("/chair/awards");
+  revalidatePath("/resolutions");
   revalidatePath("/profile");
   return { success: true };
 }

@@ -233,7 +233,7 @@ export function DelegateMatrixPanel({
         </div>
         <Link
           href="/chair/allocation-matrix"
-          className="inline-flex rounded-lg bg-[#17324A] px-4 py-2 text-sm font-semibold text-white"
+          className="inline-flex rounded-lg bg-[#007AFF] px-4 py-2 text-sm font-semibold text-white"
         >
           {t("emptyCta")}
         </Link>
@@ -245,25 +245,25 @@ export function DelegateMatrixPanel({
     mounted && activeDelegate
       ? createPortal(
           <div
-            className="fixed inset-0 z-[90] flex items-end justify-center bg-[#183148]/45 px-3 py-4 sm:items-center sm:px-4"
+            className="fixed inset-0 z-[90] flex items-end justify-center bg-[#1D1D1F]/45 px-3 py-4 sm:items-center sm:px-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
             onClick={closeModal}
           >
             <div
-              className="flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#C9DDE9] bg-[#F8FBFF] shadow-2xl"
+              className="flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#D1D1D6] bg-[#FBFBFD] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <header className="flex shrink-0 items-start justify-between gap-3 border-b border-[#C9DDE9] bg-[#EDF8FF] px-4 py-3 md:px-5">
+              <header className="flex shrink-0 items-start justify-between gap-3 border-b border-[#D1D1D6] bg-[#F5F5F7] px-4 py-3 md:px-5">
                 <div className="min-w-0">
                   <p className="text-2xl leading-none" aria-hidden>
                     {flagEmojiForCountryName(activeDelegate.country)}
                   </p>
-                  <h3 id={titleId} className="mt-1 font-sans text-lg font-semibold text-[#183148]">
+                  <h3 id={titleId} className="mt-1 font-sans text-lg font-semibold text-[#1D1D1F]">
                     {activeDelegate.country}
                   </h3>
-                  <p className="text-sm text-[#4D6174]">{activeDelegate.displayName}</p>
+                  <p className="text-sm text-[#6E6E73]">{activeDelegate.displayName}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <span
@@ -279,7 +279,7 @@ export function DelegateMatrixPanel({
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="rounded-lg border border-[#C9DDE9] bg-white/80 p-1.5 text-[#35516B] hover:bg-white"
+                    className="rounded-lg border border-[#D1D1D6] bg-white/80 p-1.5 text-[#6E6E73] hover:bg-white"
                     aria-label={t("closeModal")}
                   >
                     <X className="h-4 w-4" aria-hidden />
@@ -289,7 +289,7 @@ export function DelegateMatrixPanel({
 
               <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 md:px-5">
                 <DelegateFloorActivitySection activity={floorActivityByProfileId[activeDelegate.userId]} />
-                <p className="text-xs text-[#4D6174]">{t("modalHint")}</p>
+                <p className="text-xs text-[#6E6E73]">{t("modalHint")}</p>
                 <div className="grid gap-3">
                   {DELEGATE_CRITERIA.map((criterion) => (
                     <RubricCriterionPicker
@@ -306,15 +306,15 @@ export function DelegateMatrixPanel({
                 ) : saveStateByProfile[activeDelegate.userId] === "error" ? (
                   <span className="text-xs text-rose-700">{t("autosaveFailed")}</span>
                 ) : !activeComplete ? (
-                  <p className="text-xs text-[#4D6174]">{t("currentIncomplete")}</p>
+                  <p className="text-xs text-[#6E6E73]">{t("currentIncomplete")}</p>
                 ) : null}
               </div>
 
-              <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-[#C9DDE9] bg-[#EDF8FF]/80 px-4 py-3 md:px-5">
+              <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-[#D1D1D6] bg-[#F5F5F7]/80 px-4 py-3 md:px-5">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm font-medium text-[#183148]"
+                  className="rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-[#1D1D1F]"
                 >
                   {t("closeModal")}
                 </button>
@@ -330,7 +330,7 @@ export function DelegateMatrixPanel({
                       setActiveUserId(null);
                     });
                   }}
-                  className="rounded-lg bg-[#17324A] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+                  className="rounded-lg bg-[#007AFF] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
                 >
                   {savingByProfile[activeDelegate.userId] ? t("saving") : t("saveAndClose")}
                 </button>
@@ -358,15 +358,15 @@ export function DelegateMatrixPanel({
           })}
         </p>
         <div className="mt-3 space-y-1.5">
-          <div className="flex items-center justify-between text-xs text-[#4D6174]">
-            <span className="font-medium text-[#183148]">{t("cardProgressLabel")}</span>
+          <div className="flex items-center justify-between text-xs text-[#6E6E73]">
+            <span className="font-medium text-[#1D1D1F]">{t("cardProgressLabel")}</span>
             <span>
               {completeCount}/{sortedDelegates.length}
             </span>
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#183148]/10">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1D1D1F]/10">
             <div
-              className="h-full rounded-full bg-[#119ED3] transition-[width] duration-300"
+              className="h-full rounded-full bg-[#007AFF] transition-[width] duration-300"
               style={{
                 width: `${sortedDelegates.length ? (completeCount / sortedDelegates.length) * 100 : 0}%`,
               }}
@@ -386,7 +386,7 @@ export function DelegateMatrixPanel({
                 <button
                   type="button"
                   onClick={() => setActiveUserId(d.userId)}
-                  className="rounded-full border border-amber-500/40 bg-white/70 px-2.5 py-0.5 text-xs font-medium text-amber-950 hover:border-[#119ED3]/50 dark:bg-black/20 dark:text-amber-100"
+                  className="rounded-full border border-amber-500/40 bg-white/70 px-2.5 py-0.5 text-xs font-medium text-amber-950 hover:border-[#007AFF]/50 dark:bg-black/20 dark:text-amber-100"
                 >
                   {d.country}
                 </button>
@@ -402,7 +402,7 @@ export function DelegateMatrixPanel({
       )}
 
       {msg ? (
-        <p className="text-xs text-brand-navy dark:text-zinc-200 bg-[#119ED3]/10 border border-[#119ED3]/25 rounded-lg px-3 py-2">
+        <p className="text-xs text-brand-navy dark:text-zinc-200 bg-[#007AFF]/10 border border-[#007AFF]/25 rounded-lg px-3 py-2">
           {msg}
         </p>
       ) : null}
@@ -419,11 +419,11 @@ export function DelegateMatrixPanel({
               onClick={() => setActiveUserId(d.userId)}
               className={cn(
                 "rounded-xl border px-4 py-3 text-left transition-colors",
-                "hover:border-[#119ED3]/45 hover:bg-[#EDF8FF]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#119ED3]/50",
+                "hover:border-[#007AFF]/45 hover:bg-[#F5F5F7]",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]/50",
                 rowComplete
                   ? "border-emerald-400/35 bg-emerald-50/40"
-                  : "border-[#C9DDE9] bg-[#F8FBFF]"
+                  : "border-[#D1D1D6] bg-[#FBFBFD]"
               )}
             >
               <div className="flex items-start justify-between gap-2">
@@ -441,9 +441,9 @@ export function DelegateMatrixPanel({
                   {rowComplete ? `${rowTotal}/${maxPts}` : t("unscoredBadge")}
                 </span>
               </div>
-              <p className="mt-2 font-sans text-sm font-semibold text-[#183148]">{d.country}</p>
-              <p className="truncate text-xs text-[#4D6174]">{d.displayName}</p>
-              <p className="mt-2 text-[0.65rem] font-medium uppercase tracking-wide text-[#35516B]">
+              <p className="mt-2 font-sans text-sm font-semibold text-[#1D1D1F]">{d.country}</p>
+              <p className="truncate text-xs text-[#6E6E73]">{d.displayName}</p>
+              <p className="mt-2 text-[0.65rem] font-medium uppercase tracking-wide text-[#6E6E73]">
                 {rowComplete ? t("complete") : t("incomplete")}
               </p>
             </button>

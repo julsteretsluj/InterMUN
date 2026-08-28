@@ -444,7 +444,14 @@
     "openMotionFloorFirst": "首先打開議席發言。",
     "openMotionBlocksRecording": "一項動議已開始投票。 在記錄進一步的陳述之前關閉它。",
     "statedMotionRecorded": "所陳述的動議已記錄（尚未開放投票）。",
-    "statedMotionRemoved": "已刪除所述動議。"
+    "statedMotionRemoved": "已刪除所述動議。",
+    "raisedPoints": "Raised points",
+    "noRaisedPoints": "No points logged yet.",
+    "pointStatusPending": "Pending",
+    "pointStatusAccepted": "Accepted",
+    "pointStatusDenied": "Denied",
+    "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
+    "agendaSetDay1Only": "Agenda set. Live topic is {first}."
   },
   "chairChecklists": {
     "common": {
@@ -726,7 +733,10 @@
     "noAwardRowsYet": "還沒有獎項行。",
     "includeInCertificatePrint": "包含在證書列印中：{label}",
     "edit": "編輯",
-    "remove": "消除"
+    "remove": "消除",
+    "submittedResolution": "Submitted resolution",
+    "selectResolution": "Select a resolution…",
+    "noSubmittedResolutions": "No submitted resolutions yet. They appear here after chairs finalize drafts."
   },
   "chairNominationsPanel": {
     "title": "主席提交的獎項",
@@ -1516,7 +1526,9 @@
     "dash": "—",
     "activeTimers": "進行中的計時器",
     "activeTimersAria": "會期與會場計時器",
-    "speakerClock": "發言人"
+    "speakerClock": "發言人",
+    "nextSpeakerHint": "Next: {name}",
+    "noActiveSpeaker": "No one is at the mic"
   },
   "dashboardSearch": {
     "aria": "搜尋",
@@ -1696,7 +1708,13 @@
     "noTimerYet": "Save a speaker timer on Session → Timer to start the clock.",
     "noWaitingToAdvance": "No waiting speakers in the queue to advance to.",
     "perSpeakerShort": "per speaker",
-    "pausedParen": "(paused)"
+    "pausedParen": "(paused)",
+    "introSuffixDigitalRoom": "Set per-speaker time here, then",
+    "noTimerYetDigitalRoom": "Set per-speaker time below, then Start.",
+    "perSpeakerTime": "Per-speaker time",
+    "perSpeakerTimeHelp": "This cap is what each speaker gets. Apply updates the floor timer and resets the current clock. Current speaker stays in sync with this list.",
+    "applyPerSpeakerTime": "Apply time",
+    "perSpeakerTimeApplied": "Per-speaker time set to {clock}."
   },
   "chairTopicTabs": {
     "selectLiveTopic": "選擇直播主題",
@@ -3160,7 +3178,29 @@
     "removePerson": "Remove",
     "selectDelegate": "Select a delegation…",
     "signMyself": "Add my name as a signatory",
-    "sponsorsLocked": "Finalized — these lists are locked."
+    "sponsorsLocked": "Finalized — these lists are locked.",
+    "howToTitle": "How to finish a resolution",
+    "chairIntro": "Chairs set up the drafts. Delegates write the full text in a shared Google Doc. Confirming a draft copies numbered operative clauses for the dais.",
+    "chairStep1": "Add one bloc per draft, pick For / Against / Neutral, and save. Delegates then join from the tabs below.",
+    "chairStep2": "Each bloc pastes a Google Doc link and writes together. In Google Docs, set Share to Anyone with the link can view.",
+    "chairStep3": "Number operative clauses 1., 2., 3. … Background (preambulatory) lines can sit above without numbers. When the bloc confirms, those numbered clauses are copied and the draft locks.",
+    "delegateIntro": "The working draft lives in a shared Google Doc in your bloc tab. The Resolution builder is optional — suggest single clauses there if you want; it does not replace the doc.",
+    "delegateStep1": "Join the bloc that matches your country's stance.",
+    "delegateStep2": "Paste the Google Doc link. Open Share and choose Anyone with the link → Viewer, or chairs cannot read the file.",
+    "delegateStep3": "Write the resolution in that doc. Number each operative clause 1., 2., 3. … Unnumbered preamble above those numbers is fine.",
+    "delegateStep4": "Fill main submitters, co-submitters, and signatories (about 15% of the committee must sign).",
+    "delegateStep5": "When the text is ready, tap Confirm & send final to chairs. That locks the draft and copies the numbered clauses.",
+    "docLinkHelp": "Paste a docs.google.com/document link. In that doc, open Share and choose Anyone with the link → Viewer. Number operative clauses 1., 2., 3. so they can be copied when you send the draft to chairs.",
+    "finalizeHelp": "This locks the draft and copies numbered operative clauses (1., 2., 3. …) for chairs and amendments. Unnumbered preamble is ignored.",
+    "sponsorsHelp": "Main submitters own the draft. Co-submitters help write it. Signatories support introducing it — you need about 15% of the committee. Fill these before sending the final to chairs.",
+    "chairStep4": "When every complete draft is ready, forward them to secretariat in one step. SMT reviews the Google Docs and chooses Best Resolution.",
+    "forwardToSmtTitle": "Forward complete resolutions to secretariat",
+    "forwardToSmtHelp": "Sends every finalized draft that has a Google Doc, numbered clauses, and full submitter lists. Incomplete drafts stay here. Secretariat uses this list to choose Best Resolution.",
+    "forwardToSmtButton": "Forward complete resolutions",
+    "forwardingToSmt": "Forwarding…",
+    "forwardToSmtSuccess": "Forwarded {count} resolution(s) to secretariat.",
+    "forwardToSmtCounts": "{ready} ready to forward · {already} already with secretariat · {incomplete} still incomplete",
+    "forwardedBadge": "With secretariat"
   },
   "voting": {
     "tabs": {
@@ -4500,7 +4540,16 @@
       "alreadyPaused": "計時器已暫停。",
       "pausedForCommittee": "委員會的計時器暫停。",
       "alreadyRunning": "計時器已經在運作。",
-      "runningForCommittee": "委員會正在運行計時器。"
+      "runningForCommittee": "委員會正在運行計時器。",
+      "presetGroups": {
+        "general": "General",
+        "moderated": "Moderated caucus",
+        "unmoderated": "Unmoderated caucus",
+        "consultation": "Consultation of the whole"
+      },
+      "start": "Start",
+      "pause": "Pause",
+      "speakerLockedToList": "Locked to the speaker list. Change Current on Speakers to update this."
     }
   },
   "navFolders": {
@@ -5563,5 +5612,20 @@
     "empty": "此活動中尚未連結代表。",
     "noMatches": "沒有代表與該搜尋相符。",
     "unnamed": "未透露姓名的代表"
+  },
+  "smtAwardsResolutions": {
+    "tab": "Resolutions",
+    "title": "Forwarded resolutions",
+    "help": "Chairs forward complete drafts here. Open the Google Doc, then pick Best Resolution for that committee or for the whole conference.",
+    "empty": "No complete resolutions have been forwarded yet. They appear here after chairs send them from the Resolutions page.",
+    "forwardedAt": "Forwarded {when}",
+    "clauseCount": "{count} clauses",
+    "mainSubmitters": "Main submitters",
+    "openDoc": "Open Google Doc",
+    "selectCommittee": "Best Resolution (committee)",
+    "selectConference": "Best Resolution (conference)",
+    "selectedCommittee": "Selected for committee",
+    "selectedConference": "Selected for conference",
+    "selectFailed": "Could not record that award. Try again."
   }
 }

@@ -1,35 +1,38 @@
 ---
-description: Clear Inter-first UI type system across all InterMUN surfaces
+description: Match seamun.com Apple HIG UI across all InterMUN surfaces
 alwaysApply: true
 ---
 
-# InterMUN Intentional UI Rule
+# InterMUN UI — seamun.com
 
-Designs should feel premium, calm, and human — with **one clear font system**.
+Designs should feel calm, crisp, and Apple-like — matching [seamun.com](https://seamun.com).
 
-## Typography (strict)
-- **UI everywhere** (body, headings, buttons, nav, marketing, auth): **Inter**
+## Typography
+- **UI everywhere** (body, headings, buttons, nav, marketing, auth): system SF stack (`-apple-system` / SF Pro) with Inter fallback
 - Hierarchy = size + weight only (`400` body · `600` subheads · `700` titles)
+- Letter-spacing slightly tight on titles (`-0.01em` to `-0.02em`)
 - **Documents only** (resolutions / papers): Merriweather via `.font-serif`
 - Dyslexic mode: OpenDyslexic (with Atkinson Hyperlegible fallback)
 - Do **not** mix Instrument Serif, Clash Display, cursive scripts, or Inter Tight into product UI
-- Avoid Poppins + Inter + Manrope stacks
 
-## Color & Tone
-- Background base: pastel blue `#DFF2FC` with soft wash to `#EDF8FF` / `#F8FBFF`
-- Ink: `#183148` · secondary `#35516B` · muted `#4D6174` (≥4.5:1)
-- Navy CTAs: `#17324A` · accent fill `#119ED3` · readable accent text `--accent-text`
-- Borders: `#C9DDE9`
+## Color & Tone (seamun.com tokens)
+- Background base: grouped gray `#F2F2F7`
+- Elevated surfaces: white `#FFFFFF`
+- Ink: `#1D1D1F` · secondary `#6E6E73` · tertiary `#AEAEB2`
+- Primary / accent: Apple blue `#007AFF` (hover `#0077ED`)
+- Borders / separators: `#D1D1D6` / `rgba(60, 60, 67, 0.29)`
+- Soft shadows only: `0 2px 8px rgba(0,0,0,0.08)` — no heavy glow
+
+## Radii & Controls
+- Radii: `8 / 10 / 12 / 16 / 20` · pills `980px`
+- Primary buttons: Apple-blue filled pills, no lift/scale on hover
+- Secondary: light fill / hairline border pills
 
 ## Layout & Composition
-- Auth / gates: split navy brand panel + white form (desktop)
-- Prefer asymmetry / staggered sections; intentional whitespace
-- Never clone identical section structures back-to-back
-
-## Buttons & Microcopy
-- Primary = navy filled; secondary = soft bordered
-- Descriptive CTAs; conversational copy
+- Auth / gates: dark brand panel (`#1D1D1F`) + white form (desktop)
+- White section cards on gray canvas; generous whitespace
+- Prefer asymmetry / staggered sections; never clone identical section structures back-to-back
 
 ## Constraints
 - Keep existing component naming/IA intact
-- Enhance only via color, texture, motion — do not change labels or structural naming
+- Enhance via tokens (color, radius, shadow, motion) — do not change labels or structural naming

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { Pause, Play } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
 import {
@@ -22,7 +21,7 @@ import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness";
 import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
-import { fetchSpeakerQueue } from "@/lib/speaker-queue";
+import { currentAndNextQueueRows, fetchSpeakerQueue } from "@/lib/speaker-queue";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
   ChairSpeakerQueuePanel,
@@ -31,6 +30,7 @@ import {
 import { CommitteeAgendaVotesTab } from "@/components/chair/CommitteeAgendaVotesTab";
 import {
   BUILTIN_TIMER_PRESETS,
+  TIMER_PRESET_GROUPS,
   presetToTimerFields,
   floorLabelLooksLikeGsl,
   isGslTimerPresetId,
@@ -46,7 +46,8 @@ import {
   parseRollAttendance,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
-import { ActiveTimerWidgets, ActiveTimerWidgetsHeading } from "@/components/timers/ActiveTimerWidgets";
+import { ActiveTimerWidgets } from "@/components/timers/ActiveTimerWidgets";
+import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
 import {
   canRecordVote,
   disciplineVoteBlockMessage,
@@ -55,7 +56,7 @@ import { resolveFeatureGuideHref } from "@/lib/guides-feature-links";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
-import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
+import { setActiveDebateTopicAction, applySetAgendaTopicOrderAction } from "@/app/actions/activeDebateTopic";
 import {
   calculateEuPartyTimeAllocation,
   EU_PARLIAMENT_PARTY_KEYS,
@@ -369,6 +370,29 @@ export function SessionControlClient({
     (country: string | null | undefined) => localizeCountryName(country, locale) || country || "—",
     [locale]
   );
+  const sessionPointLabel = useCallback(
+    (code: string) => {
+      const map: Record<SessionPointCode, string> = {
+        poi: tSessionControl("pointOfInformation"),
+        poc: tSessionControl("pointOfClarification"),
+        order: tSessionControl("pointOfOrder"),
+        parliamentary_inquiry: tSessionControl("parliamentaryInquiry"),
+        personal_privilege: tSessionControl("personalPrivilege"),
+        right_of_reply: tSessionControl("rightOfReply"),
+        fact_check: tSessionControl("factCheck"),
+      };
+      return map[code as SessionPointCode] ?? code.replace(/_/g, " ");
+    },
+    [tSessionControl]
+  );
+  const sessionPointStatusLabel = useCallback(
+    (status: SessionPointRow["status"]) => {
+      if (status === "accepted") return tSessionControl("pointStatusAccepted");
+      if (status === "denied") return tSessionControl("pointStatusDenied");
+      return tSessionControl("pointStatusPending");
+    },
+    [tSessionControl]
+  );
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
   const floorConferenceId = useLiveDebateConferenceId(
@@ -450,8 +474,7 @@ export function SessionControlClient({
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
-  // Value currently unused in the UI; rows are kept in state for the motions/points log.
-  const [, setSessionPoints] = useState<SessionPointRow[]>([]);
+  const [sessionPoints, setSessionPoints] = useState<SessionPointRow[]>([]);
   const [pointDraftCode, setPointDraftCode] = useState<SessionPointCode>("parliamentary_inquiry");
   const [pointDraftDetail, setPointDraftDetail] = useState("");
   const [pointDraftAllocationId, setPointDraftAllocationId] = useState("");
@@ -1350,6 +1373,16 @@ export function SessionControlClient({
         {
           event: "*",
           schema: "public",
+          table: "chair_session_points",
+          filter: `conference_id=eq.${floorConferenceId}`,
+        },
+        () => void refresh()
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
           table: "chair_delegate_discipline",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
@@ -1407,6 +1440,17 @@ export function SessionControlClient({
   }
 
   function saveTimer() {
+    publishFloorTimer();
+  }
+
+  function publishFloorTimer(opts?: {
+    timeLeftSeconds?: number;
+    totalTimeSeconds?: number;
+    floorLabel?: string;
+    perSpeakerMode?: boolean;
+    isRunning?: boolean;
+    successMessage?: string;
+  }) {
     let voteItemIdToSave: string | null = null;
     if (timer.purpose === "motion_vote") {
       const id = timer.boundVoteItemId.trim();
@@ -1422,8 +1466,8 @@ export function SessionControlClient({
     }
 
     startTransition(async () => {
-      let left = parseTime(timer.leftM, timer.leftS);
-      let total = parseTime(timer.totalM, timer.totalS);
+      let left = opts?.timeLeftSeconds ?? parseTime(timer.leftM, timer.leftS);
+      let total = opts?.totalTimeSeconds ?? parseTime(timer.totalM, timer.totalS);
       if (left <= 0 && total <= 0) {
         setMsg("Set speaker time and/or total time: at least one must be greater than zero.");
         return;
@@ -1434,16 +1478,41 @@ export function SessionControlClient({
         left = total;
         cappedToTotal = true;
       }
+      const floorLabel = opts?.floorLabel ?? timer.floorLabel;
+      const perSpeakerMode = opts?.perSpeakerMode ?? timer.perSpeakerMode;
+      const isRunning = opts?.isRunning ?? timer.isRunning;
+      let currentSpeaker = timer.current.trim() || null;
+      let nextSpeaker = timer.next.trim() || null;
+      try {
+        const queueRows = await fetchSpeakerQueue(supabase, floorConferenceId);
+        const { current, next } = currentAndNextQueueRows(queueRows);
+        const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
+          if (!row) return "";
+          if (row.allocation_id) {
+            const country = displayCountry(
+              allocations.find((a) => a.id === row.allocation_id)?.country ?? null
+            );
+            if (country && country !== "—") return country;
+          }
+          return row.label?.trim() || "";
+        };
+        const fromList = labelFor(current);
+        const nextFromList = labelFor(next);
+        if (fromList) currentSpeaker = fromList;
+        if (current) nextSpeaker = nextFromList || null;
+      } catch {
+        /* keep timer fields */
+      }
       const payloadBase = {
         conference_id: floorConferenceId,
-        current_speaker: timer.current.trim() || null,
-        next_speaker: timer.next.trim() || null,
+        current_speaker: currentSpeaker,
+        next_speaker: nextSpeaker,
         time_left_seconds: left,
         total_time_seconds: total,
         vote_item_id: voteItemIdToSave,
-        per_speaker_mode: timer.perSpeakerMode,
-        is_running: timer.isRunning,
-        floor_label: timer.floorLabel.trim() || null,
+        per_speaker_mode: perSpeakerMode,
+        is_running: isRunning,
+        floor_label: floorLabel.trim() || null,
         updated_at: new Date().toISOString(),
       };
       const firstAttempt = await supabase.from("timers").upsert(
@@ -1461,26 +1530,33 @@ export function SessionControlClient({
       setMsg(
         error
           ? error.message
-          : fallbackWithoutMeta
-          ? `${tTimer("saved")} (EU timer names/tags will sync after database migrations are applied.)`
-          : cappedToTotal
-          ? tTimer("savedCapped")
-          : tTimer("saved")
+          : opts?.successMessage
+            ? opts.successMessage
+            : fallbackWithoutMeta
+            ? `${tTimer("saved")} (EU timer names/tags will sync after database migrations are applied.)`
+            : cappedToTotal
+            ? tTimer("savedCapped")
+            : tTimer("saved")
       );
       if (
         !error &&
-        !timer.perSpeakerMode &&
-        floorLabelLooksLikeGsl(timer.floorLabel) &&
+        !perSpeakerMode &&
+        floorLabelLooksLikeGsl(floorLabel) &&
         !suppressGslSavePromptRef.current
       ) {
         setSpeakerListChairPrompt((prev) => (prev === "moderated_passed" ? prev : "gsl"));
       }
       setTimer((t) => ({
         ...t,
+        current: currentSpeaker ?? "",
+        next: nextSpeaker ?? "",
         leftM: String(Math.floor(left / 60)),
         leftS: String(left % 60),
         totalM: String(Math.floor(total / 60)),
         totalS: String(total % 60),
+        floorLabel,
+        perSpeakerMode,
+        isRunning,
       }));
       void refresh();
     });
@@ -1522,25 +1598,44 @@ export function SessionControlClient({
   }
 
   function startFloorTimer() {
-    if (!liveTimerRow) {
-      setMsg("Save the timer once before starting the clock.");
-      return;
-    }
-    if (timer.isRunning) {
+    const remainingNow = Math.max(0, Math.round(liveRemaining));
+    if (liveTimerRow && timer.isRunning && remainingNow > 0) {
       setMsg(tTimer("alreadyRunning"));
       return;
     }
-    startTransition(async () => {
-      const { error } = await supabase
-        .from("timers")
-        .update({
-          is_running: true,
-          current_pause_reason: null,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("conference_id", floorConferenceId);
-      setMsg(error ? error.message : tTimer("runningForCommittee"));
-      void refresh();
+    if (liveTimerRow && remainingNow > 0) {
+      startTransition(async () => {
+        const { error } = await supabase
+          .from("timers")
+          .update({
+            is_running: true,
+            current_pause_reason: null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("conference_id", floorConferenceId);
+        setMsg(error ? error.message : tTimer("runningForCommittee"));
+        void refresh();
+      });
+      return;
+    }
+    publishFloorTimer({ isRunning: true, successMessage: tTimer("runningForCommittee") });
+  }
+
+  function startEuTimerSlot(slot: EuTimerSlotKey) {
+    const seconds = Math.max(0, euTimerSlots[slot] ?? 0);
+    if (seconds <= 0) {
+      setMsg("Set a positive time for this EU timer first.");
+      return;
+    }
+    const slotName = euTimerMeta[slot]?.name?.trim() || euTimerSlotLabel(slot);
+    const slotTag = euTimerMeta[slot]?.tag?.trim() || "party timer";
+    publishFloorTimer({
+      timeLeftSeconds: seconds,
+      totalTimeSeconds: seconds,
+      floorLabel: `${slotName} (${slotTag})`,
+      perSpeakerMode: slot === "speaker_time" ? true : timer.perSpeakerMode,
+      isRunning: true,
+      successMessage: tTimer("runningForCommittee"),
     });
   }
 
@@ -1696,6 +1791,18 @@ export function SessionControlClient({
     });
   }
 
+  function setSessionPointStatus(id: string, status: "accepted" | "denied") {
+    startTransition(async () => {
+      const { error } = await supabase.from("chair_session_points").update({ status }).eq("id", id);
+      if (error) {
+        setMsg(error.message);
+        return;
+      }
+      setMsg(null);
+      void refresh();
+    });
+  }
+
   function advanceSpeakerAndResetClock() {
     if (!timer.perSpeakerMode) {
       setMsg("Turn on per-speaker time first, then save the timer.");
@@ -1704,12 +1811,8 @@ export function SessionControlClient({
     startTransition(async () => {
       const rows = await fetchSpeakerQueue(supabase, floorConferenceId);
       const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
-      const curIdx = sorted.findIndex((r) => r.status === "current");
-      const currentRow = curIdx >= 0 ? sorted[curIdx] : null;
-      const nextWaiting = sorted.find((r, i) => r.status === "waiting" && (!currentRow || i > curIdx));
-      const firstWaiting = sorted.find((r) => r.status === "waiting");
-
-      const nextCurrent = nextWaiting ?? firstWaiting;
+      const currentRow = sorted.find((r) => r.status === "current") ?? null;
+      const { next: nextCurrent } = currentAndNextQueueRows(sorted);
       if (!nextCurrent) {
         setMsg("No waiting speakers in the queue to advance to.");
         return;
@@ -1725,11 +1828,25 @@ export function SessionControlClient({
         speakerLabel: nextCurrent.label,
       });
 
-      const nextIdx = sorted.indexOf(nextCurrent);
-      const afterNext = sorted.slice(nextIdx + 1).find((r) => r.status === "waiting");
+      const afterAdvance = sorted.map((r) => {
+        if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
+        if (r.id === nextCurrent.id) return { ...r, status: "current" };
+        return r;
+      });
+      const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
       const cap = Math.max(1, parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60);
-      const curLabel = nextCurrent.label?.trim() || "—";
-      const nextLabel = afterNext?.label?.trim() || "";
+      const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
+        if (!row) return "";
+        if (row.allocation_id) {
+          const country = displayCountry(
+            allocations.find((a) => a.id === row.allocation_id)?.country ?? null
+          );
+          if (country && country !== "—") return country;
+        }
+        return row.label?.trim() || "";
+      };
+      const curLabel = labelFor(nextCurrent) || "—";
+      const nextLabel = labelFor(afterNext);
 
       const voteItemIdToSave =
         timer.purpose === "motion_vote" && timer.boundVoteItemId.trim()
@@ -2174,6 +2291,31 @@ export function SessionControlClient({
         }
         if (passes && openMotion.procedure_code === "open_gsl") {
           setSpeakerListChairPrompt("gsl");
+        }
+        if (passes && openMotion.procedure_code === "set_agenda") {
+          const title = (openMotion.title ?? "").trim();
+          const firstTopic =
+            (debateTopicOptions ?? []).find((topic) => topic.label.trim() === title) ??
+            agendaTopicsRemaining.find((topic) => (topic.name ?? "").trim() === title);
+          if (firstTopic) {
+            const agendaOrder = await applySetAgendaTopicOrderAction(firstTopic.id);
+            if (agendaOrder.error) {
+              setMsg(agendaOrder.error);
+            } else if (agendaOrder.day2TopicId) {
+              const secondLabel =
+                (debateTopicOptions ?? []).find((topic) => topic.id === agendaOrder.day2TopicId)?.label ??
+                agendaTopicsRemaining.find((topic) => topic.id === agendaOrder.day2TopicId)?.name ??
+                "";
+              setMsg(
+                tSessionControl("agendaSetWithDay2", {
+                  first: title,
+                  second: String(secondLabel).trim() || tSessionControl("untitled"),
+                })
+              );
+            } else {
+              setMsg(tSessionControl("agendaSetDay1Only", { first: title }));
+            }
+          }
         }
         if (isEuGuidedWorkflow && passes) {
           if (openMotion.procedure_code === "set_agenda") {
@@ -2801,6 +2943,7 @@ export function SessionControlClient({
 
   const show = (id: Exclude<SessionFloorSection, "all">) =>
     activeSection === "all" || activeSection === id;
+  const dedicatedPage = activeSection !== "all";
   const boundVoteItemIdTrimmed = timer.boundVoteItemId.trim();
   const activeMotionForRecordedVotes = boundVoteItemIdTrimmed
     ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed) ?? null
@@ -2834,8 +2977,10 @@ export function SessionControlClient({
 
       {show("agenda") ? (
         <section className="space-y-4">
-          <div className="flex items-center justify-between gap-3">
-            <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
+          <div className={`flex items-center gap-3 ${dedicatedPage ? "justify-end" : "justify-between"}`}>
+            {dedicatedPage ? null : (
+              <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
+            )}
             <HelpButton
               title={tSessionControl("tabAgenda")}
               guideHref={resolveFeatureGuideHref("session", "chair").href}
@@ -2865,10 +3010,12 @@ export function SessionControlClient({
 
       {show("motions") || show("discipline") ? (
       <section className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">
-            {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
-          </h3>
+        <div className={`flex items-center gap-3 ${dedicatedPage ? "justify-end" : "justify-between"}`}>
+          {dedicatedPage ? null : (
+            <h3 className="font-sans text-lg font-semibold text-brand-navy">
+              {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
+            </h3>
+          )}
           <HelpButton
             title={tSessionControl("motionControl")}
             guideHref={resolveFeatureGuideHref("session", "chair").href}
@@ -3751,6 +3898,59 @@ export function SessionControlClient({
         {motionWorkflowTab === "history" ? (
           <>
         <div className={surfaceCard}>
+          <p className={`${surfaceLabel} mb-2 tracking-wider`}>{tSessionControl("raisedPoints")}</p>
+          {sessionPoints.length === 0 ? (
+            <p className="text-sm text-brand-muted">{tSessionControl("noRaisedPoints")}</p>
+          ) : (
+            <ul className="space-y-2 text-sm text-brand-navy">
+              {sessionPoints.map((point) => {
+                const raisedBy = point.raised_by_allocation_id
+                  ? displayCountry(
+                      allocations.find((a) => a.id === point.raised_by_allocation_id)?.country ?? null
+                    )
+                  : tSessionControl("notSpecified");
+                const detail = point.detail?.trim() ?? "";
+                return (
+                  <li key={point.id} className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium">{sessionPointLabel(point.point_code)}</p>
+                      <p className="text-xs text-brand-muted">
+                        {raisedBy}
+                        {detail ? ` · ${detail}` : ""}
+                      </p>
+                      <p className="text-xs text-brand-muted">
+                        {sessionPointStatusLabel(point.status)}{" "}
+                        <span>({new Date(point.created_at).toLocaleString()})</span>
+                      </p>
+                    </div>
+                    {point.status === "pending" ? (
+                      <span className="flex shrink-0 items-center gap-2">
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={() => setSessionPointStatus(point.id, "accepted")}
+                          className="text-xs font-medium text-emerald-800 hover:underline disabled:opacity-50 dark:text-emerald-300"
+                        >
+                          {tSessionControl("accept")}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={() => setSessionPointStatus(point.id, "denied")}
+                          className="text-xs font-medium text-red-700 hover:underline disabled:opacity-50"
+                        >
+                          {tSessionControl("deny")}
+                        </button>
+                      </span>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+
+        <div className={surfaceCard}>
           <p className={`${surfaceLabel} mb-2 tracking-wider`}>{tSessionControl("auditTimeline")}</p>
           {motionAudit.length === 0 ? (
             <p className="text-sm text-brand-muted">{tSessionControl("noAuditEvents")}</p>
@@ -3813,14 +4013,21 @@ export function SessionControlClient({
 
       {show("timer") ? (
       <section className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
+        <div className="flex flex-wrap items-center justify-end gap-3">
+          {dedicatedPage ? null : (
+            <h3 className="mr-auto font-sans text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
+          )}
+            <FloorTimerRunButtons
+              running={Boolean(liveTimerRow) && timer.isRunning && liveRemaining > 0}
+              pending={pending}
+              onStart={startFloorTimer}
+              onPause={stopFloorTimer}
+            />
           <HelpButton title={tTimer("controlsTitle")}>
             {tTimer("controlsHelp")}
           </HelpButton>
         </div>
-        <div className="space-y-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-3">
-          <ActiveTimerWidgetsHeading theme="page" />
+        <div className="space-y-3 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-3">
           <ActiveTimerWidgets
             conferenceId={floorConferenceId}
             sessionConferenceId={canonicalConferenceId}
@@ -3878,6 +4085,14 @@ export function SessionControlClient({
                 const slotSeconds = Math.max(0, euTimerSlots[slot] ?? 0);
                 const slotMinutes = Math.floor(slotSeconds / 60);
                 const slotRemainder = slotSeconds % 60;
+                const slotName = euTimerMeta[slot]?.name?.trim() || euTimerSlotLabel(slot);
+                const slotTag = euTimerMeta[slot]?.tag?.trim() || "party timer";
+                const slotFloorLabel = `${slotName} (${slotTag})`;
+                const slotIsLive =
+                  Boolean(liveTimerRow) &&
+                  timer.isRunning &&
+                  liveRemaining > 0 &&
+                  (timer.floorLabel.trim() === slotFloorLabel || timer.floorLabel.trim() === slotName);
                 return (
                   <div
                     key={slot}
@@ -3948,6 +4163,15 @@ export function SessionControlClient({
                         {tSessionControl("apply")}
                       </button>
                     </div>
+                    <div className="mt-2">
+                      <FloorTimerRunButtons
+                        size="md"
+                        running={slotIsLive}
+                        pending={pending}
+                        onStart={() => startEuTimerSlot(slot)}
+                        onPause={stopFloorTimer}
+                      />
+                    </div>
                     <p className="mt-1 text-[0.65rem] text-brand-muted">
                       {formatSecondsAsMinSec(slotSeconds)}
                     </p>
@@ -3984,10 +4208,14 @@ export function SessionControlClient({
                 }}
               >
                 <option value="">{tTimer("applyPreset")}</option>
-                {BUILTIN_TIMER_PRESETS.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
+                {TIMER_PRESET_GROUPS.map((group) => (
+                  <optgroup key={group} label={tTimer(`presetGroups.${group}`)}>
+                    {BUILTIN_TIMER_PRESETS.filter((p) => p.group === group).map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
             </label>
@@ -4052,9 +4280,6 @@ export function SessionControlClient({
           <p className="text-sm text-brand-navy">
             <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
             <span className="font-medium">{timer.isRunning ? tTimer("running") : tTimer("paused")}</span>
-            {!liveTimerRow ? (
-              <span className="text-brand-muted font-normal"> — {tTimer("saveToEnablePauseStart")}</span>
-            ) : null}
           </p>
           <label className="block text-sm text-brand-navy">
             <span className={surfaceLabel}>{tTimer("pauseReasonLogged")}</span>
@@ -4065,26 +4290,6 @@ export function SessionControlClient({
               onChange={(e) => setPauseReasonDraft(e.target.value)}
             />
           </label>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={pending || !liveTimerRow || !timer.isRunning}
-              onClick={stopFloorTimer}
-              className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
-            >
-              <Pause className="h-4 w-4 shrink-0" aria-hidden />
-              {tTimer("pauseClock")}
-            </button>
-            <button
-              type="button"
-              disabled={pending || !liveTimerRow || timer.isRunning}
-              onClick={startFloorTimer}
-              className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
-            >
-              <Play className="h-4 w-4 shrink-0" aria-hidden />
-              {tTimer("startClock")}
-            </button>
-          </div>
           <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
             <input
               type="checkbox"
@@ -4104,15 +4309,28 @@ export function SessionControlClient({
               <span className={surfaceLabel}>{tTimer("currentSpeaker")}</span>
               <input
                 className={surfaceField}
-                value={timer.current}
+                value={
+                  currentSpeakerQueueRow
+                    ? displayCountry(
+                        allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
+                          currentSpeakerQueueRow.label ??
+                          timer.current
+                      )
+                    : timer.current
+                }
+                readOnly={Boolean(currentSpeakerQueueRow)}
                 onChange={(e) => setTimer((t) => ({ ...t, current: e.target.value }))}
               />
+              {currentSpeakerQueueRow ? (
+                <span className="mt-1 block text-xs text-brand-muted">{tTimer("speakerLockedToList")}</span>
+              ) : null}
             </label>
             <label className="block text-sm text-brand-navy">
               <span className={surfaceLabel}>{tTimer("nextSpeaker")}</span>
               <input
                 className={surfaceField}
                 value={timer.next}
+                readOnly={Boolean(currentSpeakerQueueRow)}
                 onChange={(e) => setTimer((t) => ({ ...t, next: e.target.value }))}
               />
             </label>
@@ -4295,7 +4513,9 @@ export function SessionControlClient({
 
       {show("announcements") ? (
       <section className="space-y-4">
-        <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
+        {dedicatedPage ? null : (
+          <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
+        )}
         <div className={`${surfaceCard} space-y-4`}>
           <p className="text-sm text-brand-muted">{tSessionControl("daisAnnouncementsHelp")}</p>
           <label className="block text-sm text-brand-navy">
@@ -4497,10 +4717,12 @@ export function SessionControlClient({
 
       {show("roll-call") ? (
       <section className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">
-            ✅ {tSessionControl("rollCallTracker")}
-          </h3>
+        <div className={`flex items-center gap-3 ${dedicatedPage ? "justify-end" : "justify-between"}`}>
+          {dedicatedPage ? null : (
+            <h3 className="font-sans text-lg font-semibold text-brand-navy">
+              ✅ {tSessionControl("rollCallTracker")}
+            </h3>
+          )}
           <HelpButton title={tSessionControl("rollCallTracker")}>
             {tSessionControl("rollCallHelp")}
           </HelpButton>

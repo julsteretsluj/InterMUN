@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
+import { syncLiveTopicToScheduleDayAction } from "@/app/actions/activeDebateTopic";
 import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
 import { playTimerExpiryAlarm } from "@/lib/timer-expiry-alarm";
 import {
@@ -57,15 +58,22 @@ export function ChairSessionReminderHost({
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      setSelectedDay(readScheduledSessionsDay());
+      const day = readScheduledSessionsDay();
+      setSelectedDay(day);
+      void syncLiveTopicToScheduleDayAction(day);
     });
     const onDay = (e: Event) => {
       const day = (e as CustomEvent<1 | 2>).detail;
-      if (day === 1 || day === 2) setSelectedDay(day);
+      if (day === 1 || day === 2) {
+        setSelectedDay(day);
+        void syncLiveTopicToScheduleDayAction(day);
+      }
     };
     const onStorage = (e: StorageEvent) => {
       if (e.key === SCHEDULED_SESSIONS_DAY_KEY) {
-        setSelectedDay(e.newValue === "2" ? 2 : 1);
+        const day = e.newValue === "2" ? 2 : 1;
+        setSelectedDay(day);
+        void syncLiveTopicToScheduleDayAction(day);
       }
     };
     window.addEventListener(SCHEDULE_DAY_CHANGED_EVENT, onDay);
@@ -166,6 +174,7 @@ export function ChairSessionReminderHost({
       });
       setStartingKey(key);
       startTransition(async () => {
+        await syncLiveTopicToScheduleDayAction(preset.day);
         const res = await startScheduledCommitteeSessionAction({
           conferenceId,
           title: preset.title,

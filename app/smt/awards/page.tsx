@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import type { AwardAssignment, AwardParticipationScore } from "@/types/database";
-import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import { isConferenceEventPlaceholderRow, submittedResolutionLabel } from "@/lib/awards";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import {
@@ -24,6 +24,7 @@ import {
 } from "@/lib/award-nomination-review";
 import type { ChairNominationRow } from "./ChairNominationsPanel";
 import type { BestDelegateComparisonRow } from "./SmtBestDelegateComparison";
+import type { SmtForwardedResolutionRow } from "./SmtForwardedResolutionsPanel";
 import { SmtAwardsRefreshOnFocus } from "./SmtAwardsRefreshOnFocus";
 import { SmtAwardsTabs } from "./SmtAwardsTabs";
 import { getTranslations } from "next-intl/server";
@@ -129,6 +130,7 @@ export default async function SmtAwardsPage() {
   let smtReportRanking: { committee: CommitteeOpt; total: number }[] = [];
   let smtReadiness = { ok: true as boolean, missingChairs: [] as string[], missingReports: [] as string[] };
   let bestDelegateComparisonRows: BestDelegateComparisonRow[] = [];
+  let forwardedResolutionRows: SmtForwardedResolutionRow[] = [];
 
   if (eventId) {
     const rawConfs = (conferences ?? []).filter(
@@ -282,6 +284,80 @@ export default async function SmtAwardsPage() {
 
       bestDelegateComparisonRows = (bdCompare ?? []) as BestDelegateComparisonRow[];
     }
+
+    const eventConfIds = rawConfs.map((c) => c.id);
+    if (eventConfIds.length > 0) {
+      const submittedSelect =
+        "id, conference_id, google_docs_url, main_submitters, status, forwarded_to_smt_at, finalized_at";
+      let submittedQuery = await supabase
+        .from("resolutions")
+        .select(submittedSelect)
+        .in("conference_id", eventConfIds);
+      if (
+        submittedQuery.error &&
+        /forwarded_to_smt_at|schema cache/i.test(String(submittedQuery.error.message ?? ""))
+      ) {
+        submittedQuery = await supabase
+          .from("resolutions")
+          .select("id, conference_id, google_docs_url, main_submitters, status, finalized_at")
+          .in("conference_id", eventConfIds);
+      }
+      const submittedRows = (submittedQuery.data ?? []).filter((r) => {
+        const forwardedAt = "forwarded_to_smt_at" in r ? (r as { forwarded_to_smt_at?: string | null }).forwarded_to_smt_at : null;
+        return (r.status ?? "draft") === "finalized" || Boolean(forwardedAt);
+      });
+      if (submittedRows.length > 0) {
+        const submittedIds = submittedRows.map((r) => r.id);
+        const [{ data: blocRows }, { data: clauseRows }] = await Promise.all([
+          supabase.from("blocs").select("resolution_id, name").in("resolution_id", submittedIds),
+          supabase.from("resolution_clauses").select("id, resolution_id").in("resolution_id", submittedIds),
+        ]);
+        const blocNameByRes = new Map<string, string>();
+        for (const b of blocRows ?? []) {
+          if (b.resolution_id && b.name?.trim()) blocNameByRes.set(b.resolution_id, b.name.trim());
+        }
+        const clauseCountByRes = new Map<string, number>();
+        for (const c of clauseRows ?? []) {
+          clauseCountByRes.set(c.resolution_id, (clauseCountByRes.get(c.resolution_id) ?? 0) + 1);
+        }
+        const selectedCommittee = new Set(
+          ((assignments ?? []) as AwardAssignment[])
+            .filter((a) => a.category === "committee_best_resolution" && a.resolution_id)
+            .map((a) => a.resolution_id as string)
+        );
+        const selectedConference = new Set(
+          ((assignments ?? []) as AwardAssignment[])
+            .filter((a) => a.category === "conference_best_resolution" && a.resolution_id)
+            .map((a) => a.resolution_id as string)
+        );
+        forwardedResolutionRows = submittedRows.map((r) => {
+          const mains = (r.main_submitters ?? []).filter(Boolean);
+          const committeeLabel =
+            labelByConf[r.conference_id] ??
+            committeeLabelByConferenceId[r.conference_id] ??
+            r.conference_id.slice(0, 8);
+          const blocName = blocNameByRes.get(r.id) ?? "Resolution";
+          const forwardedAt =
+            "forwarded_to_smt_at" in r
+              ? ((r as { forwarded_to_smt_at?: string | null }).forwarded_to_smt_at ?? null)
+              : null;
+          return {
+            id: r.id,
+            conferenceId: r.conference_id,
+            committeeLabel,
+            blocName,
+            displayLabel: submittedResolutionLabel(blocName, committeeLabel),
+            googleDocsUrl: r.google_docs_url,
+            clauseCount: clauseCountByRes.get(r.id) ?? 0,
+            mainSubmitterNames: mains.map((id) => nomineeNameByProfileId[id] ?? id.slice(0, 8)),
+            firstMainSubmitterId: mains[0] ?? null,
+            forwardedAt,
+            selectedAsCommittee: selectedCommittee.has(r.id),
+            selectedAsConference: selectedConference.has(r.id),
+          };
+        });
+      }
+    }
   }
 
   const nominationsPayload: ChairNominationRow[] = nominationRowsForQueue.map((n) => ({
@@ -340,6 +416,7 @@ export default async function SmtAwardsPage() {
         }}
         bestDelegateComparisonRows={bestDelegateComparisonRows}
         overallBestDelegateLadderRows={overallBestDelegateLadderRows}
+        forwardedResolutionRows={forwardedResolutionRows}
       />
     </MunPageShell>
   );

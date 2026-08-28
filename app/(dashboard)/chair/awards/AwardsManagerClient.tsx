@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { AWARD_CATEGORIES, awardCategoryMeta, isConferenceEventPlaceholderRow } from "@/lib/awards";
+import { AWARD_CATEGORIES, awardCategoryMeta, isBestResolutionAwardCategory, isConferenceEventPlaceholderRow } from "@/lib/awards";
 import {
   maxRubricPointsForAwardCategory,
   rubricBandInitialsForAssignment,
@@ -28,6 +28,13 @@ type EligibleRecipients = {
   conferenceChairs: Prof[];
 };
 
+type SubmittedResolutionOpt = {
+  id: string;
+  conferenceId: string;
+  displayLabel: string;
+  firstMainSubmitterId: string | null;
+};
+
 /** Committee chamber only (DISEC, ECOSOC, …) — not the agenda/topic title. */
 function committeeOptionLabel(c: Conf) {
   return c.committee?.trim() || c.id.slice(0, 8);
@@ -48,6 +55,7 @@ export function AwardsManagerClient({
   eligibleRecipients,
   conferenceIdToCanonical = {},
   enableCertificatePrint = false,
+  submittedResolutions = [],
 }: {
   conferences: Conf[];
   assignments: AwardAssignment[];
@@ -58,6 +66,8 @@ export function AwardsManagerClient({
   conferenceIdToCanonical?: Record<string, string>;
   /** When true (SMT final awards tab): add certificate checkboxes and print selected. */
   enableCertificatePrint?: boolean;
+  /** Finalized / forwarded drafts for Best Resolution. Labels are `Name (Committee)`. */
+  submittedResolutions?: SubmittedResolutionOpt[];
 }) {
   const t = useTranslations("awardsManager");
   const router = useRouter();
@@ -107,6 +117,7 @@ export function AwardsManagerClient({
     committee_conference_id: "",
     recipient_profile_id: "",
     recipient_committee_id: "",
+    resolution_id: "",
     notes: "",
     sort_order: "0",
   });
@@ -154,6 +165,25 @@ export function AwardsManagerClient({
   ]);
 
   const meta = awardCategoryMeta(form.category);
+  const pickingResolution = isBestResolutionAwardCategory(form.category);
+
+  const resolutionById = useMemo(
+    () => Object.fromEntries(submittedResolutions.map((r) => [r.id, r] as const)),
+    [submittedResolutions]
+  );
+
+  const resolutionOptions = useMemo(() => {
+    const list = [...submittedResolutions].sort((a, b) => a.displayLabel.localeCompare(b.displayLabel));
+    if (form.resolution_id && !list.some((r) => r.id === form.resolution_id)) {
+      list.unshift({
+        id: form.resolution_id,
+        conferenceId: form.committee_conference_id,
+        displayLabel: form.resolution_id.slice(0, 8),
+        firstMainSubmitterId: form.recipient_profile_id || null,
+      });
+    }
+    return list;
+  }, [submittedResolutions, form.resolution_id, form.committee_conference_id, form.recipient_profile_id]);
 
   /**
    * Recipient options are constrained to the award's scope: committee awards only list
@@ -204,6 +234,7 @@ export function AwardsManagerClient({
       committee_conference_id: "",
       recipient_profile_id: "",
       recipient_committee_id: "",
+      resolution_id: "",
       notes: "",
       sort_order: "0",
     });
@@ -217,6 +248,7 @@ export function AwardsManagerClient({
       committee_conference_id: a.committee_conference_id ?? "",
       recipient_profile_id: a.recipient_profile_id ?? "",
       recipient_committee_id: a.recipient_committee_id ?? "",
+      resolution_id: a.resolution_id ?? "",
       notes: a.notes ?? "",
       sort_order: String(a.sort_order ?? 0),
     });
@@ -281,6 +313,20 @@ export function AwardsManagerClient({
     setCertSelected(new Set());
   }
 
+  function recipientLabel(a: AwardAssignment): string {
+    if (a.resolution_id) {
+      const res = resolutionById[a.resolution_id];
+      if (res?.displayLabel) return res.displayLabel;
+    }
+    if (a.recipient_profile_id != null) {
+      return profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8);
+    }
+    if (a.recipient_committee_id != null) {
+      return committeeById[a.recipient_committee_id] ?? t("dash");
+    }
+    return t("dash");
+  }
+
   function printCertificates() {
     const rows = ordered.filter((a) => certSelected.has(a.id));
     if (rows.length === 0) return;
@@ -289,12 +335,7 @@ export function AwardsManagerClient({
     const bodyRows = rows
       .map((a) => {
         const m = awardCategoryMeta(a.category);
-        const recip =
-          a.recipient_profile_id != null
-            ? profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8)
-            : a.recipient_committee_id != null
-              ? committeeById[a.recipient_committee_id] ?? t("dash")
-              : t("dash");
+        const recip = recipientLabel(a);
         const comm =
           a.committee_conference_id != null
             ? committeeById[a.committee_conference_id] ?? t("dash")
@@ -362,7 +403,11 @@ th{background:#f4f4f5}
                 value={form.category}
                 onChange={(e) => {
                   const next = e.target.value;
-                  setForm((f) => ({ ...f, category: next }));
+                  setForm((f) => ({
+                    ...f,
+                    category: next,
+                    resolution_id: isBestResolutionAwardCategory(next) ? f.resolution_id : "",
+                  }));
                   setRubricScores({});
                 }}
               >
@@ -373,7 +418,7 @@ th{background:#f4f4f5}
                 ))}
               </select>
             </label>
-            {meta?.scope === "committee" && (
+            {meta?.scope === "committee" && !pickingResolution && (
               <label className="block text-sm">
                 <span className="text-brand-muted text-xs uppercase">{t("committeeSession")}</span>
                 <select
@@ -424,13 +469,45 @@ th{background:#f4f4f5}
                 </span>
               </p>
             </div>
-          ) : meta?.scope === "committee" ? (
+          ) : !pickingResolution && meta?.scope === "committee" ? (
             <p className="text-xs leading-relaxed text-brand-muted border-l-2 border-slate-300 pl-3 dark:border-zinc-600">
               {t("committeeScopedAwardsHelp")}
             </p>
           ) : null}
 
-          {(meta?.scope === "conference_wide" ||
+          {pickingResolution ? (
+            <label className="block text-sm">
+              <span className="text-brand-muted text-xs uppercase">{t("submittedResolution")}</span>
+              <select
+                name="resolution_id"
+                required
+                className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
+                value={form.resolution_id}
+                onChange={(e) => {
+                  const nextId = e.target.value;
+                  const picked = resolutionById[nextId];
+                  setForm((f) => ({
+                    ...f,
+                    resolution_id: nextId,
+                    recipient_profile_id: picked?.firstMainSubmitterId ?? "",
+                    committee_conference_id: picked?.conferenceId ?? "",
+                  }));
+                }}
+              >
+                <option value="">{t("selectResolution")}</option>
+                {resolutionOptions.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.displayLabel}
+                  </option>
+                ))}
+              </select>
+              {submittedResolutions.length === 0 ? (
+                <span className="mt-1 block text-xs text-brand-muted">{t("noSubmittedResolutions")}</span>
+              ) : null}
+              <input type="hidden" name="recipient_profile_id" value={form.recipient_profile_id} />
+              <input type="hidden" name="committee_conference_id" value={form.committee_conference_id} />
+            </label>
+          ) : (meta?.scope === "conference_wide" ||
             meta?.scope === "collective_person" ||
             meta?.scope === "committee") && (
             <label className="block text-sm">
@@ -585,12 +662,7 @@ th{background:#f4f4f5}
               ) : (
                 ordered.map((a) => {
                   const m = awardCategoryMeta(a.category);
-                  const recip =
-                    a.recipient_profile_id != null
-                      ? profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8)
-                      : a.recipient_committee_id != null
-                        ? committeeById[a.recipient_committee_id] ?? t("dash")
-                        : t("dash");
+                  const recip = recipientLabel(a);
                   const comm =
                     a.committee_conference_id != null
                       ? committeeById[a.committee_conference_id] ?? t("dash")

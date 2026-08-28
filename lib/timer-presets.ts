@@ -3,19 +3,34 @@
 
 /** Named timer presets chairs can apply (sets duration + floor label for delegates). */
 
+export type TimerPresetGroup = "general" | "moderated" | "unmoderated" | "consultation";
+
 export type TimerPreset = {
   id: string;
   /** Shown next to the committee timer for delegates (e.g. GSL 60s). */
   name: string;
   totalSeconds: number;
   perSpeakerMode: boolean;
+  group: TimerPresetGroup;
 };
 
-/** Built-in presets that denote the General Speakers' List (chair speaker-list prompt). */
-export const GSL_TIMER_PRESET_IDS = new Set(["gsl-45", "gsl-60", "gsl-90"]);
+export const TIMER_PRESET_GROUPS: TimerPresetGroup[] = [
+  "general",
+  "moderated",
+  "unmoderated",
+  "consultation",
+];
 
-/** Presets for per-speaker moderated caucus segments (chair speaker-list prompt). */
-export const MODERATED_CAUCUS_TIMER_PRESET_IDS = new Set(["mod-3", "mod-5", "mod-10"]);
+/** Total caucus / consultation lengths, in minutes. */
+export const CAUCUS_DURATION_MINUTES = [5, 10, 15, 20, 25, 30, 35, 40, 45] as const;
+
+/** Built-in presets that denote the General Speakers' List (chair speaker-list prompt). */
+export const GSL_TIMER_PRESET_IDS = new Set<string>();
+
+/** Presets for moderated caucus total time (chair speaker-list prompt). */
+export const MODERATED_CAUCUS_TIMER_PRESET_IDS = new Set(
+  CAUCUS_DURATION_MINUTES.map((minutes) => `mod-${minutes}`)
+);
 
 export function isGslTimerPresetId(id: string): boolean {
   return GSL_TIMER_PRESET_IDS.has(id);
@@ -30,15 +45,27 @@ export function floorLabelLooksLikeGsl(label: string): boolean {
   return /\bgsl\b/i.test(label.trim());
 }
 
+function durationPresets(
+  idPrefix: "mod" | "unmod" | "consult",
+  namePrefix: string,
+  group: TimerPresetGroup
+): TimerPreset[] {
+  return CAUCUS_DURATION_MINUTES.map((minutes) => ({
+    id: `${idPrefix}-${minutes}`,
+    name: `${namePrefix} ${minutes}m`,
+    totalSeconds: minutes * 60,
+    perSpeakerMode: false,
+    group,
+  }));
+}
+
 export const BUILTIN_TIMER_PRESETS: TimerPreset[] = [
-  { id: "gsl-45", name: "GSL 45s", totalSeconds: 45, perSpeakerMode: false },
-  { id: "gsl-60", name: "GSL 60s", totalSeconds: 60, perSpeakerMode: false },
-  { id: "gsl-90", name: "GSL 90s", totalSeconds: 90, perSpeakerMode: false },
-  { id: "yield-30", name: "Yield / right of reply 30s", totalSeconds: 30, perSpeakerMode: false },
-  { id: "point-60", name: "Point of order 60s", totalSeconds: 60, perSpeakerMode: false },
-  { id: "mod-3", name: "Moderated caucus 3m (per speaker)", totalSeconds: 180, perSpeakerMode: true },
-  { id: "mod-5", name: "Moderated caucus 5m (per speaker)", totalSeconds: 300, perSpeakerMode: true },
-  { id: "mod-10", name: "Moderated caucus 10m (per speaker)", totalSeconds: 600, perSpeakerMode: true },
+  { id: "timer-60", name: "60 seconds", totalSeconds: 60, perSpeakerMode: false, group: "general" },
+  { id: "timer-5", name: "5 minutes", totalSeconds: 5 * 60, perSpeakerMode: false, group: "general" },
+  { id: "timer-10", name: "10 minutes", totalSeconds: 10 * 60, perSpeakerMode: false, group: "general" },
+  ...durationPresets("mod", "Moderated caucus", "moderated"),
+  ...durationPresets("unmod", "Unmoderated caucus", "unmoderated"),
+  ...durationPresets("consult", "Consultation of the whole", "consultation"),
 ];
 
 export function presetToTimerFields(p: TimerPreset): {

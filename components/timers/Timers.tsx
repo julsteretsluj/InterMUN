@@ -5,6 +5,7 @@
 
 import { Clock } from "lucide-react";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
+import { useSpeakerQueueLabels } from "@/lib/use-speaker-queue-labels";
 import { useTranslations } from "next-intl";
 
 type TimerTheme = "dark" | "light";
@@ -24,6 +25,7 @@ export function Timers({
     conferenceId,
     activeVoteItemId
   );
+  const { currentLabel: queueCurrent, nextLabel: queueNext } = useSpeakerQueueLabels(conferenceId);
 
   if (!conferenceId) return null;
 
@@ -42,6 +44,8 @@ export function Timers({
 
   const floorLabel = timer.floor_label?.trim();
   const pauseReason = timer.current_pause_reason?.trim();
+  const currentSpeaker = queueCurrent?.trim() || timer.current_speaker?.trim() || t("dash");
+  const nextSpeaker = queueNext?.trim() || timer.next_speaker?.trim() || t("dash");
 
   return (
     <div className={shell}>
@@ -55,11 +59,11 @@ export function Timers({
         ) : null}
         <div>
           <span className={labelCls}>{t("currentSpeaker")}</span>
-          <p className="font-medium">{timer.current_speaker || t("dash")}</p>
+          <p className="font-medium">{currentSpeaker}</p>
         </div>
         <div>
           <span className={labelCls}>{t("nextSpeaker")}</span>
-          <p className="font-medium">{timer.next_speaker || t("dash")}</p>
+          <p className="font-medium">{nextSpeaker}</p>
         </div>
         <div>
           <span className={labelCls}>

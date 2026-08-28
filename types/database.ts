@@ -94,6 +94,8 @@ export interface AwardAssignment {
   notes: string | null;
   /** Per-criterion 1–8 scores (SEAMUN bands); null or omitted for committee-scoped assignments / legacy rows. */
   rubric_scores?: Record<string, number> | null;
+  /** Linked resolution when this row is Best Resolution. */
+  resolution_id?: string | null;
   sort_order: number;
   created_by: string | null;
   created_at: string;
@@ -108,6 +110,10 @@ export interface Resolution {
   co_submitters: string[];
   signatories: string[];
   visible_to_other_bloc: boolean;
+  status?: string | null;
+  finalized_at?: string | null;
+  forwarded_to_smt_at?: string | null;
+  forwarded_to_smt_by?: string | null;
   created_at: string;
   updated_at: string;
 }

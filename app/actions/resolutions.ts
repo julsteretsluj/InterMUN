@@ -6,13 +6,15 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { nextClauseNumber } from "@/lib/resolution-functions";
+import { nextClauseNumber, resolutionSmtForwardGaps, isResolutionReadyToForwardToSmt } from "@/lib/resolution-functions";
 import { isGoogleDocsDocumentUrl } from "@/lib/google-docs-embed";
 import {
   extractOperativeClauses,
   fetchGoogleDocText,
   GoogleDocNotPublicError,
 } from "@/lib/resolution-doc-clauses";
+import { getChamberScope } from "@/lib/chamber-scope";
+import { fetchScorableDelegatesForCommittee } from "@/lib/seated-delegates-for-awards";
 import nodemailer from "nodemailer";
 
 type BlocStance = "for" | "against" | "neutral";
@@ -656,5 +658,121 @@ export async function emailResolutionToDelegateAction(input: {
   }
 
   return { ok: true, data: { resolutionId: input.resolutionId, targetEmail: to } };
+}
+
+/**
+ * Chair forwards every complete finalized resolution in this chamber to secretariat
+ * for Best Resolution review. Incomplete drafts stay with the dais.
+ */
+export async function forwardCompleteResolutionsToSmtAction(input: {
+  conferenceId: string;
+}): Promise<ActionResult<{ forwarded: number; alreadyForwarded: number; incomplete: number }>> {
+  const auth = await getAuthContext();
+  if (!auth.user || !isStaff(auth.role)) {
+    return { ok: false, error: "Only chairs can forward resolutions to secretariat." };
+  }
+  if (!isUuid(input.conferenceId)) return { ok: false, error: "Invalid conference id." };
+
+  const scope = await getChamberScope(auth.supabase, input.conferenceId);
+  const siblingIds = scope.siblingConferenceIds;
+  const seated = await fetchScorableDelegatesForCommittee(auth.supabase, siblingIds);
+  const seatedCount = seated.length;
+
+  const { data: rows, error: readErr } = await auth.supabase
+    .from("resolutions")
+    .select(
+      "id, conference_id, google_docs_url, main_submitters, co_submitters, signatories, status, forwarded_to_smt_at"
+    )
+    .in("conference_id", siblingIds);
+  if (readErr) return { ok: false, error: readErr.message };
+
+  const resolutions = rows ?? [];
+  const ids = resolutions.map((r) => r.id);
+  const clauseCountById = new Map<string, number>();
+  if (ids.length > 0) {
+    const { data: clauseRows, error: clauseErr } = await auth.supabase
+      .from("resolution_clauses")
+      .select("id, resolution_id")
+      .in("resolution_id", ids);
+    if (clauseErr) return { ok: false, error: clauseErr.message };
+    for (const row of clauseRows ?? []) {
+      clauseCountById.set(row.resolution_id, (clauseCountById.get(row.resolution_id) ?? 0) + 1);
+    }
+  }
+
+  const readyIds: string[] = [];
+  let alreadyForwarded = 0;
+  let incomplete = 0;
+  for (const r of resolutions) {
+    if (r.forwarded_to_smt_at) {
+      alreadyForwarded += 1;
+      continue;
+    }
+    const gaps = resolutionSmtForwardGaps({
+      status: r.status,
+      googleDocsUrl: r.google_docs_url,
+      clauseCount: clauseCountById.get(r.id) ?? 0,
+      mainSubmitterCount: (r.main_submitters ?? []).filter(Boolean).length,
+      coSubmitterCount: (r.co_submitters ?? []).filter(Boolean).length,
+      signatoryCount: (r.signatories ?? []).filter(Boolean).length,
+      seatedCount,
+    });
+    if (!isResolutionReadyToForwardToSmt(gaps)) {
+      incomplete += 1;
+      continue;
+    }
+    readyIds.push(r.id);
+  }
+
+  if (readyIds.length === 0) {
+    return {
+      ok: false,
+      error:
+        alreadyForwarded > 0 && incomplete === 0
+          ? "All complete resolutions are already with secretariat."
+          : "No complete resolutions to forward. Finalize drafts with a Google Doc, numbered clauses, and full submitter lists first.",
+    };
+  }
+
+  const nowIso = new Date().toISOString();
+  const { error: updErr } = await auth.supabase
+    .from("resolutions")
+    .update({
+      forwarded_to_smt_at: nowIso,
+      forwarded_to_smt_by: auth.user.id,
+      updated_at: nowIso,
+    })
+    .in("id", readyIds);
+  if (updErr) return { ok: false, error: updErr.message };
+
+  const admin = createAdminClient();
+  if (admin) {
+    const { data: smtProfiles } = await admin
+      .from("profiles")
+      .select("id")
+      .in("role", ["smt", "admin"]);
+    const smtIds = (smtProfiles ?? []).map((p) => p.id).filter((id) => id !== auth.user!.id);
+    if (smtIds.length > 0) {
+      const committeeId = scope.canonicalConferenceId;
+      await admin.from("user_notifications").insert(
+        smtIds.map((userId) => ({
+          user_id: userId,
+          conference_id: committeeId,
+          type: "resolutions_forwarded_smt",
+          title: "Resolutions ready for Best Resolution review",
+          body: `${readyIds.length} complete resolution(s) were forwarded by chairs.`,
+          href: "/smt/awards",
+          reference_id: readyIds[0],
+        }))
+      );
+    }
+  }
+
+  revalidatePath("/resolutions");
+  revalidatePath("/smt/awards");
+  return {
+    ok: true,
+    data: { forwarded: readyIds.length, alreadyForwarded, incomplete },
+  };
 }
 

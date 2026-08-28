@@ -53,7 +53,7 @@ export function ChairDelegateAvatar({
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full bg-[#119ED3] font-bold text-white ring-2 ring-white/80 dark:ring-zinc-800",
+        "inline-flex shrink-0 items-center justify-center rounded-full bg-[#007AFF] font-bold text-white ring-2 ring-white/80 dark:ring-zinc-800",
         sizeClass,
         className
       )}

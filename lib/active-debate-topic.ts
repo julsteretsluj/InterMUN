@@ -10,6 +10,53 @@ import {
 
 export type DebateTopicOption = { id: string; label: string };
 
+export type ActiveDebateTopicPayload = {
+  topic_conference_id?: string | null;
+  day1_topic_conference_id?: string | null;
+  day2_topic_conference_id?: string | null;
+};
+
+export function parseActiveDebateTopicPayload(raw: unknown): ActiveDebateTopicPayload {
+  if (!raw || typeof raw !== "object") return {};
+  const row = raw as Record<string, unknown>;
+  const asId = (value: unknown) => (typeof value === "string" && value.trim() ? value.trim() : null);
+  return {
+    topic_conference_id: asId(row.topic_conference_id),
+    day1_topic_conference_id: asId(row.day1_topic_conference_id),
+    day2_topic_conference_id: asId(row.day2_topic_conference_id),
+  };
+}
+
+/** Remaining sibling after the first agenda topic — typically the day-2 topic. */
+export function otherTopicIdForDay2(orderedSiblingIds: string[], firstTopicId: string): string | null {
+  const others = orderedSiblingIds.filter((id) => id !== firstTopicId);
+  return others[0] ?? null;
+}
+
+export function resolveAgendaDayTopicIds(input: {
+  topics: { id: string; name: string }[];
+  stored: ActiveDebateTopicPayload;
+  setAgendaFirstTopicName?: string | null;
+}): { day1: string | null; day2: string | null } {
+  const ids = input.topics.map((t) => t.id);
+  const storedDay1 =
+    input.stored.day1_topic_conference_id && ids.includes(input.stored.day1_topic_conference_id)
+      ? input.stored.day1_topic_conference_id
+      : null;
+  const storedDay2 =
+    input.stored.day2_topic_conference_id && ids.includes(input.stored.day2_topic_conference_id)
+      ? input.stored.day2_topic_conference_id
+      : null;
+  if (storedDay1) {
+    return { day1: storedDay1, day2: storedDay2 ?? otherTopicIdForDay2(ids, storedDay1) };
+  }
+  const wanted = input.setAgendaFirstTopicName?.trim() ?? "";
+  if (!wanted) return { day1: null, day2: null };
+  const first = input.topics.find((t) => t.name.trim() === wanted);
+  if (!first) return { day1: null, day2: null };
+  return { day1: first.id, day2: otherTopicIdForDay2(ids, first.id) };
+}
+
 export type ResolvedDebateConferenceBundle = {
   debateConferenceId: string;
   canonicalConferenceId: string;
@@ -44,7 +91,8 @@ export async function getResolvedDebateConferenceBundle(
       .maybeSingle(),
   ]);
 
-  const raw = (syncRow?.payload as { topic_conference_id?: unknown } | null)?.topic_conference_id;
+  const payload = parseActiveDebateTopicPayload(syncRow?.payload);
+  const storedTopicId = payload.topic_conference_id;
 
   const { data: topicRows } = await supabase
     .from("conferences")
@@ -59,7 +107,7 @@ export async function getResolvedDebateConferenceBundle(
     : allRows;
 
   const ensureIds = new Set<string>([activeConferenceId, canonicalConferenceId]);
-  if (typeof raw === "string" && siblings.includes(raw)) ensureIds.add(raw);
+  if (storedTopicId && siblings.includes(storedTopicId)) ensureIds.add(storedTopicId);
   for (const id of ensureIds) {
     if (!alignedRows.some((r) => r.id === id) && siblings.includes(id)) {
       const row = allRows.find((r) => r.id === id);
@@ -74,7 +122,7 @@ export async function getResolvedDebateConferenceBundle(
 
   const safeSiblingIds = alignedRows.map((r) => r.id);
   const siblingSet = new Set(safeSiblingIds.length ? safeSiblingIds : siblings);
-  const storedPick = typeof raw === "string" && siblingSet.has(raw) ? raw : null;
+  const storedPick = storedTopicId && siblingSet.has(storedTopicId) ? storedTopicId : null;
   const picked =
     storedPick ??
     (siblingSet.has(activeConferenceId) ? activeConferenceId : safeSiblingIds[0] ?? activeConferenceId);

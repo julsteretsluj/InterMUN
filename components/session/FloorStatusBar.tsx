@@ -393,6 +393,7 @@ export function FloorStatusBar({
         sessionConferenceId={sessionScopeId}
         activeVoteItemId={activeMotionVoteItemId}
         chairSeesRawTimer={chairSeesRawTimer}
+        showIdleFloorTimer
         theme={theme}
       />
       {sessionMiniControls === "none" ? null : (

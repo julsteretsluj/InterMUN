@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
+import { syncLiveTopicToScheduleDayAction } from "@/app/actions/activeDebateTopic";
 import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
 import { HelpButton } from "@/components/HelpButton";
 import {
@@ -52,6 +53,7 @@ export function ChairScheduledSessionsPanel({
   const chooseDay = useCallback((day: 1 | 2) => {
     setSelectedDay(day);
     writeScheduledSessionsDay(day);
+    void syncLiveTopicToScheduleDayAction(day);
   }, []);
 
   const toggleSound = useCallback(() => {
@@ -83,6 +85,7 @@ export function ChairScheduledSessionsPanel({
       });
       setStartingKey(key);
       startTransition(async () => {
+        await syncLiveTopicToScheduleDayAction(preset.day);
         const res = await startScheduledCommitteeSessionAction({
           conferenceId,
           title: preset.title,

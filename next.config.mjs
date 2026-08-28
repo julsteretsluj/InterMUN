@@ -7,6 +7,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["@splinetool/react-spline", "@splinetool/runtime"],
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.optimization.innerGraph = false;
+    }
+    return config;
+  },
   turbopack: {
     root: path.resolve(__dirname),
   },

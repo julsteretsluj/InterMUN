@@ -444,13 +444,12 @@ export function ChairCommitteeSessionControl({
   return (
     <div className="space-y-8">
       <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 text-brand-navy shadow-sm backdrop-blur-sm md:p-8">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-sans text-lg font-semibold md:text-xl">{t("title")}</h3>
+        <div className="flex items-start justify-between gap-3">
+          <p className="text-sm text-brand-muted">{t("subtitle")}</p>
           <HelpButton title={t("title")}>
             {t("helpStartStop")}
           </HelpButton>
         </div>
-        <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
 
         {showSmtProgressReminder ? (
           <div

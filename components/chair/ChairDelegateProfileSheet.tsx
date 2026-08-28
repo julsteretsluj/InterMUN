@@ -46,7 +46,7 @@ function dash(value: string | null | undefined, fallback: string) {
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-[#C9DDE9] bg-white px-3 py-2.5 dark:border-zinc-700 dark:bg-zinc-900/70">
+    <div className="rounded-xl border border-[#D1D1D6] bg-white px-3 py-2.5 dark:border-zinc-700 dark:bg-zinc-900/70">
       <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</dt>
       <dd className="mt-0.5 text-sm font-semibold text-brand-navy dark:text-zinc-100">{value}</dd>
     </div>
@@ -115,13 +115,13 @@ export function ChairDelegateProfileSheetProvider({ children }: { children: Reac
             <div className="flex flex-wrap gap-2 pt-1">
               <Link
                 href={`/committee-room/person/${selected.userId}`}
-                className="inline-flex items-center justify-center rounded-lg bg-[#17324A] px-3 py-2 text-sm font-medium text-white hover:opacity-95"
+                className="inline-flex items-center justify-center rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-medium text-white hover:opacity-95"
               >
                 {t("openFullProfile")}
               </Link>
               <Link
                 href={`/chats-notes?forProfile=${encodeURIComponent(selected.userId)}`}
-                className="inline-flex items-center justify-center rounded-lg border border-[#C9DDE9] bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[#DFF2FC]/60 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+                className="inline-flex items-center justify-center rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[#F2F2F7]/60 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
               >
                 {t("openChat")}
               </Link>
