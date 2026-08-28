@@ -26,6 +26,7 @@ import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
 import { MarketingEmph } from "@/components/marketing/MarketingEmph";
+import { MarketingGlassOrbs } from "@/components/marketing/MarketingGlassOrbs";
 import { MarketingHeroSpline } from "@/components/marketing/MarketingHeroSpline";
 import { MarketingOriginMap } from "@/components/marketing/MarketingOriginMap";
 import { getPartnershipContactEmail } from "@/lib/branding";
@@ -322,9 +323,8 @@ export async function MarketingHome() {
   return (
     <>
       <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-28">
-        <div className="pointer-events-none absolute -left-20 bottom-4 h-64 w-64 rounded-[45%_55%_50%_50%] bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -right-16 top-10 h-72 w-72 rounded-[60%_40%_55%_45%] bg-[color-mix(in_srgb,var(--accent-bright)_18%,transparent)] blur-3xl" aria-hidden />
-        <div className="mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-14">
+        <MarketingGlassOrbs variant="hero" />
+        <div className="relative z-[1] mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-14">
           <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-16">
             <div className="mun-marketing-hero-copy mun-animate-rise order-2 lg:order-1 lg:pt-6">
               <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
@@ -368,8 +368,9 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="how-it-works" className="scroll-mt-24 border-b border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-20 md:py-28">
-        <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
+      <section id="how-it-works" className="relative scroll-mt-24 overflow-hidden border-b border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-20 md:py-28">
+        <MarketingGlassOrbs variant="steps" />
+        <div className="relative mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
           <div className="mun-animate-rise max-w-xl md:ml-4">
             <p className="mun-marketing-eyebrow">{t("steps.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("steps.title")}</h2>
@@ -440,8 +441,9 @@ export async function MarketingHome() {
         </section>
       </section>
 
-      <section id="origin" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-24">
-        <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
+      <section id="origin" className="mun-marketing-surface relative scroll-mt-24 overflow-hidden border-t border-[var(--hairline)] py-16 md:py-24">
+        <MarketingGlassOrbs variant="origin" />
+        <div className="relative mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
           <div className="max-w-2xl">
             <p className="mun-marketing-eyebrow">{t("origin.eyebrow")}</p>
             <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("origin.title")}</h2>
@@ -476,8 +478,9 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="contact" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-24">
-        <div className="mx-auto max-w-3xl px-4 md:px-6">
+      <section id="contact" className="mun-marketing-surface relative scroll-mt-24 overflow-hidden border-t border-[var(--hairline)] py-16 md:py-24">
+        <MarketingGlassOrbs variant="contact" />
+        <div className="relative mx-auto max-w-3xl px-4 md:px-6">
           <div className="mun-marketing-contact-card">
             <div className="text-center">
               <p className="mun-marketing-eyebrow">{t("contact.eyebrow")}</p>
@@ -510,8 +513,9 @@ export async function MarketingHome() {
       </section>
 
       <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-24">
+        <MarketingGlassOrbs variant="footer" />
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
+        <div className="relative mx-auto max-w-3xl px-4 text-center md:px-6">
           <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
           <h2 className="mun-display mt-3 text-3xl md:text-4xl">
             {t("footer.ctaTitle")}{" "}

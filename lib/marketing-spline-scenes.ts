@@ -11,3 +11,14 @@ export const MARKETING_HERO_SPLINE_SCENE =
  */
 export const MARKETING_ORIGIN_GLOBE_SPLINE_SCENE =
   process.env.NEXT_PUBLIC_MARKETING_ORIGIN_GLOBE_SPLINE_SCENE ?? "";
+
+/**
+ * Glass orb accent — frosted circle scene for ambient marketing decoration.
+ * Set `NEXT_PUBLIC_MARKETING_GLASS_ORB_SPLINE_SCENE` when the Spline export is ready.
+ */
+export const MARKETING_GLASS_ORB_SPLINE_SCENE =
+  process.env.NEXT_PUBLIC_MARKETING_GLASS_ORB_SPLINE_SCENE ?? "";
+
+/** Floating marketing clock — shown on every marketing page. */
+export const MARKETING_CLOCK_SPLINE_SCENE =
+  "https://prod.spline.design/j4sVMI8xFPsxYls3/scene.splinecode";

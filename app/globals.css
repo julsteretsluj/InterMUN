@@ -1783,6 +1783,223 @@ html.colorblind-mode .schedule-swatch-session {
   opacity: 1;
 }
 
+.marketing-shell .mun-marketing-glass-orb {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  animation: mun-marketing-float 9s var(--ease-apple-out) infinite;
+  will-change: transform;
+}
+
+.marketing-shell .mun-marketing-glass-orb.mun-marketing-spline-interactive {
+  pointer-events: auto;
+}
+
+.marketing-shell .mun-marketing-glass-orb--sm {
+  width: min(18vw, 5.5rem);
+  height: min(18vw, 5.5rem);
+}
+
+.marketing-shell .mun-marketing-glass-orb--md {
+  width: min(24vw, 8rem);
+  height: min(24vw, 8rem);
+}
+
+.marketing-shell .mun-marketing-glass-orb--lg {
+  width: min(32vw, 11rem);
+  height: min(32vw, 11rem);
+}
+
+.marketing-shell .mun-marketing-glass-orb--xl {
+  width: min(40vw, 14rem);
+  height: min(40vw, 14rem);
+}
+
+.marketing-shell .mun-marketing-glass-orb-shell {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  box-shadow:
+    var(--apple-material-shadow),
+    0 20px 40px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.marketing-shell .mun-marketing-glass-orb-shell canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.marketing-shell .mun-marketing-glass-orb-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 32% 28%, color-mix(in srgb, #ffffff 82%, transparent), transparent 58%),
+    radial-gradient(circle at 68% 72%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 62%),
+    color-mix(in srgb, var(--marketing-glass-fill) 72%, transparent);
+}
+
+.marketing-shell .mun-marketing-glass-orb-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, #ffffff 70%, transparent) 0%,
+    transparent 42%,
+    transparent 68%,
+    color-mix(in srgb, var(--accent-bright) 12%, transparent) 100%
+  );
+  opacity: 0.45;
+}
+
+.marketing-shell .mun-marketing-glass-orb--hero-tr {
+  right: -2.5rem;
+  top: 0.5rem;
+}
+
+.marketing-shell .mun-marketing-glass-orb--hero-bl {
+  left: -3rem;
+  bottom: 2rem;
+}
+
+.marketing-shell .mun-marketing-glass-orb--steps-r {
+  right: -1.5rem;
+  top: 18%;
+}
+
+.marketing-shell .mun-marketing-glass-orb--origin-l {
+  left: -1rem;
+  top: 12%;
+}
+
+.marketing-shell .mun-marketing-glass-orb--contact-r {
+  right: -1.25rem;
+  bottom: 10%;
+}
+
+.marketing-shell .mun-marketing-glass-orb--footer-l {
+  left: -2rem;
+  top: 22%;
+}
+
+.marketing-shell .mun-marketing-glass-orb--footer-r {
+  right: -1rem;
+  bottom: 18%;
+}
+
+.marketing-shell .mun-marketing-clock {
+  pointer-events: auto;
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  z-index: 25;
+  width: min(28vw, 6.5rem);
+  height: min(28vw, 6.5rem);
+}
+
+.marketing-shell .mun-marketing-clock-glass {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0.4rem;
+  border-radius: 1.25rem;
+  box-shadow:
+    var(--apple-material-shadow),
+    0 16px 36px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.marketing-shell .mun-marketing-clock-inner {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--marketing-glass-fill) 36%, transparent);
+}
+
+.marketing-shell .mun-marketing-clock-inner canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.marketing-shell .mun-marketing-clock-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #ffffff 68%, transparent) 0%,
+    transparent 40%,
+    transparent 64%,
+    color-mix(in srgb, var(--accent) 10%, transparent) 100%
+  );
+  opacity: 0.38;
+}
+
+.marketing-shell .mun-marketing-clock-edge {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 var(--apple-material-border-highlight),
+    inset 0 -0.5px 0 var(--apple-material-border-edge);
+}
+
+@media (min-width: 768px) {
+  .marketing-shell .mun-marketing-clock {
+    right: max(1.5rem, env(safe-area-inset-right, 0px));
+    bottom: max(1.75rem, env(safe-area-inset-bottom, 0px));
+    width: min(22vw, 8.5rem);
+    height: min(22vw, 8.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .marketing-shell .mun-marketing-clock {
+    width: 9.5rem;
+    height: 9.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .marketing-shell .mun-marketing-glass-orb--hero-tr {
+    right: 1.5rem;
+    top: 1.5rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--hero-bl {
+    left: 0.5rem;
+    bottom: 4rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--steps-r {
+    right: 2rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--origin-l {
+    left: 1.5rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--contact-r {
+    right: 1.5rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--footer-l {
+    left: 2rem;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb--footer-r {
+    right: 2rem;
+  }
+}
+
 .marketing-shell .mun-marketing-hero-spline {
   position: relative;
   width: 100%;
@@ -1885,6 +2102,10 @@ html.colorblind-mode .schedule-swatch-session {
 
   .marketing-shell .mun-marketing-spline-hint {
     opacity: 1;
+  }
+
+  .marketing-shell .mun-marketing-glass-orb {
+    animation: none;
   }
 
   .marketing-shell .mun-gate-card:hover,
