@@ -5,8 +5,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import Spline from "@splinetool/react-spline/next";
 import { MARKETING_ORIGIN_GLOBE_SPLINE_SCENE } from "@/lib/marketing-spline-scenes";
+import { MarketingSplineScene } from "@/components/marketing/MarketingSplineScene";
 import { cn } from "@/lib/utils";
 
 export function MarketingOriginGlobe({ className }: { className?: string }) {
@@ -14,7 +14,11 @@ export function MarketingOriginGlobe({ className }: { className?: string }) {
   const hasSplineScene = MARKETING_ORIGIN_GLOBE_SPLINE_SCENE.length > 0;
 
   return (
-    <div className={cn("mun-marketing-origin-globe", className)}>
+    <div
+      className={cn("mun-marketing-origin-globe mun-marketing-spline-interactive", className)}
+      role="group"
+      aria-label="Interactive globe — drag to change perspective"
+    >
       <div className="mun-marketing-origin-globe-glass mun-apple-material mun-apple-material-thin">
         <div className="mun-marketing-origin-globe-inner">
           {!hasSplineScene || !loaded ? (
@@ -38,7 +42,7 @@ export function MarketingOriginGlobe({ className }: { className?: string }) {
                 loaded ? "opacity-100" : "opacity-0"
               )}
             >
-              <Spline
+              <MarketingSplineScene
                 scene={MARKETING_ORIGIN_GLOBE_SPLINE_SCENE}
                 className="h-full w-full"
                 onLoad={() => setLoaded(true)}
@@ -54,6 +58,11 @@ export function MarketingOriginGlobe({ className }: { className?: string }) {
         </div>
         <span className="mun-marketing-origin-globe-shine" aria-hidden />
         <span className="mun-marketing-origin-globe-edge" aria-hidden />
+        {hasSplineScene ? (
+          <span className="mun-marketing-spline-hint" aria-hidden>
+            Drag to explore
+          </span>
+        ) : null}
       </div>
     </div>
   );

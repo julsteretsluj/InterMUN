@@ -287,23 +287,35 @@ export default async function SmtAwardsPage() {
 
     const eventConfIds = rawConfs.map((c) => c.id);
     if (eventConfIds.length > 0) {
+      type SubmittedResolutionRow = {
+        id: string;
+        conference_id: string;
+        google_docs_url: string | null;
+        main_submitters: string[] | null;
+        status: string | null;
+        finalized_at: string | null;
+        forwarded_to_smt_at?: string | null;
+      };
+
       const submittedSelect =
         "id, conference_id, google_docs_url, main_submitters, status, forwarded_to_smt_at, finalized_at";
-      let submittedQuery = await supabase
+      const submittedQuery = await supabase
         .from("resolutions")
         .select(submittedSelect)
         .in("conference_id", eventConfIds);
+      let submittedRows: SubmittedResolutionRow[] = (submittedQuery.data ?? []) as SubmittedResolutionRow[];
       if (
         submittedQuery.error &&
         /forwarded_to_smt_at|schema cache/i.test(String(submittedQuery.error.message ?? ""))
       ) {
-        submittedQuery = await supabase
+        const fallbackQuery = await supabase
           .from("resolutions")
           .select("id, conference_id, google_docs_url, main_submitters, status, finalized_at")
           .in("conference_id", eventConfIds);
+        submittedRows = (fallbackQuery.data ?? []) as SubmittedResolutionRow[];
       }
-      const submittedRows = (submittedQuery.data ?? []).filter((r) => {
-        const forwardedAt = "forwarded_to_smt_at" in r ? (r as { forwarded_to_smt_at?: string | null }).forwarded_to_smt_at : null;
+      submittedRows = submittedRows.filter((r) => {
+        const forwardedAt = r.forwarded_to_smt_at ?? null;
         return (r.status ?? "draft") === "finalized" || Boolean(forwardedAt);
       });
       if (submittedRows.length > 0) {

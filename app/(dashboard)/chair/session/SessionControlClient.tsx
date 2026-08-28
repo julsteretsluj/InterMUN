@@ -3012,9 +3012,7 @@ export function SessionControlClient({
       <section className="space-y-4">
         <div className={`flex items-center gap-3 ${dedicatedPage ? "justify-end" : "justify-between"}`}>
           {dedicatedPage ? null : (
-            <h3 className="font-sans text-lg font-semibold text-brand-navy">
-              {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
-            </h3>
+            <h3 className="font-sans text-lg font-semibold text-brand-navy">{tSessionControl("motionControl")}</h3>
           )}
           <HelpButton
             title={tSessionControl("motionControl")}

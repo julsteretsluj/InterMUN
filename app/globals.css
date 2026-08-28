@@ -1739,6 +1739,50 @@ html.colorblind-mode .schedule-swatch-session {
   height: 100% !important;
 }
 
+.marketing-shell .mun-marketing-spline-interactive {
+  touch-action: none;
+  cursor: grab;
+}
+
+.marketing-shell .mun-marketing-spline-interactive:active {
+  cursor: grabbing;
+}
+
+.marketing-shell .mun-marketing-spline-interactive:hover.mun-marketing-hero-accent,
+.marketing-shell .mun-marketing-spline-interactive:focus-within.mun-marketing-hero-accent {
+  animation-play-state: paused;
+}
+
+.marketing-shell .mun-marketing-spline-canvas,
+.marketing-shell .mun-marketing-spline-canvas canvas {
+  touch-action: none;
+}
+
+.marketing-shell .mun-marketing-spline-hint {
+  pointer-events: none;
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 4;
+  border-radius: 999px;
+  border: 1px solid var(--marketing-glass-line);
+  background: color-mix(in srgb, var(--marketing-glass-fill-strong) 88%, transparent);
+  padding: 0.3rem 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--apple-label-secondary);
+  opacity: 0;
+  backdrop-filter: blur(12px) saturate(1.2);
+  transition: opacity var(--dur-base) var(--ease-apple-out);
+}
+
+.marketing-shell .mun-marketing-spline-interactive:hover .mun-marketing-spline-hint,
+.marketing-shell .mun-marketing-spline-interactive:focus-within .mun-marketing-spline-hint {
+  opacity: 1;
+}
+
 .marketing-shell .mun-marketing-hero-spline {
   position: relative;
   width: 100%;
@@ -1837,6 +1881,10 @@ html.colorblind-mode .schedule-swatch-session {
   .marketing-shell .mun-marketing-hero-preview,
   .marketing-shell .mun-marketing-hero-accent {
     animation: none;
+  }
+
+  .marketing-shell .mun-marketing-spline-hint {
+    opacity: 1;
   }
 
   .marketing-shell .mun-gate-card:hover,
