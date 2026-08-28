@@ -5032,8 +5032,9 @@
     "origin": {
       "eyebrow": "Our roots",
       "title": "Where it began",
-      "tooltip": "This project originated in Thailand",
-      "mapAria": "Stylized map with a pin on Thailand"
+      "location": "Bangkok, Thailand",
+      "tooltip": "InterMUN started here in Bangkok — where the first committees were run on this platform.",
+      "mapAria": "Interactive globe highlighting Bangkok, Thailand"
     },
     "contact": {
       "eyebrow": "Get in touch",

@@ -4,9 +4,10 @@
 "use client";
 
 import Spline from "@splinetool/react-spline/next";
+import { MARKETING_HERO_SPLINE_SCENE } from "@/lib/marketing-spline-scenes";
 import { cn } from "@/lib/utils";
 
-const HERO_SPLINE_SCENE = "https://prod.spline.design/NhFmyOJD6c4fCNht/scene.splinecode";
+const HERO_SPLINE_SCENE = MARKETING_HERO_SPLINE_SCENE;
 
 export function MarketingHeroSpline({ className }: { className?: string }) {
   return (

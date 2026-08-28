@@ -2363,6 +2363,86 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   box-shadow: var(--marketing-float-shadow);
 }
 
+.marketing-shell .mun-marketing-origin-globe {
+  position: relative;
+  width: 100%;
+}
+
+.marketing-shell .mun-marketing-origin-globe-glass {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--apple-material-shadow);
+}
+
+.marketing-shell .mun-marketing-origin-globe-inner {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 1.125rem;
+  background: color-mix(in srgb, var(--marketing-glass-fill) 40%, transparent);
+}
+
+.marketing-shell .mun-marketing-origin-globe-inner canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.marketing-shell .mun-marketing-origin-globe-loading {
+  pointer-events: none;
+  position: absolute;
+  inset: auto 0 0.75rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--apple-label-tertiary);
+}
+
+.marketing-shell .mun-marketing-origin-globe-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #ffffff 68%, transparent) 0%,
+    transparent 42%,
+    transparent 64%,
+    color-mix(in srgb, var(--accent) 8%, transparent) 100%
+  );
+  opacity: 0.36;
+}
+
+.marketing-shell .mun-marketing-origin-globe-edge {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 var(--apple-material-border-highlight),
+    inset 0 -0.5px 0 var(--apple-material-border-edge);
+}
+
+.marketing-shell .mun-marketing-origin-location-label {
+  font-family: var(--apple-font-ui);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--brand-navy);
+}
+
+.marketing-shell .mun-marketing-origin-location-mobile {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--brand-navy);
+}
+
 /* Extra .mun-apple-site selector outranks the generic
    `.mun-apple-site header[class*="border-b"]` material override, which would
    otherwise repaint this header with theme materials. */

@@ -5097,7 +5097,8 @@
       "eyebrow": "Our roots",
       "title": "Where it began",
       "tooltip": "This project originated in Thailand",
-      "mapAria": "Stylized map with a pin on Thailand"
+      "mapAria": "Stylized map with a pin on Thailand",
+      "location": "Bangkok, Thailand"
     }
   },
   "notFoundPage": {
