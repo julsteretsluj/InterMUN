@@ -1,8 +1,9 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-/** Marketing hero — local MacBook GLTF. */
-export const MARKETING_HERO_MACBOOK_GLTF = "/marketing/mac_book.gltf";
+/** Marketing hero — MacBook Spline scene. */
+export const MARKETING_HERO_SPLINE_SCENE =
+  "https://prod.spline.design/ymkEOWPrRwhS5V88/scene.splinecode";
 
 /**
  * Origin globe — export from Spline and paste the public scene URL here.

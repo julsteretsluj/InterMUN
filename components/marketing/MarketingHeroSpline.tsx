@@ -3,43 +3,13 @@
 
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { MARKETING_HERO_SPLINE_SCENE } from "@/lib/marketing-spline-scenes";
+import { MarketingSplineScene } from "@/components/marketing/MarketingSplineScene";
 import { cn } from "@/lib/utils";
 
-const MarketingHeroMacBookCanvas = dynamic(
-  () =>
-    import("@/components/marketing/MarketingHeroMacBookCanvas").then(
-      (mod) => mod.MarketingHeroMacBookCanvas
-    ),
-  { ssr: false }
-);
-
 export function MarketingHeroSpline({ className }: { className?: string }) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = rootRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "140px" }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div
-      ref={rootRef}
       className={cn(
         "mun-marketing-hero-spline mun-marketing-hero-accent mun-marketing-spline-interactive",
         className
@@ -49,7 +19,7 @@ export function MarketingHeroSpline({ className }: { className?: string }) {
     >
       <div className="mun-marketing-hero-spline-glass mun-apple-material mun-apple-material-thin">
         <div className="mun-marketing-hero-spline-inner">
-          {visible ? <MarketingHeroMacBookCanvas className="h-full w-full" /> : null}
+          <MarketingSplineScene scene={MARKETING_HERO_SPLINE_SCENE} className="h-full w-full" lazy />
         </div>
         <span className="mun-marketing-hero-spline-shine" aria-hidden />
         <span className="mun-marketing-hero-spline-edge" aria-hidden />
