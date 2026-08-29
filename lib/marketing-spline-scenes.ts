@@ -1,9 +1,8 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-/** Marketing hero — glass device scene. */
-export const MARKETING_HERO_SPLINE_SCENE =
-  "https://prod.spline.design/NhFmyOJD6c4fCNht/scene.splinecode";
+/** Marketing hero — local MacBook GLTF. */
+export const MARKETING_HERO_MACBOOK_GLTF = "/marketing/mac_book.gltf";
 
 /**
  * Origin globe — export from Spline and paste the public scene URL here.
@@ -11,7 +10,3 @@ export const MARKETING_HERO_SPLINE_SCENE =
  */
 export const MARKETING_ORIGIN_GLOBE_SPLINE_SCENE =
   process.env.NEXT_PUBLIC_MARKETING_ORIGIN_GLOBE_SPLINE_SCENE ?? "";
-
-/** Floating marketing clock — shown on every marketing page. */
-export const MARKETING_CLOCK_SPLINE_SCENE =
-  "https://prod.spline.design/j4sVMI8xFPsxYls3/scene.splinecode";

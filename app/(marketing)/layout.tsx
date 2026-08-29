@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
-import { MarketingClockSpline } from "@/components/marketing/MarketingClockSpline";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
 import { openingOrbUrl } from "@/lib/opening-orb";
 import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
@@ -59,7 +58,6 @@ export default async function MarketingLayout({
           {children}
         </AppleLayoutWrapper>
       </main>
-      <MarketingClockSpline />
       <MarketingSiteFooter />
     </div>
   );
