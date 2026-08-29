@@ -6,7 +6,7 @@
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import Spline from "@splinetool/react-spline";
 import type { Application } from "@splinetool/runtime";
-import { enableMarketingSplineControls } from "@/lib/marketing-spline-interaction";
+import { enableMarketingSplineControls, hideMarketingSplineWatermark } from "@/lib/marketing-spline-interaction";
 import { cn } from "@/lib/utils";
 
 class SplineErrorBoundary extends Component<
@@ -69,6 +69,7 @@ export function MarketingSplineScene({
             scene={scene}
             className="h-full w-full"
             onLoad={(app) => {
+              hideMarketingSplineWatermark(app);
               enableMarketingSplineControls(app);
               onLoad?.(app);
             }}
