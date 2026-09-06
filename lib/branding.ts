@@ -7,16 +7,10 @@
  */
 
 /** Dark-mode white gavel-and-ring emblem (`public/intermun-emblem.png`). Tab icons: `app/icon.png` / `app/apple-icon.png`. */
-export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png?v=4";
+export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png?v=5";
 
 /** Light-mode gavel-and-ring emblem — synced from `app/lightintermun.PNG` (transparent PNG). */
-export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png?v=4";
-
-/** Dark-mode horizontal wordmark — gavel + intermun.site (`public/intermun-wordmark-dark.png`). */
-export const INTERMUN_WORDMARK_DARK_PATH = "/intermun-wordmark-dark.png?v=1";
-
-/** Light-mode horizontal wordmark — navy gavel + intermun.site (`public/intermun-wordmark-light.png`). */
-export const INTERMUN_WORDMARK_LIGHT_PATH = "/intermun-wordmark-light.png?v=1";
+export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png?v=5";
 
 export function getAppName(): string {
   return process.env.NEXT_PUBLIC_APP_NAME?.trim() || "InterMUN";

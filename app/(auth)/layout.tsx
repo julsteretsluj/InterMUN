@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
-import { getAppName, getAppTagline } from "@/lib/branding";
+import { BrandWordmark } from "@/components/BrandWordmark";
+import { getAppTagline } from "@/lib/branding";
 import { openingOrbUrl } from "@/lib/opening-orb";
 
 export default async function AuthLayout({
@@ -12,7 +13,6 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations("authWizard");
-  const appName = getAppName();
   const tagline = getAppTagline();
 
   return (
@@ -27,7 +27,9 @@ export default async function AuthLayout({
           <div className="relative z-[1] flex flex-1 flex-col justify-between">
             <div>
               <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
-              <h1 className="mun-seamun-brand-title mt-5 text-white">{appName}</h1>
+              <h1 className="mun-seamun-brand-title mt-5">
+                <BrandWordmark variant="wordmark" surface="dark" size="hero" align="start" />
+              </h1>
               <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
               <ul className="mt-10 space-y-3 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white/80">
                 <li className="flex items-center gap-3">

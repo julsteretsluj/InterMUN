@@ -2,16 +2,16 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { PublicPageControls } from "@/components/PublicPageControls";
-import { getAppName, getAppTagline } from "@/lib/branding";
+import { BrandWordmark } from "@/components/BrandWordmark";
+import { getAppTagline } from "@/lib/branding";
 
 type AppleGateLayoutProps = {
   children: React.ReactNode;
   title?: string;
 };
 
-export async function AppleGateLayout({ children, title }: AppleGateLayoutProps) {
+export async function AppleGateLayout({ children }: AppleGateLayoutProps) {
   const t = await getTranslations("authWizard");
-  const appName = getAppName();
   const tagline = getAppTagline();
 
   return (
@@ -24,8 +24,8 @@ export async function AppleGateLayout({ children, title }: AppleGateLayoutProps)
         <div className="relative z-[1] flex flex-1 flex-col justify-between">
           <div>
             <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
-            <h1 className="mun-seamun-brand-title mt-5 text-white">
-              {typeof title === "string" ? title : appName}
+            <h1 className="mun-seamun-brand-title mt-5">
+              <BrandWordmark variant="wordmark" surface="dark" size="hero" align="start" />
             </h1>
             <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
           </div>

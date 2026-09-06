@@ -45,24 +45,32 @@ export function InterMunEmblem({
   className?: string;
   /** Use `alt=""` when a visible “InterMUN” label sits next to the image. */
   alt?: string;
-  /** Auth/gate forms stay light even when the site theme is dark. */
-  surface?: "theme" | "light";
+  /** Auth/gate forms stay light even when the site theme is dark. Brand panels use dark. */
+  surface?: "theme" | "light" | "dark";
 }) {
   const sized = emblemClasses(className);
   const forceLight = surface === "light";
+  const forceDark = surface === "dark";
   return (
     <>
-      <span
-        className={cn(
-          "inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none",
-          !forceLight && "dark:hidden"
-        )}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
-        <img src={INTERMUN_EMBLEM_LIGHT_PATH} alt={alt} className={sized} decoding="async" />
-      </span>
+      {!forceDark ? (
+        <span
+          className={cn(
+            "inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none",
+            !forceLight && "dark:hidden"
+          )}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
+          <img src={INTERMUN_EMBLEM_LIGHT_PATH} alt={alt} className={sized} decoding="async" />
+        </span>
+      ) : null}
       {!forceLight ? (
-        <span className="hidden max-w-full shrink-0 items-center justify-center overflow-visible leading-none dark:inline-flex">
+        <span
+          className={cn(
+            "max-w-full shrink-0 items-center justify-center overflow-visible leading-none",
+            forceDark ? "inline-flex" : "hidden dark:inline-flex"
+          )}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
           <img src={INTERMUN_EMBLEM_PATH} alt={alt} className={sized} decoding="async" />
         </span>

@@ -203,6 +203,9 @@ html {
   /* Mix with ink so links stay ≥4.5:1 on gray for every theme hue, including custom accents. */
   --accent-text: color-mix(in srgb, var(--accent) 48%, var(--color-text));
   --accent-fill: color-mix(in srgb, var(--accent) 82%, #000000);
+  /* Wordmark gradient — darkened so orange/pink hold ≥4.5:1 on white and #F2F2F7. */
+  --mun-wordmark-gradient: linear-gradient(90deg, #c2410c 0%, #be185d 36%, #6b21a8 68%, #1d4ed8 100%);
+  --mun-wordmark-suffix: #58585c;
 
   /* —— BORDER / LINE —— */
   --color-border: var(--hairline);
@@ -360,6 +363,9 @@ html.dark {
   --brand-accent-ink: var(--color-text);
   --accent-text: color-mix(in srgb, var(--accent) 48%, var(--color-text));
   --accent-fill: color-mix(in srgb, var(--accent) 82%, #000000);
+  /* Bright wordmark stops — ≥3:1 (logo) / suffix ≥4.5:1 on charcoal and navy panels. */
+  --mun-wordmark-gradient: linear-gradient(90deg, #ff9f5a 0%, #ff7ab0 36%, #d8a5ff 68%, #7dc4ff 100%);
+  --mun-wordmark-suffix: #d1d1d6;
 
   --color-border: var(--hairline);
   --color-border-strong: var(--hairline-strong);
@@ -8709,6 +8715,35 @@ html.dark .mun-apple-window-sidebar {
   letter-spacing: 0;
   line-height: 1.15;
   color: #ffffff;
+}
+
+.mun-brand-wordmark-light {
+  --mun-wordmark-gradient: linear-gradient(90deg, #c2410c 0%, #be185d 36%, #6b21a8 68%, #1d4ed8 100%);
+  --mun-wordmark-suffix: #58585c;
+}
+
+.mun-brand-wordmark-dark {
+  --mun-wordmark-gradient: linear-gradient(90deg, #ff9f5a 0%, #ff7ab0 36%, #d8a5ff 68%, #7dc4ff 100%);
+  --mun-wordmark-suffix: #e5e5ea;
+}
+
+.mun-brand-word {
+  font-family: var(--apple-font-ui, var(--font-sans));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background-image: var(--mun-wordmark-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.mun-brand-word-suffix {
+  font-family: var(--apple-font-ui, var(--font-sans));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--mun-wordmark-suffix);
+  -webkit-text-fill-color: var(--mun-wordmark-suffix);
 }
 
 .mun-seamun-form-panel {
