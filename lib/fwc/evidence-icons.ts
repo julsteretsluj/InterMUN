@@ -32,6 +32,10 @@ export const FWC_EVIDENCE_ICONS: Record<string, string> = {
   "EVD-24": "/fwc/evidence/evd-24.jpg",
   "EVD-25": "/fwc/evidence/evd-25.jpg",
   "EVD-26": "/fwc/evidence/evd-26.jpg",
+  "EVD-27": "/fwc/evidence/evd-27.jpg",
+  "EVD-28": "/fwc/evidence/evd-28.jpg",
+  "EVD-29": "/fwc/evidence/evd-29.jpg",
+  "EVD-30": "/fwc/evidence/evd-30.jpg",
 };
 
 function normalizeEvidenceSlug(slug: string): string {
