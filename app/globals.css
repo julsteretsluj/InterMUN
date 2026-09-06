@@ -77,6 +77,7 @@ html {
 
   /* —— Apple system colors (light / sRGB — HIG) —— */
   --system-red: #ff3b30;
+  --system-red-fill: color-mix(in srgb, var(--system-red) 84%, #000000);
   --system-orange: #ff9500;
   --system-yellow: #ffcc00;
   --system-green: #34c759;
@@ -102,7 +103,7 @@ html {
   --apple-bg-tertiary: #e5e5ea;
   --apple-bg-elevated: #ffffff;
   --apple-label: #1d1d1f;
-  --apple-label-secondary: #6e6e73;
+  --apple-label-secondary: #58585c;
   --apple-label-tertiary: #aeaeb2;
   --apple-label-quaternary: rgba(60, 60, 67, 0.18);
   --apple-fill: rgba(120, 120, 128, 0.2);
@@ -175,8 +176,6 @@ html {
   /* —— ACCENT (seamun.com Apple blue; theme hue may override) —— */
   --accent: #007aff;
   --accent-bright: #0077ed;
-  /* Readable accent for body/link text on gray & white (≥4.5:1) */
-  --accent-text: #0071e3;
   /* Emphasis copy — follows active theme hue instead of fixed gold */
   --gold-text: color-mix(in srgb, var(--accent) 88%, var(--color-text));
   --gold-text-bright: var(--accent-bright);
@@ -195,11 +194,15 @@ html {
 
   /* —— TEXT —— */
   --color-text: #1d1d1f;
-  --color-text-secondary: #6e6e73;
-  --color-text-muted: #6e6e73;
+  /* Darker than Apple #6E6E73 so body copy holds 4.5:1 on grouped gray #F2F2F7 / #E5E5EA. */
+  --color-text-secondary: #58585c;
+  --color-text-muted: #58585c;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
+  /* Mix with ink so links stay ≥4.5:1 on gray for every theme hue, including custom accents. */
+  --accent-text: color-mix(in srgb, var(--accent) 48%, var(--color-text));
+  --accent-fill: color-mix(in srgb, var(--accent) 82%, #000000);
 
   /* —— BORDER / LINE —— */
   --color-border: var(--hairline);
@@ -253,6 +256,7 @@ html.text-size-large {
 html.dark {
   /* —— Apple system colors (dark / sRGB — HIG) —— */
   --system-red: #ff453a;
+  --system-red-fill: color-mix(in srgb, var(--system-red) 84%, #000000);
   --system-orange: #ff9f0a;
   --system-yellow: #ffd60a;
   --system-green: #30d158;
@@ -277,7 +281,7 @@ html.dark {
   --apple-bg-tertiary: #1a2436;
   --apple-bg-elevated: #162033;
   --apple-label: #ffffff;
-  --apple-label-secondary: rgba(235, 235, 245, 0.6);
+  --apple-label-secondary: rgba(235, 235, 245, 0.78);
   --apple-label-tertiary: rgba(235, 235, 245, 0.3);
   --apple-label-quaternary: rgba(235, 235, 245, 0.18);
   --apple-fill: rgba(120, 120, 128, 0.36);
@@ -350,10 +354,12 @@ html.dark {
 
   --color-text: #f2f2f7;
   --color-text-secondary: #d1d1d6;
-  --color-text-muted: #8e8e93;
+  --color-text-muted: #aeaeb2;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
+  --accent-text: color-mix(in srgb, var(--accent) 48%, var(--color-text));
+  --accent-fill: color-mix(in srgb, var(--accent) 82%, #000000);
 
   --color-border: var(--hairline);
   --color-border-strong: var(--hairline-strong);
@@ -1191,7 +1197,7 @@ html.dark ::selection {
     @apply border border-transparent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-45;
     @apply [border-radius:var(--radius-pill)];
     transition: transform var(--dur-fast) var(--ease-apple-out), color var(--dur-base) var(--ease-apple-out), background-color var(--dur-base) var(--ease-apple-out), box-shadow var(--dur-base) var(--ease-apple-out);
-    background-color: var(--accent);
+    background-color: var(--accent-fill);
     background-image: none;
     box-shadow: none;
   }
@@ -1682,9 +1688,9 @@ html.colorblind-mode .schedule-swatch-session {
   --marketing-chamber-elevated: #ffffff;
   --marketing-chamber-deep: #e5e5ea;
   --marketing-ink: #1d1d1f;
-  --marketing-ink-soft: #6e6e73;
+  --marketing-ink-soft: #58585c;
   --marketing-hairline: #d1d1d6;
-  --marketing-emph: var(--gold-text);
+  --marketing-emph: var(--accent-text);
   --marketing-band-accent: var(--accent);
   --marketing-band-card-bg: rgba(255, 255, 255, 0.88);
   --marketing-band-card-shadow:
@@ -1765,14 +1771,14 @@ html.colorblind-mode .schedule-swatch-session {
   bottom: 0.75rem;
   z-index: 4;
   border-radius: 999px;
-  border: 1px solid var(--marketing-glass-line);
-  background: color-mix(in srgb, var(--marketing-glass-fill-strong) 88%, transparent);
+  border: 1px solid var(--marketing-glass-line-strong);
+  background: var(--marketing-glass-fill-strong);
   padding: 0.3rem 0.65rem;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--apple-label-secondary);
+  color: var(--marketing-ink);
   opacity: 0;
   backdrop-filter: blur(12px) saturate(1.2);
   transition: opacity var(--dur-base) var(--ease-apple-out);
@@ -2104,6 +2110,10 @@ html.colorblind-mode .schedule-swatch-session {
   color: var(--marketing-ink-soft);
 }
 
+.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy p.mun-marketing-eyebrow {
+  color: var(--marketing-emph);
+}
+
 /* The generic `.mun-apple-site h1:not(...):not(...)` rule (specificity 0-3-1)
    paints the hero headline with --apple-label and shrinks it to title-2. Lock
    hero copy to the chamber ink with the intended display sizes; the 0-4-1
@@ -2137,7 +2147,7 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark) .marketing-preview-surface p {
-  color: #71717a;
+  color: #58585c;
 }
 
 .marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark)
@@ -2222,7 +2232,7 @@ html.dark .marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar,
 html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-bar {
   border-bottom-color: rgba(0, 0, 0, 0.08) !important;
   background: #ffffff !important;
-  color: #6e6e73 !important;
+  color: #58585c !important;
 }
 
 html.dark .marketing-shell .mun-chamber-frame-body,
@@ -2242,7 +2252,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
 .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-bar {
   border-bottom-color: rgba(0, 0, 0, 0.08) !important;
   background: #fbfbfd !important;
-  color: #6e6e73 !important;
+  color: #58585c !important;
 }
 
 .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
@@ -2261,7 +2271,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
 .marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview p:not(
   .marketing-session-surface *
 ) {
-  color: #6e6e73;
+  color: #58585c;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview .marketing-chamber-init-btn {
@@ -2273,11 +2283,11 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   color-scheme: light;
   --color-text: #18181b;
   --color-text-secondary: #3f3f46;
-  --color-text-muted: #71717a;
+  --color-text-muted: #58585c;
   --brand-navy: #18181b;
-  --brand-muted: #71717a;
+  --brand-muted: #58585c;
   --color-brand-navy: #18181b;
-  --color-brand-muted: #71717a;
+  --color-brand-muted: #58585c;
   --apple-label: #18181b;
   --apple-label-secondary: #52525b;
   --hairline: rgba(60, 60, 67, 0.18);
@@ -2296,7 +2306,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   .text-brand-muted,
   [class*="text-brand-muted"]
 ) {
-  color: #71717a;
+  color: #58585c;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(.mun-inset, .mun-label, .mun-muted) {
@@ -2304,7 +2314,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-label {
-  color: #71717a;
+  color: #58585c;
 }
 
 /* Nested white islands — same light copy as the parent session card. */
@@ -2312,11 +2322,11 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   color-scheme: light;
   --color-text: #18181b;
   --color-text-secondary: #3f3f46;
-  --color-text-muted: #71717a;
+  --color-text-muted: #58585c;
   --brand-navy: #18181b;
-  --brand-muted: #71717a;
+  --brand-muted: #58585c;
   --color-brand-navy: #18181b;
-  --color-brand-muted: #71717a;
+  --color-brand-muted: #58585c;
   --hairline: rgba(60, 60, 67, 0.18);
   color: #18181b;
 }
@@ -2333,7 +2343,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .mun-label,
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-500 {
-  color: #71717a;
+  color: #58585c;
 }
 
 .marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-800 {
@@ -2368,11 +2378,11 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   color-scheme: light;
   --color-text: #18181b;
   --color-text-secondary: #3f3f46;
-  --color-text-muted: #71717a;
+  --color-text-muted: #58585c;
   --brand-navy: #18181b;
-  --brand-muted: #71717a;
+  --brand-muted: #58585c;
   --color-brand-navy: #18181b;
-  --color-brand-muted: #71717a;
+  --color-brand-muted: #58585c;
   --apple-label: #18181b;
   --apple-label-secondary: #52525b;
   --hairline: rgba(60, 60, 67, 0.18);
@@ -2384,11 +2394,11 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   color-scheme: light;
   --color-text: #1c1c1e;
   --color-text-secondary: #3a3a3c;
-  --color-text-muted: #71717a;
+  --color-text-muted: #58585c;
   --brand-navy: #1c1c1e;
-  --brand-muted: #71717a;
+  --brand-muted: #58585c;
   --color-brand-navy: #1c1c1e;
-  --color-brand-muted: #71717a;
+  --color-brand-muted: #58585c;
   --hairline: rgba(60, 60, 67, 0.18);
   --color-bg-page: #ffffff;
   color: #1c1c1e;
@@ -2464,14 +2474,14 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   display: inline-flex;
   align-items: center;
   border-radius: var(--radius-pill);
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hairline));
-  background: color-mix(in srgb, var(--accent) 14%, var(--material-thick));
+  border: 1px solid color-mix(in srgb, var(--accent-text) 40%, var(--hairline));
+  background: color-mix(in srgb, var(--accent-text) 8%, var(--material-thick));
   padding: 0.2rem 0.65rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--gold-text-bright);
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
 }
 
 .marketing-shell .mun-role-feature {
@@ -2700,11 +2710,11 @@ html.dark .mun-apple-site.marketing-shell .marketing-header {
   position: relative;
   font-family: var(--apple-font-ui, var(--font-sans));
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
   text-transform: none;
   white-space: nowrap;
-  color: var(--marketing-ink-soft);
+  color: var(--marketing-ink);
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-md);
   transition:
@@ -2714,8 +2724,8 @@ html.dark .mun-apple-site.marketing-shell .marketing-header {
 
 @media (min-width: 1024px) {
   .marketing-shell .marketing-nav a {
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
     padding: 0.375rem 0.625rem;
   }
 }
@@ -2958,9 +2968,9 @@ html.dark .marketing-shell {
   --marketing-chamber-elevated: #12121a;
   --marketing-chamber-deep: #060609;
   --marketing-ink: #ffffff;
-  --marketing-ink-soft: rgba(255, 255, 255, 0.66);
+  --marketing-ink-soft: #d1d1d6;
   --marketing-hairline: rgba(255, 255, 255, 0.1);
-  --marketing-emph: color-mix(in srgb, var(--gold-text-bright) 65%, #ffffff);
+  --marketing-emph: var(--accent-text);
   --marketing-band-accent: color-mix(in srgb, var(--accent-bright) 78%, #ffffff);
   --marketing-band-card-bg: color-mix(in srgb, #ffffff 7%, transparent);
   --marketing-band-card-shadow:
@@ -4197,7 +4207,7 @@ html.dark .mun-apple-alert-panel {
 
 .mun-apple-btn-filled-red {
   border-color: color-mix(in srgb, var(--system-red) 88%, #000000);
-  background: var(--system-red);
+  background: var(--system-red-fill);
   color: #ffffff;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
@@ -8240,7 +8250,7 @@ html.dark .mun-apple-window-sidebar {
 
 .mun-apple-site .mun-shell-title,
 .mun-apple-site .dashboard-panel-title,
-.mun-apple-site h1:not(.mun-display):not(.mun-emph) {
+.mun-apple-site h1:not(.mun-display):not(.mun-emph):not(.mun-seamun-brand-title) {
   font-family: var(--font-sans);
   font-size: var(--apple-text-title-2-size);
   line-height: 1.25;
@@ -8398,11 +8408,11 @@ html.dark .mun-apple-window-sidebar {
 .mun-apple-site.marketing-shell .marketing-nav a,
 .mun-apple-site .marketing-shell .marketing-nav a {
   font-family: var(--apple-font-ui, var(--font-sans));
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--marketing-ink-soft);
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--marketing-ink) !important;
   border-radius: var(--radius-md);
   padding: 0.375rem 0.5rem;
 }
@@ -8523,11 +8533,11 @@ html.dark .mun-apple-window-sidebar {
   .text-brand-muted,
   [class*="text-brand-muted"]
 ) {
-  color: #71717a;
+  color: #58585c;
 }
 
 .mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-label {
-  color: #71717a;
+  color: #58585c;
 }
 
 .mun-apple-site.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .text-zinc-800 {
@@ -8698,6 +8708,7 @@ html.dark .mun-apple-window-sidebar {
   font-synthesis: none;
   letter-spacing: 0;
   line-height: 1.15;
+  color: #ffffff;
 }
 
 .mun-seamun-form-panel {
@@ -8883,7 +8894,7 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #6e6e73;
+  color: #58585c;
 }
 .guided-tour-title {
   margin: 0.35rem 0 0;
@@ -8896,7 +8907,7 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   margin: 0.4rem 0 0;
   font-size: 0.875rem;
   line-height: 1.45;
-  color: #6e6e73;
+  color: #58585c;
 }
 .guided-tour-actions {
   display: flex;
@@ -8930,7 +8941,7 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
 .guided-tour-btn-ghost {
   border: 0;
   background: transparent;
-  color: #6e6e73;
+  color: #58585c;
   padding-left: 0.15rem;
 }
 .guided-tour-btn-ghost:hover {

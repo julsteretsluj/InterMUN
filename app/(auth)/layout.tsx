@@ -26,10 +26,10 @@ export default async function AuthLayout({
           </div>
           <div className="relative z-[1] flex flex-1 flex-col justify-between">
             <div>
-              <p className="mun-seamun-eyebrow text-white/70">Est. 2026 — Conference platform</p>
+              <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
               <h1 className="mun-seamun-brand-title mt-5 text-white">{appName}</h1>
-              <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/75">{tagline}</p>
-              <ul className="mt-10 space-y-3 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white/55">
+              <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
+              <ul className="mt-10 space-y-3 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white/80">
                 <li className="flex items-center gap-3">
                   <span className="h-px w-4 bg-white/40" aria-hidden />
                   Live session tools
@@ -44,7 +44,7 @@ export default async function AuthLayout({
                 </li>
               </ul>
             </div>
-            <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/55">
+            <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/80">
               “Diplomacy is the art of letting someone else have your way.”
             </p>
           </div>

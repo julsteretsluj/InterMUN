@@ -23,13 +23,13 @@ export async function AppleGateLayout({ children, title }: AppleGateLayoutProps)
         </div>
         <div className="relative z-[1] flex flex-1 flex-col justify-between">
           <div>
-            <p className="mun-seamun-eyebrow text-white/70">Est. 2026 — Conference platform</p>
+            <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
             <h1 className="mun-seamun-brand-title mt-5 text-white">
               {typeof title === "string" ? title : appName}
             </h1>
-            <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/75">{tagline}</p>
+            <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
           </div>
-          <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/55">
+          <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/80">
             Select your room, enter your codes, and step into session.
           </p>
         </div>

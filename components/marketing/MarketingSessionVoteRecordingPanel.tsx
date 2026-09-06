@@ -128,7 +128,7 @@ export function MarketingSessionVoteRecordingPanel({
                   className={cn(
                     "rounded-[var(--radius-md)] px-2.5 py-1 text-[0.75rem] font-medium transition-apple",
                     row.vote === "yes"
-                      ? "bg-[var(--accent)] text-white"
+                      ? "bg-[var(--accent-fill)] text-white"
                       : "bg-[var(--apple-bg-secondary)] text-brand-navy"
                   )}
                 >
@@ -140,7 +140,7 @@ export function MarketingSessionVoteRecordingPanel({
                   className={cn(
                     "rounded-[var(--radius-md)] px-2.5 py-1 text-[0.75rem] font-medium transition-apple",
                     row.vote === "no"
-                      ? "bg-[var(--system-red)] text-white"
+                      ? "bg-[var(--system-red-fill)] text-white"
                       : "bg-[var(--apple-bg-secondary)] text-brand-navy"
                   )}
                 >
