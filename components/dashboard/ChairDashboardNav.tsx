@@ -49,6 +49,11 @@ export type ChairNavItemKey =
   | "score"
   | "crisis"
   | "crisisReport"
+  | "fwcDirectives"
+  | "fwcMovement"
+  | "fwcMap"
+  | "fwcBackroom"
+  | "fwcEvidence"
   | "archive"
   | "officialLinks"
   | "notesModeration"
@@ -66,6 +71,8 @@ type ChairNavItem = {
   exactHref?: boolean;
   /** Shown only for FWC / UNSC committees. */
   crisisOnly?: boolean;
+  /** Shown only for FWC (not UNSC). */
+  fwcOnly?: boolean;
 };
 
 /** Primary tab order follows chair workflow sequence requested by product. */
@@ -130,6 +137,11 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
   { href: "/crisis", itemKey: "crisis", emoji: "⚡", crisisOnly: true },
   { href: "/report", itemKey: "crisisReport", emoji: "🚨", crisisOnly: true },
+  { href: "/fwc/directives", itemKey: "fwcDirectives", emoji: "✉️", fwcOnly: true },
+  { href: "/fwc/movement", itemKey: "fwcMovement", emoji: "🗺️", fwcOnly: true },
+  { href: "/fwc/map", itemKey: "fwcMap", emoji: "📍", fwcOnly: true },
+  { href: "/chair/fwc/backroom", itemKey: "fwcBackroom", emoji: "🎛️", fwcOnly: true },
+  { href: "/chair/fwc/evidence", itemKey: "fwcEvidence", emoji: "📦", fwcOnly: true },
   { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },
   { href: "/profile", itemKey: "settings", emoji: "👤", activeMatch: "/profile" },
 ];
@@ -205,18 +217,28 @@ function ChairNavRow({
   );
 }
 
-function filterChairNavItems(items: ChairNavItem[], crisisReportingEnabled: boolean) {
-  return items.filter((item) => !item.crisisOnly || crisisReportingEnabled);
+function filterChairNavItems(
+  items: ChairNavItem[],
+  crisisReportingEnabled: boolean,
+  fwcCrisisEnabled: boolean
+) {
+  return items.filter((item) => {
+    if (item.crisisOnly && !crisisReportingEnabled) return false;
+    if (item.fwcOnly && !fwcCrisisEnabled) return false;
+    return true;
+  });
 }
 
 export function ChairDashboardSidebar({
   conferenceLine,
   crisisReportingEnabled,
+  fwcCrisisEnabled = false,
   seamunScheduleEnabled = false,
   heldNotesCount = 0,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
+  fwcCrisisEnabled?: boolean;
   seamunScheduleEnabled?: boolean;
   heldNotesCount?: number;
 }) {
@@ -252,12 +274,16 @@ export function ChairDashboardSidebar({
   const headerText = conferenceLine.trim() || t("committeeTopicFallback");
   const hubActive = pathname === "/chair";
   const navItems = useMemo(() => {
-    const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
+    const items = filterChairNavItems(
+      CHAIR_NAV_ITEMS,
+      crisisReportingEnabled,
+      fwcCrisisEnabled
+    );
     const filtered = seamunScheduleEnabled
       ? items
       : items.filter((item) => item.itemKey !== "conferenceSchedule");
     return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
-  }, [crisisReportingEnabled, seamunScheduleEnabled]);
+  }, [crisisReportingEnabled, fwcCrisisEnabled, seamunScheduleEnabled]);
 
   const priorityByKey = useMemo(
     () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),
@@ -445,11 +471,13 @@ function DockItem({
 export function ChairMobileDock({
   conferenceLine,
   crisisReportingEnabled,
+  fwcCrisisEnabled = false,
   seamunScheduleEnabled = false,
   heldNotesCount = 0,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
+  fwcCrisisEnabled?: boolean;
   seamunScheduleEnabled?: boolean;
   heldNotesCount?: number;
 }) {
@@ -484,12 +512,16 @@ export function ChairMobileDock({
 
   const hubActive = pathname === "/chair";
   const navItems = useMemo(() => {
-    const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
+    const items = filterChairNavItems(
+      CHAIR_NAV_ITEMS,
+      crisisReportingEnabled,
+      fwcCrisisEnabled
+    );
     const filtered = seamunScheduleEnabled
       ? items
       : items.filter((item) => item.itemKey !== "conferenceSchedule");
     return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
-  }, [crisisReportingEnabled, seamunScheduleEnabled]);
+  }, [crisisReportingEnabled, fwcCrisisEnabled, seamunScheduleEnabled]);
 
   const priorityByKey = useMemo(
     () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),

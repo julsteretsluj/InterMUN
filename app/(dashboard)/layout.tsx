@@ -26,7 +26,7 @@ import {
   ADMIN_APP_HOME,
 } from "@/lib/roles";
 import { ChairDashboardSidebar, ChairMobileDock } from "@/components/dashboard/ChairDashboardNav";
-import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { isCrisisCommittee, isFwcCommittee } from "@/lib/crisis-committee";
 import type { UserRole } from "@/types/database";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
@@ -174,6 +174,7 @@ export default async function DashboardLayout({
     ? profileConferenceLine
     : defaultConferenceLine;
   const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
+  const fwcCrisisEnabled = isFwcCommittee(activeConf.committee);
   const liveFloorConferenceId = debateBundle?.debateConferenceId ?? activeConf?.id ?? null;
   const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);
@@ -221,6 +222,7 @@ export default async function DashboardLayout({
             <ChairDashboardSidebar
               conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}
+              fwcCrisisEnabled={fwcCrisisEnabled}
               seamunScheduleEnabled={showSeamunLogo}
               heldNotesCount={heldNotesCount}
             />
@@ -229,6 +231,7 @@ export default async function DashboardLayout({
               staffRole={navRole}
               variant="aspire-sidebar"
               crisisReportingEnabled={crisisReportingEnabled}
+              fwcCrisisEnabled={fwcCrisisEnabled}
               seamunScheduleEnabled={showSeamunLogo}
             />
           )}
@@ -306,6 +309,7 @@ export default async function DashboardLayout({
           <ChairMobileDock
             conferenceLine={conferenceLine || ""}
             crisisReportingEnabled={crisisReportingEnabled}
+            fwcCrisisEnabled={fwcCrisisEnabled}
             seamunScheduleEnabled={showSeamunLogo}
             heldNotesCount={heldNotesCount}
           />
@@ -314,6 +318,7 @@ export default async function DashboardLayout({
             staffRole={navRole}
             variant="dock"
             crisisReportingEnabled={crisisReportingEnabled}
+            fwcCrisisEnabled={fwcCrisisEnabled}
             seamunScheduleEnabled={showSeamunLogo}
           />
         )}

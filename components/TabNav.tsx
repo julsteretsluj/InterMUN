@@ -49,6 +49,11 @@ const NAV_EMOJIS: Record<string, string> = {
   "/report": "🚩",
   "/crisis": "⚡",
   "/crisis-slides": "🖼️",
+  "/fwc/directives": "✉️",
+  "/fwc/movement": "🗺️",
+  "/fwc/map": "📍",
+  "/chair/fwc/backroom": "🎛️",
+  "/chair/fwc/evidence": "📦",
   "/advisor": "🎓",
   "/advisor/notes": "📨",
   "/advisor/schedule": "🗓️",
@@ -85,6 +90,12 @@ const BASE_TABS = [
 
 const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides", "/crisis"]);
 
+const FWC_ONLY_TABS = [
+  { href: "/fwc/directives", labelKey: "fwcDirectives", fwcOnly: true },
+  { href: "/fwc/movement", labelKey: "fwcMovement", fwcOnly: true },
+  { href: "/fwc/map", labelKey: "fwcMap", fwcOnly: true },
+] as const;
+
 const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
 
 const SCHEDULE_TAB = { labelKey: "conferenceSchedule" as const };
@@ -101,12 +112,14 @@ function emojiForHref(href: string): string {
 function useNavTabs(
   staffRole: UserRole | null | undefined,
   crisisReportingEnabled: boolean,
-  seamunScheduleEnabled: boolean
+  seamunScheduleEnabled: boolean,
+  fwcCrisisEnabled: boolean
 ) {
   const role = staffRole ?? null;
-  const baseTabs = crisisReportingEnabled
+  const crisisTabs = crisisReportingEnabled
     ? [...BASE_TABS]
     : BASE_TABS.filter((t) => !CRISIS_ONLY_HREFS.has(t.href));
+  const baseTabs = fwcCrisisEnabled ? [...crisisTabs, ...FWC_ONLY_TABS] : crisisTabs;
 
   const roleTabs =
     role === "chair"
@@ -137,6 +150,12 @@ function useNavTabs(
         { href: "/chair/room-code", labelKey: "committeeCode" },
         ...(role === "chair"
           ? ([{ href: "/chair/session", labelKey: "session" }] as const)
+          : []),
+        ...(role === "chair" && fwcCrisisEnabled
+          ? ([
+              { href: "/chair/fwc/backroom", labelKey: "fwcBackroom", fwcOnly: true },
+              { href: "/chair/fwc/evidence", labelKey: "fwcEvidence", fwcOnly: true },
+            ] as const)
           : []),
         ...(role === "smt" || role === "admin"
           ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords" }] as const)
@@ -237,18 +256,26 @@ export function TabNav({
   staffRole = null,
   variant,
   crisisReportingEnabled = true,
+  fwcCrisisEnabled = false,
   seamunScheduleEnabled = false,
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
   /** When false, hide crisis routes (`/report`, `/crisis-slides`, `/crisis`). */
   crisisReportingEnabled?: boolean;
+  /** When true, show FWC-only routes (`/fwc/directives`, `/fwc/movement`, `/fwc/map`). */
+  fwcCrisisEnabled?: boolean;
   /** SEAMUN I 2027 locked timetable link in sidebar/dock. */
   seamunScheduleEnabled?: boolean;
 }) {
   const t = useTranslations("tabNav");
   const pathname = usePathname();
-  const rawTabs = useNavTabs(staffRole, crisisReportingEnabled, seamunScheduleEnabled);
+  const rawTabs = useNavTabs(
+    staffRole,
+    crisisReportingEnabled,
+    seamunScheduleEnabled,
+    fwcCrisisEnabled
+  );
   const hrefOrder =
     staffRole === "advisor"
       ? ADVISOR_TAB_NAV_HREF_ORDER

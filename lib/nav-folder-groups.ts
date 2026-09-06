@@ -76,6 +76,11 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   score: "resources",
   crisis: "crisis",
   crisisReport: "crisis",
+  fwcDirectives: "crisis",
+  fwcMovement: "crisis",
+  fwcMap: "crisis",
+  fwcBackroom: "crisis",
+  fwcEvidence: "crisis",
   settings: "account",
 };
 
@@ -142,6 +147,11 @@ export function tabHrefFolder(href: string): NavFolderId {
     href === "/report" ||
     href === "/crisis" ||
     href === "/crisis-slides" ||
+    href === "/fwc/directives" ||
+    href === "/fwc/movement" ||
+    href === "/fwc/map" ||
+    href === "/chair/fwc/backroom" ||
+    href === "/chair/fwc/evidence" ||
     href === "/chair/session" ||
     href.startsWith("/chair/session/") ||
     href === "/chair/room-code" ||
