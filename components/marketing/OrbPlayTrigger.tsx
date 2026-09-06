@@ -32,7 +32,7 @@ export function OrbPlayTrigger({
         type="button"
         onClick={handlePlay}
         className={cn(
-          "cursor-pointer rounded-2xl border-0 bg-transparent p-0 text-left transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]",
+          "inline-flex shrink-0 cursor-pointer items-center rounded-2xl border-0 bg-transparent p-0 text-left transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]",
           className
         )}
         aria-label={t("playOrbAnimation")}

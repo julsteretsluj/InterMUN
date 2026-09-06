@@ -4,8 +4,8 @@
 import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** Light wordmark is wide — only height (or explicit max-w) should constrain it. */
-function lightWordmarkClasses(className?: string): string {
+/** Gavel-ring mark is wide — only height (or explicit max-w) should constrain it. */
+function emblemClasses(className?: string): string {
   const tokens = (className ?? "")
     .split(/\s+/)
     .filter((token) => token && !token.startsWith("dark:"));
@@ -32,61 +32,41 @@ function lightWordmarkClasses(className?: string): string {
   );
 }
 
-/** Dark circular emblem stays square; derive from max height when only wordmark sizing is passed. */
-function darkEmblemClasses(className?: string): string {
-  const tokens = (className ?? "").split(/\s+/).filter(Boolean);
-  const darkTokens = tokens.filter((token) => token.includes("dark:"));
-  if (darkTokens.length) {
-    return darkTokens.map((token) => token.replace(/dark:/g, "")).join(" ");
-  }
-
-  const lightTokens = tokens.filter((token) => !token.startsWith("dark:"));
-  const maxH = lightTokens.find((token) => /^max-h-/.test(token));
-  if (maxH) {
-    const size = maxH.replace("max-h-", "");
-    return `h-${size} w-${size}`;
-  }
-
-  const h = lightTokens.find((token) => /^h-/.test(token) && !/^max-h-/.test(token));
-  if (h) return `${h} ${h.replace(/^h-/, "w-")}`;
-
-  return "h-10 w-10";
-}
-
 /**
- * InterMUN emblem. Light mode uses the rainbow chain wordmark
- * (`public/intermun-emblem-light.png`); dark mode uses the full circular
- * mark with laurel wreath (`public/intermun-emblem.png`).
+ * InterMUN emblem. Light mode uses the navy gavel-and-ring mark
+ * (`public/intermun-emblem-light.png`); dark mode uses the white gavel-and-ring
+ * mark (`public/intermun-emblem.png`).
  */
 export function InterMunEmblem({
   className,
   alt = "InterMUN",
+  surface = "theme",
 }: {
   className?: string;
   /** Use `alt=""` when a visible “InterMUN” label sits next to the image. */
   alt?: string;
+  /** Auth/gate forms stay light even when the site theme is dark. */
+  surface?: "theme" | "light";
 }) {
+  const sized = emblemClasses(className);
+  const forceLight = surface === "light";
   return (
     <>
-      <span className="inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none dark:hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
-        <img
-          src={INTERMUN_EMBLEM_LIGHT_PATH}
-          alt={alt}
-          className={cn(lightWordmarkClasses(className), "aspect-square")}
-          decoding="async"
-        />
-      </span>
-      {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
-      <img
-        src={INTERMUN_EMBLEM_PATH}
-        alt={alt}
+      <span
         className={cn(
-          "hidden shrink-0 object-contain drop-shadow-[0_4px_22px_rgba(0,0,0,0.45)] dark:block",
-          darkEmblemClasses(className)
+          "inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none",
+          !forceLight && "dark:hidden"
         )}
-        decoding="async"
-      />
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
+        <img src={INTERMUN_EMBLEM_LIGHT_PATH} alt={alt} className={sized} decoding="async" />
+      </span>
+      {!forceLight ? (
+        <span className="hidden max-w-full shrink-0 items-center justify-center overflow-visible leading-none dark:inline-flex">
+          {/* eslint-disable-next-line @next/next/no-img-element -- small static emblem sized purely via CSS classes */}
+          <img src={INTERMUN_EMBLEM_PATH} alt={alt} className={sized} decoding="async" />
+        </span>
+      ) : null}
     </>
   );
 }

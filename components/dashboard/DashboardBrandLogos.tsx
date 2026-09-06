@@ -21,11 +21,11 @@ export function DashboardBrandLogos({
   const intermunClass =
     variant === "sidebar"
       ? showConferenceLogo
-        ? "max-h-7 max-w-[4rem] w-auto dark:h-8 dark:w-8"
-        : "max-h-8 max-w-[4.5rem] w-auto dark:h-10 dark:w-10"
+        ? "max-h-7 max-w-[4rem] w-auto"
+        : "max-h-8 max-w-[4.5rem] w-auto"
       : showConferenceLogo
-        ? "max-h-7 max-w-[4rem] w-auto dark:h-8 dark:w-8"
-        : "max-h-9 max-w-[5rem] w-auto dark:h-9 dark:w-9";
+        ? "max-h-7 max-w-[4rem] w-auto"
+        : "max-h-9 max-w-[5rem] w-auto";
 
   if (!showConferenceLogo) {
     return <InterMunEmblem alt="" className={intermunClass} />;

@@ -25,7 +25,7 @@ export default async function MarketingLayout({
         <div className="marketing-header-inner mx-auto grid max-w-[var(--content-max-width,82.5rem)] grid-cols-[1fr_auto] items-center gap-2 px-4 py-3 md:gap-4 md:px-8 lg:grid-cols-[1fr_auto_1fr]">
           {/* No justify-self-start: stretching lets the brand truncate inside a narrow column. */}
           <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
-            <MarketingOrbTrigger emblemClassName="max-h-8 w-auto md:max-h-9" />
+            <MarketingOrbTrigger className="shrink-0" emblemClassName="max-h-8 w-auto md:max-h-9" />
             <Link
               href="/"
               className="marketing-header-brand font-sans min-w-0 truncate !mb-0 text-sm font-semibold tracking-[-0.03em] md:text-base"

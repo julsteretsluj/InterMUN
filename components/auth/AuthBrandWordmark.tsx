@@ -15,7 +15,7 @@ export function AuthBrandWordmark({
 }) {
   return (
     <OrbPlayTrigger className="mx-auto block w-full text-center">
-      <BrandWordmark className={className} size={size} />
+      <BrandWordmark className={className} size={size} surface="light" />
     </OrbPlayTrigger>
   );
 }
