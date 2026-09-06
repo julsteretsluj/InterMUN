@@ -75,7 +75,6 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   officialLinks: "resources",
   score: "resources",
   crisis: "crisis",
-  crisisReport: "crisis",
   fwcDirectives: "crisis",
   fwcMovement: "crisis",
   fwcMap: "crisis",
@@ -144,7 +143,6 @@ export function tabHrefFolder(href: string): NavFolderId {
     href === "/resolutions" ||
     href === "/amendments" ||
     href === "/running-notes" ||
-    href === "/report" ||
     href === "/crisis" ||
     href === "/crisis-slides" ||
     href === "/fwc/directives" ||

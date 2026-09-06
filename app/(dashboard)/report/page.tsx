@@ -1,25 +1,18 @@
-import { createClient } from "@/lib/supabase/server";
-import { ReportView } from "@/components/report/ReportView";
-import { MunPageShell } from "@/components/MunPageShell";
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { redirect } from "next/navigation";
-import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { createClient } from "@/lib/supabase/server";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
-import { isCrisisCommittee } from "@/lib/crisis-committee";
-import { getTranslations } from "next-intl/server";
 
-export default async function ReportPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ about?: string; aboutName?: string }>;
-}) {
-  const t = await getTranslations("pageTitles");
-  const { about, aboutName: aboutNameRaw } = await searchParams;
+/** Crisis incident reporting was removed; send old bookmarks to the role hub. */
+export default async function ReportPage() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return null;
+  if (!user) redirect("/login");
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -33,33 +26,8 @@ export default async function ReportPage({
   const effectiveRole = String(
     effectiveDashboardRole(myRole, smtSurface) ?? myRole
   ).toLowerCase();
-  const activeConf = await resolveDashboardConferenceForUser(profile.role, user.id);
-  if (!activeConf || !isCrisisCommittee(activeConf.committee)) {
-    if (effectiveRole === "chair") redirect("/chair");
-    if (myRole === "smt" || myRole === "admin") redirect("/smt");
-    redirect("/delegate");
-  }
-  const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
-  let q = supabase.from("reports").select("*").order("created_at", { ascending: false });
-  if (!canViewAll) q = q.eq("user_id", user.id);
-  const { data: reports } = await q;
-
-  const aboutName = aboutNameRaw ? decodeURIComponent(aboutNameRaw) : "";
-  const initialDescription =
-    about && aboutName
-      ? `Regarding ${aboutName} (profile id ${about}). `
-      : about
-        ? `Regarding profile id ${about}. `
-        : undefined;
-
-  return (
-    <MunPageShell title={t("report")} variant="flush">
-      <ReportView
-        reports={reports || []}
-        canViewAll={canViewAll}
-        initialDescription={initialDescription}
-      />
-    </MunPageShell>
-  );
+  if (effectiveRole === "chair") redirect("/chair");
+  if (myRole === "smt" || myRole === "admin") redirect("/smt");
+  redirect("/delegate");
 }

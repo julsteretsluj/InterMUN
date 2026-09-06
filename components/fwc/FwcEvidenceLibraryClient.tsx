@@ -12,6 +12,11 @@ import type {
   FwcEvidenceMonitorRow,
   FwcEvidenceSourceMeta,
 } from "@/lib/fwc/evidence-types";
+import { fwcEvidenceIconSrc } from "@/lib/fwc/evidence-icons";
+import {
+  fwcEvidencePlaceLabel,
+  groupFwcEvidenceByLocation,
+} from "@/lib/fwc/evidence-location";
 import { cn } from "@/lib/utils";
 
 type FoundFilter = "all" | "found" | "unfound";
@@ -34,21 +39,36 @@ export function FwcEvidenceLibraryClient({
   const [notice, setNotice] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
+  const isEvidenceFound = (item: FwcEvidenceMonitorRow) =>
+    item.found || Boolean(item.heldByAllocationId);
+
+  const holdersById = useMemo(
+    () => Object.fromEntries(holders.map((holder) => [holder.id, holder])),
+    [holders]
+  );
+
+  const locationGroups = useMemo(
+    () => groupFwcEvidenceByLocation(items, holders),
+    [items, holders]
+  );
+
   const filtered = useMemo(() => {
     const loc = locationQuery.trim().toLowerCase();
     return items.filter((item) => {
-      if (foundFilter === "found" && !item.found) return false;
-      if (foundFilter === "unfound" && item.found) return false;
+      const found = isEvidenceFound(item);
+      if (foundFilter === "found" && !found) return false;
+      if (foundFilter === "unfound" && found) return false;
       if (holderId && item.heldByAllocationId !== holderId) return false;
       if (loc) {
-        const hay = `${item.currentLocation} ${item.startingLocation}`.toLowerCase();
+        const where = fwcEvidencePlaceLabel(item, holdersById).toLowerCase();
+        const hay = `${item.currentLocation} ${item.startingLocation} ${where}`.toLowerCase();
         if (!hay.includes(loc)) return false;
       }
       return true;
     });
-  }, [items, foundFilter, holderId, locationQuery]);
+  }, [items, foundFilter, holderId, locationQuery, holdersById]);
 
-  const foundCount = items.filter((item) => item.found).length;
+  const foundCount = items.filter(isEvidenceFound).length;
 
   function patchItem(next: FwcEvidenceMonitorRow) {
     setItems((prev) => prev.map((item) => (item.id === next.id ? next : item)));
@@ -133,6 +153,86 @@ export function FwcEvidenceLibraryClient({
         </label>
       </section>
 
+      <section
+        aria-label={t("locationsTitle")}
+        className="rounded-[16px] border border-[#D1D1D6] bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+      >
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-semibold tracking-[-0.01em] text-[#1D1D1F]">
+              {t("locationsTitle")}
+            </h2>
+            <p className="mt-1 text-sm text-[#6E6E73]">{t("locationsIntro")}</p>
+          </div>
+          <p className="text-xs font-semibold uppercase tracking-[0.04em] text-[#6E6E73]">
+            {t("locationsCount", { count: locationGroups.length })}
+          </p>
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {locationGroups.map((group) => (
+            <article
+              key={group.key}
+              className={cn(
+                "rounded-[12px] border px-4 py-3",
+                group.held
+                  ? "border-[#007AFF]/28 bg-[#F2F8FF]"
+                  : "border-[#D1D1D6] bg-[#F2F2F7]"
+              )}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold tracking-[-0.01em] text-[#1D1D1F]">
+                    {group.label}
+                  </p>
+                  {group.grid ? (
+                    <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.04em] text-[#007AFF]">
+                      {t("locationsGrid", { grid: group.grid })}
+                    </p>
+                  ) : null}
+                </div>
+                <span className="shrink-0 rounded-[980px] bg-white px-2.5 py-0.5 text-[11px] font-semibold text-[#6E6E73]">
+                  {t("locationsItemCount", { count: group.items.length })}
+                </span>
+              </div>
+              <ul className="mt-3 space-y-1.5">
+                {group.items.map((item) => {
+                  const iconSrc = fwcEvidenceIconSrc(item.slug);
+                  const found = isEvidenceFound(item);
+                  return (
+                    <li key={item.id} className="flex items-center gap-2 text-sm text-[#1D1D1F]">
+                      {iconSrc ? (
+                        <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-[6px] border border-[#D1D1D6] bg-white">
+                          {/* eslint-disable-next-line @next/next/no-img-element -- small static public badge */}
+                          <img
+                            src={iconSrc}
+                            alt=""
+                            className="h-full w-full object-cover"
+                            draggable={false}
+                          />
+                        </span>
+                      ) : null}
+                      <span className="min-w-0 flex-1 truncate">
+                        <span className="font-semibold">{item.slug}</span>
+                        <span className="text-[#6E6E73]"> · {item.title}</span>
+                      </span>
+                      {found ? (
+                        <span className="shrink-0 rounded-[980px] bg-[#007AFF] px-2 py-0.5 text-[10px] font-semibold text-white">
+                          {t("foundYes")}
+                        </span>
+                      ) : (
+                        <span className="shrink-0 rounded-[980px] bg-white px-2 py-0.5 text-[10px] font-semibold text-[#6E6E73]">
+                          {t("foundNo")}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <div className="flex flex-wrap items-end gap-3 rounded-[16px] border border-[#D1D1D6] bg-white p-4">
         <label className="min-w-[8rem] flex-1 text-xs font-semibold uppercase tracking-[0.04em] text-[#6E6E73]">
           {t("filterFound")}
@@ -203,9 +303,33 @@ export function FwcEvidenceLibraryClient({
                 </td>
               </tr>
             ) : (
-              filtered.map((item) => (
-                <tr key={item.id} className="border-b border-[#E5E5EA] align-top last:border-b-0">
-                  <td className="whitespace-nowrap px-3 py-3 font-semibold text-[#1D1D1F]">{item.slug}</td>
+              filtered.map((item) => {
+                const iconSrc = fwcEvidenceIconSrc(item.slug);
+                const isFound = item.found || Boolean(item.heldByAllocationId);
+                return (
+                <tr
+                  key={item.id}
+                  className={cn(
+                    "border-b border-[#E5E5EA] align-top last:border-b-0",
+                    isFound && "bg-[#F2F8FF]"
+                  )}
+                >
+                  <td className="whitespace-nowrap px-3 py-3 font-semibold text-[#1D1D1F]">
+                    <span className="inline-flex items-center gap-2">
+                      {iconSrc ? (
+                        <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-[8px] border border-[#D1D1D6] bg-[#F2F2F7]">
+                          {/* eslint-disable-next-line @next/next/no-img-element -- small static public badge */}
+                          <img
+                            src={iconSrc}
+                            alt=""
+                            className="h-full w-full object-cover"
+                            draggable={false}
+                          />
+                        </span>
+                      ) : null}
+                      {item.slug}
+                    </span>
+                  </td>
                   <td className="px-3 py-3 text-[#6E6E73]">{item.category}</td>
                   <td className="px-3 py-3 font-medium text-[#1D1D1F]">{item.title}</td>
                   <td className="px-3 py-3 text-[#6E6E73]">{item.startingLocation}</td>
@@ -215,15 +339,15 @@ export function FwcEvidenceLibraryClient({
                     <button
                       type="button"
                       disabled={pending}
-                      onClick={() => saveRow(item, { found: !item.found })}
+                      onClick={() => saveRow(item, { found: !isFound })}
                       className={cn(
                         "rounded-[980px] px-3 py-1 text-xs font-semibold",
-                        item.found
+                        isFound
                           ? "bg-[#007AFF] text-white"
                           : "bg-[#F2F2F7] text-[#6E6E73]"
                       )}
                     >
-                      {item.found ? t("foundYes") : t("foundNo")}
+                      {isFound ? t("foundYes") : t("foundNo")}
                     </button>
                   </td>
                   <td className="px-3 py-3">
@@ -272,7 +396,8 @@ export function FwcEvidenceLibraryClient({
                     />
                   </td>
                 </tr>
-              ))
+                );
+              })
             )}
           </tbody>
         </table>

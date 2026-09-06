@@ -48,7 +48,6 @@ export type ChairNavItemKey =
   | "voting"
   | "score"
   | "crisis"
-  | "crisisReport"
   | "fwcDirectives"
   | "fwcMovement"
   | "fwcMap"
@@ -136,7 +135,6 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/notes-moderation", itemKey: "notesModeration", emoji: "📝" },
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
   { href: "/crisis", itemKey: "crisis", emoji: "⚡", crisisOnly: true },
-  { href: "/report", itemKey: "crisisReport", emoji: "🚨", crisisOnly: true },
   { href: "/fwc/directives", itemKey: "fwcDirectives", emoji: "✉️", fwcOnly: true },
   { href: "/fwc/movement", itemKey: "fwcMovement", emoji: "🗺️", fwcOnly: true },
   { href: "/fwc/map", itemKey: "fwcMap", emoji: "📍", fwcOnly: true },

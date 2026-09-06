@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { unstable_rethrow } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -14,6 +14,16 @@ import {
   switchSmtToDelegateExperienceAction,
   updateSmtCommitteeBindingsAction,
 } from "@/app/actions/smtDashboardSurface";
+
+function conferenceIdForSeat(
+  seatId: string,
+  seatsByConferenceId: Record<string, { id: string; label: string }[]>
+): string | null {
+  for (const [conferenceId, seats] of Object.entries(seatsByConferenceId)) {
+    if (seats.some((seat) => seat.id === seatId)) return conferenceId;
+  }
+  return null;
+}
 
 export function SmtCommitteeViewSettingsCard({
   conferences,
@@ -31,14 +41,46 @@ export function SmtCommitteeViewSettingsCard({
   const t = useTranslations("smtCommitteeView");
   const searchParams = useSearchParams();
   const bindHint = searchParams.get("smtBind") === "1";
+  const previewFail = searchParams.get("smtPreview");
+
+  const initialDelegateConferenceId =
+    (currentDelegateAllocationId &&
+      conferenceIdForSeat(currentDelegateAllocationId, delegateSeatsByConferenceId)) ||
+    currentChairId ||
+    "";
+
   const [previewMode, setPreviewMode] = useState<"chair" | "delegate" | null>(null);
-  const [chairId, setChairId] = useState(currentChairId ?? "");
+  const [chairId, setChairId] = useState(currentChairId ?? initialDelegateConferenceId);
   const [delegateAllocId, setDelegateAllocId] = useState(currentDelegateAllocationId ?? "");
   const [chairAllocId, setChairAllocId] = useState("");
   const [bindMsg, setBindMsg] = useState<string | null>(null);
-  const [surfaceMsg, setSurfaceMsg] = useState<string | null>(null);
+  const [surfaceMsg, setSurfaceMsg] = useState<string | null>(
+    previewFail ? t("surfaceSwitchError") : null
+  );
   const [pendingBindings, startBindings] = useTransition();
   const [pendingSurface, startSurface] = useTransition();
+
+  const delegateSeats = useMemo(
+    () => delegateSeatsByConferenceId[chairId] ?? [],
+    [delegateSeatsByConferenceId, chairId]
+  );
+  const chairSeats = useMemo(
+    () => chairSeatsByConferenceId[chairId] ?? [],
+    [chairSeatsByConferenceId, chairId]
+  );
+
+  function selectCommittee(nextConferenceId: string) {
+    setChairId(nextConferenceId);
+    setChairAllocId("");
+    if (!nextConferenceId) {
+      setDelegateAllocId("");
+      return;
+    }
+    const stillValid = (delegateSeatsByConferenceId[nextConferenceId] ?? []).some(
+      (seat) => seat.id === delegateAllocId
+    );
+    if (!stillValid) setDelegateAllocId("");
+  }
 
   function saveBindings() {
     setBindMsg(null);
@@ -99,6 +141,21 @@ export function SmtCommitteeViewSettingsCard({
     });
   }
 
+  function openDelegatePreview() {
+    setPreviewMode("delegate");
+    setSurfaceMsg(null);
+    if (!chairId && currentDelegateAllocationId) {
+      const fromSeat = conferenceIdForSeat(
+        currentDelegateAllocationId,
+        delegateSeatsByConferenceId
+      );
+      if (fromSeat) setChairId(fromSeat);
+    }
+    if (currentDelegateAllocationId && !delegateAllocId) {
+      setDelegateAllocId(currentDelegateAllocationId);
+    }
+  }
+
   function startPreview() {
     if (previewMode === "chair") {
       goChair();
@@ -131,7 +188,7 @@ export function SmtCommitteeViewSettingsCard({
           </label>
           <select
             value={chairId}
-            onChange={(e) => setChairId(e.target.value)}
+            onChange={(e) => selectCommittee(e.target.value)}
             className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
             <option value="">{t("chairCommitteePlaceholder")}</option>
@@ -149,15 +206,19 @@ export function SmtCommitteeViewSettingsCard({
           <select
             value={delegateAllocId}
             onChange={(e) => setDelegateAllocId(e.target.value)}
-            className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            disabled={!chairId}
+            className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
             <option value="">{t("delegateSeatPlaceholder")}</option>
-            {(delegateSeatsByConferenceId[chairId] ?? []).map((s) => (
+            {delegateSeats.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.label}
               </option>
             ))}
           </select>
+          {chairId && delegateSeats.length === 0 ? (
+            <p className="mt-1 text-xs text-rose-700 dark:text-rose-300">{t("noDelegateSeats")}</p>
+          ) : null}
         </div>
         <button
           type="button"
@@ -211,10 +272,7 @@ export function SmtCommitteeViewSettingsCard({
           <button
             type="button"
             disabled={pendingSurface}
-            onClick={() => {
-              setPreviewMode("delegate");
-              setSurfaceMsg(null);
-            }}
+            onClick={() => openDelegatePreview()}
             className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
               previewMode === "delegate"
                 ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/20 dark:text-zinc-100"
@@ -232,11 +290,7 @@ export function SmtCommitteeViewSettingsCard({
               </label>
               <select
                 value={chairId}
-                onChange={(e) => {
-                  setChairId(e.target.value);
-                  setDelegateAllocId("");
-                  setChairAllocId("");
-                }}
+                onChange={(e) => selectCommittee(e.target.value)}
                 className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
               >
                 <option value="">{t("chairCommitteePlaceholder")}</option>
@@ -259,12 +313,15 @@ export function SmtCommitteeViewSettingsCard({
                   className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
                 >
                   <option value="">{t("delegateSeatPlaceholder")}</option>
-                  {(delegateSeatsByConferenceId[chairId] ?? []).map((s) => (
+                  {delegateSeats.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.label}
                     </option>
                   ))}
                 </select>
+                {chairId && delegateSeats.length === 0 ? (
+                  <p className="mt-1 text-xs text-rose-700 dark:text-rose-300">{t("noDelegateSeats")}</p>
+                ) : null}
               </div>
             ) : (
               <div>
@@ -278,7 +335,7 @@ export function SmtCommitteeViewSettingsCard({
                   className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
                 >
                   <option value="">{t("chairSeatOptionalPlaceholder")}</option>
-                  {(chairSeatsByConferenceId[chairId] ?? []).map((s) => (
+                  {chairSeats.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.label}
                     </option>
@@ -291,12 +348,12 @@ export function SmtCommitteeViewSettingsCard({
               disabled={
                 pendingSurface ||
                 !chairId ||
-                (previewMode === "delegate" ? !delegateAllocId : false)
+                (previewMode === "delegate" ? !delegateAllocId || delegateSeats.length === 0 : false)
               }
               onClick={() => void startPreview()}
               className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
             >
-              Start
+              {pendingSurface ? t("startingPreview") : t("startPreview")}
             </button>
           </div>
         ) : null}

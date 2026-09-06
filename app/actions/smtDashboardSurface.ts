@@ -239,10 +239,11 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
     .from("profiles")
     .update({
       smt_delegate_allocation_id: aid,
+      smt_chair_conference_id: canonicalCid,
       updated_at: new Date().toISOString(),
     })
     .eq("id", user.id);
-  if (error) redirect("/smt/profile?smtBind=1");
+  if (error) redirect("/smt/profile?smtBind=1&smtPreview=delegate");
 
   await setSmtDashboardSurface("delegate");
   await setActiveConferenceId(canonicalCid);
@@ -390,13 +391,14 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     const canonicalId = canonicalByConferenceId.get(row.conference_id);
     if (!canonicalId) continue;
     const profileRef = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
-    const role = profileRef?.role?.toString().trim().toLowerCase();
     const displayCountry = row.country?.trim() || "—";
     const displayName = profileRef?.name?.trim() || null;
     const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
     const isDais = isDaisSeatAllocationCountry(row.country);
 
-    if (role === "chair" || isDais) {
+    // Chair preview uses dais placards only. Country seats stay in the delegate list even if a
+    // chair-role profile is linked — otherwise SMT can't pick that country for delegate preview.
+    if (isDais) {
       chairSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
       continue;
     }

@@ -1167,6 +1167,8 @@ const EVIDENCE_SELECT =
 const EVIDENCE_STORAGE_PREFIX = "fwc-evidence";
 
 function mapEvidenceRow(row: Record<string, unknown>): FwcEvidenceMonitorRow {
+  const heldByAllocationId =
+    typeof row.held_by_allocation_id === "string" ? row.held_by_allocation_id : null;
   return {
     id: String(row.id ?? ""),
     slug: String(row.slug ?? ""),
@@ -1176,9 +1178,10 @@ function mapEvidenceRow(row: Record<string, unknown>): FwcEvidenceMonitorRow {
     discoverableBy: String(row.discoverable_by ?? ""),
     tacticalEffect: String(row.tactical_effect ?? ""),
     isSecret: Boolean(row.is_secret),
-    found: Boolean(row.found),
+    // Held evidence is always treated as found in the monitor.
+    found: Boolean(row.found) || Boolean(heldByAllocationId),
     currentLocation: String(row.current_location ?? row.starting_location ?? ""),
-    heldByAllocationId: typeof row.held_by_allocation_id === "string" ? row.held_by_allocation_id : null,
+    heldByAllocationId,
     foundByAllocationId: typeof row.found_by_allocation_id === "string" ? row.found_by_allocation_id : null,
     foundAt: typeof row.found_at === "string" ? row.found_at : null,
     notes: typeof row.notes === "string" ? row.notes : "",
@@ -1428,6 +1431,10 @@ export async function updateFwcEvidenceState(input: {
     } else {
       patch.found_at = null;
       patch.found_by_allocation_id = null;
+      // Unfound items cannot still be held by someone.
+      if (input.heldByAllocationId === undefined) {
+        patch.held_by_allocation_id = null;
+      }
     }
   }
   if (input.currentLocation !== undefined) {
@@ -1438,6 +1445,14 @@ export async function updateFwcEvidenceState(input: {
     const holder = input.heldByAllocationId?.trim() || null;
     if (holder && !isUuid(holder)) return { ok: false, error: "Invalid character seat." };
     patch.held_by_allocation_id = holder;
+    if (holder) {
+      // Assigning a holder always marks the item found.
+      patch.found = true;
+      patch.found_at = current.found_at ?? new Date().toISOString();
+      if (!current.found_by_allocation_id) {
+        patch.found_by_allocation_id = holder;
+      }
+    }
   }
   if (input.notes !== undefined) {
     patch.notes = input.notes?.trim() || null;

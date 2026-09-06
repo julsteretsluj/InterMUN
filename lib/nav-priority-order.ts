@@ -26,7 +26,6 @@ export const DELEGATE_TAB_NAV_HREF_ORDER = [
   "/sources",
   "/ideas",
   "/profile",
-  "/report",
   "/crisis-slides",
   "/fwc/directives",
   "/fwc/movement",
@@ -63,7 +62,6 @@ export const CHAIR_STAFF_TAB_NAV_HREF_ORDER = [
   "/speeches",
   "/stances",
   "/crisis",
-  "/report",
   "/fwc/directives",
   "/fwc/movement",
   "/fwc/map",
@@ -126,7 +124,6 @@ export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "score",
   "discipline",
   "crisis",
-  "crisisReport",
   "fwcDirectives",
   "fwcMovement",
   "fwcMap",
@@ -173,7 +170,6 @@ export const DELEGATE_HUB_TILE_KEY_ORDER = [
   "chairFeedback",
   "archive",
   "crisisSlides",
-  "crisisReport",
 ] as const;
 
 /** Chair hub jump tab (href). */
@@ -192,7 +188,6 @@ export const CHAIR_HUB_TILE_HREF_ORDER = [
   "/chair/flow-checklist",
   "/chair/awards",
   "/crisis",
-  "/report",
   "/documents",
   "/official-links",
   "/chair/room-code",
@@ -240,7 +235,6 @@ export const PROFILE_DELEGATE_QUICK_LINK_HREF_ORDER = [
   "/sources",
   "/ideas",
   "/crisis-slides",
-  "/report",
 ] as const;
 
 export function hrefPriorityRank(href: string, order: readonly string[]): number {

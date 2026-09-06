@@ -414,7 +414,6 @@ export default async function ProfilePage({
                 ...(crisisReportingEnabled
                   ? ([
                       { href: "/crisis-slides", label: tp("delegateWelcome.links.crisisSlides") },
-                      { href: "/report", label: tp("delegateWelcome.links.report") },
                     ] as const)
                   : []),
                 { href: "/voting", label: tp("delegateWelcome.links.motions") },

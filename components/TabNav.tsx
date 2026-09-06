@@ -46,7 +46,6 @@ const NAV_EMOJIS: Record<string, string> = {
   "/amendments": "✏️",
   "/speeches": "🎤",
   "/running-notes": "🗒️",
-  "/report": "🚩",
   "/crisis": "⚡",
   "/crisis-slides": "🖼️",
   "/fwc/directives": "✉️",
@@ -84,11 +83,10 @@ const BASE_TABS = [
   { href: "/amendments", labelKey: "amendments" },
   { href: "/speeches", labelKey: "speeches" },
   { href: "/running-notes", labelKey: "running" },
-  { href: "/report", labelKey: "report" },
   { href: "/crisis-slides", labelKey: "crisisSlides" },
 ] as const;
 
-const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides", "/crisis"]);
+const CRISIS_ONLY_HREFS = new Set<string>(["/crisis-slides", "/crisis"]);
 
 const FWC_ONLY_TABS = [
   { href: "/fwc/directives", labelKey: "fwcDirectives", fwcOnly: true },
@@ -261,7 +259,7 @@ export function TabNav({
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
-  /** When false, hide crisis routes (`/report`, `/crisis-slides`, `/crisis`). */
+  /** When false, hide crisis routes (`/crisis-slides`, `/crisis`). */
   crisisReportingEnabled?: boolean;
   /** When true, show FWC-only routes (`/fwc/directives`, `/fwc/movement`, `/fwc/map`). */
   fwcCrisisEnabled?: boolean;

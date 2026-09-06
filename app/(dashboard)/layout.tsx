@@ -139,7 +139,16 @@ export default async function DashboardLayout({
     activeEvent?.id ?? "",
     activeEvent?.event_code
   );
-  const navRole = showStaffNav ? role ?? null : isAdvisorRole(normalizedRole) ? "advisor" : null;
+  /** SMT chair/delegate preview must use the previewed role for chrome, not secretariat staff tabs. */
+  const smtCommitteePreview =
+    isSmtRole(normalizedRole) && (smtSurface === "chair" || smtSurface === "delegate");
+  const navRole = smtCommitteePreview
+    ? (effectiveRole ?? null)
+    : showStaffNav
+      ? role ?? null
+      : isAdvisorRole(normalizedRole)
+        ? "advisor"
+        : null;
   const appName = getAppName();
   const displayName = profile?.name?.trim() || t("defaultDisplayName");
   const userEmail = user.email ?? "";
