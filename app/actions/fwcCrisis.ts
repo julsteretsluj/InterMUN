@@ -131,6 +131,23 @@ const FWC_REVALIDATE_PATHS = [
 const DIRECTIVE_SELECT =
   "id, conference_id, title, submitter_allocation_id, co_submitter_allocation_ids, directive_type, target_grid, request_body, assets_and_powers, reason, anonymity_status, approval_status, resolution_details, evaluation, created_at, updated_at";
 
+/** Static select so PostgREST typing stays a row, not `GenericStringError` from a dynamic join. */
+const FWC_METERS_SELECT =
+  "public_panic_exposure, dimensional_breach_index, hive_strain_spore_density, covert_secrecy_index, subterranean_footprint, subject_control_rating";
+
+function metersFromRow(row: unknown): FwcMeters {
+  const source =
+    row && typeof row === "object" && !Array.isArray(row)
+      ? (row as Record<string, unknown>)
+      : {};
+  const next: FwcMeters = { ...DEFAULT_METERS };
+  for (const key of FWC_METER_KEYS) {
+    const value = Number(source[key] ?? DEFAULT_METERS[key]);
+    next[key] = clampMeter(key, Number.isFinite(value) ? value : DEFAULT_METERS[key]);
+  }
+  return next;
+}
+
 function isUuid(v: string): boolean {
   return UUID_RE.test(v);
 }
@@ -546,27 +563,27 @@ async function applyMeterDeltas(
 
   const { data: current, error: readErr } = await db
     .from("fwc_meters")
-    .select(FWC_METER_KEYS.join(","))
+    .select(FWC_METERS_SELECT)
     .eq("conference_id", canonicalConferenceId)
     .maybeSingle();
   if (readErr) return { ok: false, error: readErr.message };
   if (!current) return { ok: false, error: "FWC meters are not initialized." };
 
+  const baseMeters = metersFromRow(current);
   const next: FwcMeters = { ...DEFAULT_METERS };
   for (const key of FWC_METER_KEYS) {
-    const base = Number((current as Record<string, unknown>)[key] ?? DEFAULT_METERS[key]);
     const delta = Number(deltas[key] ?? 0);
-    next[key] = clampMeter(key, (Number.isFinite(base) ? base : DEFAULT_METERS[key]) + (Number.isFinite(delta) ? delta : 0));
+    next[key] = clampMeter(key, baseMeters[key] + (Number.isFinite(delta) ? delta : 0));
   }
 
   const { data: updated, error: writeErr } = await db
     .from("fwc_meters")
     .update({ ...next, updated_at: new Date().toISOString() })
     .eq("conference_id", canonicalConferenceId)
-    .select(FWC_METER_KEYS.join(","))
+    .select(FWC_METERS_SELECT)
     .single();
   if (writeErr || !updated) return { ok: false, error: writeErr?.message ?? "Could not update meters." };
-  return { ok: true, data: updated as FwcMeters };
+  return { ok: true, data: metersFromRow(updated) };
 }
 
 /**
@@ -1135,13 +1152,13 @@ export async function updateFwcMeters(input: {
     .from("fwc_meters")
     .update({ ...patch, updated_at: new Date().toISOString() })
     .eq("conference_id", scope.data.canonicalConferenceId)
-    .select(FWC_METER_KEYS.join(","))
+    .select(FWC_METERS_SELECT)
     .maybeSingle();
   if (error) return { ok: false, error: error.message };
   if (!updated) return { ok: false, error: "FWC meters are not initialized." };
 
   revalidateFwcPaths();
-  return { ok: true, data: { meters: updated as FwcMeters } };
+  return { ok: true, data: { meters: metersFromRow(updated) } };
 }
 
 const EVIDENCE_SELECT =
