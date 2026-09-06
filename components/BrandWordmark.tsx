@@ -1,8 +1,7 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-import { getAppName, getAppTagline } from "@/lib/branding";
-import { InterMunEmblem } from "@/components/InterMunEmblem";
+import { getAppName, getAppTagline, INTERMUN_WORDMARK_DARK_PATH, INTERMUN_WORDMARK_LIGHT_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
 export function BrandWordmark({
@@ -11,7 +10,7 @@ export function BrandWordmark({
   surface = "theme",
 }: {
   className?: string;
-  /** Larger emblem only (e.g. login / signup); title and tagline stay default scale. */
+  /** Larger lockup (e.g. login / signup); title and tagline stay default scale. */
   size?: "default" | "hero";
   /** Auth/gate forms stay light even when the site theme is dark. */
   surface?: "theme" | "light";
@@ -20,18 +19,23 @@ export function BrandWordmark({
   const sub = getAppTagline();
   const hero = size === "hero";
   const alt = sub ? `${title} — ${sub}` : title;
+  const wordmarkClass = hero
+    ? "block h-auto w-auto max-h-14 max-w-[min(92vw,28rem)] shrink-0 object-contain object-center md:max-h-16 lg:max-h-20"
+    : "block h-auto w-auto max-h-10 max-w-[min(88vw,24rem)] shrink-0 object-contain object-center md:max-h-12";
+
   return (
     <div className={cn("text-center", className)}>
       <div className="flex justify-center">
-        <InterMunEmblem
-          alt={alt}
-          surface={surface}
-          className={cn(
-            hero
-              ? "max-h-28 w-auto max-w-[min(92vw,22rem)] md:max-h-36 lg:max-h-40"
-              : "max-h-20 w-auto max-w-[min(88vw,18rem)] md:max-h-24"
-          )}
-        />
+        <span className={cn("inline-flex max-w-full", surface !== "light" && "dark:hidden")}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- static brand wordmark sized via CSS classes */}
+          <img src={INTERMUN_WORDMARK_LIGHT_PATH} alt={alt} className={wordmarkClass} decoding="async" />
+        </span>
+        {surface !== "light" ? (
+          <span className="hidden max-w-full dark:inline-flex">
+            {/* eslint-disable-next-line @next/next/no-img-element -- static brand wordmark sized via CSS classes */}
+            <img src={INTERMUN_WORDMARK_DARK_PATH} alt={alt} className={wordmarkClass} decoding="async" />
+          </span>
+        ) : null}
       </div>
     </div>
   );
