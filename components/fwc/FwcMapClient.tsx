@@ -11,14 +11,18 @@ import {
 import { FwcMovementForm } from "@/components/fwc/FwcMovementForm";
 import { FWC_MARKER_LEGEND } from "@/lib/fwc/board-markers";
 import { lookupFwcCharacter } from "@/lib/fwc/characters";
+import type { FwcBoardEvidenceMarker } from "@/lib/fwc/evidence-location";
 
 export function FwcMapClient({
   characters,
+  evidenceMarkers = [],
   highlightAllocationId = null,
   showMovementForm = false,
   movementForm = null,
 }: {
   characters: FwcBoardCharacter[];
+  /** Chair-only: evidence catalog pins on the board. */
+  evidenceMarkers?: FwcBoardEvidenceMarker[];
   highlightAllocationId?: string | null;
   showMovementForm?: boolean;
   movementForm?: {
@@ -46,6 +50,7 @@ export function FwcMapClient({
     <div className="space-y-5">
       <FwcHawkinsBoard
         characters={characters}
+        evidenceMarkers={evidenceMarkers}
         highlightAllocationId={highlightAllocationId}
         onSelectCell={showMovementForm && movementForm ? setTargetHint : undefined}
       />
@@ -82,6 +87,11 @@ export function FwcMapClient({
               </li>
             ))}
           </ul>
+          {evidenceMarkers.length > 0 ? (
+            <p className="mt-3 text-xs text-[#6E6E73]">
+              Squared badges are evidence pins (chair view only). Tap one for title and grid.
+            </p>
+          ) : null}
         </section>
       ) : null}
 

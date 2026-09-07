@@ -12,6 +12,7 @@ import {
   loadViewerFwcCharacterSeat,
 } from "@/lib/fwc/load-page-context";
 import { lookupFwcCharacter } from "@/lib/fwc/characters";
+import { buildFwcBoardEvidenceMarkers } from "@/lib/fwc/evidence-location";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import { createClient } from "@/lib/supabase/server";
@@ -37,6 +38,7 @@ export default async function FwcMapPage() {
   const effectiveRole = String(
     effectiveDashboardRole(myRole, smtSurface) ?? myRole
   ).toLowerCase();
+  const showEvidenceOnMap = effectiveRole === "chair";
 
   const activeConf = await resolveDashboardConferenceForUser(profile.role, user.id);
   if (!activeConf || !isFwcCommittee(activeConf.committee)) {
@@ -55,12 +57,12 @@ export default async function FwcMapPage() {
   );
 
   const heldCounts = new Map<string, number>();
-  const { data: evidenceRows } = await supabase
+  const { data: heldRows } = await supabase
     .from("fwc_evidence_items")
     .select("held_by_allocation_id")
     .eq("conference_id", snapshot.canonicalConferenceId)
     .not("held_by_allocation_id", "is", null);
-  for (const row of evidenceRows ?? []) {
+  for (const row of heldRows ?? []) {
     const id = String(row.held_by_allocation_id ?? "");
     if (!id) continue;
     heldCounts.set(id, (heldCounts.get(id) ?? 0) + 1);
@@ -80,12 +82,44 @@ export default async function FwcMapPage() {
     };
   });
 
+  let evidenceMarkers: ReturnType<typeof buildFwcBoardEvidenceMarkers> = [];
+  if (showEvidenceOnMap) {
+    const { data: evidenceRows } = await supabase
+      .from("fwc_evidence_items")
+      .select(
+        "id, slug, title, starting_location, current_location, held_by_allocation_id"
+      )
+      .eq("conference_id", snapshot.canonicalConferenceId)
+      .order("slug", { ascending: true });
+
+    const holderGridByAllocationId: Record<string, string> = {};
+    for (const character of characters) {
+      holderGridByAllocationId[character.allocationId] = character.currentGrid;
+    }
+
+    evidenceMarkers = buildFwcBoardEvidenceMarkers(
+      (evidenceRows ?? []).map((row) => ({
+        id: String(row.id ?? ""),
+        slug: String(row.slug ?? ""),
+        title: String(row.title ?? ""),
+        startingLocation: String(row.starting_location ?? ""),
+        currentLocation: String(row.current_location ?? row.starting_location ?? ""),
+        heldByAllocationId:
+          typeof row.held_by_allocation_id === "string" ? row.held_by_allocation_id : null,
+      })),
+      holderGridByAllocationId
+    );
+  }
+
   return (
     <MunPageShell title="Hawkins map" variant="offset">
       <p className="max-w-3xl text-sm leading-relaxed text-[#6E6E73]">
         Parallel tactical board for Hawkins / the Upside Down. Markers show every seated
         character’s live grid from crisis state — positions are shared on the floor, not
         anonymous.
+        {showEvidenceOnMap
+          ? " Evidence badges (squared) are chair-only so the dais can see where every catalog item sits or who holds it."
+          : ""}
       </p>
 
       {snapshot.ensureError ? (
@@ -98,6 +132,7 @@ export default async function FwcMapPage() {
 
       <FwcMapClient
         characters={characters}
+        evidenceMarkers={evidenceMarkers}
         highlightAllocationId={viewer.seat?.id ?? null}
       />
     </MunPageShell>

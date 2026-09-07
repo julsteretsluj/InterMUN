@@ -64,3 +64,52 @@ export function groupFwcEvidenceByLocation(
     return a.label.localeCompare(b.label, undefined, { sensitivity: "base" });
   });
 }
+
+export type FwcBoardEvidenceMarker = {
+  id: string;
+  slug: string;
+  title: string;
+  /** Board cell used for placement (holder grid when held). */
+  grid: string;
+  heldByAllocationId: string | null;
+  placeLabel: string;
+};
+
+/** Chair map pins: place-based evidence on their grid; held items follow the holder’s cell. */
+export function buildFwcBoardEvidenceMarkers(
+  items: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    startingLocation: string;
+    currentLocation: string;
+    heldByAllocationId: string | null;
+  }>,
+  holderGridByAllocationId: Record<string, string>
+): FwcBoardEvidenceMarker[] {
+  const out: FwcBoardEvidenceMarker[] = [];
+  for (const item of items) {
+    let grid: string | null = null;
+    let placeLabel = "";
+    if (item.heldByAllocationId) {
+      grid = holderGridByAllocationId[item.heldByAllocationId]?.trim() || null;
+      placeLabel = "Held by character";
+    } else {
+      grid =
+        extractFwcGridFromLocation(item.currentLocation) ??
+        extractFwcGridFromLocation(item.startingLocation);
+      placeLabel =
+        item.currentLocation.trim() || item.startingLocation.trim() || "Unknown location";
+    }
+    if (!grid) continue;
+    out.push({
+      id: item.id,
+      slug: item.slug,
+      title: item.title,
+      grid,
+      heldByAllocationId: item.heldByAllocationId,
+      placeLabel,
+    });
+  }
+  return out.sort((a, b) => a.slug.localeCompare(b.slug, undefined, { sensitivity: "base" }));
+}
