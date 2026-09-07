@@ -15,6 +15,8 @@ import {
 } from "@/lib/smt-conference-filters";
 import {
   committeeTabKey,
+  dedupeCanonicalCommitteesByDisplayLabel,
+  mergeAllocationsAcrossSiblingConferences,
   pickCanonicalConferenceRowByAllocationScore,
   resolveCanonicalCommitteeConferenceId,
 } from "@/lib/conference-committee-canonical";
@@ -22,9 +24,33 @@ import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-diffi
 import { getTranslations } from "next-intl/server";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 function isUuid(v: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
+}
+
+/** PostgREST caps a single select at ~1000 rows; page so FWC / late chambers are not dropped. */
+async function fetchAllAllocationRows<T extends Record<string, unknown>>(
+  supabase: SupabaseClient,
+  conferenceIds: string[],
+  columns: string
+): Promise<T[]> {
+  if (conferenceIds.length === 0) return [];
+  const pageSize = 1000;
+  const out: T[] = [];
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("allocations")
+      .select(columns)
+      .in("conference_id", conferenceIds)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error || !data?.length) break;
+    out.push(...(data as unknown as T[]));
+    if (data.length < pageSize) break;
+  }
+  return out;
 }
 
 export async function updateSmtCommitteeBindingsAction(
@@ -296,16 +322,17 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
 
   const filtered = filterConferencesForSmtRoomCodes(rows ?? []);
   const filteredIds = filtered.map((c) => c.id);
-  const { data: allocSummaries } = filteredIds.length
-    ? await supabase
-        .from("allocations")
-        .select("conference_id, user_id")
-        .in("conference_id", filteredIds)
-    : { data: [] as { conference_id: string | null; user_id: string | null }[] };
+
+  type AllocSummary = { conference_id: string | null; user_id: string | null };
+  const allocSummaries = await fetchAllAllocationRows<AllocSummary>(
+    supabase,
+    filteredIds,
+    "conference_id, user_id"
+  );
 
   const allocationRowCountByConferenceId = new Map<string, number>();
   const linkedUserCountByConferenceId = new Map<string, number>();
-  for (const a of allocSummaries ?? []) {
+  for (const a of allocSummaries) {
     if (!a.conference_id) continue;
     allocationRowCountByConferenceId.set(
       a.conference_id,
@@ -325,6 +352,16 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     const arr = groupsByTab.get(k) ?? [];
     arr.push(c);
     groupsByTab.set(k, arr);
+  }
+
+  const canonicalByConferenceId = new Map<string, string>();
+  for (const groupRows of groupsByTab.values()) {
+    const primary = pickCanonicalConferenceRowByAllocationScore(
+      groupRows,
+      allocationRowCountByConferenceId,
+      linkedUserCountByConferenceId
+    );
+    for (const row of groupRows) canonicalByConferenceId.set(row.id, primary.id);
   }
 
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
@@ -349,28 +386,48 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
       { committee: b.committee, name: b.label }
     )
   );
-  const committees: { id: string; label: string }[] = committeesRaw.map(({ id, label }) => ({
-    id,
-    label,
-  }));
 
-  const conferenceIds = filtered.map((c) => c.id);
-  const { data: allocRows } =
-    conferenceIds.length > 0
-      ? await supabase
-          .from("allocations")
-          .select("id, country, conference_id, user_id, profiles(name, role)")
-          .in("conference_id", conferenceIds)
-      : { data: [] as unknown[] };
+  const { committees: dedupedCommittees, conferenceIdToCanonical } = dedupeCanonicalCommitteesByDisplayLabel(
+    committeesRaw.map(({ id, label }) => ({ id, label })),
+    canonicalByConferenceId
+  );
+  const committees = dedupedCommittees;
 
-  const canonicalByConferenceId = new Map<string, string>();
-  for (const groupRows of groupsByTab.values()) {
-    const primary = pickCanonicalConferenceRowByAllocationScore(
-      groupRows,
-      allocationRowCountByConferenceId,
-      linkedUserCountByConferenceId
-    );
-    for (const row of groupRows) canonicalByConferenceId.set(row.id, primary.id);
+  type AllocRow = {
+    id: string;
+    country: string | null;
+    conference_id: string;
+    user_id: string | null;
+  };
+  const allocRows = await fetchAllAllocationRows<AllocRow>(
+    supabase,
+    filteredIds,
+    "id, country, conference_id, user_id"
+  );
+
+  const linkedUserIds = [
+    ...new Set(allocRows.map((r) => r.user_id).filter((id): id is string => Boolean(id))),
+  ];
+  const profileNameById = new Map<string, string>();
+  if (linkedUserIds.length > 0) {
+    const pageSize = 1000;
+    for (let from = 0; from < linkedUserIds.length; from += pageSize) {
+      const slice = linkedUserIds.slice(from, from + pageSize);
+      const { data: profiles } = await supabase.from("profiles").select("id, name").in("id", slice);
+      for (const p of profiles ?? []) {
+        const name = p.name?.trim();
+        if (name) profileNameById.set(p.id, name);
+      }
+    }
+  }
+
+  const rowsByCanonical = new Map<string, AllocRow[]>();
+  for (const row of allocRows) {
+    const canonicalId = conferenceIdToCanonical.get(row.conference_id);
+    if (!canonicalId) continue;
+    const arr = rowsByCanonical.get(canonicalId) ?? [];
+    arr.push(row);
+    rowsByCanonical.set(canonicalId, arr);
   }
 
   const delegateSeatsByConferenceId: Record<string, { id: string; label: string }[]> = {};
@@ -380,29 +437,25 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     chairSeatsByConferenceId[c.id] = [];
   }
 
-  type AllocRow = {
-    id: string;
-    country: string | null;
-    conference_id: string;
-    user_id: string | null;
-    profiles: { name?: string | null; role?: string | null } | { name?: string | null; role?: string | null }[] | null;
-  };
-  for (const row of (allocRows ?? []) as AllocRow[]) {
-    const canonicalId = canonicalByConferenceId.get(row.conference_id);
-    if (!canonicalId) continue;
-    const profileRef = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
-    const displayCountry = row.country?.trim() || "—";
-    const displayName = profileRef?.name?.trim() || null;
-    const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
-    const isDais = isDaisSeatAllocationCountry(row.country);
-
-    // Chair preview uses dais placards only. Country seats stay in the delegate list even if a
-    // chair-role profile is linked — otherwise SMT can't pick that country for delegate preview.
-    if (isDais) {
-      chairSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
-      continue;
+  for (const [canonicalId, groupRows] of rowsByCanonical) {
+    if (!delegateSeatsByConferenceId[canonicalId]) {
+      delegateSeatsByConferenceId[canonicalId] = [];
+      chairSeatsByConferenceId[canonicalId] = [];
     }
-    delegateSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
+    const merged = mergeAllocationsAcrossSiblingConferences(groupRows, canonicalId);
+    for (const row of merged) {
+      const displayCountry = row.country?.trim() || "—";
+      const displayName = row.user_id ? profileNameById.get(row.user_id) ?? null : null;
+      const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
+
+      // Chair preview uses dais placards only. Country / character seats stay in the delegate list
+      // even if a chair-role profile is linked — otherwise SMT can't preview that placard.
+      if (isDaisSeatAllocationCountry(row.country)) {
+        chairSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
+        continue;
+      }
+      delegateSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
+    }
   }
 
   for (const c of committees) {
@@ -411,9 +464,12 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
   }
 
   const rawChairId = (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null;
-  const currentChairId = rawChairId
+  let currentChairId = rawChairId
     ? await resolveCanonicalCommitteeConferenceId(supabase, rawChairId)
     : null;
+  if (currentChairId) {
+    currentChairId = conferenceIdToCanonical.get(currentChairId) ?? currentChairId;
+  }
 
   return {
     conferences: committees,
