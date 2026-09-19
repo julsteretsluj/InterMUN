@@ -103,7 +103,7 @@ const LEGEND_DEF: { cat: SeamunLockedBlockCategory; msg: string }[] = [
   { cat: "sweep", msg: "legendSweep" },
 ];
 
-const SCHEDULE_COLUMN_MIN_H = "min-h-[56rem]";
+const SCHEDULE_COLUMN_MIN_H = "min-h-[64rem]";
 
 function ScheduleColumnBody({ col }: { col: SeamunLockedColumn }) {
   return (
@@ -127,14 +127,14 @@ function ScheduleColumnBody({ col }: { col: SeamunLockedColumn }) {
             key={`${b.start}-${b.end}-${b.title}`}
             title={`${b.title} ${b.start}–${b.end}`}
             className={cn(
-              "absolute left-0.5 right-0.5 z-[1] overflow-hidden rounded-md border px-1 py-0.5 shadow-sm",
+              "absolute left-0.5 right-0.5 z-[1] overflow-hidden rounded-md border px-1.5 py-1 shadow-sm",
               categoryClass(b.category)
             )}
             style={{ top: st.top, height: st.height }}
           >
-            <p className="line-clamp-2 text-[0.58rem] font-bold leading-tight sm:text-[0.62rem]">{b.title}</p>
+            <p className="line-clamp-2 text-[0.72rem] font-bold leading-tight sm:text-[0.78rem]">{b.title}</p>
             {compact ? null : (
-              <p className="mt-0.5 font-mono text-[0.52rem] tabular-nums leading-none opacity-80 sm:text-[0.55rem]">
+              <p className="mt-0.5 font-mono text-[0.62rem] tabular-nums leading-none opacity-80 sm:text-[0.68rem]">
                 {b.start}–{b.end}
               </p>
             )}
@@ -149,16 +149,16 @@ function ScheduleGrid({ columns }: { columns: SeamunLockedColumn[] }) {
   return (
     <div className="overflow-x-auto pb-1">
       <div className="inline-flex min-w-full gap-0">
-        <div className="sticky left-0 z-[1] w-14 shrink-0 border-r border-brand-navy/10 bg-brand-paper pr-1 sm:w-16">
-          <div className="h-10 border-b border-brand-navy/10" aria-hidden />
+        <div className="sticky left-0 z-[1] w-16 shrink-0 border-r border-brand-navy/10 bg-brand-paper pr-1 sm:w-[4.5rem]">
+          <div className="h-12 border-b border-brand-navy/10" aria-hidden />
           <div className={cn("relative", SCHEDULE_COLUMN_MIN_H)}>
             {AXIS_TICKS.map((tick) => {
               const top = ((timeToMinutes(tick) - SEAMUN_I_2027_AXIS_START_MIN) / AXIS_RANGE) * 100;
               return (
                 <div
                   key={tick}
-                  className="absolute right-0.5 font-mono text-[0.6rem] tabular-nums leading-none text-brand-muted"
-                  style={{ top: `calc(${top}% - 0.35rem)` }}
+                  className="absolute right-0.5 font-mono text-[0.72rem] tabular-nums leading-none text-brand-muted sm:text-[0.78rem]"
+                  style={{ top: `calc(${top}% - 0.4rem)` }}
                 >
                   {tick}
                 </div>
@@ -172,10 +172,10 @@ function ScheduleGrid({ columns }: { columns: SeamunLockedColumn[] }) {
             key={col.header}
             className={cn(
               "border-r border-brand-navy/10 last:border-r-0",
-              columns.length === 1 ? "min-w-[12rem] flex-1 max-w-md" : "min-w-[9.5rem] flex-1 sm:min-w-[10.5rem]"
+              columns.length === 1 ? "min-w-[14rem] flex-1 max-w-lg" : "min-w-[11rem] flex-1 sm:min-w-[12rem]"
             )}
           >
-            <div className="flex h-10 items-end justify-center border-b border-brand-navy/10 px-1 pb-1 text-center text-[0.65rem] font-semibold leading-tight text-brand-navy dark:text-zinc-100">
+            <div className="flex h-12 items-end justify-center border-b border-brand-navy/10 px-1.5 pb-1.5 text-center text-sm font-semibold leading-tight text-brand-navy dark:text-zinc-100">
               {col.header}
             </div>
             <ScheduleColumnBody col={col} />
@@ -199,7 +199,7 @@ export type SeamunI2027LockedScheduleVisualProps = {
 
 function tabClass(active: boolean) {
   return cn(
-    "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
+    "rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold transition-apple",
     active
       ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
       : "text-brand-muted hover:bg-brand-navy/5"
@@ -208,7 +208,7 @@ function tabClass(active: boolean) {
 
 function pillClass(active: boolean) {
   return cn(
-    "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
+    "rounded-[var(--radius-md)] border px-3 py-2 text-sm font-semibold transition-apple",
     active
       ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
       : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
@@ -334,13 +334,13 @@ export function SeamunI2027LockedScheduleVisual({
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="font-sans text-xl font-semibold text-brand-navy">{t("title")}</h2>
-          <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
-          {isSmt ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("smtBrowseHint")}</p> : null}
-          {isAdvisor ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorOnlyHint")}</p> : null}
-          {isCommittee ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("committeeOnlyHint")}</p> : null}
+          <h2 className="font-sans text-2xl font-semibold tracking-tight text-brand-navy">{t("title")}</h2>
+          <p className="mt-1 text-base text-brand-muted">{t("body")}</p>
+          {isSmt ? <p className="mt-2 text-base text-brand-navy/90 dark:text-zinc-200">{t("smtBrowseHint")}</p> : null}
+          {isAdvisor ? <p className="mt-2 text-base text-brand-navy/90 dark:text-zinc-200">{t("advisorOnlyHint")}</p> : null}
+          {isCommittee ? <p className="mt-2 text-base text-brand-navy/90 dark:text-zinc-200">{t("committeeOnlyHint")}</p> : null}
           {handbookHref ? (
-            <p className="mt-3 text-sm text-brand-navy/90 dark:text-zinc-200">
+            <p className="mt-3 text-base text-brand-navy/90 dark:text-zinc-200">
               <a
                 href={handbookHref}
                 target="_blank"
@@ -353,7 +353,7 @@ export function SeamunI2027LockedScheduleVisual({
             </p>
           ) : null}
         </div>
-        <div className="flex shrink-0 gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
+        <div className="flex shrink-0 gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-1 dark:bg-black/25">
           {([1, 2] as const).map((d) => (
             <button key={d} type="button" onClick={() => setDay(d)} className={tabClass(day === d)}>
               {d === 1 ? tSched("day1Tab") : tSched("day2Tab")}
@@ -363,7 +363,7 @@ export function SeamunI2027LockedScheduleVisual({
       </div>
 
       {isSmt ? (
-        <div className="mb-4 flex flex-wrap gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
+        <div className="mb-4 flex flex-wrap gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-1 dark:bg-black/25">
           {(
             [
               ["teams", "browseTeams"],
@@ -389,7 +389,7 @@ export function SeamunI2027LockedScheduleVisual({
             <button type="button" onClick={() => selectTeamsScope("all")} className={tabClass(teamsScope === "all")}>
               {t("teamsScopeAll")}
             </button>
-            <span className="text-xs text-brand-muted">{t("pickDebateTrack")}</span>
+            <span className="text-sm text-brand-muted">{t("pickDebateTrack")}</span>
             {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
               <button
                 key={g.id}
@@ -402,7 +402,7 @@ export function SeamunI2027LockedScheduleVisual({
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-brand-muted">{t("pickLunchGroup")}</span>
+            <span className="text-sm text-brand-muted">{t("pickLunchGroup")}</span>
             {SEAMUN_I_2027_LUNCH_GROUPS.map((g) => (
               <button
                 key={g.id}
@@ -419,7 +419,7 @@ export function SeamunI2027LockedScheduleVisual({
 
       {browseMode === "committee" && showCommitteePicker ? (
         <div className="mb-4 space-y-2">
-          <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickCommitteeAll")}</p>
+          <p className="text-base font-semibold text-brand-navy dark:text-zinc-100">{t("pickCommitteeAll")}</p>
           <div className="flex flex-wrap gap-2">
             {allCommittees.map((ch) => (
               <button
@@ -437,12 +437,12 @@ export function SeamunI2027LockedScheduleVisual({
       ) : null}
 
       {showLockedCommitteeLabel ? (
-        <p className="mb-4 text-sm font-semibold text-brand-navy dark:text-zinc-100">{committee}</p>
+        <p className="mb-4 text-base font-semibold text-brand-navy dark:text-zinc-100">{committee}</p>
       ) : null}
 
       {browseMode === "advisor" && (isSmt || isAdvisor) ? (
         <div className="mb-4 space-y-2">
-          <p className="text-sm text-brand-muted">{t("advisorRosterHint")}</p>
+          <p className="text-base text-brand-muted">{t("advisorRosterHint")}</p>
           <div className="flex flex-wrap gap-2">
             {SEAMUN_I_2027_ADVISOR_ROSTER.map((entry) => {
               const key = formatSeamunAdvisorRosterKey(entry);
@@ -465,11 +465,11 @@ export function SeamunI2027LockedScheduleVisual({
 
       {isSmt && browseMode === "teams" ? (
         <div className="mb-5 overflow-x-auto rounded-xl border border-brand-navy/10 bg-white/50 p-4 dark:bg-black/20">
-          <h3 className="mb-1 text-sm font-semibold text-brand-navy dark:text-zinc-100">
+          <h3 className="mb-1 text-base font-semibold text-brand-navy dark:text-zinc-100">
             {t("lunchGroupsMatrixTitle")}
           </h3>
-          <p className="mb-3 text-xs text-brand-muted">{t("lunchGroupsMatrixHint")}</p>
-          <table className="w-full min-w-[20rem] text-left text-xs">
+          <p className="mb-3 text-sm text-brand-muted">{t("lunchGroupsMatrixHint")}</p>
+          <table className="w-full min-w-[20rem] text-left text-sm">
             <thead>
               <tr className="border-b border-brand-navy/10 text-brand-muted">
                 <th className="py-2 pr-4 font-semibold">{t("colLunchGroup")}</th>
@@ -492,11 +492,11 @@ export function SeamunI2027LockedScheduleVisual({
         </div>
       ) : null}
 
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-muted">{t("legendTitle")}</p>
-      <div className="mb-5 flex flex-wrap gap-x-4 gap-y-2 text-[0.65rem] text-brand-navy/90 dark:text-zinc-200">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-brand-muted">{t("legendTitle")}</p>
+      <div className="mb-5 flex flex-wrap gap-x-4 gap-y-2 text-sm text-brand-navy/90 dark:text-zinc-200">
         {LEGEND_DEF.map(({ cat, msg }) => (
           <span key={cat} className="inline-flex items-center gap-1.5">
-            <span className={cn("h-2.5 w-4 shrink-0 rounded-sm border", categoryClass(cat))} aria-hidden />
+            <span className={cn("h-3 w-5 shrink-0 rounded-sm border", categoryClass(cat))} aria-hidden />
             {t(msg)}
           </span>
         ))}
@@ -505,7 +505,7 @@ export function SeamunI2027LockedScheduleVisual({
       <CanteenLeaveNotice className="mb-5" />
 
       {awaitingSelection ? (
-        <p className="mb-4 rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-center text-sm text-brand-muted">
+        <p className="mb-4 rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-center text-base text-brand-muted">
           {browseMode === "advisor" ? t("selectAdvisorPrompt") : t("selectCommitteePrompt")}
         </p>
       ) : null}
