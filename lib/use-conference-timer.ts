@@ -4,25 +4,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { playTimerExpiryAlarm } from "@/lib/timer-expiry-alarm";
+import {
+  useSharedConferenceTimerRow,
+  type ConferenceTimerRow,
+} from "@/lib/hooks/useCommitteeLiveStore";
 
-export type ConferenceTimerRow = {
-  id: string;
-  conference_id: string | null;
-  current_speaker: string | null;
-  next_speaker: string | null;
-  time_left_seconds: number;
-  total_time_seconds: number;
-  vote_item_id?: string | null;
-  per_speaker_mode?: boolean | null;
-  /** When false, countdown is frozen until the chair starts again. */
-  is_running?: boolean | null;
-  /** Delegate-visible label (e.g. GSL 60s). */
-  floor_label?: string | null;
-  /** Shown when paused (e.g. after chair logs a pause reason). */
-  current_pause_reason?: string | null;
-};
+export type { ConferenceTimerRow };
 
 /** Hide idle timer numbers on the live floor until something is actively happening. */
 export function shouldShowLiveFloorTimerUI(
@@ -50,67 +38,30 @@ function timerVisibleForFloor(
 
 /**
  * Live committee floor timer (Supabase `timers` table).
- * @param activeVoteItemId Procedure current vote item when in voting_procedure; null otherwise.
- *        Timer rows with vote_item_id set are hidden unless they match or per_speaker_mode is on.
- * @param chairSeesRawTimer When true, ignore motion binding so chairs always see the committee timer row (for controls).
+ * Shares one realtime channel per conference via useCommitteeLiveStore.
  */
 export function useConferenceTimer(
   conferenceId: string | null,
   activeVoteItemId: string | null = null,
   chairSeesRawTimer = false
 ) {
-  const [rawTimer, setRawTimer] = useState<ConferenceTimerRow | null>(null);
+  const rawTimer = useSharedConferenceTimerRow(conferenceId);
   const [elapsed, setElapsed] = useState(0);
-  const supabase = useMemo(() => createClient(), []);
   const prevRemainingRef = useRef<number | null>(null);
   const canExpireAlarmRef = useRef(false);
+  const timerIdentity = rawTimer
+    ? `${rawTimer.id}:${rawTimer.time_left_seconds}:${rawTimer.is_running}:${rawTimer.total_time_seconds}`
+    : "";
+
+  useEffect(() => {
+    setElapsed(0);
+  }, [timerIdentity]);
 
   const timer = useMemo(() => {
     if (!rawTimer) return null;
     if (chairSeesRawTimer) return rawTimer;
     return timerVisibleForFloor(rawTimer, activeVoteItemId) ? rawTimer : null;
   }, [rawTimer, activeVoteItemId, chairSeesRawTimer]);
-
-  useEffect(() => {
-    if (!conferenceId) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- drop timer when no committee
-      setRawTimer(null);
-      return;
-    }
-    void supabase
-      .from("timers")
-      .select("*")
-      .eq("conference_id", conferenceId)
-      .maybeSingle()
-      .then(({ data }) => {
-        setElapsed(0);
-        if (data) setRawTimer(data as ConferenceTimerRow);
-        else setRawTimer(null);
-      });
-  }, [supabase, conferenceId]);
-
-  useEffect(() => {
-    if (!conferenceId) return;
-    const channel = supabase
-      .channel(`timers-hook-${conferenceId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "timers",
-          filter: `conference_id=eq.${conferenceId}`,
-        },
-        (payload) => {
-          setRawTimer(payload.new as ConferenceTimerRow);
-          setElapsed(0);
-        }
-      )
-      .subscribe();
-    return () => {
-      void supabase.removeChannel(channel);
-    };
-  }, [supabase, conferenceId]);
 
   useEffect(() => {
     if (!timer?.time_left_seconds) return;

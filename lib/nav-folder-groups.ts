@@ -51,6 +51,7 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   session: "session",
   rollCall: "session",
   speakers: "session",
+  openingSpeech: "session",
   formalMotions: "session",
   agenda: "session",
   timer: "session",

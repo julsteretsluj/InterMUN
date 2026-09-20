@@ -7,6 +7,7 @@ import {
   disciplineSpeakBlockMessage,
   fetchDisciplineForAllocation,
 } from "@/lib/delegate-discipline";
+import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
 
 export type SpeakerQueueEntry = {
   id: string;
@@ -91,5 +92,6 @@ export async function addAllocationToSpeakerQueue(
     status: "waiting",
   });
   if (error) return { ok: false, message: error.message };
+  notifySpeakerQueueUpdated(conferenceId);
   return { ok: true };
 }

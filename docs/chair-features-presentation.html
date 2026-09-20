@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InterMUN — Chair features</title>
+  <style>
+    :root {
+      --bg: #F2F2F7;
+      --card: #FFFFFF;
+      --ink: #1D1D1F;
+      --muted: #6E6E73;
+      --tertiary: #AEAEB2;
+      --line: #D1D1D6;
+      --accent: #007AFF;
+      --accent-hover: #0077ED;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --radius: 16px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: clamp(2rem, 5vw, 4rem);
+      align-items: stretch;
+    }
+    .slide.active { display: flex; }
+
+    .frame {
+      width: min(1100px, 100%);
+      margin: auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(60, 60, 67, 0.12);
+      padding: clamp(1.75rem, 4vw, 3rem);
+      min-height: min(72vh, 640px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .lede, p, li {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      line-height: 1.45;
+    }
+    .lede { margin: 0; max-width: 38rem; }
+    ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+    li strong { color: var(--ink); font-weight: 600; }
+
+    .hero-brand {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.5rem;
+    }
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      background: #FAFAFC;
+    }
+    .tile h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .tile p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 980px;
+      padding: 0.4rem 0.85rem;
+      background: rgba(0, 122, 255, 0.1);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .chip.soft {
+      background: rgba(60, 60, 67, 0.08);
+      color: var(--ink);
+    }
+    .arrow { color: var(--tertiary); font-weight: 600; }
+
+    .footer-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      background: rgba(242, 242, 247, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(60, 60, 67, 0.12);
+      z-index: 5;
+    }
+    .footer-bar button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 980px;
+      padding: 0.55rem 1rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .footer-bar button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    .footer-bar button:hover { filter: brightness(0.98); }
+    .footer-bar button.primary:hover { background: var(--accent-hover); }
+    .progress {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: var(--tertiary);
+    }
+    .note {
+      margin: 0;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background: rgba(0, 122, 255, 0.08);
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck" aria-live="polite">
+
+    <section class="slide active" data-title="Title">
+      <div class="frame">
+        <p class="hero-brand">InterMUN</p>
+        <h1>Chair features</h1>
+        <p class="lede">A walkthrough of every dais tool — prep, floor, documents, and wrap-up — so you can run committee from one workspace.</p>
+        <p class="hint">Use ← → or space · click Next</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Your job">
+      <div class="frame">
+        <p class="eyebrow">Overview</p>
+        <h2>What chairs do in InterMUN</h2>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Prep</h3>
+            <p>Room code, checklist, matrix, digital room, guides.</p>
+          </div>
+          <div class="tile">
+            <h3>Floor</h3>
+            <p>Session clock, roll, speakers, motions, timer, votes.</p>
+          </div>
+          <div class="tile">
+            <h3>Documents</h3>
+            <p>Resolutions, amendments, notes moderation.</p>
+          </div>
+          <div class="tile">
+            <h3>Wrap-up</h3>
+            <p>Session progress, awards, stop session, archive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Prep">
+      <div class="frame">
+        <p class="eyebrow">Before first session</p>
+        <h2>Getting set</h2>
+        <ul>
+          <li><strong>Room code</strong> — six characters to join the committee (not placard passwords).</li>
+          <li><strong>Prep checklist</strong> — rules, topic, tech, co-chair roles.</li>
+          <li><strong>Delegates</strong> — confirm seats on the allocation matrix (usually SMT-owned).</li>
+          <li><strong>Digital Room</strong> — placards, roll status, private chair flags.</li>
+          <li><strong>Guides &amp; official links</strong> — RoP and research for your chamber.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Two rooms">
+      <div class="frame">
+        <p class="eyebrow">Surfaces</p>
+        <h2>Digital Room vs Committee room</h2>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Digital Room</h3>
+            <p>Chair placard board, compliment / concern / reminder flags, speaker list controls on this device.</p>
+          </div>
+          <div class="tile">
+            <h3>Committee room</h3>
+            <p>Full live floor delegates see — timers, announcements, request to speak, shared status.</p>
+          </div>
+        </div>
+        <p class="note">The <strong>speaker list</strong> is the same everywhere: Speakers, Opening speeches, Digital Room, and the committee floor.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Day-of flow">
+      <div class="frame">
+        <p class="eyebrow">Day of</p>
+        <h2>Suggested floor order</h2>
+        <div class="flow">
+          <span class="chip soft">Start session</span><span class="arrow">→</span>
+          <span class="chip soft">Roll call</span><span class="arrow">→</span>
+          <span class="chip">Opening speeches</span><span class="arrow">→</span>
+          <span class="chip soft">Speakers</span><span class="arrow">→</span>
+          <span class="chip soft">Motions</span><span class="arrow">→</span>
+          <span class="chip soft">Timer</span>
+        </div>
+        <div class="flow" style="margin-top:0.5rem">
+          <span class="chip soft">Agenda</span><span class="arrow">→</span>
+          <span class="chip soft">Announcements</span><span class="arrow">→</span>
+          <span class="chip soft">Voting</span><span class="arrow">→</span>
+          <span class="chip soft">Discipline</span><span class="arrow">→</span>
+          <span class="chip soft">Wrap-up</span>
+        </div>
+        <p class="lede">Follow your RoP; InterMUN just keeps the tools in one place.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Session & roll">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Session start &amp; roll call</h2>
+        <ul>
+          <li><strong>Start session</strong> — turns on the shared committee session clock.</li>
+          <li><strong>Roll call</strong> — present, present &amp; voting, or absent.</li>
+          <li>Watch <strong>quorum</strong> before substantive votes.</li>
+          <li>Top status bar shows session time and the current speaker when one is set.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Opening speeches">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Opening speeches</h2>
+        <ul>
+          <li>One-click <strong>A→Z speakers list</strong> for every eligible delegation.</li>
+          <li>Default <strong>60s</strong> per speaker (paused until you Start).</li>
+          <li>First speaker marked current; advance from list controls.</li>
+          <li>Extend to <strong>90s</strong> by passing <em>Motion to Extend Opening Speech Time</em>.</li>
+          <li>Discipline-blocked seats are skipped automatically.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Speakers">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Speakers list (GSL &amp; caucuses)</h2>
+        <ul>
+          <li>Add, remove, reorder, set <strong>Current</strong>, and <strong>Advance</strong>.</li>
+          <li>Delegates can <strong>Request to speak</strong> when you allow it.</li>
+          <li>After a moderated caucus or open GSL passes, InterMUN prompts you to fill the list.</li>
+          <li>Prefer the list over typing names into the timer — names stay synced.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Motions">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Formal motions</h2>
+        <ul>
+          <li>Entertain motions; use presets (GSL, mod/unmod, open/close debate, extend opening speech…).</li>
+          <li>Record Yes / No / Abstain and close the vote.</li>
+          <li>Competing motions follow disruptiveness order.</li>
+        </ul>
+        <p class="note"><strong>Formal motions</strong> = real votes on the floor. A Motions &amp; Points log (if used) is scratch notes — not a substitute.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Timer">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Timer</h2>
+        <ul>
+          <li>Floor presets for speeches and caucuses; pause with a reason.</li>
+          <li><strong>Per-speaker mode</strong> for GSL, openings, and moderated speaker times.</li>
+          <li>Current / next speaker come from the <strong>speakers list</strong>.</li>
+          <li>Delegates see the live clock in the committee room and status bar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Agenda & announcements">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Agenda &amp; announcements</h2>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Agenda</h3>
+            <p>Switch the live topic when debate moves on. Motions, timers, and speakers follow that topic row.</p>
+          </div>
+          <div class="tile">
+            <h3>Announcements</h3>
+            <p>Pin short dais lines so they appear in Digital Room and the committee room.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Voting & discipline">
+      <div class="frame">
+        <p class="eyebrow">Floor</p>
+        <h2>Voting &amp; discipline</h2>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Voting</h3>
+            <p>Open votes with the right majority. Chairs record placards from Session; delegates use Voting.</p>
+          </div>
+          <div class="tile">
+            <h3>Discipline</h3>
+            <p>Warnings → strikes → rights (no vote / no speak / removed). Use sparingly; always log a reason.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Digital Room">
+      <div class="frame">
+        <p class="eyebrow">Live board</p>
+        <h2>Digital Room features</h2>
+        <ul>
+          <li>Searchable placard grid with roll status.</li>
+          <li>Add a placard to the <strong>shared speaker list</strong> in one tap.</li>
+          <li>Private <strong>compliment / concern / reminder</strong> flags (synced for chairs on that committee).</li>
+          <li>Jump to full committee room or the delegates matrix when needed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Documents">
+      <div class="frame">
+        <p class="eyebrow">Mid-session</p>
+        <h2>Documents &amp; crisis</h2>
+        <ul>
+          <li><strong>Resolutions / amendments</strong> — review drafts before substantive debate and voting.</li>
+          <li><strong>Notes moderation</strong> — hold, release, or bounce notes when enabled.</li>
+          <li><strong>Crisis tools</strong> — slides, FWC directives / map / backroom only when your committee uses them.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Wrap-up">
+      <div class="frame">
+        <p class="eyebrow">Close</p>
+        <h2>Wrap-up</h2>
+        <ul>
+          <li><strong>Session progress</strong> — tick stages (opening → caucuses → writing → voting → superlatives); SMT can see updates.</li>
+          <li><strong>Score / Awards</strong> — rubric, nominations, submit when required.</li>
+          <li><strong>Stop session</strong> — end the shared session clock.</li>
+          <li>Leave files in Archive / Documents as directed by SMT.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Tips">
+      <div class="frame">
+        <p class="eyebrow">Remember</p>
+        <h2>Quick tips</h2>
+        <ul>
+          <li>One <strong>speakers list</strong> drives Speakers, Opening speeches, Digital Room, and the floor bar.</li>
+          <li>Share the <strong>room code</strong>, not placard passwords, for committee join.</li>
+          <li>Empty speaker chip in the top bar means nobody is current — that’s intentional.</li>
+          <li>Full written playbook: <strong>Guides → InterMUN guide for chairs</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" data-title="End">
+      <div class="frame">
+        <p class="hero-brand">InterMUN</p>
+        <h2>You’re ready for the dais</h2>
+        <p class="lede">Start with Prep checklist, then run the day-of flow. When in doubt, open Guides or ask SMT.</p>
+        <p class="hint">Press Esc for overview · F for fullscreen</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer-bar">
+    <button type="button" id="prev">Previous</button>
+    <div style="text-align:center">
+      <div class="progress" id="progress">1 / 1</div>
+      <div class="hint" id="titleHint"></div>
+    </div>
+    <button type="button" class="primary" id="next">Next</button>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    let i = 0;
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      document.getElementById("progress").textContent = `${i + 1} / ${slides.length}`;
+      document.getElementById("titleHint").textContent = slides[i].dataset.title || "";
+      document.getElementById("prev").disabled = i === 0;
+      document.getElementById("next").textContent = i === slides.length - 1 ? "Done" : "Next";
+    }
+
+    document.getElementById("prev").addEventListener("click", () => show(i - 1));
+    document.getElementById("next").addEventListener("click", () => {
+      if (i === slides.length - 1) return;
+      show(i + 1);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+        e.preventDefault();
+        show(i + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault();
+        show(i - 1);
+      } else if (e.key === "Home") {
+        show(0);
+      } else if (e.key === "End") {
+        show(slides.length - 1);
+      } else if (e.key === "f" || e.key === "F") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+    });
+
+    show(0);
+  </script>
+</body>
+</html>

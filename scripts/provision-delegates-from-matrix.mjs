@@ -98,6 +98,16 @@ async function createDelegateUser(admin, origin, email, name) {
     return { userId, action: "invite email sent" };
   }
 
+  // generateLink often creates the auth user before SMTP send; still usable.
+  let userId = user?.id ?? null;
+  if (!userId) userId = (await findUserByEmail(admin, email))?.id ?? null;
+  if (userId) {
+    return {
+      userId,
+      action: `account ready (${error.message}) — use Forgot password at /login`,
+    };
+  }
+
   const rateLimited = /rate limit/i.test(error.message);
   if (!rateLimited) {
     return { userId: null, action: null, error: `Invite failed: ${error.message}` };
@@ -245,9 +255,10 @@ async function resolveAllocation(admin, delegate, legacyCode) {
   return { allocation: canonicalAlloc, scope, legacyCode, matchedBy: "gateCodeCountry" };
 }
 
-async function provisionOne(admin, origin, delegate, dryRun) {
+async function provisionOne(admin, origin, delegate, dryRun, noInvite = false) {
   const email = delegate.email.trim().toLowerCase();
   const name = delegate.name.trim() || email.split("@")[0];
+  const school = (delegate.school ?? "").trim() || null;
   const legacyCode = toLegacyGateCode(delegate.placardCode);
   const resolved = await resolveAllocation(admin, delegate, legacyCode);
 
@@ -260,6 +271,36 @@ async function provisionOne(admin, origin, delegate, dryRun) {
   }
 
   const { allocation, scope } = resolved;
+
+  // Always keep matrix name/school on the seat (all topic siblings by country).
+  if (!dryRun) {
+    const { data: siblingSeats } = await admin
+      .from("allocations")
+      .select("id")
+      .in("conference_id", scope.siblingConferenceIds ?? [scope.canonicalConferenceId])
+      .eq("country", allocation.country);
+    if (siblingSeats?.length) {
+      await admin
+        .from("allocations")
+        .update({
+          display_name_override: name,
+          display_school_override: school,
+        })
+        .in(
+          "id",
+          siblingSeats.map((s) => s.id)
+        );
+    } else {
+      await admin
+        .from("allocations")
+        .update({
+          display_name_override: name,
+          display_school_override: school,
+        })
+        .eq("id", allocation.id);
+    }
+  }
+
   if (allocation.user_id) {
     const { data: existingProfile } = await admin
       .from("profiles")
@@ -268,10 +309,16 @@ async function provisionOne(admin, origin, delegate, dryRun) {
       .maybeSingle();
     const existingEmailUser = await findUserByEmail(admin, email);
     if (existingEmailUser?.id === allocation.user_id) {
+      if (!dryRun) {
+        await admin
+          .from("profiles")
+          .update({ role: "delegate", name, allocation: allocation.country, updated_at: new Date().toISOString() })
+          .eq("id", allocation.user_id);
+      }
       return {
         email,
         ok: true,
-        action: "already assigned to this seat",
+        action: "already assigned to this seat — name refreshed",
         allocationId: allocation.id,
         country: allocation.country,
         legacyCode,
@@ -296,6 +343,7 @@ async function provisionOne(admin, origin, delegate, dryRun) {
       allocationId: allocation.id,
       country: allocation.country,
       conferenceId: scope.canonicalConferenceId,
+      action: noInvite ? "would set override + assign if account exists" : "would invite/assign",
     };
   }
 
@@ -318,16 +366,34 @@ async function provisionOne(admin, origin, delegate, dryRun) {
       };
     }
     action = "assigned existing delegate account";
+  } else if (noInvite) {
+    return {
+      email,
+      ok: true,
+      action: "name/school override set — no account yet (invite skipped)",
+      allocationId: allocation.id,
+      country: allocation.country,
+      legacyCode,
+      matchedBy: resolved.matchedBy,
+      needsInvite: true,
+    };
   } else {
     if (!origin) {
       return { email, ok: false, error: "NEXT_PUBLIC_APP_URL required for invites" };
     }
     const created = await createDelegateUser(admin, origin, email, name);
     if (!created.userId) {
-      return { email, ok: false, error: created.error ?? "Could not create user" };
+      // Invite may have created the auth user even when SMTP send failed.
+      const fallback = await findUserByEmail(admin, email);
+      if (!fallback) {
+        return { email, ok: false, error: created.error ?? "Could not create user" };
+      }
+      userId = fallback.id;
+      action = `${created.error ?? "invite warning"} — assigned existing account`;
+    } else {
+      userId = created.userId;
+      action = created.action;
     }
-    userId = created.userId;
-    action = created.action;
   }
 
   await admin
@@ -372,6 +438,7 @@ async function main() {
   loadEnvLocal();
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
+  const noInvite = args.includes("--no-invite");
   const delayMs = Number(args.find((a) => a.startsWith("--delay-ms="))?.split("=")[1] ?? "1200");
   const delegateIdx = args.indexOf("--delegate");
   const delegateJson = delegateIdx >= 0 ? args[delegateIdx + 1] : null;
@@ -400,8 +467,8 @@ async function main() {
   } else {
     if (!xlsxPath) {
       console.error(
-        "Usage: node scripts/provision-delegates-from-matrix.mjs <matrix.xlsx> [--dry-run]\n" +
-          '   or: node scripts/provision-delegates-from-matrix.mjs --delegate \'{"sheet":"ECOSOC",...}\' [--dry-run]'
+        "Usage: node scripts/provision-delegates-from-matrix.mjs <matrix.xlsx> [--dry-run] [--no-invite]\n" +
+          '   or: node scripts/provision-delegates-from-matrix.mjs --delegate \'{"sheet":"ECOSOC",...}\' [--dry-run] [--no-invite]'
       );
       process.exit(1);
     }
@@ -419,20 +486,23 @@ async function main() {
 
   const results = [];
   for (const delegate of delegates) {
-    results.push(await provisionOne(admin, origin, delegate, dryRun));
-    if (!dryRun && delayMs > 0) await sleep(delayMs);
+    results.push(await provisionOne(admin, origin, delegate, dryRun, noInvite));
+    if (!dryRun && !noInvite && delayMs > 0) await sleep(delayMs);
   }
 
   const ok = results.filter((r) => r.ok);
   const failed = results.filter((r) => !r.ok);
+  const needsInvite = results.filter((r) => r.needsInvite);
 
   console.log(
     JSON.stringify(
       {
         dryRun,
+        noInvite,
         total: results.length,
         succeeded: ok.length,
         failed: failed.length,
+        needsInvite: needsInvite.length,
         results,
       },
       null,

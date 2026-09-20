@@ -7,6 +7,7 @@ import { type RollAttendance, parseRollAttendance } from "@/lib/roll-attendance"
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { getTranslations } from "next-intl/server";
 import { getChamberScope } from "@/lib/chamber-scope";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 
 export default async function ChairDigitalRoomPage() {
@@ -30,6 +31,7 @@ export default async function ChairDigitalRoomPage() {
 
   const conferenceId = await requireActiveConferenceId();
   const scope = await getChamberScope(supabase, conferenceId);
+  const debateBundle = await getResolvedDebateConferenceBundle(supabase, conferenceId);
 
   const [{ data: conf }, { data: allocationRows }, { data: rollRows }] = await Promise.all([
     supabase
@@ -87,6 +89,8 @@ export default async function ChairDigitalRoomPage() {
     <MunPageShell title={t("digitalRoom")} variant="flush">
       <ChairDigitalRoomClient
         conferenceId={scope.canonicalConferenceId}
+        floorConferenceId={debateBundle.debateConferenceId}
+        siblingConferenceIds={debateBundle.siblingConferenceIds}
         committeeLine={committeeLine}
         allocations={allocations}
         rollAttendanceByAllocationId={rollAttendanceByAllocationId}

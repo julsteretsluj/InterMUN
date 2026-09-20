@@ -3,50 +3,16 @@
 
 "use client";
 
-import { useCallback, useState } from "react";
-import { useTranslations } from "next-intl";
-import { OrbAnimationOverlay } from "@/components/marketing/OrbAnimationOverlay";
-import { ORB_ANIMATION_CLICK_LOOPS } from "@/lib/opening-orb";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/** Brand mark wrapper — opening orb replay removed. */
 export function OrbPlayTrigger({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) {
-  const t = useTranslations("marketing");
-  const [playing, setPlaying] = useState(false);
-  const [playKey, setPlayKey] = useState(0);
-  const handleComplete = useCallback(() => setPlaying(false), []);
-
-  const handlePlay = useCallback(() => {
-    setPlayKey((key) => key + 1);
-    setPlaying(true);
-  }, []);
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={handlePlay}
-        className={cn(
-          "inline-flex shrink-0 cursor-pointer items-center rounded-2xl border-0 bg-transparent p-0 text-left transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]",
-          className
-        )}
-        aria-label={t("playOrbAnimation")}
-      >
-        {children}
-      </button>
-      <OrbAnimationOverlay
-        open={playing}
-        playKey={playKey}
-        onComplete={handleComplete}
-        surface="light"
-        dismissible
-        loops={ORB_ANIMATION_CLICK_LOOPS}
-      />
-    </>
-  );
+  return <div className={cn(className)}>{children}</div>;
 }

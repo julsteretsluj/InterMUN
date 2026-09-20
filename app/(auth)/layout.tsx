@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { getAppTagline } from "@/lib/branding";
-import { openingOrbUrl } from "@/lib/opening-orb";
 
 export default async function AuthLayout({
   children,
@@ -18,7 +17,6 @@ export default async function AuthLayout({
   return (
     <MarketingOpening>
       <div className="mun-seamun-split min-h-screen">
-        <link rel="preload" href={openingOrbUrl(0)} as="image" />
         <aside className="mun-seamun-brand-panel" aria-hidden={false}>
           <div className="mun-seamun-brand-glow" aria-hidden />
           <div className="mun-seamun-brand-letter" aria-hidden>

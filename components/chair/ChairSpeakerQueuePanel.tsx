@@ -23,6 +23,11 @@ import {
 } from "@/lib/speaker-queue";
 import { upsertAlignedSpeakerTimer } from "@/lib/timer-speakers";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
+import {
+  notifySpeakerQueueUpdated,
+  SPEAKER_QUEUE_UPDATED_EVENT,
+  speakerQueueUpdatedMatches,
+} from "@/lib/speaker-queue-sync";
 
 type Alloc = { id: string; country: string; userRole?: string | null };
 
@@ -197,14 +202,36 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         .channel(`chair-speaker-queue-${conferenceId}`)
         .on(
           "postgres_changes",
-          { event: "*", schema: "public", table: "speaker_queue_entries" },
+          {
+            event: "*",
+            schema: "public",
+            table: "speaker_queue_entries",
+            filter: `conference_id=eq.${conferenceId}`,
+          },
           () => void loadQueue()
         )
         .subscribe();
+
+      const onLocalUpdate = (event: Event) => {
+        if (speakerQueueUpdatedMatches(event, conferenceId)) void loadQueue();
+      };
+      const onVisible = () => {
+        if (document.visibilityState === "visible") void loadQueue();
+      };
+      window.addEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalUpdate);
+      document.addEventListener("visibilitychange", onVisible);
+
       return () => {
         void supabase.removeChannel(ch);
+        window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalUpdate);
+        document.removeEventListener("visibilitychange", onVisible);
       };
     }, [supabase, conferenceId, loadQueue]);
+
+    const bumpQueueSync = useCallback(() => {
+      notifySpeakerQueueUpdated(conferenceId);
+      void loadQueue();
+    }, [conferenceId, loadQueue]);
 
     const activeQueueAllocationIds = useMemo(() => activeAllocationIdsInQueue(queue), [queue]);
     const speakerAllocations = useMemo<SpeakerAllocation[]>(() => {
@@ -400,7 +427,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             namesOnly: true,
           });
         }
-        void loadQueue();
+        bumpQueueSync();
       });
     }
 
@@ -437,7 +464,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           perSpeakerMode: true,
           isRunning: true,
         });
-        void loadQueue();
+        bumpQueueSync();
       });
     }
 
@@ -541,7 +568,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           isRunning: true,
         });
         notify(error ? error.message : tEuParty("advancedSpeakerResetClock"));
-        void loadQueue();
+        bumpQueueSync();
       });
     }
 
@@ -558,7 +585,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       startTransition(async () => {
         await supabase.from("speaker_queue_entries").update({ sort_order: ob }).eq("id", a.id);
         await supabase.from("speaker_queue_entries").update({ sort_order: oa }).eq("id", b.id);
-        void loadQueue();
+        bumpQueueSync();
       });
     }
 

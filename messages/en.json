@@ -191,6 +191,7 @@
     "presetCustom": "Custom",
     "presetSetAgenda": "Motion to Set the Agenda",
     "presetExtendOpeningSpeech": "Motion to Extend Opening Speech Time",
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker.",
     "presetOpenDebate": "Motion to Open Debate",
     "presetOpenGsl": "Motion to Open the General Speakers' List",
     "presetForAgainst": "Motion to Begin For/Against Speeches (resolution)",
@@ -880,6 +881,7 @@
     "score": "Score",
     "allocationMatrix": "Allocation matrix",
     "speakers": "🎤 Speakers",
+    "openingSpeech": "🎙️ Opening speeches",
     "report": "Report",
     "documents": "Documents",
     "chairFeedback": "Chair feedback",
@@ -1372,6 +1374,7 @@
       "session": "Session",
       "agenda": "Agenda",
       "speakers": "Speakers",
+      "openingSpeech": "Opening speeches",
       "formalMotions": "Formal motions",
       "resolutions": "Resolutions",
       "amendments": "Amendments",
@@ -1714,6 +1717,21 @@
     "committeeFallback": "Committee",
     "dash": "—",
     "unnamedDelegate": "Unnamed"
+  },
+  "chairOpeningSpeechPanel": {
+    "title": "Opening speeches",
+    "intro": "Builds the speakers list in alphabetical order and sets a 60-second per-speaker timer. Pass a motion to extend speaking time to 90 seconds.",
+    "statusLabel": "Speaking time:",
+    "statusDefault": "{seconds}s per speaker",
+    "statusExtended": "{seconds}s per speaker (extended)",
+    "clockRemaining": "clock {clock}",
+    "extendHintPrefix": "To extend time, open",
+    "extendMotionName": "Motion to Extend Opening Speech Time",
+    "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
+    "beginButton": "Set A–Z list · 60s timer",
+    "settingUp": "Setting up…",
+    "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
+    "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
   },
   "chairSpeakerQueuePanel": {
     "dash": "—",
@@ -2988,6 +3006,10 @@
       "speakers": {
         "label": "Speakers",
         "hint": "Same speaker list as Digital Room; syncs to committee room"
+      },
+      "openingSpeech": {
+        "label": "Opening speeches",
+        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
       },
       "formalMotions": {
         "label": "Formal motions",
@@ -4744,6 +4766,7 @@
       "quickLinkSession": "Session",
       "quickLinkRoll": "Roll",
       "quickLinkAgenda": "Agenda",
+      "quickLinkOpeningSpeech": "Opening",
       "quickLinkSpeakers": "Speakers",
       "quickLinkMotions": "Motions",
       "quickLinkTimer": "Timer",

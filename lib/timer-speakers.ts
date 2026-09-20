@@ -10,6 +10,8 @@ export type TimerSpeakerExisting = {
   total_time_seconds?: number | null;
   is_running?: boolean | null;
   per_speaker_mode?: boolean | null;
+  current_speaker?: string | null;
+  next_speaker?: string | null;
 };
 
 /** Keep the floor timer's current/next speaker in lockstep with the speaker list. */
@@ -25,6 +27,10 @@ export async function upsertAlignedSpeakerTimer(
     isRunning?: boolean;
     perSpeakerMode?: boolean;
     namesOnly?: boolean;
+    /** When set, updates `floor_label` (pass `null` to clear). */
+    floorLabel?: string | null;
+    /** Keep existing current/next speaker names instead of overwriting. */
+    preserveSpeakers?: boolean;
   }
 ) {
   if (input.namesOnly) {
@@ -58,16 +64,26 @@ export async function upsertAlignedSpeakerTimer(
   if (left < 0) left = 0;
 
   const isRunning = input.isRunning ?? input.existing?.is_running ?? false;
+  const currentSpeaker = input.preserveSpeakers
+    ? (input.existing?.current_speaker ?? input.currentSpeaker)
+    : input.currentSpeaker;
+  const nextSpeaker = input.preserveSpeakers
+    ? (input.existing?.next_speaker ?? input.nextSpeaker)
+    : input.nextSpeaker;
+  const floorLabel =
+    input.floorLabel !== undefined
+      ? input.floorLabel?.trim() || null
+      : input.existing?.floor_label ?? null;
   const payload: Record<string, unknown> = {
     conference_id: conferenceId,
-    current_speaker: input.currentSpeaker,
-    next_speaker: input.nextSpeaker,
+    current_speaker: currentSpeaker,
+    next_speaker: nextSpeaker,
     time_left_seconds: left,
     total_time_seconds: total,
     vote_item_id: input.existing?.vote_item_id ?? null,
     per_speaker_mode: input.perSpeakerMode ?? input.existing?.per_speaker_mode ?? true,
     is_running: isRunning,
-    floor_label: input.existing?.floor_label ?? null,
+    floor_label: floorLabel,
     updated_at: new Date().toISOString(),
   };
   if (isRunning) payload.current_pause_reason = null;

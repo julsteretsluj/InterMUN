@@ -6,6 +6,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { currentAndNextQueueRows } from "@/lib/speaker-queue";
+import {
+  SPEAKER_QUEUE_UPDATED_EVENT,
+  speakerQueueUpdatedMatches,
+} from "@/lib/speaker-queue-sync";
 
 /** Live current/next labels from the speaker list (allocation country when linked). */
 export function useSpeakerQueueLabels(conferenceId: string | null) {
@@ -76,8 +80,20 @@ export function useSpeakerQueueLabels(conferenceId: string | null) {
         () => void load()
       )
       .subscribe();
+
+    const onLocalUpdate = (event: Event) => {
+      if (speakerQueueUpdatedMatches(event, conferenceId)) void load();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void load();
+    };
+    window.addEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalUpdate);
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
       void supabase.removeChannel(ch);
+      window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalUpdate);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, [conferenceId, load]);
 

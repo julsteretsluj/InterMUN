@@ -159,6 +159,7 @@ function revalidateCommitteeSessionSurfaces() {
     "/chair/session/roll-call",
     "/chair/session/agenda",
     "/chair/session/speakers",
+    "/chair/session/opening-speech",
     "/chair/session/motions",
     "/chair/session/timer",
     "/chair/session/announcements",

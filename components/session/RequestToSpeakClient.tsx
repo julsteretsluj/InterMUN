@@ -11,6 +11,7 @@ import {
   canRequestOrJoinSpeakerList,
   fetchDisciplineForAllocation,
 } from "@/lib/delegate-discipline";
+import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
 
 export function RequestToSpeakClient({
   conferenceId,
@@ -93,6 +94,7 @@ export function RequestToSpeakClient({
 
       if (insErr) throw insErr;
 
+      notifySpeakerQueueUpdated(conferenceId);
       setMsg(t("requested"));
       setPurpose("");
     } catch (e: unknown) {

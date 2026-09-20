@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
-import { openingOrbUrl } from "@/lib/opening-orb";
+import { MarketingMazeScript } from "@/components/marketing/MarketingMazeScript";
 import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
 import { MarketingSiteFooter } from "@/components/marketing/MarketingSiteFooter";
@@ -17,7 +17,7 @@ export default async function MarketingLayout({
 
   return (
     <div className="marketing-shell mun-apple-site relative min-h-screen text-brand-navy">
-      <link rel="preload" href={openingOrbUrl(0)} as="image" />
+      <MarketingMazeScript />
       <header className="marketing-header sticky top-0 z-30 border-b-0">
         <div className="mun-marketing-rainbow-bar" aria-hidden />
         {/* Side columns use `1fr` (min-content floor) so the controls can never overlap the

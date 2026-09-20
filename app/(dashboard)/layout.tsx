@@ -11,7 +11,7 @@ import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnno
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
-import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { getResolvedDebateConferenceBundleCached } from "@/lib/active-debate-topic";
 import { getAppName } from "@/lib/branding";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import {
@@ -50,16 +50,21 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const t = await getTranslations("dashboardLayout");
-  const locale = await getLocale();
-  const tCommitteeLabels = await getTranslations("committeeNames.labels");
-  const tTopics = await getTranslations("agendaTopics");
-  const supabase = await createClient();
+  const [t, locale, tCommitteeLabels, tTopics, supabase, hdrs, smtSurfaceCookie] =
+    await Promise.all([
+      getTranslations("dashboardLayout"),
+      getLocale(),
+      getTranslations("committeeNames.labels"),
+      getTranslations("agendaTopics"),
+      createClient(),
+      headers(),
+      getSmtDashboardSurface(),
+    ]);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const hdrs = await headers();
   const pathname = hdrs.get("x-pathname") || "/profile";
 
   if (!user) {
@@ -75,7 +80,7 @@ export default async function DashboardLayout({
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
-  const smtSurface = isSmtRole(normalizedRole) ? await getSmtDashboardSurface() : null;
+  const smtSurface = isSmtRole(normalizedRole) ? smtSurfaceCookie : null;
   const effectiveRole = (effectiveDashboardRole(normalizedRole, smtSurface) ||
     normalizedRole) as UserRole | undefined;
 
@@ -126,13 +131,18 @@ export default async function DashboardLayout({
     }
   }
 
-  const { data: activeEvent } = activeConf?.event_id
-    ? await supabase
-        .from("conference_events")
-        .select("id, event_code")
-        .eq("id", activeConf.event_id)
-        .maybeSingle()
-    : { data: null };
+  const [activeEventResult, debateBundle] = await Promise.all([
+    activeConf.event_id
+      ? supabase
+          .from("conference_events")
+          .select("id, event_code")
+          .eq("id", activeConf.event_id)
+          .maybeSingle()
+      : Promise.resolve({ data: null as { id: string; event_code: string | null } | null }),
+    getResolvedDebateConferenceBundleCached(supabase, activeConf.id),
+  ]);
+
+  const activeEvent = activeEventResult.data;
 
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
   const seamunScheduleEnabled = isSeamunI2027LockedScheduleEvent(
@@ -158,15 +168,7 @@ export default async function DashboardLayout({
   const translatedTopic = activeConf.name
     ? translateAgendaTopicLabel(tTopics, activeConf.name, locale)
     : "";
-  const { count: notificationUnreadCount } = await supabase
-    .from("user_notifications")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .is("read_at", null);
 
-  const debateBundle = activeConf?.id
-    ? await getResolvedDebateConferenceBundle(supabase, activeConf.id)
-    : null;
   const selectedDebateTopic = debateBundle?.debateTopicOptions.find(
     (topic) => topic.id === debateBundle.debateConferenceId
   );
@@ -188,19 +190,8 @@ export default async function DashboardLayout({
   const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);
 
-  const heldNotesCount =
-    isChairRole(effectiveRole) && liveFloorSiblings.length > 0
-      ? (
-          await supabase
-            .from("delegation_notes")
-            .select("*", { count: "exact", head: true })
-            .in("conference_id", liveFloorSiblings)
-            .eq("moderation_state", "held")
-        ).count ?? 0
-      : 0;
-
-
   const tourView = isChairRole(effectiveRole) ? "chair" : "delegate";
+  const chairSiblingIds = isChairRole(effectiveRole) ? liveFloorSiblings : null;
 
   return (
     <AppleAppFrame appName={appName}>
@@ -233,7 +224,7 @@ export default async function DashboardLayout({
               crisisReportingEnabled={crisisReportingEnabled}
               fwcCrisisEnabled={fwcCrisisEnabled}
               seamunScheduleEnabled={showSeamunLogo}
-              heldNotesCount={heldNotesCount}
+              siblingConferenceIds={chairSiblingIds}
             />
           ) : (
             <TabNav
@@ -276,9 +267,7 @@ export default async function DashboardLayout({
           brandHomeHref={isChairRole(effectiveRole) ? "/chair" : "/delegate"}
           showDelegateHubLink={false}
           showExitSmtPreview={isSmtRole(normalizedRole) && smtSurface !== "secretariat"}
-          notifications={
-            <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
-          }
+          notifications={<DashboardNotifications />}
         />
         <DashboardAnnouncementPopup />
         {isChairRole(effectiveRole) && seamunScheduleEnabled && activeConf.committee ? (
@@ -320,7 +309,7 @@ export default async function DashboardLayout({
             crisisReportingEnabled={crisisReportingEnabled}
             fwcCrisisEnabled={fwcCrisisEnabled}
             seamunScheduleEnabled={showSeamunLogo}
-            heldNotesCount={heldNotesCount}
+            siblingConferenceIds={chairSiblingIds}
           />
         ) : (
           <TabNav

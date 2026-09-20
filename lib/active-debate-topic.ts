@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
+import { cache } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
 import {
@@ -146,3 +147,9 @@ export async function getResolvedDebateConferenceBundle(
     committeeLabelRaw,
   };
 }
+
+/** Dedupes debate-bundle resolution within a single RSC request. */
+export const getResolvedDebateConferenceBundleCached = cache(
+  async (supabase: SupabaseClient, activeConferenceId: string) =>
+    getResolvedDebateConferenceBundle(supabase, activeConferenceId)
+);

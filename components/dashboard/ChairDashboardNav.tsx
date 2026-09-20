@@ -21,6 +21,7 @@ import {
   sortByKeyPriority,
 } from "@/lib/nav-priority-order";
 import { cn } from "@/lib/utils";
+import { useHeldNotesCount } from "@/lib/hooks/useHeldNotesCount";
 
 const LABELS_STORAGE_KEY = "intermun-chair-nav-hide-labels";
 
@@ -39,6 +40,7 @@ export type ChairNavItemKey =
   | "session"
   | "agenda"
   | "speakers"
+  | "openingSpeech"
   | "formalMotions"
   | "resolutions"
   | "amendments"
@@ -111,6 +113,11 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     href: "/chair/session/speakers",
     itemKey: "speakers",
     emoji: "🎤",
+  },
+  {
+    href: "/chair/session/opening-speech",
+    itemKey: "openingSpeech",
+    emoji: "🎙️",
   },
   {
     href: "/chair/session/motions",
@@ -232,18 +239,25 @@ export function ChairDashboardSidebar({
   crisisReportingEnabled,
   fwcCrisisEnabled = false,
   seamunScheduleEnabled = false,
-  heldNotesCount = 0,
+  siblingConferenceIds = null,
+  heldNotesCount: heldNotesCountProp,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   fwcCrisisEnabled?: boolean;
   seamunScheduleEnabled?: boolean;
+  /** When set, badge count is fetched on the client (preferred). */
+  siblingConferenceIds?: string[] | null;
+  /** @deprecated Prefer siblingConferenceIds — kept for call-site compatibility. */
   heldNotesCount?: number;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
+  const heldNotesLive = useHeldNotesCount(siblingConferenceIds);
+  const heldNotesCount =
+    siblingConferenceIds != null ? heldNotesLive : (heldNotesCountProp ?? 0);
 
   useEffect(() => {
     // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
@@ -471,18 +485,24 @@ export function ChairMobileDock({
   crisisReportingEnabled,
   fwcCrisisEnabled = false,
   seamunScheduleEnabled = false,
-  heldNotesCount = 0,
+  siblingConferenceIds = null,
+  heldNotesCount: heldNotesCountProp,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   fwcCrisisEnabled?: boolean;
   seamunScheduleEnabled?: boolean;
+  siblingConferenceIds?: string[] | null;
+  /** @deprecated Prefer siblingConferenceIds — kept for call-site compatibility. */
   heldNotesCount?: number;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
+  const heldNotesLive = useHeldNotesCount(siblingConferenceIds);
+  const heldNotesCount =
+    siblingConferenceIds != null ? heldNotesLive : (heldNotesCountProp ?? 0);
 
   useEffect(() => {
     // Deferred a frame so hydration-safe defaults render first, without a sync cascade.

@@ -21,6 +21,7 @@ function revalidateDebateTopicPaths() {
   revalidatePath("/chair/session/discipline");
   revalidatePath("/chair/session/timer");
   revalidatePath("/chair/session/speakers");
+  revalidatePath("/chair/session/opening-speech");
   revalidatePath("/chair/session/roll-call");
   revalidatePath("/chair/session/announcements");
   revalidatePath("/delegate");

@@ -3,8 +3,7 @@
 
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
 import { useSpeakerQueueLabels } from "@/lib/use-speaker-queue-labels";
@@ -14,6 +13,10 @@ import {
 } from "@/lib/committee-session-end";
 import { useNowMs } from "@/lib/hooks/useNowMs";
 import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
+import {
+  refreshSharedProcedureState,
+  useSharedProcedureState,
+} from "@/lib/hooks/useCommitteeLiveStore";
 import { cn } from "@/lib/utils";
 
 type WidgetTheme = "light" | "dark" | "page";
@@ -129,67 +132,16 @@ export function ActiveTimerWidgets({
     chairSeesRawTimer
   );
   const { currentLabel: queueCurrentLabel, nextLabel: queueNextLabel } = useSpeakerQueueLabels(conferenceId);
-  const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
-  const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
-  const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
-
-  const loadSession = useCallback(() => {
-    const supabase = createClient();
-    return supabase
-      .from("procedure_states")
-      .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
-      .eq("conference_id", sessionScopeId)
-      .maybeSingle()
-      .then(({ data, error }) => {
-        const errorMessage = String(error?.message ?? "");
-        const missingSessionColumns =
-          /schema cache/i.test(errorMessage) &&
-          /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(
-            errorMessage
-          );
-        if (missingSessionColumns) {
-          setSessionStartedAt(null);
-          setSessionDurationSeconds(null);
-          setSessionEndsAt(null);
-          return;
-        }
-        const row = data as {
-          committee_session_started_at?: string | null;
-          committee_session_duration_seconds?: number | null;
-          committee_session_ends_at?: string | null;
-        } | null;
-        setSessionStartedAt(row?.committee_session_started_at ?? null);
-        setSessionDurationSeconds(row?.committee_session_duration_seconds ?? null);
-        setSessionEndsAt(row?.committee_session_ends_at ?? null);
-      });
-  }, [sessionScopeId]);
+  const procedureLive = useSharedProcedureState(sessionScopeId);
+  const sessionStartedAt = procedureLive?.committee_session_started_at ?? null;
+  const sessionDurationSeconds = procedureLive?.committee_session_duration_seconds ?? null;
+  const sessionEndsAt = procedureLive?.committee_session_ends_at ?? null;
 
   useEffect(() => {
-    void loadSession();
-  }, [loadSession]);
-
-  useEffect(() => {
-    const onUpdated = () => void loadSession();
+    const onUpdated = () => refreshSharedProcedureState(sessionScopeId);
     window.addEventListener(COMMITTEE_SESSION_UPDATED_EVENT, onUpdated);
-    const supabase = createClient();
-    const ch = supabase
-      .channel(`active-timer-widgets-session-${sessionScopeId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "procedure_states",
-          filter: `conference_id=eq.${sessionScopeId}`,
-        },
-        () => void loadSession()
-      )
-      .subscribe();
-    return () => {
-      window.removeEventListener(COMMITTEE_SESSION_UPDATED_EVENT, onUpdated);
-      void supabase.removeChannel(ch);
-    };
-  }, [loadSession, sessionScopeId]);
+    return () => window.removeEventListener(COMMITTEE_SESSION_UPDATED_EVENT, onUpdated);
+  }, [sessionScopeId]);
 
   const sessionEndMs = committeeSessionEndTimestampMs(
     sessionStartedAt,
@@ -233,14 +185,16 @@ export function ActiveTimerWidgets({
         hint={sessionHint}
         live={sessionLive}
       />
-      <TimerChip
-        theme={theme}
-        label={t("currentSpeaker")}
-        clock={currentSpeaker || t("noActiveSpeaker")}
-        hint={speakerHint}
-        live={Boolean(currentSpeaker)}
-        clockMono={false}
-      />
+      {currentSpeaker ? (
+        <TimerChip
+          theme={theme}
+          label={t("currentSpeaker")}
+          clock={currentSpeaker}
+          hint={speakerHint}
+          live
+          clockMono={false}
+        />
+      ) : null}
       {showFloor ? (
         <TimerChip
           theme={theme}

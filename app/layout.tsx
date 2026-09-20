@@ -6,11 +6,8 @@ import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import { buildThemeInitScript } from "@/lib/theme-init-script";
 import { localeDirection } from "@/lib/i18n/locales";
 import { IntlProvider } from "@/components/i18n/IntlProvider";
+import { DyslexicFontLoader } from "@/components/i18n/DyslexicFontLoader";
 import { AppleAppProviders } from "@/components/ui/AppleAppShell";
-import "@fontsource/opendyslexic/latin-400.css";
-import "@fontsource/opendyslexic/latin-700.css";
-import "@fontsource/atkinson-hyperlegible/latin-400.css";
-import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
 
 /**
@@ -40,9 +37,6 @@ export const metadata: Metadata = {
   /** Favicons: `app/icon.png` + `app/apple-icon.png`. */
 };
 
-// Avoid static prerender during build when Supabase env is only set at deploy/runtime.
-export const dynamic = "force-dynamic";
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -51,32 +45,6 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
   const themeInit = buildThemeInitScript();
-  const mazeInit = `(function (m, a, z, e) {
-  var s, t, u, v;
-  try {
-    t = m.sessionStorage.getItem("maze-us");
-  } catch (err) {}
-
-  if (!t) {
-    t = new Date().getTime();
-    try {
-      m.sessionStorage.setItem("maze-us", t);
-    } catch (err) {}
-  }
-
-  u = document.currentScript || (function () {
-    var w = document.getElementsByTagName("script");
-    return w[w.length - 1];
-  })();
-  v = u && u.nonce;
-
-  s = a.createElement("script");
-  s.src = z + "?apiKey=" + e;
-  s.async = true;
-  if (v) s.setAttribute("nonce", v);
-  a.getElementsByTagName("head")[0].appendChild(s);
-  m.mazeUniversalSnippetApiKey = e;
-})(window, document, "https://snippet.maze.co/maze-universal-loader.js", "0fe5ce1b-25bb-4e97-8a3a-9bf0a1c1405e");`;
 
   return (
     <html
@@ -145,10 +113,8 @@ export default async function RootLayout({
             </filter>
           </defs>
         </svg>
-        <Script id="maze-universal-loader" strategy="afterInteractive">
-          {mazeInit}
-        </Script>
         <IntlProvider locale={locale} messages={messages}>
+          <DyslexicFontLoader />
           <AppleAppProviders>{children}</AppleAppProviders>
         </IntlProvider>
       </body>

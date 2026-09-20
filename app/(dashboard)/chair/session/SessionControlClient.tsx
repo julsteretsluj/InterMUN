@@ -22,11 +22,14 @@ import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness
 import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { currentAndNextQueueRows, fetchSpeakerQueue } from "@/lib/speaker-queue";
+import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
 } from "@/components/chair/ChairSpeakerQueuePanel";
+import { ChairOpeningSpeechPanel } from "@/components/chair/ChairOpeningSpeechPanel";
+import { applyOpeningSpeechTimeExtension } from "@/lib/opening-speech";
 import { CommitteeAgendaVotesTab } from "@/components/chair/CommitteeAgendaVotesTab";
 import {
   BUILTIN_TIMER_PRESETS,
@@ -282,6 +285,7 @@ export type SessionFloorSection =
   | "timer"
   | "announcements"
   | "speakers"
+  | "opening-speech"
   | "roll-call"
   | "all";
 
@@ -1389,8 +1393,20 @@ export function SessionControlClient({
         () => void refresh()
       )
       .subscribe();
+
+    const onLocalSpeakerQueue = (event: Event) => {
+      if (speakerQueueUpdatedMatches(event, floorConferenceId)) void refresh();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void refresh();
+    };
+    window.addEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
       void supabase.removeChannel(ch);
+      window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, [supabase, floorConferenceId, rosterKey, refresh]);
 
@@ -1882,6 +1898,7 @@ export function SessionControlClient({
         floorLabel: prev.floorLabel,
       }));
       setMsg(error ? error.message : tSessionControl("advancedSpeakerResetClock"));
+      notifySpeakerQueueUpdated(floorConferenceId);
       void refresh();
     });
   }
@@ -2291,6 +2308,30 @@ export function SessionControlClient({
         }
         if (passes && openMotion.procedure_code === "open_gsl") {
           setSpeakerListChairPrompt("gsl");
+        }
+        if (passes && openMotion.procedure_code === "extend_opening_speech") {
+          const extendResult = await applyOpeningSpeechTimeExtension(
+            supabase,
+            floorConferenceId,
+            liveTimerRow
+              ? {
+                  vote_item_id: liveTimerRow.vote_item_id,
+                  floor_label: liveTimerRow.floor_label,
+                  time_left_seconds: liveTimerRow.time_left_seconds,
+                  total_time_seconds: liveTimerRow.total_time_seconds,
+                  is_running: liveTimerRow.is_running,
+                  per_speaker_mode: liveTimerRow.per_speaker_mode,
+                  current_speaker: liveTimerRow.current_speaker,
+                  next_speaker: liveTimerRow.next_speaker,
+                }
+              : null,
+            liveRemaining
+          );
+          if (!extendResult.ok) {
+            setMsg(extendResult.message);
+          } else {
+            setMsg(tSessionControl("openingSpeechExtendedTo90"));
+          }
         }
         if (passes && openMotion.procedure_code === "set_agenda") {
           const title = (openMotion.title ?? "").trim();
@@ -4302,37 +4343,6 @@ export function SessionControlClient({
               </span>
             </span>
           </label>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>{tTimer("currentSpeaker")}</span>
-              <input
-                className={surfaceField}
-                value={
-                  currentSpeakerQueueRow
-                    ? displayCountry(
-                        allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
-                          currentSpeakerQueueRow.label ??
-                          timer.current
-                      )
-                    : timer.current
-                }
-                readOnly={Boolean(currentSpeakerQueueRow)}
-                onChange={(e) => setTimer((t) => ({ ...t, current: e.target.value }))}
-              />
-              {currentSpeakerQueueRow ? (
-                <span className="mt-1 block text-xs text-brand-muted">{tTimer("speakerLockedToList")}</span>
-              ) : null}
-            </label>
-            <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>{tTimer("nextSpeaker")}</span>
-              <input
-                className={surfaceField}
-                value={timer.next}
-                readOnly={Boolean(currentSpeakerQueueRow)}
-                onChange={(e) => setTimer((t) => ({ ...t, next: e.target.value }))}
-              />
-            </label>
-          </div>
             </>
           ) : null}
 
@@ -4697,6 +4707,22 @@ export function SessionControlClient({
           </ul>
         </div>
       </section>
+      ) : null}
+
+      {show("opening-speech") ? (
+        <ChairOpeningSpeechPanel
+          conferenceId={floorConferenceId}
+          allocations={allocations}
+          isEuParliament={procedureProfile === "eu_parliament"}
+          isCrisisCommittee={isCrisisCommitteeSession}
+          autoSetupOnMount={activeSection === "opening-speech"}
+          includeSpeakerQueue={activeSection === "opening-speech"}
+          speakerListPromptKind={
+            activeSection === "opening-speech" ? speakerListChairPrompt : null
+          }
+          onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
+          onNotify={(text) => setMsg(text)}
+        />
       ) : null}
 
       {show("speakers") ? (

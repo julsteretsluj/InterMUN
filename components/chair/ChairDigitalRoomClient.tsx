@@ -14,6 +14,7 @@ import { type RollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attend
 import { createClient } from "@/lib/supabase/client";
 import { addAllocationToSpeakerQueue, fetchSpeakerQueue } from "@/lib/speaker-queue";
 import { ChairSpeakerQueuePanel } from "@/components/chair/ChairSpeakerQueuePanel";
+import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 import { useTranslations } from "next-intl";
 
 export type DigitalRoomAllocation = {
@@ -65,12 +66,18 @@ function flagsMeaningful(f: Record<string, PlacardFlags>): boolean {
 
 export function ChairDigitalRoomClient({
   conferenceId,
+  floorConferenceId: floorConferenceIdProp,
+  siblingConferenceIds = [],
   committeeLine,
   allocations,
   rollAttendanceByAllocationId,
   isCrisisCommittee = false,
 }: {
+  /** Canonical chamber id — chair notes / placard flags. */
   conferenceId: string;
+  /** Live floor topic id for the shared speaker list (defaults to canonical). */
+  floorConferenceId?: string;
+  siblingConferenceIds?: string[];
   committeeLine: string;
   allocations: DigitalRoomAllocation[];
   rollAttendanceByAllocationId: Record<string, RollAttendance>;
@@ -78,6 +85,12 @@ export function ChairDigitalRoomClient({
 }) {
   const t = useTranslations("chairDigitalRoom");
   const supabase = useMemo(() => createClient(), []);
+  const floorConferenceId = useLiveDebateConferenceId(
+    supabase,
+    floorConferenceIdProp ?? conferenceId,
+    conferenceId,
+    siblingConferenceIds.length > 0 ? siblingConferenceIds : [conferenceId]
+  );
   const [query, setQuery] = useState("");
   const loadLegacy = useCallback(
     () => (typeof window !== "undefined" ? loadLegacyFlags(conferenceId) : null),
@@ -167,10 +180,10 @@ export function ChairDigitalRoomClient({
     async (allocationId: string, country: string) => {
       setAddingSpeakerId(allocationId);
       try {
-        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+        const rows = await fetchSpeakerQueue(supabase, floorConferenceId);
         const result = await addAllocationToSpeakerQueue(
           supabase,
-          conferenceId,
+          floorConferenceId,
           allocationId,
           country,
           rows
@@ -182,7 +195,7 @@ export function ChairDigitalRoomClient({
         setAddingSpeakerId(null);
       }
     },
-    [supabase, conferenceId, t]
+    [supabase, floorConferenceId, t]
   );
 
   const flaggedCount = useMemo(() => {
@@ -235,7 +248,7 @@ export function ChairDigitalRoomClient({
           </p>
         ) : null}
         <ChairSpeakerQueuePanel
-          conferenceId={conferenceId}
+          conferenceId={floorConferenceId}
           allocations={speakerAllocOptions}
           variant="digital-room"
           isCrisisCommittee={isCrisisCommittee}

@@ -19,6 +19,10 @@ import { committeeSessionEndTimestampMs } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 import { useNowMs } from "@/lib/hooks/useNowMs";
 import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
+import {
+  refreshSharedProcedureState,
+  useSharedProcedureState,
+} from "@/lib/hooks/useCommitteeLiveStore";
 
 type Announcement = {
   id: string;
@@ -75,40 +79,11 @@ export function FloorStatusBar({
   const [rollSelf, setRollSelf] = useState<string | null>(null);
   const [selfAllocationId, setSelfAllocationId] = useState<string | null>(null);
   const [expandedAnnouncement, setExpandedAnnouncement] = useState<Announcement | null>(null);
-  const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
-  const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
-  const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
   const [activeTopicLabel, setActiveTopicLabel] = useState<string | null>(null);
-
-  const loadProcedureSession = useCallback(() => {
-    return supabase
-      .from("procedure_states")
-      .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
-      .eq("conference_id", sessionScopeId)
-      .maybeSingle()
-      .then(async ({ data, error }) => {
-        const errorMessage = String(error?.message ?? "");
-        const missingSessionColumns =
-          /schema cache/i.test(errorMessage) &&
-          /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(
-            errorMessage
-          );
-        if (missingSessionColumns) {
-          setSessionStartedAt(null);
-          setSessionDurationSeconds(null);
-          setSessionEndsAt(null);
-          return;
-        }
-        const row = data as {
-          committee_session_started_at?: string | null;
-          committee_session_duration_seconds?: number | null;
-          committee_session_ends_at?: string | null;
-        } | null;
-        setSessionStartedAt(row?.committee_session_started_at ?? null);
-        setSessionDurationSeconds(row?.committee_session_duration_seconds ?? null);
-        setSessionEndsAt(row?.committee_session_ends_at ?? null);
-      });
-  }, [supabase, sessionScopeId]);
+  const procedureLive = useSharedProcedureState(sessionScopeId);
+  const sessionStartedAt = procedureLive?.committee_session_started_at ?? null;
+  const sessionDurationSeconds = procedureLive?.committee_session_duration_seconds ?? null;
+  const sessionEndsAt = procedureLive?.committee_session_ends_at ?? null;
 
   const loadDais = useCallback(() => {
     return supabase
@@ -206,37 +181,17 @@ export function FloorStatusBar({
   }, [supabase, conferenceId, loadDais, loadPauseEvents, loadActiveMotions, loadActiveTopic, loadSelfRollCall, observeOnly]);
 
   useEffect(() => {
-    void loadProcedureSession();
-    const ch = supabase
-      .channel(`floor-procedure-session-${sessionScopeId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "procedure_states",
-          filter: `conference_id=eq.${sessionScopeId}`,
-        },
-        () => void loadProcedureSession()
-      )
-      .subscribe();
-    return () => {
-      void supabase.removeChannel(ch);
-    };
-  }, [supabase, sessionScopeId, loadProcedureSession]);
-
-  useEffect(() => {
     function handleSessionUpdate(event: Event) {
       const detail = (event as CustomEvent<{ conferenceId?: string }>).detail;
       const watchedIds = new Set([conferenceId, sessionScopeId]);
       if (detail?.conferenceId && !watchedIds.has(detail.conferenceId)) return;
-      void loadProcedureSession();
+      refreshSharedProcedureState(sessionScopeId);
     }
     window.addEventListener(COMMITTEE_SESSION_UPDATED_EVENT, handleSessionUpdate as EventListener);
     return () => {
       window.removeEventListener(COMMITTEE_SESSION_UPDATED_EVENT, handleSessionUpdate as EventListener);
     };
-  }, [conferenceId, sessionScopeId, loadProcedureSession]);
+  }, [conferenceId, sessionScopeId]);
 
   const sessionEndMs =
     sessionStartedAt != null
@@ -348,6 +303,7 @@ export function FloorStatusBar({
         | "quickLinkSession"
         | "quickLinkRoll"
         | "quickLinkAgenda"
+        | "quickLinkOpeningSpeech"
         | "quickLinkSpeakers"
         | "quickLinkMotions"
         | "quickLinkTimer"
@@ -357,6 +313,7 @@ export function FloorStatusBar({
         if (key === "quickLinkSession") return "Session";
         if (key === "quickLinkRoll") return "Roll";
         if (key === "quickLinkAgenda") return "Agenda";
+        if (key === "quickLinkOpeningSpeech") return "Opening";
         if (key === "quickLinkSpeakers") return "Speakers";
         if (key === "quickLinkMotions") return "Motions";
         return "Timer";
@@ -375,6 +332,7 @@ export function FloorStatusBar({
           { href: "/chair/session", label: quickLinkLabel("quickLinkSession") },
           { href: "/chair/session/roll-call", label: quickLinkLabel("quickLinkRoll") },
           { href: "/chair/session/agenda", label: quickLinkLabel("quickLinkAgenda") },
+          { href: "/chair/session/opening-speech", label: quickLinkLabel("quickLinkOpeningSpeech") },
           { href: "/chair/session/speakers", label: quickLinkLabel("quickLinkSpeakers") },
           { href: "/chair/session/motions", label: quickLinkLabel("quickLinkMotions") },
           { href: "/chair/session/timer", label: quickLinkLabel("quickLinkTimer") },
