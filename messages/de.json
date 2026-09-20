@@ -4596,7 +4596,8 @@
       "secretariat": "Sekretariat",
       "contact": "Kontakt",
       "signIn": "anmelden",
-      "getStarted": "Fangen Sie an"
+      "getStarted": "Fangen Sie an",
+      "features": "Features"
     },
     "playOrbAnimation": "Spielen Sie die InterMUN-Animation ab",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

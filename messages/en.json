@@ -545,6 +545,11 @@
     "label": "Language",
     "selectorAria": "Select language"
   },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
+  },
   "dashboardTopBar": {
     "delegateHub": "Delegate hub",
     "backToHome": "Back to home"
@@ -4966,6 +4971,7 @@
     "metaDescription": "The whole conference team, in one tab. Browser-based MUN software for dais, delegates, advisors, and secretariat — procedural floor control, prep workflows, and event oversight.",
     "nav": {
       "howItWorks": "The gates",
+      "features": "Features",
       "chairs": "Dais",
       "delegates": "Delegates",
       "secretariat": "Secretariat",

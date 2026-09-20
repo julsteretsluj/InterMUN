@@ -4596,7 +4596,8 @@
       "secretariat": "အတွင်းဝန်ရုံး",
       "contact": "ဆက်သွယ်ရန်",
       "signIn": "ဆိုင်းအင်လုပ်ခြင်း",
-      "getStarted": "စတင်လိုက်ပါ။"
+      "getStarted": "စတင်လိုက်ပါ။",
+      "features": "Features"
     },
     "playOrbAnimation": "InterMUN ကာတွန်းကို ကစားပါ။",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

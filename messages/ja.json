@@ -4596,7 +4596,8 @@
       "secretariat": "事務局",
       "contact": "接触",
       "signIn": "サインイン",
-      "getStarted": "始めましょう"
+      "getStarted": "始めましょう",
+      "features": "Features"
     },
     "playOrbAnimation": "InterMUN アニメーションを再生する",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

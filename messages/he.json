@@ -4596,7 +4596,8 @@
       "secretariat": "מַזכִּירוּת",
       "contact": "מַגָע",
       "signIn": "היכנס",
-      "getStarted": "התחל"
+      "getStarted": "התחל",
+      "features": "Features"
     },
     "playOrbAnimation": "שחק אנימציה של InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

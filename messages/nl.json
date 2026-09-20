@@ -4596,7 +4596,8 @@
       "secretariat": "Secretariaat",
       "contact": "Contact",
       "signIn": "Log in",
-      "getStarted": "Ga aan de slag"
+      "getStarted": "Ga aan de slag",
+      "features": "Features"
     },
     "playOrbAnimation": "Speel InterMUN-animatie",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

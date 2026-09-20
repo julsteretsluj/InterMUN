@@ -3,19 +3,11 @@
 
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Accessibility, Glasses, Type } from "lucide-react";
+import { Accessibility } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  persistAndApplyColorblindMode,
-  persistAndApplyColorblindType,
-  persistAndApplyDyslexicFont,
-  readColorblindModeFromStorage,
-  readColorblindTypeFromStorage,
-  readDyslexicFontFromStorage,
-} from "@/lib/theme-document";
-import { COLORBLIND_TYPES, type ColorblindType } from "@/lib/theme-storage";
+import { AccessibilitySettingsPanel } from "@/components/AccessibilitySettingsPanel";
 import { useTranslations } from "next-intl";
 
 export function AccessibilitySelector({
@@ -26,14 +18,8 @@ export function AccessibilitySelector({
   compact?: boolean;
 }) {
   const tTheme = useTranslations("themeSelector");
-  const tColorblind = useTranslations("colorblindMode");
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [colorblindMode, setColorblindMode] = useState(() => readColorblindModeFromStorage());
-  const [colorblindType, setColorblindType] = useState<ColorblindType>(() =>
-    readColorblindTypeFromStorage()
-  );
-  const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number; maxHeight: number } | null>(
     null
   );
@@ -65,8 +51,6 @@ export function AccessibilitySelector({
   }, [open]);
 
   useLayoutEffect(() => {
-    // No reset needed on close: the panel unmounts, and reopening recomputes
-    // the box in this layout effect before paint.
     if (!open) return;
     function sync() {
       const el = btnRef.current;
@@ -76,8 +60,6 @@ export function AccessibilitySelector({
       setPopoverBox({
         top,
         right: Math.max(12, window.innerWidth - rect.right),
-        // Cap to the space below the trigger so the panel scrolls internally
-        // instead of clipping offscreen at large text-size settings.
         maxHeight: Math.max(160, window.innerHeight - top - 12),
       });
     }
@@ -89,27 +71,6 @@ export function AccessibilitySelector({
       window.removeEventListener("scroll", sync, true);
     };
   }, [open]);
-
-  const toggleColorblindMode = useCallback(() => {
-    setColorblindMode((prev) => {
-      const next = !prev;
-      persistAndApplyColorblindMode(next, colorblindType);
-      return next;
-    });
-  }, [colorblindType]);
-
-  const selectColorblindType = useCallback((type: ColorblindType) => {
-    setColorblindType(type);
-    persistAndApplyColorblindType(type);
-  }, []);
-
-  const toggleDyslexicFont = useCallback(() => {
-    setDyslexicFont((prev) => {
-      const next = !prev;
-      persistAndApplyDyslexicFont(next);
-      return next;
-    });
-  }, []);
 
   const iconButtonClass = cn(
     "inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
@@ -163,88 +124,8 @@ export function AccessibilitySelector({
               }}
               className="mun-popover flex w-[min(100vw-1.5rem,18.5rem)] flex-col p-3"
             >
-              {/* Inner scroller: the panel's ::before arrow overhangs its top edge,
-                  so overflow must be clipped here, not on the panel itself. */}
               <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-              <p className="tag tag-neutral mb-1.5">{tTheme("accessibility")}</p>
-              <button
-                type="button"
-                title={tTheme("colorblindTitle")}
-                onClick={toggleColorblindMode}
-                className={cn(
-                  "flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-                  colorblindMode
-                    ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                    : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-                )}
-                aria-pressed={colorblindMode}
-                aria-label={colorblindMode ? tColorblind("disableAria") : tColorblind("enableAria")}
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Glasses className="size-4" strokeWidth={1.75} aria-hidden />
-                  {tTheme("colorblindMode")}
-                </span>
-                <span className="text-xs font-semibold">{colorblindMode ? tTheme("on") : tTheme("off")}</span>
-              </button>
-              {colorblindMode ? (
-                <div className="mt-2 rounded-[var(--radius-md)] border border-[var(--hairline)] p-2">
-                  <p className="mb-1.5 px-1 text-[0.7rem] font-semibold uppercase tracking-wide text-brand-muted">
-                    {tTheme("colorblindType")}
-                  </p>
-                  <div className="grid gap-1">
-                    {COLORBLIND_TYPES.map((type) => {
-                      const active = colorblindType === type;
-                      const label =
-                        type === "deuteranopia"
-                          ? tTheme("colorblindDeuteranopia")
-                          : type === "protanopia"
-                            ? tTheme("colorblindProtanopia")
-                            : tTheme("colorblindTritanopia");
-                      return (
-                        <button
-                          key={type}
-                          type="button"
-                          onClick={() => selectColorblindType(type)}
-                          aria-pressed={active}
-                          className={cn(
-                            "flex items-center justify-between rounded-[var(--radius-sm)] px-2.5 py-1.5 text-xs font-medium transition-apple",
-                            active
-                              ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-brand-navy"
-                              : "text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-                          )}
-                        >
-                          <span>{label}</span>
-                          {active ? (
-                            <span aria-hidden className="text-brand-accent dark:text-brand-accent-bright">
-                              ✓
-                            </span>
-                          ) : null}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : null}
-              <p className="mt-2 text-[0.7rem] leading-snug text-brand-muted">{tTheme("colorblindHint")}</p>
-              <button
-                type="button"
-                title={tTheme("dyslexicTitle")}
-                onClick={toggleDyslexicFont}
-                className={cn(
-                  "mt-3 flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-                  dyslexicFont
-                    ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                    : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-                )}
-                aria-pressed={dyslexicFont}
-                aria-label={`${tTheme("dyslexicFriendlyFont")}: ${dyslexicFont ? tTheme("on") : tTheme("off")}`}
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Type className="size-4" strokeWidth={1.75} aria-hidden />
-                  {tTheme("dyslexicFriendlyFont")}
-                </span>
-                <span className="text-xs font-semibold">{dyslexicFont ? tTheme("on") : tTheme("off")}</span>
-              </button>
+                <AccessibilitySettingsPanel />
               </div>
             </div>,
             document.body

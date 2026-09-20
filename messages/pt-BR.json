@@ -4596,7 +4596,8 @@
       "secretariat": "Secretariada",
       "contact": "Contato",
       "signIn": "Entrar",
-      "getStarted": "Comece"
+      "getStarted": "Comece",
+      "features": "Features"
     },
     "playOrbAnimation": "Reproduzir animação InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

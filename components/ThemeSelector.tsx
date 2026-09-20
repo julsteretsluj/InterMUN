@@ -3,30 +3,12 @@
 
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ALargeSmall, Moon, Palette, Sun } from "lucide-react";
+import { Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { nearestThemeHue, themeHueToHex } from "@/lib/apple-color-picker";
-import { AppleColorPicker } from "@/components/ui/AppleColorPicker";
-import {
-  TEXT_SIZE_STEP_MAX,
-  TEXT_SIZE_STEP_MIN,
-  textSizeStepToRootPct,
-  THEME_HUES,
-  type TextSizeStep,
-  type ThemePreference,
-} from "@/lib/theme-storage";
-import {
-  clampTextSizeStep,
-  persistAndApplyTextSize,
-  persistAndApplyTheme,
-  readTextSizeFromStorage,
-  readThemeFromStorage,
-} from "@/lib/theme-document";
+import { ThemeSettingsPanel } from "@/components/ThemeSettingsPanel";
 import { useTranslations } from "next-intl";
-
-const THEME_HUE_PRESETS = THEME_HUES.map((hue) => themeHueToHex(hue));
 
 export function ThemeSelector({
   className,
@@ -37,9 +19,6 @@ export function ThemeSelector({
 }) {
   const t = useTranslations("themeSelector");
   const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
-  const [accentHex, setAccentHex] = useState(() => readThemeFromStorage().accentHex);
-  const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number; maxHeight: number } | null>(
     null
@@ -72,8 +51,6 @@ export function ThemeSelector({
   }, [open]);
 
   useLayoutEffect(() => {
-    // No reset needed on close: the panel unmounts, and reopening recomputes
-    // the box in this layout effect before paint.
     if (!open) return;
     function sync() {
       const el = btnRef.current;
@@ -83,8 +60,6 @@ export function ThemeSelector({
       setPopoverBox({
         top,
         right: Math.max(12, window.innerWidth - rect.right),
-        // Cap to the space below the trigger so the panel scrolls internally
-        // instead of clipping offscreen at large text-size settings.
         maxHeight: Math.max(160, window.innerHeight - top - 12),
       });
     }
@@ -96,39 +71,6 @@ export function ThemeSelector({
       window.removeEventListener("scroll", sync, true);
     };
   }, [open]);
-
-  const setAppearance = useCallback(
-    (next: ThemePreference) => {
-      setMode(next);
-      persistAndApplyTheme(next, accentHex);
-    },
-    [accentHex]
-  );
-
-  const setAccentColor = useCallback(
-    (nextHex: string) => {
-      setAccentHex(nextHex);
-      persistAndApplyTheme(mode, nextHex);
-    },
-    [mode]
-  );
-
-  const onAccentColorChange = useCallback(
-    (hex: string) => {
-      setAccentColor(hex);
-    },
-    [setAccentColor]
-  );
-
-  const accentLabelHue = nearestThemeHue(accentHex);
-  const accentIsPreset =
-    themeHueToHex(accentLabelHue).toLowerCase() === accentHex.toLowerCase();
-
-  const onTextSizeSliderChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
-    const v = clampTextSizeStep(Number(e.currentTarget.value));
-    setTextSizeStep(v);
-    persistAndApplyTextSize(v);
-  }, []);
 
   const iconButtonClass = cn(
     "inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
@@ -182,86 +124,9 @@ export function ThemeSelector({
               }}
               className="mun-popover flex w-[min(100vw-1.5rem,22rem)] flex-col p-3"
             >
-          {/* Inner scroller: the panel's ::before arrow overhangs its top edge,
-              so overflow must be clipped here, not on the panel itself. */}
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-          <p className="tag tag-neutral mb-0.5">{t("appearance")}</p>
-          <div className="mt-2 grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => setAppearance("light")}
-              className={cn(
-                "flex items-center justify-center gap-2 rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-                mode === "light"
-                  ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                  : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-              )}
-            >
-              <Sun className="size-4" strokeWidth={1.75} aria-hidden />
-              {t("light")}
-            </button>
-            <button
-              type="button"
-              onClick={() => setAppearance("dark")}
-              className={cn(
-                "flex items-center justify-center gap-2 rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-                mode === "dark"
-                  ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                  : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-              )}
-            >
-              <Moon className="size-4" strokeWidth={1.75} aria-hidden />
-              {t("dark")}
-            </button>
-          </div>
-
-          <p className="tag tag-accent mt-4 mb-1.5">{t("accentColour")}</p>
-          <AppleColorPicker
-            embedded
-            color={accentHex}
-            opacity={100}
-            presets={THEME_HUE_PRESETS}
-            title={t("colorsTitle")}
-            onColorChange={(hex) => onAccentColorChange(hex)}
-          />
-          <p className="mt-2 text-center text-[0.65rem] font-medium text-brand-muted">
-            {accentIsPreset ? t(`hues.${accentLabelHue}`) : t("customAccent", { hex: accentHex.toUpperCase() })}
-          </p>
-
-          <p className="tag tag-neutral mt-4 mb-1.5">{t("typography")}</p>
-          <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">
-            <ALargeSmall className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
-            {t("textSize")}
-          </p>
-          <div className="space-y-2" role="group" aria-labelledby="text-size-heading">
-            <div className="flex items-baseline justify-between gap-2">
-              <span className="text-[0.65rem] font-medium uppercase tracking-wide text-brand-muted">{t("scale")}</span>
-              <span className="tabular-nums text-sm font-semibold text-brand-navy dark:text-zinc-100">
-                {textSizeStepToRootPct(textSizeStep)}%
-              </span>
-            </div>
-            <input
-              id="text-size-slider"
-              type="range"
-              min={TEXT_SIZE_STEP_MIN}
-              max={TEXT_SIZE_STEP_MAX}
-              step={1}
-              value={textSizeStep}
-              onInput={onTextSizeSliderChange}
-              onChange={onTextSizeSliderChange}
-              aria-valuemin={TEXT_SIZE_STEP_MIN}
-              aria-valuemax={TEXT_SIZE_STEP_MAX}
-              aria-valuenow={textSizeStep}
-              aria-valuetext={`${textSizeStepToRootPct(textSizeStep)} percent base size`}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_8%,var(--color-bg-page))] accent-[color:var(--accent)]"
-            />
-            <div className="flex justify-between px-0.5 text-[0.65rem] font-medium text-brand-muted">
-              <span>{t("small")}</span>
-              <span>{t("medium")}</span>
-              <span>{t("large")}</span>
-            </div>
-          </div>
-          </div>
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+                <ThemeSettingsPanel />
+              </div>
             </div>,
             document.body
           )

@@ -4596,7 +4596,8 @@
       "secretariat": "সচিবালয়",
       "contact": "যোগাযোগ",
       "signIn": "সাইন ইন করুন",
-      "getStarted": "শুরু করুন"
+      "getStarted": "শুরু করুন",
+      "features": "Features"
     },
     "playOrbAnimation": "ইন্টারমুন অ্যানিমেশন খেলুন",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

@@ -4596,7 +4596,8 @@
       "secretariat": "លេខាធិការដ្ឋាន",
       "contact": "ទំនាក់ទំនង",
       "signIn": "ចូល",
-      "getStarted": "ចាប់ផ្តើម"
+      "getStarted": "ចាប់ផ្តើម",
+      "features": "Features"
     },
     "playOrbAnimation": "លេងចលនា InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

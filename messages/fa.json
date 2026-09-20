@@ -4596,7 +4596,8 @@
       "secretariat": "دبیرخانه",
       "contact": "تماس بگیرید",
       "signIn": "وارد شوید",
-      "getStarted": "شروع کنید"
+      "getStarted": "شروع کنید",
+      "features": "Features"
     },
     "playOrbAnimation": "انیمیشن InterMUN را پخش کنید",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

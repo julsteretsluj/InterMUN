@@ -24,7 +24,7 @@ export function MunPageShell({
   return (
     <GlassPanel
       className={cn(
-        "mun-page-shell space-y-5",
+        "mun-page-shell space-y-4",
         variant === "offset" && "mun-page-shell-offset",
         variant === "split" && "mun-page-shell-split",
         variant === "flush" && "mun-page-shell-flush !p-4 md:!p-5",
@@ -35,20 +35,14 @@ export function MunPageShell({
     >
       <div
         className={cn(
-          "flex flex-wrap items-end justify-between gap-x-4 gap-y-3",
-          variant === "offset" && "md:pl-3",
-          variant === "split" && "border-b border-[var(--hairline)] pb-4"
+          "flex flex-wrap items-center justify-between gap-x-4 gap-y-2",
+          variant === "split" && "border-b border-[var(--hairline)] pb-3"
         )}
       >
-        <h2
-          className={cn(
-            "font-sans !mb-0 text-[1.5rem] font-semibold tracking-[-0.01em] text-brand-navy md:text-[1.85rem]",
-            variant === "offset" && "relative after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-10 after:rounded-full after:bg-[var(--accent)]"
-          )}
-        >
+        <h2 className="font-sans !mb-0 text-[1.35rem] font-semibold tracking-[-0.015em] text-brand-navy md:text-[1.6rem]">
           {title}
         </h2>
-        {titleAside ? <div className="shrink-0 self-center">{titleAside}</div> : null}
+        {titleAside ? <div className="shrink-0">{titleAside}</div> : null}
       </div>
       {children}
     </GlassPanel>

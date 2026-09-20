@@ -4596,7 +4596,8 @@
       "secretariat": "सचिवालय",
       "contact": "संपर्क",
       "signIn": "दाखिल करना",
-      "getStarted": "शुरू हो जाओ"
+      "getStarted": "शुरू हो जाओ",
+      "features": "Features"
     },
     "playOrbAnimation": "इंटरएमयूएन एनीमेशन खेलें",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

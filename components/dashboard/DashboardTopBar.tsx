@@ -4,46 +4,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
-import { SignOutButton } from "@/components/SignOutButton";
+import { ChromePreferencesMenu } from "@/components/ChromePreferencesMenu";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
-import { AccessibilitySelector } from "@/components/AccessibilitySelector";
-import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
-import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { switchSmtToSecretariatAction } from "@/app/actions/smtDashboardSurface";
-
-function initialsFromName(name: string, email: string): string {
-  const n = name.trim();
-  if (n.length > 0) {
-    const parts = n.split(/\s+/).filter(Boolean);
-    if (parts.length >= 2) {
-      return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
-    }
-    return n.slice(0, 2).toUpperCase();
-  }
-  const local = email.split("@")[0] ?? "?";
-  return local.slice(0, 2).toUpperCase();
-}
-
-function formatHeaderDate(d: Date, locale: string): string {
-  return new Intl.DateTimeFormat(locale, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(d);
-}
-
-function formatHeaderTime(d: Date, locale: string): string {
-  return new Intl.DateTimeFormat(locale, {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(d);
-}
 
 export function DashboardTopBar({
   userName,
@@ -74,17 +41,8 @@ export function DashboardTopBar({
   /** Account menu target (e.g. SMT uses `/smt/profile`). */
   profileHref?: string;
 }) {
-  const t = useTranslations("dashboardTopBar");
   const tSmtView = useTranslations("smtCommitteeView");
-  const locale = useLocale();
-  const initials = initialsFromName(userName, userEmail);
-  const [now, setNow] = useState(() => new Date());
   const [pendingExitSurface, startExitSurface] = useTransition();
-
-  useEffect(() => {
-    const id = window.setInterval(() => setNow(new Date()), 1000);
-    return () => window.clearInterval(id);
-  }, []);
 
   function exitSmtPreview() {
     startExitSurface(async () => {
@@ -97,12 +55,7 @@ export function DashboardTopBar({
       data-tour="tour-topbar"
       className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[var(--dashboard-card)] shadow-[0_4px_18px_-16px_rgba(15,23,42,0.45)] transition-[background-color,box-shadow] duration-300 dark:bg-[var(--material-chrome)]"
     >
-      <div className="flex w-full flex-wrap items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
-        <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:dark:inline-flex" aria-hidden>
-          <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-          <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-          <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-        </div>
+      <div className="flex w-full items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
         <Link
           href={brandHomeHref ?? "/profile"}
           className="flex shrink-0 items-center gap-2 lg:hidden"
@@ -110,24 +63,10 @@ export function DashboardTopBar({
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="topbar" />
         </Link>
-        <div className="min-w-0 flex-1 basis-[min(100%,12rem)] sm:flex-[1_1_40%]">
+        <div className="min-w-0 flex-1">
           <DashboardSearch />
         </div>
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5 sm:ml-0 sm:flex-nowrap sm:gap-2">
-          <Link
-            href="/"
-            className="rounded-lg border border-[var(--hairline)] bg-white px-3 py-1.5 text-xs font-semibold text-brand-navy transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:color-mix(in_srgb,var(--accent)_30%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--dashboard-cream)_55%,white)]"
-          >
-            ← {t("backToHome")}
-          </Link>
-          {showDelegateHubLink ? (
-            <Link
-              href="/delegate"
-              className="hidden rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] sm:inline-flex"
-            >
-              📄 {t("delegateHub")}
-            </Link>
-          ) : null}
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           {showExitSmtPreview ? (
             <button
               type="button"
@@ -139,68 +78,19 @@ export function DashboardTopBar({
               ↩ {tSmtView("goSecretariat")}
             </button>
           ) : null}
-          {conferenceLine ? (
-            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-diplomatic lg:block">
-              {conferenceLine}
-            </p>
+          {notifications != null ? (
+            <div className="flex shrink-0 items-center">{notifications}</div>
           ) : null}
-          <time
-            dateTime={now.toISOString()}
-            className="hidden items-center gap-2 text-sm sm:inline-flex"
-            aria-label={`${formatHeaderDate(now, locale)} ${formatHeaderTime(now, locale)}`}
-            suppressHydrationWarning
-          >
-            <span className="text-brand-muted">{formatHeaderDate(now, locale)}</span>
-            <span className="rounded-[var(--radius-md)] border border-[color:color-mix(in_srgb,var(--accent)_42%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] px-2 py-0.5 font-mono text-xs font-semibold tabular-nums tracking-tight text-brand-navy shadow-[0_1px_0_rgba(0,0,0,0.06)] dark:text-zinc-100 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]">
-              {formatHeaderTime(now, locale)}
-            </span>
-          </time>
-          <div className="inline-flex min-h-9 min-w-0 max-w-full items-stretch overflow-hidden rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5 [box-shadow:0_1px_0_rgba(0,0,0,0.04)_inset] dark:[box-shadow:0_1px_0_rgba(255,255,255,0.06)_inset] sm:shrink-0 sm:min-h-0">
-            {notifications != null ? (
-              <div className="flex min-w-0 items-center border-r border-[var(--hairline)] pr-0.5">
-                {notifications}
-              </div>
-            ) : null}
-            <div className="flex min-w-0 flex-1 items-center border-r border-[var(--hairline)] px-1.5 pr-0.5 sm:flex-initial">
-              <LanguageSwitcher className="flex w-full min-w-0" />
-            </div>
-            <div className="flex shrink-0 items-stretch gap-0.5 pl-0.5 pr-0.5">
-              <AccessibilitySelector className="shrink-0" />
-              <ThemeSelector className="shrink-0" />
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] py-1 pl-1 pr-1.5">
-            <Link
-              href={profileHref}
-              className="flex min-w-0 items-center gap-2 rounded-[var(--radius-pill)] pr-1 transition-apple hover:bg-[color:var(--discord-hover-bg)]"
-            >
-              {profilePictureUrl?.trim() ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={profilePictureUrl.trim()}
-                  alt={`${userName} profile`}
-                  className="h-8 w-8 shrink-0 rounded-[var(--radius-md)] object-cover"
-                />
-              ) : (
-                <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] text-xs font-bold text-white"
-                  aria-hidden
-                >
-                  {initials}
-                </span>
-              )}
-              <div className="hidden min-w-0 sm:block">
-                <p className="truncate text-sm font-semibold text-brand-navy">{userName}</p>
-                <p className="truncate text-[0.7rem] text-brand-muted">{userEmail}</p>
-              </div>
-              <ChevronDown
-                className="hidden h-4 w-4 shrink-0 text-brand-muted sm:block"
-                strokeWidth={1.75}
-                aria-hidden
-              />
-            </Link>
-            <SignOutButton className="border-l border-[var(--hairline)] pl-1.5 text-xs sm:text-sm" />
-          </div>
+          <ChromePreferencesMenu
+            account={{
+              userName,
+              userEmail,
+              profilePictureUrl,
+              profileHref,
+              conferenceLine,
+              showDelegateHubLink,
+            }}
+          />
         </div>
       </div>
     </header>

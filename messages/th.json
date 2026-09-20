@@ -4596,7 +4596,8 @@
       "secretariat": "สำนักเลขาธิการ",
       "contact": "ติดต่อ",
       "signIn": "เข้าสู่ระบบ",
-      "getStarted": "เริ่มต้นเลย"
+      "getStarted": "เริ่มต้นเลย",
+      "features": "Features"
     },
     "playOrbAnimation": "เล่นแอนิเมชั่น InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

@@ -4596,7 +4596,8 @@
       "secretariat": "Sekretarieti",
       "contact": "Wasiliana",
       "signIn": "Ingia",
-      "getStarted": "Anza"
+      "getStarted": "Anza",
+      "features": "Features"
     },
     "playOrbAnimation": "Cheza uhuishaji wa InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

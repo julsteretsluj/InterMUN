@@ -4596,7 +4596,8 @@
       "secretariat": "秘书处",
       "contact": "接触",
       "signIn": "登入",
-      "getStarted": "开始使用"
+      "getStarted": "开始使用",
+      "features": "Features"
     },
     "playOrbAnimation": "播放 InterMUN 动画",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

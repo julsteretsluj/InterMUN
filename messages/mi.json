@@ -4596,7 +4596,8 @@
       "secretariat": "Hekeretari",
       "contact": "Whakapā",
       "signIn": "Waitohu mai",
-      "getStarted": "Tīmatahia"
+      "getStarted": "Tīmatahia",
+      "features": "Features"
     },
     "playOrbAnimation": "Whakatangihia te hākoritanga InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

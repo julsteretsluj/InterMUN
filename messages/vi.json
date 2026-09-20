@@ -4596,7 +4596,8 @@
       "secretariat": "Ban thư ký",
       "contact": "Liên hệ",
       "signIn": "Đăng nhập",
-      "getStarted": "Bắt đầu"
+      "getStarted": "Bắt đầu",
+      "features": "Features"
     },
     "playOrbAnimation": "Chơi hoạt hình InterMUN",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

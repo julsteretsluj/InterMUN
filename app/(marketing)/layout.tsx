@@ -3,6 +3,7 @@ import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
 import { MarketingMazeScript } from "@/components/marketing/MarketingMazeScript";
+import { MarketingPrimaryNav } from "@/components/marketing/MarketingPrimaryNav";
 import { AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
 import { MarketingSiteFooter } from "@/components/marketing/MarketingSiteFooter";
@@ -33,14 +34,7 @@ export default async function MarketingLayout({
               {appName}
             </Link>
           </div>
-          <nav className="marketing-nav hidden items-center justify-self-center lg:flex lg:gap-2">
-            <Link href="/about">About</Link>
-            <Link href="/#how-it-works">{t("nav.howItWorks")}</Link>
-            <Link href="/features/chairs">{t("nav.chairs")}</Link>
-            <Link href="/features/delegates">{t("nav.delegates")}</Link>
-            <Link href="/features/secretariat">{t("nav.secretariat")}</Link>
-            <Link href="/#contact">{t("nav.contact")}</Link>
-          </nav>
+          <MarketingPrimaryNav />
           <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end lg:col-start-3">
             <PublicPageControls compact className="marketing-header-controls" />
             {/* !important variants: unlayered .mun-apple-btn display beats layered `hidden` in Tailwind v4. */}

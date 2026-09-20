@@ -4596,7 +4596,8 @@
       "secretariat": "사무국",
       "contact": "연락하다",
       "signIn": "로그인",
-      "getStarted": "시작하기"
+      "getStarted": "시작하기",
+      "features": "Features"
     },
     "playOrbAnimation": "InterMUN 애니메이션 재생",
     "hero": {
@@ -5702,5 +5703,10 @@
     "foundNo": "Not found",
     "heldByNone": "—",
     "notesPlaceholder": "Chair notes…"
+  },
+  "chromePreferences": {
+    "openAria": "Open preferences",
+    "accountAria": "Account and preferences",
+    "profile": "Profile"
   }
 }

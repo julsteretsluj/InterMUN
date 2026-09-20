@@ -3,11 +3,8 @@
 
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AccessibilitySelector } from "@/components/AccessibilitySelector";
-import { SignOutButton } from "@/components/SignOutButton";
-import { ThemeSelector } from "@/components/ThemeSelector";
+import { ChromePreferencesMenu } from "@/components/ChromePreferencesMenu";
 import { AppleProductPage } from "@/components/ui/AppleProductPage";
 import { AppleSidebar, AppleSidebarRow, AppleSidebarSection } from "@/components/ui/AppleSidebar";
 import { AppleWindowWithSidebar } from "@/components/ui/AppleWindow";
@@ -49,14 +46,16 @@ export function AdminAppChrome({
         className="bg-[var(--dashboard-card)]"
         sidebarClassName="hidden flex-col bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] md:flex"
         trailing={
-          <div className="flex items-center gap-1">
-            <Link href="/" className="mun-apple-btn mun-apple-btn-plain-blue mun-apple-btn-compact !px-2">
-              Back to home
-            </Link>
-            <AccessibilitySelector />
-            <ThemeSelector />
-            <SignOutButton className="mun-apple-btn mun-apple-btn-plain-blue mun-apple-btn-compact !px-2" />
-          </div>
+          <ChromePreferencesMenu
+            account={{
+              userName: "Admin",
+              userEmail: "",
+              profileHref: "/admin",
+              conferenceLine: activeEventName
+                ? [activeEventName, activeEventCode].filter(Boolean).join(" · ")
+                : null,
+            }}
+          />
         }
         sidebar={
           <AppleSidebar className="h-full min-h-0 w-full" aria-label="Admin navigation">
@@ -66,7 +65,6 @@ export function AdminAppChrome({
                   key={item.href}
                   href={item.href}
                   title={item.label}
-                  detail={String(item.priority)}
                   dataTour={
                     item.href === "/admin"
                       ? "nav-admin-overview"
@@ -102,11 +100,6 @@ export function AdminAppChrome({
                 </p>
               </div>
             ) : null}
-            <div className="px-3 pb-3">
-              <p className="mun-apple-text mun-apple-text-caption-2 mun-vibrancy-tertiary">
-                First admin account is assigned in the database. Never share the service role key.
-              </p>
-            </div>
           </AppleSidebar>
         }
       >

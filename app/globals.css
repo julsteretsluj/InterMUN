@@ -1001,10 +1001,16 @@ html.dark ::selection {
     @apply border-[color-mix(in_srgb,var(--semantic-success)_30%,var(--hairline))] bg-[var(--semantic-success-bg)] text-[var(--semantic-success)];
   }
   .nav-priority-badge {
+    /* Hidden by default — priority order still drives nav sequence; numbers
+       only appear during guided tours to reduce chrome noise. */
+    display: none;
     /* Fixed width so 1- and 2-digit numbers share one column when the badge
        sits beside the icon in the collapsed rail (min-width alone made "11"
        wider than "3" and staggered every icon). */
-    @apply absolute left-1 top-1 z-[1] flex h-[1.125rem] w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0 text-[0.625rem] font-bold leading-none tabular-nums text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
+    @apply absolute left-1 top-1 z-[1] h-[1.125rem] w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0 text-[0.625rem] font-bold leading-none tabular-nums text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
+  }
+  html[data-tour] .nav-priority-badge {
+    display: flex;
   }
   /* Numbered chip on active nav pill — theme accent-bright (was fixed gold). */
   .dashboard-nav-active .nav-priority-badge {
@@ -1030,10 +1036,16 @@ html.dark ::selection {
     color: #ffffff;
   }
   .nav-priority-link {
-    @apply relative pl-8;
+    @apply relative;
+  }
+  html[data-tour] .nav-priority-link:not(.nav-priority-link--dock) {
+    @apply pl-8;
   }
   .nav-priority-link--dock {
-    @apply relative pt-4;
+    @apply relative;
+  }
+  html[data-tour] .nav-priority-link--dock {
+    @apply pt-4;
   }
   .nav-priority-link--dock .nav-priority-badge {
     @apply left-1/2 top-0 -translate-x-1/2;
@@ -1065,7 +1077,10 @@ html.dark ::selection {
     justify-content: center !important;
   }
   .nav-priority-tab {
-    @apply relative pl-6;
+    @apply relative;
+  }
+  html[data-tour] .nav-priority-tab {
+    @apply pl-6;
   }
 
   .nav-folder + .nav-folder {
@@ -8571,19 +8586,12 @@ html.dark .mun-apple-window-sidebar {
 
 .mun-page-shell-offset {
   margin-left: 0;
-  border-radius: var(--radius-xl) var(--radius-xl) var(--radius-md) var(--radius-xl);
-}
-
-@media (min-width: 768px) {
-  .mun-page-shell-offset {
-    margin-left: 0.75rem;
-    transform: rotate(-0.15deg);
-  }
+  border-radius: var(--radius-xl);
 }
 
 .mun-page-shell-split {
   border-radius: var(--radius-lg);
-  background: linear-gradient(165deg, #ffffff 0%, color-mix(in srgb, var(--accent) 4%, #ffffff) 100%);
+  background: var(--dashboard-card);
 }
 
 .mun-page-shell-flush {
@@ -8623,9 +8631,6 @@ html.dark .mun-apple-window-sidebar {
   .mun-animate-from-left,
   .mun-animate-from-right {
     animation: none;
-  }
-  .mun-page-shell-offset {
-    transform: none;
   }
 }
 
