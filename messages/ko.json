@@ -451,7 +451,8 @@
     "pointStatusAccepted": "Accepted",
     "pointStatusDenied": "Denied",
     "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
-    "agendaSetDay1Only": "Agenda set. Live topic is {first}."
+    "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker."
   },
   "chairChecklists": {
     "common": {
@@ -583,7 +584,12 @@
     "home": "집",
     "library": "도서관",
     "mainNavigationAria": "메인 네비게이션",
-    "crisis": "위기"
+    "crisis": "위기",
+    "fwcDirectives": "Directives",
+    "fwcMovement": "Movement",
+    "fwcMap": "Hawkins",
+    "fwcBackroom": "Backroom",
+    "fwcEvidence": "Evidence"
   },
   "dashboardLayout": {
     "helpCenter": "도움말 센터",
@@ -852,7 +858,8 @@
     "timer": "시간제 노동자",
     "smtProfile": "윤곽",
     "crisis": "위기",
-    "smtDelegates": "대표자"
+    "smtDelegates": "대표자",
+    "openingSpeech": "🎙️ Opening speeches"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -1276,7 +1283,10 @@
     "goDelegate": "대리인 보기",
     "surfaceSwitchError": "보기를 전환할 수 없습니다. 이벤트 게이트와 선택 항목을 확인하세요.",
     "pickChairFirst": "먼저 위원장 위원회를 선택하세요(또는 할당을 저장하세요).",
-    "pickDelegateFirst": "먼저 대의원 좌석을 선택하세요(또는 할당을 저장하세요)."
+    "pickDelegateFirst": "먼저 대의원 좌석을 선택하세요(또는 할당을 저장하세요).",
+    "startPreview": "Start",
+    "startingPreview": "Starting…",
+    "noDelegateSeats": "No delegate placards found for this committee."
   },
   "smtOverview": {
     "noEventSelected": "선택된 회의가 없습니다. 먼저 이벤트 코드를 입력하세요.",
@@ -1348,7 +1358,13 @@
       "settings": "설정",
       "resolutions": "Resolutions",
       "guides": "Guides",
-      "crisisReport": "보고서"
+      "crisisReport": "보고서",
+      "openingSpeech": "Opening speeches",
+      "fwcDirectives": "Directives",
+      "fwcMovement": "Movement",
+      "fwcMap": "Hawkins",
+      "fwcBackroom": "Backroom",
+      "fwcEvidence": "Evidence"
     }
   },
   "smtNav": {
@@ -2673,6 +2689,10 @@
       "crisisReport": {
         "label": "보고서",
         "hint": "사고 보고"
+      },
+      "openingSpeech": {
+        "label": "Opening speeches",
+        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
       }
     }
   },
@@ -4370,7 +4390,8 @@
       "rollCallYou": "점호(당신)",
       "fullAnnouncement": "전체 발표",
       "daisAnnouncement": "다이스 발표",
-      "close": "닫다"
+      "close": "닫다",
+      "quickLinkOpeningSpeech": "Opening"
     },
     "committeeControl": {
       "sessionNameLabel": "세션 이름",
@@ -5628,5 +5649,58 @@
     "selectedCommittee": "Selected for committee",
     "selectedConference": "Selected for conference",
     "selectFailed": "Could not record that award. Try again."
+  },
+  "chairOpeningSpeechPanel": {
+    "title": "Opening speeches",
+    "intro": "Builds the speakers list in alphabetical order and sets a 60-second per-speaker timer. Pass a motion to extend speaking time to 90 seconds.",
+    "statusLabel": "Speaking time:",
+    "statusDefault": "{seconds}s per speaker",
+    "statusExtended": "{seconds}s per speaker (extended)",
+    "clockRemaining": "clock {clock}",
+    "extendHintPrefix": "To extend time, open",
+    "extendMotionName": "Motion to Extend Opening Speech Time",
+    "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
+    "beginButton": "Set A–Z list · 60s timer",
+    "settingUp": "Setting up…",
+    "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
+    "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
+  },
+  "fwcEvidence": {
+    "title": "Evidence library",
+    "intro": "See where every item currently is, then mark found status and holders in the table. Upload a new spreadsheet to refresh catalog fields without wiping found status or locations for matching Evidence IDs.",
+    "summary": "{found} of {total} found",
+    "sourceFile": "Source: {name}",
+    "sourceMissing": "No uploaded source file yet — bundled SEAMUN I 2027 catalog is in use.",
+    "replaceUpload": "Upload / replace .xlsx",
+    "working": "Working…",
+    "uploadSuccess": "Imported {count} evidence items. Found status and locations were kept for matching IDs.",
+    "locationsTitle": "Where everything is",
+    "locationsIntro": "Every catalog item, grouped by current place or the character holding it.",
+    "locationsCount": "{count} places",
+    "locationsItemCount": "{count}",
+    "locationsGrid": "Grid {grid}",
+    "filterFound": "Found",
+    "filterAll": "All",
+    "filterFoundOnly": "Found",
+    "filterUnfound": "Not found",
+    "filterLocation": "Location",
+    "filterLocationPlaceholder": "Grid or place…",
+    "filterHolder": "Held by",
+    "filterAnyHolder": "Anyone",
+    "empty": "No evidence matches these filters.",
+    "colId": "ID",
+    "colCategory": "Category",
+    "colItem": "Item",
+    "colPrimary": "Primary location",
+    "colDiscoverable": "Discoverable by",
+    "colEffect": "Tactical / narrative effect",
+    "colFound": "Found?",
+    "colCurrent": "Where it stays",
+    "colHeldBy": "Held by",
+    "colNotes": "Notes",
+    "foundYes": "Found",
+    "foundNo": "Not found",
+    "heldByNone": "—",
+    "notesPlaceholder": "Chair notes…"
   }
 }

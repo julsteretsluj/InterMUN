@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
 import {
@@ -21,6 +21,8 @@ import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness";
 import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { useActionBusy } from "@/lib/hooks/useActionBusy";
+import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
 import { currentAndNextQueueRows, fetchSpeakerQueue } from "@/lib/speaker-queue";
 import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
@@ -451,7 +453,28 @@ export function SessionControlClient({
   });
   const [openVotingMotions, setOpenVotingMotions] = useState<MotionRow[]>([]);
   const [msg, setMsg] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
+  type SessionBusy =
+    | "timer"
+    | "advance"
+    | "votes"
+    | "discipline"
+    | "points"
+    | "notes"
+    | "dais"
+    | "roll"
+    | "motions"
+    | "agenda";
+  const { runBusy, isBusy } = useActionBusy<SessionBusy>();
+  const pendingTimer = isBusy("timer");
+  const pendingAdvance = isBusy("advance");
+  const pendingVotes = isBusy("votes");
+  const pendingDiscipline = isBusy("discipline");
+  const pendingPoints = isBusy("points");
+  const pendingNotes = isBusy("notes");
+  const pendingDais = isBusy("dais");
+  const pendingRoll = isBusy("roll");
+  const pendingMotions = isBusy("motions");
+  const pendingAgenda = isBusy("agenda");
   const [openMotion, setOpenMotion] = useState<MotionRow | null>(null);
   const [recentMotions, setRecentMotions] = useState<MotionRow[]>([]);
   const [motionAudit, setMotionAudit] = useState<MotionAudit[]>([]);
@@ -1481,7 +1504,7 @@ export function SessionControlClient({
       voteItemIdToSave = id;
     }
 
-    startTransition(async () => {
+    runBusy("timer", async () => {
       let left = opts?.timeLeftSeconds ?? parseTime(timer.leftM, timer.leftS);
       let total = opts?.totalTimeSeconds ?? parseTime(timer.totalM, timer.totalS);
       if (left <= 0 && total <= 0) {
@@ -1499,6 +1522,32 @@ export function SessionControlClient({
       const isRunning = opts?.isRunning ?? timer.isRunning;
       let currentSpeaker = timer.current.trim() || null;
       let nextSpeaker = timer.next.trim() || null;
+
+      // Instant feedback for start/save before queue alignment + upsert.
+      applyOptimisticTimerPatch(floorConferenceId, {
+        current_speaker: currentSpeaker,
+        next_speaker: nextSpeaker,
+        time_left_seconds: left,
+        total_time_seconds: total,
+        per_speaker_mode: perSpeakerMode,
+        is_running: isRunning,
+        floor_label: floorLabel.trim() || null,
+        current_pause_reason: isRunning ? null : undefined,
+      });
+      setTimer((t) => ({
+        ...t,
+        current: currentSpeaker ?? "",
+        next: nextSpeaker ?? "",
+        leftM: String(Math.floor(left / 60)),
+        leftS: String(left % 60),
+        totalM: String(Math.floor(total / 60)),
+        totalS: String(total % 60),
+        floorLabel,
+        perSpeakerMode,
+        isRunning,
+      }));
+      if (opts?.successMessage) setMsg(opts.successMessage);
+
       try {
         const queueRows = await fetchSpeakerQueue(supabase, floorConferenceId);
         const { current, next } = currentAndNextQueueRows(queueRows);
@@ -1589,7 +1638,19 @@ export function SessionControlClient({
     }
     const frozenLeft = Math.max(0, Math.round(liveRemaining));
     const reason = pauseReasonDraft.trim() || "Paused by chair";
-    startTransition(async () => {
+    applyOptimisticTimerPatch(floorConferenceId, {
+      time_left_seconds: frozenLeft,
+      is_running: false,
+      current_pause_reason: reason,
+    });
+    setTimer((t) => ({
+      ...t,
+      isRunning: false,
+      leftM: String(Math.floor(frozenLeft / 60)),
+      leftS: String(frozenLeft % 60),
+    }));
+    setMsg(tTimer("pausedForCommittee"));
+    runBusy("timer", async () => {
       const { error: logErr } = await supabase.from("timer_pause_events").insert({
         conference_id: floorConferenceId,
         reason,
@@ -1608,8 +1669,10 @@ export function SessionControlClient({
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", floorConferenceId);
-      setMsg(error ? error.message : tTimer("pausedForCommittee"));
-      void refresh();
+      if (error) {
+        setMsg(error.message);
+        void refresh();
+      }
     });
   }
 
@@ -1620,7 +1683,14 @@ export function SessionControlClient({
       return;
     }
     if (liveTimerRow && remainingNow > 0) {
-      startTransition(async () => {
+      applyOptimisticTimerPatch(floorConferenceId, {
+        is_running: true,
+        current_pause_reason: null,
+        time_left_seconds: remainingNow,
+      });
+      setTimer((t) => ({ ...t, isRunning: true }));
+      setMsg(tTimer("runningForCommittee"));
+      runBusy("timer", async () => {
         const { error } = await supabase
           .from("timers")
           .update({
@@ -1629,8 +1699,10 @@ export function SessionControlClient({
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", floorConferenceId);
-        setMsg(error ? error.message : tTimer("runningForCommittee"));
-        void refresh();
+        if (error) {
+          setMsg(error.message);
+          void refresh();
+        }
       });
       return;
     }
@@ -1700,7 +1772,7 @@ export function SessionControlClient({
       }
       rightsStatement = drafted.trim();
     }
-    startTransition(async () => {
+    runBusy("votes", async () => {
       const { error } = await supabase.from("votes").upsert(
         { vote_item_id: voteItemId, allocation_id: allocation.id, user_id: uid, value },
         { onConflict: "vote_item_id,allocation_id" }
@@ -1743,7 +1815,7 @@ export function SessionControlClient({
       return;
     }
     const voteItemId = activeMotionForRecordedVotes.id;
-    startTransition(async () => {
+    runBusy("votes", async () => {
       const { error } = await supabase
         .from("votes")
         .delete()
@@ -1770,7 +1842,7 @@ export function SessionControlClient({
       setMsg("Choose a delegate first.");
       return;
     }
-    startTransition(async () => {
+    runBusy("discipline", async () => {
       const { error } = await supabase.rpc("apply_delegate_disciplinary_action", {
         p_conference_id: floorConferenceId,
         p_allocation_id: disciplineTargetAllocationId,
@@ -1789,7 +1861,7 @@ export function SessionControlClient({
 
   function addSessionPoint() {
     const detail = pointDraftDetail.trim();
-    startTransition(async () => {
+    runBusy("points", async () => {
       const { error } = await supabase.from("chair_session_points").insert({
         conference_id: floorConferenceId,
         raised_by_allocation_id: pointDraftAllocationId || null,
@@ -1808,7 +1880,7 @@ export function SessionControlClient({
   }
 
   function setSessionPointStatus(id: string, status: "accepted" | "denied") {
-    startTransition(async () => {
+    runBusy("points", async () => {
       const { error } = await supabase.from("chair_session_points").update({ status }).eq("id", id);
       if (error) {
         setMsg(error.message);
@@ -1824,7 +1896,18 @@ export function SessionControlClient({
       setMsg("Turn on per-speaker time first, then save the timer.");
       return;
     }
-    startTransition(async () => {
+    const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
+      if (!row) return "";
+      if (row.allocation_id) {
+        const country = displayCountry(
+          allocations.find((a) => a.id === row.allocation_id)?.country ?? null
+        );
+        if (country && country !== "—") return country;
+      }
+      return row.label?.trim() || "";
+    };
+
+    runBusy("advance", async () => {
       const rows = await fetchSpeakerQueue(supabase, floorConferenceId);
       const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
       const currentRow = sorted.find((r) => r.status === "current") ?? null;
@@ -1833,6 +1916,41 @@ export function SessionControlClient({
         setMsg("No waiting speakers in the queue to advance to.");
         return;
       }
+
+      const afterAdvance = sorted.map((r) => {
+        if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
+        if (r.id === nextCurrent.id) return { ...r, status: "current" };
+        return r;
+      });
+      const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
+      const cap = Math.max(1, parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60);
+      const curLabel = labelFor(nextCurrent) || "—";
+      const nextLabel = labelFor(afterNext);
+
+      applyOptimisticTimerPatch(floorConferenceId, {
+        current_speaker: curLabel,
+        next_speaker: nextLabel || null,
+        time_left_seconds: cap,
+        total_time_seconds: cap,
+        per_speaker_mode: true,
+        is_running: true,
+        current_pause_reason: null,
+        floor_label: timer.floorLabel.trim() || null,
+      });
+      setTimer((prev) => ({
+        ...prev,
+        current: curLabel,
+        next: nextLabel,
+        leftM: String(Math.floor(cap / 60)),
+        leftS: String(cap % 60),
+        totalM: String(Math.floor(cap / 60)),
+        totalS: String(cap % 60),
+        perSpeakerMode: true,
+        isRunning: true,
+        floorLabel: prev.floorLabel,
+      }));
+      setMsg(tSessionControl("advancedSpeakerResetClock"));
+      notifySpeakerQueueUpdated(floorConferenceId);
 
       if (currentRow) {
         await supabase.from("speaker_queue_entries").update({ status: "done" }).eq("id", currentRow.id);
@@ -1843,26 +1961,6 @@ export function SessionControlClient({
         allocationId: nextCurrent.allocation_id,
         speakerLabel: nextCurrent.label,
       });
-
-      const afterAdvance = sorted.map((r) => {
-        if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
-        if (r.id === nextCurrent.id) return { ...r, status: "current" };
-        return r;
-      });
-      const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
-      const cap = Math.max(1, parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60);
-      const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
-        if (!row) return "";
-        if (row.allocation_id) {
-          const country = displayCountry(
-            allocations.find((a) => a.id === row.allocation_id)?.country ?? null
-          );
-          if (country && country !== "—") return country;
-        }
-        return row.label?.trim() || "";
-      };
-      const curLabel = labelFor(nextCurrent) || "—";
-      const nextLabel = labelFor(afterNext);
 
       const voteItemIdToSave =
         timer.purpose === "motion_vote" && timer.boundVoteItemId.trim()
@@ -1879,27 +1977,17 @@ export function SessionControlClient({
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: true,
           is_running: true,
+          current_pause_reason: null,
           floor_label: timer.floorLabel.trim() || null,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
       );
 
-      setTimer((prev) => ({
-        ...prev,
-        current: curLabel,
-        next: nextLabel,
-        leftM: String(Math.floor(cap / 60)),
-        leftS: String(cap % 60),
-        totalM: String(Math.floor(cap / 60)),
-        totalS: String(cap % 60),
-        perSpeakerMode: true,
-        isRunning: true,
-        floorLabel: prev.floorLabel,
-      }));
-      setMsg(error ? error.message : tSessionControl("advancedSpeakerResetClock"));
-      notifySpeakerQueueUpdated(floorConferenceId);
-      void refresh();
+      if (error) {
+        setMsg(error.message);
+        void refresh();
+      }
     });
   }
 
@@ -1909,7 +1997,7 @@ export function SessionControlClient({
       setMsg(tSessionControl("writeSpeechNoteFirst"));
       return;
     }
-    startTransition(async () => {
+    runBusy("notes", async () => {
       if (!authUserId) {
         setMsg("You must be signed in.");
         return;
@@ -1940,7 +2028,7 @@ export function SessionControlClient({
   }
 
   function deleteChairSpeechNote(noteId: string) {
-    startTransition(async () => {
+    runBusy("notes", async () => {
       const { error } = await supabase.from("chair_speech_notes").delete().eq("id", noteId);
       setMsg(error ? error.message : tSessionControl("speechNoteDeleted"));
       if (!error) void loadChairSpeechNotes();
@@ -1951,7 +2039,7 @@ export function SessionControlClient({
     const body = daisBody.trim();
     const resources = parseGuideResources(daisResources);
     if (!body && resources.length === 0) return;
-    startTransition(async () => {
+    runBusy("dais", async () => {
       if (!authUserId) {
         setMsg("You must be signed in.");
         return;
@@ -1977,7 +2065,7 @@ export function SessionControlClient({
   }
 
   function setDaisPinned(announcementId: string, pinned: boolean) {
-    startTransition(async () => {
+    runBusy("dais", async () => {
       if (pinned) {
         await supabase
           .from("dais_announcements")
@@ -2023,7 +2111,7 @@ export function SessionControlClient({
       return;
     }
     const publishAtIso = daisEditPublishAt.trim() ? new Date(daisEditPublishAt).toISOString() : null;
-    startTransition(async () => {
+    runBusy("dais", async () => {
       const { error } = await supabase
         .from("dais_announcements")
         .update({
@@ -2046,7 +2134,7 @@ export function SessionControlClient({
     ) {
       return;
     }
-    startTransition(async () => {
+    runBusy("dais", async () => {
       if (daisEditingId === id) cancelEditDais();
       const { error } = await supabase
         .from("dais_announcements")
@@ -2059,7 +2147,7 @@ export function SessionControlClient({
   }
 
   function initRollCall() {
-    startTransition(async () => {
+    runBusy("roll", async () => {
       const floorAllocations = allocations.filter(
         (a) => a.conference_id === floorConferenceId && isDelegateRollCallAllocation(a)
       );
@@ -2094,7 +2182,7 @@ export function SessionControlClient({
   function setRollAttendanceForRow(allocationId: string, attendance: RollAttendance) {
     const row = roll.find((x) => x.allocation_id === allocationId);
     if (row?.attendance === attendance) return;
-    startTransition(async () => {
+    runBusy("roll", async () => {
       const rollConferenceId =
         row?.conference_id ??
         allocations.find((a) => a.id === allocationId)?.conference_id ??
@@ -2142,7 +2230,7 @@ export function SessionControlClient({
       );
       return;
     }
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
@@ -2204,7 +2292,7 @@ export function SessionControlClient({
     if (!openMotion) return;
     const draftError = validateMotionDraft(motionDraft);
     if (draftError) return setMsg(draftError);
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { error } = await supabase
         .from("vote_items")
         .update({
@@ -2230,7 +2318,7 @@ export function SessionControlClient({
 
   function closeMotion() {
     if (!openMotion) return;
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open")
@@ -2391,7 +2479,7 @@ export function SessionControlClient({
   }
 
   function reopenMotion(voteItemId: string) {
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: blocking } = await supabase
         .from("vote_items")
         .select("id")
@@ -2449,7 +2537,7 @@ export function SessionControlClient({
       setMsg("Close the current vote before opening the motion floor for statements.");
       return;
     }
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
@@ -2469,7 +2557,7 @@ export function SessionControlClient({
   }
 
   function closeMotionFloorForStatements() {
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
@@ -2512,7 +2600,7 @@ export function SessionControlClient({
         return;
       }
     }
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { error } = await supabase.from("vote_items").insert({
         conference_id: floorConferenceId,
         vote_type: draft.vote_type,
@@ -2808,7 +2896,7 @@ export function SessionControlClient({
       return;
     }
     const first = ordered[0];
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
@@ -2844,7 +2932,7 @@ export function SessionControlClient({
   }
 
   function withdrawStatedMotion(voteItemId: string) {
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { error } = await supabase
         .from("vote_items")
         .delete()
@@ -2858,7 +2946,7 @@ export function SessionControlClient({
 
   /** Deletes an open-for-voting or closed motion; pending stated motions use {@link withdrawStatedMotion}. */
   function deleteMotionAsChair(voteItemId: string) {
-    startTransition(async () => {
+    runBusy("motions", async () => {
       const { data: row, error: fetchErr } = await supabase
         .from("vote_items")
         .select("open_for_voting, closed_at")
@@ -3033,10 +3121,10 @@ export function SessionControlClient({
             <CommitteeAgendaVotesTab
               topics={debateTopicOptions ?? []}
               liveTopicId={floorConferenceId}
-              pending={pending}
+              pending={pendingAgenda}
               committeeLabelRaw={committeeLabelRaw}
               onSetLiveTopic={(topicId) => {
-                startTransition(async () => {
+                runBusy("agenda", async () => {
                   const r = await setActiveDebateTopicAction(topicId);
                   if (r.error) setMsg(r.error);
                   else setMsg(null);
@@ -3140,7 +3228,7 @@ export function SessionControlClient({
               </label>
               <button
                 type="button"
-                disabled={pending}
+                disabled={pendingPoints}
                 onClick={addSessionPoint}
                 className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
               >
@@ -3164,7 +3252,7 @@ export function SessionControlClient({
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
-                disabled={pending || !!openMotion}
+                disabled={pendingMotions || !!openMotion}
                 onClick={startGuidedMotionFlow}
                 className="px-3 py-2 rounded-lg border border-brand-accent/50 bg-brand-accent/15 text-brand-navy text-sm font-medium hover:bg-brand-accent/25 disabled:opacity-50"
               >
@@ -3172,7 +3260,7 @@ export function SessionControlClient({
               </button>
               <button
                 type="button"
-                disabled={pending || !!openMotion || motionFloorOpen}
+                disabled={pendingMotions || !!openMotion || motionFloorOpen}
                 onClick={openMotionFloorForStatements}
                 className="px-3 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium disabled:opacity-50"
               >
@@ -3180,7 +3268,7 @@ export function SessionControlClient({
               </button>
               <button
                 type="button"
-                disabled={pending || !motionFloorOpen}
+                disabled={pendingMotions || !motionFloorOpen}
                 onClick={closeMotionFloorForStatements}
                 className="px-3 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-black/20 disabled:opacity-50"
               >
@@ -3189,7 +3277,7 @@ export function SessionControlClient({
               <button
                 type="button"
                 disabled={
-                  pending ||
+                  pendingMotions ||
                   !motionFloorOpen ||
                   !!openMotion ||
                   !!motionDraftValidationError
@@ -3202,7 +3290,7 @@ export function SessionControlClient({
               <button
                 type="button"
                 disabled={
-                  pending || motionFloorOpen || !!openMotion || pendingStatedMotions.length === 0
+                  pendingMotions || motionFloorOpen || !!openMotion || pendingStatedMotions.length === 0
                 }
                 onClick={beginVotingInDisruptivenessOrder}
                 className="px-3 py-2 rounded-lg bg-brand-navy text-white text-sm font-medium hover:bg-brand-navy/90 dark:bg-zinc-950 dark:hover:bg-zinc-800 disabled:opacity-50"
@@ -3233,7 +3321,7 @@ export function SessionControlClient({
                       </div>
                       <button
                         type="button"
-                        disabled={pending}
+                        disabled={pendingMotions}
                         onClick={() => withdrawStatedMotion(m.id)}
                         className="text-xs text-red-700 font-medium hover:underline shrink-0"
                       >
@@ -3631,7 +3719,7 @@ export function SessionControlClient({
               <button
                 type="button"
                 disabled={
-                  pending || !!motionDraftValidationError
+                  pendingMotions || !!motionDraftValidationError
                 }
                 onClick={() => createMotion()}
                 className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium"
@@ -3642,7 +3730,7 @@ export function SessionControlClient({
               <>
                 <button
                   type="button"
-                  disabled={pending}
+                  disabled={pendingMotions}
                   onClick={saveMotionEdits}
                   className="px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
                 >
@@ -3650,7 +3738,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending}
+                  disabled={pendingMotions}
                   onClick={closeMotion}
                   className="px-4 py-2 rounded-lg border border-red-600 bg-red-50 text-red-900 text-sm font-medium hover:bg-red-100 disabled:opacity-50"
                 >
@@ -3658,7 +3746,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending}
+                  disabled={pendingMotions}
                   onClick={() => {
                     if (
                       !window.confirm(
@@ -3787,7 +3875,7 @@ export function SessionControlClient({
                           <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              disabled={pending || !canRecordVote(discipline) || absent}
+                              disabled={pendingVotes || !canRecordVote(discipline) || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
                               className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
@@ -3796,7 +3884,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || !canRecordVote(discipline) || absent}
+                                disabled={pendingVotes || !call.user_id || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "yes", true)}
                                 className="rounded-lg border border-brand-accent/45 bg-brand-accent/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >
@@ -3806,7 +3894,7 @@ export function SessionControlClient({
                             {canAbstain ? (
                               <button
                                 type="button"
-                                disabled={pending || !canRecordVote(discipline) || absent}
+                                disabled={pendingVotes || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
                                 className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                               >
@@ -3815,7 +3903,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || !canRecordVote(discipline) || absent}
+                              disabled={pendingVotes || !canRecordVote(discipline) || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "no")}
                               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                             >
@@ -3824,7 +3912,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || !canRecordVote(discipline) || absent}
+                                disabled={pendingVotes || !call.user_id || !canRecordVote(discipline) || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "no", true)}
                                 className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >
@@ -3833,7 +3921,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending}
+                              disabled={pendingVotes}
                               onClick={() => clearDelegateVoteForAllocation(call)}
                               className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15 disabled:opacity-50"
                             >
@@ -3878,7 +3966,7 @@ export function SessionControlClient({
                 />
                 <button
                   type="button"
-                  disabled={pending || !disciplineTargetAllocationId}
+                  disabled={pendingDiscipline || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("warning")}
                   className="rounded-lg border border-amber-500/45 bg-amber-500/15 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
@@ -3886,7 +3974,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending || !disciplineTargetAllocationId}
+                  disabled={pendingDiscipline || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("strike")}
                   className="rounded-lg border border-rose-500/45 bg-rose-500/15 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
@@ -3894,7 +3982,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending || !disciplineTargetAllocationId}
+                  disabled={pendingDiscipline || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("revoke_warning")}
                   className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
@@ -3902,7 +3990,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending || !disciplineTargetAllocationId}
+                  disabled={pendingDiscipline || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("revoke_strike")}
                   className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
                 >
@@ -3910,7 +3998,7 @@ export function SessionControlClient({
                 </button>
                 <button
                   type="button"
-                  disabled={pending || !disciplineTargetAllocationId}
+                  disabled={pendingDiscipline || !disciplineTargetAllocationId}
                   onClick={() => applyDisciplinaryAction("reset")}
                   className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-2 text-xs font-medium text-rose-900 dark:text-rose-100 disabled:opacity-50"
                 >
@@ -3966,7 +4054,7 @@ export function SessionControlClient({
                       <span className="flex shrink-0 items-center gap-2">
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingPoints}
                           onClick={() => setSessionPointStatus(point.id, "accepted")}
                           className="text-xs font-medium text-emerald-800 hover:underline disabled:opacity-50 dark:text-emerald-300"
                         >
@@ -3974,7 +4062,7 @@ export function SessionControlClient({
                         </button>
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingPoints}
                           onClick={() => setSessionPointStatus(point.id, "denied")}
                           className="text-xs font-medium text-red-700 hover:underline disabled:opacity-50"
                         >
@@ -4017,7 +4105,7 @@ export function SessionControlClient({
                 <span className="flex shrink-0 items-center gap-2">
                   <button
                     type="button"
-                    disabled={pending || !!openMotion}
+                    disabled={pendingMotions || !!openMotion}
                     onClick={() => reopenMotion(m.id)}
                     className="text-xs text-amber-700 font-medium hover:underline disabled:opacity-50"
                   >
@@ -4025,7 +4113,7 @@ export function SessionControlClient({
                   </button>
                   <button
                     type="button"
-                    disabled={pending}
+                    disabled={pendingMotions}
                     onClick={() => {
                       if (
                         !window.confirm(
@@ -4058,7 +4146,7 @@ export function SessionControlClient({
           )}
             <FloorTimerRunButtons
               running={Boolean(liveTimerRow) && timer.isRunning && liveRemaining > 0}
-              pending={pending}
+              pending={pendingTimer}
               onStart={startFloorTimer}
               onPause={stopFloorTimer}
             />
@@ -4206,7 +4294,7 @@ export function SessionControlClient({
                       <FloorTimerRunButtons
                         size="md"
                         running={slotIsLive}
-                        pending={pending}
+                        pending={pendingTimer}
                         onStart={() => startEuTimerSlot(slot)}
                         onPause={stopFloorTimer}
                       />
@@ -4387,7 +4475,7 @@ export function SessionControlClient({
             </label>
             <button
               type="button"
-              disabled={pending || !speechNoteDraft.trim()}
+              disabled={pendingNotes || !speechNoteDraft.trim()}
               onClick={saveChairSpeechNote}
               className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
@@ -4404,7 +4492,7 @@ export function SessionControlClient({
                         <button
                           type="button"
                           className="text-xs text-red-700 hover:underline dark:text-red-300 shrink-0"
-                          disabled={pending}
+                          disabled={pendingNotes}
                           onClick={() => deleteChairSpeechNote(n.id)}
                         >
                           {tTimer("delete")}
@@ -4473,7 +4561,7 @@ export function SessionControlClient({
             </label>
             <button
               type="button"
-              disabled={pending}
+              disabled={pendingTimer}
               onClick={saveTimer}
               className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
@@ -4482,7 +4570,7 @@ export function SessionControlClient({
             {timer.perSpeakerMode ? (
               <button
                 type="button"
-                disabled={pending}
+                disabled={pendingAdvance}
                 onClick={advanceSpeakerAndResetClock}
                 className="px-4 py-2 rounded-lg border border-brand-navy/20 bg-white text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
               >
@@ -4566,7 +4654,7 @@ export function SessionControlClient({
           </div>
           <button
             type="button"
-            disabled={pending}
+            disabled={pendingDais}
             onClick={postDais}
             className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
           >
@@ -4639,7 +4727,7 @@ export function SessionControlClient({
                       <div className="flex flex-wrap gap-2">
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingDais}
                           onClick={saveDaisEdit}
                           className="rounded-lg bg-brand-accent px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
                         >
@@ -4647,7 +4735,7 @@ export function SessionControlClient({
                         </button>
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingDais}
                           onClick={cancelEditDais}
                           className="rounded-lg border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/10 disabled:opacity-50"
                         >
@@ -4666,7 +4754,7 @@ export function SessionControlClient({
                         {a.is_pinned ? (
                           <button
                             type="button"
-                            disabled={pending}
+                            disabled={pendingDais}
                             onClick={() => setDaisPinned(a.id, false)}
                             className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                           >
@@ -4675,7 +4763,7 @@ export function SessionControlClient({
                         ) : (
                           <button
                             type="button"
-                            disabled={pending}
+                            disabled={pendingDais}
                             onClick={() => setDaisPinned(a.id, true)}
                             className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                           >
@@ -4684,7 +4772,7 @@ export function SessionControlClient({
                         )}
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingDais}
                           onClick={() => beginEditDais(a)}
                           className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                         >
@@ -4692,7 +4780,7 @@ export function SessionControlClient({
                         </button>
                         <button
                           type="button"
-                          disabled={pending}
+                          disabled={pendingDais}
                           onClick={() => deleteDaisAnnouncement(a.id)}
                           className="text-xs font-medium text-red-800 underline hover:no-underline dark:text-red-300 disabled:opacity-50"
                         >
@@ -4755,7 +4843,7 @@ export function SessionControlClient({
         <div className={`${surfaceCard} space-y-4`}>
           <button
             type="button"
-            disabled={pending}
+            disabled={pendingRoll}
             onClick={initRollCall}
             className="px-4 py-2 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] text-brand-navy text-sm font-medium hover:bg-brand-navy/5 dark:hover:bg-white/20 disabled:opacity-50"
           >
@@ -4797,7 +4885,7 @@ export function SessionControlClient({
                               key={opt.value}
                               type="button"
                               title={opt.title}
-                              disabled={pending}
+                              disabled={pendingRoll}
                               onClick={() => setRollAttendanceForRow(r.allocation_id, opt.value)}
                               className={`rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition disabled:opacity-50 sm:text-sm ${
                                 active ? opt.activeClass : opt.inactiveClass

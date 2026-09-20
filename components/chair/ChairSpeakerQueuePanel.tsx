@@ -3,13 +3,15 @@
 
 "use client";
 
-import { forwardRef, useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ChevronUp, ListOrdered, SkipForward } from "lucide-react";
 import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { useActionBusy } from "@/lib/hooks/useActionBusy";
+import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { EU_PARLIAMENT_PARTY_KEYS, type EuPartyKey } from "@/lib/eu-party-time";
@@ -173,7 +175,11 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     const [capS, setCapS] = useState("0");
     const lastSyncedSpeakerKey = useRef("");
     const [localFeedback, setLocalFeedback] = useState<string | null>(null);
-    const [pending, startTransition] = useTransition();
+    const { runBusy, isBusy } = useActionBusy<"clock" | "advance" | "queue">();
+    const pendingClock = isBusy("clock");
+    const pendingAdvance = isBusy("advance");
+    const pendingQueue = isBusy("queue");
+    const pending = pendingClock || pendingAdvance || pendingQueue;
 
     const notify = useCallback(
       (text: string) => {
@@ -365,7 +371,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       if (!pickAlloc) return;
       const a = speakerAllocations.find((x) => x.id === pickAlloc);
       if (!a) return;
-      startTransition(async () => {
+      runBusy("queue", async () => {
         const rows = await fetchSpeakerQueue(supabase, conferenceId);
         const result = await addAllocationToSpeakerQueue(
           supabase,
@@ -387,7 +393,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         notify(t("chooseDelegationsNotAlreadyQueued"));
         return;
       }
-      startTransition(async () => {
+      runBusy("queue", async () => {
         let rows = await fetchSpeakerQueue(supabase, conferenceId);
         for (let i = 0; i < toAdd.length; i++) {
           const id = toAdd[i]!;
@@ -413,8 +419,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function removeQueue(id: string) {
-      startTransition(async () => {
+      runBusy("queue", async () => {
         const removed = queue.find((r) => r.id === id);
+        setQueue((prev) => prev.filter((r) => r.id !== id));
         await supabase.from("speaker_queue_entries").delete().eq("id", id);
         if (removed?.status === "current") {
           const leftover = queue.filter((r) => r.id !== id);
@@ -432,14 +439,18 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function setCurrent(id: string) {
-      startTransition(async () => {
-        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+      runBusy("queue", async () => {
+        const rows = queue.length ? queue : await fetchSpeakerQueue(supabase, conferenceId);
         const existingCurrent = rows.find((r) => r.status === "current");
+        const target = rows.find((r) => r.id === id) ?? null;
+        const nextRows = rows.map((r) =>
+          r.id === id ? { ...r, status: "current" } : r.id === existingCurrent?.id ? { ...r, status: "waiting" } : r
+        );
+        setQueue(nextRows);
         if (existingCurrent?.id && existingCurrent.id !== id) {
           await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("id", existingCurrent.id);
         }
         await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", id);
-        const target = rows.find((r) => r.id === id) ?? null;
         if (target && target.status !== "current") {
           void logCommitteeSpeech(supabase, {
             conferenceId,
@@ -447,14 +458,20 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             speakerLabel: target.label,
           });
         }
-        const nextRows = rows.map((r) =>
-          r.id === id ? { ...r, status: "current" } : r.id === existingCurrent?.id ? { ...r, status: "waiting" } : r
-        );
         const { next } = currentAndNextQueueRows(nextRows);
         const cap = Math.max(1, speakerCap || remaining || 60);
         const currentLabel = target ? queueLabelForRow(target) : null;
         const nextLabel = next ? queueLabelForRow(next) : null;
         lastSyncedSpeakerKey.current = `${currentLabel ?? ""}|${nextLabel ?? ""}`;
+        applyOptimisticTimerPatch(conferenceId, {
+          current_speaker: currentLabel,
+          next_speaker: nextLabel,
+          time_left_seconds: cap,
+          total_time_seconds: cap,
+          per_speaker_mode: true,
+          is_running: true,
+          current_pause_reason: null,
+        });
         await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
           nextSpeaker: nextLabel,
@@ -473,16 +490,22 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         notify(tTimer("alreadyPaused"));
         return;
       }
-      startTransition(async () => {
+      const frozen = Math.max(0, Math.round(remaining));
+      applyOptimisticTimerPatch(conferenceId, {
+        time_left_seconds: frozen,
+        is_running: false,
+      });
+      notify(tTimer("pausedForCommittee"));
+      runBusy("clock", async () => {
         const { error } = await supabase
           .from("timers")
           .update({
-            time_left_seconds: Math.max(0, Math.round(remaining)),
+            time_left_seconds: frozen,
             is_running: false,
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", conferenceId);
-        notify(error ? error.message : tTimer("pausedForCommittee"));
+        if (error) notify(error.message);
       });
     }
 
@@ -495,7 +518,17 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         notify(tTimer("alreadyRunning"));
         return;
       }
-      startTransition(async () => {
+      applyOptimisticTimerPatch(conferenceId, {
+        current_speaker: currentLabel,
+        next_speaker: nextLabel,
+        time_left_seconds: resumeLeft,
+        total_time_seconds: cap,
+        per_speaker_mode: true,
+        is_running: true,
+        current_pause_reason: null,
+      });
+      notify(tTimer("runningForCommittee"));
+      runBusy("clock", async () => {
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
           nextSpeaker: nextLabel,
@@ -505,7 +538,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           perSpeakerMode: true,
           isRunning: true,
         });
-        notify(error ? error.message : tTimer("runningForCommittee"));
+        if (error) notify(error.message);
       });
     }
 
@@ -514,7 +547,13 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         1,
         (Math.max(0, parseInt(capM, 10) || 0) * 60) + Math.max(0, parseInt(capS, 10) || 0)
       );
-      startTransition(async () => {
+      applyOptimisticTimerPatch(conferenceId, {
+        time_left_seconds: cap,
+        total_time_seconds: cap,
+        per_speaker_mode: true,
+        is_running: Boolean(liveTimer) && isRunning && remaining > 0,
+      });
+      runBusy("clock", async () => {
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: alignedCurrentLabel,
           nextSpeaker: alignedNextLabel,
@@ -529,16 +568,38 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function advanceSpeakerAndResetClock() {
-      startTransition(async () => {
-        const rows = await fetchSpeakerQueue(supabase, conferenceId);
-        const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
-        const curIdx = sorted.findIndex((r) => r.status === "current");
-        const currentRow = curIdx >= 0 ? sorted[curIdx] : null;
-        const { next: nextCurrent } = currentAndNextQueueRows(sorted);
-        if (!nextCurrent) {
-          notify(t("noWaitingToAdvance"));
-          return;
-        }
+      const sorted = [...queue].sort((a, b) => a.sort_order - b.sort_order);
+      const currentRow = sorted.find((r) => r.status === "current") ?? null;
+      const { next: nextCurrent } = currentAndNextQueueRows(sorted);
+      if (!nextCurrent) {
+        notify(t("noWaitingToAdvance"));
+        return;
+      }
+      const afterAdvance = sorted.map((r) => {
+        if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
+        if (r.id === nextCurrent.id) return { ...r, status: "current" };
+        return r;
+      });
+      const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
+      const cap = Math.max(1, speakerCap || remaining || 60);
+      const currentLabel = queueLabelForRow(nextCurrent);
+      const nextLabel = afterNext ? queueLabelForRow(afterNext) : null;
+      lastSyncedSpeakerKey.current = `${currentLabel}|${nextLabel ?? ""}`;
+
+      setQueue(afterAdvance);
+      applyOptimisticTimerPatch(conferenceId, {
+        current_speaker: currentLabel,
+        next_speaker: nextLabel,
+        time_left_seconds: cap,
+        total_time_seconds: cap,
+        per_speaker_mode: true,
+        is_running: true,
+        current_pause_reason: null,
+      });
+      notify(tEuParty("advancedSpeakerResetClock"));
+      notifySpeakerQueueUpdated(conferenceId);
+
+      runBusy("advance", async () => {
         if (currentRow) {
           await supabase.from("speaker_queue_entries").update({ status: "done" }).eq("id", currentRow.id);
         }
@@ -548,16 +609,6 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           allocationId: nextCurrent.allocation_id,
           speakerLabel: nextCurrent.label,
         });
-        const afterAdvance = sorted.map((r) => {
-          if (currentRow && r.id === currentRow.id) return { ...r, status: "done" };
-          if (r.id === nextCurrent.id) return { ...r, status: "current" };
-          return r;
-        });
-        const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
-        const cap = Math.max(1, speakerCap || remaining || 60);
-        const currentLabel = queueLabelForRow(nextCurrent);
-        const nextLabel = afterNext ? queueLabelForRow(afterNext) : null;
-        lastSyncedSpeakerKey.current = `${currentLabel}|${nextLabel ?? ""}`;
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
           nextSpeaker: nextLabel,
@@ -567,8 +618,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           perSpeakerMode: true,
           isRunning: true,
         });
-        notify(error ? error.message : tEuParty("advancedSpeakerResetClock"));
-        bumpQueueSync();
+        if (error) notify(error.message);
+        void loadQueue();
       });
     }
 
@@ -582,7 +633,13 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       const b = sorted[j]!;
       const oa = a.sort_order;
       const ob = b.sort_order;
-      startTransition(async () => {
+      const swapped = sorted.map((r) => {
+        if (r.id === a.id) return { ...r, sort_order: ob };
+        if (r.id === b.id) return { ...r, sort_order: oa };
+        return r;
+      });
+      setQueue(swapped);
+      runBusy("queue", async () => {
         await supabase.from("speaker_queue_entries").update({ sort_order: ob }).eq("id", a.id);
         await supabase.from("speaker_queue_entries").update({ sort_order: oa }).eq("id", b.id);
         bumpQueueSync();
@@ -668,13 +725,13 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           <div className="flex flex-wrap items-center gap-2">
             <FloorTimerRunButtons
               running={Boolean(liveTimer) && isRunning && remaining > 0}
-              pending={pending}
+              pending={pendingClock}
               onStart={startSpeakerClock}
               onPause={pauseSpeakerClock}
             />
             <button
               type="button"
-              disabled={pending}
+              disabled={pendingAdvance}
               onClick={advanceSpeakerAndResetClock}
               className={
                 isSession

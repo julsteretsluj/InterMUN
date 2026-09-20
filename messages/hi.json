@@ -451,7 +451,8 @@
     "pointStatusAccepted": "Accepted",
     "pointStatusDenied": "Denied",
     "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
-    "agendaSetDay1Only": "Agenda set. Live topic is {first}."
+    "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker."
   },
   "chairChecklists": {
     "common": {
@@ -583,7 +584,12 @@
     "home": "घर",
     "library": "पुस्तकालय",
     "mainNavigationAria": "मुख्य नेविगेशन",
-    "crisis": "संकट"
+    "crisis": "संकट",
+    "fwcDirectives": "Directives",
+    "fwcMovement": "Movement",
+    "fwcMap": "Hawkins",
+    "fwcBackroom": "Backroom",
+    "fwcEvidence": "Evidence"
   },
   "dashboardLayout": {
     "helpCenter": "सहायता केंद्र",
@@ -852,7 +858,8 @@
     "timer": "घड़ी",
     "smtProfile": "प्रोफ़ाइल",
     "crisis": "संकट",
-    "smtDelegates": "प्रतिनिधियों"
+    "smtDelegates": "प्रतिनिधियों",
+    "openingSpeech": "🎙️ Opening speeches"
   },
   "setupPage": {
     "title": "सुपाबेस कॉन्फ़िगर नहीं है",
@@ -1276,7 +1283,10 @@
     "goDelegate": "प्रतिनिधि दृश्य",
     "surfaceSwitchError": "दृश्य स्विच नहीं किया जा सका. इवेंट गेट और चयन की जाँच करें।",
     "pickChairFirst": "पहले एक अध्यक्ष समिति का चयन करें (या कार्य सहेजें)।",
-    "pickDelegateFirst": "पहले एक प्रतिनिधि सीट चुनें (या असाइनमेंट सहेजें)।"
+    "pickDelegateFirst": "पहले एक प्रतिनिधि सीट चुनें (या असाइनमेंट सहेजें)।",
+    "startPreview": "Start",
+    "startingPreview": "Starting…",
+    "noDelegateSeats": "No delegate placards found for this committee."
   },
   "smtOverview": {
     "noEventSelected": "कोई सम्मेलन चयनित नहीं है. पहले अपना ईवेंट कोड दर्ज करें.",
@@ -1348,7 +1358,13 @@
       "settings": "सेटिंग्स",
       "resolutions": "Resolutions",
       "guides": "Guides",
-      "crisisReport": "प्रतिवेदन"
+      "crisisReport": "प्रतिवेदन",
+      "openingSpeech": "Opening speeches",
+      "fwcDirectives": "Directives",
+      "fwcMovement": "Movement",
+      "fwcMap": "Hawkins",
+      "fwcBackroom": "Backroom",
+      "fwcEvidence": "Evidence"
     }
   },
   "smtNav": {
@@ -2673,6 +2689,10 @@
       "crisisReport": {
         "label": "प्रतिवेदन",
         "hint": "घटना की रिपोर्टिंग"
+      },
+      "openingSpeech": {
+        "label": "Opening speeches",
+        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
       }
     }
   },
@@ -4370,7 +4390,8 @@
       "rollCallYou": "रोल कॉल (आप)",
       "fullAnnouncement": "पूर्ण घोषणा",
       "daisAnnouncement": "मंच से घोषणा",
-      "close": "बंद करना"
+      "close": "बंद करना",
+      "quickLinkOpeningSpeech": "Opening"
     },
     "committeeControl": {
       "sessionNameLabel": "सत्र का नाम",
@@ -5628,5 +5649,58 @@
     "selectedCommittee": "Selected for committee",
     "selectedConference": "Selected for conference",
     "selectFailed": "Could not record that award. Try again."
+  },
+  "chairOpeningSpeechPanel": {
+    "title": "Opening speeches",
+    "intro": "Builds the speakers list in alphabetical order and sets a 60-second per-speaker timer. Pass a motion to extend speaking time to 90 seconds.",
+    "statusLabel": "Speaking time:",
+    "statusDefault": "{seconds}s per speaker",
+    "statusExtended": "{seconds}s per speaker (extended)",
+    "clockRemaining": "clock {clock}",
+    "extendHintPrefix": "To extend time, open",
+    "extendMotionName": "Motion to Extend Opening Speech Time",
+    "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
+    "beginButton": "Set A–Z list · 60s timer",
+    "settingUp": "Setting up…",
+    "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
+    "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
+  },
+  "fwcEvidence": {
+    "title": "Evidence library",
+    "intro": "See where every item currently is, then mark found status and holders in the table. Upload a new spreadsheet to refresh catalog fields without wiping found status or locations for matching Evidence IDs.",
+    "summary": "{found} of {total} found",
+    "sourceFile": "Source: {name}",
+    "sourceMissing": "No uploaded source file yet — bundled SEAMUN I 2027 catalog is in use.",
+    "replaceUpload": "Upload / replace .xlsx",
+    "working": "Working…",
+    "uploadSuccess": "Imported {count} evidence items. Found status and locations were kept for matching IDs.",
+    "locationsTitle": "Where everything is",
+    "locationsIntro": "Every catalog item, grouped by current place or the character holding it.",
+    "locationsCount": "{count} places",
+    "locationsItemCount": "{count}",
+    "locationsGrid": "Grid {grid}",
+    "filterFound": "Found",
+    "filterAll": "All",
+    "filterFoundOnly": "Found",
+    "filterUnfound": "Not found",
+    "filterLocation": "Location",
+    "filterLocationPlaceholder": "Grid or place…",
+    "filterHolder": "Held by",
+    "filterAnyHolder": "Anyone",
+    "empty": "No evidence matches these filters.",
+    "colId": "ID",
+    "colCategory": "Category",
+    "colItem": "Item",
+    "colPrimary": "Primary location",
+    "colDiscoverable": "Discoverable by",
+    "colEffect": "Tactical / narrative effect",
+    "colFound": "Found?",
+    "colCurrent": "Where it stays",
+    "colHeldBy": "Held by",
+    "colNotes": "Notes",
+    "foundYes": "Found",
+    "foundNo": "Not found",
+    "heldByNone": "—",
+    "notesPlaceholder": "Chair notes…"
   }
 }

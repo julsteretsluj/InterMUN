@@ -451,7 +451,8 @@
     "pointStatusAccepted": "Accepted",
     "pointStatusDenied": "Denied",
     "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
-    "agendaSetDay1Only": "Agenda set. Live topic is {first}."
+    "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker."
   },
   "chairChecklists": {
     "common": {
@@ -583,7 +584,12 @@
     "home": "Maison",
     "library": "Bibliothèque",
     "mainNavigationAria": "Navigation principale",
-    "crisis": "Crise"
+    "crisis": "Crise",
+    "fwcDirectives": "Directives",
+    "fwcMovement": "Movement",
+    "fwcMap": "Hawkins",
+    "fwcBackroom": "Backroom",
+    "fwcEvidence": "Evidence"
   },
   "dashboardLayout": {
     "helpCenter": "Centre d'aide",
@@ -852,7 +858,8 @@
     "timer": "Minuteur",
     "smtProfile": "Profil",
     "crisis": "Crise",
-    "smtDelegates": "Déléguées"
+    "smtDelegates": "Déléguées",
+    "openingSpeech": "🎙️ Opening speeches"
   },
   "setupPage": {
     "title": "La Supabase n'est pas configurée",
@@ -1276,7 +1283,10 @@
     "goDelegate": "Vue des délégués",
     "surfaceSwitchError": "Impossible de changer de vue. Vérifiez la porte de l'événement et les sélections.",
     "pickChairFirst": "Sélectionnez d’abord un comité président (ou enregistrez les affectations).",
-    "pickDelegateFirst": "Sélectionnez d’abord un siège de délégué (ou enregistrez les affectations)."
+    "pickDelegateFirst": "Sélectionnez d’abord un siège de délégué (ou enregistrez les affectations).",
+    "startPreview": "Start",
+    "startingPreview": "Starting…",
+    "noDelegateSeats": "No delegate placards found for this committee."
   },
   "smtOverview": {
     "noEventSelected": "Aucune conférence n'est sélectionnée. Entrez d'abord votre code d'événement.",
@@ -1348,7 +1358,13 @@
       "settings": "Paramètres",
       "resolutions": "Resolutions",
       "guides": "Guides",
-      "crisisReport": "Rapport"
+      "crisisReport": "Rapport",
+      "openingSpeech": "Opening speeches",
+      "fwcDirectives": "Directives",
+      "fwcMovement": "Movement",
+      "fwcMap": "Hawkins",
+      "fwcBackroom": "Backroom",
+      "fwcEvidence": "Evidence"
     }
   },
   "smtNav": {
@@ -2673,6 +2689,10 @@
       "crisisReport": {
         "label": "Rapport",
         "hint": "Rapport d'incident"
+      },
+      "openingSpeech": {
+        "label": "Opening speeches",
+        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
       }
     }
   },
@@ -4370,7 +4390,8 @@
       "rollCallYou": "Appel nominal (vous)",
       "fullAnnouncement": "Annonce complète",
       "daisAnnouncement": "Annonce de l'estrade",
-      "close": "Fermer"
+      "close": "Fermer",
+      "quickLinkOpeningSpeech": "Opening"
     },
     "committeeControl": {
       "sessionNameLabel": "Nom de la séance",
@@ -5628,5 +5649,58 @@
     "selectedCommittee": "Selected for committee",
     "selectedConference": "Selected for conference",
     "selectFailed": "Could not record that award. Try again."
+  },
+  "chairOpeningSpeechPanel": {
+    "title": "Opening speeches",
+    "intro": "Builds the speakers list in alphabetical order and sets a 60-second per-speaker timer. Pass a motion to extend speaking time to 90 seconds.",
+    "statusLabel": "Speaking time:",
+    "statusDefault": "{seconds}s per speaker",
+    "statusExtended": "{seconds}s per speaker (extended)",
+    "clockRemaining": "clock {clock}",
+    "extendHintPrefix": "To extend time, open",
+    "extendMotionName": "Motion to Extend Opening Speech Time",
+    "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
+    "beginButton": "Set A–Z list · 60s timer",
+    "settingUp": "Setting up…",
+    "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
+    "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
+  },
+  "fwcEvidence": {
+    "title": "Evidence library",
+    "intro": "See where every item currently is, then mark found status and holders in the table. Upload a new spreadsheet to refresh catalog fields without wiping found status or locations for matching Evidence IDs.",
+    "summary": "{found} of {total} found",
+    "sourceFile": "Source: {name}",
+    "sourceMissing": "No uploaded source file yet — bundled SEAMUN I 2027 catalog is in use.",
+    "replaceUpload": "Upload / replace .xlsx",
+    "working": "Working…",
+    "uploadSuccess": "Imported {count} evidence items. Found status and locations were kept for matching IDs.",
+    "locationsTitle": "Where everything is",
+    "locationsIntro": "Every catalog item, grouped by current place or the character holding it.",
+    "locationsCount": "{count} places",
+    "locationsItemCount": "{count}",
+    "locationsGrid": "Grid {grid}",
+    "filterFound": "Found",
+    "filterAll": "All",
+    "filterFoundOnly": "Found",
+    "filterUnfound": "Not found",
+    "filterLocation": "Location",
+    "filterLocationPlaceholder": "Grid or place…",
+    "filterHolder": "Held by",
+    "filterAnyHolder": "Anyone",
+    "empty": "No evidence matches these filters.",
+    "colId": "ID",
+    "colCategory": "Category",
+    "colItem": "Item",
+    "colPrimary": "Primary location",
+    "colDiscoverable": "Discoverable by",
+    "colEffect": "Tactical / narrative effect",
+    "colFound": "Found?",
+    "colCurrent": "Where it stays",
+    "colHeldBy": "Held by",
+    "colNotes": "Notes",
+    "foundYes": "Found",
+    "foundNo": "Not found",
+    "heldByNone": "—",
+    "notesPlaceholder": "Chair notes…"
   }
 }

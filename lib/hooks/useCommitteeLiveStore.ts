@@ -244,3 +244,28 @@ export function refreshSharedProcedureState(conferenceId: string) {
       emit(current);
     });
 }
+
+/**
+ * Instant local timer update for chair start/pause/advance before the network round-trip.
+ * No-op if nobody is subscribed yet (first paint will load from Supabase).
+ */
+export function applyOptimisticTimerPatch(
+  conferenceId: string,
+  patch: Partial<ConferenceTimerRow>
+) {
+  const entry = timerById.get(conferenceId);
+  if (!entry) return;
+  const base: ConferenceTimerRow = entry.value ?? {
+    id: `optimistic-${conferenceId}`,
+    conference_id: conferenceId,
+    current_speaker: null,
+    next_speaker: null,
+    time_left_seconds: 60,
+    total_time_seconds: 60,
+    is_running: false,
+    per_speaker_mode: true,
+  };
+  entry.value = { ...base, ...patch, conference_id: conferenceId };
+  entry.loading = false;
+  emit(entry);
+}

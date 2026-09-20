@@ -451,7 +451,8 @@
     "pointStatusAccepted": "Accepted",
     "pointStatusDenied": "Denied",
     "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
-    "agendaSetDay1Only": "Agenda set. Live topic is {first}."
+    "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker."
   },
   "chairChecklists": {
     "common": {
@@ -583,7 +584,12 @@
     "home": "บ้าน",
     "library": "ห้องสมุด",
     "mainNavigationAria": "การนำทางหลัก",
-    "crisis": "วิกฤติ"
+    "crisis": "วิกฤติ",
+    "fwcDirectives": "Directives",
+    "fwcMovement": "Movement",
+    "fwcMap": "Hawkins",
+    "fwcBackroom": "Backroom",
+    "fwcEvidence": "Evidence"
   },
   "dashboardLayout": {
     "helpCenter": "ศูนย์ช่วยเหลือ",
@@ -852,7 +858,8 @@
     "timer": "ตัวจับเวลา",
     "smtProfile": "ประวัติโดยย่อ",
     "crisis": "วิกฤติ",
-    "smtDelegates": "ผู้ได้รับมอบหมาย"
+    "smtDelegates": "ผู้ได้รับมอบหมาย",
+    "openingSpeech": "🎙️ Opening speeches"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -1276,7 +1283,10 @@
     "goDelegate": "มุมมองการมอบหมาย",
     "surfaceSwitchError": "ไม่สามารถสลับมุมมองได้ ตรวจสอบประตูเหตุการณ์และการเลือก",
     "pickChairFirst": "เลือกประธานคณะกรรมการก่อน (หรือบันทึกงานที่ได้รับมอบหมาย)",
-    "pickDelegateFirst": "เลือกที่นั่งของผู้รับมอบสิทธิ์ก่อน (หรือบันทึกการมอบหมาย)"
+    "pickDelegateFirst": "เลือกที่นั่งของผู้รับมอบสิทธิ์ก่อน (หรือบันทึกการมอบหมาย)",
+    "startPreview": "Start",
+    "startingPreview": "Starting…",
+    "noDelegateSeats": "No delegate placards found for this committee."
   },
   "smtOverview": {
     "noEventSelected": "ไม่มีการเลือกการประชุม กรอกรหัสกิจกรรมของคุณก่อน",
@@ -1348,7 +1358,13 @@
       "settings": "การตั้งค่า",
       "resolutions": "Resolutions",
       "guides": "Guides",
-      "crisisReport": "รายงาน"
+      "crisisReport": "รายงาน",
+      "openingSpeech": "Opening speeches",
+      "fwcDirectives": "Directives",
+      "fwcMovement": "Movement",
+      "fwcMap": "Hawkins",
+      "fwcBackroom": "Backroom",
+      "fwcEvidence": "Evidence"
     }
   },
   "smtNav": {
@@ -2673,6 +2689,10 @@
       "crisisReport": {
         "label": "รายงาน",
         "hint": "การรายงานเหตุการณ์"
+      },
+      "openingSpeech": {
+        "label": "Opening speeches",
+        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
       }
     }
   },
@@ -4370,7 +4390,8 @@
       "rollCallYou": "ม้วนสาย (คุณ)",
       "fullAnnouncement": "ประกาศฉบับเต็ม",
       "daisAnnouncement": "ประกาศไดส์",
-      "close": "ปิด"
+      "close": "ปิด",
+      "quickLinkOpeningSpeech": "Opening"
     },
     "committeeControl": {
       "sessionNameLabel": "ชื่อเซสชัน",
@@ -5628,5 +5649,58 @@
     "selectedCommittee": "Selected for committee",
     "selectedConference": "Selected for conference",
     "selectFailed": "Could not record that award. Try again."
+  },
+  "chairOpeningSpeechPanel": {
+    "title": "Opening speeches",
+    "intro": "Builds the speakers list in alphabetical order and sets a 60-second per-speaker timer. Pass a motion to extend speaking time to 90 seconds.",
+    "statusLabel": "Speaking time:",
+    "statusDefault": "{seconds}s per speaker",
+    "statusExtended": "{seconds}s per speaker (extended)",
+    "clockRemaining": "clock {clock}",
+    "extendHintPrefix": "To extend time, open",
+    "extendMotionName": "Motion to Extend Opening Speech Time",
+    "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
+    "beginButton": "Set A–Z list · 60s timer",
+    "settingUp": "Setting up…",
+    "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
+    "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
+  },
+  "fwcEvidence": {
+    "title": "Evidence library",
+    "intro": "See where every item currently is, then mark found status and holders in the table. Upload a new spreadsheet to refresh catalog fields without wiping found status or locations for matching Evidence IDs.",
+    "summary": "{found} of {total} found",
+    "sourceFile": "Source: {name}",
+    "sourceMissing": "No uploaded source file yet — bundled SEAMUN I 2027 catalog is in use.",
+    "replaceUpload": "Upload / replace .xlsx",
+    "working": "Working…",
+    "uploadSuccess": "Imported {count} evidence items. Found status and locations were kept for matching IDs.",
+    "locationsTitle": "Where everything is",
+    "locationsIntro": "Every catalog item, grouped by current place or the character holding it.",
+    "locationsCount": "{count} places",
+    "locationsItemCount": "{count}",
+    "locationsGrid": "Grid {grid}",
+    "filterFound": "Found",
+    "filterAll": "All",
+    "filterFoundOnly": "Found",
+    "filterUnfound": "Not found",
+    "filterLocation": "Location",
+    "filterLocationPlaceholder": "Grid or place…",
+    "filterHolder": "Held by",
+    "filterAnyHolder": "Anyone",
+    "empty": "No evidence matches these filters.",
+    "colId": "ID",
+    "colCategory": "Category",
+    "colItem": "Item",
+    "colPrimary": "Primary location",
+    "colDiscoverable": "Discoverable by",
+    "colEffect": "Tactical / narrative effect",
+    "colFound": "Found?",
+    "colCurrent": "Where it stays",
+    "colHeldBy": "Held by",
+    "colNotes": "Notes",
+    "foundYes": "Found",
+    "foundNo": "Not found",
+    "heldByNone": "—",
+    "notesPlaceholder": "Chair notes…"
   }
 }

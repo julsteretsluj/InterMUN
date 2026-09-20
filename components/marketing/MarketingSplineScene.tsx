@@ -4,15 +4,21 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import { Component, useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 import type { Application } from "@splinetool/runtime";
 import { enableMarketingSplineControls, hideMarketingSplineWatermark } from "@/lib/marketing-spline-interaction";
 import { cn } from "@/lib/utils";
 
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => null,
-});
+type SplineProps = {
+  scene: string;
+  className?: string;
+  onLoad?: (app: Application) => void;
+};
+
+const Spline = dynamic(
+  () => import("@/components/marketing/SplineClient") as Promise<{ default: ComponentType<SplineProps> }>,
+  { ssr: false, loading: () => null }
+);
 
 class SplineErrorBoundary extends Component<
   { fallback: ReactNode; children: ReactNode },
