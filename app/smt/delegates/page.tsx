@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
+import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { SmtDelegatesSearchClient, type SmtDelegateSearchRow } from "./SmtDelegatesSearchClient";
@@ -72,12 +73,15 @@ export default async function SmtDelegatesPage() {
           .not("user_id", "is", null)
       : { data: [] as never[] };
 
-  const delegateAllocations = sortRowsByAllocationCountry(
-    (allocations ?? []).filter((a) => {
-      if (isDaisSeatAllocationCountry(a.country)) return false;
-      const profile = unwrapProfile(a.profiles as LinkedProfile | LinkedProfile[] | null);
-      return isDelegateProfileRole(profile?.role);
-    })
+  // Sibling topic conferences each carry a copy of the roster — one card per linked user.
+  const delegateAllocations = dedupeAllocationsByUserId(
+    sortRowsByAllocationCountry(
+      (allocations ?? []).filter((a) => {
+        if (isDaisSeatAllocationCountry(a.country)) return false;
+        const profile = unwrapProfile(a.profiles as LinkedProfile | LinkedProfile[] | null);
+        return isDelegateProfileRole(profile?.role);
+      })
+    )
   );
 
   const userIds = [

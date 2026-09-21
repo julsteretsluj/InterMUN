@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isAdminInviteConfigured } from "@/lib/admin-invite-configured";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
+import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { SmtAdvisorsClient } from "./SmtAdvisorsClient";
 
@@ -60,13 +61,15 @@ export default async function SmtAdvisorsPage() {
     .not("user_id", "is", null)
     .order("country");
 
-  const delegateAllocations = (allocations ?? []).filter((a) => {
-    if (isDaisSeatAllocationCountry(a.country)) return false;
-    const profile = unwrapProfile(
-      a.profiles as LinkedProfile | LinkedProfile[] | null | undefined
-    );
-    return isDelegateProfileRole(profile?.role);
-  });
+  const delegateAllocations = dedupeAllocationsByUserId(
+    (allocations ?? []).filter((a) => {
+      if (isDaisSeatAllocationCountry(a.country)) return false;
+      const profile = unwrapProfile(
+        a.profiles as LinkedProfile | LinkedProfile[] | null | undefined
+      );
+      return isDelegateProfileRole(profile?.role);
+    })
+  );
 
   const countryByAllocationId = new Map(delegateAllocations.map((a) => [a.id, a.country]));
 
