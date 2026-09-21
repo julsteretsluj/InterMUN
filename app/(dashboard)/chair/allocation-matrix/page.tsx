@@ -422,7 +422,9 @@ export default async function ChairAllocationMatrixPage() {
         grade: r.user_id ? (profile?.grade ?? null) : null,
         notes: r.user_id ? (profile?.notes ?? null) : null,
         profile_picture_url: profile?.profile_picture_url ?? null,
-        linked_role: profile?.role ?? (displayName && isChairSeat ? "chair" : null),
+        linked_role:
+          profile?.role ??
+          (displayName ? (isChairSeat ? "chair" : "delegate") : null),
         linked_name: displayName,
         country_display: countryDisplay,
         party_label: partyLabel,

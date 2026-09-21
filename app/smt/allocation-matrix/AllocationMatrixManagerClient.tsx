@@ -61,10 +61,16 @@ export function AllocationMatrixManagerClient({
     return `/allocation-signup?conference=${encodeURIComponent(conferenceId)}&allocation=${encodeURIComponent(allocationId)}&next=${encodeURIComponent("/profile")}`;
   }
 
-  function linkedLabel(row: { user_id: string | null; linked_role: string | null; linked_name: string | null }) {
+  function linkedLabel(row: {
+    country: string;
+    user_id: string | null;
+    linked_role: string | null;
+    linked_name: string | null;
+  }) {
     const name = row.linked_name?.trim();
     if (!row.user_id && !name) return t("linkedOpen");
     const role = row.linked_role?.trim().toLowerCase();
+    const seatIsChair = isCommitteeChairSeatLabel(row.country);
     const roleLabel =
       role === "chair"
         ? t("linkedRoleChair")
@@ -72,7 +78,9 @@ export function AllocationMatrixManagerClient({
           ? t("linkedRoleDelegate")
           : row.user_id
             ? t("linkedRoleLinked")
-            : t("linkedRoleChair");
+            : seatIsChair
+              ? t("linkedRoleChair")
+              : t("linkedRoleDelegate");
     return name ? `${roleLabel}: ${name}` : roleLabel;
   }
 

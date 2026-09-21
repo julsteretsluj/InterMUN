@@ -16,6 +16,7 @@ import {
   pickCanonicalConferenceRowByAllocationScore,
 } from "@/lib/conference-committee-canonical";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { isCommitteeChairSeatLabel } from "@/lib/dais-seat-plan";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
@@ -238,11 +239,17 @@ export default async function SmtAllocationMatrixPage({
         const overrideName = String(a.display_name_override ?? "").trim() || null;
         const profile = a.user_id ? profileById.get(a.user_id) : null;
         const linkedName = profile?.name?.trim() || overrideName;
+        const seatIsChair = isCommitteeChairSeatLabel(a.country);
+        // Name overrides without a linked account: label from seat type (country = delegate,
+        // Head Chair / Co-chair = chair). Never default unnamed overrides to "chair".
+        const linkedRole =
+          profile?.role ??
+          (linkedName ? (seatIsChair ? "chair" : "delegate") : null);
         return {
           id: a.id,
           country: a.country,
           user_id: a.user_id,
-          linked_role: profile?.role ?? (linkedName && !a.user_id ? "chair" : null),
+          linked_role: linkedRole,
           linked_name: linkedName,
           code: codeById.get(a.id) ?? null,
         };
