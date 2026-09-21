@@ -8,7 +8,9 @@ import {
   DelegationNoteModerationQueue,
   type HeldDelegationNote,
 } from "@/components/delegation-notes/DelegationNoteModerationQueue";
-import { isChairRole } from "@/lib/roles";
+import { isChairRole, isSmtRole } from "@/lib/roles";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
+import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
@@ -49,7 +51,10 @@ export default async function ChairNotesModerationPage() {
     .maybeSingle();
   // Match moderate_delegation_note RPC + staff RLS: chair role is enough.
   // Do not require a linked allocation seat — many chairs (incl. review/temp) have none.
-  if (!isChairRole(profile?.role)) redirect("/profile");
+  // SMT chair-preview uses the same surface as a real chair.
+  const smtSurface = isSmtRole(profile?.role) ? await getSmtDashboardSurface() : null;
+  const effectiveRole = effectiveDashboardRole(profile?.role, smtSurface) ?? profile?.role;
+  if (!isChairRole(effectiveRole)) redirect("/profile");
 
   const conferenceId = await requireActiveConferenceId();
   const scope = await getChamberScope(supabase, conferenceId);
