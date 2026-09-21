@@ -3,6 +3,7 @@ import { getRequestConfig } from "next-intl/server";
 import { deepMergeMessages } from "@/lib/i18n/deep-merge-messages";
 import {
   isPublicMarketingPath,
+  omitDeferredAppNamespaces,
   pickMessageNamespaces,
   publicMessageNamespaces,
 } from "@/lib/i18n/message-slices";
@@ -37,7 +38,7 @@ export default getRequestConfig(async () => {
 
   const messages = isPublicMarketingPath(pathname)
     ? pickMessageNamespaces(allMessages, publicMessageNamespaces())
-    : allMessages;
+    : omitDeferredAppNamespaces(allMessages);
 
   return {
     locale,

@@ -19,8 +19,20 @@ function AutoStartTour() {
     } catch {
       return;
     }
-    const id = window.setTimeout(() => start(), 700);
-    return () => window.clearTimeout(id);
+    // Wait for idle so the first paint / nav is not competing with tour DOM work.
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const kick = () => start();
+    const w = window;
+    if ("requestIdleCallback" in w) {
+      idleId = w.requestIdleCallback(kick, { timeout: 4000 });
+    } else {
+      timeoutId = setTimeout(kick, 2500);
+    }
+    return () => {
+      if (idleId != null) w.cancelIdleCallback(idleId);
+      if (timeoutId != null) clearTimeout(timeoutId);
+    };
   }, [view, start, running]);
 
   return null;

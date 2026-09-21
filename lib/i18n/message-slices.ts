@@ -10,9 +10,35 @@ export const CORE_MESSAGE_NAMESPACES = [
   "language",
   "themeSelector",
   "colorblindMode",
+  "chromePreferences",
+  "dashboardTopBar",
   "notFoundPage",
   "pageTitles",
   "appleColorPicker",
+] as const;
+
+/**
+ * Catalogs only needed on public / setup / gate surfaces. Authenticated app
+ * shells omit these on every navigation to cut RSC + client payload.
+ */
+export const APP_DEFERRED_MESSAGE_NAMESPACES = [
+  "marketing",
+  "secretariatRegistration",
+  "conferenceSetupForm",
+  "conferenceSetupPage",
+  "setupPage",
+  "authWizard",
+  "eventGateForm",
+  "eventGatePage",
+  "roomGate",
+  "roomGateForm",
+  "committeeGate",
+  "committeeGateForm",
+  "staffBypassForm",
+  "allocationCodeGate",
+  "allocationCodeGateForm",
+  "allocationSignupPage",
+  "seamunConferenceLinks",
 ] as const;
 
 /** Public / marketing / auth / gate surfaces. */
@@ -77,4 +103,15 @@ export function pickMessageNamespaces(
 
 export function publicMessageNamespaces(): string[] {
   return [...new Set([...CORE_MESSAGE_NAMESPACES, ...MARKETING_MESSAGE_NAMESPACES])];
+}
+
+/** Drop deferred namespaces from the full catalog for authenticated app routes. */
+export function omitDeferredAppNamespaces(
+  all: Record<string, unknown>
+): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...all };
+  for (const key of APP_DEFERRED_MESSAGE_NAMESPACES) {
+    delete out[key];
+  }
+  return out;
 }

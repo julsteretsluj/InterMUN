@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
-import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed";
+import { DeferredChairLiveFloor } from "@/components/session/DeferredChairLiveFloor";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { DashboardNotifications } from "@/components/dashboard/DashboardNotifications";
 import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
@@ -289,7 +289,7 @@ export default async function DashboardLayout({
               interactive={false}
               dense
             >
-              <ChairLiveFloorThemed
+              <DeferredChairLiveFloor
                 conferenceId={liveFloorConferenceId ?? activeConf.id}
                 canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
                 siblingConferenceIds={liveFloorSiblings}
