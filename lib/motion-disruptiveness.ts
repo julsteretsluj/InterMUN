@@ -94,17 +94,45 @@ export function motionDisruptivenessScore(
   return 40;
 }
 
+/** Parse proposed total minutes from motion title/description (Press Corps tie-break). */
+export function parseMotionProposedTotalMinutes(
+  title?: string | null,
+  description?: string | null
+): number {
+  const text = `${title ?? ""}\n${description ?? ""}`;
+  const match =
+    text.match(/total\s+(\d+)\s*min/i) ||
+    text.match(/(\d+)\s*-?\s*minutes?\b/i) ||
+    text.match(/(\d+)\s*-?\s*minute\b/i);
+  if (!match) return 0;
+  const n = Number(match[1]);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
 export function sortMotionsMostDisruptiveFirst<
-  T extends { vote_type: VoteType; procedure_code: string | null; created_at: string },
+  T extends {
+    vote_type: VoteType;
+    procedure_code: string | null;
+    created_at: string;
+    title?: string | null;
+    description?: string | null;
+  },
 >(
   rows: T[],
   caucusPrecedence: CaucusDisruptivenessPrecedence = "consultation_first",
   procedureProfile?: ProcedureProfile | string | null
 ): T[] {
+  const profile = normalizeProcedureProfile(procedureProfile);
   return [...rows].sort((a, b) => {
     const da = motionDisruptivenessScore(a.vote_type, a.procedure_code, caucusPrecedence, procedureProfile);
     const db = motionDisruptivenessScore(b.vote_type, b.procedure_code, caucusPrecedence, procedureProfile);
     if (db !== da) return db - da;
+    // Press Corps RoP: equal disruptiveness → longer total time first.
+    if (profile === "press_corps") {
+      const ta = parseMotionProposedTotalMinutes(a.title, a.description);
+      const tb = parseMotionProposedTotalMinutes(b.title, b.description);
+      if (tb !== ta) return tb - ta;
+    }
     return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
   });
 }

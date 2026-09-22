@@ -740,6 +740,41 @@ export function SessionControlClient({
           return tSessionControl("guidedConsultationRequiresTotalMinutes");
         }
       }
+      if (isPressCorpsProfile && draft.procedure_code === "extend_opening_speech") {
+        const seconds = Number(draft.moderated_speaker_seconds);
+        if (!Number.isFinite(seconds) || seconds <= 0) {
+          return tSessionControl("guidedPressExtendRequiresSeconds");
+        }
+      }
+      if (isPressCorpsProfile && draft.procedure_code === "roll_call_vote") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedPressRollCallRequiresSubject");
+        }
+      }
+      if (draft.procedure_code === "interview") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedPressInterviewRequiresAssignment");
+        }
+        const total = Number(draft.unmoderated_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedPressInterviewRequiresMinutes");
+        }
+      }
+      if (draft.procedure_code === "press_conference") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedPressConferenceRequiresCommittee");
+        }
+        const total = Number(draft.unmoderated_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedPressConferenceRequiresMinutes");
+        }
+      }
+      if (draft.procedure_code === "writing_time") {
+        const total = Number(draft.unmoderated_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedPressWritingRequiresMinutes");
+        }
+      }
       if (draft.procedure_code === "set_agenda") {
         const title = draft.title.trim();
         if (!title) return tSessionControl("guidedSelectAgendaTopic");
@@ -791,7 +826,14 @@ export function SessionControlClient({
       }
       return null;
     },
-    [agendaTopicsRemaining.length, agendaUsedNameSet, resolutions, tSessionControl, votingCallOrder.length]
+    [
+      agendaTopicsRemaining.length,
+      agendaUsedNameSet,
+      isPressCorpsProfile,
+      resolutions,
+      tSessionControl,
+      votingCallOrder.length,
+    ]
   );
 
   const motionDraftValidationError = useMemo(
@@ -945,6 +987,7 @@ export function SessionControlClient({
   function stripTimingLineFromDescription(raw: string) {
     return raw
       .replace(/(?:^|\n)Timing:\s*total\s+\d+\s*min(?:,\s*speaker\s+\d+\s*s)?\s*$/i, "")
+      .replace(/(?:^|\n)Timing:\s*speaker\s+\d+\s*s\s*$/i, "")
       .trim();
   }
 
@@ -962,6 +1005,20 @@ export function SessionControlClient({
     if (draft.procedure_code === "consultation") {
       const base = stripTimingLineFromDescription(draft.description);
       const timing = `Timing: total ${draft.consultation_total_minutes} min`;
+      return base ? `${base}\n${timing}` : timing;
+    }
+    if (
+      draft.procedure_code === "interview" ||
+      draft.procedure_code === "press_conference" ||
+      draft.procedure_code === "writing_time"
+    ) {
+      const base = stripTimingLineFromDescription(draft.description);
+      const timing = `Timing: total ${draft.unmoderated_total_minutes} min`;
+      return base ? `${base}\n${timing}` : timing;
+    }
+    if (isPressCorpsProfile && draft.procedure_code === "extend_opening_speech") {
+      const base = stripTimingLineFromDescription(draft.description);
+      const timing = `Timing: speaker ${draft.moderated_speaker_seconds}s`;
       return base ? `${base}\n${timing}` : timing;
     }
     if (draft.procedure_code === "amendment") {
@@ -2680,7 +2737,9 @@ export function SessionControlClient({
     const options = procedurePresets.filter((p) => p.code !== null);
     const pickRaw = window.prompt(
       [
-        tSessionControl("guidedStepChooseProcedure"),
+        isPressCorpsProfile
+          ? tSessionControl("guidedPressStepChooseProcedure")
+          : tSessionControl("guidedStepChooseProcedure"),
         ...options.map((p, i) => `${i + 1}. ${p.label}`),
       ].join("\n")
     );
@@ -2694,7 +2753,82 @@ export function SessionControlClient({
     const procedureCode = selected.code;
 
     let titleTrimmed = "";
-    if (procedureCode === "set_agenda") {
+    let pressTotalMinutes = "";
+    let pressSpeakerSeconds = "";
+
+    if (isPressCorpsProfile) {
+      if (procedureCode === "extend_opening_speech") {
+        const secondsRaw = window.prompt(tSessionControl("guidedPressStepExtendSeconds"), "90");
+        if (secondsRaw === null) return;
+        const seconds = Number(secondsRaw);
+        if (!Number.isFinite(seconds) || seconds <= 0) {
+          setMsg(tSessionControl("guidedPressExtendRequiresSeconds"));
+          return;
+        }
+        pressSpeakerSeconds = String(Math.round(seconds));
+        titleTrimmed = `Motion to Extend Speaker Time to ${pressSpeakerSeconds} seconds`;
+      } else if (procedureCode === "roll_call_vote") {
+        const subject = window.prompt(tSessionControl("guidedPressStepRollCallSubject"), "");
+        if (subject === null) return;
+        const subjectTrimmed = subject.trim();
+        if (!subjectTrimmed) {
+          setMsg(tSessionControl("guidedPressRollCallRequiresSubject"));
+          return;
+        }
+        titleTrimmed = `Motion to vote on ${subjectTrimmed} by roll call.`;
+      } else if (procedureCode === "interview") {
+        const minutesRaw = window.prompt(tSessionControl("guidedPressStepInterviewMinutes"), "20");
+        if (minutesRaw === null) return;
+        const minutes = Number(minutesRaw);
+        if (!Number.isFinite(minutes) || minutes <= 0) {
+          setMsg(tSessionControl("guidedPressInterviewRequiresMinutes"));
+          return;
+        }
+        const assignment = window.prompt(tSessionControl("guidedPressStepInterviewAssignment"), "");
+        if (assignment === null) return;
+        const assignmentTrimmed = assignment.trim();
+        if (!assignmentTrimmed) {
+          setMsg(tSessionControl("guidedPressInterviewRequiresAssignment"));
+          return;
+        }
+        pressTotalMinutes = String(Math.round(minutes));
+        titleTrimmed = `Motion for a ${pressTotalMinutes} minute interview period for completing the ${assignmentTrimmed} assignment.`;
+      } else if (procedureCode === "press_conference") {
+        const minutesRaw = window.prompt(tSessionControl("guidedPressStepPressConferenceMinutes"), "15");
+        if (minutesRaw === null) return;
+        const minutes = Number(minutesRaw);
+        if (!Number.isFinite(minutes) || minutes <= 0) {
+          setMsg(tSessionControl("guidedPressConferenceRequiresMinutes"));
+          return;
+        }
+        const committee = window.prompt(tSessionControl("guidedPressStepPressConferenceCommittee"), "");
+        if (committee === null) return;
+        const committeeTrimmed = committee.trim();
+        if (!committeeTrimmed) {
+          setMsg(tSessionControl("guidedPressConferenceRequiresCommittee"));
+          return;
+        }
+        pressTotalMinutes = String(Math.round(minutes));
+        titleTrimmed = `Motion for a Press Conference with a ${committeeTrimmed} delegate.`;
+      } else if (procedureCode === "writing_time") {
+        const minutesRaw = window.prompt(tSessionControl("guidedPressStepWritingMinutes"), "20");
+        if (minutesRaw === null) return;
+        const minutes = Number(minutesRaw);
+        if (!Number.isFinite(minutes) || minutes <= 0) {
+          setMsg(tSessionControl("guidedPressWritingRequiresMinutes"));
+          return;
+        }
+        pressTotalMinutes = String(Math.round(minutes));
+        titleTrimmed = `Motion for ${pressTotalMinutes} minutes of Writing Time.`;
+      } else {
+        const titleInput = window.prompt(
+          tSessionControl("guidedStepMotionTitleOptional"),
+          selected.title ?? selected.label
+        );
+        if (titleInput === null) return;
+        titleTrimmed = titleInput.trim();
+      }
+    } else if (procedureCode === "set_agenda") {
       const topics = agendaTopicsRemaining.filter((t) => (t.name ?? "").trim().length > 0);
       if (topics.length === 0) {
         setMsg(tSessionControl("guidedNoAgendaTopics"));
@@ -2743,7 +2877,9 @@ export function SessionControlClient({
 
     const motionerInput = window.prompt(
       [
-        tSessionControl("guidedStepMotioner"),
+        isPressCorpsProfile
+          ? tSessionControl("guidedPressStepMotioner")
+          : tSessionControl("guidedStepMotioner"),
         `0. ${tSessionControl("guidedMotionerNotSpecified")}`,
         ...allocations.map((a, i) => `${i + 1}. ${displayCountry(a.country)}`),
       ].join("\n"),
@@ -2757,7 +2893,13 @@ export function SessionControlClient({
       }
     }
 
-    let description = window.prompt(tSessionControl("guidedStepDescriptionNotesOptional"), "") ?? "";
+    let description =
+      window.prompt(
+        isPressCorpsProfile
+          ? tSessionControl("guidedPressStepNotesOptional")
+          : tSessionControl("guidedStepDescriptionNotesOptional"),
+        ""
+      ) ?? "";
     if (
       procedureCode === "moderated_caucus" ||
       procedureCode === "unmoderated_caucus" ||
@@ -2870,11 +3012,17 @@ export function SessionControlClient({
       moderated_speaker_seconds:
         procedureCode === "moderated_caucus"
           ? (description.match(/speaker\s+(\d+)\s*s/i)?.[1] ?? "")
-          : "",
+          : isPressCorpsProfile && procedureCode === "extend_opening_speech"
+            ? pressSpeakerSeconds
+            : "",
       unmoderated_total_minutes:
         procedureCode === "unmoderated_caucus"
           ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
-          : "",
+          : procedureCode === "interview" ||
+              procedureCode === "press_conference" ||
+              procedureCode === "writing_time"
+            ? pressTotalMinutes
+            : "",
       consultation_total_minutes:
         procedureCode === "consultation"
           ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
@@ -3402,8 +3550,18 @@ export function SessionControlClient({
                   procedure_resolution_id: code === "set_agenda" ? null : d.procedure_resolution_id,
                   procedure_clause_ids: code === "set_agenda" ? [] : d.procedure_clause_ids,
                   moderated_total_minutes: code === "moderated_caucus" ? d.moderated_total_minutes : "",
-                  moderated_speaker_seconds: code === "moderated_caucus" ? d.moderated_speaker_seconds : "",
-                  unmoderated_total_minutes: code === "unmoderated_caucus" ? d.unmoderated_total_minutes : "",
+                  moderated_speaker_seconds:
+                    code === "moderated_caucus" ||
+                    (isPressCorpsProfile && code === "extend_opening_speech")
+                      ? d.moderated_speaker_seconds
+                      : "",
+                  unmoderated_total_minutes:
+                    code === "unmoderated_caucus" ||
+                    code === "interview" ||
+                    code === "press_conference" ||
+                    code === "writing_time"
+                      ? d.unmoderated_total_minutes
+                      : "",
                   consultation_total_minutes: code === "consultation" ? d.consultation_total_minutes : "",
                   amendment_kind: code === "amendment" ? d.amendment_kind : "friendly",
                   amendment_debate_seconds: code === "amendment" ? d.amendment_debate_seconds : "45",
@@ -3537,7 +3695,13 @@ export function SessionControlClient({
                     ? tSessionControl("topic")
                     : motionDraft.procedure_code === "unmoderated_caucus"
                       ? tSessionControl("topicOptional")
-                      : tSessionControl("titleOptional")}
+                      : motionDraft.procedure_code === "interview"
+                        ? tSessionControl("pressRelatedAssignment")
+                        : motionDraft.procedure_code === "press_conference"
+                          ? tSessionControl("pressCommitteeOrDelegate")
+                          : isPressCorpsProfile && motionDraft.procedure_code === "roll_call_vote"
+                            ? tSessionControl("pressRollCallSubject")
+                            : tSessionControl("titleOptional")}
               </span>
               <input
                 className={surfaceField}
@@ -3550,7 +3714,13 @@ export function SessionControlClient({
                       ? tSessionControl("unmoderatedCaucusTopicOptional")
                       : motionDraft.procedure_code === "consultation"
                         ? tSessionControl("consultationPurposePlaceholder")
-                        : tSessionControl("motionTitleOptional")
+                        : motionDraft.procedure_code === "interview"
+                          ? tSessionControl("pressRelatedAssignmentPlaceholder")
+                          : motionDraft.procedure_code === "press_conference"
+                            ? tSessionControl("pressCommitteeOrDelegatePlaceholder")
+                            : isPressCorpsProfile && motionDraft.procedure_code === "roll_call_vote"
+                              ? tSessionControl("pressRollCallSubjectPlaceholder")
+                              : tSessionControl("motionTitleOptional")
                 }
               />
             </label>
@@ -3584,6 +3754,36 @@ export function SessionControlClient({
                 />
               </label>
             </div>
+          ) : isPressCorpsProfile && motionDraft.procedure_code === "extend_opening_speech" ? (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>{tSessionControl("pressExtendSeconds")}</span>
+              <input
+                type="number"
+                min={1}
+                className={surfaceField}
+                value={motionDraft.moderated_speaker_seconds}
+                onChange={(e) =>
+                  setMotionDraft((d) => ({ ...d, moderated_speaker_seconds: e.target.value }))
+                }
+                placeholder="e.g. 90"
+              />
+            </label>
+          ) : motionDraft.procedure_code === "interview" ||
+            motionDraft.procedure_code === "press_conference" ||
+            motionDraft.procedure_code === "writing_time" ? (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>{tSessionControl("pressTotalMinutes")}</span>
+              <input
+                type="number"
+                min={1}
+                className={surfaceField}
+                value={motionDraft.unmoderated_total_minutes}
+                onChange={(e) =>
+                  setMotionDraft((d) => ({ ...d, unmoderated_total_minutes: e.target.value }))
+                }
+                placeholder={tSessionControl("minutesPlaceholder")}
+              />
+            </label>
           ) : motionDraft.procedure_code === "unmoderated_caucus" ? (
             <label className="text-sm block text-brand-navy">
               <span className={surfaceLabel}>{tSessionControl("totalTimeMinutes")}</span>
