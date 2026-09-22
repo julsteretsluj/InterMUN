@@ -75,7 +75,7 @@ import {
   parseEuSessionPhase,
   type EuSessionPhase,
 } from "@/lib/eu-session-phase";
-import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
+import { isEuParliamentProcedure, isPressCorpsProcedure, looksLikePressCorpsCommittee } from "@/lib/procedure-profiles";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
@@ -518,9 +518,10 @@ export function SessionControlClient({
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
-  const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament">("default");
+  const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament" | "press_corps">("default");
   const [isEuGuidedWorkflow, setIsEuGuidedWorkflow] = useState(false);
   const isEuParliamentProfile = procedureProfile === "eu_parliament";
+  const isPressCorpsProfile = procedureProfile === "press_corps";
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
@@ -614,6 +615,37 @@ export function SessionControlClient({
   }, [rollAttendanceByAllocationId, votingCallOrder]);
 
   const procedurePresets = useMemo(() => {
+    if (isPressCorpsProfile) {
+      return [
+        { code: null as string | null, label: tSessionControl("presetCustom") },
+        {
+          code: "extend_opening_speech",
+          label: tSessionControl("presetExtendOpeningSpeech"),
+          title: tSessionControl("presetExtendOpeningSpeech"),
+        },
+        {
+          code: "roll_call_vote",
+          label: tSessionControl("presetRollCallVote"),
+          title: tSessionControl("presetRollCallVote"),
+        },
+        {
+          code: "interview",
+          label: tSessionControl("presetInterview"),
+          title: tSessionControl("presetInterviewTitle"),
+        },
+        {
+          code: "press_conference",
+          label: tSessionControl("presetPressConference"),
+          title: tSessionControl("presetPressConferenceTitle"),
+        },
+        {
+          code: "writing_time",
+          label: tSessionControl("presetWritingTime"),
+          title: tSessionControl("presetWritingTimeTitle"),
+        },
+      ];
+    }
+
     const base: {
       code: string | null;
       label: string;
@@ -663,7 +695,7 @@ export function SessionControlClient({
       base.splice(1, 0, { code: "set_agenda", label: tSessionControl("presetSetAgenda"), title: "" });
     }
     return base;
-  }, [agendaTopicsRemaining.length, motionDraft.procedure_code, tSessionControl]);
+  }, [agendaTopicsRemaining.length, isPressCorpsProfile, motionDraft.procedure_code, tSessionControl]);
 
   const ropMajorityForDraft = useMemo(
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code, procedureProfile),
@@ -1169,11 +1201,18 @@ export function SessionControlClient({
     const looksLikeEuParliamentCommittee =
       committeeLabel.includes("eu") &&
       (committeeLabel.includes("parli") || committeeLabel.includes("parliament"));
-    const normalizedProcedureProfile = (
-      isEuParliamentProcedure(confForAgenda?.procedure_profile) || looksLikeEuParliamentCommittee
-    )
-      ? "eu_parliament"
-      : "default";
+    const normalizedProcedureProfile = (() => {
+      if (
+        isPressCorpsProcedure(confForAgenda?.procedure_profile) ||
+        looksLikePressCorpsCommittee(confForAgenda?.committee)
+      ) {
+        return "press_corps" as const;
+      }
+      if (isEuParliamentProcedure(confForAgenda?.procedure_profile) || looksLikeEuParliamentCommittee) {
+        return "eu_parliament" as const;
+      }
+      return "default" as const;
+    })();
     setProcedureProfile(normalizedProcedureProfile);
     const precedence: CaucusDisruptivenessPrecedence =
       confForAgenda?.consultation_before_moderated_caucus === false ? "moderated_first" : "consultation_first";

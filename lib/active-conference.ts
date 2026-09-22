@@ -21,7 +21,7 @@ export type ActiveConferenceRow = {
   crisis_slides_url: string | null;
   allocation_code_gate_enabled: boolean;
   consultation_before_moderated_caucus?: boolean;
-  procedure_profile?: "default" | "eu_parliament";
+  procedure_profile?: "default" | "eu_parliament" | "press_corps";
   eu_guided_workflow_enabled?: boolean;
 };
 

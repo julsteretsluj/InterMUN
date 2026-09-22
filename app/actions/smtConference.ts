@@ -69,7 +69,12 @@ export async function updateCommitteeSessionAction(
   const crisisSlidesUrl = String(formData.get("crisis_slides_url") ?? "").trim();
   const consultationBeforeModerated = formData.get("consultation_before_moderated_caucus") === "on";
   const procedureProfileRaw = String(formData.get("procedure_profile") ?? "default").trim().toLowerCase();
-  const procedureProfile = procedureProfileRaw === "eu_parliament" ? "eu_parliament" : "default";
+  const procedureProfile =
+    procedureProfileRaw === "eu_parliament"
+      ? "eu_parliament"
+      : procedureProfileRaw === "press_corps"
+        ? "press_corps"
+        : "default";
   const euGuidedWorkflowEnabled = formData.get("eu_guided_workflow_enabled") === "on";
 
   if (!id || name.length < 2 || !isValidCommitteeJoinCode(committeeCode)) {
@@ -130,7 +135,12 @@ export async function updateChamberCommitteeProfileAction(
   const ropDocumentUrl = String(formData.get("rop_document_url") ?? "").trim();
   const committeeCode = normalizeCommitteeCode(String(formData.get("room_code") ?? ""));
   const procedureProfileRaw = String(formData.get("procedure_profile") ?? "default").trim().toLowerCase();
-  const procedureProfile = procedureProfileRaw === "eu_parliament" ? "eu_parliament" : "default";
+  const procedureProfile =
+    procedureProfileRaw === "eu_parliament"
+      ? "eu_parliament"
+      : procedureProfileRaw === "press_corps"
+        ? "press_corps"
+        : "default";
 
   if (!anchorId || !isValidCommitteeJoinCode(committeeCode)) {
     return { error: "Committee label and a valid 6-character room code (letters/digits) are required." };

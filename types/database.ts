@@ -50,7 +50,7 @@ export interface Conference {
   /** Competing-motion order: consultation ranks above moderated caucus unless false. */
   consultation_before_moderated_caucus?: boolean;
   /** Procedure ruleset profile for committee-specific RoP flows. */
-  procedure_profile?: "default" | "eu_parliament";
+  procedure_profile?: "default" | "eu_parliament" | "press_corps";
   /** Enables EU guided workflow checks when procedure_profile is eu_parliament. */
   eu_guided_workflow_enabled?: boolean;
   created_at: string;

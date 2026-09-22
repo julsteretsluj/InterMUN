@@ -56,6 +56,16 @@ export function motionDisruptivenessScore(
           silent_prayer: 20,
           minute_silent: 20,
         }
+      : profile === "press_corps"
+        ? {
+            // Press Corps RoP: Interviews > Press Conference > Writing Time
+            interview: 90,
+            interviews: 90,
+            press_conference: 80,
+            writing_time: 70,
+            roll_call_vote: 60,
+            extend_opening_speech: 40,
+          }
       : {
           adjourn: 100,
           suspend: 96,

@@ -4,6 +4,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearActiveEvent, getActiveEventId } from "@/lib/active-event-cookie";
@@ -143,6 +144,8 @@ export async function setRoomCodeAndEnterAction(
   await setActiveConferenceContext(supabase, conferenceId);
   // Do not clear committee second-gate cookie: delegates stay verified until next login.
   await clearAllocationCodeVerification();
+  revalidatePath("/chair/room-code");
+  revalidatePath("/smt/room-codes");
   redirect(nextPath);
 }
 

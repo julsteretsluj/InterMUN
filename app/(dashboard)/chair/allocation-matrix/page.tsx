@@ -12,6 +12,9 @@ import {
 } from "@/lib/conference-committee-canonical";
 import { isScorableAllocationSeat } from "@/lib/seated-delegates-for-awards";
 import { loadDelegateFloorActivityByProfileId } from "@/lib/delegate-floor-activity";
+import { isChairRole, isSmtRole } from "@/lib/roles";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
+import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import {
   ChairAllocationScoringRoot,
   ChairAllocationScoreButton,
@@ -61,6 +64,7 @@ type AllocationRow = {
   country_display: string;
   party_label: string | null;
   member_country: string | null;
+  placard_code: string | null;
 };
 
 type SignupRequestRow = {
@@ -235,6 +239,17 @@ export default async function ChairAllocationMatrixPage() {
     redirect("/profile");
   }
 
+  const smtSurface = isSmtRole(profile?.role) ? await getSmtDashboardSurface() : null;
+  const effectiveRole = effectiveDashboardRole(profile?.role, smtSurface) ?? profile?.role;
+  /** Real chairs only — scoring / floor activity stay chair-account gated. */
+  const isChairViewer = profile?.role === "chair";
+  /** Chairs + SMT chair preview (+ admin) see placard codes read-only. */
+  const showPlacardCodes =
+    isChairViewer ||
+    isChairRole(effectiveRole) ||
+    profile?.role === "admin" ||
+    profile?.role === "smt";
+
   const activeConf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!activeConf) {
     redirect("/room-gate?next=%2Fchair%2Fallocation-matrix");
@@ -252,7 +267,6 @@ export default async function ChairAllocationMatrixPage() {
     // Keep going if dais seed fails; roster still loads.
   }
   const awardConferenceId = awardScope.canonicalConferenceId;
-  const isChairViewer = profile?.role === "chair";
 
   const [{ data: allocData }, { data: participationDelegate }] = await Promise.all([
     supabase
@@ -283,6 +297,7 @@ export default async function ChairAllocationMatrixPage() {
         | "country_display"
         | "party_label"
         | "member_country"
+        | "placard_code"
       >[],
       awardConferenceId
     )
@@ -296,9 +311,12 @@ export default async function ChairAllocationMatrixPage() {
       .in("allocation_id", allocationIds);
     gateCodeRows = (gateCodeData as { allocation_id: string; code: string | null }[] | null) ?? [];
 
-    // Admins can open this page but allocation_gate_codes RLS historically targets chair/smt.
-    // Fall back to service-role read if needed so metadata still renders.
-    if (gateCodeRows.length === 0 && profile?.role === "admin") {
+    // Admins / SMT can open this page but allocation_gate_codes RLS may return empty.
+    // Fall back to service-role read if needed so placard codes still render.
+    if (
+      gateCodeRows.length === 0 &&
+      (profile?.role === "admin" || profile?.role === "smt")
+    ) {
       const admin = createAdminClient();
       if (admin) {
         const { data: adminGateCodes } = await admin
@@ -407,6 +425,7 @@ export default async function ChairAllocationMatrixPage() {
         country_display: countryDisplay,
         party_label: partyLabel,
         member_country: memberCountry,
+        placard_code: gateCode || null,
       };
     })
   );
@@ -493,6 +512,9 @@ export default async function ChairAllocationMatrixPage() {
                 <th className="px-3 py-2">{tMatrix("columns.flag")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.photo")}</th>
                 {showPartyColumn ? <th className="px-3 py-2">{tMatrix("columns.party")}</th> : null}
+                {showPlacardCodes ? (
+                  <th className="px-3 py-2">{tMatrix("columns.placardCode")}</th>
+                ) : null}
                 <th className="px-3 py-2">{tMatrix("columns.email")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.name")}</th>
                 <th className="px-3 py-2">{tMatrix("columns.grade")}</th>
@@ -503,7 +525,14 @@ export default async function ChairAllocationMatrixPage() {
             <tbody>
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={(isChairViewer ? 8 : 7) + (showPartyColumn ? 1 : 0)} className="px-3 py-6 text-center text-brand-muted">
+                  <td
+                    colSpan={
+                      (isChairViewer ? 8 : 7) +
+                      (showPartyColumn ? 1 : 0) +
+                      (showPlacardCodes ? 1 : 0)
+                    }
+                    className="px-3 py-6 text-center text-brand-muted"
+                  >
                     {tMatrix("noRows")}
                   </td>
                 </tr>
@@ -557,6 +586,11 @@ export default async function ChairAllocationMatrixPage() {
                       </td>
                       {showPartyColumn ? (
                         <td className="px-3 py-2 text-xs text-brand-muted">{r.party_label || tMatrix("dash")}</td>
+                      ) : null}
+                      {showPlacardCodes ? (
+                        <td className="px-3 py-2 font-mono text-xs tabular-nums text-brand-navy">
+                          {r.placard_code?.trim() || tMatrix("dash")}
+                        </td>
                       ) : null}
                       <td className="px-3 py-2 text-xs text-brand-muted">{r.email || tMatrix("dash")}</td>
                       <td className="px-3 py-2 text-xs text-brand-muted">

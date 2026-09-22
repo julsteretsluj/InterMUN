@@ -154,6 +154,8 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           pattern="[A-Za-z0-9]{6}"
           title={tSetup("committeeCodeTitle")}
           autoComplete="off"
+          key={`${conferenceId}:${selected?.committee_code ?? selected?.room_code ?? ""}`}
+          defaultValue={selected?.committee_code ?? selected?.room_code ?? ""}
           className={`${fieldClass} font-mono uppercase tracking-widest placeholder:text-brand-muted/70`}
           placeholder={t("committeeCodePlaceholder")}
         />
