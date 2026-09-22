@@ -172,13 +172,17 @@ export async function setupOpeningSpeeches(
   return { ok: true, count: allowed.length, skipped };
 }
 
-/** Apply a passed motion to extend opening speech time from 60s → 90s. */
+/**
+ * Apply a passed motion to extend opening speech per-speaker time.
+ * Defaults to 90s (SEAMUN standard); pass `targetSeconds` when the motion names a custom length.
+ */
 export async function applyOpeningSpeechTimeExtension(
   supabase: SupabaseClient,
   conferenceId: string,
   existing?: TimerSpeakerExisting | null,
-  currentRemainingSeconds?: number | null
-): Promise<{ ok: true } | { ok: false; message: string }> {
+  currentRemainingSeconds?: number | null,
+  targetSeconds?: number | null
+): Promise<{ ok: true; seconds: number } | { ok: false; message: string }> {
   let timerRow = existing ?? null;
   if (!timerRow) {
     const { data } = await supabase
@@ -191,25 +195,37 @@ export async function applyOpeningSpeechTimeExtension(
     timerRow = (data as TimerSpeakerExisting | null) ?? null;
   }
 
+  const target = Math.max(
+    OPENING_SPEECH_SECONDS,
+    Math.round(targetSeconds && targetSeconds > 0 ? targetSeconds : OPENING_SPEECH_EXTENDED_SECONDS)
+  );
+  const previousTotal = Math.max(
+    OPENING_SPEECH_SECONDS,
+    Math.round(timerRow?.total_time_seconds ?? OPENING_SPEECH_SECONDS)
+  );
   const remaining = Math.max(
     0,
     Math.round(
-      currentRemainingSeconds ?? timerRow?.time_left_seconds ?? OPENING_SPEECH_SECONDS
+      currentRemainingSeconds ?? timerRow?.time_left_seconds ?? previousTotal
     )
   );
-  const extension = OPENING_SPEECH_EXTENDED_SECONDS - OPENING_SPEECH_SECONDS;
-  const nextLeft = Math.min(OPENING_SPEECH_EXTENDED_SECONDS, remaining + extension);
+  const extension = Math.max(0, target - previousTotal);
+  const nextLeft = Math.min(target, remaining + extension);
+  const floorLabel =
+    target >= OPENING_SPEECH_EXTENDED_SECONDS
+      ? `Opening speeches (${target}s)`
+      : OPENING_SPEECH_FLOOR_LABEL;
 
   const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
     currentSpeaker: timerRow?.current_speaker ?? null,
     nextSpeaker: timerRow?.next_speaker ?? null,
     existing: timerRow,
     timeLeftSeconds: nextLeft,
-    totalTimeSeconds: OPENING_SPEECH_EXTENDED_SECONDS,
+    totalTimeSeconds: target,
     perSpeakerMode: true,
     isRunning: timerRow?.is_running ?? false,
-    floorLabel: OPENING_SPEECH_EXTENDED_FLOOR_LABEL,
+    floorLabel,
   });
   if (error) return { ok: false, message: error.message };
-  return { ok: true };
+  return { ok: true, seconds: target };
 }

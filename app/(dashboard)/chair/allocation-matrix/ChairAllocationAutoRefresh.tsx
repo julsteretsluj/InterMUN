@@ -10,15 +10,26 @@ export function ChairAllocationAutoRefresh({ intervalMs = 10000 }: { intervalMs?
 
   useEffect(() => {
     if (pauseRefresh) return;
-    const id = window.setInterval(() => {
+
+    const tick = () => {
+      if (document.visibilityState !== "visible") return;
       router.refresh();
-    }, intervalMs);
-    return () => window.clearInterval(id);
+    };
+
+    const id = window.setInterval(tick, intervalMs);
+    const onVisible = () => {
+      if (document.visibilityState === "visible") router.refresh();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      window.clearInterval(id);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [router, intervalMs, pauseRefresh]);
 
   return (
     <p className="text-xs text-brand-muted mt-1 mb-3">
-      Auto-refreshing requests every {Math.max(1, Math.round(intervalMs / 1000))}s.
+      Auto-refreshing while this tab is visible (every {Math.max(1, Math.round(intervalMs / 1000))}s).
     </p>
   );
 }

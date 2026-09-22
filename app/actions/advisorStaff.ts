@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import { getServerAppOrigin } from "@/lib/app-origin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { inviteUserByEmailWithArchive } from "@/lib/auth-invite";
+import { findAuthUserIdByEmail } from "@/lib/auth-admin-emails";
 import { getTranslations } from "next-intl/server";
 
 export type AdvisorStaffFormState = { error?: string; success?: string };
@@ -22,22 +23,6 @@ function isValidEmail(raw: string): boolean {
 
 function isValidAllocationId(raw: string): boolean {
   return UUID_RE.test(raw.trim());
-}
-
-async function findAuthUserIdByEmail(
-  admin: NonNullable<ReturnType<typeof createAdminClient>>,
-  email: string
-): Promise<string | null> {
-  const target = email.trim().toLowerCase();
-  // Page Auth users until match — avoid loading the full directory when the user is early.
-  for (let page = 1; page <= 10; page += 1) {
-    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
-    if (error) return null;
-    const hit = data.users.find((u) => (u.email ?? "").trim().toLowerCase() === target);
-    if (hit?.id) return hit.id;
-    if (data.users.length < 200) break;
-  }
-  return null;
 }
 
 async function requireSmt() {
@@ -123,7 +108,7 @@ export async function smtAssignAdvisorDelegateAction(
   const admin = createAdminClient();
   if (!admin) return { error: t("missingServiceRole") };
 
-  const advisorId = await findAuthUserIdByEmail(admin, advisorEmail);
+  const advisorId = await findAuthUserIdByEmail(advisorEmail);
   if (!advisorId) return { error: t("advisorNotFound") };
 
   const { data: advisorProfile } = await admin

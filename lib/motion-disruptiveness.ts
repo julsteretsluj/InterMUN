@@ -3,9 +3,13 @@
 
 import type { VoteType } from "@/types/database";
 import { normalizeProcedureProfile, type ProcedureProfile } from "@/lib/procedure-profiles";
+import { parseMotionProposedMinutes } from "@/lib/press-motion-timing";
 
 /** How consultation vs moderated caucus rank when both are pending (handbook vs alternate RoP). */
 export type CaucusDisruptivenessPrecedence = "consultation_first" | "moderated_first";
+
+/** Parse proposed total minutes from motion title/description (Press Corps tie-break). */
+export { parseMotionProposedMinutes as parseMotionProposedTotalMinutes } from "@/lib/press-motion-timing";
 
 function caucusScores(precedence: CaucusDisruptivenessPrecedence) {
   if (precedence === "consultation_first") {
@@ -94,21 +98,6 @@ export function motionDisruptivenessScore(
   return 40;
 }
 
-/** Parse proposed total minutes from motion title/description (Press Corps tie-break). */
-export function parseMotionProposedTotalMinutes(
-  title?: string | null,
-  description?: string | null
-): number {
-  const text = `${title ?? ""}\n${description ?? ""}`;
-  const match =
-    text.match(/total\s+(\d+)\s*min/i) ||
-    text.match(/(\d+)\s*-?\s*minutes?\b/i) ||
-    text.match(/(\d+)\s*-?\s*minute\b/i);
-  if (!match) return 0;
-  const n = Number(match[1]);
-  return Number.isFinite(n) && n > 0 ? n : 0;
-}
-
 export function sortMotionsMostDisruptiveFirst<
   T extends {
     vote_type: VoteType;
@@ -129,8 +118,8 @@ export function sortMotionsMostDisruptiveFirst<
     if (db !== da) return db - da;
     // Press Corps RoP: equal disruptiveness → longer total time first.
     if (profile === "press_corps") {
-      const ta = parseMotionProposedTotalMinutes(a.title, a.description);
-      const tb = parseMotionProposedTotalMinutes(b.title, b.description);
+      const ta = parseMotionProposedMinutes(a.title, a.description) ?? 0;
+      const tb = parseMotionProposedMinutes(b.title, b.description) ?? 0;
       if (tb !== ta) return tb - ta;
     }
     return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();

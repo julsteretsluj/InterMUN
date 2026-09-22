@@ -192,6 +192,7 @@
     "presetSetAgenda": "Motion to Set the Agenda",
     "presetExtendOpeningSpeech": "Motion to Extend Opening Speech Time",
     "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker.",
+    "openingSpeechExtendedToSeconds": "Opening speech time extended to {seconds} seconds per speaker.",
     "presetOpenDebate": "Motion to Open Debate",
     "presetOpenGsl": "Motion to Open the General Speakers' List",
     "presetForAgainst": "Motion to Begin For/Against Speeches (resolution)",

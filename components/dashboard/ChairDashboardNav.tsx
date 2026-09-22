@@ -74,6 +74,8 @@ type ChairNavItem = {
   crisisOnly?: boolean;
   /** Shown only for FWC (not UNSC). */
   fwcOnly?: boolean;
+  /** Hidden when chamber uses Press Corps RoP. */
+  hideForPressCorps?: boolean;
 };
 
 /** Primary tab order follows chair workflow sequence requested by product. */
@@ -124,8 +126,8 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     itemKey: "formalMotions",
     emoji: "📜",
   },
-  { href: "/resolutions", itemKey: "resolutions", emoji: "📄" },
-  { href: "/amendments", itemKey: "amendments", emoji: "✏️" },
+  { href: "/resolutions", itemKey: "resolutions", emoji: "📄", hideForPressCorps: true },
+  { href: "/amendments", itemKey: "amendments", emoji: "✏️", hideForPressCorps: true },
   {
     href: "/chair/session/timer",
     itemKey: "timer",
@@ -225,11 +227,13 @@ function ChairNavRow({
 function filterChairNavItems(
   items: ChairNavItem[],
   crisisReportingEnabled: boolean,
-  fwcCrisisEnabled: boolean
+  fwcCrisisEnabled: boolean,
+  pressCorpsProcedure = false
 ) {
   return items.filter((item) => {
     if (item.crisisOnly && !crisisReportingEnabled) return false;
     if (item.fwcOnly && !fwcCrisisEnabled) return false;
+    if (item.hideForPressCorps && pressCorpsProcedure) return false;
     return true;
   });
 }
@@ -238,6 +242,7 @@ export function ChairDashboardSidebar({
   conferenceLine,
   crisisReportingEnabled,
   fwcCrisisEnabled = false,
+  pressCorpsProcedure = false,
   seamunScheduleEnabled = false,
   siblingConferenceIds = null,
   heldNotesCount: heldNotesCountProp,
@@ -245,6 +250,7 @@ export function ChairDashboardSidebar({
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   fwcCrisisEnabled?: boolean;
+  pressCorpsProcedure?: boolean;
   seamunScheduleEnabled?: boolean;
   /** When set, badge count is fetched on the client (preferred). */
   siblingConferenceIds?: string[] | null;
@@ -289,13 +295,14 @@ export function ChairDashboardSidebar({
     const items = filterChairNavItems(
       CHAIR_NAV_ITEMS,
       crisisReportingEnabled,
-      fwcCrisisEnabled
+      fwcCrisisEnabled,
+      pressCorpsProcedure
     );
     const filtered = seamunScheduleEnabled
       ? items
       : items.filter((item) => item.itemKey !== "conferenceSchedule");
     return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
-  }, [crisisReportingEnabled, fwcCrisisEnabled, seamunScheduleEnabled]);
+  }, [crisisReportingEnabled, fwcCrisisEnabled, pressCorpsProcedure, seamunScheduleEnabled]);
 
   const priorityByKey = useMemo(
     () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),
@@ -484,6 +491,7 @@ export function ChairMobileDock({
   conferenceLine,
   crisisReportingEnabled,
   fwcCrisisEnabled = false,
+  pressCorpsProcedure = false,
   seamunScheduleEnabled = false,
   siblingConferenceIds = null,
   heldNotesCount: heldNotesCountProp,
@@ -491,6 +499,7 @@ export function ChairMobileDock({
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   fwcCrisisEnabled?: boolean;
+  pressCorpsProcedure?: boolean;
   seamunScheduleEnabled?: boolean;
   siblingConferenceIds?: string[] | null;
   /** @deprecated Prefer siblingConferenceIds — kept for call-site compatibility. */
@@ -533,13 +542,14 @@ export function ChairMobileDock({
     const items = filterChairNavItems(
       CHAIR_NAV_ITEMS,
       crisisReportingEnabled,
-      fwcCrisisEnabled
+      fwcCrisisEnabled,
+      pressCorpsProcedure
     );
     const filtered = seamunScheduleEnabled
       ? items
       : items.filter((item) => item.itemKey !== "conferenceSchedule");
     return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
-  }, [crisisReportingEnabled, fwcCrisisEnabled, seamunScheduleEnabled]);
+  }, [crisisReportingEnabled, fwcCrisisEnabled, pressCorpsProcedure, seamunScheduleEnabled]);
 
   const priorityByKey = useMemo(
     () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),

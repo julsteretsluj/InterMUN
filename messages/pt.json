@@ -452,7 +452,39 @@
     "pointStatusDenied": "Denied",
     "agendaSetWithDay2": "Agenda set. Day 1 is {first}. Day 2 will use {second}.",
     "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
-    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker."
+    "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker.",
+    "openingSpeechExtendedToSeconds": "Opening speech time extended to {seconds} seconds per speaker.",
+    "presetInterview": "Motion for an Interview",
+    "presetInterviewTitle": "Motion for an Interview Period",
+    "presetPressConference": "Motion for a Press Conference",
+    "presetPressConferenceTitle": "Motion for a Press Conference",
+    "presetWritingTime": "Motion for Writing Time",
+    "presetWritingTimeTitle": "Motion for Writing Time",
+    "pressRelatedAssignment": "Related assignment",
+    "pressRelatedAssignmentPlaceholder": "e.g. Breaking news report",
+    "pressCommitteeOrDelegate": "Committee / delegate",
+    "pressCommitteeOrDelegatePlaceholder": "e.g. DISEC / France",
+    "pressRollCallSubject": "Vote subject",
+    "pressRollCallSubjectPlaceholder": "e.g. the interview period motion",
+    "pressExtendSeconds": "Extended speaker time (seconds)",
+    "pressTotalMinutes": "Total time (minutes)",
+    "guidedPressStepChooseProcedure": "Press Corps — Step 1: Choose motion (enter number).",
+    "guidedPressStepExtendSeconds": "Press Corps — Step 2: Extended speaker time in seconds (e.g. 90).",
+    "guidedPressStepRollCallSubject": "Press Corps — Step 2: What to vote on by roll call.",
+    "guidedPressStepInterviewMinutes": "Press Corps — Step 2: Interview period total minutes (required).",
+    "guidedPressStepInterviewAssignment": "Press Corps — Step 3: Related assignment (required).",
+    "guidedPressStepPressConferenceMinutes": "Press Corps — Step 2: Press conference total minutes (required).",
+    "guidedPressStepPressConferenceCommittee": "Press Corps — Step 3: Committee / delegate for the press conference (required).",
+    "guidedPressStepWritingMinutes": "Press Corps — Step 2: Writing time total minutes (required).",
+    "guidedPressStepMotioner": "Press Corps — Motioner (optional, enter number or leave blank).",
+    "guidedPressStepNotesOptional": "Press Corps — Notes (optional).",
+    "guidedPressExtendRequiresSeconds": "Extend opening speech requires speaker time in seconds.",
+    "guidedPressRollCallRequiresSubject": "Roll call vote requires a subject (what is being voted on).",
+    "guidedPressInterviewRequiresMinutes": "Interview motion requires total time (minutes).",
+    "guidedPressInterviewRequiresAssignment": "Interview motion requires a related assignment.",
+    "guidedPressConferenceRequiresMinutes": "Press conference requires total time (minutes).",
+    "guidedPressConferenceRequiresCommittee": "Press conference requires a committee or delegate.",
+    "guidedPressWritingRequiresMinutes": "Writing time requires total time (minutes)."
   },
   "chairChecklists": {
     "common": {
@@ -2306,7 +2338,8 @@
       "addDay": "Add day",
       "removeDay": "Remove day",
       "confirmRemoveDay": "Remove Day {day} and all of its blocks for every group?"
-    }
+    },
+    "procedurePressCorps": "Press Corps RoP (SEAMUN I)"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Abrir",

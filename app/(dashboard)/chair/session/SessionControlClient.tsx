@@ -33,6 +33,14 @@ import {
 import { ChairOpeningSpeechPanel } from "@/components/chair/ChairOpeningSpeechPanel";
 import { applyOpeningSpeechTimeExtension } from "@/lib/opening-speech";
 import { CommitteeAgendaVotesTab } from "@/components/chair/CommitteeAgendaVotesTab";
+import { GuidedMotionWizard, type GuidedMotionDraftResult } from "@/components/chair/GuidedMotionWizard";
+import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
+import {
+  isPressTimedProcedure,
+  parseMotionProposedMinutes,
+  parseMotionProposedSpeakerSeconds,
+  pressMotionFloorLabel,
+} from "@/lib/press-motion-timing";
 import {
   BUILTIN_TIMER_PRESETS,
   TIMER_PRESET_GROUPS,
@@ -522,6 +530,7 @@ export function SessionControlClient({
   const [isEuGuidedWorkflow, setIsEuGuidedWorkflow] = useState(false);
   const isEuParliamentProfile = procedureProfile === "eu_parliament";
   const isPressCorpsProfile = procedureProfile === "press_corps";
+  const [guidedMotionOpen, setGuidedMotionOpen] = useState(false);
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
@@ -1423,6 +1432,10 @@ export function SessionControlClient({
     }
   }, [supabase, floorConferenceId, rosterConferenceIdList, conferenceId, canonicalConferenceId, supportsEuTimerMeta]);
 
+  const debouncedRefresh = useDebouncedCallback(() => {
+    void refresh();
+  }, 400);
+
   useEffect(() => {
     // Deferred to a microtask so state lands asynchronously (no sync cascade).
     void Promise.resolve().then(refresh);
@@ -1434,27 +1447,27 @@ export function SessionControlClient({
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "roll_call_entries" },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "timers" },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "vote_items" },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "votes" },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "motion_audit_events" },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
@@ -1464,7 +1477,7 @@ export function SessionControlClient({
           table: "procedure_states",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
@@ -1474,7 +1487,7 @@ export function SessionControlClient({
           table: "dais_announcements",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
@@ -1484,12 +1497,12 @@ export function SessionControlClient({
           table: "speaker_queue_entries",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${floorConferenceId}` },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
@@ -1499,7 +1512,7 @@ export function SessionControlClient({
           table: "chair_session_points",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .on(
         "postgres_changes",
@@ -1509,15 +1522,15 @@ export function SessionControlClient({
           table: "chair_delegate_discipline",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => void refresh()
+        () => debouncedRefresh()
       )
       .subscribe();
 
     const onLocalSpeakerQueue = (event: Event) => {
-      if (speakerQueueUpdatedMatches(event, floorConferenceId)) void refresh();
+      if (speakerQueueUpdatedMatches(event, floorConferenceId)) debouncedRefresh();
     };
     const onVisible = () => {
-      if (document.visibilityState === "visible") void refresh();
+      if (document.visibilityState === "visible") debouncedRefresh();
     };
     window.addEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
     document.addEventListener("visibilitychange", onVisible);
@@ -1527,7 +1540,7 @@ export function SessionControlClient({
       window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [supabase, floorConferenceId, rosterKey, refresh]);
+  }, [supabase, floorConferenceId, rosterKey, refresh, debouncedRefresh]);
 
   const loadChairSpeechNotes = useCallback(async () => {
     if (!authUserId) {
@@ -2494,6 +2507,8 @@ export function SessionControlClient({
           setSpeakerListChairPrompt("gsl");
         }
         if (passes && openMotion.procedure_code === "extend_opening_speech") {
+          const targetSeconds =
+            parseMotionProposedSpeakerSeconds(openMotion.title, openMotion.description) ?? undefined;
           const extendResult = await applyOpeningSpeechTimeExtension(
             supabase,
             floorConferenceId,
@@ -2509,13 +2524,32 @@ export function SessionControlClient({
                   next_speaker: liveTimerRow.next_speaker,
                 }
               : null,
-            liveRemaining
+            liveRemaining,
+            targetSeconds
           );
           if (!extendResult.ok) {
             setMsg(extendResult.message);
           } else {
-            setMsg(tSessionControl("openingSpeechExtendedTo90"));
+            setMsg(
+              tSessionControl("openingSpeechExtendedToSeconds", {
+                seconds: extendResult.seconds,
+              })
+            );
           }
+        }
+        if (passes && isPressTimedProcedure(openMotion.procedure_code)) {
+          const mins =
+            parseMotionProposedMinutes(openMotion.title, openMotion.description) ?? 20;
+          const totalSec = Math.max(60, mins * 60);
+          const label = pressMotionFloorLabel(openMotion.procedure_code, mins);
+          publishFloorTimer({
+            timeLeftSeconds: totalSec,
+            totalTimeSeconds: totalSec,
+            floorLabel: label,
+            perSpeakerMode: false,
+            isRunning: false,
+            successMessage: `${label} loaded on the floor timer (paused).`,
+          });
         }
         if (passes && openMotion.procedure_code === "set_agenda") {
           const title = (openMotion.title ?? "").trim();
@@ -2734,315 +2768,32 @@ export function SessionControlClient({
   }
 
   function startGuidedMotionFlow() {
-    const options = procedurePresets.filter((p) => p.code !== null);
-    const pickRaw = window.prompt(
-      [
-        isPressCorpsProfile
-          ? tSessionControl("guidedPressStepChooseProcedure")
-          : tSessionControl("guidedStepChooseProcedure"),
-        ...options.map((p, i) => `${i + 1}. ${p.label}`),
-      ].join("\n")
-    );
-    if (!pickRaw) return;
-    const pick = Number(pickRaw);
-    if (!Number.isFinite(pick) || pick < 1 || pick > options.length) {
-      setMsg(tSessionControl("invalidProcedureSelection"));
-      return;
-    }
-    const selected = options[pick - 1]!;
-    const procedureCode = selected.code;
+    setGuidedMotionOpen(true);
+  }
 
-    let titleTrimmed = "";
-    let pressTotalMinutes = "";
-    let pressSpeakerSeconds = "";
-
-    if (isPressCorpsProfile) {
-      if (procedureCode === "extend_opening_speech") {
-        const secondsRaw = window.prompt(tSessionControl("guidedPressStepExtendSeconds"), "90");
-        if (secondsRaw === null) return;
-        const seconds = Number(secondsRaw);
-        if (!Number.isFinite(seconds) || seconds <= 0) {
-          setMsg(tSessionControl("guidedPressExtendRequiresSeconds"));
-          return;
-        }
-        pressSpeakerSeconds = String(Math.round(seconds));
-        titleTrimmed = `Motion to Extend Speaker Time to ${pressSpeakerSeconds} seconds`;
-      } else if (procedureCode === "roll_call_vote") {
-        const subject = window.prompt(tSessionControl("guidedPressStepRollCallSubject"), "");
-        if (subject === null) return;
-        const subjectTrimmed = subject.trim();
-        if (!subjectTrimmed) {
-          setMsg(tSessionControl("guidedPressRollCallRequiresSubject"));
-          return;
-        }
-        titleTrimmed = `Motion to vote on ${subjectTrimmed} by roll call.`;
-      } else if (procedureCode === "interview") {
-        const minutesRaw = window.prompt(tSessionControl("guidedPressStepInterviewMinutes"), "20");
-        if (minutesRaw === null) return;
-        const minutes = Number(minutesRaw);
-        if (!Number.isFinite(minutes) || minutes <= 0) {
-          setMsg(tSessionControl("guidedPressInterviewRequiresMinutes"));
-          return;
-        }
-        const assignment = window.prompt(tSessionControl("guidedPressStepInterviewAssignment"), "");
-        if (assignment === null) return;
-        const assignmentTrimmed = assignment.trim();
-        if (!assignmentTrimmed) {
-          setMsg(tSessionControl("guidedPressInterviewRequiresAssignment"));
-          return;
-        }
-        pressTotalMinutes = String(Math.round(minutes));
-        titleTrimmed = `Motion for a ${pressTotalMinutes} minute interview period for completing the ${assignmentTrimmed} assignment.`;
-      } else if (procedureCode === "press_conference") {
-        const minutesRaw = window.prompt(tSessionControl("guidedPressStepPressConferenceMinutes"), "15");
-        if (minutesRaw === null) return;
-        const minutes = Number(minutesRaw);
-        if (!Number.isFinite(minutes) || minutes <= 0) {
-          setMsg(tSessionControl("guidedPressConferenceRequiresMinutes"));
-          return;
-        }
-        const committee = window.prompt(tSessionControl("guidedPressStepPressConferenceCommittee"), "");
-        if (committee === null) return;
-        const committeeTrimmed = committee.trim();
-        if (!committeeTrimmed) {
-          setMsg(tSessionControl("guidedPressConferenceRequiresCommittee"));
-          return;
-        }
-        pressTotalMinutes = String(Math.round(minutes));
-        titleTrimmed = `Motion for a Press Conference with a ${committeeTrimmed} delegate.`;
-      } else if (procedureCode === "writing_time") {
-        const minutesRaw = window.prompt(tSessionControl("guidedPressStepWritingMinutes"), "20");
-        if (minutesRaw === null) return;
-        const minutes = Number(minutesRaw);
-        if (!Number.isFinite(minutes) || minutes <= 0) {
-          setMsg(tSessionControl("guidedPressWritingRequiresMinutes"));
-          return;
-        }
-        pressTotalMinutes = String(Math.round(minutes));
-        titleTrimmed = `Motion for ${pressTotalMinutes} minutes of Writing Time.`;
-      } else {
-        const titleInput = window.prompt(
-          tSessionControl("guidedStepMotionTitleOptional"),
-          selected.title ?? selected.label
-        );
-        if (titleInput === null) return;
-        titleTrimmed = titleInput.trim();
-      }
-    } else if (procedureCode === "set_agenda") {
-      const topics = agendaTopicsRemaining.filter((t) => (t.name ?? "").trim().length > 0);
-      if (topics.length === 0) {
-        setMsg(tSessionControl("guidedNoAgendaTopics"));
-        return;
-      }
-      const pickTopicRaw = window.prompt(
-        [
-          tSessionControl("guidedStepChooseAgendaTopic"),
-          ...topics.map(
-            (t, i) =>
-              `${i + 1}. ${translateAgendaTopicLabel(tTopics, String(t.name).trim(), locale)}`
-          ),
-        ].join("\n"),
-        "1"
-      );
-      if (!pickTopicRaw) return;
-      const pickTopic = Number(pickTopicRaw);
-      if (!Number.isFinite(pickTopic) || pickTopic < 1 || pickTopic > topics.length) {
-        setMsg(tSessionControl("guidedInvalidAgendaTopicSelection"));
-        return;
-      }
-      titleTrimmed = String(topics[pickTopic - 1]!.name ?? "").trim();
-    } else {
-      const titlePrompt =
-        procedureCode === "consultation"
-          ? tSessionControl("guidedStepTopicPurpose")
-          : procedureCode === "moderated_caucus"
-            ? tSessionControl("guidedStepTopic")
-            : procedureCode === "unmoderated_caucus"
-              ? tSessionControl("guidedStepTopicOptional")
-              : tSessionControl("guidedStepMotionTitleOptional");
-      const titleInput = window.prompt(titlePrompt, selected.title ?? selected.label);
-      if (titleInput === null) return;
-      titleTrimmed = titleInput.trim();
-      if (!titleTrimmed) {
-        if (procedureCode === "consultation") {
-          setMsg(tSessionControl("guidedConsultationRequiresTopicOrPurpose"));
-          return;
-        }
-        if (procedureCode === "moderated_caucus") {
-          setMsg(tSessionControl("guidedTopicIsRequired"));
-          return;
-        }
-      }
-    }
-
-    const motionerInput = window.prompt(
-      [
-        isPressCorpsProfile
-          ? tSessionControl("guidedPressStepMotioner")
-          : tSessionControl("guidedStepMotioner"),
-        `0. ${tSessionControl("guidedMotionerNotSpecified")}`,
-        ...allocations.map((a, i) => `${i + 1}. ${displayCountry(a.country)}`),
-      ].join("\n"),
-      "0"
-    );
-    let motionerId: string | null = null;
-    if (motionerInput && motionerInput.trim() !== "" && motionerInput.trim() !== "0") {
-      const idx = Number(motionerInput);
-      if (Number.isFinite(idx) && idx >= 1 && idx <= allocations.length) {
-        motionerId = allocations[idx - 1]!.id;
-      }
-    }
-
-    let description =
-      window.prompt(
-        isPressCorpsProfile
-          ? tSessionControl("guidedPressStepNotesOptional")
-          : tSessionControl("guidedStepDescriptionNotesOptional"),
-        ""
-      ) ?? "";
-    if (
-      procedureCode === "moderated_caucus" ||
-      procedureCode === "unmoderated_caucus" ||
-      procedureCode === "consultation"
-    ) {
-      const totalRequired =
-        procedureCode === "moderated_caucus" ||
-        procedureCode === "unmoderated_caucus" ||
-        procedureCode === "consultation";
-      const totalMinutes = window.prompt(
-        tSessionControl("guidedTimingTotalMinutesRequired", {
-          required: totalRequired ? ` (${tSessionControl("guidedRequired")})` : "",
-        }),
-        "10"
-      );
-      if (procedureCode === "moderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg(tSessionControl("guidedModeratedRequiresTotalMinutes"));
-        return;
-      }
-      if (procedureCode === "unmoderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg(tSessionControl("guidedUnmoderatedRequiresTotalMinutes"));
-        return;
-      }
-      if (procedureCode === "consultation" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg(tSessionControl("guidedConsultationRequiresTotalMinutes"));
-        return;
-      }
-      if (totalMinutes && Number(totalMinutes) > 0) {
-        let timing = tSessionControl("guidedTimingTotalMinutesLine", { minutes: totalMinutes });
-        if (procedureCode === "moderated_caucus") {
-          const speakerSeconds = window.prompt(tSessionControl("guidedTimingSpeakerSecondsRequired"), "60");
-          if (!speakerSeconds || Number(speakerSeconds) <= 0) {
-            setMsg(tSessionControl("guidedModeratedRequiresSpeakerSeconds"));
-            return;
-          }
-          timing += tSessionControl("guidedTimingSpeakerSecondsLine", { seconds: speakerSeconds });
-        }
-        description = description.trim() ? `${description.trim()}\n${timing}` : timing;
-      }
-    }
-
-    let resolutionId: string | null = null;
-    let clauseIds: string[] = [];
-    if (motionRequiresResolutionOnly(procedureCode) || motionRequiresClauseTargets(procedureCode)) {
-      if (resolutions.length === 0) {
-        setMsg(tSessionControl("guidedNoResolutionsForMotion"));
-        return;
-      }
-      const resPick = window.prompt(
-        [
-          tSessionControl("guidedStepSelectTargetResolution"),
-          ...resolutions.map((r, i) => `${i + 1}. ${r.id.slice(0, 8)} ${r.google_docs_url ? `(${r.google_docs_url})` : ""}`),
-        ].join("\n")
-      );
-      const rIdx = Number(resPick);
-      if (!Number.isFinite(rIdx) || rIdx < 1 || rIdx > resolutions.length) {
-        setMsg(tSessionControl("guidedResolutionSelectionRequired"));
-        return;
-      }
-      resolutionId = resolutions[rIdx - 1]!.id;
-
-      if (motionRequiresClauseTargets(procedureCode)) {
-        const clauses = resolutionClauses.filter((c) => c.resolution_id === resolutionId);
-        if (clauses.length === 0) {
-          setMsg(tSessionControl("guidedNoClausesForResolution"));
-          return;
-        }
-        const clausePick = window.prompt(
-          [
-            tSessionControl("guidedStepChooseClauseNumbers"),
-            ...clauses.map(
-              (c, i) =>
-                `${i + 1}. ${tSessionControl("guidedClausePreview", {
-                  number: c.clause_number,
-                  preview: `${c.clause_text.slice(0, 60)}...`,
-                })}`
-            ),
-          ].join("\n")
-        );
-        if (!clausePick) {
-          setMsg(tSessionControl("guidedAtLeastOneClauseRequired"));
-          return;
-        }
-        const picked = clausePick
-          .split(",")
-          .map((x) => Number(x.trim()))
-          .filter((n) => Number.isFinite(n) && n >= 1 && n <= clauses.length)
-          .map((n) => clauses[n - 1]!.id);
-        clauseIds = Array.from(new Set(picked));
-        if (clauseIds.length === 0) {
-          setMsg(tSessionControl("guidedAtLeastOneClauseRequired"));
-          return;
-        }
-      }
-    }
-
+  function applyGuidedMotionDraft(partial: GuidedMotionDraftResult, action: "draft" | "record" | "create") {
     const nextDraft: MotionDraftState = {
       vote_type: "motion",
-      procedure_code: procedureCode,
-      title: titleTrimmed,
-      description: description.trim(),
+      procedure_code: partial.procedure_code,
+      title: partial.title,
+      description: partial.description,
       must_vote: false,
-      procedure_resolution_id: resolutionId,
-      procedure_clause_ids: clauseIds,
-      motioner_allocation_id: motionerId,
-      moderated_total_minutes:
-        procedureCode === "moderated_caucus"
-          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
-          : "",
-      moderated_speaker_seconds:
-        procedureCode === "moderated_caucus"
-          ? (description.match(/speaker\s+(\d+)\s*s/i)?.[1] ?? "")
-          : isPressCorpsProfile && procedureCode === "extend_opening_speech"
-            ? pressSpeakerSeconds
-            : "",
-      unmoderated_total_minutes:
-        procedureCode === "unmoderated_caucus"
-          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
-          : procedureCode === "interview" ||
-              procedureCode === "press_conference" ||
-              procedureCode === "writing_time"
-            ? pressTotalMinutes
-            : "",
-      consultation_total_minutes:
-        procedureCode === "consultation"
-          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
-          : "",
+      procedure_resolution_id: null,
+      procedure_clause_ids: [],
+      motioner_allocation_id: partial.motioner_allocation_id,
+      moderated_total_minutes: partial.moderated_total_minutes,
+      moderated_speaker_seconds: partial.moderated_speaker_seconds,
+      unmoderated_total_minutes: partial.unmoderated_total_minutes,
+      consultation_total_minutes: partial.consultation_total_minutes,
       amendment_kind: "friendly",
       amendment_debate_seconds: "45",
     };
-
     setMotionDraft(nextDraft);
-
-    if (motionFloorOpen) {
-      if (window.confirm(tSessionControl("guidedConfirmRecordStatedMotionNow"))) {
-        recordStatedMotion(nextDraft);
-        return;
-      }
-      setMsg(tSessionControl("guidedDraftLoadedFloorOpen"));
+    if (action === "record") {
+      recordStatedMotion(nextDraft);
       return;
     }
-
-    if (window.confirm(tSessionControl("guidedConfirmCreateOpenMotionNow"))) {
+    if (action === "create") {
       createMotion(nextDraft);
       return;
     }
@@ -3277,6 +3028,23 @@ export function SessionControlClient({
   return (
     <div className="space-y-12">
       <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
+      {isPressCorpsProfile ? (
+        <div className="rounded-xl border border-[#D1D1D6] bg-[#F2F2F7] px-4 py-3 text-sm text-[#1D1D1F]">
+          <p className="font-semibold tracking-tight">Press Corps RoP</p>
+          <p className="mt-1 text-[#6E6E73]">
+            Loop: Assignment → Motions → Enacted → Deadline → Review. Motions vote order: Interviews → Press
+            conference → Writing time (longer time first when equal).
+          </p>
+          <a
+            href="/rop/press-corps-seamun-i-2027.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex text-[#007AFF] hover:text-[#0077ED]"
+          >
+            Open Press Corps Rules of Procedure (PDF)
+          </a>
+        </div>
+      ) : null}
       {msg && (
         <div className="flex items-start justify-between gap-3 rounded-lg border border-[var(--hairline)] bg-[var(--dashboard-card)] px-3 py-2 text-sm text-brand-navy shadow-sm">
           <p className="min-w-0 flex-1">{msg}</p>
@@ -3290,6 +3058,18 @@ export function SessionControlClient({
           </button>
         </div>
       )}
+
+      <GuidedMotionWizard
+        open={guidedMotionOpen}
+        onClose={() => setGuidedMotionOpen(false)}
+        isPressCorps={isPressCorpsProfile}
+        presets={procedurePresets
+          .filter((p): p is { code: string; label: string; title?: string } => !!p.code)
+          .map((p) => ({ code: p.code!, label: p.label, title: p.title }))}
+        allocations={allocations.map((a) => ({ id: a.id, label: displayCountry(a.country) }))}
+        motionFloorOpen={motionFloorOpen}
+        onComplete={applyGuidedMotionDraft}
+      />
 
       {show("agenda") ? (
         <section className="space-y-4">
@@ -3380,13 +3160,23 @@ export function SessionControlClient({
                     onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
                     className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-1.5 text-xs text-brand-navy"
                   >
-                    <option value="poi">{tSessionControl("pointOfInformation")}</option>
-                    <option value="poc">{tSessionControl("pointOfClarification")}</option>
-                    <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
-                    <option value="order">{tSessionControl("pointOfOrder")}</option>
-                    <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
-                    <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
-                    <option value="fact_check">{tSessionControl("factCheck")}</option>
+                    {isPressCorpsProfile ? (
+                      <>
+                        <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
+                        <option value="order">{tSessionControl("pointOfOrder")}</option>
+                        <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="poi">{tSessionControl("pointOfInformation")}</option>
+                        <option value="poc">{tSessionControl("pointOfClarification")}</option>
+                        <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
+                        <option value="order">{tSessionControl("pointOfOrder")}</option>
+                        <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
+                        <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
+                        <option value="fact_check">{tSessionControl("factCheck")}</option>
+                      </>
+                    )}
                   </select>
                 </label>
                 <label className="text-xs text-brand-muted">

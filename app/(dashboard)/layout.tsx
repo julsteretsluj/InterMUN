@@ -215,6 +215,7 @@ export default async function DashboardLayout({
               conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}
               fwcCrisisEnabled={fwcCrisisEnabled}
+              pressCorpsProcedure={activeConf.procedure_profile === "press_corps"}
               seamunScheduleEnabled={showSeamunLogo}
               siblingConferenceIds={chairSiblingIds}
             />
@@ -300,6 +301,7 @@ export default async function DashboardLayout({
             conferenceLine={conferenceLine || ""}
             crisisReportingEnabled={crisisReportingEnabled}
             fwcCrisisEnabled={fwcCrisisEnabled}
+            pressCorpsProcedure={activeConf.procedure_profile === "press_corps"}
             seamunScheduleEnabled={showSeamunLogo}
             siblingConferenceIds={chairSiblingIds}
           />

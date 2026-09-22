@@ -34,3 +34,22 @@ export async function getAuthEmailsByUserIds(
 
   return emailByUserId;
 }
+
+/**
+ * Find an Auth user id by email. Caps pagination (does not create users / send mail).
+ */
+export async function findAuthUserIdByEmail(email: string): Promise<string | null> {
+  const target = email.trim().toLowerCase();
+  if (!target.includes("@")) return null;
+  const admin = createAdminClient();
+  if (!admin) return null;
+
+  for (let page = 1; page <= 5; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) return null;
+    const hit = data.users.find((u) => (u.email ?? "").trim().toLowerCase() === target);
+    if (hit?.id) return hit.id;
+    if (data.users.length < 200) break;
+  }
+  return null;
+}
