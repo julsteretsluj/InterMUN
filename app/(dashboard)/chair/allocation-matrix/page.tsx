@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getAuthEmailsByUserIds } from "@/lib/auth-admin-emails";
 import { MunPageShell } from "@/components/MunPageShell";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
@@ -226,18 +227,10 @@ export default async function ChairAllocationMatrixPage() {
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tSessionEu = await getTranslations("sessionControlClient");
   const locale = await getLocale();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user, profile: cachedProfile } = await getCachedDashboardAuth();
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .maybeSingle();
-
+  const profile = cachedProfile;
   if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
     redirect("/profile");
   }
@@ -349,22 +342,7 @@ export default async function ChairAllocationMatrixPage() {
           profile_picture_url: string | null;
         }[],
       };
-  const emailByUserId = new Map<string, string>();
-  if (userIds.length > 0) {
-    const admin = createAdminClient();
-    if (admin) {
-      const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
-        page: 1,
-        perPage: 1000,
-      });
-      if (!usersError) {
-        const userSet = new Set(userIds);
-        for (const u of usersData.users) {
-          if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
-        }
-      }
-    }
-  }
+  const emailByUserId = await getAuthEmailsByUserIds(userIds);
   const profileById = new Map(
     (profiles ?? []).map((p) => [
       p.id,

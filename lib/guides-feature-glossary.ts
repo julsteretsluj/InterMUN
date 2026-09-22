@@ -102,12 +102,10 @@ export const GUIDE_SECTION_GLOSSARY: Record<
     people: [
       { id: "advisors", kind: "feature" },
       { id: "notes", kind: "feature" },
-      { id: "awards", kind: "feature" },
     ],
     tools: [
       { id: "newsroom", kind: "feature" },
       { id: "pressCorps", kind: "feature" },
-      { id: "milestones", kind: "feature" },
       { id: "conferenceGuides", kind: "feature" },
     ],
   },

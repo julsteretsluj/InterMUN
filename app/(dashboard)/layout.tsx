@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { createClient } from "@/lib/supabase/server";
+import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { DeferredChairLiveFloor } from "@/components/session/DeferredChairLiveFloor";
@@ -50,32 +50,24 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [t, locale, tCommitteeLabels, tTopics, supabase, hdrs, smtSurfaceCookie] =
+  const [t, locale, tCommitteeLabels, tTopics, auth, hdrs, smtSurfaceCookie] =
     await Promise.all([
       getTranslations("dashboardLayout"),
       getLocale(),
       getTranslations("committeeNames.labels"),
       getTranslations("agendaTopics"),
-      createClient(),
+      getCachedDashboardAuth(),
       headers(),
       getSmtDashboardSurface(),
     ]);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user, profile } = auth;
 
   const pathname = hdrs.get("x-pathname") || "/profile";
 
   if (!user) {
     redirect(`/login?next=${encodeURIComponent(pathname)}`);
   }
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role, name, profile_picture_url")
-    .eq("id", user.id)
-    .maybeSingle();
 
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;

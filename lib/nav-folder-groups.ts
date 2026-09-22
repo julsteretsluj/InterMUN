@@ -101,10 +101,8 @@ export const SMT_ITEM_FOLDER: Record<string, NavFolderId> = {
   advisors: "people",
   delegates: "people",
   notes: "people",
-  awards: "people",
   newsroom: "media",
   pressCorps: "media",
-  milestones: "media",
   guides: "media",
   profile: "account",
 };

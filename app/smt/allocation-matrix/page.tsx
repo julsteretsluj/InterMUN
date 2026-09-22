@@ -197,14 +197,21 @@ export default async function SmtAllocationMatrixPage({
     allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
 
     const seeder = createAdminClient() ?? supabase;
+    const selectedConf =
+      list.find((c) => c.id === selectedConferenceId) ??
+      rawList.find((c) => c.id === selectedConferenceId) ??
+      null;
     try {
-      for (const c of list) {
-        await ensureDaisSeatAllocations(
-          seeder,
-          c.id,
-          isSmtSecretariatConferenceRow(c) ? "SMT" : committeeHintForSmtDaisPlan(c)
-        );
-      }
+      // Only seed the chamber being viewed — event-wide ensure was O(chambers × queries).
+      await ensureDaisSeatAllocations(
+        seeder,
+        canonicalConferenceId,
+        selectedConf
+          ? isSmtSecretariatConferenceRow(selectedConf)
+            ? "SMT"
+            : committeeHintForSmtDaisPlan(selectedConf)
+          : null
+      );
       allocs =
         (
           await supabase

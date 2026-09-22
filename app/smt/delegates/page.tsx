@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { getAuthEmailsByUserIds } from "@/lib/auth-admin-emails";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
@@ -87,24 +87,7 @@ export default async function SmtDelegatesPage() {
   const userIds = [
     ...new Set(delegateAllocations.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
   ];
-  const emailByUserId = new Map<string, string>();
-  if (userIds.length > 0) {
-    const admin = createAdminClient();
-    if (admin) {
-      const userSet = new Set(userIds);
-      for (let page = 1; page <= 5 && emailByUserId.size < userIds.length; page += 1) {
-        const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
-          page,
-          perPage: 1000,
-        });
-        if (usersError) break;
-        for (const u of usersData.users) {
-          if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
-        }
-        if (usersData.users.length < 1000) break;
-      }
-    }
-  }
+  const emailByUserId = await getAuthEmailsByUserIds(userIds);
 
   const rows: SmtDelegateSearchRow[] = delegateAllocations.map((a) => {
     const profile = unwrapProfile(a.profiles as LinkedProfile | LinkedProfile[] | null);

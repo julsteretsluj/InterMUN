@@ -45,7 +45,6 @@ export const GUIDED_TOUR_STEPS: Record<GuidedTourView, readonly GuidedTourStep[]
     { id: "committees", target: "nav-liveCommittees" },
     { id: "roomCodes", target: "nav-roomCodes" },
     { id: "matrix", target: "nav-allocationMatrix" },
-    { id: "awards", target: "nav-awards" },
     { id: "notes", target: "nav-notes" },
     { id: "advisors", target: "nav-advisors" },
     { id: "topbar", target: "tour-topbar" },

@@ -29,10 +29,15 @@ async function findAuthUserIdByEmail(
   email: string
 ): Promise<string | null> {
   const target = email.trim().toLowerCase();
-  const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
-  if (error) return null;
-  const hit = data.users.find((u) => (u.email ?? "").trim().toLowerCase() === target);
-  return hit?.id ?? null;
+  // Page Auth users until match — avoid loading the full directory when the user is early.
+  for (let page = 1; page <= 10; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) return null;
+    const hit = data.users.find((u) => (u.email ?? "").trim().toLowerCase() === target);
+    if (hit?.id) return hit.id;
+    if (data.users.length < 200) break;
+  }
+  return null;
 }
 
 async function requireSmt() {

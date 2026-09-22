@@ -16,6 +16,82 @@ const LEGACY_PARLIAMENTARIAN_TIER_LABELS = [
   "Parliamentarian (Advanced)",
 ] as const;
 
+const LEGACY_PARLIAMENTARIAN_TIER_LOWER = new Set(
+  LEGACY_PARLIAMENTARIAN_TIER_LABELS.map((l) => l.toLowerCase())
+);
+
+type AllocCountryRow = { id?: string; country: string | null; user_id?: string | null };
+
+function lowerCountry(s: string | null | undefined): string {
+  return String(s ?? "").trim().toLowerCase();
+}
+
+/** True when seats already match the plan and no legacy cleanup is needed. */
+function isDaisRosterHealthy(
+  rows: AllocCountryRow[],
+  labels: readonly string[],
+  effectiveCommittee: string | null | undefined
+): boolean {
+  const lower = lowerCountry;
+  const countries = rows.map((r) => lower(r.country));
+  const existingCounts = new Map<string, number>();
+  for (const n of countries) {
+    existingCounts.set(n, (existingCounts.get(n) ?? 0) + 1);
+  }
+
+  const desiredCounts = new Map<string, number>();
+  for (const label of labels) {
+    const n = lower(label);
+    desiredCounts.set(n, (desiredCounts.get(n) ?? 0) + 1);
+  }
+  for (const [n, want] of desiredCounts) {
+    if ((existingCounts.get(n) ?? 0) < want) return false;
+  }
+
+  const group = committeeSessionGroupKey(effectiveCommittee);
+  const renamePairs = group ? LEGACY_DAIS_RENAMES[group] : undefined;
+  if (renamePairs?.length) {
+    const existingLower = new Set(countries);
+    for (const [fromLc, toExact] of renamePairs) {
+      if (existingLower.has(fromLc) && !existingLower.has(toExact.trim().toLowerCase())) {
+        return false;
+      }
+    }
+  }
+
+  if (group === "SMT") {
+    if (countries.some((c) => LEGACY_PARLIAMENTARIAN_TIER_LOWER.has(c))) return false;
+    const countrySet = new Set(countries);
+    const hasLeadership =
+      countrySet.has("secretary general") || countrySet.has("deputy secretary general");
+    if (hasLeadership) {
+      if (
+        countrySet.has("head chair") ||
+        countrySet.has("co-chair") ||
+        countrySet.has("co chair")
+      ) {
+        return false;
+      }
+    }
+    const par = rows.filter((r) => lower(r.country) === "parliamentarian");
+    if (par.length > 3 && par.some((r) => !r.user_id)) return false;
+  }
+
+  // Head Chair / Co-chair leftovers when secretariat titles exist (any chamber).
+  {
+    const countrySet = new Set(countries);
+    if (countrySet.has("secretary general") && countrySet.has("head chair")) return false;
+    if (
+      countrySet.has("deputy secretary general") &&
+      (countrySet.has("co-chair") || countrySet.has("co chair"))
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 /** Drop obsolete tier-suffixed parliamentarian seats so Multiset insert can seed exactly three plain "Parliamentarian" rows. */
 async function deleteLegacyParliamentarianTierAllocationRows(
   supabase: SupabaseClient,
@@ -143,11 +219,28 @@ export async function ensureDaisSeatAllocations(
     if (hint === "SMT") effectiveCommittee = "SMT";
   }
 
-  await reconcileLegacyDaisSeatLabels(supabase, conferenceId, effectiveCommittee);
-  await deleteLegacyParliamentarianTierAllocationRows(supabase, conferenceId, effectiveCommittee);
+  const labels = [...getDaisSeatLabelsForCommittee(effectiveCommittee)];
+  const { data: existingSnapshot } = await supabase
+    .from("allocations")
+    .select("id, country, user_id")
+    .eq("conference_id", conferenceId);
+
+  if (
+    isDaisRosterHealthy(
+      (existingSnapshot ?? []) as AllocCountryRow[],
+      labels,
+      effectiveCommittee
+    )
+  ) {
+    return;
+  }
+
+  await Promise.all([
+    reconcileLegacyDaisSeatLabels(supabase, conferenceId, effectiveCommittee),
+    deleteLegacyParliamentarianTierAllocationRows(supabase, conferenceId, effectiveCommittee),
+  ]);
   await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
 
-  const labels = [...getDaisSeatLabelsForCommittee(effectiveCommittee)];
   const { data: existing } = await supabase
     .from("allocations")
     .select("country")

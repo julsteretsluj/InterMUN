@@ -761,7 +761,7 @@ export async function forwardCompleteResolutionsToSmtAction(input: {
           type: "resolutions_forwarded_smt",
           title: "Resolutions ready for Best Resolution review",
           body: `${readyIds.length} complete resolution(s) were forwarded by chairs.`,
-          href: "/smt/awards",
+          href: "/smt",
           reference_id: readyIds[0],
         }))
       );
@@ -769,7 +769,7 @@ export async function forwardCompleteResolutionsToSmtAction(input: {
   }
 
   revalidatePath("/resolutions");
-  revalidatePath("/smt/awards");
+  revalidatePath("/smt");
   return {
     ok: true,
     data: { forwarded: readyIds.length, alreadyForwarded, incomplete },
