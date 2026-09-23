@@ -111,8 +111,8 @@ export async function MarketingHome() {
 
           <div className="relative z-[1] mx-auto max-w-2xl pt-6 text-center md:pt-10">
             <p className="clicky-kaomoji mb-3">^ ω ^</p>
-            <h1 className="text-[clamp(2.6rem,8vw,4.5rem)] font-bold lowercase leading-[0.95] tracking-[-0.045em] text-[var(--clicky-ink)]">
-              {appName.toLowerCase()}
+            <h1 className="case-preserve text-[clamp(2.6rem,8vw,4.5rem)] font-bold leading-[0.95] tracking-[-0.045em] text-[var(--clicky-ink)]">
+              {appName}
             </h1>
             <p className="mt-4 text-base lowercase text-[var(--clicky-ink-soft)] md:text-lg">
               {t("hero.subtitle")}
@@ -268,7 +268,7 @@ export async function MarketingHome() {
             <p>{t("about.p3")}</p>
           </div>
           <p className="mt-10 text-sm text-white/45 lowercase">
-            {t("about.eyebrow")} · {appName}
+            {t("about.eyebrow")} · <span className="case-preserve">{appName}</span>
           </p>
         </div>
       </section>

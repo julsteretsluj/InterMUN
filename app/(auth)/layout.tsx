@@ -19,8 +19,8 @@ export default async function AuthLayout({
         <aside className="mun-clicky-auth-brand" aria-hidden={false}>
           <div className="relative z-[1]">
             <p className="clicky-kaomoji text-white/40">^ ω ^</p>
-            <h1 className="mt-6 text-4xl font-bold lowercase tracking-[-0.04em] text-[#f7f6f2]">
-              {appName.toLowerCase()}
+            <h1 className="case-preserve mt-6 text-4xl font-bold tracking-[-0.04em] text-[#f7f6f2]">
+              {appName}
             </h1>
             <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/70">{tagline}</p>
             <ul className="mt-10 space-y-3 text-sm lowercase text-white/55">

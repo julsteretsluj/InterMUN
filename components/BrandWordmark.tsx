@@ -58,13 +58,13 @@ export function BrandWordmark({
         {showText ? (
           <span
             className={cn(
-              "mun-brand-wordmark inline-flex items-baseline whitespace-nowrap leading-none",
+              "mun-brand-wordmark case-preserve inline-flex items-baseline whitespace-nowrap leading-none",
               surface === "light" && "mun-brand-wordmark-light",
               surface === "dark" && "mun-brand-wordmark-dark",
               textClass
             )}
           >
-            <span className="mun-brand-word">intermun</span>
+            <span className="mun-brand-word">{title}</span>
             <span className="mun-brand-word-suffix">.site</span>
           </span>
         ) : null}

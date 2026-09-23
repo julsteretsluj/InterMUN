@@ -14,7 +14,7 @@ export async function MarketingSiteFooter() {
     <footer className="relative z-10 border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-12 text-[#f7f6f2]">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
         <div>
-          <p className="text-lg font-bold lowercase tracking-[-0.03em]">{appName.toLowerCase()}</p>
+          <p className="case-preserve text-lg font-bold tracking-[-0.03em]">{appName}</p>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55">
             conference software that stays out of the way until the gavel needs it.
           </p>
@@ -23,7 +23,7 @@ export async function MarketingSiteFooter() {
           </p>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-white/40">product</p>
+          <p className="text-xs font-semibold tracking-[0.08em] text-white/40">product</p>
           <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
             <Link href="/#how-it-works" className="hover:text-white">
               how it works
@@ -40,7 +40,7 @@ export async function MarketingSiteFooter() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-white/40">resources</p>
+          <p className="text-xs font-semibold tracking-[0.08em] text-white/40">resources</p>
           <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
             <Link href="/about" className="hover:text-white">
               about

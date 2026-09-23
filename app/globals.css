@@ -1799,7 +1799,7 @@ html.colorblind-mode .schedule-swatch-session {
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--marketing-ink);
   opacity: 0;
   backdrop-filter: blur(12px) saturate(1.2);
@@ -2084,7 +2084,7 @@ html.colorblind-mode .schedule-swatch-session {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: color-mix(in srgb, var(--navy) 82%, var(--accent));
 }
 
@@ -2623,7 +2623,7 @@ html.dark .marketing-shell .mun-chamber-frame-dark .mun-chamber-frame-body {
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-tertiary);
 }
 
@@ -3166,7 +3166,7 @@ html.dark .marketing-shell {
   line-height: 1.38;
   letter-spacing: 0.04em;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -3224,7 +3224,7 @@ html.dark .mun-glass-input:focus {
   line-height: 1.18;
   font-weight: 600;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
   backdrop-filter: blur(var(--apple-material-ultrathin-blur)) saturate(var(--apple-material-saturate));
   -webkit-backdrop-filter: blur(var(--apple-material-ultrathin-blur)) saturate(var(--apple-material-saturate));
@@ -3326,7 +3326,7 @@ html.dark .mun-glass-input:focus {
   line-height: 1.18;
   font-weight: 600;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-tertiary);
 }
 
@@ -4623,7 +4623,7 @@ html.dark .mun-apple-color-picker-segment-active {
   font-size: var(--apple-text-caption-2-size, 0.6875rem);
   font-weight: 600;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-tertiary);
 }
 
@@ -4926,7 +4926,7 @@ html.dark .mun-apple-calendar-popover {
   font-size: var(--apple-text-caption-2-size, 0.6875rem);
   font-weight: 600;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-tertiary);
 }
 
@@ -5110,7 +5110,7 @@ html.dark .mun-apple-calendar-day.is-today:not(.is-selected) .mun-apple-calendar
   line-height: 1.38;
   font-weight: 600;
   letter-spacing: -0.006em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -5440,7 +5440,7 @@ html.dark .mun-apple-menu-panel {
   line-height: 1.27;
   font-weight: 600;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -6430,7 +6430,7 @@ html.dark .mun-apple-sidebar {
   line-height: 1.27;
   font-weight: 600;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -7284,7 +7284,7 @@ html.dark .mun-apple-tab-bar-accessory {
 .mun-apple-text-field-section-header {
   font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 
 .mun-apple-text-field-group {
@@ -7946,7 +7946,7 @@ html.dark .mun-apple-widget {
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -8709,7 +8709,7 @@ html.dark .mun-apple-window-sidebar {
   font-size: max(0.75rem, 12px);
   font-weight: 600;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   line-height: 1.4;
 }
 
@@ -8934,7 +8934,7 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: #58585c;
 }
 .guided-tour-title {
@@ -8987,4 +8987,38 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
 }
 .guided-tour-btn-ghost:hover {
   color: #1D1D1F;
+}
+
+/* —— Clicky era: sitewide lowercase content —— */
+html,
+body {
+  text-transform: lowercase;
+}
+
+/* Beat Tailwind / legacy uppercase treatments */
+.uppercase {
+  text-transform: lowercase !important;
+}
+
+/* Preserve typed values, monospace codes, and brand logo casing */
+input,
+textarea,
+[contenteditable="true"],
+[contenteditable=""],
+.font-mono,
+.font-mono *,
+code,
+kbd,
+pre,
+samp,
+.case-preserve,
+.case-preserve *,
+.normal-case,
+.normal-case *,
+.marketing-header-brand,
+.mun-brand-wordmark,
+.mun-brand-wordmark *,
+.mun-brand-word,
+.mun-brand-word-suffix {
+  text-transform: none !important;
 }

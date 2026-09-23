@@ -21,9 +21,9 @@ export default async function MarketingLayout({
         <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-center gap-2 px-4 py-3 md:grid-cols-[auto_1fr_auto] md:gap-4 md:px-8">
           <Link
             href="/"
-            className="marketing-header-brand min-w-0 truncate text-base md:text-lg"
+            className="marketing-header-brand case-preserve min-w-0 truncate text-base md:text-lg"
           >
-            {appName.toLowerCase()}
+            {appName}
           </Link>
           <MarketingPrimaryNav />
           <div className="flex shrink-0 items-center justify-end gap-1.5 justify-self-end sm:gap-2">

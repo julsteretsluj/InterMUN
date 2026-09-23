@@ -39,7 +39,7 @@ export function marketingRollAttendanceButtonClass(value: RollAttendance, active
 export const PREVIEW_CARD =
   "marketing-preview-surface rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-4 text-[var(--clicky-ink)] shadow-[var(--clicky-shadow)] [color-scheme:light]";
 export const PREVIEW_LABEL =
-  "text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-[var(--clicky-ink-faint)]";
+  "text-[0.6875rem] font-semibold tracking-[0.06em] text-[var(--clicky-ink-faint)]";
 export const PREVIEW_MUTED = "text-sm text-[var(--clicky-ink-soft)]";
 export const PREVIEW_HEADING = "font-semibold tracking-[-0.02em] text-[var(--clicky-ink)]";
 export const PREVIEW_ROW =

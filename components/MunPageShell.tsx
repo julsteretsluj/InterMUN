@@ -35,7 +35,7 @@ export function MunPageShell({
         )}
       >
         <div>
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-[var(--clicky-ink-faint)]">
+          <p className="text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--clicky-ink-faint)]">
             workspace
           </p>
           <h2 className="mt-1 font-sans !mb-0 text-[1.35rem] font-bold tracking-[-0.03em] text-[var(--clicky-ink)] md:text-[1.55rem]">

@@ -13,7 +13,7 @@ export default function AboutPage() {
 
   return (
     <MarketingDocumentPage
-      eyebrow={`about ${appName.toLowerCase()}`}
+      eyebrow={`about ${appName}`}
       title="built for the whole conference team."
       intro={`${appName} brings delegates, chairs, advisors, and secretariat into one shared workspace—from prep through the final gavel. we think the hard part is the interface, not the diplomacy.`}
       sections={[

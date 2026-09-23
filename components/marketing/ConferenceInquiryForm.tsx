@@ -18,7 +18,7 @@ const INPUT_CLASS =
   "mt-1.5 w-full rounded-[var(--clicky-radius-sm)] border border-[var(--clicky-line)] bg-white px-3 py-2.5 text-[0.9375rem] text-[var(--clicky-ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--clicky-muted)] focus:border-[var(--clicky-blue)] focus:shadow-[0_0_0_3px_rgba(0,122,255,0.18)] [color-scheme:light]";
 
 const LABEL_CLASS =
-  "block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--clicky-muted)]";
+  "block text-[0.6875rem] font-semibold tracking-[0.08em] text-[var(--clicky-muted)]";
 
 export function ConferenceInquiryForm({ className }: { className?: string }) {
   const t = useTranslations("marketing.contact.form");
