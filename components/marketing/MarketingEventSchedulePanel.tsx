@@ -188,7 +188,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       ) : (
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">
+            <span className="text-[0.65rem] font-semibold  tracking-wide text-[var(--clicky-ink-faint)]">
               {t("groupsLabel")}
             </span>
             <div className="flex flex-wrap gap-1">
@@ -212,12 +212,12 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
           </div>
 
           <p className="text-[0.65rem] text-[var(--clicky-ink-soft)]">
-            <span className="font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">{t("renameGroup")}:</span>{" "}
+            <span className="font-semibold  tracking-wide text-[var(--clicky-ink-faint)]">{t("renameGroup")}:</span>{" "}
             {activeGroup.name}
           </p>
 
           <div className="flex flex-wrap gap-2 text-[0.6rem] text-[var(--clicky-ink-soft)]">
-            <span className="font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">{t("legendTitle")}</span>
+            <span className="font-semibold  tracking-wide text-[var(--clicky-ink-faint)]">{t("legendTitle")}</span>
             <span className="inline-flex items-center gap-1">
               <span className="inline-block h-2 w-2 rounded-sm bg-[var(--clicky-mint)]" aria-hidden />
               {t("legendSession")}
@@ -235,7 +235,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
           <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
             <table className="w-full min-w-[32rem] text-xs">
               <thead>
-                <tr className="border-b border-[var(--clicky-line)] bg-[var(--clicky-paper)] text-left text-[0.65rem] uppercase tracking-wide text-[var(--clicky-ink-faint)]">
+                <tr className="border-b border-[var(--clicky-line)] bg-[var(--clicky-paper)] text-left text-[0.65rem]  tracking-wide text-[var(--clicky-ink-faint)]">
                   <th className="px-2 py-2">{t("colStart")}</th>
                   <th className="px-2 py-2">{t("colEnd")}</th>
                   <th className="px-2 py-2">{t("colKind")}</th>

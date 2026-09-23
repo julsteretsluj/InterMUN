@@ -87,13 +87,13 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block space-y-1">
-          <span className="mun-label normal-case">{t("draftResolution")}</span>
+          <span className="mun-label ">{t("draftResolution")}</span>
           <select className="mun-field" defaultValue="draft-a">
             <option value="draft-a">{t("draftResolutionNumber", { number: 1 })}</option>
           </select>
         </label>
         <label className="block space-y-1">
-          <span className="mun-label normal-case">{t("section")}</span>
+          <span className="mun-label ">{t("section")}</span>
           <select
             className="mun-field"
             value={section}
@@ -110,7 +110,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
       </div>
 
       <div className="space-y-2">
-        <span className="mun-label normal-case block">{t("openingPresets")}</span>
+        <span className="mun-label  block">{t("openingPresets")}</span>
         <div className="max-h-32 overflow-y-auto rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)]/50 p-2 dark:border-white/10 dark:bg-black/20">
           <div className="flex flex-wrap gap-1.5">
             {presets.map((preset) => (
@@ -146,7 +146,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
       </div>
 
       <label className="block space-y-1">
-        <span className="mun-label normal-case">{t("clauseText")}</span>
+        <span className="mun-label ">{t("clauseText")}</span>
         <textarea
           className="mun-field min-h-[100px] resize-y"
           value={body}
@@ -156,7 +156,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
       </label>
 
       <div className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)]/50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--clicky-ink-soft)]">{t("preview")}</p>
+        <p className="text-[10px] font-semibold  tracking-wide text-[var(--clicky-ink-soft)]">{t("preview")}</p>
         <p className="mt-1 text-sm text-[var(--clicky-ink)]">{preview || t("previewDash")}</p>
       </div>
 

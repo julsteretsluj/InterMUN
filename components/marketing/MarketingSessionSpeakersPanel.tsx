@@ -131,7 +131,7 @@ export function MarketingSessionSpeakersPanel({
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
             {!heroCompact ? (
-              <p className="mt-0.5 text-[0.65rem] font-normal normal-case text-[var(--clicky-ink-soft)]">
+              <p className="mt-0.5 text-[0.65rem] font-normal  text-[var(--clicky-ink-soft)]">
                 {tTimer("remainingHelpPerSpeaker")}
               </p>
             ) : null}

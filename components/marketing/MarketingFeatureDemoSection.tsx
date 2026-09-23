@@ -45,7 +45,7 @@ export function MarketingFeatureDemoSection({
       >
         <div className={cn("max-w-xl", reversed && "lg:pl-4")}>
           <p className="clicky-eyebrow">{eyebrow}</p>
-          <h2 className="clicky-section-title mt-3 normal-case">{title}</h2>
+          <h2 className="clicky-section-title mt-3 ">{title}</h2>
           <p className="clicky-lede mt-4">{description}</p>
           {shownBullets.length > 0 ? (
             <ul className="mt-8 space-y-3">

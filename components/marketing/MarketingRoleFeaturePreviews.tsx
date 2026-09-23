@@ -74,7 +74,7 @@ export function ChairRollCallQuorumDemo() {
         <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{tc("rollCallTracker")}</h3>
         <span
           className={cn(
-            "rounded-full px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider",
+            "rounded-full px-2.5 py-1 font-mono text-[0.65rem] font-bold  tracking-wider",
             quorumMet
               ? "border border-[color-mix(in_srgb,var(--clicky-mint)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-mint)_15%,white)] text-[var(--clicky-ink)]"
               : "border border-[color-mix(in_srgb,#febc2e_45%,var(--clicky-line))] bg-[color-mix(in_srgb,#febc2e_15%,white)] text-[var(--clicky-ink)]"

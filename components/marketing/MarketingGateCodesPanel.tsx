@@ -86,14 +86,14 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
       <section className="space-y-2 rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
         <h3 className="font-sans text-sm font-semibold text-[var(--clicky-ink)]">{tEvent("eventDetails")}</h3>
         <div>
-          <label className="mb-1 block text-[0.65rem] font-medium uppercase tracking-wider text-[var(--clicky-ink-faint)]">
+          <label className="mb-1 block text-[0.65rem] font-medium  tracking-wider text-[var(--clicky-ink-faint)]">
             {tEvent("conferenceCodeFirstGate")}
           </label>
           <div className="flex flex-wrap items-center gap-2">
             <input
               value={eventCode}
               onChange={(e) => setEventCode(e.target.value.toUpperCase())}
-              className="min-w-[10rem] flex-1 rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs uppercase tracking-wider text-[var(--clicky-ink)]"
+              className="min-w-[10rem] flex-1 rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs  tracking-wider text-[var(--clicky-ink)]"
               autoComplete="off"
             />
             <button
@@ -155,7 +155,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
                       pattern="[A-Z0-9]{6}"
                       placeholder={tRoom("committeeCodePlaceholder")}
                       autoComplete="off"
-                      className="w-full rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs uppercase tracking-widest text-[var(--clicky-ink)]"
+                      className="w-full rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs  tracking-widest text-[var(--clicky-ink)]"
                     />
                   </div>
                   <button

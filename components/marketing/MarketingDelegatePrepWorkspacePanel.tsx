@@ -48,7 +48,7 @@ export function MarketingDelegatePrepWorkspacePanel({
               aria-selected={tab === key}
               onClick={() => setTab(key)}
               className={cn(
-                "rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition",
+                "rounded-full border px-3 py-1.5 text-xs font-semibold  tracking-wide transition",
                 tab === key
                   ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)] text-[var(--clicky-ink)]"
                   : "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))]"
@@ -111,7 +111,7 @@ function DocumentsWorkspace() {
           <h3 className="font-sans font-semibold text-[var(--clicky-ink)]">{t("newDocumentTitle")}</h3>
           <div className="space-y-3">
             <div>
-              <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>
+              <label className="mun-label mb-1 block ">{t("typeLabel")}</label>
               <select
                 value={form.doc_type}
                 onChange={(e) => setForm({ ...form, doc_type: e.target.value as "prep_doc" })}
@@ -122,7 +122,7 @@ function DocumentsWorkspace() {
               <p className="mt-1 text-xs text-[var(--clicky-ink-soft)]">{t("delegatePositionPaperNote")}</p>
             </div>
             <div>
-              <label className="mun-label mb-1 block normal-case">{t("titleLabel")}</label>
+              <label className="mun-label mb-1 block ">{t("titleLabel")}</label>
               <input
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -131,7 +131,7 @@ function DocumentsWorkspace() {
               />
             </div>
             <div>
-              <label className="mun-label mb-1 block normal-case">{t("googleDocsUrl")}</label>
+              <label className="mun-label mb-1 block ">{t("googleDocsUrl")}</label>
               <input
                 value={form.google_docs_url}
                 onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
@@ -141,7 +141,7 @@ function DocumentsWorkspace() {
               />
             </div>
             <div>
-              <label className="mun-label mb-1 block normal-case">{t("plainTextOptional")}</label>
+              <label className="mun-label mb-1 block ">{t("plainTextOptional")}</label>
               <textarea
                 value={form.content}
                 onChange={(e) => setForm({ ...form, content: e.target.value })}
@@ -221,7 +221,7 @@ function SpeechesWorkspace() {
             className="mun-field"
           />
           <div>
-            <label className="mun-label mb-1 block normal-case">{t("googleDocsUrl")}</label>
+            <label className="mun-label mb-1 block ">{t("googleDocsUrl")}</label>
             <input
               value={form.google_docs_url}
               onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}

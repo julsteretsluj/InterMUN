@@ -35,7 +35,7 @@ export function MarketingDocumentPage({
             <div>
               <p className="clicky-lede text-[1.1rem]">{intro}</p>
               {updated ? (
-                <p className="mt-4 font-mono text-[0.7rem] uppercase tracking-wider text-[var(--clicky-ink-faint)]">
+                <p className="mt-4 font-mono text-[0.7rem]  tracking-wider text-[var(--clicky-ink-faint)]">
                   last updated · {updated}
                 </p>
               ) : null}

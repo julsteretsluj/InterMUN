@@ -166,7 +166,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
         <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
           <table className="w-full min-w-[32rem] text-xs">
             <thead>
-              <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem] uppercase tracking-wider text-[var(--clicky-ink-faint)]">
+              <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem]  tracking-wider text-[var(--clicky-ink-faint)]">
                 <th className="px-2.5 py-2">{t("countryPosition")}</th>
                 <th className="px-2.5 py-2">{t("placardCode")}</th>
                 <th className="px-2.5 py-2">{t("assignedAccount")}</th>

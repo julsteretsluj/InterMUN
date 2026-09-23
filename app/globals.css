@@ -2189,7 +2189,7 @@ html.colorblind-mode .schedule-swatch-session {
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  text-transform: none;
+  text-transform: lowercase;
   color: color-mix(in srgb, var(--marketing-ink) 92%, var(--accent));
 }
 
@@ -2734,7 +2734,7 @@ html.dark .mun-apple-site.marketing-shell .marketing-header {
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: none;
+  text-transform: lowercase;
   white-space: nowrap;
   color: var(--marketing-ink);
   padding: 0.5rem 0.75rem;
@@ -7952,7 +7952,7 @@ html.dark .mun-apple-widget {
 
 .mun-apple-lock-widget-meta {
   font-weight: 500;
-  text-transform: none;
+  text-transform: lowercase;
   letter-spacing: -0.01em;
 }
 
@@ -8380,7 +8380,7 @@ html.dark .mun-apple-window-sidebar {
   font-size: var(--apple-text-footnote-size);
   font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: none;
+  text-transform: lowercase;
   color: var(--apple-label-secondary);
 }
 
@@ -8433,7 +8433,7 @@ html.dark .mun-apple-window-sidebar {
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: none;
+  text-transform: lowercase;
   color: var(--marketing-ink) !important;
   border-radius: var(--radius-md);
   padding: 0.375rem 0.5rem;
@@ -8995,30 +8995,31 @@ body {
   text-transform: lowercase;
 }
 
-/* Beat Tailwind / legacy uppercase treatments */
-.uppercase {
+html body :where(*) {
   text-transform: lowercase !important;
 }
 
-/* Preserve typed values, monospace codes, and brand logo casing */
-input,
-textarea,
-[contenteditable="true"],
-[contenteditable=""],
-.font-mono,
-.font-mono *,
-code,
-kbd,
-pre,
-samp,
-.case-preserve,
-.case-preserve *,
+/* Beat Tailwind / legacy uppercase + normal-case utilities */
+.uppercase,
 .normal-case,
-.normal-case *,
-.marketing-header-brand,
-.mun-brand-wordmark,
-.mun-brand-wordmark *,
-.mun-brand-word,
-.mun-brand-word-suffix {
+.capitalize {
+  text-transform: lowercase !important;
+}
+
+/* Preserve typed values and InterMUN logo casing only */
+html body :is(
+  input,
+  textarea,
+  [contenteditable="true"],
+  [contenteditable=""],
+  .case-preserve,
+  .case-preserve *,
+  .marketing-header-brand,
+  .mun-brand-wordmark,
+  .mun-brand-wordmark *,
+  .mun-brand-word,
+  .mun-brand-word-suffix
+) {
   text-transform: none !important;
 }
+
