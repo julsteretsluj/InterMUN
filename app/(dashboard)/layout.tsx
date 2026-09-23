@@ -212,7 +212,6 @@ export default async function DashboardLayout({
         <div className="flex min-h-0 flex-1 flex-col">
           {isChairRole(effectiveRole) ? (
             <ChairDashboardSidebar
-              conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}
               fwcCrisisEnabled={fwcCrisisEnabled}
               pressCorpsProcedure={activeConf.procedure_profile === "press_corps"}

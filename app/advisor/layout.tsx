@@ -92,24 +92,6 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
             profileHref="/advisor/profile"
           />
           <DashboardAnnouncementPopup />
-          {activeEvent ? (
-            <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-4 py-2 text-xs text-brand-muted sm:px-6">
-              <div className="w-full">
-                {t("activeEvent")}{" "}
-                <span className="font-medium text-brand-navy">{activeEvent.name}</span> · {t("code")}{" "}
-                <span className="font-mono text-[var(--accent)]">{activeEvent.event_code}</span>
-              </div>
-            </div>
-          ) : (
-            <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-4 py-2 text-xs text-[var(--accent)] sm:px-6">
-              <div className="w-full">
-                <Link href="/event-gate?next=%2Fadvisor" className="underline hover:no-underline">
-                  {t("enterConferenceCodeLink")}
-                </Link>{" "}
-                {t("loadEventPrompt")}
-              </div>
-            </div>
-          )}
           <main
             data-tour="tour-main"
             className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10"

@@ -93,19 +93,6 @@ export function AdminAppChrome({
                 />
               ))}
             </AppleSidebarSection>
-            {activeEventName ? (
-              <div className="px-3 py-3">
-                <p className="mun-apple-text mun-apple-text-caption-1 mun-vibrancy-secondary">
-                  Active event: <span className="mun-vibrancy-primary">{activeEventName}</span>
-                  {activeEventCode ? (
-                    <>
-                      {" "}
-                      · <span className="font-mono">{activeEventCode}</span>
-                    </>
-                  ) : null}
-                </p>
-              </div>
-            ) : null}
           </AppleSidebar>
         }
       >

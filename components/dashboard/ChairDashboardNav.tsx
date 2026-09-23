@@ -239,7 +239,6 @@ function filterChairNavItems(
 }
 
 export function ChairDashboardSidebar({
-  conferenceLine,
   crisisReportingEnabled,
   fwcCrisisEnabled = false,
   pressCorpsProcedure = false,
@@ -247,7 +246,6 @@ export function ChairDashboardSidebar({
   siblingConferenceIds = null,
   heldNotesCount: heldNotesCountProp,
 }: {
-  conferenceLine: string;
   crisisReportingEnabled: boolean;
   fwcCrisisEnabled?: boolean;
   pressCorpsProcedure?: boolean;
@@ -289,8 +287,6 @@ export function ChairDashboardSidebar({
     });
   }, []);
 
-  const headerText = conferenceLine.trim() || t("committeeTopicFallback");
-  const hubActive = pathname === "/chair";
   const navItems = useMemo(() => {
     const items = filterChairNavItems(
       CHAIR_NAV_ITEMS,
@@ -336,26 +332,6 @@ export function ChairDashboardSidebar({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className={cn("shrink-0 px-2 pt-3 pb-2 group-hover:px-3", labelsHidden && "px-2")}>
-        <Link
-          href="/chair"
-          title={headerText}
-          className={cn(
-            "flex w-full items-center justify-center gap-1.5 rounded-[var(--radius-pill)] bg-[var(--accent)] px-2 py-2 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95 group-hover:justify-start group-hover:gap-2 group-hover:px-4 group-hover:py-2.5",
-            labelsHidden && "mx-auto h-11 w-full rounded-[var(--radius-lg)] px-2 py-0",
-            hubActive && "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_50%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
-          )}
-        >
-          <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
-            📌
-          </span>
-          {!labelsHidden ? (
-            <span className="hidden min-w-0 truncate group-hover:inline">{headerText}</span>
-          ) : null}
-          {labelsHidden ? <span className="sr-only">{headerText}</span> : null}
-        </Link>
-      </div>
-
       <nav
         aria-label={t("ariaDashboard")}
         data-tour="tour-nav"

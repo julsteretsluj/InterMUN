@@ -12,10 +12,8 @@ import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnno
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { TourShell } from "@/components/tour/TourShell";
-import { getTranslations } from "next-intl/server";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
-  const t = await getTranslations("smtLayout");
   const supabase = await createClient();
   const {
     data: { user },
@@ -51,7 +49,6 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const conferenceLine = activeEvent
     ? [activeEvent.name, activeEvent.event_code].filter(Boolean).join(" · ")
     : null;
-  const hubLabel = activeEvent?.name?.trim() || t("hubEnterConferenceCode");
 
   return (
     <AppleAppFrame appName={appName}>
@@ -70,7 +67,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           </span>
         </Link>
         <div className="flex min-h-0 flex-1 flex-col">
-          <SmtDashboardSidebar hubLabel={hubLabel} />
+          <SmtDashboardSidebar />
         </div>
       </aside>
 
@@ -86,24 +83,6 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           profileHref="/smt/profile"
         />
         <DashboardAnnouncementPopup />
-        {activeEvent ? (
-          <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-4 py-2 text-xs text-brand-muted sm:px-6">
-            <div className="w-full">
-              {t("activeEvent")}{" "}
-              <span className="font-medium text-brand-navy">{activeEvent.name}</span> · {t("code")}{" "}
-              <span className="font-mono text-[var(--accent)]">{activeEvent.event_code}</span>
-            </div>
-          </div>
-        ) : (
-          <div className="border-b border-[var(--hairline)] bg-[var(--dashboard-card)] px-4 py-2 text-xs text-[var(--accent)] sm:px-6">
-            <div className="w-full">
-              <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
-                {t("enterConferenceCodeLink")}
-              </Link>{" "}
-              {t("loadCommitteesPrompt")}
-            </div>
-          </div>
-        )}
         <main
           data-tour="tour-main"
           className="w-full flex-1 overflow-y-auto px-4 py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-8 md:py-10 lg:pb-10"

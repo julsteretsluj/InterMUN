@@ -9199,6 +9199,11 @@ html.dark .mun-apple-btn-ghost {
   color: #f7f6f2 !important;
 }
 
+/* Beat .mun-apple-site h2 { color: var(--apple-label) } on inverted bands */
+.clicky-band :is(h1, h2, h3, h4, h5, h6) {
+  color: #f7f6f2 !important;
+}
+
 .clicky-band .clicky-on-band-soft {
   color: rgba(247, 246, 242, 0.75) !important;
 }
@@ -9213,6 +9218,10 @@ html.dark .mun-apple-btn-ghost {
 
 html.dark .clicky-band {
   background-color: #0a0b0e !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark .clicky-band :is(h1, h2, h3, h4, h5, h6) {
   color: #f5f5f7 !important;
 }
 

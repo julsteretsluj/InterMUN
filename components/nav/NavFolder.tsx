@@ -135,9 +135,13 @@ export function NavFolder({
         <div className="overflow-hidden">
           <div
             className={cn(
-              "flex flex-col gap-0.5 pb-1 pt-0.5",
-              !labelsHidden && "pl-1",
-              compact && "group-hover:pl-1"
+              "nav-folder-children flex flex-col gap-0.5 pb-1 pt-0.5",
+              /* Nest past the folder chevron so subtabs read as children */
+              labelsHidden
+                ? "pl-0"
+                : compact
+                  ? "pl-0 group-hover:pl-5"
+                  : "pl-5"
             )}
           >
             {children}

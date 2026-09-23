@@ -139,11 +139,10 @@ function SmtDockLink({
 
 const SMT_NAV_ITEMS_ORDERED = sortByKeyPriority(SMT_NAV_ITEMS, "navKey", SMT_NAV_KEY_ORDER);
 
-export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
+export function SmtDashboardSidebar() {
   const tNav = useTranslations("smtNav");
   const tDash = useTranslations("dashboardLayout");
   const pathname = usePathname();
-  const hubActive = pathname === "/smt" || pathname.startsWith("/smt/committees/");
 
   const priorityByKey = useMemo(
     () => new Map(SMT_NAV_ITEMS_ORDERED.map((item, index) => [item.navKey, index + 1])),
@@ -168,30 +167,10 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="shrink-0 px-2 pb-2 pt-3 group-hover:px-3">
-        <Link
-          href="/smt"
-          title={hubLabel}
-          className={cn(
-            "flex w-full items-center justify-center gap-1.5 rounded-[var(--radius-pill)] bg-[var(--accent)] px-2 py-2 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95 group-hover:gap-2 group-hover:px-3 group-hover:py-2.5",
-            hubActive &&
-              "ring-2 ring-[color:color-mix(in_srgb,white_45%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
-          )}
-        >
-          <span className="inline-flex size-7 shrink-0 items-center justify-center text-base leading-none" aria-hidden>
-            📌
-          </span>
-          <span className="hidden min-w-0 truncate group-hover:inline">{hubLabel}</span>
-          <span className="text-xs font-bold leading-none tracking-wide group-hover:hidden" aria-hidden>
-            {tNav("hubAbbrev")}
-          </span>
-        </Link>
-      </div>
-
       <nav
         aria-label={tNav("ariaDashboard")}
         data-tour="tour-nav"
-        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-1 [scrollbar-width:thin] group-hover:px-3"
+        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-2 [scrollbar-width:thin] group-hover:px-3"
       >
         {folderGroups.map(({ folderId, items }) => (
           <NavFolder
