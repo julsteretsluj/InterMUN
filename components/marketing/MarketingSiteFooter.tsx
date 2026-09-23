@@ -12,21 +12,21 @@ export async function MarketingSiteFooter() {
   const appName = getAppName();
 
   return (
-    <footer className="relative z-10 border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-12 text-[#f7f6f2]">
+    <footer className="clicky-band relative z-10 border-t border-white/10 py-12">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
         <div>
           <div className="flex items-center gap-2.5">
             <InterMunEmblem alt="" className="max-h-8 w-auto" surface="dark" />
             <p className="case-preserve text-lg font-bold tracking-[-0.03em]">{appName}</p>
           </div>
-          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55">{t("footer.tagline")}</p>
-          <p className="mt-6 text-xs text-white/35">
+          <p className="clicky-on-band-soft mt-2 max-w-xs text-sm leading-relaxed">{t("footer.tagline")}</p>
+          <p className="clicky-on-band-faint mt-6 text-xs">
             {t("footer.copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-[0.08em] text-white/40">{t("footer.product")}</p>
-          <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
+          <p className="clicky-on-band-faint text-xs font-semibold tracking-[0.08em]">{t("footer.product")}</p>
+          <nav className="clicky-on-band-soft mt-3 flex flex-col gap-2 text-sm">
             <Link href="/#how-it-works" className="hover:text-white">
               {t("footer.howItWorks")}
             </Link>
@@ -42,8 +42,8 @@ export async function MarketingSiteFooter() {
           </nav>
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-[0.08em] text-white/40">{t("footer.resources")}</p>
-          <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
+          <p className="clicky-on-band-faint text-xs font-semibold tracking-[0.08em]">{t("footer.resources")}</p>
+          <nav className="clicky-on-band-soft mt-3 flex flex-col gap-2 text-sm">
             <Link href="/about" className="hover:text-white">
               {t("nav.about")}
             </Link>

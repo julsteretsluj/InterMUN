@@ -250,18 +250,18 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="about" className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-24">
+      <section id="about" className="clicky-band border-t border-white/10 py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-8">
-          <p className="clicky-kaomoji text-white/50">{t("about.dreamEyebrow")}</p>
+          <p className="clicky-kaomoji clicky-on-band-faint">{t("about.dreamEyebrow")}</p>
           <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold leading-tight tracking-[-0.03em]">
             {t("about.title")}
           </h2>
-          <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-white/75">
+          <div className="clicky-on-band-soft mt-8 space-y-5 text-[1.05rem] leading-relaxed">
             <p>{t("about.paragraph1")}</p>
             <p>{t("about.paragraph2")}</p>
             <p>{t("about.paragraph3")}</p>
           </div>
-          <p className="mt-10 text-sm text-white/45">{t("about.footerLabel", { app: appName })}</p>
+          <p className="clicky-on-band-faint mt-10 text-sm">{t("about.footerLabel", { app: appName })}</p>
         </div>
       </section>
 

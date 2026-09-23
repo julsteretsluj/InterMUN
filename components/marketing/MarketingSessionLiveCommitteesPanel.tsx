@@ -14,7 +14,6 @@ import {
   difficultyTagClass,
   eslFriendlyTagClass,
   formatTagClass,
-  lightLockedTagClass,
 } from "@/lib/committee-tag-styles";
 import {
   translateCommitteeTagAgeRange,
@@ -148,7 +147,7 @@ export function MarketingSessionLiveCommitteesPanel({
             <div className="mb-3 flex items-center gap-3 sm:mb-4">
               <h2
                 id={`marketing-smt-difficulty-${section.difficulty}`}
-                className={lightLockedTagClass(difficultyTagClass(section.difficulty))}
+                className={difficultyTagClass(section.difficulty)}
               >
                 {translateCommitteeTagDifficulty(section.difficulty, tCommitteeTags)}
               </h2>
@@ -182,7 +181,7 @@ export function MarketingSessionLiveCommitteesPanel({
                     className={cn(
                       "relative rounded-[var(--clicky-radius-sm)] border bg-[var(--clicky-window)] px-3.5 py-3 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
                       selected
-                        ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,#0B1F3A)] bg-[color-mix(in_srgb,var(--clicky-blue)_6%,#ffffff)] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_25%,transparent)]"
+                        ? "border-[var(--clicky-blue)] bg-[color-mix(in_srgb,var(--clicky-blue)_16%,var(--clicky-window))] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_35%,transparent)]"
                         : "border-[var(--clicky-line)]"
                     )}
                   >
@@ -205,14 +204,14 @@ export function MarketingSessionLiveCommitteesPanel({
 
                     {tags ? (
                       <div className="mt-2 flex flex-wrap gap-1.5">
-                        <span className={lightLockedTagClass(formatTagClass(tags.format))}>
+                        <span className={formatTagClass(tags.format)}>
                           {translateCommitteeTagFormat(tags.format, tCommitteeTags)}
                         </span>
-                        <span className={lightLockedTagClass(ageRangeTagClass())}>
+                        <span className={ageRangeTagClass()}>
                           {translateCommitteeTagAgeRange(tags.ageRangeKey, tCommitteeTags)}
                         </span>
                         {tags.eslFriendly ? (
-                          <span className={lightLockedTagClass(eslFriendlyTagClass(true))}>
+                          <span className={eslFriendlyTagClass(true)}>
                             {t("eslFriendly")}
                           </span>
                         ) : null}

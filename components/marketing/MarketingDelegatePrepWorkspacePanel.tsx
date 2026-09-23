@@ -48,10 +48,10 @@ export function MarketingDelegatePrepWorkspacePanel({
               aria-selected={tab === key}
               onClick={() => setTab(key)}
               className={cn(
-                "rounded-full border px-3 py-1.5 text-xs font-semibold  tracking-wide transition",
+                "rounded-full border px-3 py-1.5 text-xs font-semibold tracking-wide transition",
                 tab === key
-                  ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)] text-[var(--clicky-ink)]"
-                  : "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))]"
+                  ? "border-transparent bg-[var(--clicky-blue)] text-white shadow-sm"
+                  : "border-[var(--clicky-line)] bg-[var(--clicky-paper)] text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))] hover:text-[var(--clicky-ink)]"
               )}
             >
               {tPrep(`prepTile.${key}`)}

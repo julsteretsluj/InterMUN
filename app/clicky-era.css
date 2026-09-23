@@ -14,12 +14,17 @@
   --clicky-coral: #ff5f57;
   --clicky-mint: #28c840;
   --clicky-window: #ffffff;
+  /* Always-dark inverted bands (about, footer, auth brand) — never remapped with --clicky-ink */
+  --clicky-band: #121212;
+  --clicky-on-band: #f7f6f2;
+  --clicky-on-band-soft: rgba(247, 246, 242, 0.75);
+  --clicky-on-band-faint: rgba(247, 246, 242, 0.45);
   --clicky-shadow: 0 1px 0 rgba(18, 18, 18, 0.04), 0 12px 40px rgba(18, 18, 18, 0.08);
   --clicky-shadow-lg: 0 2px 0 rgba(18, 18, 18, 0.03), 0 24px 64px rgba(18, 18, 18, 0.12);
   --clicky-radius-sm: 10px;
   --clicky-radius: 14px;
   --clicky-radius-lg: 22px;
-  --clicky-dot: radial-gradient(circle, rgba(18, 18, 18, 0.11) 1px, transparent 1.2px);
+  --clicky-dot: radial-gradient(circle, rgba(18, 18, 18, 0.22) 1.35px, transparent 1.6px);
 }
 
 /* —— Global canvas —— */
@@ -73,9 +78,13 @@ html.dark .mun-clicky-auth {
   --clicky-window: #1c1f28;
   --clicky-blue: #0a84ff;
   --clicky-blue-hover: #2997ff;
+  --clicky-band: #0a0b0e;
+  --clicky-on-band: #f5f5f7;
+  --clicky-on-band-soft: rgba(245, 245, 247, 0.75);
+  --clicky-on-band-faint: rgba(245, 245, 247, 0.45);
   --clicky-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.4);
   --clicky-shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
-  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1.2px);
+  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.35px, transparent 1.6px);
   --dashboard-cream: var(--clicky-paper);
   --dashboard-card: var(--clicky-window);
   --dashboard-shadow: var(--clicky-shadow);
@@ -120,6 +129,38 @@ html.dark .clicky-pill-ghost:hover {
 
 html.dark .clicky-pill-primary {
   color: #fff;
+}
+
+/* Always-dark inverted bands — beat paper-canvas / token remaps */
+.clicky-band {
+  background-color: #121212 !important;
+  background-image: none !important;
+  color: #f7f6f2 !important;
+}
+
+.clicky-band .clicky-on-band-soft {
+  color: rgba(247, 246, 242, 0.75) !important;
+}
+
+.clicky-band .clicky-on-band-faint {
+  color: rgba(247, 246, 242, 0.45) !important;
+}
+
+.clicky-band a:hover {
+  color: #ffffff !important;
+}
+
+html.dark .clicky-band {
+  background-color: #0a0b0e !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark .clicky-band .clicky-on-band-soft {
+  color: rgba(245, 245, 247, 0.75) !important;
+}
+
+html.dark .clicky-band .clicky-on-band-faint {
+  color: rgba(245, 245, 247, 0.45) !important;
 }
 
 .marketing-shell .marketing-header {
@@ -358,8 +399,8 @@ html.dark .clicky-pill-primary {
   flex-direction: column;
   justify-content: space-between;
   padding: 2.5rem 2.75rem;
-  background: var(--clicky-ink);
-  color: #f7f6f2;
+  background: var(--clicky-band);
+  color: var(--clicky-on-band);
   overflow: hidden;
 }
 
@@ -373,7 +414,7 @@ html.dark .clicky-pill-primary {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.2px);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.22) 1.35px, transparent 1.6px);
   background-size: 24px 24px;
   opacity: 0.35;
   pointer-events: none;

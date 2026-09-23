@@ -55,12 +55,12 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <MarketingFeaturesDemos role={role} />
 
-      <section className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-20">
+      <section className="clicky-band border-t border-white/10 py-16 md:py-20">
         <div className="mx-auto max-w-2xl px-4 text-center md:px-8">
           <h2 className="text-[clamp(1.6rem,3vw,2.25rem)] font-bold lowercase tracking-[-0.03em]">
             {t("ctaTitle")} {t("ctaTitleEmphasis")}
           </h2>
-          <p className="mt-4 text-white/65">{t("ctaSubtitle")}</p>
+          <p className="clicky-on-band-soft mt-4">{t("ctaSubtitle")}</p>
           <Link href={FEATURE_PAGE_CTA_HREF[role]} className="clicky-pill clicky-pill-primary mt-8 inline-flex">
             {t("ctaStart")}
           </Link>

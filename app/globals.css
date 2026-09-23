@@ -9053,9 +9053,13 @@ html.dark {
   --clicky-window: #1c1f28;
   --clicky-blue: #0a84ff;
   --clicky-blue-hover: #2997ff;
+  --clicky-band: #0a0b0e;
+  --clicky-on-band: #f5f5f7;
+  --clicky-on-band-soft: rgba(245, 245, 247, 0.75);
+  --clicky-on-band-faint: rgba(245, 245, 247, 0.45);
   --clicky-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.4);
   --clicky-shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
-  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1.2px);
+  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.35px, transparent 1.6px);
   --dashboard-cream: var(--clicky-paper);
   --dashboard-card: var(--clicky-window);
   --dashboard-shadow: var(--clicky-shadow);
@@ -9168,6 +9172,38 @@ html.dark .mun-apple-btn-ghost {
   background: var(--clicky-window) !important;
   color: var(--clicky-ink) !important;
   border-color: var(--clicky-line) !important;
+}
+
+/* Inverted bands must stay dark in both themes (about / footer / feature CTA) */
+.clicky-band {
+  background-color: #121212 !important;
+  background-image: none !important;
+  color: #f7f6f2 !important;
+}
+
+.clicky-band .clicky-on-band-soft {
+  color: rgba(247, 246, 242, 0.75) !important;
+}
+
+.clicky-band .clicky-on-band-faint {
+  color: rgba(247, 246, 242, 0.45) !important;
+}
+
+.clicky-band a:hover {
+  color: #ffffff !important;
+}
+
+html.dark .clicky-band {
+  background-color: #0a0b0e !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark .clicky-band .clicky-on-band-soft {
+  color: rgba(245, 245, 247, 0.75) !important;
+}
+
+html.dark .clicky-band .clicky-on-band-faint {
+  color: rgba(245, 245, 247, 0.45) !important;
 }
 
 
