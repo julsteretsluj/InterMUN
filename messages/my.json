@@ -17,10 +17,10 @@
     "secretaryGeneral": "အထွေထွေအတွင်းရေးမှူး",
     "returnToProfile": "ပရိုဖိုင်သို့ ပြန်သွားရန်",
     "useDifferentAccount": "မတူညီသောအကောင့်ကိုသုံးပါ။",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "အကြံပြုထားသော အသုံးပြုမှုဖြင့် နံပါတ်တပ်ထားသည် (1 = ဤနေရာတွင် စတင်ပါ)။ lib/nav-priority-order.ts တွင် အမှာစာပြောင်းပါ။",
+    "chooseFile": "File ကို ရွေးပါ။",
+    "noFileChosen": "ဖိုင်ကို ရွေးထားခြင်းမရှိပါ။",
+    "clear": "ရှင်းပါတယ်။",
     "reload": "ပြန်တင်ပါ။"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "မှတ်စုများ",
     "committee": "ကော်မတီ",
     "history": "သမိုင်း",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "သတင်းခန်း",
+    "pressCorps": "စာနယ်ဇင်းတပ်ဖွဲ့",
+    "milestones": "မှတ်တိုင်များ",
     "voting": "မဲပေးခြင်း။",
     "guides": "လမ်းညွှန်များ",
     "documents": "စာရွက်စာတမ်းများ",
@@ -601,7 +601,7 @@
     "ideas": "စိတ်ကူးများ",
     "sources": "အရင်းအမြစ်များ",
     "resolutions": "ဆုံးဖြတ်ချက်များ",
-    "amendments": "Amendments",
+    "amendments": "ပြင်ဆင်ချက်",
     "speeches": "မိန့်ခွန်းများ",
     "running": "ပြေးသည်။",
     "report": "သတင်းပို့တယ်။",
@@ -617,11 +617,11 @@
     "library": "စာကြည့်တိုက်",
     "mainNavigationAria": "ပင်မလမ်းကြောင်း",
     "crisis": "အကျပ်အတည်း",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "ညွှန်ကြားချက်များ",
+    "fwcMovement": "လှုပ်ရှားမှု",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "နောက်ခန်း",
+    "fwcEvidence": "အထောက်အထား"
   },
   "dashboardLayout": {
     "helpCenter": "အကူအညီစင်တာ",
@@ -668,7 +668,7 @@
     "selectRoleAria": "အခန်းကဏ္ဍကို ရွေးချယ်ပါ။",
     "nextRoleAria": "နောက်အခန်းကဏ္ဍ",
     "authConnectError": "အထောက်အထားစိစစ်ခြင်းသို့ ချိတ်ဆက်၍မရပါ (Supabase env vars ကိုစစ်ဆေးပါ)။",
-    "backToHome": "Back to home"
+    "backToHome": "အိမ်ပြန်"
   },
   "googleDocs": {
     "openNewDocHelp": "တဘ်အသစ်တွင် Google Docs ကိုဖွင့်ပါ။ အချက်ပြပါက ဝင်ရောက်ပါ၊ ထို့နောက် လိပ်စာဘားမှ စာရွက်စာတမ်း URL ကို ကူးယူပါ။",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "အကျပ်အတည်းလျှော",
     "resolutions": "ဆုံးဖြတ်ချက်များ",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "ပြင်ဆင်ချက်",
+    "pressCorps": "စာနယ်ဇင်းတပ်ဖွဲ့",
     "allocationPasswords": "စကားဝှက်များခွဲဝေခြင်း။",
     "sources": "အရင်းအမြစ်များ",
     "notes": "မှတ်စုများ",
-    "notesModeration": "Note review",
+    "notesModeration": "မှတ်ချက်သုံးသပ်ချက်",
     "rollCallTracker": "✅ Roll Call Tracker",
     "runningNotes": "အပြေးမှတ်စုများ",
     "awardsSmt": "ဆုများ",
@@ -855,10 +855,10 @@
     "delegateSchedule": "ညီလာခံအချိန်ဇယား",
     "chairSchedule": "ညီလာခံအချိန်ဇယား",
     "advisorSchedule": "ညီလာခံအချိန်ဇယား",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "ကိုယ်စားလှယ်ပါနော်။",
+    "advisorDelegateDocuments": "ကိုယ်စားလှယ်စာရွက်စာတမ်းများ",
+    "advisorDelegateVoting": "ကိုယ်စားလှယ်မဲပေးခြင်း",
+    "advisorDelegateNotes": "ကိုယ်စားလှယ်မှတ်စုများ",
     "voting": "မဲပေးခြင်း။",
     "digitalRoom": "ဒစ်ဂျစ်တယ်အခန်း",
     "committeeSession": "ကော်မတီအစည်းအဝေး",
@@ -867,12 +867,12 @@
     "follow": "လိုက်နာပါ။",
     "guides": "လမ်းညွှန်များ",
     "committeeCodes": "ကော်မတီကုဒ်များ (ဥက္ကဌ / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "ကဏ္ဍတိုးတက်မှု",
     "officialUnLinks": "တရားဝင် ကုလသမဂ္ဂ လင့်ခ်များ",
     "committeeRoom": "ကော်မတီအခန်း",
     "history": "သမိုင်း",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "သတင်းခန်း",
+    "milestones": "မှတ်တိုင်များ",
     "speeches": "မိန့်ခွန်းများ",
     "chairRoom": "ကုလားထိုင်အခန်း",
     "ideas": "စိတ်ကူးများ",
@@ -891,7 +891,7 @@
     "smtProfile": "ကိုယ်ရေးအကျဉ်း",
     "crisis": "အကျပ်အတည်း",
     "smtDelegates": "ကိုယ်စားလှယ်တွေ",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ အဖွင့်မိန့်ခွန်း"
   },
   "setupPage": {
     "title": "Supabase ကို စီစဉ်မထားပါ။",
@@ -1538,13 +1538,13 @@
       "memberStates": "ကုလသမဂ္ဂအဖွဲ့ဝင်နိုင်ငံများ",
       "unSystem": "ကုလသမဂ္ဂစနစ် (တည်ထောင်သူများနှင့် အဖွဲ့ဝင်များ)",
       "history": "ကုလသမဂ္ဂသမိုင်း",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "SEAMUN ဝဘ်ဆိုဒ်",
+      "seamunCommittee": "SEAMUN ကော်မတီပေါ်တယ်။",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "တက်ဘ်အသစ်တစ်ခုတွင် ဖွင့်သည်။",
+    "backToCategories": "အမျိုးအစားအားလုံး",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "ညီလာခံဝဘ်ဆိုဒ်နှင့် ကော်မတီပေါ်တယ်",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Press Corps ခွဲဝေမှုတစ်ခုစီအတွက် သတင်းစားပွဲသုံးခု (ကမ္ဘာ၊ ကျန်းမာရေးနှင့် အင်္ဂါရပ်များ)။"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "တရားဝင် SEAMUN ညီလာခံဆိုက် (အချိန်ဇယားများ၊ အချက်အလက်များနှင့် ကြေငြာချက်များ)။",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "ဆက်သွယ်ရန်",
       "signIn": "ဆိုင်းအင်လုပ်ခြင်း",
       "getStarted": "စတင်လိုက်ပါ။",
-      "features": "Features",
+      "features": "အင်္ဂါရပ်များ",
       "about": "အကြောင်း",
       "menu": "မီနူး",
       "closeMenu": "ပိတ်လိုက်",
@@ -4650,7 +4650,7 @@
       "chip3": "ကြားခံဘာသာစကား 31 ခု",
       "previewLabel": "ဆက်ရှင်သွားတော့",
       "sticky1": "တစ်ထပ်တွင် ခေါ်ဆိုမှု၊ အချိန်တိုင်းကိရိယာနှင့် လှုပ်ရှားမှုများ။",
-      "sticky2": "ကစားကွက်များကို မုန်းတီးသော ထိုင်ခုံများအတွက် တည်ဆောက်ထားသည်။",
+      "sticky2": "ဘရောက်ဇာ တဘ်များ လှည့်ပတ်သုံးရသည်ကို မုန်းသော ဥက္ကဋ္ဌများအတွက်။",
       "floorEyebrow": "ကြမ်းပြင်ပေါ်မှာ"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "(UTC) တွင် တင်သွင်းခဲ့သည်",
         "showOptionalDetails": "ပွဲအသေးစိတ်များ ထည့်ပါ (ချန်လှပ်ထားနိုင်သည်)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "စတင်ရန် အဆင်သင့်ဖြစ်ပြီလား? အတွင်းရေးမှူးအဖွဲ့ အပြည့်အစုံ မှတ်ပုံတင်ခြင်းကို စတင်ပါ။",
+      "registerSecretariatLink": "သင့်ညီလာခံကို မှတ်ပုံတင်ပါ"
     },
     "footer": {
       "ctaTitle": "သင်၏နောက်ကော်မတီကိုယူပါ။",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "လာခဲ့ပါ။",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "ပြင်ဆင်မှု ထည့်သွင်းပြီး သိမ်းဆည်းပါ",
+      "prepWorkspaceHint": "ကိုယ်စားလှယ် ဒက်ရှ်ဘုတ်နှင့် တူညီသော ရေး-သိမ်း စီးဆင်းမှုများ — စာရွက်စာတမ်းများ၊ ပုဒ်မ အကြံပြုချက်များနှင့် မှတ်စုများ။"
     },
     "exploreChairs": "Dais လုပ်ဆောင်ချက်အားလုံးကို စူးစမ်းပါ။",
     "exploreDelegates": "ကိုယ်စားလှယ်၏အင်္ဂါရပ်အားလုံးကို စူးစမ်းပါ။",
@@ -4854,7 +4854,7 @@
         "subtitle": "Dais လိုအပ်သောကိရိယာတိုင်း - အပိတ်ဆုများမှတဆင့်ခေါ်ဆိုသည် - စစ်မှန်သောကော်မတီစည်းချက်အတွက်တည်ဆောက်ထားသော session workspace တစ်ခုတွင်။",
         "intro": "အောက်ပါကဏ္ဍတစ်ခုစီသည် တိုက်ရိုက်သရုပ်ပြထားသည်။ InterMUN သည် ကြမ်းပြင်လုပ်ထုံးလုပ်နည်းကို မည်သို့မြင်နိုင်သည်ကို ကြည့်ရှုရန် တက်ရောက်မှုခလုတ်များ၊ လှုပ်ရှားမှုများကို ပြန်စီရန်၊ အချိန်တိုင်းမာများနှင့် ကိုယ်စားလှယ်များကို အမှတ်ပေးလိုက်ပါ။",
         "chip1": "အပြန်အလှန်အကျိုးပြုသောသရုပ်ပြ 6 ခု",
-        "chip2": "Quorum-aware roll call",
+        "chip2": "ကိုရမ် ထည့်သွင်းစဉ်းစားသော နာမည်ခေါ်စာရင်း",
         "chip3": "လှုပ်ရှားမှုဦးစားပေးနှင့် မဲပေးခြင်း။",
         "ctaTitle": "ထိုင်ခုံအဆင်သင့်",
         "ctaTitleEmphasis": "မင်းရဲ့ နောက်ဆက်ရှင်လား?",
@@ -4863,7 +4863,7 @@
         "ctaBack": "အိမ်ပြန်",
         "relatedNavLabel": "အခြားအခန်းကဏ္ဍခရီးစဉ်များ",
         "related": {
-          "chairs": "Dais",
+          "chairs": "ဒိုင်များ",
           "delegates": "ကိုယ်စားလှယ်တွေ",
           "secretariat": "အတွင်းဝန်ရုံး"
         },
@@ -4948,7 +4948,7 @@
         "ctaBack": "အိမ်ပြန်",
         "relatedNavLabel": "အခြားအခန်းကဏ္ဍခရီးစဉ်များ",
         "related": {
-          "chairs": "Dais",
+          "chairs": "ဒိုင်များ",
           "delegates": "ကိုယ်စားလှယ်တွေ",
           "secretariat": "အတွင်းဝန်ရုံး"
         },
@@ -5023,7 +5023,7 @@
         "ctaBack": "အိမ်ပြန်",
         "relatedNavLabel": "အခြားအခန်းကဏ္ဍခရီးစဉ်များ",
         "related": {
-          "chairs": "Dais",
+          "chairs": "ဒိုင်များ",
           "delegates": "ကိုယ်စားလှယ်တွေ",
           "secretariat": "အတွင်းဝန်ရုံး"
         },
@@ -5111,7 +5111,7 @@
         "voteMeta": "{yes}မျက်နှာသာ · {no}ဆန့်ကျင်ဘက် · လိုအပ်ချက်များ {needed} ၏ {total}",
         "inFavor": "ထောက်ခံပါတယ်။",
         "against": "ဆန့်ကျင်ဘက်",
-        "timerLabel": "Session timer",
+        "timerLabel": "ဆက်ရှင်အချိန်တိုင်း",
         "timerGsl": "GSL 1:30",
         "timerMod": "Mod caucus 10m",
         "timerUnmod": "Unmod 5 မီတာ",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "ကျွန်ုပ်တို့၏ အရင်းအမြစ်",
+      "title": "စတင်ခဲ့သောနေရာ",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "ဘန်ကောက်၊ ထိုင်းနိုင်ငံ"
     },
     "faq": {
       "title": "ခဏခဏမေးတယ်။",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "စာမျက်နှာကို ရှာမတွေ့ပါ။",
+    "description": "သင်ရှာဖွေနေသော စာမျက်နှာသည် မတည်ရှိပါ သို့မဟုတ် ရွှေ့ထားသည်။",
+    "backToHome": "အိမ်ပြန်"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "အသွင်အပြင်နှင့် ဝင်ရောက်နိုင်မှု ဆက်တင်များကို ဖွင့်ပါ။",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "အသွင်အပြင်နှင့် အသုံးပြုနိုင်မှု ဆက်တင်များ ဖွင့်ရန်",
+    "accountAria": "အကောင့်နှင့် ဦးစားပေးများ",
+    "profile": "ပရိုဖိုင်",
     "appearanceAndAccess": "အသုံးပြုနိုင်မှုနှင့် အရောင်"
   }
 }

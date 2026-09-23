@@ -17,10 +17,10 @@
     "secretaryGeneral": "Tổng thư ký",
     "returnToProfile": "Quay lại hồ sơ",
     "useDifferentAccount": "Sử dụng một tài khoản khác",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Đánh số theo khuyến nghị sử dụng (1 = bắt đầu tại đây). Thay đổi thứ tự trong lib/nav-priority-order.ts.",
+    "chooseFile": "Chọn tệp",
+    "noFileChosen": "Không có tập tin nào được chọn",
+    "clear": "Thông thoáng",
     "reload": "Tải lại"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Ghi chú",
     "committee": "Ủy ban",
     "history": "Lịch sử",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Phòng tin tức",
+    "pressCorps": "Quân đoàn báo chí",
+    "milestones": "Các cột mốc quan trọng",
     "voting": "Bỏ phiếu",
     "guides": "Hướng dẫn",
     "documents": "Tài liệu",
@@ -601,7 +601,7 @@
     "ideas": "Ý tưởng",
     "sources": "Nguồn",
     "resolutions": "Nghị quyết",
-    "amendments": "Amendments",
+    "amendments": "Sửa đổi",
     "speeches": "Bài phát biểu",
     "running": "Đang chạy",
     "report": "Báo cáo",
@@ -617,11 +617,11 @@
     "library": "Thư viện",
     "mainNavigationAria": "Điều hướng chính",
     "crisis": "Khủng hoảng",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Chỉ thị",
+    "fwcMovement": "Sự chuyển động",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "phòng sau",
+    "fwcEvidence": "Chứng cớ"
   },
   "dashboardLayout": {
     "helpCenter": "Trung tâm trợ giúp",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Chọn vai trò",
     "nextRoleAria": "Vai trò tiếp theo",
     "authConnectError": "Không thể kết nối với xác thực (kiểm tra Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Trở về nhà"
   },
   "googleDocs": {
     "openNewDocHelp": "Mở Google Tài liệu trong tab mới. Đăng nhập nếu được nhắc, sau đó sao chép URL tài liệu từ thanh địa chỉ.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Trượt khủng hoảng",
     "resolutions": "Nghị quyết",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Sửa đổi",
+    "pressCorps": "Quân đoàn báo chí",
     "allocationPasswords": "Mật khẩu phân bổ",
     "sources": "Nguồn",
     "notes": "Ghi chú",
-    "notesModeration": "Note review",
+    "notesModeration": "Ghi chú xem xét",
     "rollCallTracker": "✅ Trình theo dõi cuộc gọi cuộn",
     "runningNotes": "Ghi chú đang chạy",
     "awardsSmt": "Giải thưởng",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Lịch hội nghị",
     "chairSchedule": "Lịch hội nghị",
     "advisorSchedule": "Lịch hội nghị",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Hồ sơ đại biểu",
+    "advisorDelegateDocuments": "Văn bản ủy quyền",
+    "advisorDelegateVoting": "Đại biểu biểu quyết",
+    "advisorDelegateNotes": "Ghi chú đại biểu",
     "voting": "Bỏ phiếu",
     "digitalRoom": "Phòng kỹ thuật số",
     "committeeSession": "Phiên họp ủy ban",
@@ -867,12 +867,12 @@
     "follow": "Theo",
     "guides": "Hướng dẫn",
     "committeeCodes": "Mã ủy ban (chủ tịch / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Tiến trình phiên",
     "officialUnLinks": "Liên kết chính thức của Liên Hợp Quốc",
     "committeeRoom": "Phòng ủy ban",
     "history": "Lịch sử",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Phòng tin tức",
+    "milestones": "Các cột mốc quan trọng",
     "speeches": "Bài phát biểu",
     "chairRoom": "Phòng ghế",
     "ideas": "Ý tưởng",
@@ -891,7 +891,7 @@
     "smtProfile": "Hồ sơ",
     "crisis": "Khủng hoảng",
     "smtDelegates": "Đại biểu",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Phát biểu khai mạc"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -1538,13 +1538,13 @@
       "memberStates": "Các quốc gia thành viên Liên hợp quốc",
       "unSystem": "Hệ thống LHQ (người sáng lập và thành viên)",
       "history": "Lịch sử LHQ",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "Trang web SEAMUN",
+      "seamunCommittee": "Cổng thông tin ủy ban SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Mở trong một tab mới.",
+    "backToCategories": "Tất cả danh mục",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Trang web hội nghị và cổng thông tin ủy ban",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Ba bàn tin tức cho mỗi phân bổ của Press Corps (thế giới, sức khỏe và tính năng)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Trang web hội nghị SEAMUN chính thức (lịch trình, thông tin và thông báo).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Liên hệ",
       "signIn": "Đăng nhập",
       "getStarted": "Bắt đầu",
-      "features": "Features",
+      "features": "Tính năng",
       "about": "Về",
       "menu": "Thực đơn",
       "closeMenu": "Đóng",
@@ -4650,7 +4650,7 @@
       "chip3": "31 ngôn ngữ giao diện",
       "previewLabel": "Sàn phiên",
       "sticky1": "Cuộc gọi điểm danh, bộ hẹn giờ và chuyển động trong một tầng.",
-      "sticky2": "Được thiết kế dành cho những chiếc ghế ghét trò chơi tung hứng.",
+      "sticky2": "Dành cho các chủ tịch ghét phải chuyển qua lại giữa các tab trình duyệt.",
       "floorEyebrow": "Trên sàn"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Đã gửi vào (UTC)",
         "showOptionalDetails": "Thêm chi tiết sự kiện (tùy chọn)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Sẵn sàng bắt đầu? Khởi động đăng ký ban thư ký đầy đủ.",
+      "registerSecretariatLink": "Đăng ký hội nghị của bạn"
     },
     "footer": {
       "ctaTitle": "Mang theo ủy ban tiếp theo của bạn",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Vắng mặt",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Thêm và lưu công việc chuẩn bị",
+      "prepWorkspaceHint": "Cùng quy trình soạn và lưu như bảng điều khiển đại biểu — tài liệu, gợi ý điều khoản và ghi chú."
     },
     "exploreChairs": "Khám phá tất cả các tính năng của dais",
     "exploreDelegates": "Khám phá tất cả các tính năng của đại biểu",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Nguồn cội của chúng tôi",
+      "title": "Nơi mọi thứ bắt đầu",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "Bangkok, Thái Lan"
     },
     "faq": {
       "title": "Thường xuyên hỏi",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Điều khoản dịch vụ | {app}",
       "metaDescription": "Các điều khoản quản lý việc truy cập và sử dụng {app}.",
-      "eyebrow": "Hợp pháp",
+      "eyebrow": "Pháp lý",
       "title": "Điều khoản dịch vụ",
       "intro": "Các điều khoản này chi phối việc bạn truy cập và sử dụng {app}. Bằng cách sử dụng dịch vụ, bạn đồng ý với các điều khoản này.",
       "updated": "25 tháng 7 năm 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Chính sách bảo mật | {app}",
       "metaDescription": "Cách {app} thu thập, sử dụng, lưu trữ và bảo vệ thông tin cá nhân.",
-      "eyebrow": "Hợp pháp",
+      "eyebrow": "Pháp lý",
       "title": "Chính sách bảo mật",
       "intro": "Chính sách này giải thích cách {app} xử lý thông tin cá nhân khi bạn sử dụng trang web, ứng dụng và dịch vụ hội nghị của chúng tôi.",
       "updated": "25 tháng 7 năm 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn đang tìm kiếm không tồn tại hoặc đã di chuyển.",
+    "backToHome": "Trở về nhà"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "Mở cài đặt giao diện và trợ năng",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "Khả năng tiếp cận và màu sắc"
+    "accountAria": "Tài khoản và tùy chọn",
+    "profile": "Hồ sơ",
+    "appearanceAndAccess": "Trợ năng và màu sắc"
   }
 }

@@ -17,10 +17,10 @@
     "secretaryGeneral": "秘书长",
     "returnToProfile": "返回个人资料",
     "useDifferentAccount": "使用不同的帐户",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "按推荐用途编号（1 = 从此处开始）。 更改 lib/nav-priority-order.ts 中的顺序。",
+    "chooseFile": "选择文件",
+    "noFileChosen": "未选择文件",
+    "clear": "清除",
     "reload": "重新加载"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "笔记",
     "committee": "委员会",
     "history": "历史",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "编辑部",
+    "pressCorps": "记者团",
+    "milestones": "里程碑",
     "voting": "表决",
     "guides": "指南",
     "documents": "文件",
@@ -601,7 +601,7 @@
     "ideas": "想法",
     "sources": "来源",
     "resolutions": "决议",
-    "amendments": "Amendments",
+    "amendments": "修正案",
     "speeches": "演讲",
     "running": "跑步",
     "report": "报告",
@@ -617,11 +617,11 @@
     "library": "图书馆",
     "mainNavigationAria": "主导航",
     "crisis": "危机",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "指令",
+    "fwcMovement": "移动",
+    "fwcMap": "霍金斯",
+    "fwcBackroom": "幕后室",
+    "fwcEvidence": "证据"
   },
   "dashboardLayout": {
     "helpCenter": "帮助中心",
@@ -668,7 +668,7 @@
     "selectRoleAria": "选择角色",
     "nextRoleAria": "下一个角色",
     "authConnectError": "无法连接到身份验证（检查 Supabase 环境变量）。",
-    "backToHome": "Back to home"
+    "backToHome": "回到家"
   },
   "googleDocs": {
     "openNewDocHelp": "在新选项卡中打开 Google 文档。 如果出现提示，请登录，然后从地址栏中复制文档 URL。",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "危机幻灯片",
     "resolutions": "决议",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "修正案",
+    "pressCorps": "记者团",
     "allocationPasswords": "分配密码",
     "sources": "来源",
     "notes": "笔记",
-    "notesModeration": "Note review",
+    "notesModeration": "笔记回顾",
     "rollCallTracker": "✅ 点名追踪器",
     "runningNotes": "跑步笔记",
     "awardsSmt": "奖项",
@@ -855,10 +855,10 @@
     "delegateSchedule": "会议日程",
     "chairSchedule": "会议日程",
     "advisorSchedule": "会议日程",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "代表简介",
+    "advisorDelegateDocuments": "代表文件",
+    "advisorDelegateVoting": "代表投票",
+    "advisorDelegateNotes": "代表笔记",
     "voting": "表决",
     "digitalRoom": "数字室",
     "committeeSession": "委员会会议",
@@ -867,12 +867,12 @@
     "follow": "跟随",
     "guides": "指南",
     "committeeCodes": "委员会代码（主席/SMT）",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "会议进度",
     "officialUnLinks": "联合国官方链接",
     "committeeRoom": "委员会室",
     "history": "历史",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "编辑部",
+    "milestones": "里程碑",
     "speeches": "演讲",
     "chairRoom": "椅房",
     "ideas": "想法",
@@ -891,7 +891,7 @@
     "smtProfile": "轮廓",
     "crisis": "危机",
     "smtDelegates": "代表们",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️开幕致辞"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1538,13 +1538,13 @@
       "memberStates": "联合国会员国",
       "unSystem": "联合国系统（创始人和成员）",
       "history": "联合国历史",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "西盟网站",
+      "seamunCommittee": "SEAMUN委员会门户网站",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "在新选项卡中打开。",
+    "backToCategories": "所有类别",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "会议网站和委员会门户",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "每个新闻团分配三个新闻台（世界、健康和专题）。"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "SEAMUN 会议官方网站（日程、信息和公告）。",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "接触",
       "signIn": "登入",
       "getStarted": "开始使用",
-      "features": "Features",
+      "features": "功能",
       "about": "关于",
       "menu": "菜单",
       "closeMenu": "关闭",
-      "moreOnTheFloor": "更多内容在地板上"
+      "moreOnTheFloor": "会场上查看更多"
     },
     "playOrbAnimation": "播放 InterMUN 动画",
     "hero": {
       "eyebrow": "房间层软件·模拟联合国",
       "title": "一个选项卡用于",
       "titleEmphasis": "整个委员会。",
-      "subtitle": "会议软件在木槌需要之前不会造成影响。",
-      "ctaStart": "举办活动",
-      "ctaJoin": "加入您的会议",
+      "subtitle": "在需要敲槌之前尽量不打扰你的会议软件。",
+      "ctaStart": "主办活动",
+      "ctaJoin": "加入你的会议",
       "chip1": "点名 → 法定人数",
       "chip2": "GSL 和正式动议",
       "chip3": "31 种界面语言",
       "previewLabel": "会议楼层",
-      "sticky1": "点名、计时器和动作都集中在一层楼。",
-      "sticky2": "专为那些讨厌摆弄拉环的椅子而设计。",
-      "floorEyebrow": "在地板上"
+      "sticky1": "点名、计时与动议，尽在同一会场。",
+      "sticky2": "为讨厌在浏览器标签间来回切换的主席而设计。",
+      "floorEyebrow": "会场上"
     },
     "steps": {
       "eyebrow": "闸门流量",
@@ -4728,7 +4728,7 @@
       "paragraph1": "InterMUN 是一个浏览器工作区，用协调的委员会工具取代了通常的电子表格、群聊和打印标语牌的组合。",
       "paragraph2": "主席获得反映会议实际展开方式的程序控制。 代表们在会场旁边进行结构化准备。 秘书处保持整个活动的可见性，而不是盘旋在每项动议上。",
       "paragraph3": "无论您是管理一个房间还是整个周末的会议，InterMUN 都能让主席、代表和工作人员从开幕点名到闭幕式保持一致。",
-      "dreamEyebrow": "梦想",
+      "dreamEyebrow": "愿景",
       "footerLabel": "关于 {app}"
     },
     "contact": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "提交时间（UTC）",
         "showOptionalDetails": "添加活动详细信息（可选）"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "准备好了吗？开始完整的秘书处注册。",
+      "registerSecretariatLink": "注册您的会议"
     },
     "footer": {
       "ctaTitle": "带上你的下一个委员会",
@@ -4797,10 +4797,10 @@
       "ctaJoin": "登入",
       "copyright": "© {year} InterMUN",
       "contact": "接触",
-      "tagline": "会议软件在木槌需要之前不会造成影响。",
+      "tagline": "在需要敲槌之前尽量不打扰你的会议软件。",
       "product": "产品",
       "resources": "资源",
-      "howItWorks": "它是如何运作的",
+      "howItWorks": "如何运作",
       "privacy": "隐私",
       "terms": "条款"
     },
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "压力+电压",
       "statusPresent": "P",
       "statusAbsent": "缺席的",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "添加并保存准备工作",
+      "prepWorkspaceHint": "与代表面板相同的撰写与保存流程 — 文件、条款建议与笔记。"
     },
     "exploreChairs": "探索讲台的所有功能",
     "exploreDelegates": "探索所有代表功能",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "我们的根源",
+      "title": "一切的开始",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "泰国曼谷"
     },
     "faq": {
       "title": "常见问题",
-      "subtitle": "主席和秘书处在会议周末之前通常会问什么。",
-      "q1": "这是给谁的？",
-      "a1": "代表、主席、顾问和秘书处——一个具有角色感知工具的会议工作空间。",
+      "subtitle": "主席与秘书处在会议周末前常问的问题。",
+      "q1": "这是给谁用的？",
+      "a1": "代表、主席、顾问与秘书处 — 一个按角色提供工具的会议工作区。",
       "q2": "我们可以以不同的方式管理记者团和GA吗？",
       "a2": "是的。 程序简介使记者团的 RoP 范围仅限于该会议厅，而无需改变其他委员会。",
       "q3": "人们如何进入一个房间？",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "服务条款 | {app}",
       "metaDescription": "管理{app}的访问和使用的条款。",
-      "eyebrow": "合法的",
+      "eyebrow": "法律信息",
       "title": "服务条款",
       "intro": "这些条款管辖您对 {app} 的访问和使用。 使用该服务即表示您同意这些条款。",
       "updated": "2026 年 7 月 25 日",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "隐私政策 | {app}",
       "metaDescription": "{app}如何收集、使用、存储和保护个人信息。",
-      "eyebrow": "合法的",
+      "eyebrow": "法律信息",
       "title": "隐私政策",
       "intro": "本政策解释了当您使用我们的网站、应用程序和会议服务时{app}如何处理个人信息。",
       "updated": "2026 年 7 月 25 日",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "找不到页面",
+    "description": "您要查找的页面不存在或已移动。",
+    "backToHome": "回到家"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "打开外观和辅助功能设置",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "辅助功能和颜色"
+    "openAria": "打开外观与无访问性设置",
+    "accountAria": "账户与偏好",
+    "profile": "个人资料",
+    "appearanceAndAccess": "无障碍与颜色"
   }
 }

@@ -17,10 +17,10 @@
     "secretaryGeneral": "Sekretaris Jenderal",
     "returnToProfile": "Kembali ke profil",
     "useDifferentAccount": "Gunakan akun lain",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Diberi nomor berdasarkan rekomendasi penggunaan (1 = mulai di sini). Ubah urutan di lib/nav-priority-order.ts.",
+    "chooseFile": "Pilih File",
+    "noFileChosen": "Tidak ada file yang dipilih",
+    "clear": "Jernih",
     "reload": "Muat ulang"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Catatan",
     "committee": "Komite",
     "history": "Sejarah",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Ruang wartawan",
+    "pressCorps": "Korps wartawan",
+    "milestones": "Tonggak sejarah",
     "voting": "Pemungutan suara",
     "guides": "Panduan",
     "documents": "Dokumen",
@@ -601,7 +601,7 @@
     "ideas": "Ide",
     "sources": "Sumber",
     "resolutions": "Resolusi",
-    "amendments": "Amendments",
+    "amendments": "Amandemen",
     "speeches": "Pidato",
     "running": "Berlari",
     "report": "Laporan",
@@ -617,11 +617,11 @@
     "library": "Perpustakaan",
     "mainNavigationAria": "Navigasi utama",
     "crisis": "Krisis",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Arahan",
+    "fwcMovement": "Pergerakan",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Ruang belakang",
+    "fwcEvidence": "Bukti"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Pilih peran",
     "nextRoleAria": "Peran selanjutnya",
     "authConnectError": "Tidak dapat terhubung ke otentikasi (periksa Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Kembali ke rumah"
   },
   "googleDocs": {
     "openNewDocHelp": "Membuka Google Dokumen di tab baru. Masuk jika diminta, lalu salin URL dokumen dari bilah alamat.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Krisis meluncur",
     "resolutions": "Resolusi",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Amandemen",
+    "pressCorps": "Korps wartawan",
     "allocationPasswords": "Kata sandi alokasi",
     "sources": "Sumber",
     "notes": "Catatan",
-    "notesModeration": "Note review",
+    "notesModeration": "Ulasan catatan",
     "rollCallTracker": "✅ Pelacak Panggilan Gulung",
     "runningNotes": "Catatan Berjalan",
     "awardsSmt": "Penghargaan",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Jadwal konferensi",
     "chairSchedule": "Jadwal konferensi",
     "advisorSchedule": "Jadwal konferensi",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Profil delegasi",
+    "advisorDelegateDocuments": "Delegasikan dokumen",
+    "advisorDelegateVoting": "Delegasikan pemungutan suara",
+    "advisorDelegateNotes": "Catatan delegasi",
     "voting": "Pemungutan suara",
     "digitalRoom": "Ruang Digital",
     "committeeSession": "Sesi Komite",
@@ -867,12 +867,12 @@
     "follow": "Mengikuti",
     "guides": "Panduan",
     "committeeCodes": "Kode panitia (ketua/SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Kemajuan sesi",
     "officialUnLinks": "Tautan resmi PBB",
     "committeeRoom": "Ruang panitia",
     "history": "Sejarah",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Ruang wartawan",
+    "milestones": "Tonggak sejarah",
     "speeches": "Pidato",
     "chairRoom": "Ruang kursi",
     "ideas": "Ide",
@@ -891,7 +891,7 @@
     "smtProfile": "Profil",
     "crisis": "Krisis",
     "smtDelegates": "Delegasi",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Pidato pembukaan"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasi",
@@ -1538,13 +1538,13 @@
       "memberStates": "Negara-negara Anggota PBB",
       "unSystem": "Sistem PBB (pendiri & anggota)",
       "history": "Sejarah PBB",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "situs SEAMUN",
+      "seamunCommittee": "Portal panitia SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Terbuka di tab baru.",
+    "backToCategories": "Semua kategori",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Situs web konferensi dan portal komite",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Tiga meja berita untuk setiap alokasi Korps Pers (dunia, kesehatan, dan fitur)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Situs resmi konferensi SEAMUN (jadwal, info, dan pengumuman).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Kontak",
       "signIn": "Masuk",
       "getStarted": "Mulailah",
-      "features": "Features",
+      "features": "Fitur",
       "about": "Tentang",
       "menu": "Menu",
       "closeMenu": "Menutup",
@@ -4650,7 +4650,7 @@
       "chip3": "31 bahasa antarmuka",
       "previewLabel": "Lantai sesi",
       "sticky1": "Roll call, pengatur waktu, dan gerakan dalam satu lantai.",
-      "sticky2": "Dibuat untuk kursi yang tidak menyukai tab juggling.",
+      "sticky2": "Dibuat untuk ketua yang benci bolak-balik antar tab browser.",
       "floorEyebrow": "Di lantai"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Dikirim pada (UTC)",
         "showOptionalDetails": "Tambahkan detail acara (opsional)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Siap memulai? Mulai pendaftaran sekretariat lengkap.",
+      "registerSecretariatLink": "Daftarkan konferensi Anda"
     },
     "footer": {
       "ctaTitle": "Bawalah komite Anda berikutnya",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Absen",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Tambah dan simpan pekerjaan persiapan",
+      "prepWorkspaceHint": "Alur tulis-dan-simpan yang sama seperti dasbor delegasi — dokumen, saran klausul, dan catatan."
     },
     "exploreChairs": "Jelajahi semua fitur dais",
     "exploreDelegates": "Jelajahi semua fitur delegasi",
@@ -5166,8 +5166,8 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Akar kami",
+      "title": "Di mana semuanya dimulai",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Ketentuan Layanan | {app}",
       "metaDescription": "Ketentuan yang mengatur akses dan penggunaan {app}.",
-      "eyebrow": "Legal",
+      "eyebrow": "Hukum",
       "title": "Ketentuan Layanan",
       "intro": "Ketentuan ini mengatur akses Anda dan penggunaan {app}. Dengan menggunakan layanan ini, Anda menyetujui persyaratan ini.",
       "updated": "25 Juli 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Kebijakan Privasi | {app}",
       "metaDescription": "Bagaimana {app} mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pribadi.",
-      "eyebrow": "Legal",
+      "eyebrow": "Hukum",
       "title": "Kebijakan Privasi",
       "intro": "Kebijakan ini menjelaskan bagaimana {app} menangani informasi pribadi saat Anda menggunakan situs web, aplikasi, dan layanan konferensi kami.",
       "updated": "25 Juli 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Halaman tidak ditemukan",
+    "description": "Halaman yang dicari tidak ada atau sudah berpindah.",
+    "backToHome": "Kembali ke rumah"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "Buka pengaturan tampilan dan aksesibilitas",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "accountAria": "Akun dan preferensi",
+    "profile": "Profil",
     "appearanceAndAccess": "Aksesibilitas & warna"
   }
 }

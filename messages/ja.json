@@ -17,10 +17,10 @@
     "secretaryGeneral": "事務局長",
     "returnToProfile": "プロフィールに戻る",
     "useDifferentAccount": "別のアカウントを使用する",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "推奨される使用法ごとに番号が付けられています (1 = ここから開始)。 lib/nav-priority-order.ts で順序を変更します。",
+    "chooseFile": "ファイルを選択",
+    "noFileChosen": "ファイルが選択されていません",
+    "clear": "クリア",
     "reload": "リロード"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "注意事項",
     "committee": "委員会",
     "history": "歴史",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "ニュースルーム",
+    "pressCorps": "記者団",
+    "milestones": "マイルストーン",
     "voting": "投票",
     "guides": "ガイド",
     "documents": "書類",
@@ -601,7 +601,7 @@
     "ideas": "アイデア",
     "sources": "情報源",
     "resolutions": "決議",
-    "amendments": "Amendments",
+    "amendments": "修正",
     "speeches": "スピーチ",
     "running": "ランニング",
     "report": "報告",
@@ -617,11 +617,11 @@
     "library": "図書館",
     "mainNavigationAria": "メインナビゲーション",
     "crisis": "危機",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "指令",
+    "fwcMovement": "動き",
+    "fwcMap": "ホーキンス",
+    "fwcBackroom": "バックルーム",
+    "fwcEvidence": "証拠"
   },
   "dashboardLayout": {
     "helpCenter": "ヘルプセンター",
@@ -668,7 +668,7 @@
     "selectRoleAria": "役割の選択",
     "nextRoleAria": "次の役割",
     "authConnectError": "認証に接続できませんでした (Supabase 環境変数を確認してください)。",
-    "backToHome": "Back to home"
+    "backToHome": "家に戻る"
   },
   "googleDocs": {
     "openNewDocHelp": "新しいタブで Google ドキュメントを開きます。 プロンプトが表示されたらサインインし、アドレス バーからドキュメントの URL をコピーします。",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "危機のスライド",
     "resolutions": "決議",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "修正",
+    "pressCorps": "記者団",
     "allocationPasswords": "パスワードの割り当て",
     "sources": "情報源",
     "notes": "注意事項",
-    "notesModeration": "Note review",
+    "notesModeration": "ノートのレビュー",
     "rollCallTracker": "✅ 点呼トラッカー",
     "runningNotes": "ランニングノート",
     "awardsSmt": "受賞歴",
@@ -855,10 +855,10 @@
     "delegateSchedule": "カンファレンススケジュール",
     "chairSchedule": "カンファレンススケジュール",
     "advisorSchedule": "カンファレンススケジュール",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "代表者のプロフィール",
+    "advisorDelegateDocuments": "委任文書",
+    "advisorDelegateVoting": "代議員の投票",
+    "advisorDelegateNotes": "参加者のメモ",
     "voting": "投票",
     "digitalRoom": "デジタルルーム",
     "committeeSession": "委員会セッション",
@@ -867,12 +867,12 @@
     "follow": "フォローする",
     "guides": "ガイド",
     "committeeCodes": "委員会コード（委員長/SMT）",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "セッションの進行状況",
     "officialUnLinks": "国連の公式リンク",
     "committeeRoom": "委員会室",
     "history": "歴史",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "ニュースルーム",
+    "milestones": "マイルストーン",
     "speeches": "スピーチ",
     "chairRoom": "チェアルーム",
     "ideas": "アイデア",
@@ -891,7 +891,7 @@
     "smtProfile": "プロフィール",
     "crisis": "危機",
     "smtDelegates": "代表者",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ 開会の挨拶"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -1538,13 +1538,13 @@
       "memberStates": "国連加盟国",
       "unSystem": "国連システム (創設者とメンバー)",
       "history": "国連の歴史",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "シームンウェブサイト",
+      "seamunCommittee": "SEAMUN委員会ポータル",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "新しいタブで開きます。",
+    "backToCategories": "すべてのカテゴリ",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "会議のウェブサイトと委員会のポータル",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "各記者団の割り当て (世界、健康、特集) ごとに 3 つのニュース デスク。"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "SEAMUN カンファレンスの公式サイト (スケジュール、情報、お知らせ)。",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "接触",
       "signIn": "サインイン",
       "getStarted": "始めましょう",
-      "features": "Features",
+      "features": "機能",
       "about": "について",
       "menu": "メニュー",
-      "closeMenu": "近い",
-      "moreOnTheFloor": "フロアでさらに詳しく"
+      "closeMenu": "閉じる",
+      "moreOnTheFloor": "フロアでもっと見る"
     },
     "playOrbAnimation": "InterMUN アニメーションを再生する",
     "hero": {
       "eyebrow": "チャンバーフロアソフト・モデルUN",
       "title": "1 つのタブ",
       "titleEmphasis": "委員会全体。",
-      "subtitle": "小槌が必要になるまで邪魔にならない会議ソフトウェア。",
-      "ctaStart": "イベントを主催する",
-      "ctaJoin": "カンファレンスに参加してください",
+      "subtitle": "ガベルが必要になるまで邪魔をしない会議ソフトウェア。",
+      "ctaStart": "イベントを開催",
+      "ctaJoin": "会議に参加",
       "chip1": "点呼→定足数",
       "chip2": "GSL と正式な動議",
       "chip3": "31のインターフェース言語",
       "previewLabel": "セッションフロア",
-      "sticky1": "点呼、タイマー、モーションを 1 つのフロアで。",
-      "sticky2": "タブをジャグリングするのが嫌いな椅子のために作られています。",
-      "floorEyebrow": "床の上で"
+      "sticky1": "点呼・タイマー・動議をひとつのフロアで。",
+      "sticky2": "ブラウザのタブを行ったり来たりするのが嫌いな議長のために。",
+      "floorEyebrow": "フロアにて"
     },
     "steps": {
       "eyebrow": "ゲートフロー",
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "(UTC) に送信されました",
         "showOptionalDetails": "イベントの詳細を追加します (オプション)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "準備はできましたか？事務局の正式登録を始めましょう。",
+      "registerSecretariatLink": "会議を登録する"
     },
     "footer": {
       "ctaTitle": "次の委員会を持ってきてください",
@@ -4797,12 +4797,12 @@
       "ctaJoin": "サインイン",
       "copyright": "© {year} InterMUN",
       "contact": "接触",
-      "tagline": "小槌が必要になるまで邪魔にならない会議ソフトウェア。",
+      "tagline": "ガベルが必要になるまで邪魔をしない会議ソフトウェア。",
       "product": "製品",
       "resources": "リソース",
-      "howItWorks": "仕組み",
+      "howItWorks": "使い方",
       "privacy": "プライバシー",
-      "terms": "条項"
+      "terms": "利用規約"
     },
     "preview": {
       "rollCallLabel": "点呼",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "不在",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "準備作業を追加・保存",
+      "prepWorkspaceHint": "代表ダッシュボードと同じ作成・保存の流れ — 文書、条項の提案、メモ。"
     },
     "exploreChairs": "dais のすべての機能を詳しく見る",
     "exploreDelegates": "デリゲートのすべての機能を確認する",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "私たちのルーツ",
+      "title": "はじまりの場所",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "タイ・バンコク"
     },
     "faq": {
       "title": "よくある質問",
-      "subtitle": "会議の週末の前に議長と事務局が通常尋ねること。",
-      "q1": "これは誰のためのものですか?",
-      "a1": "参加者、議長、顧問、事務局 - 役割を認識したツールを備えた 1 つの会議ワークスペース。",
+      "subtitle": "会議週末の前に議長と事務局がよく尋ねること。",
+      "q1": "誰向けですか？",
+      "a1": "代表・議長・アドバイザー・事務局 — 役割に応じたツールを持つひとつの会議ワークスペース。",
       "q2": "記者団とGAを別の方法で運営することはできるでしょうか?",
       "a2": "はい。 手順プロファイルにより、他の委員会を変更することなく、記者団の RoP の範囲がその議場に限定されます。",
       "q3": "人はどうやって部屋に入るのですか？",
@@ -5201,7 +5201,7 @@
       "techTitle": "カンファレンスファーストのテクノロジー",
       "techP1": "機能は、実際の週末のワークフロー、役割の境界、部屋が急速に動いているときの落ち着いた UI を中心に形作られています。 アクセシビリティと安全な役割へのアクセスは設計の一部です。",
       "techCtaBefore": "カンファレンスに{app}をご希望ですか?",
-      "techCtaLink": "Say hello"
+      "techCtaLink": "こんにちは"
     },
     "documentPage": {
       "lastUpdated": "最終更新日 · {date}"
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "利用規約 | {app}",
       "metaDescription": "{app} へのアクセスと使用を規定する規約。",
-      "eyebrow": "法律上の",
+      "eyebrow": "法務",
       "title": "利用規約",
       "intro": "これらの規約は、{app} へのアクセスと使用に適用されます。 サービスを使用すると、これらの規約に同意したものとみなされます。",
       "updated": "2026 年 7 月 25 日",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "プライバシーポリシー | {app}",
       "metaDescription": "{app} が個人情報をどのように収集、使用、保管、保護するか。",
-      "eyebrow": "法律上の",
+      "eyebrow": "法務",
       "title": "プライバシーポリシー",
       "intro": "このポリシーは、お客様が当社のウェブサイト、アプリケーション、および会議サービスをご利用いただく際に、{app}が個人情報をどのように取り扱うかについて説明します。",
       "updated": "2026 年 7 月 25 日",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しないか、移動されました。",
+    "backToHome": "家に戻る"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "外観とアクセシビリティの設定を開く",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "accountAria": "アカウントと設定",
+    "profile": "プロフィール",
     "appearanceAndAccess": "アクセシビリティとカラー"
   }
 }

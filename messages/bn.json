@@ -17,10 +17,10 @@
     "secretaryGeneral": "মহাসচিব মো",
     "returnToProfile": "প্রোফাইলে ফিরে যান",
     "useDifferentAccount": "একটি ভিন্ন অ্যাকাউন্ট ব্যবহার করুন",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "প্রস্তাবিত ব্যবহারের দ্বারা সংখ্যাযুক্ত (1 = এখানে শুরু করুন)। lib/nav-priority-order.ts-এ ক্রম পরিবর্তন করুন।",
+    "chooseFile": "ফাইল নির্বাচন করুন",
+    "noFileChosen": "কোনো ফাইল বেছে নেওয়া হয়নি",
+    "clear": "পরিষ্কার",
     "reload": "পুনরায় লোড করুন"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "নোট",
     "committee": "কমিটি",
     "history": "ইতিহাস",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "নিউজরুম",
+    "pressCorps": "প্রেস কর্পস",
+    "milestones": "মাইলফলক",
     "voting": "ভোট",
     "guides": "গাইড",
     "documents": "নথিপত্র",
@@ -601,7 +601,7 @@
     "ideas": "ধারনা",
     "sources": "সূত্র",
     "resolutions": "রেজুলেশন",
-    "amendments": "Amendments",
+    "amendments": "সংশোধনী",
     "speeches": "বক্তৃতা",
     "running": "চলমান",
     "report": "রিপোর্ট",
@@ -617,11 +617,11 @@
     "library": "লাইব্রেরি",
     "mainNavigationAria": "প্রধান নেভিগেশন",
     "crisis": "সংকট",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "নির্দেশাবলী",
+    "fwcMovement": "আন্দোলন",
+    "fwcMap": "হকিন্স",
+    "fwcBackroom": "ব্যাকরুম",
+    "fwcEvidence": "প্রমাণ"
   },
   "dashboardLayout": {
     "helpCenter": "সাহায্য কেন্দ্র",
@@ -668,7 +668,7 @@
     "selectRoleAria": "ভূমিকা নির্বাচন করুন",
     "nextRoleAria": "পরবর্তী ভূমিকা",
     "authConnectError": "প্রমাণীকরণের সাথে সংযোগ করা যায়নি (সুপাবেস env vars পরীক্ষা করুন)।",
-    "backToHome": "Back to home"
+    "backToHome": "বাড়িতে ফিরে"
   },
   "googleDocs": {
     "openNewDocHelp": "একটি নতুন ট্যাবে Google ডক্স খোলে৷ প্রম্পট করা হলে সাইন ইন করুন, তারপর অ্যাড্রেস বার থেকে ডকুমেন্ট ইউআরএল কপি করুন।",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "ক্রাইসিস স্লাইড",
     "resolutions": "রেজুলেশন",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "সংশোধনী",
+    "pressCorps": "প্রেস কর্পস",
     "allocationPasswords": "বরাদ্দ পাসওয়ার্ড",
     "sources": "সূত্র",
     "notes": "নোট",
-    "notesModeration": "Note review",
+    "notesModeration": "নোট পর্যালোচনা",
     "rollCallTracker": "✅ রোল কল ট্র্যাকার",
     "runningNotes": "চলমান নোট",
     "awardsSmt": "পুরস্কার",
@@ -855,10 +855,10 @@
     "delegateSchedule": "সম্মেলনের সময়সূচী",
     "chairSchedule": "সম্মেলনের সময়সূচী",
     "advisorSchedule": "সম্মেলনের সময়সূচী",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "প্রতিনিধি প্রোফাইল",
+    "advisorDelegateDocuments": "নথি প্রতিনিধি",
+    "advisorDelegateVoting": "প্রতিনিধি ভোট",
+    "advisorDelegateNotes": "প্রতিনিধি নোট",
     "voting": "ভোট",
     "digitalRoom": "ডিজিটাল রুম",
     "committeeSession": "কমিটির অধিবেশন",
@@ -867,12 +867,12 @@
     "follow": "অনুসরণ করুন",
     "guides": "গাইড",
     "committeeCodes": "কমিটির কোড (চেয়ার / এসএমটি)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "সেশনের অগ্রগতি",
     "officialUnLinks": "জাতিসংঘের অফিসিয়াল লিঙ্ক",
     "committeeRoom": "কমিটি রুম",
     "history": "ইতিহাস",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "নিউজরুম",
+    "milestones": "মাইলফলক",
     "speeches": "বক্তৃতা",
     "chairRoom": "চেয়ার রুম",
     "ideas": "ধারনা",
@@ -891,7 +891,7 @@
     "smtProfile": "প্রোফাইল",
     "crisis": "সংকট",
     "smtDelegates": "প্রতিনিধি",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ উদ্বোধনী বক্তৃতা"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -1538,13 +1538,13 @@
       "memberStates": "জাতিসংঘের সদস্য রাষ্ট্রসমূহ",
       "unSystem": "ইউএন সিস্টেম (প্রতিষ্ঠাতা ও সদস্য)",
       "history": "জাতিসংঘের ইতিহাস",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "SEAMUN ওয়েবসাইট",
+      "seamunCommittee": "SEAMUN কমিটির পোর্টাল",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "একটি নতুন ট্যাবে খোলে৷",
+    "backToCategories": "সমস্ত বিভাগ",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "সম্মেলনের ওয়েবসাইট এবং কমিটির পোর্টাল",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "প্রতিটি প্রেস কর্পস বরাদ্দের জন্য তিনটি নিউজ ডেস্ক (বিশ্ব, স্বাস্থ্য, এবং বৈশিষ্ট্য)।"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "অফিসিয়াল SEAMUN কনফারেন্স সাইট (সময়সূচী, তথ্য, এবং ঘোষণা)।",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "যোগাযোগ",
       "signIn": "সাইন ইন করুন",
       "getStarted": "শুরু করুন",
-      "features": "Features",
+      "features": "বৈশিষ্ট্য",
       "about": "সম্পর্কে",
       "menu": "মেনু",
       "closeMenu": "বন্ধ",
@@ -4650,7 +4650,7 @@
       "chip3": "31টি ইন্টারফেস ভাষা",
       "previewLabel": "সেশন ফ্লোর",
       "sticky1": "রোল কল, টাইমার এবং গতি এক তলায়।",
-      "sticky2": "জাগলিং ট্যাব ঘৃণা যারা চেয়ার জন্য নির্মিত.",
+      "sticky2": "ব্রাউজার ট্যাব নিয়ে ঘোরাঘুরি করতে ঘৃণা করা চেয়ারদের জন্য তৈরি।",
       "floorEyebrow": "মেঝেতে"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "(UTC) এ জমা দেওয়া হয়েছে",
         "showOptionalDetails": "ইভেন্টের বিবরণ যোগ করুন (ঐচ্ছিক)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "শুরু করতে প্রস্তুত? সম্পূর্ণ সচিবালয় নিবন্ধন শুরু করুন।",
+      "registerSecretariatLink": "আপনার সম্মেলন নিবন্ধন করুন"
     },
     "footer": {
       "ctaTitle": "আপনার পরবর্তী কমিটি নিয়ে আসুন",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "অনুপস্থিত",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "প্রস্তুতি যোগ ও সংরক্ষণ করুন",
+      "prepWorkspaceHint": "প্রতিনিধি ড্যাশবোর্ডের মতোই লিখে-সংরক্ষণের প্রবাহ — নথি, ধারা প্রস্তাব ও নোট।"
     },
     "exploreChairs": "সমস্ত মঞ্চ বৈশিষ্ট্য অন্বেষণ",
     "exploreDelegates": "সমস্ত প্রতিনিধি বৈশিষ্ট্য অন্বেষণ",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "আমাদের শিকড়",
+      "title": "যেখানে শুরু",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "ব্যাংকক, থাইল্যান্ড"
     },
     "faq": {
       "title": "প্রায়ই জিজ্ঞাসিত",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "পেজ পাওয়া যায়নি",
+    "description": "আপনি যে পৃষ্ঠাটি খুঁজছেন সেটি বিদ্যমান নেই বা সরানো হয়েছে।",
+    "backToHome": "বাড়িতে ফিরে"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "উপস্থিতি এবং অ্যাক্সেসযোগ্যতা সেটিংস খুলুন",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "অ্যাক্সেসযোগ্যতা এবং রঙ"
+    "openAria": "চেহারা ও অ্যাক্সেসিবিলিটি সেটিং খুলুন",
+    "accountAria": "অ্যাকাউন্ট ও পছন্দসমূহ",
+    "profile": "প্রোফাইল",
+    "appearanceAndAccess": "অ্যাক্সেসিবিলিটি ও রঙ"
   }
 }

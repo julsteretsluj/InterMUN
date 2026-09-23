@@ -17,10 +17,10 @@
     "secretaryGeneral": "دبیر کل",
     "returnToProfile": "بازگشت به نمایه",
     "useDifferentAccount": "از حساب دیگری استفاده کنید",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "شماره گذاری شده با استفاده توصیه شده (1 = از اینجا شروع کنید). تغییر ترتیب در lib/nav-priority-order.ts.",
+    "chooseFile": "فایل را انتخاب کنید",
+    "noFileChosen": "هیچ فایلی انتخاب نشد",
+    "clear": "پاک کردن",
     "reload": "بارگذاری مجدد"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "یادداشت ها",
     "committee": "کمیته",
     "history": "تاریخچه",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "اتاق خبر",
+    "pressCorps": "سپاه مطبوعات",
+    "milestones": "نقاط عطف",
     "voting": "رای دادن",
     "guides": "راهنماها",
     "documents": "اسناد",
@@ -601,7 +601,7 @@
     "ideas": "ایده ها",
     "sources": "منابع",
     "resolutions": "قطعنامه ها",
-    "amendments": "Amendments",
+    "amendments": "اصلاحات",
     "speeches": "سخنرانی ها",
     "running": "در حال دویدن",
     "report": "گزارش دهید",
@@ -617,11 +617,11 @@
     "library": "کتابخانه",
     "mainNavigationAria": "ناوبری اصلی",
     "crisis": "بحران",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "بخشنامه ها",
+    "fwcMovement": "حرکت",
+    "fwcMap": "هاوکینز",
+    "fwcBackroom": "اتاق پشتی",
+    "fwcEvidence": "شواهد"
   },
   "dashboardLayout": {
     "helpCenter": "مرکز راهنمایی",
@@ -668,7 +668,7 @@
     "selectRoleAria": "نقش را انتخاب کنید",
     "nextRoleAria": "نقش بعدی",
     "authConnectError": "اتصال به احراز هویت امکان‌پذیر نیست (Supabase env vars را بررسی کنید).",
-    "backToHome": "Back to home"
+    "backToHome": "بازگشت به خانه"
   },
   "googleDocs": {
     "openNewDocHelp": "Google Docs را در یک برگه جدید باز می کند. در صورت درخواست وارد شوید، سپس URL سند را از نوار آدرس کپی کنید.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "بحران سقوط می کند",
     "resolutions": "قطعنامه ها",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "اصلاحات",
+    "pressCorps": "سپاه مطبوعات",
     "allocationPasswords": "پسوردهای تخصیص",
     "sources": "منابع",
     "notes": "یادداشت ها",
-    "notesModeration": "Note review",
+    "notesModeration": "بررسی یادداشت",
     "rollCallTracker": "✅ Roll Call Tracker",
     "runningNotes": "در حال اجرا",
     "awardsSmt": "جوایز",
@@ -855,10 +855,10 @@
     "delegateSchedule": "برنامه کنفرانس",
     "chairSchedule": "برنامه کنفرانس",
     "advisorSchedule": "برنامه کنفرانس",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "نمایه نماینده",
+    "advisorDelegateDocuments": "اسناد نمایندگی",
+    "advisorDelegateVoting": "رای دادن نمایندگان",
+    "advisorDelegateNotes": "یادداشت های نماینده",
     "voting": "رای دادن",
     "digitalRoom": "اتاق دیجیتال",
     "committeeSession": "جلسه کمیته",
@@ -867,12 +867,12 @@
     "follow": "دنبال کنید",
     "guides": "راهنماها",
     "committeeCodes": "کدهای کمیته (رئیس / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "پیشرفت جلسه",
     "officialUnLinks": "پیوندهای رسمی سازمان ملل",
     "committeeRoom": "اتاق کمیته",
     "history": "تاریخچه",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "اتاق خبر",
+    "milestones": "نقاط عطف",
     "speeches": "سخنرانی ها",
     "chairRoom": "اتاق صندلی",
     "ideas": "ایده ها",
@@ -891,7 +891,7 @@
     "smtProfile": "نمایه",
     "crisis": "بحران",
     "smtDelegates": "نمایندگان",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ سخنرانی افتتاحیه"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -1538,13 +1538,13 @@
       "memberStates": "کشورهای عضو سازمان ملل",
       "unSystem": "سیستم سازمان ملل متحد (بنیانگذاران و اعضا)",
       "history": "تاریخ سازمان ملل متحد",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "وب سایت SEAMUN",
+      "seamunCommittee": "پورتال کمیته SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "در یک برگه جدید باز می شود.",
+    "backToCategories": "همه دسته ها",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "وب سایت و پورتال کمیته کنفرانس",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "سه میز خبری برای هر تخصیص سپاه مطبوعات (جهان، سلامت و ویژگی ها)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "سایت رسمی کنفرانس SEAMUN (زمان بندی، اطلاعات و اطلاعیه ها).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "تماس بگیرید",
       "signIn": "وارد شوید",
       "getStarted": "شروع کنید",
-      "features": "Features",
+      "features": "قابلیت‌ها",
       "about": "درباره",
       "menu": "منو",
       "closeMenu": "بستن",
@@ -4650,7 +4650,7 @@
       "chip3": "31 زبان رابط",
       "previewLabel": "طبقه جلسه",
       "sticky1": "تماس تلفنی، تایمر، و حرکات در یک طبقه.",
-      "sticky2": "ساخته شده برای صندلی هایی که از تبلت های شعبده بازی متنفرند.",
+      "sticky2": "برای رؤسایی که از جابه‌جایی میان زبانه‌های مرورگر متنفرند.",
       "floorEyebrow": "روی زمین"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "ارسال شده در (UTC)",
         "showOptionalDetails": "افزودن جزئیات رویداد (اختیاری)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "آماده‌اید؟ ثبت‌نام کامل دبیرخانه را آغاز کنید.",
+      "registerSecretariatLink": "کنفرانس خود را ثبت کنید"
     },
     "footer": {
       "ctaTitle": "کمیته بعدی خود را بیاورید",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "غایب",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "افزودن و ذخیرهٔ آماده‌سازی",
+      "prepWorkspaceHint": "همان جریان‌های نوشتن و ذخیره مانند داشبورد نماینده — اسناد، پیشنهاد بندها و یادداشت‌ها."
     },
     "exploreChairs": "تمام ویژگی‌های دیس را کاوش کنید",
     "exploreDelegates": "همه ویژگی‌های نمایندگی را کاوش کنید",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "ریشه‌های ما",
+      "title": "از کجا آغاز شد",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "بانکوک، تایلند"
     },
     "faq": {
       "title": "مکرر پرسیده می شود",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "شرایط خدمات | {app}",
       "metaDescription": "شرایط حاکم بر دسترسی و استفاده از {app}.",
-      "eyebrow": "قانونی",
+      "eyebrow": "حقوقی",
       "title": "شرایط خدمات",
       "intro": "این شرایط بر دسترسی و استفاده شما از {app} حاکم است. با استفاده از این سرویس، شما با این شرایط موافقت می کنید.",
       "updated": "25 جولای 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "سیاست حفظ حریم خصوصی | {app}",
       "metaDescription": "چگونه {app} اطلاعات شخصی را جمع‌آوری، استفاده، ذخیره و محافظت می‌کند.",
-      "eyebrow": "قانونی",
+      "eyebrow": "حقوقی",
       "title": "سیاست حفظ حریم خصوصی",
       "intro": "این خط‌مشی توضیح می‌دهد که چگونه {app} اطلاعات شخصی را هنگام استفاده از وب‌سایت، برنامه‌ها و خدمات کنفرانس ما مدیریت می‌کند.",
       "updated": "25 جولای 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "صفحه پیدا نشد",
+    "description": "صفحه ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.",
+    "backToHome": "بازگشت به خانه"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "تنظیمات ظاهر و دسترسی را باز کنید",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "دسترسی و رنگ"
+    "openAria": "باز کردن تنظیمات ظاهر و دسترس‌پذیری",
+    "accountAria": "حساب و ترجیحات",
+    "profile": "نمایه",
+    "appearanceAndAccess": "دسترس‌پذیری و رنگ"
   }
 }

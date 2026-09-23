@@ -17,10 +17,10 @@
     "secretaryGeneral": "الأمين العام",
     "returnToProfile": "العودة إلى الملف الشخصي",
     "useDifferentAccount": "استخدم حسابًا مختلفًا",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "مرقمة حسب الاستخدام الموصى به (1 = ابدأ هنا). قم بتغيير الترتيب في lib/nav-priority-order.ts.",
+    "chooseFile": "اختر ملف",
+    "noFileChosen": "لم يتم اختيار أي ملف",
+    "clear": "واضح",
     "reload": "إعادة تحميل"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "ملحوظات",
     "committee": "لجنة",
     "history": "تاريخ",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "غرفة الأخبار",
+    "pressCorps": "فيلق الصحافة",
+    "milestones": "المعالم",
     "voting": "التصويت",
     "guides": "أدلة",
     "documents": "وثائق",
@@ -601,7 +601,7 @@
     "ideas": "أفكار",
     "sources": "مصادر",
     "resolutions": "القرارات",
-    "amendments": "Amendments",
+    "amendments": "التعديلات",
     "speeches": "الخطب",
     "running": "جري",
     "report": "تقرير",
@@ -617,11 +617,11 @@
     "library": "مكتبة",
     "mainNavigationAria": "الملاحة الرئيسية",
     "crisis": "مصيبة",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "التوجيهات",
+    "fwcMovement": "حركة",
+    "fwcMap": "هوكينز",
+    "fwcBackroom": "خلف الكواليس",
+    "fwcEvidence": "شهادة"
   },
   "dashboardLayout": {
     "helpCenter": "مركز المساعدة",
@@ -668,7 +668,7 @@
     "selectRoleAria": "حدد الدور",
     "nextRoleAria": "الدور التالي",
     "authConnectError": "تعذر الاتصال بالمصادقة (راجع Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "العودة إلى المنزل"
   },
   "googleDocs": {
     "openNewDocHelp": "يفتح محرّر مستندات Google في علامة تبويب جديدة. قم بتسجيل الدخول إذا طُلب منك ذلك، ثم انسخ عنوان URL للمستند من شريط العناوين.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "شرائح الأزمة",
     "resolutions": "القرارات",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "التعديلات",
+    "pressCorps": "فيلق الصحافة",
     "allocationPasswords": "تخصيص كلمات المرور",
     "sources": "مصادر",
     "notes": "ملحوظات",
-    "notesModeration": "Note review",
+    "notesModeration": "مراجعة الملاحظة",
     "rollCallTracker": "✅ تعقب المكالمات",
     "runningNotes": "تشغيل الملاحظات",
     "awardsSmt": "الجوائز",
@@ -855,10 +855,10 @@
     "delegateSchedule": "الجدول الزمني للمؤتمر",
     "chairSchedule": "الجدول الزمني للمؤتمر",
     "advisorSchedule": "الجدول الزمني للمؤتمر",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "ملف تعريف المندوب",
+    "advisorDelegateDocuments": "وثائق المندوب",
+    "advisorDelegateVoting": "مندوب التصويت",
+    "advisorDelegateNotes": "ملاحظات المندوب",
     "voting": "التصويت",
     "digitalRoom": "الغرفة الرقمية",
     "committeeSession": "جلسة اللجنة",
@@ -867,12 +867,12 @@
     "follow": "يتبع",
     "guides": "أدلة",
     "committeeCodes": "رموز اللجنة (الرئيس/SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "تقدم الجلسة",
     "officialUnLinks": "الروابط الرسمية للأمم المتحدة",
     "committeeRoom": "غرفة اللجنة",
     "history": "تاريخ",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "غرفة الأخبار",
+    "milestones": "المعالم",
     "speeches": "الخطب",
     "chairRoom": "غرفة الكرسي",
     "ideas": "أفكار",
@@ -891,7 +891,7 @@
     "smtProfile": "حساب تعريفي",
     "crisis": "مصيبة",
     "smtDelegates": "المندوبون",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ الكلمات الإفتتاحية"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -1538,13 +1538,13 @@
       "memberStates": "الدول الأعضاء في الأمم المتحدة",
       "unSystem": "منظومة الأمم المتحدة (المؤسسون والأعضاء)",
       "history": "تاريخ الأمم المتحدة",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "موقع سيمن",
+      "seamunCommittee": "بوابة لجنة SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "يفتح في علامة تبويب جديدة.",
+    "backToCategories": "جميع الفئات",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "موقع المؤتمر وبوابة اللجنة",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "ثلاثة مكاتب أخبار لكل تخصيص من هيئة الصحافة (العالم، والصحة، والمقالات)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "الموقع الرسمي لمؤتمر SEAMUN (الجداول والمعلومات والإعلانات).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "اتصال",
       "signIn": "تسجيل الدخول",
       "getStarted": "ابدأ",
-      "features": "Features",
-      "about": "عن",
-      "menu": "قائمة طعام",
-      "closeMenu": "يغلق",
-      "moreOnTheFloor": "المزيد على الأرض"
+      "features": "الميزات",
+      "about": "حول",
+      "menu": "القائمة",
+      "closeMenu": "إغلاق",
+      "moreOnTheFloor": "المزيد في القاعة"
     },
     "playOrbAnimation": "تشغيل الرسوم المتحركة InterMUN",
     "hero": {
       "eyebrow": "برمجيات أرضية الغرفة · نموذج الأمم المتحدة",
       "title": "علامة تبويب واحدة ل",
       "titleEmphasis": "اللجنة بأكملها.",
-      "subtitle": "برنامج مؤتمرات يظل بعيدًا عن الطريق حتى تحتاج إليه المطرقة.",
-      "ctaStart": "استضافة حدث",
+      "subtitle": "برمجيات مؤتمرات تبقى بعيدة عن الطريق حتى يحتاجها المطرقة.",
+      "ctaStart": "استضف فعالية",
       "ctaJoin": "انضم إلى مؤتمرك",
       "chip1": "نداء الأسماء → النصاب القانوني",
       "chip2": "GSL والطلبات الرسمية",
       "chip3": "31 لغة واجهة",
       "previewLabel": "أرضية الجلسة",
-      "sticky1": "نداء الأسماء والمؤقتات والحركات في طابق واحد.",
-      "sticky2": "مصممة للكراسي التي تكره علامات التبويب المتلاعبة.",
-      "floorEyebrow": "على الأرض"
+      "sticky1": "نداء الأسماء والمؤقتات والمقترحات في قاعة واحدة واحدة.",
+      "sticky2": "مصمّم لرؤساء اللجان الذين يكرهون التنقل بين تبويبات المتصفح.",
+      "floorEyebrow": "في القاعة"
     },
     "steps": {
       "eyebrow": "تدفق البوابة",
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "تم الإرسال في (التوقيت العالمي المنسق)",
         "showOptionalDetails": "إضافة تفاصيل الحدث (اختياري)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "هل أنتم مستعدون؟ ابدؤوا تسجيل الأمانة الكامل.",
+      "registerSecretariatLink": "سجّلوا مؤتمركم"
     },
     "footer": {
       "ctaTitle": "أحضر لجنتك القادمة",
@@ -4797,12 +4797,12 @@
       "ctaJoin": "تسجيل الدخول",
       "copyright": "© {year} إنترمون",
       "contact": "اتصال",
-      "tagline": "برنامج مؤتمرات يظل بعيدًا عن الطريق حتى تحتاج إليه المطرقة.",
-      "product": "منتج",
-      "resources": "موارد",
+      "tagline": "برمجيات مؤتمرات تبقى بعيدة عن الطريق حتى يحتاجها المطرقة.",
+      "product": "المنتج",
+      "resources": "الموارد",
       "howItWorks": "كيف يعمل",
-      "privacy": "خصوصية",
-      "terms": "شروط"
+      "privacy": "الخصوصية",
+      "terms": "الشروط"
     },
     "preview": {
       "rollCallLabel": "نداء رول",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "ف + الخامس",
       "statusPresent": "P",
       "statusAbsent": "غائب",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "أضف واحفظ أعمال التحضير",
+      "prepWorkspaceHint": "نفس تدفقات الكتابة والحفظ كما في لوحة المندوب — مستندات واقتراحات بنود وملاحظات."
     },
     "exploreChairs": "اكتشف جميع ميزات المنصة",
     "exploreDelegates": "اكتشف جميع ميزات المندوب",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "جذورنا",
+      "title": "من أين بدأت",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "بانكوك، تايلاند"
     },
     "faq": {
-      "title": "كثيرا ما يطلب",
-      "subtitle": "ما الذي يسأله الرؤساء والأمانة عادةً قبل عطلة نهاية الأسبوع للمؤتمر؟",
+      "title": "أسئلة شائعة",
+      "subtitle": "ما يسأله الرؤساء والأمانة عادة قبل عطلة مؤتمر.",
       "q1": "لمن هذا؟",
-      "a1": "المندوبون والرؤساء والمستشارون والسكرتارية - مساحة عمل واحدة للمؤتمرات مزودة بأدوات تدرك الأدوار.",
+      "a1": "المندوبون والرؤساء والمستشارون والأمانة — مساحة مؤتمر واحدة بأدوات حسب الدور.",
       "q2": "هل يمكننا إدارة السلك الصحفي وGA بشكل مختلف؟",
       "a2": "نعم. تحافظ ملفات الإجراءات على إبقاء قواعد الممارسة المهنية للهيئات الصحفية ضمن نطاق تلك الغرفة دون تغيير اللجان الأخرى.",
       "q3": "كيف يدخل الناس إلى الغرفة؟",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "لم يتم العثور على الصفحة",
+    "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "backToHome": "العودة إلى المنزل"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "افتح إعدادات المظهر وإمكانية الوصول",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "فتح إعدادات المظهر وإمكانية الوصول",
+    "accountAria": "الحساب والتفضيلات",
+    "profile": "الملف الشخصي",
     "appearanceAndAccess": "إمكانية الوصول واللون"
   }
 }

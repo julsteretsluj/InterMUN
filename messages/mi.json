@@ -17,10 +17,10 @@
     "secretaryGeneral": "Hekeretari Tianara",
     "returnToProfile": "Hoki ki te kōtaha",
     "useDifferentAccount": "Whakamahia he putea rereke",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Kua tauhia ma te whakamahi e taunakitia ana (1 = timata i konei). Hurihia te raupapa i roto i te lib/nav-priority-order.ts.",
+    "chooseFile": "Kōwhiri Kōnae",
+    "noFileChosen": "Karekau he konae i tohua",
+    "clear": "Maamaa",
     "reload": "Utaina ano"
   },
   "eventGateForm": {
@@ -591,7 +591,7 @@
     "notes": "Notes",
     "committee": "Komiti",
     "history": "Hītori",
-    "newsroom": "Newsroom",
+    "newsroom": "Whare Karere",
     "pressCorps": "Press Corps",
     "milestones": "Milestones",
     "voting": "Pooti",
@@ -601,7 +601,7 @@
     "ideas": "Nga whakaaro",
     "sources": "Nga puna",
     "resolutions": "Nga Whakatau",
-    "amendments": "Amendments",
+    "amendments": "Nga whakatikatika",
     "speeches": "Nga Korero",
     "running": "Rere ana",
     "report": "Ripoata",
@@ -617,11 +617,11 @@
     "library": "Whare Pukapuka",
     "mainNavigationAria": "Te whakatere matua",
     "crisis": "Te raruraru",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Nga tohutohu",
+    "fwcMovement": "Te nekehanga",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Rūma tuara",
+    "fwcEvidence": "Nga taunakitanga"
   },
   "dashboardLayout": {
     "helpCenter": "Pokapū awhina",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Tīpako tūranga",
     "nextRoleAria": "Te tūranga o muri",
     "authConnectError": "Kāore i taea te hono atu ki te motuhēhēnga (tirohia Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Hoki ki te kainga"
   },
   "googleDocs": {
     "openNewDocHelp": "Whakatuwherahia nga Tuhinga Google ki te ripa hou. Waitohu ki te akiakihia, ka kapehia te URL tuhinga mai i te pae wāhitau.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Kiriata raruraru",
     "resolutions": "Nga Whakatau",
-    "amendments": "Amendments",
+    "amendments": "Nga whakatikatika",
     "pressCorps": "Press Corps",
     "allocationPasswords": "Kupuhipa tohatoha",
     "sources": "Nga puna",
     "notes": "Notes",
-    "notesModeration": "Note review",
+    "notesModeration": "Panui arotake",
     "rollCallTracker": "✅ Huri Waea Aroturuki",
     "runningNotes": "Rere Notes",
     "awardsSmt": "Tohu",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Te tabula amuiraa",
     "chairSchedule": "Te tabula amuiraa",
     "advisorSchedule": "Te tabula amuiraa",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Tukuna te pūkete",
+    "advisorDelegateDocuments": "Tukuna nga tuhinga",
+    "advisorDelegateVoting": "Tukuna te pooti",
+    "advisorDelegateNotes": "Tukuna nga korero",
     "voting": "Pooti",
     "digitalRoom": "Rūma Matihiko",
     "committeeSession": "Huihuinga komiti",
@@ -867,11 +867,11 @@
     "follow": "Whaia",
     "guides": "Kaitohutohu",
     "committeeCodes": "Waehere komiti (heamana / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Te ahunga whakamua o te huihuinga",
     "officialUnLinks": "Hononga UN mana",
     "committeeRoom": "Rua komiti",
     "history": "Hītori",
-    "newsroom": "Newsroom",
+    "newsroom": "Whare Karere",
     "milestones": "Milestones",
     "speeches": "Nga Korero",
     "chairRoom": "Rūma noho",
@@ -891,7 +891,7 @@
     "smtProfile": "Kōtaha",
     "crisis": "Te raruraru",
     "smtDelegates": "Nga Kai-whakahaere",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Whakatuwhera korero"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -1538,13 +1538,13 @@
       "memberStates": "Whenua Mema UN",
       "unSystem": "UN Pūnaha (nga kaiwhakarewa me nga mema)",
       "history": "UN History",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "paetukutuku SEAMUN",
+      "seamunCommittee": "te tomokanga komiti SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Ka tuwhera ki te ripa hou.",
+    "backToCategories": "Ngā kāwai katoa",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Pae tukutuku hui me te tomokanga komiti",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "E toru nga papa korero mo ia roopu Press Corps (te ao, te hauora, me nga ahuatanga)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Te pae hui mana a SEAMUN (nga whakaritenga, nga korero, me nga panui).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Whakapā",
       "signIn": "Waitohu mai",
       "getStarted": "Tīmatahia",
-      "features": "Features",
+      "features": "Ngā āhuatanga",
       "about": "Mō",
       "menu": "Tahua",
       "closeMenu": "Katia",
@@ -4650,7 +4650,7 @@
       "chip3": "31 reo atanga",
       "previewLabel": "Papa wahanga",
       "sticky1": "Huri waea, taima, me nga motini ki te papa kotahi.",
-      "sticky2": "He mea hanga mo nga tuuru e kino ana ki nga ripa tarai.",
+      "sticky2": "I hangaia mō ngā heamana e kino ana ki te whakataka tab pūtirotiro.",
       "floorEyebrow": "I runga i te papa"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "I tukuna i (UTC)",
         "showOptionalDetails": "Tāpirihia ngā taipitopito takahanga (he kōwhiri)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Kua rite ki te tīmata? Tīmatahia te rēhita kāhui tuhi katoa.",
+      "registerSecretariatLink": "Rēhitatia tō hui"
     },
     "footer": {
       "ctaTitle": "Kawea mai to komiti e whai ake nei",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Kei te ngaro",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Tāpiri me te tiaki mahi whakangungu",
+      "prepWorkspaceHint": "Ngā rere ōrite o te tuhi-me-te-tiaki ki te papatohu māngai — tuhinga, whakaaro whiti me ngā tuhipoka."
     },
     "exploreChairs": "Tūhurahia ngā āhuatanga katoa o te rā",
     "exploreDelegates": "Te torotoro i nga ahuatanga katoa o te kaitautapa",
@@ -5166,8 +5166,8 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Ō mātou pūtake",
+      "title": "Te wāhi i tīmata ai",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Kaore i kitea te whaarangi",
+    "description": "Ko te wharangi e rapu ana koe kaore i te noho, kua neke ranei.",
+    "backToHome": "Hoki ki te kainga"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Whakatuwherahia te ahua me nga tautuhinga urunga",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "Te urunga me te tae"
+    "openAria": "Tuwhera ngā tautuhinga āhua me te wātea ā-tae",
+    "accountAria": "Pūkete me ngā manakohanga",
+    "profile": "Kōtaha",
+    "appearanceAndAccess": "Wātea ā-tae me te tae"
   }
 }

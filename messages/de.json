@@ -17,10 +17,10 @@
     "secretaryGeneral": "Generalsekretär",
     "returnToProfile": "Zurück zum Profil",
     "useDifferentAccount": "Verwenden Sie ein anderes Konto",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Nummeriert nach empfohlener Verwendung (1 = hier beginnen). Ändern Sie die Reihenfolge in lib/nav-priority-order.ts.",
+    "chooseFile": "Wählen Sie Datei",
+    "noFileChosen": "Keine Datei ausgewählt",
+    "clear": "Klar",
     "reload": "Neu laden"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Notizen",
     "committee": "Ausschuss",
     "history": "Geschichte",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Nachrichtenredaktion",
+    "pressCorps": "Pressekorps",
+    "milestones": "Meilensteine",
     "voting": "Wählen",
     "guides": "Führerinnen",
     "documents": "Unterlagen",
@@ -601,7 +601,7 @@
     "ideas": "Ideen",
     "sources": "Quellen",
     "resolutions": "Vorsätze",
-    "amendments": "Amendments",
+    "amendments": "Änderungen",
     "speeches": "Reden",
     "running": "Läuft",
     "report": "Bericht",
@@ -617,11 +617,11 @@
     "library": "Bibliothek",
     "mainNavigationAria": "Hauptnavigation",
     "crisis": "Krise",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Richtlinien",
+    "fwcMovement": "Bewegung",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Hinterzimmer",
+    "fwcEvidence": "Beweis"
   },
   "dashboardLayout": {
     "helpCenter": "Hilfecenter",
@@ -653,7 +653,7 @@
     "signUp": "Melden Sie sich an",
     "dontHaveAccount": "Sie haben noch kein Konto?",
     "alreadyHaveAccount": "Sie haben bereits ein Konto?",
-    "chair": "Stuhl",
+    "chair": "Vorsitz",
     "chairHint": "(das Podium)",
     "delegate": "Delegieren",
     "delegateHint": "(Ihr Ausschuss)",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Rolle auswählen",
     "nextRoleAria": "Nächste Rolle",
     "authConnectError": "Es konnte keine Verbindung zur Authentifizierung hergestellt werden (überprüfen Sie die Umgebungsvariablen von Supabase).",
-    "backToHome": "Back to home"
+    "backToHome": "Zurück nach Hause"
   },
   "googleDocs": {
     "openNewDocHelp": "Öffnet Google Docs in einem neuen Tab. Melden Sie sich an, wenn Sie dazu aufgefordert werden, und kopieren Sie dann die Dokument-URL aus der Adressleiste.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Krisenrutschen",
     "resolutions": "Vorsätze",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Änderungen",
+    "pressCorps": "Pressekorps",
     "allocationPasswords": "Vergabe von Passwörtern",
     "sources": "Quellen",
     "notes": "Notizen",
-    "notesModeration": "Note review",
+    "notesModeration": "Notizenrezension",
     "rollCallTracker": "✅ Anwesenheits-Tracker",
     "runningNotes": "Laufnotizen",
     "awardsSmt": "Auszeichnungen",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Konferenzplan",
     "chairSchedule": "Konferenzplan",
     "advisorSchedule": "Konferenzplan",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Delegiertenprofil",
+    "advisorDelegateDocuments": "Dokumente delegieren",
+    "advisorDelegateVoting": "Abstimmung der Delegierten",
+    "advisorDelegateNotes": "Notizen für Delegierte",
     "voting": "Wählen",
     "digitalRoom": "Digitaler Raum",
     "committeeSession": "Ausschusssitzung",
@@ -867,12 +867,12 @@
     "follow": "Folgen",
     "guides": "Führerinnen",
     "committeeCodes": "Ausschusskodizes (Vorsitzender / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Sitzungsfortschritt",
     "officialUnLinks": "Offizielle UN-Links",
     "committeeRoom": "Ausschussraum",
     "history": "Geschichte",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Nachrichtenredaktion",
+    "milestones": "Meilensteine",
     "speeches": "Reden",
     "chairRoom": "Stuhlzimmer",
     "ideas": "Ideen",
@@ -891,7 +891,7 @@
     "smtProfile": "Profil",
     "crisis": "Krise",
     "smtDelegates": "Delegierte",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Eröffnungsreden"
   },
   "setupPage": {
     "title": "Supabase ist nicht konfiguriert",
@@ -915,7 +915,7 @@
   "smtRoomCodesPage": {
     "selectEventFirst": "Wählen Sie zunächst eine Konferenzveranstaltung aus.",
     "enterConferenceCode": "Geben Sie den Konferenzcode ein",
-    "title": "Raumcodes und Stühle",
+    "title": "Raumcodes und Vorsitzende",
     "subtitle": "Legen Sie den Ausschusscode für das zweite Tor für jede Sitzung fest und laden Sie Podiumsvorsitzende ein oder befördern Sie sie, ohne das Delegierten-Dashboard zu verwenden."
   },
   "roleSetupChecklist": {
@@ -1331,7 +1331,7 @@
     "whichCommittee": "In welchem ​​Ausschuss möchten Sie mitmachen?",
     "sessionsCount": "{count, plural, one {# Sitzung} other {# Sitzungen}}",
     "topicLabel": "Thema:",
-    "chairsLabel": "Stühle:",
+    "chairsLabel": "Vorsitz:",
     "committeeLogoAlt": "{Name}-Logo",
     "eslFriendly": "ESL-freundlich",
     "difficultyOther": "Other committees"
@@ -1346,13 +1346,13 @@
     "ageRangeGrade9Year10": "Klassenstufen 9–12 (US) · Schuljahre 10–13 (UK)"
   },
   "chairNav": {
-    "ariaDashboard": "Stuhl-Armaturenbrett",
+    "ariaDashboard": "Vorsitz-Dashboard",
     "committeeTopicFallback": "Ausschuss & Thema",
     "hideLabels": "Etiketten ausblenden",
     "showLabels": "Beschriftungen anzeigen",
     "helpCenter": "Hilfecenter",
     "dashboardTabs": {
-      "ariaLabel": "Abschnitte des Stuhl-Armaturenbretts",
+      "ariaLabel": "Abschnitte des Vorsitz-Dashboards",
       "overview": "Überblick",
       "guidance": "Anleitung",
       "jump": "Springe zu"
@@ -1403,7 +1403,7 @@
     "ariaDashboard": "SMT-Dashboard",
     "liveCommittees": "Live-Komitees",
     "eventSessions": "Veranstaltung & Sitzungen",
-    "roomCodes": "Raumcodes und Stühle",
+    "roomCodes": "Raumcodes und Vorsitzende",
     "advisors": "Berater",
     "notes": "Notizen",
     "awards": "Auszeichnungen",
@@ -1538,13 +1538,13 @@
       "memberStates": "UN-Mitgliedstaaten",
       "unSystem": "UN-System (Gründer & Mitglieder)",
       "history": "UN-Geschichte",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "SEAMUN-Website",
+      "seamunCommittee": "Portal des SEAMUN-Komitees",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Öffnet in einem neuen Tab.",
+    "backToCategories": "Alle Kategorien",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Konferenz-Website und Ausschussportal",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Drei Nachrichtenredaktionen für jede Zuteilung des Pressekorps (Welt, Gesundheit und Features)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Offizielle SEAMUN-Konferenzseite (Zeitpläne, Informationen und Ankündigungen).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -1605,7 +1605,7 @@
     "editMetadataIntro": "Bearbeiten Sie die Metadaten der Ausschusssitzungen und die Namen der Vorsitzenden unter",
     "eventSessionsLink": "Veranstaltungs- und Ausschusssitzungen",
     "codesUnder": ". Codes unten",
-    "roomCodesChairsLink": "Raumcodes und Stühle",
+    "roomCodesChairsLink": "Raumcodes und Vorsitzende",
     "differentEventWarning": "Dieses Komitee gehört einer anderen Konferenz an als der von Ihnen ausgewählten.",
     "switchEvent": "Ereignis wechseln",
     "liveCommittees": "Live-Komitees",
@@ -1702,7 +1702,7 @@
     "adding": "Hinzufügen...",
     "addToSpeakerList": "Zur Rednerliste hinzufügen",
     "reminder": "Erinnerung",
-    "privateReminderLabel": "Private Erinnerung (nur Stühle, synchronisiert)",
+    "privateReminderLabel": "Private Erinnerung (nur Vorsitz, synchronisiert)",
     "committeeFallback": "Ausschuss",
     "dash": "—",
     "complimentReasonPrompt": "Reason for this compliment (required):",
@@ -1876,8 +1876,8 @@
     "delegationsLabel": "Delegationen",
     "noDelegations": "Für diesen Ausschuss sind keine Delegationen zugewiesen.",
     "delegateTargetsHint": "Ziele sind nur auf zugewiesene Zuteilungen beschränkt.",
-    "chairsLabel": "Stühle",
-    "anyChair": "Jeder Stuhl",
+    "chairsLabel": "Vorsitz",
+    "anyChair": "Jeder Vorsitz",
     "noChairs": "Keine Stuhlprofile gefunden.",
     "notesListTitle": "Notizenliste",
     "noteCount": "{count, plural, one {# Notiz} other {# Notizen}}",
@@ -1938,7 +1938,7 @@
     "fullNoteAria": "Vollständiger Hinweis",
     "close": "Schließen",
     "unknownCountry": "Unbekannt",
-    "chairFallback": "Stuhl",
+    "chairFallback": "Vorsitz",
     "errors": {
       "votingProcedure": "Der Abstimmungsvorgang ist aktiv: Das Verfassen von Notizen ist deaktiviert.",
       "sessionInactive": "Notizen sind deaktiviert, während die Ausschusssitzung nicht aktiv ist.",
@@ -1951,7 +1951,7 @@
       "sendFailed": "Nachricht konnte nicht gesendet werden."
     },
     "sendToSmt": "An SMT senden",
-    "sendToSmtHelp": "Landet im Notizen-Posteingang des Sekretariats (von Stühlen). Verwenden Sie dies für den Fortschritt am Ende der Sitzung.",
+    "sendToSmtHelp": "Landet im Notizen-Posteingang des Sekretariats (vom Vorsitz). Verwenden Sie dies für den Fortschritt am Ende der Sitzung.",
     "progressPrefill": "Die Ausschusssitzung ist gerade zu Ende gegangen. \n\nFortschritt: \n- \n\nAlles, was SMT weiterverfolgen sollte: \n-",
     "progressComposeHint": "Diese Notiz geht an SMT. Fassen Sie zusammen, was im Raum behandelt wurde und was das Sekretariat wissen sollte.",
     "progressSent": "Fortschrittsbericht an SMT gesendet."
@@ -1983,7 +1983,7 @@
     "setRoleTitle": "Legen Sie die Rolle für das vorhandene Konto fest",
     "roleLabel": "Rolle",
     "roleDelegate": "Delegieren",
-    "roleChair": "Stuhl",
+    "roleChair": "Vorsitz",
     "roleSmt": "SMT (Sekretariat)",
     "roleSaving": "Sparen…",
     "roleSave": "Rolle speichern"
@@ -2343,7 +2343,7 @@
   },
   "allocationMatrixManager": {
     "linkedOpen": "Offen",
-    "linkedRoleChair": "Stuhl",
+    "linkedRoleChair": "Vorsitz",
     "linkedRoleDelegate": "Delegieren",
     "linkedRoleLinked": "Verlinkt",
     "addedRow": "Zeile hinzugefügt.",
@@ -2895,7 +2895,7 @@
           "0": "Ein Stuhl dominiert; Mangelnde Kommunikation führt zu inkonsistenten Entscheidungen.",
           "1": "Die Arbeit ist aufgeteilt, aber die Vorsitzenden arbeiten in Silos. minimale Beratung bei Vergabeentscheidungen.",
           "2": "Ausgewogene Partnerschaft; klare Kommunikation und gegenseitige Unterstützung während der Sitzungen.",
-          "3": "Nahtlose Synergie; Die Stühle gehen auf die Bedürfnisse des anderen ein und sorgen für eine einheitliche, professionelle Präsenz."
+          "3": "Nahtlose Synergie; Die Vorsitzenden gehen auf die Bedürfnisse des anderen ein und sorgen für eine einheitliche, professionelle Präsenz."
         }
       },
       "mun_knowledge": {
@@ -3054,8 +3054,8 @@
       "chair_delegate_synergy": {
         "label": "Synergie zwischen Vorsitz und Delegiertem",
         "bands": {
-          "0": "Stühle haben Mühe, den Raum zu bewältigen; geringer Respekt vor dem Podium.",
-          "1": "Funktionale Beziehung; Stühle folgen dem Zeitplan, führen aber nicht.",
+          "0": "Vorsitzende haben Mühe, den Raum zu bewältigen; geringer Respekt vor dem Podium.",
+          "1": "Funktionale Beziehung; Vorsitzende folgen dem Zeitplan, führen aber nicht.",
           "2": "Positive Energie; Vorsitzende betreuen die Delegierten und wahren gleichzeitig die Ordnung.",
           "3": "Nahtlose Synergie; Das Podium inspiriert zu einem professionellen und anspruchsvollen Umfeld."
         }
@@ -4631,27 +4631,27 @@
       "contact": "Kontakt",
       "signIn": "anmelden",
       "getStarted": "Fangen Sie an",
-      "features": "Features",
-      "about": "Um",
-      "menu": "Speisekarte",
+      "features": "Funktionen",
+      "about": "Über uns",
+      "menu": "Menü",
       "closeMenu": "Schließen",
-      "moreOnTheFloor": "Mehr auf dem Boden"
+      "moreOnTheFloor": "Mehr auf der Seite"
     },
     "playOrbAnimation": "Spielen Sie die InterMUN-Animation ab",
     "hero": {
       "eyebrow": "Kammerbodensoftware · Modell UN",
       "title": "Eine Registerkarte für die",
       "titleEmphasis": "ganzes Komitee.",
-      "subtitle": "Konferenzsoftware, die nicht im Weg ist, bis der Hammer sie braucht.",
-      "ctaStart": "Veranstalten Sie eine Veranstaltung",
-      "ctaJoin": "Nehmen Sie an Ihrer Konferenz teil",
+      "subtitle": "Konferenzsoftware, die nicht im Weg steht — bis der Hammer fällt.",
+      "ctaStart": "eine Veranstaltung ausrichten",
+      "ctaJoin": "Der Konferenz beitreten",
       "chip1": "Anwesenheit → Quorum",
       "chip2": "GSL und formelle Anträge",
       "chip3": "31 Schnittstellensprachen",
       "previewLabel": "Sitzungsgeschoss",
       "sticky1": "Anwesenheit, Timer und Anträge auf einer Seite.",
-      "sticky2": "Entwickelt für Nutzer, die es hassen, mit Tabs zu jonglieren.",
-      "floorEyebrow": "Auf dem Boden"
+      "sticky2": "Für Vorsitze, die es hassen, mit Browser-Tabs zu jonglieren.",
+      "floorEyebrow": "Auf der Seite"
     },
     "steps": {
       "eyebrow": "Torfluss",
@@ -4748,7 +4748,7 @@
         "rolePlaceholder": "Wählen Sie eine Rolle aus",
         "roleSecretariat": "Sekretariat / Organisator",
         "roleAdvisor": "Fakultätsberater",
-        "roleChair": "Podest / Stuhl",
+        "roleChair": "Podium / Vorsitz",
         "roleOther": "Andere",
         "eventDatesLabel": "Veranstaltungstermine",
         "eventDatesPlaceholder": "z.B. 14.–16. März 2026",
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Eingereicht bei (UTC)",
         "showOptionalDetails": "Veranstaltungsdetails hinzufügen (optional)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Bereit zum Start? Beginnen Sie die vollständige Sekretariatsregistrierung.",
+      "registerSecretariatLink": "Konferenz registrieren"
     },
     "footer": {
       "ctaTitle": "Bringen Sie Ihren nächsten Ausschuss mit",
@@ -4797,12 +4797,12 @@
       "ctaJoin": "anmelden",
       "copyright": "© {year} InterMUN",
       "contact": "Kontakt",
-      "tagline": "Konferenzsoftware, die nicht im Weg ist, bis der Hammer sie braucht.",
+      "tagline": "Konferenzsoftware, die nicht im Weg steht — bis der Hammer fällt.",
       "product": "Produkt",
       "resources": "Ressourcen",
-      "howItWorks": "Wie es funktioniert",
-      "privacy": "Privatsphäre",
-      "terms": "Bedingungen"
+      "howItWorks": "So funktioniert’s",
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen"
     },
     "preview": {
       "rollCallLabel": "Anwesenheit",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Abwesend",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Vorbereitung hinzufügen und speichern",
+      "prepWorkspaceHint": "Dieselben Verfassen-und-Speichern-Abläufe wie im Delegierten-Dashboard — Dokumente, Klauselvorschläge und Notizen."
     },
     "exploreChairs": "Entdecken Sie alle Podiumsfunktionen",
     "exploreDelegates": "Entdecken Sie alle Delegiertenfunktionen",
@@ -4859,7 +4859,7 @@
         "ctaTitle": "Bereit zum Vorsitz",
         "ctaTitleEmphasis": "Deine nächste Sitzung?",
         "ctaSubtitle": "Erstellen Sie ein Konto, geben Sie die Zugangscodes Ihres Organisators ein und öffnen Sie den Podiumsarbeitsbereich, wenn der Ausschuss beginnt.",
-        "ctaStart": "Veranstalten Sie eine Veranstaltung",
+        "ctaStart": "eine Veranstaltung ausrichten",
         "ctaBack": "Zurück nach Hause",
         "relatedNavLabel": "Andere Rollentouren",
         "related": {
@@ -5019,7 +5019,7 @@
         "ctaTitle": "Konfigurieren Sie Ihr",
         "ctaTitleEmphasis": "nächste Konferenz.",
         "ctaSubtitle": "Erstellen Sie die Veranstaltung, veröffentlichen Sie Zugangscodes und öffnen Sie alle Ausschüsse über ein einziges Sekretariats-Dashboard.",
-        "ctaStart": "Veranstalten Sie eine Veranstaltung",
+        "ctaStart": "eine Veranstaltung ausrichten",
         "ctaBack": "Zurück nach Hause",
         "relatedNavLabel": "Andere Rollentouren",
         "related": {
@@ -5160,29 +5160,29 @@
         "checklistLabel": "Checkliste für die Einrichtung",
         "check_allocations": "Zuordnungsmatrix vollständig",
         "check_gates": "Gate-Codes veröffentlicht",
-        "check_chairs": "Dais-Stühle sind eingeladen",
+        "check_chairs": "Podiumsvorsitz ist eingeladen",
         "check_topics": "Agendathemen konfiguriert",
         "check_newsroom": "Newsroom-Feed verkabelt"
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Unsere Wurzeln",
+      "title": "Wo alles begann",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
     },
     "faq": {
       "title": "Häufig gefragt",
-      "subtitle": "Was Vorsitzende und Sekretariat normalerweise vor einem Konferenzwochenende fragen.",
+      "subtitle": "Was Vorsitze und Sekretariat vor einem Konferenzwochenende meist fragen.",
       "q1": "Für wen ist das?",
-      "a1": "Delegierte, Vorsitzende, Berater und Sekretariat – ein Konferenzarbeitsbereich mit rollenbewussten Tools.",
-      "q2": "Können wir Pressekorps und GA unterschiedlich leiten?",
-      "a2": "Ja. Verfahrensprofile sorgen dafür, dass die RoP des Pressekorps auf diese Kammer beschränkt bleibt, ohne dass andere Ausschüsse geändert werden.",
-      "q3": "Wie kommen Menschen in einen Raum?",
-      "a3": "Veranstaltungscode, dann Raum-/Komiteecode, dann optionale Plakatcodes – entworfen für echte Check-in-Warteschlangen.",
+      "a1": "Delegierte, Vorsitze, Berater und Sekretariat — ein Konferenzraum mit rollenbasierten Tools.",
+      "q2": "Können wir Press Corps und GV unterschiedlich führen?",
+      "a2": "Ja. Verfahrensprofile halten die Geschäftsordnung des Press Corps in dieser Kammer, ohne andere Komitees zu ändern.",
+      "q3": "Wie kommt man in einen Raum?",
+      "a3": "Event-Code, dann Raum-/Komitee-Code, optional Placard-Codes — für echte Check-in-Schlangen gebaut.",
       "q4": "Ist es bereit für ein Live-Wochenende?",
-      "a4": "Sitzungssaal, Abstimmungen, Notizen, Dokumente und Aufsicht sind für die gleichzeitige Nutzung in allen Kammern konzipiert."
+      "a4": "Sitzungsseite, Abstimmungen, Notizen, Dokumente und Aufsicht sind für parallele Nutzung über Kammern hinweg gebaut."
     },
     "aboutPage": {
       "metaTitle": "Ungefähr {app}",
@@ -5193,12 +5193,12 @@
       "purposeTitle": "Unser Ziel",
       "purposeP1": "Model United Nations ist am besten, wenn sich die Menschen auf Diplomatie, Verfahren, Forschung und Zusammenarbeit konzentrieren können. {app} existiert, um die Verwaltungsreibung in diesen Momenten zu verringern.",
       "purposeP2": "Die Plattform verbindet Vorbereitung, Live-Sitzungstools, Dokumente, Abstimmungen, Notizen und Aufsicht – ohne die Menschen zu ersetzen, die eine Konferenz ausmachen.",
-      "rolesTitle": "Designed around every role",
+      "rolesTitle": "Entwickelt für jede Rolle",
       "rolesDelegates": "Die Delegierten recherchieren, entwerfen, arbeiten zusammen und folgen den Reden.",
       "rolesChairs": "Die Vorsitzenden führen Namensaufrufe, Redner, Anträge, Timer und Abstimmungen durch.",
       "rolesAdvisors": "Berater unterstützen ihre Delegationen mit der richtigen Sichtbarkeit.",
       "rolesSecretariat": "Das Sekretariat koordiniert die Kammern und sieht konferenzweite Fortschritte.",
-      "techTitle": "Conference-first technology",
+      "techTitle": "Konferenz-First-Technologie",
       "techP1": "Die Funktionen sind auf echte Wochenend-Workflows, Rollengrenzen und eine ruhige Benutzeroberfläche ausgerichtet, wenn sich der Raum schnell bewegt. Barrierefreiheit und sicherer Rollenzugriff sind Teil des Designs.",
       "techCtaBefore": "Möchten Sie {app} bei Ihrer Konferenz?",
       "techCtaLink": "Sag Hallo"
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Nutzungsbedingungen | {app}",
       "metaDescription": "Die Bedingungen für den Zugriff auf und die Nutzung von {app}.",
-      "eyebrow": "Legal",
+      "eyebrow": "Rechtliches",
       "title": "Nutzungsbedingungen",
       "intro": "Diese Bedingungen regeln Ihren Zugriff auf und Ihre Nutzung von {app}. Durch die Nutzung des Dienstes stimmen Sie diesen Bedingungen zu.",
       "updated": "25. Juli 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Datenschutzrichtlinie | {app}",
       "metaDescription": "Wie {app} personenbezogene Daten erhebt, nutzt, speichert und schützt.",
-      "eyebrow": "Legal",
+      "eyebrow": "Rechtliches",
       "title": "Datenschutzrichtlinie",
       "intro": "In dieser Richtlinie wird erläutert, wie {app} mit personenbezogenen Daten umgeht, wenn Sie unsere Website, Anwendungen und Konferenzdienste nutzen.",
       "updated": "25. Juli 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backToHome": "Zurück nach Hause"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Öffnen Sie die Einstellungen für Darstellung und Barrierefreiheit",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "Zugänglichkeit und Farbe"
+    "openAria": "Darstellung und Barrierefreiheit öffnen",
+    "accountAria": "Konto und Einstellungen",
+    "profile": "Profil",
+    "appearanceAndAccess": "Barrierefreiheit & Farbe"
   }
 }

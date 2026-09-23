@@ -17,10 +17,10 @@
     "secretaryGeneral": "Secretaris-generaal",
     "returnToProfile": "Terug naar profiel",
     "useDifferentAccount": "Gebruik een ander account",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Genummerd op aanbevolen gebruik (1 = begin hier). Wijzig de volgorde in lib/nav-priority-order.ts.",
+    "chooseFile": "Kies Bestand",
+    "noFileChosen": "Geen bestand gekozen",
+    "clear": "Duidelijk",
     "reload": "Herladen"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Opmerkingen",
     "committee": "Commissie",
     "history": "Geschiedenis",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Nieuwskamer",
+    "pressCorps": "Pers Korps",
+    "milestones": "Mijlpalen",
     "voting": "Stemmen",
     "guides": "Gidsen",
     "documents": "Documenten",
@@ -601,7 +601,7 @@
     "ideas": "Ideeën",
     "sources": "Bronnen",
     "resolutions": "Resoluties",
-    "amendments": "Amendments",
+    "amendments": "Amendementen",
     "speeches": "Toespraken",
     "running": "Rennen",
     "report": "Rapport",
@@ -617,11 +617,11 @@
     "library": "Bibliotheek",
     "mainNavigationAria": "Hoofdnavigatie",
     "crisis": "Crisis",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Richtlijnen",
+    "fwcMovement": "Beweging",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Achterkamer",
+    "fwcEvidence": "Bewijs"
   },
   "dashboardLayout": {
     "helpCenter": "Helpcentrum",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Selecteer rol",
     "nextRoleAria": "Volgende rol",
     "authConnectError": "Kan geen verbinding maken met authenticatie (controleer Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Terug naar huis"
   },
   "googleDocs": {
     "openNewDocHelp": "Opent Google Documenten in een nieuw tabblad. Meld u aan als daarom wordt gevraagd en kopieer vervolgens de document-URL uit de adresbalk.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "De crisis glijdt",
     "resolutions": "Resoluties",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Amendementen",
+    "pressCorps": "Pers Korps",
     "allocationPasswords": "Wachtwoorden toewijzen",
     "sources": "Bronnen",
     "notes": "Opmerkingen",
-    "notesModeration": "Note review",
+    "notesModeration": "Opmerking beoordeling",
     "rollCallTracker": "✅ Roll-call-tracker",
     "runningNotes": "Notities uitvoeren",
     "awardsSmt": "Onderscheidingen",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Conferentieschema",
     "chairSchedule": "Conferentieschema",
     "advisorSchedule": "Conferentieschema",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Profiel delegeren",
+    "advisorDelegateDocuments": "Documenten delegeren",
+    "advisorDelegateVoting": "Stemmen door afgevaardigden",
+    "advisorDelegateNotes": "Delegeer notities",
     "voting": "Stemmen",
     "digitalRoom": "Digitale Kamer",
     "committeeSession": "Commissiesessie",
@@ -867,12 +867,12 @@
     "follow": "Volgen",
     "guides": "Gidsen",
     "committeeCodes": "Commissiecodes (voorzitter / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Sessievoortgang",
     "officialUnLinks": "Officiële VN-links",
     "committeeRoom": "Commissie kamer",
     "history": "Geschiedenis",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Nieuwskamer",
+    "milestones": "Mijlpalen",
     "speeches": "Toespraken",
     "chairRoom": "Stoel kamer",
     "ideas": "Ideeën",
@@ -891,7 +891,7 @@
     "smtProfile": "Profiel",
     "crisis": "Crisis",
     "smtDelegates": "Afgevaardigden",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Openingstoespraken"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -1538,13 +1538,13 @@
       "memberStates": "VN-lidstaten",
       "unSystem": "VN-systeem (oprichters en leden)",
       "history": "VN-geschiedenis",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "SEAMUN-website",
+      "seamunCommittee": "SEAMUN commissieportaal",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Opent in een nieuw tabblad.",
+    "backToCategories": "Alle categorieën",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Conferentiewebsite en commissieportaal",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Drie nieuwsbureaus voor elke toewijzing van het Perskorps (wereld, gezondheid en kenmerken)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Officiële SEAMUN-conferentiesite (schema's, info en aankondigingen).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,10 +4631,10 @@
       "contact": "Contact",
       "signIn": "Log in",
       "getStarted": "Ga aan de slag",
-      "features": "Features",
+      "features": "Functies",
       "about": "Over",
       "menu": "Menu",
-      "closeMenu": "Dichtbij",
+      "closeMenu": "Sluiten",
       "moreOnTheFloor": "Meer op de vloer"
     },
     "playOrbAnimation": "Speel InterMUN-animatie",
@@ -4642,15 +4642,15 @@
       "eyebrow": "Kamervloersoftware · Model UN",
       "title": "Eén tabblad voor de",
       "titleEmphasis": "hele commissie.",
-      "subtitle": "Vergadersoftware die uit de weg blijft totdat de voorzittershamer hem nodig heeft.",
-      "ctaStart": "Organiseer een evenement",
-      "ctaJoin": "Neem deel aan uw conferentie",
+      "subtitle": "Conferentiesoftware die uit de weg blijft tot de hamer hem nodig heeft.",
+      "ctaStart": "Een evenement organiseren",
+      "ctaJoin": "Deelnemen aan je conferentie",
       "chip1": "Appèl → quorum",
       "chip2": "GSL en formele moties",
       "chip3": "31 interfacetalen",
       "previewLabel": "Sessie verdieping",
-      "sticky1": "Appèl, timers en bewegingen op één verdieping.",
-      "sticky2": "Gebouwd voor stoelen die een hekel hebben aan jongleren met tabbladen.",
+      "sticky1": "Presentielijst, timers en moties op één vloer.",
+      "sticky2": "Gemaakt voor voorzitters die een hekel hebben aan jongleren met browsertabs.",
       "floorEyebrow": "Op de vloer"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Ingediend op (UTC)",
         "showOptionalDetails": "Evenementdetails toevoegen (optioneel)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Klaar om te starten? Begin de volledige secretariaatsregistratie.",
+      "registerSecretariatLink": "Registreer je conferentie"
     },
     "footer": {
       "ctaTitle": "Neem je volgende commissie mee",
@@ -4797,7 +4797,7 @@
       "ctaJoin": "Log in",
       "copyright": "© {year} InterMUN",
       "contact": "Contact",
-      "tagline": "Vergadersoftware die uit de weg blijft totdat de voorzittershamer hem nodig heeft.",
+      "tagline": "Conferentiesoftware die uit de weg blijft tot de hamer hem nodig heeft.",
       "product": "Product",
       "resources": "Bronnen",
       "howItWorks": "Hoe het werkt",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Afwezig",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Prepwerk toevoegen en opslaan",
+      "prepWorkspaceHint": "Dezelfde opstellen-en-opslaan-flows als het gedelegeerdendashboard — documenten, clausulevoorstellen en notities."
     },
     "exploreChairs": "Ontdek alle podiumfuncties",
     "exploreDelegates": "Ontdek alle delegatiefuncties",
@@ -4919,7 +4919,7 @@
             "previewLabel": "Timer bureau"
           },
           "awards": {
-            "index": "§ VI",
+            "index": "§VI",
             "eyebrow": "Rubriek onderscheidingen",
             "title": "Scores delegeren vóór beoordeling door het secretariaat",
             "description": "Beoordeel elke deelnemer tijdens de sessie op basis van de rubriek. De benoemingen van voorzitters stromen naar het secretariaat met bijgevoegd bewijsmateriaal voor de uiteindelijke beslissingen van de beste afgevaardigde.",
@@ -5166,23 +5166,23 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Onze roots",
+      "title": "Waar het begon",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
     },
     "faq": {
-      "title": "Vaak gevraagd",
-      "subtitle": "Wat voorzitters en secretariaat doorgaans vragen vóór een congresweekend.",
+      "title": "Veelgestelde vragen",
+      "subtitle": "Wat voorzitters en secretariaat meestal vragen vóór een conferentieweekend.",
       "q1": "Voor wie is dit?",
-      "a1": "Afgevaardigden, voorzitters, adviseurs en secretariaat: één conferentiewerkruimte met rolbewuste tools.",
-      "q2": "Kunnen we het perskorps en de Algemene Vergadering anders runnen?",
-      "a2": "Ja. Procedureprofielen houden het perskorps RoP gericht op die kamer zonder andere commissies te veranderen.",
-      "q3": "Hoe komen mensen een kamer binnen?",
-      "a3": "Evenementcode, vervolgens kamer-/commissiecode en vervolgens optionele plakkaatcodes — ontworpen voor echte inchecklijnen.",
-      "q4": "Is hij klaar voor een live-weekend?",
-      "a4": "Sessievloer, stemmingen, notities, documenten en toezicht zijn gebouwd voor gelijktijdig gebruik door alle kamers."
+      "a1": "Afgevaardigden, voorzitters, advisors en secretariaat — één conferentieruimte met rolbewuste tools.",
+      "q2": "Kunnen we press corps en AV anders draaien?",
+      "a2": "Ja. Procedureprofielen houden de RoP van press corps bij die kamer zonder andere commissies te wijzigen.",
+      "q3": "Hoe komt men in een zaal?",
+      "a3": "Eventcode, dan zaal-/commissiecode, daarna optionele placardcodes — voor echte check-inrijen.",
+      "q4": "Is het klaar voor een live weekend?",
+      "a4": "Sessievloer, stemmen, notities, documenten en toezicht zijn gebouwd voor gelijktijdig gebruik over kamers."
     },
     "aboutPage": {
       "metaTitle": "Over {app}",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Servicevoorwaarden | {app}",
       "metaDescription": "De voorwaarden voor toegang tot en gebruik van {app}.",
-      "eyebrow": "Legaal",
+      "eyebrow": "Juridisch",
       "title": "Servicevoorwaarden",
       "intro": "Deze voorwaarden zijn van toepassing op uw toegang tot en gebruik van {app}. Door gebruik te maken van de dienst gaat u akkoord met deze voorwaarden.",
       "updated": "25 juli 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Privacybeleid | {app}",
       "metaDescription": "Hoe {app} persoonlijke informatie verzamelt, gebruikt, opslaat en beschermt.",
-      "eyebrow": "Legaal",
+      "eyebrow": "Juridisch",
       "title": "Privacybeleid",
       "intro": "In dit beleid wordt uitgelegd hoe {app} omgaat met persoonlijke informatie wanneer u onze website, applicaties en conferentiediensten gebruikt.",
       "updated": "25 juli 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die u zoekt bestaat niet of is verplaatst.",
+    "backToHome": "Terug naar huis"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open de instellingen voor uiterlijk en toegankelijkheid",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "Weergave- en toegankelijkheidsinstellingen openen",
+    "accountAria": "Account en voorkeuren",
+    "profile": "Profiel",
     "appearanceAndAccess": "Toegankelijkheid & kleur"
   }
 }

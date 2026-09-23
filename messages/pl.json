@@ -17,10 +17,10 @@
     "secretaryGeneral": "Sekretarz Generalny",
     "returnToProfile": "Wróć do profilu",
     "useDifferentAccount": "Użyj innego konta",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Numerowane według zalecanego użycia (1 = zacznij tutaj). Zmień kolejność w lib/nav-priority-order.ts.",
+    "chooseFile": "Wybierz Plik",
+    "noFileChosen": "Nie wybrano pliku",
+    "clear": "Jasne",
     "reload": "Przeładować"
   },
   "eventGateForm": {
@@ -592,8 +592,8 @@
     "committee": "Komisja",
     "history": "Historia",
     "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "pressCorps": "Korpus Prasowy",
+    "milestones": "Kamienie milowe",
     "voting": "Głosowanie",
     "guides": "Przewodniki",
     "documents": "Dokumenty",
@@ -601,7 +601,7 @@
     "ideas": "Pomysły",
     "sources": "Źródła",
     "resolutions": "Postanowienia",
-    "amendments": "Amendments",
+    "amendments": "Poprawki",
     "speeches": "Przemówienia",
     "running": "Działanie",
     "report": "Raport",
@@ -617,11 +617,11 @@
     "library": "Biblioteka",
     "mainNavigationAria": "Główna nawigacja",
     "crisis": "Kryzys",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "Dyrektywy",
+    "fwcMovement": "Ruch",
+    "fwcMap": "Hawkinsa",
+    "fwcBackroom": "Zaplecze",
+    "fwcEvidence": "Dowód"
   },
   "dashboardLayout": {
     "helpCenter": "Centrum pomocy",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Wybierz rolę",
     "nextRoleAria": "Następna rola",
     "authConnectError": "Nie można połączyć się z uwierzytelnieniem (sprawdź Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Powrót do domu"
   },
   "googleDocs": {
     "openNewDocHelp": "Otwiera Dokumenty Google w nowej karcie. Zaloguj się, jeśli zostaniesz o to poproszony, a następnie skopiuj adres URL dokumentu z paska adresu.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Slajdy kryzysowe",
     "resolutions": "Postanowienia",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Poprawki",
+    "pressCorps": "Korpus Prasowy",
     "allocationPasswords": "Hasła alokacyjne",
     "sources": "Źródła",
     "notes": "Notatki",
-    "notesModeration": "Note review",
+    "notesModeration": "Uwaga recenzja",
     "rollCallTracker": "✅ Śledzenie połączeń telefonicznych",
     "runningNotes": "Uruchamianie notatek",
     "awardsSmt": "Nagrody",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Harmonogram konferencji",
     "chairSchedule": "Harmonogram konferencji",
     "advisorSchedule": "Harmonogram konferencji",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Profil delegata",
+    "advisorDelegateDocuments": "Deleguj dokumenty",
+    "advisorDelegateVoting": "Głosowanie delegatów",
+    "advisorDelegateNotes": "Notatki delegata",
     "voting": "Głosowanie",
     "digitalRoom": "Pokój cyfrowy",
     "committeeSession": "Posiedzenie komisji",
@@ -867,12 +867,12 @@
     "follow": "Podążać",
     "guides": "Przewodniki",
     "committeeCodes": "Kody komisji (przewodniczącego / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Postęp sesji",
     "officialUnLinks": "Oficjalne linki ONZ",
     "committeeRoom": "Pokój komisji",
     "history": "Historia",
     "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "milestones": "Kamienie milowe",
     "speeches": "Przemówienia",
     "chairRoom": "Pokój z krzesłami",
     "ideas": "Pomysły",
@@ -891,7 +891,7 @@
     "smtProfile": "Profil",
     "crisis": "Kryzys",
     "smtDelegates": "Delegaci",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Przemówienia otwierające"
   },
   "setupPage": {
     "title": "Supabase nie jest skonfigurowany",
@@ -1538,13 +1538,13 @@
       "memberStates": "Państwa członkowskie ONZ",
       "unSystem": "System ONZ (założyciele i członkowie)",
       "history": "Historia ONZ",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "stronie internetowej SEAMUN",
+      "seamunCommittee": "Portal komisji SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Otwiera się w nowej karcie.",
+    "backToCategories": "Wszystkie kategorie",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Strona internetowa konferencji i portal komisji",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Trzy punkty informacyjne dla każdego przydziału Korpusu Prasowego (świat, zdrowie i funkcje)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Oficjalna strona konferencji SEAMUN (harmonogramy, informacje i ogłoszenia).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "Kontakt",
       "signIn": "Zalogować się",
       "getStarted": "Zacznij",
-      "features": "Features",
-      "about": "O",
+      "features": "Funkcje",
+      "about": "O nas",
       "menu": "Menu",
-      "closeMenu": "Zamknąć",
-      "moreOnTheFloor": "Więcej na podłodze"
+      "closeMenu": "Zamknij",
+      "moreOnTheFloor": "Więcej na sali"
     },
     "playOrbAnimation": "Zagraj w animację InterMUN",
     "hero": {
       "eyebrow": "Oprogramowanie piętra komory · Model UN",
       "title": "Jedna zakładka dla",
       "titleEmphasis": "cała komisja.",
-      "subtitle": "Oprogramowanie konferencyjne, które pozostaje na uboczu, dopóki młotek go nie potrzebuje.",
+      "subtitle": "Oprogramowanie konferencyjne, które nie przeszkadza, dopóki młotek go nie potrzebuje.",
       "ctaStart": "Zorganizuj wydarzenie",
-      "ctaJoin": "Dołącz do swojej konferencji",
+      "ctaJoin": "Dołącz do konferencji",
       "chip1": "Apel → kworum",
       "chip2": "GSL i wnioski formalne",
       "chip3": "31 języków interfejsu",
       "previewLabel": "Podłoga sesyjna",
-      "sticky1": "Apel, liczniki czasu i wnioski na jednym piętrze.",
-      "sticky2": "Stworzony dla krzeseł, które nienawidzą żonglowania zakładkami.",
-      "floorEyebrow": "Na podłodze"
+      "sticky1": "Lista obecności, timery i wnioski na jednej sali.",
+      "sticky2": "Dla przewodniczących, którzy nienawidzą żonglowania kartami przeglądarki.",
+      "floorEyebrow": "Na sali"
     },
     "steps": {
       "eyebrow": "Przepływ bramowy",
@@ -4728,7 +4728,7 @@
       "paragraph1": "InterMUN to przestrzeń robocza w przeglądarce, która zastępuje zwykłą mieszankę arkuszy kalkulacyjnych, czatów grupowych i drukowanych plakatów skoordynowanymi narzędziami komitetu.",
       "paragraph2": "Krzesła zyskują kontrolę proceduralną, która odzwierciedla rzeczywisty przebieg sesji. Delegaci otrzymują zorganizowane przygotowanie przy sali. Sekretariat zapewnia widoczność całego wydarzenia bez zatrzymywania się nad każdym ruchem.",
       "paragraph3": "Niezależnie od tego, czy prowadzisz jedną salę, czy całą konferencję weekendową, InterMUN utrzymuje krzesła, delegatów i personel w jednym szeregu od apelu otwierającego po ceremonię zamknięcia.",
-      "dreamEyebrow": "Sen",
+      "dreamEyebrow": "Marzenie",
       "footerLabel": "O {app}"
     },
     "contact": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Przesłano o (UTC)",
         "showOptionalDetails": "Dodaj szczegóły wydarzenia (opcjonalnie)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Gotowi do startu? Rozpocznij pełną rejestrację sekretariatu.",
+      "registerSecretariatLink": "Zarejestruj konferencję"
     },
     "footer": {
       "ctaTitle": "Przyprowadź następną komisję",
@@ -4797,7 +4797,7 @@
       "ctaJoin": "Zalogować się",
       "copyright": "© {year} InterMUN",
       "contact": "Kontakt",
-      "tagline": "Oprogramowanie konferencyjne, które pozostaje na uboczu, dopóki młotek go nie potrzebuje.",
+      "tagline": "Oprogramowanie konferencyjne, które nie przeszkadza, dopóki młotek go nie potrzebuje.",
       "product": "Produkt",
       "resources": "Zasoby",
       "howItWorks": "Jak to działa",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+W",
       "statusPresent": "P",
       "statusAbsent": "Nieobecny",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Dodaj i zapisz przygotowanie",
+      "prepWorkspaceHint": "Te same przepływy pisania i zapisu co w panelu delegata — dokumenty, propozycje klauzul i notatki."
     },
     "exploreChairs": "Poznaj wszystkie funkcje podium",
     "exploreDelegates": "Poznaj wszystkie funkcje delegowania",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Nasze korzenie",
+      "title": "Gdzie to się zaczęło",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "Bangkok, Tajlandia"
     },
     "faq": {
-      "title": "Często zadawane pytania",
-      "subtitle": "O co zwykle pytają przewodniczący i sekretariat przed weekendem konferencyjnym.",
+      "title": "Częste pytania",
+      "subtitle": "Co zwykle pytają przewodniczący i sekretariat przed weekendem konferencji.",
       "q1": "Dla kogo to jest?",
-      "a1": "Delegaci, przewodniczący, doradcy i sekretariat — jedna przestrzeń robocza konferencji z narzędziami uwzględniającymi role.",
+      "a1": "Delegaci, przewodniczący, doradcy i sekretariat — jedna przestrzeń z narzędziami według roli.",
       "q2": "Czy możemy inaczej zarządzać korpusem prasowym i GA?",
       "a2": "Tak. Profile procedur utrzymują korpus prasowy RoP w zasięgu tej izby bez zmiany innych komisji.",
       "q3": "Jak ludzie wchodzą do pokoju?",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Warunki świadczenia usług | {app}",
       "metaDescription": "Warunki regulujące dostęp i korzystanie z {app}.",
-      "eyebrow": "Prawny",
+      "eyebrow": "Informacje prawne",
       "title": "Warunki świadczenia usług",
       "intro": "Niniejsze warunki regulują dostęp i korzystanie z {app}. Korzystając z usługi, wyrażasz zgodę na te warunki.",
       "updated": "25 lipca 2026 r",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Polityka prywatności | {app}",
       "metaDescription": "Jak {app} gromadzi, wykorzystuje, przechowuje i chroni dane osobowe.",
-      "eyebrow": "Prawny",
+      "eyebrow": "Informacje prawne",
       "title": "Polityka prywatności",
       "intro": "Niniejsza polityka wyjaśnia, w jaki sposób {app} postępuje z danymi osobowymi podczas korzystania z naszej strony internetowej, aplikacji i usług konferencyjnych.",
       "updated": "25 lipca 2026 r",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Nie znaleziono strony",
+    "description": "Strona, której szukasz nie istnieje lub została przeniesiona.",
+    "backToHome": "Powrót do domu"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "Otwórz ustawienia wyglądu i dostępności",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "accountAria": "Konto i preferencje",
+    "profile": "Profil",
     "appearanceAndAccess": "Dostępność i kolor"
   }
 }

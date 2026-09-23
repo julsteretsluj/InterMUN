@@ -17,10 +17,10 @@
     "secretaryGeneral": "Генеральний секретар",
     "returnToProfile": "Повернутися до профілю",
     "useDifferentAccount": "Використовуйте інший обліковий запис",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Пронумеровано відповідно до рекомендованого використання (1 = початок тут). Змініть порядок у lib/nav-priority-order.ts.",
+    "chooseFile": "Виберіть Файл",
+    "noFileChosen": "Файл не вибрано",
+    "clear": "ясно",
     "reload": "Перезавантажити"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Примітки",
     "committee": "Комітет",
     "history": "історія",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Новини",
+    "pressCorps": "Корпус преси",
+    "milestones": "Віхи",
     "voting": "Голосування",
     "guides": "Посібники",
     "documents": "Документи",
@@ -601,7 +601,7 @@
     "ideas": "Ідеї",
     "sources": "Джерела",
     "resolutions": "Резолюції",
-    "amendments": "Amendments",
+    "amendments": "Поправки",
     "speeches": "Виступи",
     "running": "Біг",
     "report": "звіт",
@@ -617,11 +617,11 @@
     "library": "Бібліотека",
     "mainNavigationAria": "Основна навігація",
     "crisis": "Криза",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "Директиви",
+    "fwcMovement": "Рух",
+    "fwcMap": "Хокінс",
+    "fwcBackroom": "Закулісне приміщення",
+    "fwcEvidence": "Докази"
   },
   "dashboardLayout": {
     "helpCenter": "Довідковий центр",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Виберіть роль",
     "nextRoleAria": "Наступна роль",
     "authConnectError": "Не вдалося підключитися до автентифікації (перевірте Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Назад додому"
   },
   "googleDocs": {
     "openNewDocHelp": "Відкриває Документи Google у новій вкладці. Увійдіть, якщо буде запропоновано, а потім скопіюйте URL-адресу документа з адресного рядка.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Кризові слайди",
     "resolutions": "Резолюції",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Поправки",
+    "pressCorps": "Корпус преси",
     "allocationPasswords": "Паролі розподілу",
     "sources": "Джерела",
     "notes": "Примітки",
-    "notesModeration": "Note review",
+    "notesModeration": "Перегляд нот",
     "rollCallTracker": "✅ Відстеження перекличок",
     "runningNotes": "Примітки до виконання",
     "awardsSmt": "Нагороди",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Розклад конференції",
     "chairSchedule": "Розклад конференції",
     "advisorSchedule": "Розклад конференції",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Профіль делегата",
+    "advisorDelegateDocuments": "Документи делегатів",
+    "advisorDelegateVoting": "Голосування делегатів",
+    "advisorDelegateNotes": "Примітки делегатів",
     "voting": "Голосування",
     "digitalRoom": "Цифрова кімната",
     "committeeSession": "Засідання комітету",
@@ -867,12 +867,12 @@
     "follow": "Слідуйте",
     "guides": "Посібники",
     "committeeCodes": "Коди комітетів (голова / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Хід сеансу",
     "officialUnLinks": "Офіційні посилання ООН",
     "committeeRoom": "Кімната комітету",
     "history": "історія",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Новини",
+    "milestones": "Віхи",
     "speeches": "Виступи",
     "chairRoom": "Крісельна кімната",
     "ideas": "Ідеї",
@@ -891,7 +891,7 @@
     "smtProfile": "Профіль",
     "crisis": "Криза",
     "smtDelegates": "Делегати",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Вступні промови"
   },
   "setupPage": {
     "title": "Supabase не налаштовано",
@@ -1539,12 +1539,12 @@
       "unSystem": "Система ООН (засновники та члени)",
       "history": "Історія ООН",
       "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunCommittee": "Портал комітету SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Відкривається в новій вкладці.",
+    "backToCategories": "Всі категорії",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Сайт конференції та портал комітету",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Три відділи новин для кожного розподілу Прес-корпусу (світ, здоров’я та функції)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Офіційний сайт конференції SEAMUN (розклади, інформація та оголошення).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "контакт",
       "signIn": "Увійдіть",
       "getStarted": "Почніть роботу",
-      "features": "Features",
+      "features": "Можливості",
       "about": "про",
       "menu": "Меню",
       "closeMenu": "Закрити",
@@ -4650,7 +4650,7 @@
       "chip3": "31 мова інтерфейсу",
       "previewLabel": "Сесійний поверх",
       "sticky1": "Перекличка, таймери, рухи в одному поверсі.",
-      "sticky2": "Створено для стільців, які ненавидять жонглювати вкладками.",
+      "sticky2": "Для голів, які ненавидять жонглювати вкладками браузера.",
       "floorEyebrow": "На підлозі"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Надіслано о (UTC)",
         "showOptionalDetails": "Додати деталі події (необов'язково)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Готові почати? Запустіть повну реєстрацію секретаріату.",
+      "registerSecretariatLink": "Зареєструвати конференцію"
     },
     "footer": {
       "ctaTitle": "Приведіть свій наступний комітет",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Відсутній",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Додати й зберегти підготовку",
+      "prepWorkspaceHint": "Ті самі сценарії «написати й зберегти», що й у панелі делегата — документи, пропозиції пунктів і нотатки."
     },
     "exploreChairs": "Ознайомтеся з усіма функціями dais",
     "exploreDelegates": "Ознайомтеся з усіма функціями делегування",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Наше коріння",
+      "title": "Де все почалося",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "Бангкок, Таїланд"
     },
     "faq": {
       "title": "Часто запитують",
@@ -5208,8 +5208,8 @@
     },
     "termsPage": {
       "metaTitle": "Умови надання послуг | {app}",
-      "metaDescription": "The terms governing access to and use of {app}.",
-      "eyebrow": "юридичний",
+      "metaDescription": "Умови, що регулюють доступ і використання {app}.",
+      "eyebrow": "Правова інформація",
       "title": "Умови обслуговування",
       "intro": "Ці умови регулюють ваш доступ і використання {app}. Користуючись послугою, ви погоджуєтеся з цими умовами.",
       "updated": "25 липня 2026 р",
@@ -5218,13 +5218,13 @@
       "usingP1": "Ви повинні надавати точну інформацію, використовувати послугу лише для законних конференцій та освітніх цілей і виконувати розумні вказівки організатора конференції.",
       "usingP2": "Якщо ви юридично не можете прийняти ці умови самостійно, батьки, опікуни, школа або організатори конференції повинні дозволити ваше використання. Організатори несуть відповідальність за те, щоб їхні учасники були належним чином авторизовані.",
       "accountsTitle": "Облікові записи та доступ",
-      "accountsL1": "Keep your credentials and conference access codes confidential.",
-      "accountsL2": "Do not impersonate another person or misrepresent your role.",
+      "accountsL1": "Зберігайте свої облікові дані та коди доступу до конференції в таємниці.",
+      "accountsL2": "Не видавайте себе за іншу особу та не уявляйте свою роль неправдиво.",
       "accountsL3": "Не отримуйте доступ до даних, комітетів або адміністративних інструментів, якими ви не маєте права користуватися.",
       "accountsL4": "Негайно повідомте нам або своєму організатору, якщо ви підозрюєте неавторизоване використання облікового запису.",
       "contentTitle": "Ваш контент",
       "contentP1": "Ви зберігаєте право власності на створений вами вміст. Ви надаєте нам обмежену ліцензію на розміщення, обробку, відтворення та відображення цього вмісту лише за потреби для роботи, захисту та покращення послуги та підтримки вашої конференції.",
-      "contentP2": "You are responsible for ensuring that your content is lawful and that you have permission to share it. Do not upload confidential material unless it is appropriate for the intended conference audience.",
+      "contentP2": "Ви несете відповідальність за те, щоб ваш вміст був законним і ви мали дозвіл на його поширення. Не завантажуйте конфіденційний матеріал, якщо він не підходить для цільової аудиторії конференції.",
       "acceptableTitle": "Прийнятне використання",
       "acceptableP1": "Ви не маєте права порушувати службу, обходити засоби контролю доступу, шукати вразливі місця, очищати дані без дозволу, поширювати зловмисне програмне забезпечення, переслідувати інших, порушувати інтелектуальну власність або використовувати платформу для шахрайства чи незаконної діяльності. We may investigate and restrict activity that threatens participants, conferences, or the service.",
       "organisersTitle": "Організатори конференції",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Політика конфіденційності | {app}",
       "metaDescription": "Як {app} збирає, використовує, зберігає та захищає особисту інформацію.",
-      "eyebrow": "юридичний",
+      "eyebrow": "Правова інформація",
       "title": "Політика конфіденційності",
       "intro": "У цій політиці пояснюється, як {app} обробляє особисту інформацію, коли ви використовуєте наш веб-сайт, програми та служби конференцій.",
       "updated": "25 липня 2026 р",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Сторінка не знайдена",
+    "description": "Сторінка, яку ви шукаєте, не існує або переміщена.",
+    "backToHome": "Назад додому"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Відкрийте налаштування зовнішнього вигляду та доступності",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "Відкрити налаштування вигляду й доступності",
+    "accountAria": "Обліковий запис і налаштування",
+    "profile": "Профіль",
     "appearanceAndAccess": "Доступність і колір"
   }
 }

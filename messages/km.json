@@ -17,10 +17,10 @@
     "secretaryGeneral": "អគ្គលេខាធិការ",
     "returnToProfile": "ត្រឡប់ទៅប្រវត្តិរូប",
     "useDifferentAccount": "ប្រើគណនីផ្សេង",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "លេខរៀងដោយការប្រើប្រាស់ដែលបានណែនាំ (1 = ចាប់ផ្តើមនៅទីនេះ)។ ផ្លាស់ប្តូរលំដាប់នៅក្នុង lib/nav-priority-order.ts ។",
+    "chooseFile": "ជ្រើសរើសឯកសារ",
+    "noFileChosen": "គ្មានឯកសារត្រូវបានជ្រើសរើសទេ។",
+    "clear": "ច្បាស់",
     "reload": "ផ្ទុកឡើងវិញ"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "កំណត់ចំណាំ",
     "committee": "គណៈកម្មាធិការ",
     "history": "ប្រវត្តិសាស្ត្រ",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "បន្ទប់ព័ត៌មាន",
+    "pressCorps": "សារព័ត៌មាន Corps",
+    "milestones": "ចំណុចសំខាន់",
     "voting": "ការបោះឆ្នោត",
     "guides": "មគ្គុទ្ទេសក៍",
     "documents": "ឯកសារ",
@@ -601,7 +601,7 @@
     "ideas": "គំនិត",
     "sources": "ប្រភព",
     "resolutions": "ដំណោះស្រាយ",
-    "amendments": "Amendments",
+    "amendments": "វិសោធនកម្ម",
     "speeches": "សុន្ទរកថា",
     "running": "កំពុងរត់",
     "report": "រាយការណ៍",
@@ -617,11 +617,11 @@
     "library": "បណ្ណាល័យ",
     "mainNavigationAria": "ការរុករកចម្បង",
     "crisis": "វិបត្តិ",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "សេចក្តីណែនាំ",
+    "fwcMovement": "ចលនា",
+    "fwcMap": "ហកឃីន",
+    "fwcBackroom": "បន្ទប់ខាងក្រោយ",
+    "fwcEvidence": "ភស្តុតាង"
   },
   "dashboardLayout": {
     "helpCenter": "មជ្ឈមណ្ឌលជំនួយ",
@@ -668,7 +668,7 @@
     "selectRoleAria": "ជ្រើសរើសតួនាទី",
     "nextRoleAria": "តួនាទីបន្ទាប់",
     "authConnectError": "មិនអាចភ្ជាប់ទៅការផ្ទៀងផ្ទាត់ (ពិនិត្យ Supabase env vars)។",
-    "backToHome": "Back to home"
+    "backToHome": "ត្រឡប់ទៅផ្ទះវិញ។"
   },
   "googleDocs": {
     "openNewDocHelp": "បើក Google Docs នៅក្នុងផ្ទាំងថ្មី។ ចូលប្រសិនបើត្រូវបានសួរ បន្ទាប់មកចម្លង URL ឯកសារពីរបារអាសយដ្ឋាន។",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "វិបត្តិស្លាយ",
     "resolutions": "ដំណោះស្រាយ",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "វិសោធនកម្ម",
+    "pressCorps": "សារព័ត៌មាន Corps",
     "allocationPasswords": "ការបែងចែកពាក្យសម្ងាត់",
     "sources": "ប្រភព",
     "notes": "កំណត់ចំណាំ",
-    "notesModeration": "Note review",
+    "notesModeration": "ការពិនិត្យឡើងវិញចំណាំ",
     "rollCallTracker": "✅ កម្មវិធីតាមដានការហៅទូរស័ព្ទ",
     "runningNotes": "កំពុងដំណើរការចំណាំ",
     "awardsSmt": "រង្វាន់",
@@ -855,10 +855,10 @@
     "delegateSchedule": "កាលវិភាគសន្និសីទ",
     "chairSchedule": "កាលវិភាគសន្និសីទ",
     "advisorSchedule": "កាលវិភាគសន្និសីទ",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "កម្រងព័ត៌មានតំណាង",
+    "advisorDelegateDocuments": "ឯកសារប្រតិភូ",
+    "advisorDelegateVoting": "ការបោះឆ្នោតប្រតិភូ",
+    "advisorDelegateNotes": "កំណត់ចំណាំរបស់ប្រតិភូ",
     "voting": "ការបោះឆ្នោត",
     "digitalRoom": "បន្ទប់ឌីជីថល",
     "committeeSession": "សម័យប្រជុំគណៈកម្មាធិការ",
@@ -867,12 +867,12 @@
     "follow": "ធ្វើតាម",
     "guides": "មគ្គុទ្ទេសក៍",
     "committeeCodes": "លេខកូដគណៈកម្មាធិការ (ប្រធាន / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "វឌ្ឍនភាពវគ្គ",
     "officialUnLinks": "តំណភ្ជាប់ផ្លូវការរបស់អង្គការសហប្រជាជាតិ",
     "committeeRoom": "បន្ទប់គណៈកម្មាធិការ",
     "history": "ប្រវត្តិសាស្ត្រ",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "បន្ទប់ព័ត៌មាន",
+    "milestones": "ចំណុចសំខាន់",
     "speeches": "សុន្ទរកថា",
     "chairRoom": "បន្ទប់កៅអី",
     "ideas": "គំនិត",
@@ -891,7 +891,7 @@
     "smtProfile": "ប្រវត្តិរូប",
     "crisis": "វិបត្តិ",
     "smtDelegates": "ប្រតិភូ",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ សុន្ទរកថាបើក"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -1538,13 +1538,13 @@
       "memberStates": "ប្រទេសសមាជិកអង្គការសហប្រជាជាតិ",
       "unSystem": "ប្រព័ន្ធអង្គការសហប្រជាជាតិ (ស្ថាបនិក និងសមាជិក)",
       "history": "ប្រវត្តិសាស្រ្តរបស់អង្គការសហប្រជាជាតិ",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "គេហទំព័រ SEAMUN",
+      "seamunCommittee": "វិបផតថលគណៈកម្មាធិការ SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "បើកនៅក្នុងផ្ទាំងថ្មី។",
+    "backToCategories": "ប្រភេទទាំងអស់។",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "គេហទំព័រសន្និសីទ និងវិបផតថលគណៈកម្មាធិការ",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "តុព័ត៌មានចំនួនបីសម្រាប់ការបែងចែកអង្គភាពសារព័ត៌មាននីមួយៗ (ពិភពលោក សុខភាព និងលក្ខណៈពិសេស)។"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "គេហទំព័រផ្លូវការនៃសន្និសីទ SEAMUN (កាលវិភាគ ព័ត៌មាន និងសេចក្តីប្រកាស)។",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "ទំនាក់ទំនង",
       "signIn": "ចូល",
       "getStarted": "ចាប់ផ្តើម",
-      "features": "Features",
+      "features": "មុខងារ",
       "about": "អំពី",
       "menu": "ម៉ឺនុយ",
       "closeMenu": "បិទ",
@@ -4650,7 +4650,7 @@
       "chip3": "31 ភាសាចំណុចប្រទាក់",
       "previewLabel": "ជាន់នៃវគ្គ",
       "sticky1": "ការហៅទូរសព្ទ មុខងារកំណត់ម៉ោង និងចលនាក្នុងមួយជាន់។",
-      "sticky2": "បង្កើតឡើងសម្រាប់កៅអីដែលស្អប់ផ្ទាំងល្បែង។",
+      "sticky2": "បង្កើតសម្រាប់ប្រធានដែលស្អប់ការប្តូរទៅមករវាង tab កម្មវិធីរុករក។",
       "floorEyebrow": "នៅលើឥដ្ឋ"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "ដាក់ស្នើនៅ (UTC)",
         "showOptionalDetails": "បន្ថែមព័ត៌មានលម្អិតអំពីព្រឹត្តិការណ៍ (ជាជម្រើស)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "រួចរាល់ហើយឬនៅ? ចាប់ផ្តើមការចុះឈ្មោះលេខាធិការពេញលេញ។",
+      "registerSecretariatLink": "ចុះឈ្មោះសន្និសីទរបស់អ្នក"
     },
     "footer": {
       "ctaTitle": "នាំគណៈកម្មការបន្ទាប់របស់អ្នក។",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "អវត្តមាន",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "បន្ថែម និងរក្សាទុកការរៀបចំ",
+      "prepWorkspaceHint": "លំហូរសរសេរ និងរក្សាទុកដូចផ្ទាំងតំណាង — ឯកសារ សំណើឃ្លា និងកំណត់ចំណាំ។"
     },
     "exploreChairs": "ស្វែងរកលក្ខណៈពិសេសទាំងអស់របស់ dais",
     "exploreDelegates": "រុករកមុខងារតំណាងទាំងអស់។",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "ឫសគល់របស់យើង",
+      "title": "កន្លែងដែលវាចាប់ផ្តើម",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "បាងកក ប្រទេសថៃ"
     },
     "faq": {
       "title": "សួរញឹកញាប់",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "រកមិនឃើញទំព័រ",
+    "description": "ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានផ្លាស់ទី។",
+    "backToHome": "ត្រឡប់ទៅផ្ទះវិញ។"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "បើករូបរាង និងការកំណត់ភាពងាយស្រួល",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "បើកការកំណត់រូបរាង និងភាពងាយស្រួល",
+    "accountAria": "គណនី និងចំណូលចិត្ត",
+    "profile": "ប្រវត្តិរូប",
     "appearanceAndAccess": "ភាពងាយស្រួល និងពណ៌"
   }
 }

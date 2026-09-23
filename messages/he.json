@@ -17,10 +17,10 @@
     "secretaryGeneral": "מזכ\"ל",
     "returnToProfile": "חזור לפרופיל",
     "useDifferentAccount": "השתמש בחשבון אחר",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "ממוספר לפי שימוש מומלץ (1 = התחל כאן). שנה סדר ב-lib/nav-priority-order.ts.",
+    "chooseFile": "בחר קובץ",
+    "noFileChosen": "לא נבחר קובץ",
+    "clear": "בָּרוּר",
     "reload": "לִטעוֹן מִחָדָשׁ"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "הערות",
     "committee": "וַעֲדָה",
     "history": "הִיסטוֹרִיָה",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "חדר חדשות",
+    "pressCorps": "חיל העיתונות",
+    "milestones": "אבני דרך",
     "voting": "הַצבָּעָה",
     "guides": "מדריכים",
     "documents": "מסמכים",
@@ -601,7 +601,7 @@
     "ideas": "רעיונות",
     "sources": "מקורות",
     "resolutions": "החלטות",
-    "amendments": "Amendments",
+    "amendments": "תיקונים",
     "speeches": "נאומים",
     "running": "רִיצָה",
     "report": "דִוּוּחַ",
@@ -617,11 +617,11 @@
     "library": "סִפְרִיָה",
     "mainNavigationAria": "ניווט ראשי",
     "crisis": "מַשׁבֵּר",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "הנחיות",
+    "fwcMovement": "תְנוּעָה",
+    "fwcMap": "הוקינס",
+    "fwcBackroom": "חדר אחורי",
+    "fwcEvidence": "עֵדוּת"
   },
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
@@ -668,7 +668,7 @@
     "selectRoleAria": "בחר תפקיד",
     "nextRoleAria": "התפקיד הבא",
     "authConnectError": "לא ניתן להתחבר לאימות (בדוק Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "חזרה הביתה"
   },
   "googleDocs": {
     "openNewDocHelp": "פותח את Google Docs בכרטיסייה חדשה. היכנס אם תתבקש, ולאחר מכן העתק את כתובת האתר של המסמך מסרגל הכתובות.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "מגלשות משבר",
     "resolutions": "החלטות",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "תיקונים",
+    "pressCorps": "חיל העיתונות",
     "allocationPasswords": "הקצאת סיסמאות",
     "sources": "מקורות",
     "notes": "הערות",
-    "notesModeration": "Note review",
+    "notesModeration": "הערה סקירה",
     "rollCallTracker": "✅ מעקב אחר שיחות",
     "runningNotes": "ריצה הערות",
     "awardsSmt": "פרסים",
@@ -855,10 +855,10 @@
     "delegateSchedule": "לוח זמנים לכנס",
     "chairSchedule": "לוח זמנים לכנס",
     "advisorSchedule": "לוח זמנים לכנס",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "פרופיל נציג",
+    "advisorDelegateDocuments": "האצלת מסמכים",
+    "advisorDelegateVoting": "הצבעת נציגים",
+    "advisorDelegateNotes": "נציג הערות",
     "voting": "הַצבָּעָה",
     "digitalRoom": "חדר דיגיטלי",
     "committeeSession": "מושב הוועדה",
@@ -867,12 +867,12 @@
     "follow": "לַעֲקוֹב",
     "guides": "מדריכים",
     "committeeCodes": "קודי ועדה (יו\"ר / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "התקדמות הפגישה",
     "officialUnLinks": "קישורים רשמיים של האו\"ם",
     "committeeRoom": "חדר ועדות",
     "history": "הִיסטוֹרִיָה",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "חדר חדשות",
+    "milestones": "אבני דרך",
     "speeches": "נאומים",
     "chairRoom": "חדר כיסא",
     "ideas": "רעיונות",
@@ -891,7 +891,7 @@
     "smtProfile": "פּרוֹפִיל",
     "crisis": "מַשׁבֵּר",
     "smtDelegates": "נציגים",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ נאומי פתיחה"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -1538,13 +1538,13 @@
       "memberStates": "המדינות החברות באו\"ם",
       "unSystem": "מערכת האו\"ם (מייסדים וחברים)",
       "history": "היסטוריה של האו\"ם",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "אתר SEAMUN",
+      "seamunCommittee": "פורטל ועדת SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "נפתח בכרטיסייה חדשה.",
+    "backToCategories": "כל הקטגוריות",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "אתר הכנס ופורטל הוועדה",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "שלושה דסקי חדשות עבור כל הקצאת חיל העיתונות (עולם, בריאות ותכונות)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "אתר הכנס הרשמי של SEAMUN (לוחות זמנים, מידע והודעות).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "מַגָע",
       "signIn": "היכנס",
       "getStarted": "התחל",
-      "features": "Features",
+      "features": "תכונות",
       "about": "אוֹדוֹת",
       "menu": "תַפרִיט",
       "closeMenu": "לִסְגוֹר",
@@ -4650,7 +4650,7 @@
       "chip3": "31 שפות ממשק",
       "previewLabel": "קומת מושב",
       "sticky1": "מפקד, טיימרים ותנועות בקומה אחת.",
-      "sticky2": "נבנה עבור כיסאות ששונאים כרטיסיות ג'אגלינג.",
+      "sticky2": "מיועד ליושבי ראש ששונאים לקפץ בין לשוניות בדפדפן.",
       "floorEyebrow": "על הרצפה"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "נשלח ב- (UTC)",
         "showOptionalDetails": "הוסף פרטי אירוע (אופציונלי)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "מוכנים להתחיל? התחילו את רישום המזכירות המלא.",
+      "registerSecretariatLink": "רשמו את הכנס שלכם"
     },
     "footer": {
       "ctaTitle": "תביא את הוועדה הבאה שלך",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "נֶעדָר",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "הוסיפו ושמרו עבודת הכנה",
+      "prepWorkspaceHint": "אותם תהליכי כתיבה ושמירה כמו בלוח המקצוענים — מסמכים, הצעות סעיפים והערות."
     },
     "exploreChairs": "חקור את כל התכונות של ה- Dais",
     "exploreDelegates": "חקור את כל תכונות הנציג",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "השורשים שלנו",
+      "title": "איפה זה התחיל",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "בנגקוק, תאילנד"
     },
     "faq": {
       "title": "נשאל תכופות",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "תנאים והגבלות | {app}",
       "metaDescription": "התנאים המסדירים את הגישה והשימוש ב-{app}.",
-      "eyebrow": "מִשׁפָּטִי",
+      "eyebrow": "משפטי",
       "title": "תנאים והגבלות",
       "intro": "תנאים אלה מסדירים את הגישה והשימוש שלך ב{app}. בשימוש בשירות, אתה מסכים לתנאים אלה.",
       "updated": "25 ביולי 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "מדיניות פרטיות | {app}",
       "metaDescription": "כיצד {app} אוסף, משתמש, מאחסן ומגן על מידע אישי.",
-      "eyebrow": "מִשׁפָּטִי",
+      "eyebrow": "משפטי",
       "title": "מדיניות פרטיות",
       "intro": "מדיניות זו מסבירה כיצד {app} מטפל במידע אישי כאשר אתה משתמש באתר האינטרנט, באפליקציות ובשירותי הועידות שלנו.",
       "updated": "25 ביולי 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "הדף לא נמצא",
+    "description": "הדף שאתה מחפש אינו קיים או עבר.",
+    "backToHome": "חזרה הביתה"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "פתח את הגדרות המראה והנגישות",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "פתח הגדרות מראה ונגישות",
+    "accountAria": "חשבון והעדפות",
+    "profile": "פרופיל",
     "appearanceAndAccess": "נגישות וצבע"
   }
 }

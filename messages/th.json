@@ -17,10 +17,10 @@
     "secretaryGeneral": "เลขาธิการ",
     "returnToProfile": "กลับไปที่โปรไฟล์",
     "useDifferentAccount": "ใช้บัญชีอื่น",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "กำหนดหมายเลขตามการใช้งานที่แนะนำ (1 = เริ่มที่นี่) เปลี่ยนลำดับใน lib/nav-priority-order.ts",
+    "chooseFile": "เลือกไฟล์",
+    "noFileChosen": "ไม่ได้เลือกไฟล์",
+    "clear": "ชัดเจน",
     "reload": "โหลดซ้ำ"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "หมายเหตุ",
     "committee": "คณะกรรมการ",
     "history": "ประวัติศาสตร์",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "ห้องข่าว",
+    "pressCorps": "คณะสื่อมวลชน",
+    "milestones": "เหตุการณ์สำคัญ",
     "voting": "การลงคะแนนเสียง",
     "guides": "ไกด์",
     "documents": "เอกสาร",
@@ -601,7 +601,7 @@
     "ideas": "ไอเดีย",
     "sources": "แหล่งที่มา",
     "resolutions": "มติ",
-    "amendments": "Amendments",
+    "amendments": "การแก้ไข",
     "speeches": "สุนทรพจน์",
     "running": "วิ่ง",
     "report": "รายงาน",
@@ -617,11 +617,11 @@
     "library": "ห้องสมุด",
     "mainNavigationAria": "การนำทางหลัก",
     "crisis": "วิกฤติ",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "คำสั่ง",
+    "fwcMovement": "ความเคลื่อนไหว",
+    "fwcMap": "ฮอว์กินส์",
+    "fwcBackroom": "ห้องด้านหลัง",
+    "fwcEvidence": "หลักฐาน"
   },
   "dashboardLayout": {
     "helpCenter": "ศูนย์ช่วยเหลือ",
@@ -668,7 +668,7 @@
     "selectRoleAria": "เลือกบทบาท",
     "nextRoleAria": "บทบาทต่อไป",
     "authConnectError": "ไม่สามารถเชื่อมต่อกับการตรวจสอบสิทธิ์ได้ (ตรวจสอบ Supabase env vars)",
-    "backToHome": "Back to home"
+    "backToHome": "กลับบ้าน"
   },
   "googleDocs": {
     "openNewDocHelp": "เปิด Google เอกสารในแท็บใหม่ ลงชื่อเข้าใช้หากได้รับแจ้ง จากนั้นคัดลอก URL เอกสารจากแถบที่อยู่",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "สไลด์วิกฤติ",
     "resolutions": "มติ",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "การแก้ไข",
+    "pressCorps": "คณะสื่อมวลชน",
     "allocationPasswords": "รหัสผ่านการจัดสรร",
     "sources": "แหล่งที่มา",
     "notes": "หมายเหตุ",
-    "notesModeration": "Note review",
+    "notesModeration": "หมายเหตุ ทบทวน",
     "rollCallTracker": "✅ ติดตามการโทรแบบม้วน",
     "runningNotes": "หมายเหตุการวิ่ง",
     "awardsSmt": "รางวัล",
@@ -855,10 +855,10 @@
     "delegateSchedule": "ตารางการประชุม",
     "chairSchedule": "ตารางการประชุม",
     "advisorSchedule": "ตารางการประชุม",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "โปรไฟล์การมอบสิทธิ์",
+    "advisorDelegateDocuments": "มอบหมายเอกสาร",
+    "advisorDelegateVoting": "มอบสิทธิ์การลงคะแนนเสียง",
+    "advisorDelegateNotes": "บันทึกการมอบหมาย",
     "voting": "การลงคะแนนเสียง",
     "digitalRoom": "ห้องดิจิตอล",
     "committeeSession": "สมัยประชุมคณะกรรมการ",
@@ -867,12 +867,12 @@
     "follow": "ติดตาม",
     "guides": "ไกด์",
     "committeeCodes": "รหัสคณะกรรมการ (ประธาน / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "ความคืบหน้าของเซสชั่น",
     "officialUnLinks": "ลิงก์ทางการของสหประชาชาติ",
     "committeeRoom": "ห้องกรรมการ",
     "history": "ประวัติศาสตร์",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "ห้องข่าว",
+    "milestones": "เหตุการณ์สำคัญ",
     "speeches": "สุนทรพจน์",
     "chairRoom": "ห้องเก้าอี้",
     "ideas": "ไอเดีย",
@@ -891,7 +891,7 @@
     "smtProfile": "ประวัติโดยย่อ",
     "crisis": "วิกฤติ",
     "smtDelegates": "ผู้ได้รับมอบหมาย",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ กล่าวเปิดงาน"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -1538,13 +1538,13 @@
       "memberStates": "ประเทศสมาชิกของสหประชาชาติ",
       "unSystem": "UN System (ผู้ก่อตั้งและสมาชิก)",
       "history": "ประวัติศาสตร์สหประชาชาติ",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "เว็บไซต์ซีมุน",
+      "seamunCommittee": "พอร์ทัลคณะกรรมการ SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "เปิดในแท็บใหม่",
+    "backToCategories": "ทุกหมวดหมู่",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "เว็บไซต์การประชุมและพอร์ทัลคณะกรรมการ",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "โต๊ะข่าวสามโต๊ะสำหรับการจัดสรร Press Corps แต่ละครั้ง (โลก สุขภาพ และฟีเจอร์)"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "เว็บไซต์การประชุมอย่างเป็นทางการของ SEAMUN (กำหนดการ ข้อมูล และประกาศ)",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "ติดต่อ",
       "signIn": "เข้าสู่ระบบ",
       "getStarted": "เริ่มต้นเลย",
-      "features": "Features",
+      "features": "ฟีเจอร์",
       "about": "เกี่ยวกับ",
       "menu": "เมนู",
       "closeMenu": "ปิด",
-      "moreOnTheFloor": "บนพื้นมากขึ้น"
+      "moreOnTheFloor": "เพิ่มเติมบนพื้นประชุม"
     },
     "playOrbAnimation": "เล่นแอนิเมชั่น InterMUN",
     "hero": {
       "eyebrow": "ซอฟต์แวร์พื้นห้อง · รุ่น UN",
       "title": "หนึ่งแท็บสำหรับ",
       "titleEmphasis": "ทั้งคณะกรรมการ",
-      "subtitle": "ซอฟต์แวร์การประชุมที่จะไม่เกะกะจนกว่าคนจะจำเป็นต้องใช้",
-      "ctaStart": "จัดงาน",
+      "subtitle": "ซอฟต์แวร์ประชุมที่ไม่วุ่นวายจนกว่าจะถึงเวลาใช้ค้อน",
+      "ctaStart": "จัดอีเวนต์",
       "ctaJoin": "เข้าร่วมการประชุมของคุณ",
       "chip1": "ม้วนสาย → องค์ประชุม",
       "chip2": "GSL และการเคลื่อนไหวอย่างเป็นทางการ",
       "chip3": "31 ภาษาอินเทอร์เฟซ",
       "previewLabel": "ชั้นเซสชั่น",
-      "sticky1": "ม้วนการโทร ตัวจับเวลา และการเคลื่อนไหวในชั้นเดียว",
-      "sticky2": "สร้างขึ้นสำหรับเก้าอี้ที่ไม่ชอบการนั่งเล่นปาหี่",
-      "floorEyebrow": "บนพื้น"
+      "sticky1": "เรียกชื่อ ตัวจับเวลา และญัตติในห้องประชุมเดียว",
+      "sticky2": "ออกแบบมาสำหรับประธานที่เกลียดการสลับแท็บเบราว์เซอร์ไปมา",
+      "floorEyebrow": "บนพื้นประชุม"
     },
     "steps": {
       "eyebrow": "การไหลของประตู",
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "ส่งที่ (UTC)",
         "showOptionalDetails": "เพิ่มรายละเอียดกิจกรรม (ไม่บังคับ)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "พร้อมเริ่มแล้วหรือยัง? เริ่มลงทะเบียนฝ่ายเลขาธิการแบบเต็ม",
+      "registerSecretariatLink": "ลงทะเบียนการประชุมของคุณ"
     },
     "footer": {
       "ctaTitle": "นำคณะกรรมการชุดต่อไปของคุณมา",
@@ -4797,12 +4797,12 @@
       "ctaJoin": "เข้าสู่ระบบ",
       "copyright": "© {year} อินเตอร์มุน",
       "contact": "ติดต่อ",
-      "tagline": "ซอฟต์แวร์การประชุมที่จะไม่เกะกะจนกว่าคนจะจำเป็นต้องใช้",
+      "tagline": "ซอฟต์แวร์ประชุมที่ไม่วุ่นวายจนกว่าจะถึงเวลาใช้ค้อน",
       "product": "ผลิตภัณฑ์",
       "resources": "ทรัพยากร",
-      "howItWorks": "มันทำงานอย่างไร",
+      "howItWorks": "ใช้งานอย่างไร",
       "privacy": "ความเป็นส่วนตัว",
-      "terms": "เงื่อนไข"
+      "terms": "ข้อกำหนด"
     },
     "preview": {
       "rollCallLabel": "ม้วนสาย",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "พี+วี",
       "statusPresent": "P",
       "statusAbsent": "ไม่มา",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "เพิ่มและบันทึกงานเตรียม",
+      "prepWorkspaceHint": "โฟลว์เขียนและบันทึกแบบเดียวกับแดชบอร์ดผู้แทน — เอกสาร ข้อเสนอมาตรา และบันทึก"
     },
     "exploreChairs": "สำรวจคุณลักษณะทั้งหมดของ dais",
     "exploreDelegates": "สำรวจฟีเจอร์ของผู้รับมอบสิทธิ์ทั้งหมด",
@@ -5174,9 +5174,9 @@
     },
     "faq": {
       "title": "คำถามที่พบบ่อย",
-      "subtitle": "ประธานและสำนักเลขาธิการคนไหนที่มักจะถามก่อนการประชุมสุดสัปดาห์",
+      "subtitle": "สิ่งที่ประธานและเลขาธิการมักถามก่อนสุดสัปดาห์ของการประชุม",
       "q1": "นี่เพื่อใคร?",
-      "a1": "ผู้ร่วมประชุม ประธาน ที่ปรึกษา และสำนักเลขาธิการ - พื้นที่ทำงานการประชุมแห่งเดียวพร้อมเครื่องมือที่คำนึงถึงบทบาท",
+      "a1": "ผู้แทน ประธาน ที่ปรึกษา และเลขาธิการ — พื้นที่ประชุมเดียวพร้อมเครื่องมือตามบทบาท",
       "q2": "เราจะบริหารสื่อมวลชนและ GA แตกต่างออกไปได้ไหม",
       "a2": "ใช่. โปรไฟล์ขั้นตอนการรักษาขอบเขต RoP ของคณะสื่อมวลชนไปยังห้องนั้นโดยไม่ต้องเปลี่ยนคณะกรรมการอื่น",
       "q3": "คนเข้าห้องได้ยังไง?",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "เงื่อนไขการให้บริการ | {app}",
       "metaDescription": "ข้อกำหนดที่ควบคุมการเข้าถึงและการใช้งาน {app}",
-      "eyebrow": "ถูกกฎหมาย",
+      "eyebrow": "กฎหมาย",
       "title": "ข้อกำหนดในการให้บริการ",
       "intro": "ข้อกำหนดเหล่านี้ควบคุมการเข้าถึงและการใช้งาน {app} ของคุณ โดยการใช้บริการแสดงว่าคุณยอมรับข้อกำหนดเหล่านี้",
       "updated": "25 กรกฎาคม 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "นโยบายความเป็นส่วนตัว | {app}",
       "metaDescription": "{app} รวบรวม ใช้ จัดเก็บ และปกป้องข้อมูลส่วนบุคคลอย่างไร",
-      "eyebrow": "ถูกกฎหมาย",
+      "eyebrow": "กฎหมาย",
       "title": "นโยบายความเป็นส่วนตัว",
       "intro": "นโยบายนี้อธิบายวิธีที่ {app} จัดการข้อมูลส่วนบุคคลเมื่อคุณใช้เว็บไซต์ แอปพลิเคชัน และบริการการประชุมของเรา",
       "updated": "25 กรกฎาคม 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "ไม่พบหน้า",
+    "description": "หน้าที่คุณกำลังค้นหาไม่มีอยู่หรือได้ถูกย้ายแล้ว",
+    "backToHome": "กลับบ้าน"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "เปิดการตั้งค่ารูปลักษณ์และการเข้าถึง",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "เปิดการตั้งค่าลักษณะและการเข้าถึง",
+    "accountAria": "บัญชีและการตั้งค่า",
+    "profile": "โปรไฟล์",
     "appearanceAndAccess": "การเข้าถึงและสี"
   }
 }

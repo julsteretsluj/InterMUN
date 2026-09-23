@@ -17,10 +17,10 @@
     "secretaryGeneral": "秘書長",
     "returnToProfile": "返回個人資料",
     "useDifferentAccount": "使用不同的帳戶",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "按建議用途編號（1 = 從此處開始）。 更改 lib/nav-priority-order.ts 中的順序。",
+    "chooseFile": "選擇文件",
+    "noFileChosen": "未選擇文件",
+    "clear": "清除",
     "reload": "重新載入"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "筆記",
     "committee": "委員會",
     "history": "歷史",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "編輯部",
+    "pressCorps": "記者團",
+    "milestones": "里程碑",
     "voting": "表決",
     "guides": "指南",
     "documents": "文件",
@@ -601,7 +601,7 @@
     "ideas": "想法",
     "sources": "來源",
     "resolutions": "決議",
-    "amendments": "Amendments",
+    "amendments": "修正案",
     "speeches": "演講",
     "running": "跑步",
     "report": "報告",
@@ -617,11 +617,11 @@
     "library": "圖書館",
     "mainNavigationAria": "主導航",
     "crisis": "危機",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "指令",
+    "fwcMovement": "移動",
+    "fwcMap": "霍金斯",
+    "fwcBackroom": "幕後室",
+    "fwcEvidence": "證據"
   },
   "dashboardLayout": {
     "helpCenter": "幫助中心",
@@ -668,7 +668,7 @@
     "selectRoleAria": "選擇角色",
     "nextRoleAria": "下一個角色",
     "authConnectError": "無法連線到身份驗證（檢查 Supabase 環境變數）。",
-    "backToHome": "Back to home"
+    "backToHome": "回到家"
   },
   "googleDocs": {
     "openNewDocHelp": "在新分頁中開啟 Google 文件。 如果出現提示，請登入，然後從網址列複製文件 URL。",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "危機幻燈片",
     "resolutions": "決議",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "修正案",
+    "pressCorps": "記者團",
     "allocationPasswords": "分配密碼",
     "sources": "來源",
     "notes": "筆記",
-    "notesModeration": "Note review",
+    "notesModeration": "筆記回顧",
     "rollCallTracker": "✅ 點名追蹤器",
     "runningNotes": "跑步筆記",
     "awardsSmt": "獎項",
@@ -855,10 +855,10 @@
     "delegateSchedule": "會議日程",
     "chairSchedule": "會議日程",
     "advisorSchedule": "會議日程",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "代表簡介",
+    "advisorDelegateDocuments": "代表文件",
+    "advisorDelegateVoting": "代表投票",
+    "advisorDelegateNotes": "代表筆記",
     "voting": "表決",
     "digitalRoom": "數位室內",
     "committeeSession": "委員會會議",
@@ -867,12 +867,12 @@
     "follow": "跟隨",
     "guides": "指南",
     "committeeCodes": "委員會代碼（主席/SMT）",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "會議進度",
     "officialUnLinks": "聯合國官方連結",
     "committeeRoom": "委員會室",
     "history": "歷史",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "編輯部",
+    "milestones": "里程碑",
     "speeches": "演講",
     "chairRoom": "椅房",
     "ideas": "想法",
@@ -891,7 +891,7 @@
     "smtProfile": "輪廓",
     "crisis": "危機",
     "smtDelegates": "代表們",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️開幕致辭"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1538,13 +1538,13 @@
       "memberStates": "聯合國會員國",
       "unSystem": "聯合國體系（創始人和成員）",
       "history": "聯合國歷史",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "西盟網站",
+      "seamunCommittee": "SEAMUN委員會入口網站",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "在新選項卡中開啟。",
+    "backToCategories": "所有類別",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "會議網站和委員會門戶",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "每個新聞團分配三個新聞台（世界、健康和專題）。"
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "SEAMUN 會議官方網站（行程、資訊和公告）。",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,27 +4631,27 @@
       "contact": "接觸",
       "signIn": "登入",
       "getStarted": "開始使用",
-      "features": "Features",
+      "features": "功能",
       "about": "關於",
       "menu": "選單",
       "closeMenu": "關閉",
-      "moreOnTheFloor": "更多內容在地板上"
+      "moreOnTheFloor": "會場上查看更多"
     },
     "playOrbAnimation": "播放 InterMUN 動畫",
     "hero": {
       "eyebrow": "房間層軟體·模擬聯合國",
       "title": "一個選項卡用於",
       "titleEmphasis": "整個委員會。",
-      "subtitle": "會議軟體在木槌需要之前不會造成影響。",
-      "ctaStart": "舉辦活動",
-      "ctaJoin": "加入您的會議",
+      "subtitle": "在需要敲槌之前盡量不打擾你的會議軟體。",
+      "ctaStart": "主辦活動",
+      "ctaJoin": "加入你的會議",
       "chip1": "點名 → 法定人數",
       "chip2": "GSL 和正式動議",
       "chip3": "31 種介面語言",
       "previewLabel": "會議樓層",
-      "sticky1": "點名、計時器和動作都集中在一層樓。",
-      "sticky2": "專為那些討厭擺弄拉環的椅子而設計。",
-      "floorEyebrow": "在地板上"
+      "sticky1": "唱名、計時與動議，盡在同一會場。",
+      "sticky2": "為討厭在瀏覽器分頁間切換的主席而設計。",
+      "floorEyebrow": "會場上"
     },
     "steps": {
       "eyebrow": "閘門流量",
@@ -4728,7 +4728,7 @@
       "paragraph1": "InterMUN 是一個瀏覽器工作區，以協調的委員會工具取代了通常的電子表格、群組聊天和列印標語牌的組合。",
       "paragraph2": "主席獲得反映會議實際展開方式的程序控制。 代表們在會場旁進行結構化準備。 秘書處保持整個活動的可見性，而不是盤旋在每項動議上。",
       "paragraph3": "無論您是管理房間還是整個週末的會議，InterMUN 都能讓主席、代表和工作人員從開幕點名到閉幕式保持一致。",
-      "dreamEyebrow": "夢想",
+      "dreamEyebrow": "願景",
       "footerLabel": "關於 {app}"
     },
     "contact": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "提交時間（UTC）",
         "showOptionalDetails": "新增活動詳細資訊（可選）"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "準備好了嗎？開始完整的秘書處註冊。",
+      "registerSecretariatLink": "註冊您的會議"
     },
     "footer": {
       "ctaTitle": "帶上你的下一個委員會",
@@ -4797,11 +4797,11 @@
       "ctaJoin": "登入",
       "copyright": "© {year} InterMUN",
       "contact": "接觸",
-      "tagline": "會議軟體在木槌需要之前不會造成影響。",
+      "tagline": "在需要敲槌之前盡量不打擾你的會議軟體。",
       "product": "產品",
       "resources": "資源",
-      "howItWorks": "它是如何運作的",
-      "privacy": "隱私",
+      "howItWorks": "如何運作",
+      "privacy": "隱私權",
       "terms": "條款"
     },
     "preview": {
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "壓力+電壓",
       "statusPresent": "P",
       "statusAbsent": "缺席的",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "新增並儲存準備工作",
+      "prepWorkspaceHint": "與代表面板相同的撰寫與儲存流程 — 文件、條款建議與筆記。"
     },
     "exploreChairs": "探索講台的所有功能",
     "exploreDelegates": "探索所有代表功能",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "我們的根源",
+      "title": "一切的開始",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "泰國曼谷"
     },
     "faq": {
       "title": "常見問題",
-      "subtitle": "主席和秘書處在會議週末之前通常會問什麼。",
-      "q1": "這是給誰的？",
-      "a1": "代表、主席、顧問和秘書處－一個具有角色感知工具的會議工作空間。",
+      "subtitle": "主席與秘書處在會議週末前常問的問題。",
+      "q1": "這是給誰用的？",
+      "a1": "代表、主席、顧問與秘書處 — 一個依角色提供工具的會議工作區。",
       "q2": "我們可以用不同的方式管理記者團和GA嗎？",
       "a2": "是的。 程序簡介使記者團的 RoP 範圍僅限於該會議廳，而無需改變其他委員會。",
       "q3": "人們如何進入一個房間？",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "服務條款 | {app}",
       "metaDescription": "管理{app}的存取和使用的條款。",
-      "eyebrow": "合法的",
+      "eyebrow": "法律資訊",
       "title": "服務條款",
       "intro": "這些條款管轄您對 {app} 的存取和使用。 使用該服務即表示您同意這些條款。",
       "updated": "2026 年 7 月 25 日",
@@ -5243,20 +5243,20 @@
     "privacyPage": {
       "metaTitle": "隱私權政策 | {app}",
       "metaDescription": "{app}如何收集、使用、儲存和保護個人資訊。",
-      "eyebrow": "合法的",
+      "eyebrow": "法律資訊",
       "title": "隱私權政策",
-      "intro": "This policy explains how {app} handles personal information when you use our website, applications, and conference services.",
+      "intro": "本政策解釋了當您使用我們的網站、應用程式和會議服務時{app}如何處理個人資訊。",
       "updated": "2026 年 7 月 25 日",
       "contactFormFallback": "我們網站上的聯絡表格",
       "collectTitle": "我們收集的資訊",
-      "collectIntro": "Depending on how you use the service, we may collect:",
+      "collectIntro": "根據您使用服務的方式，我們可能會收集：",
       "collectL1": "帳戶詳細信息，例如您的姓名、電子郵件地址、個人資料和角色。",
       "collectL2": "會議資訊、委員會任務和參與記錄。",
       "collectL3": "您創建的內容，包括文件、註釋、訊息、投票和提交。",
-      "collectL4": "Files you upload and communications you send to conference teams or to us.",
+      "collectL4": "您上傳的文件以及發送給會議團隊或我們的通訊。",
       "collectL5": "操作、保護和改進服務所需的技術和使用資料。",
       "useTitle": "我們如何使用資訊",
-      "useL1": "Provide accounts, conference workspaces, and role-based features.",
+      "useL1": "提供帳戶、會議工作區和基於角色的功能。",
       "useL2": "將內容交付給有權存取內容的參與者和工作人員。",
       "useL3": "維護安全性、防止濫用、解決問題並提高可靠性。",
       "useL4": "回覆支援、合作夥伴關係和會議詢問。",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "找不到頁面",
+    "description": "您要尋找的頁面不存在或已移動。",
+    "backToHome": "回到家"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "開啟外觀和輔助使用設定",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "輔助功能和顏色"
+    "openAria": "開啟外觀與無障礙設定",
+    "accountAria": "帳戶與偏好",
+    "profile": "個人資料",
+    "appearanceAndAccess": "無障礙與顏色"
   }
 }

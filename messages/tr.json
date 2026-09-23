@@ -17,10 +17,10 @@
     "secretaryGeneral": "Genel Sekreter",
     "returnToProfile": "Profile dön",
     "useDifferentAccount": "Farklı bir hesap kullanın",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Önerilen kullanıma göre numaralandırılmıştır (1 = buradan başlayın). Lib/nav-priority-order.ts'deki sırayı değiştirin.",
+    "chooseFile": "Dosya Seç",
+    "noFileChosen": "Dosya seçilmedi",
+    "clear": "Temizlemek",
     "reload": "Yeniden yükle"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Notlar",
     "committee": "Komite",
     "history": "Tarih",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Haber odası",
+    "pressCorps": "Basın Birliği",
+    "milestones": "Kilometre Taşları",
     "voting": "Oylama",
     "guides": "Kılavuzlar",
     "documents": "Belgeler",
@@ -601,7 +601,7 @@
     "ideas": "Fikirler",
     "sources": "Kaynaklar",
     "resolutions": "Çözünürlükler",
-    "amendments": "Amendments",
+    "amendments": "Değişiklikler",
     "speeches": "Konuşmalar",
     "running": "Koşma",
     "report": "Rapor",
@@ -617,11 +617,11 @@
     "library": "Kütüphane",
     "mainNavigationAria": "Ana gezinme",
     "crisis": "Kriz",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Direktifler",
+    "fwcMovement": "Hareket",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Arka oda",
+    "fwcEvidence": "Kanıt"
   },
   "dashboardLayout": {
     "helpCenter": "Yardım merkezi",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Rol seçin",
     "nextRoleAria": "Sonraki rol",
     "authConnectError": "Kimlik doğrulamaya bağlanılamadı (Supabase env değişkenlerini kontrol edin).",
-    "backToHome": "Back to home"
+    "backToHome": "Eve dön"
   },
   "googleDocs": {
     "openNewDocHelp": "Google Dokümanlar'ı yeni bir sekmede açar. İstenirse oturum açın, ardından adres çubuğundan belgenin URL'sini kopyalayın.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Kriz slaytları",
     "resolutions": "Çözünürlükler",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Değişiklikler",
+    "pressCorps": "Basın Birliği",
     "allocationPasswords": "Tahsis şifreleri",
     "sources": "Kaynaklar",
     "notes": "Notlar",
-    "notesModeration": "Note review",
+    "notesModeration": "Not incelemesi",
     "rollCallTracker": "✅ Yoklama Takibi",
     "runningNotes": "Notları Çalıştırma",
     "awardsSmt": "Ödüller",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Konferans programı",
     "chairSchedule": "Konferans programı",
     "advisorSchedule": "Konferans programı",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Delege profili",
+    "advisorDelegateDocuments": "Belgeleri devret",
+    "advisorDelegateVoting": "Delege oylaması",
+    "advisorDelegateNotes": "Delege notları",
     "voting": "Oylama",
     "digitalRoom": "Dijital Oda",
     "committeeSession": "Komite oturumu",
@@ -867,12 +867,12 @@
     "follow": "Takip etmek",
     "guides": "Kılavuzlar",
     "committeeCodes": "Komite kodları (başkan / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Oturum ilerlemesi",
     "officialUnLinks": "Resmi BM bağlantıları",
     "committeeRoom": "Komite odası",
     "history": "Tarih",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Haber odası",
+    "milestones": "Kilometre Taşları",
     "speeches": "Konuşmalar",
     "chairRoom": "Sandalye odası",
     "ideas": "Fikirler",
@@ -891,7 +891,7 @@
     "smtProfile": "Profil",
     "crisis": "Kriz",
     "smtDelegates": "Delegeler",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️Açılış konuşmaları"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -1538,13 +1538,13 @@
       "memberStates": "BM Üye Devletleri",
       "unSystem": "BM Sistemi (kurucular ve üyeler)",
       "history": "BM Tarihi",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "SEAMUN web sitesi",
+      "seamunCommittee": "SEAMUN komite portalı",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Yeni bir sekmede açılır.",
+    "backToCategories": "Tüm kategoriler",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Konferans web sitesi ve komite portalı",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Her Basın Birliği tahsisi için üç haber masası (dünya, sağlık ve özellikler)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Resmi SEAMUN konferans sitesi (programlar, bilgiler ve duyurular).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Temas etmek",
       "signIn": "Oturum aç",
       "getStarted": "Başlayın",
-      "features": "Features",
+      "features": "Özellikler",
       "about": "Hakkında",
       "menu": "Menü",
       "closeMenu": "Kapalı",
@@ -4650,7 +4650,7 @@
       "chip3": "31 arayüz dili",
       "previewLabel": "Oturum katı",
       "sticky1": "Yoklama, zamanlayıcılar ve hareketler tek katta.",
-      "sticky2": "Hokkabazlık yapmaktan nefret eden sandalyeler için tasarlandı.",
+      "sticky2": "Tarayıcı sekmeleriyle hokkabazlık yapmaktan nefret eden başkanlar için.",
       "floorEyebrow": "Yerde"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "(UTC) tarihinde gönderildi",
         "showOptionalDetails": "Etkinlik ayrıntılarını ekleyin (isteğe bağlı)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Başlamaya hazır mısınız? Tam sekretarya kaydını başlatın.",
+      "registerSecretariatLink": "Konferansınızı kaydedin"
     },
     "footer": {
       "ctaTitle": "Bir sonraki komitenizi getirin",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Mevcut olmayan",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Hazırlık ekle ve kaydet",
+      "prepWorkspaceHint": "Delege panelindekiyle aynı yaz-ve-kaydet akışları — belgeler, madde önerileri ve notlar."
     },
     "exploreChairs": "Tüm dais özelliklerini keşfedin",
     "exploreDelegates": "Tüm temsilci özelliklerini keşfedin",
@@ -5166,11 +5166,11 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Köklerimiz",
+      "title": "Nereden başladı",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "Bangkok, Tayland"
     },
     "faq": {
       "title": "Sık sorulanlar",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa mevcut değil veya taşınmış.",
+    "backToHome": "Eve dön"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "Görünüm ve erişilebilirlik ayarlarını aç",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "accountAria": "Hesap ve tercihler",
+    "profile": "Profil",
     "appearanceAndAccess": "Erişilebilirlik ve renk"
   }
 }

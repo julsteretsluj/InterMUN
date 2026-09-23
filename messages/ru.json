@@ -17,10 +17,10 @@
     "secretaryGeneral": "Генеральный секретарь",
     "returnToProfile": "Вернуться в профиль",
     "useDifferentAccount": "Использовать другую учетную запись",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Пронумерованы в соответствии с рекомендациями по использованию (1 = начать здесь). Измените порядок в lib/nav-priority-order.ts.",
+    "chooseFile": "Выберите файл",
+    "noFileChosen": "Файл не выбран",
+    "clear": "Прозрачный",
     "reload": "Перезагрузить"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Примечания",
     "committee": "комитет",
     "history": "История",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Отдел новостей",
+    "pressCorps": "Пресс-корпус",
+    "milestones": "Вехи",
     "voting": "Голосование",
     "guides": "Путеводители",
     "documents": "Документы",
@@ -601,7 +601,7 @@
     "ideas": "Идеи",
     "sources": "Источники",
     "resolutions": "Резолюции",
-    "amendments": "Amendments",
+    "amendments": "Поправки",
     "speeches": "Выступления",
     "running": "Бег",
     "report": "Отчет",
@@ -617,11 +617,11 @@
     "library": "Библиотека",
     "mainNavigationAria": "Основная навигация",
     "crisis": "Кризис",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
-    "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcDirectives": "Директивы",
+    "fwcMovement": "Движение",
+    "fwcMap": "Хокинс",
+    "fwcBackroom": "подсобное помещение",
+    "fwcEvidence": "Доказательство"
   },
   "dashboardLayout": {
     "helpCenter": "Справочный центр",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Выберите роль",
     "nextRoleAria": "Следующая роль",
     "authConnectError": "Не удалось подключиться к аутентификации (проверьте переменные среды Supabase).",
-    "backToHome": "Back to home"
+    "backToHome": "Вернуться домой"
   },
   "googleDocs": {
     "openNewDocHelp": "Открывает Документы Google в новой вкладке. Войдите в систему, если будет предложено, а затем скопируйте URL-адрес документа из адресной строки.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Кризисные слайды",
     "resolutions": "Резолюции",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Поправки",
+    "pressCorps": "Пресс-корпус",
     "allocationPasswords": "Пароли распределения",
     "sources": "Источники",
     "notes": "Примечания",
-    "notesModeration": "Note review",
+    "notesModeration": "Обзор заметок",
     "rollCallTracker": "✅ Трекер перекличек",
     "runningNotes": "Текущие заметки",
     "awardsSmt": "Награды",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Расписание конференции",
     "chairSchedule": "Расписание конференции",
     "advisorSchedule": "Расписание конференции",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Профиль делегата",
+    "advisorDelegateDocuments": "Делегировать документы",
+    "advisorDelegateVoting": "Делегатское голосование",
+    "advisorDelegateNotes": "Заметки делегата",
     "voting": "Голосование",
     "digitalRoom": "Цифровая комната",
     "committeeSession": "Заседание комитета",
@@ -867,12 +867,12 @@
     "follow": "Следовать",
     "guides": "Путеводители",
     "committeeCodes": "Коды комитетов (председатель / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Ход сеанса",
     "officialUnLinks": "Официальные ссылки ООН",
     "committeeRoom": "Комната комитета",
     "history": "История",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Отдел новостей",
+    "milestones": "Вехи",
     "speeches": "Выступления",
     "chairRoom": "Кресло",
     "ideas": "Идеи",
@@ -891,7 +891,7 @@
     "smtProfile": "Профиль",
     "crisis": "Кризис",
     "smtDelegates": "Делегаты",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Вступительные речи"
   },
   "setupPage": {
     "title": "Супабаза не настроена",
@@ -1538,13 +1538,13 @@
       "memberStates": "Государства-члены ООН",
       "unSystem": "Система ООН (основатели и члены)",
       "history": "История ООН",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "Сайт SEAMUN",
+      "seamunCommittee": "Портал комитета SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Открывается в новой вкладке.",
+    "backToCategories": "Все категории",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Веб-сайт конференции и портал комитета",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Три новостные службы для каждого подразделения Пресс-корпуса (мир, здравоохранение и репортажи)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Официальный сайт конференции SEAMUN (расписание, информация и анонсы).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,26 +4631,26 @@
       "contact": "Контакт",
       "signIn": "Войти",
       "getStarted": "Начать",
-      "features": "Features",
-      "about": "О",
+      "features": "Возможности",
+      "about": "О нас",
       "menu": "Меню",
-      "closeMenu": "Закрывать",
-      "moreOnTheFloor": "Больше на полу"
+      "closeMenu": "Закрыть",
+      "moreOnTheFloor": "Ещё на полу"
     },
     "playOrbAnimation": "Воспроизвести анимацию InterMUN",
     "hero": {
       "eyebrow": "Программное обеспечение для пола камеры · Модель ООН",
       "title": "Одна вкладка для",
       "titleEmphasis": "весь комитет.",
-      "subtitle": "Программное обеспечение для конференций, которое не будет мешать вам, пока оно не понадобится молотку.",
+      "subtitle": "ПО для конференций, которое не мешает, пока не понадобится молоток.",
       "ctaStart": "Провести мероприятие",
-      "ctaJoin": "Присоединяйтесь к вашей конференции",
+      "ctaJoin": "Присоединиться к конференции",
       "chip1": "Перекличка → кворум",
       "chip2": "GSL и официальные ходатайства",
       "chip3": "31 язык интерфейса",
       "previewLabel": "Сессионный этаж",
-      "sticky1": "Перекличка, таймеры и движения на одном этаже.",
-      "sticky2": "Создан для стульев, которые ненавидят жонглировать планшетами.",
+      "sticky1": "Перекличка, таймеры и предложения — на одном полу.",
+      "sticky2": "Для председателей, которые ненавидят жонглировать вкладками браузера.",
       "floorEyebrow": "На полу"
     },
     "steps": {
@@ -4729,7 +4729,7 @@
       "paragraph2": "Председатели получают процедурный контроль, который отражает то, как на самом деле разворачиваются сессии. Делегаты проходят структурированную подготовку прямо в зале. Секретариат обеспечивает видимость всего мероприятия, не зависая от каждого движения.",
       "paragraph3": "Независимо от того, проводите ли вы конференцию в одном зале или целую конференцию выходного дня, InterMUN обеспечивает согласованность председателей, делегатов и персонала от открытия переклички до церемонии закрытия.",
       "dreamEyebrow": "Мечта",
-      "footerLabel": "Около {app}"
+      "footerLabel": "О {app}"
     },
     "contact": {
       "eyebrow": "Свяжитесь с нами",
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Отправлено в (UTC)",
         "showOptionalDetails": "Добавьте информацию о событии (необязательно)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Готовы начать? Запустите полную регистрацию секретариата.",
+      "registerSecretariatLink": "Зарегистрировать конференцию"
     },
     "footer": {
       "ctaTitle": "Принесите свой следующий комитет",
@@ -4797,7 +4797,7 @@
       "ctaJoin": "Войти",
       "copyright": "© {year} ИнтерМУН",
       "contact": "Контакт",
-      "tagline": "Программное обеспечение для конференций, которое не будет мешать вам, пока оно не понадобится молотку.",
+      "tagline": "ПО для конференций, которое не мешает, пока не понадобится молоток.",
       "product": "Продукт",
       "resources": "Ресурсы",
       "howItWorks": "Как это работает",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "П+В",
       "statusPresent": "P",
       "statusAbsent": "Отсутствующий",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Добавить и сохранить подготовку",
+      "prepWorkspaceHint": "Те же сценарии «написать и сохранить», что и в панели делегата — документы, предложения пунктов и заметки."
     },
     "exploreChairs": "Изучите все возможности возвышения",
     "exploreDelegates": "Изучите все функции делегата",
@@ -5166,17 +5166,17 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Наши корни",
+      "title": "Где всё началось",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
-      "location": "Bangkok, Thailand"
+      "location": "Бангкок, Таиланд"
     },
     "faq": {
-      "title": "Часто задаваемые",
-      "subtitle": "Какие вопросы обычно задают председатели и секретариат перед выходными конференции?",
+      "title": "Частые вопросы",
+      "subtitle": "Что обычно спрашивают председатели и секретариат перед конференцией.",
       "q1": "Для кого это?",
-      "a1": "Делегаты, председатели, советники и секретариат — единое рабочее пространство конференции с инструментами с учетом ролей.",
+      "a1": "Делегаты, председатели, советники и секретариат — одно рабочее пространство с инструментами по ролям.",
       "q2": "Можем ли мы управлять прессой и Генеральной Ассамблеей по-разному?",
       "a2": "Да. Профили процедур позволяют пресс-корпусу ограничиваться рамками этой палаты без изменения других комитетов.",
       "q3": "Как люди попадают в комнату?",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Условия обслуживания | {app}",
       "metaDescription": "Условия, регулирующие доступ и использование {app}.",
-      "eyebrow": "Юридический",
+      "eyebrow": "Правовая информация",
       "title": "Условия использования",
       "intro": "Эти условия регулируют ваш доступ и использование {app}. Используя сервис, вы соглашаетесь с этими условиями.",
       "updated": "25 июля 2026 г.",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Политика конфиденциальности | {app}",
       "metaDescription": "Как {app} собирает, использует, хранит и защищает личную информацию.",
-      "eyebrow": "Юридический",
+      "eyebrow": "Правовая информация",
       "title": "политика конфиденциальности",
       "intro": "Эта политика объясняет, как {app} обрабатывает личную информацию, когда вы используете наш веб-сайт, приложения и конференц-услуги.",
       "updated": "25 июля 2026 г.",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Страница не найдена",
+    "description": "Страница, которую вы ищете, не существует или переехала.",
+    "backToHome": "Вернуться домой"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Открыть настройки внешнего вида и специальных возможностей",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "Открыть настройки оформления и доступности",
+    "accountAria": "Аккаунт и настройки",
+    "profile": "Профиль",
     "appearanceAndAccess": "Доступность и цвет"
   }
 }

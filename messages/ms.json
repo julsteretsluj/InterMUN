@@ -17,10 +17,10 @@
     "secretaryGeneral": "Ketua Setiausaha",
     "returnToProfile": "Kembali ke profil",
     "useDifferentAccount": "Gunakan akaun lain",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Dinomborkan mengikut penggunaan yang disyorkan (1 = mula di sini). Tukar susunan dalam lib/nav-priority-order.ts.",
+    "chooseFile": "Pilih Fail",
+    "noFileChosen": "Tiada fail dipilih",
+    "clear": "Jelas",
     "reload": "Muat semula"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Nota",
     "committee": "Jawatankuasa",
     "history": "Sejarah",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Bilik berita",
+    "pressCorps": "Kor Akhbar",
+    "milestones": "Pencapaian",
     "voting": "Mengundi",
     "guides": "Pemandu",
     "documents": "Dokumen",
@@ -601,7 +601,7 @@
     "ideas": "Idea",
     "sources": "Sumber",
     "resolutions": "Resolusi",
-    "amendments": "Amendments",
+    "amendments": "Pindaan",
     "speeches": "Ucapan",
     "running": "Berlari",
     "report": "Laporan",
@@ -617,11 +617,11 @@
     "library": "Perpustakaan",
     "mainNavigationAria": "Navigasi utama",
     "crisis": "Krisis",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Arahan",
+    "fwcMovement": "Pergerakan",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Bilik belakang",
+    "fwcEvidence": "Bukti"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Pilih peranan",
     "nextRoleAria": "Peranan seterusnya",
     "authConnectError": "Tidak dapat menyambung ke pengesahan (semak Supabase env vars).",
-    "backToHome": "Back to home"
+    "backToHome": "Balik rumah"
   },
   "googleDocs": {
     "openNewDocHelp": "Membuka Dokumen Google dalam tab baharu. Log masuk jika digesa, kemudian salin URL dokumen dari bar alamat.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Slaid krisis",
     "resolutions": "Resolusi",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Pindaan",
+    "pressCorps": "Kor Akhbar",
     "allocationPasswords": "Kata laluan peruntukan",
     "sources": "Sumber",
     "notes": "Nota",
-    "notesModeration": "Note review",
+    "notesModeration": "Semakan nota",
     "rollCallTracker": "✅ Roll Call Tracker",
     "runningNotes": "Nota Larian",
     "awardsSmt": "Anugerah",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Jadual persidangan",
     "chairSchedule": "Jadual persidangan",
     "advisorSchedule": "Jadual persidangan",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Perwakilan profil",
+    "advisorDelegateDocuments": "Mewakilkan dokumen",
+    "advisorDelegateVoting": "Mengundi perwakilan",
+    "advisorDelegateNotes": "Mewakilkan nota",
     "voting": "Mengundi",
     "digitalRoom": "Bilik Digital",
     "committeeSession": "Sesi AJK",
@@ -867,12 +867,12 @@
     "follow": "Ikut",
     "guides": "Pemandu",
     "committeeCodes": "Kod jawatankuasa (kerusi / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Kemajuan sesi",
     "officialUnLinks": "Pautan rasmi PBB",
     "committeeRoom": "Bilik panitia",
     "history": "Sejarah",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Bilik berita",
+    "milestones": "Pencapaian",
     "speeches": "Ucapan",
     "chairRoom": "Bilik kerusi",
     "ideas": "Idea",
@@ -891,7 +891,7 @@
     "smtProfile": "Profil",
     "crisis": "Krisis",
     "smtDelegates": "Perwakilan",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Ucapan perasmian"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -1538,13 +1538,13 @@
       "memberStates": "Negara Anggota PBB",
       "unSystem": "Sistem PBB (pengasas & ahli)",
       "history": "Sejarah PBB",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "laman web SEAMUN",
+      "seamunCommittee": "Portal jawatankuasa SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Dibuka dalam tab baharu.",
+    "backToCategories": "Semua kategori",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Laman web persidangan dan portal jawatankuasa",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Tiga meja berita untuk setiap peruntukan Press Corps (dunia, kesihatan dan ciri)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Tapak persidangan rasmi SEAMUN (jadual, maklumat dan pengumuman).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Kenalan",
       "signIn": "Log masuk",
       "getStarted": "Mulakan",
-      "features": "Features",
+      "features": "Ciri",
       "about": "Tentang",
       "menu": "Menu",
       "closeMenu": "tutup",
@@ -4650,7 +4650,7 @@
       "chip3": "31 bahasa antara muka",
       "previewLabel": "Lantai sesi",
       "sticky1": "Panggilan lancar, pemasa dan gerakan dalam satu tingkat.",
-      "sticky2": "Dibina untuk kerusi yang membenci tab juggling.",
+      "sticky2": "Dibina untuk pengerusi yang benci melompat antara tab pelayar.",
       "floorEyebrow": "Di atas lantai"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Dihantar di (UTC)",
         "showOptionalDetails": "Tambahkan butiran acara (pilihan)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Bersedia untuk bermula? Mulakan pendaftaran sekretariat penuh.",
+      "registerSecretariatLink": "Daftarkan persidangan anda"
     },
     "footer": {
       "ctaTitle": "Bawa jawatankuasa anda yang seterusnya",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "tidak hadir",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Tambah dan simpan kerja persediaan",
+      "prepWorkspaceHint": "Aliran tulis-dan-simpan yang sama seperti papan pemuka perwakilan — dokumen, cadangan klausa dan nota."
     },
     "exploreChairs": "Terokai semua ciri pelamin",
     "exploreDelegates": "Terokai semua ciri perwakilan",
@@ -5166,8 +5166,8 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Akar umbi kami",
+      "title": "Di mana semuanya bermula",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
@@ -5196,7 +5196,7 @@
       "rolesTitle": "Direka untuk setiap peranan",
       "rolesDelegates": "Mewakilkan penyelidikan, draf, bekerjasama dan ikuti pendapat.",
       "rolesChairs": "Kerusi menjalankan panggilan gulung, pembesar suara, gerakan, pemasa dan undian.",
-      "rolesAdvisors": "Advisors support their delegations with the right visibility.",
+      "rolesAdvisors": "Penasihat menyokong delegasi mereka dengan keterlihatan yang betul.",
       "rolesSecretariat": "Sekretariat menyelaraskan dewan dan melihat kemajuan seluruh persidangan.",
       "techTitle": "Teknologi yang mengutamakan persidangan",
       "techP1": "Ciri dibentuk mengikut aliran kerja hujung minggu sebenar, sempadan peranan dan UI yang tenang apabila bilik bergerak pantas. Kebolehcapaian dan akses peranan selamat adalah sebahagian daripada reka bentuk.",
@@ -5209,7 +5209,7 @@
     "termsPage": {
       "metaTitle": "Syarat Perkhidmatan | {app}",
       "metaDescription": "Terma yang mengawal akses kepada dan penggunaan {app}.",
-      "eyebrow": "sah",
+      "eyebrow": "Undang-undang",
       "title": "Syarat Perkhidmatan",
       "intro": "Syarat ini mengawal akses anda kepada dan penggunaan {app}. Dengan menggunakan perkhidmatan ini, anda bersetuju menerima syarat ini.",
       "updated": "25 Julai 2026",
@@ -5243,7 +5243,7 @@
     "privacyPage": {
       "metaTitle": "Dasar Privasi | {app}",
       "metaDescription": "Bagaimana {app} mengumpul, menggunakan, menyimpan dan melindungi maklumat peribadi.",
-      "eyebrow": "sah",
+      "eyebrow": "Undang-undang",
       "title": "Dasar Privasi",
       "intro": "Dasar ini menerangkan cara {app} mengendalikan maklumat peribadi apabila anda menggunakan tapak web, aplikasi dan perkhidmatan persidangan kami.",
       "updated": "25 Julai 2026",
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Halaman tidak ditemui",
+    "description": "Halaman yang anda cari tidak wujud atau telah berpindah.",
+    "backToHome": "Balik rumah"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5863,8 +5863,8 @@
   },
   "chromePreferences": {
     "openAria": "Buka tetapan penampilan dan kebolehaksesan",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
-    "appearanceAndAccess": "Kebolehcapaian & warna"
+    "accountAria": "Akaun dan keutamaan",
+    "profile": "Profil",
+    "appearanceAndAccess": "Kebolehaksesan & warna"
   }
 }

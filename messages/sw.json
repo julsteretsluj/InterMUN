@@ -17,10 +17,10 @@
     "secretaryGeneral": "Katibu Mkuu",
     "returnToProfile": "Rudi kwa wasifu",
     "useDifferentAccount": "Tumia akaunti tofauti",
-    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts.",
-    "chooseFile": "Choose File",
-    "noFileChosen": "No file chosen",
-    "clear": "Clear",
+    "navPriorityOrderHint": "Imehesabiwa kwa matumizi yaliyopendekezwa (1 = anza hapa). Badilisha mpangilio katika lib/nav-priority-order.ts.",
+    "chooseFile": "Chagua Faili",
+    "noFileChosen": "Hakuna faili iliyochaguliwa",
+    "clear": "Wazi",
     "reload": "Pakia upya"
   },
   "eventGateForm": {
@@ -591,9 +591,9 @@
     "notes": "Vidokezo",
     "committee": "Kamati",
     "history": "Historia",
-    "newsroom": "Newsroom",
-    "pressCorps": "Press Corps",
-    "milestones": "Milestones",
+    "newsroom": "Chumba cha habari",
+    "pressCorps": "Kikosi cha Waandishi wa Habari",
+    "milestones": "Maadili",
     "voting": "Kupiga kura",
     "guides": "Waelekezi",
     "documents": "Nyaraka",
@@ -601,7 +601,7 @@
     "ideas": "Mawazo",
     "sources": "Vyanzo",
     "resolutions": "Maazimio",
-    "amendments": "Amendments",
+    "amendments": "Marekebisho",
     "speeches": "Hotuba",
     "running": "Kukimbia",
     "report": "Ripoti",
@@ -617,11 +617,11 @@
     "library": "Maktaba",
     "mainNavigationAria": "Urambazaji mkuu",
     "crisis": "Mgogoro",
-    "fwcDirectives": "Directives",
-    "fwcMovement": "Movement",
+    "fwcDirectives": "Maelekezo",
+    "fwcMovement": "Mwendo",
     "fwcMap": "Hawkins",
-    "fwcBackroom": "Backroom",
-    "fwcEvidence": "Evidence"
+    "fwcBackroom": "Chumba cha nyuma",
+    "fwcEvidence": "Ushahidi"
   },
   "dashboardLayout": {
     "helpCenter": "Kituo cha usaidizi",
@@ -668,7 +668,7 @@
     "selectRoleAria": "Chagua jukumu",
     "nextRoleAria": "Jukumu linalofuata",
     "authConnectError": "Haikuweza kuunganisha kwenye uthibitishaji (angalia vars za Supabase env).",
-    "backToHome": "Back to home"
+    "backToHome": "Rudi nyumbani"
   },
   "googleDocs": {
     "openNewDocHelp": "Hufungua Hati za Google katika kichupo kipya. Ingia katika akaunti ukiombwa, kisha nakili URL ya hati kutoka kwa upau wa anwani.",
@@ -840,12 +840,12 @@
   "pageTitles": {
     "crisisSlides": "Slaidi za migogoro",
     "resolutions": "Maazimio",
-    "amendments": "Amendments",
-    "pressCorps": "Press Corps",
+    "amendments": "Marekebisho",
+    "pressCorps": "Kikosi cha Waandishi wa Habari",
     "allocationPasswords": "Nywila za ugawaji",
     "sources": "Vyanzo",
     "notes": "Vidokezo",
-    "notesModeration": "Note review",
+    "notesModeration": "Kumbuka ukaguzi",
     "rollCallTracker": "✅ Roll Call Tracker",
     "runningNotes": "Vidokezo vya Kuendesha",
     "awardsSmt": "Tuzo",
@@ -855,10 +855,10 @@
     "delegateSchedule": "Ratiba ya mkutano",
     "chairSchedule": "Ratiba ya mkutano",
     "advisorSchedule": "Ratiba ya mkutano",
-    "advisorDelegateProfile": "Delegate profile",
-    "advisorDelegateDocuments": "Delegate documents",
-    "advisorDelegateVoting": "Delegate voting",
-    "advisorDelegateNotes": "Delegate notes",
+    "advisorDelegateProfile": "Kaumu wasifu",
+    "advisorDelegateDocuments": "Hati hati",
+    "advisorDelegateVoting": "Mjumbe wa kupiga kura",
+    "advisorDelegateNotes": "Kaulizia maelezo",
     "voting": "Kupiga kura",
     "digitalRoom": "Chumba cha Dijitali",
     "committeeSession": "Kikao cha kamati",
@@ -867,12 +867,12 @@
     "follow": "Fuata",
     "guides": "Waelekezi",
     "committeeCodes": "Nambari za kamati (mwenyekiti / SMT)",
-    "committeeFlowChecklist": "Session progress",
+    "committeeFlowChecklist": "Maendeleo ya kikao",
     "officialUnLinks": "Viungo rasmi vya UN",
     "committeeRoom": "Chumba cha kamati",
     "history": "Historia",
-    "newsroom": "Newsroom",
-    "milestones": "Milestones",
+    "newsroom": "Chumba cha habari",
+    "milestones": "Maadili",
     "speeches": "Hotuba",
     "chairRoom": "Chumba cha mwenyekiti",
     "ideas": "Mawazo",
@@ -891,7 +891,7 @@
     "smtProfile": "Wasifu",
     "crisis": "Mgogoro",
     "smtDelegates": "Wajumbe",
-    "openingSpeech": "🎙️ Opening speeches"
+    "openingSpeech": "🎙️ Hotuba za ufunguzi"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -1538,13 +1538,13 @@
       "memberStates": "Nchi Wanachama wa Umoja wa Mataifa",
       "unSystem": "Mfumo wa UN (waanzilishi na wanachama)",
       "history": "Historia ya Umoja wa Mataifa",
-      "seamunWebsite": "SEAMUN website",
-      "seamunCommittee": "SEAMUN committee portal",
+      "seamunWebsite": "Tovuti ya SEAMUN",
+      "seamunCommittee": "bandari ya kamati ya SEAMUN",
       "unicef": "UNICEF",
       "unesco": "UNESCO"
     },
-    "libraryIntro": "Opens in a new tab.",
-    "backToCategories": "All categories",
+    "libraryIntro": "Hufungua katika kichupo kipya.",
+    "backToCategories": "Kategoria zote",
     "linkCount": "{count, plural, one {# link} other {# links}}",
     "categoryHints": {
       "seamun": "Tovuti ya mkutano na tovuti ya kamati",
@@ -1558,7 +1558,7 @@
       "pressCorpsLinks": "Madawati matatu ya habari kwa kila mgao wa Press Corps (ulimwengu, afya na vipengele)."
     },
     "linkDescriptions": {
-      "seamunWebsite": "Official SEAMUN conference site (schedules, info, and announcements).",
+      "seamunWebsite": "Tovuti rasmi ya mkutano ya SEAMUN (ratiba, maelezo, na matangazo).",
       "seamunCommittee": "Committee portal for InterMUN / SEAMUN digital rooms and dashboards."
     }
   },
@@ -4631,7 +4631,7 @@
       "contact": "Wasiliana",
       "signIn": "Ingia",
       "getStarted": "Anza",
-      "features": "Features",
+      "features": "Vipengele",
       "about": "Kuhusu",
       "menu": "Menyu",
       "closeMenu": "Funga",
@@ -4650,7 +4650,7 @@
       "chip3": "Lugha 31 za kiolesura",
       "previewLabel": "Sakafu ya kikao",
       "sticky1": "Pindua simu, vipima muda, na usogeze katika ghorofa moja.",
-      "sticky2": "Imeundwa kwa ajili ya viti wanaochukia tabo za mauzauza.",
+      "sticky2": "Imetengenezwa kwa wenyeviti wanaochukia kubadilisha-badilisha tabo za kivinjari.",
       "floorEyebrow": "Kwenye sakafu"
     },
     "steps": {
@@ -4786,8 +4786,8 @@
         "fieldSubmittedAt": "Imewasilishwa kwa (UTC)",
         "showOptionalDetails": "Ongeza maelezo ya tukio (si lazima)"
       },
-      "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
-      "registerSecretariatLink": "Register your conference"
+      "registerSecretariat": "Tayari kuanza? Anza usajili kamili wa sekretarieti.",
+      "registerSecretariatLink": "Sajili mkutano wako"
     },
     "footer": {
       "ctaTitle": "Lete kamati yako ijayo",
@@ -4838,8 +4838,8 @@
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
       "statusAbsent": "Haipo",
-      "prepWorkspaceTitle": "Add and save prep work",
-      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
+      "prepWorkspaceTitle": "Ongeza na uhifadhi kazi ya maandalizi",
+      "prepWorkspaceHint": "Mtiririko uleule wa kuandika-na-kuhifadhi kama dashibodi ya wajumbe — hati, mapendekezo ya vifungu na madokezo."
     },
     "exploreChairs": "Chunguza vipengele vyote vya dais",
     "exploreDelegates": "Chunguza vipengele vyote vya mjumbe",
@@ -5166,8 +5166,8 @@
       }
     },
     "origin": {
-      "eyebrow": "Our roots",
-      "title": "Where it began",
+      "eyebrow": "Asili yetu",
+      "title": "Mahali ilipoanza",
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
@@ -5278,9 +5278,9 @@
     }
   },
   "notFoundPage": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist or has moved.",
-    "backToHome": "Back to home"
+    "title": "Ukurasa haujapatikana",
+    "description": "Ukurasa unaotafuta haupo au umehama.",
+    "backToHome": "Rudi nyumbani"
   },
   "appleColorPicker": {
     "title": "Colors",
@@ -5862,9 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Fungua mipangilio ya mwonekano na ufikiaji",
-    "accountAria": "Account and preferences",
-    "profile": "Profile",
+    "openAria": "Fungua mipangilio ya muonekano na ufikivu",
+    "accountAria": "Akaunti na mapendeleo",
+    "profile": "Wasifu",
     "appearanceAndAccess": "Ufikivu na rangi"
   }
 }
