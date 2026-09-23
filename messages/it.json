@@ -2742,7 +2742,7 @@
     "hub": {
       "sessionTitle": "Sessione del comitato",
       "sessionLive": "La sessione è in diretta",
-      "sessionLiveNamed": "Dal vivo · {title}",
+      "sessionLiveNamed": "In diretta · {title}",
       "sessionIdle": "Ancora nessun timestamp della sessione live",
       "sessionCta": "Apri il controllo della sessione",
       "heldNotes": "{count, plural, one {# nota in attesa di revisione} other {# note in attesa di revisione}}",

@@ -2745,7 +2745,7 @@
       "sessionLiveNamed": "တိုက်ရိုက် · {title}",
       "sessionIdle": "တိုက်ရိုက်အစည်းအဝေးအချိန်တံဆိပ်မရသေးပါ။",
       "sessionCta": "စက်ရှင်ထိန်းချုပ်မှုကို ဖွင့်ပါ။",
-      "heldNotes": "{count, plural, one {# note waiting for review} other {# notes waiting for review}}",
+      "heldNotes": "{count, plural, one {သုံးသပ်ချက် # မှတ်ချက်} other {သုံးသပ်ချက် # မှတ်စု}}",
       "floorTitle": "ကြမ်းပြင်ပေါ်မှာ",
       "floorBody": "တိုင်မာ၊ စပီကာများစာရင်းနှင့် ရွေ့လျားမှုများသည် အလယ်အလတ်စကားစစ်ထိုးပွဲအတွက် သင်ရောက်ရှိနိုင်သော ကိရိယာသုံးခုဖြစ်သည်။",
       "chamberTitle": "လွှတ်တော်နဲ့ အလှူခံတယ်။",

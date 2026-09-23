@@ -2745,7 +2745,7 @@
       "sessionLiveNamed": "Langsung · {title}",
       "sessionIdle": "Tiada cap masa sesi langsung lagi",
       "sessionCta": "Kawalan sesi terbuka",
-      "heldNotes": "{count, plural, one {# note waiting for review} other {# notes waiting for review}}",
+      "heldNotes": "{count, plural, one {# nota menunggu semakan} other {# nota menunggu untuk semakan}}",
       "floorTitle": "Di atas lantai",
       "floorBody": "Pemasa, senarai pembesar suara dan gerakan ialah tiga alat yang anda capai untuk pertengahan perbahasan.",
       "chamberTitle": "Penjagaan bilik",

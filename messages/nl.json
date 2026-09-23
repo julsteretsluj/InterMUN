@@ -2742,7 +2742,7 @@
     "hub": {
       "sessionTitle": "Commissiesessie",
       "sessionLive": "Sessie is live",
-      "sessionLiveNamed": "Leef · {title}",
+      "sessionLiveNamed": "Live · {title}",
       "sessionIdle": "Nog geen tijdstempel voor livesessies",
       "sessionCta": "Sessiecontrole openen",
       "heldNotes": "{count, plural, one {# notitie wacht op beoordeling} other {# notities wachten op beoordeling}}",
