@@ -51,7 +51,7 @@ export function MarketingDelegatePrepWorkspacePanel({
                 "rounded-full border px-3 py-1.5 text-xs font-semibold  tracking-wide transition",
                 tab === key
                   ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)] text-[var(--clicky-ink)]"
-                  : "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))]"
+                  : "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))]"
               )}
             >
               {tPrep(`prepTile.${key}`)}
@@ -172,7 +172,7 @@ function DocumentsWorkspace() {
           {saved.map((doc) => (
             <li
               key={doc.id}
-              className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
+              className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
             >
               {doc.title}
             </li>
@@ -256,7 +256,7 @@ function SpeechesWorkspace() {
         {items.map((speech) => (
           <li
             key={speech.id}
-            className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
+            className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
           >
             {speech.title}
           </li>

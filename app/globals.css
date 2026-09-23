@@ -8989,27 +8989,30 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   color: #1D1D1F;
 }
 
-/* —— Clicky era: lowercase on marketing + auth shells only —— */
-/* Dashboard / session stay sentence case so country names and chair labels stay readable. */
-.marketing-shell,
-.mun-clicky-auth {
+/* —— Clicky era: sitewide lowercase content —— */
+html,
+body,
+.mun-apple-site {
   text-transform: lowercase;
 }
 
-.marketing-shell :where(*),
-.mun-clicky-auth :where(*) {
+html body :where(*),
+.mun-apple-site :where(*) {
   text-transform: lowercase !important;
 }
 
-.marketing-shell :is(.uppercase, .normal-case, .capitalize),
-.mun-clicky-auth :is(.uppercase, .normal-case, .capitalize) {
+/* Beat Tailwind / legacy uppercase + normal-case utilities */
+.uppercase,
+.normal-case,
+.capitalize {
   text-transform: lowercase !important;
 }
 
 /* Preserve typed values and InterMUN logo casing */
-.marketing-shell :is(
+html body :is(
   input,
   textarea,
+  select,
   [contenteditable="true"],
   [contenteditable=""],
   .case-preserve,
@@ -9019,29 +9022,152 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   .mun-brand-wordmark,
   .mun-brand-wordmark *,
   .mun-brand-word,
-  .mun-brand-word-suffix
-),
-.mun-clicky-auth :is(
-  input,
-  textarea,
-  [contenteditable="true"],
-  [contenteditable=""],
-  .case-preserve,
-  .case-preserve *,
-  .mun-brand-wordmark,
-  .mun-brand-wordmark *,
-  .mun-brand-word,
-  .mun-brand-word-suffix
+  .mun-brand-word-suffix,
+  .font-mono,
+  code,
+  kbd,
+  samp,
+  pre
 ) {
   text-transform: none !important;
 }
 
-.marketing-shell .case-preserve,
-.marketing-shell .case-preserve *,
-.marketing-shell .marketing-header-brand,
-.marketing-shell .marketing-header-brand *,
-.mun-clicky-auth .case-preserve,
-.mun-clicky-auth .case-preserve * {
+html body .case-preserve,
+html body .case-preserve *,
+html body .marketing-header-brand,
+html body .marketing-header-brand *,
+html body .mun-brand-wordmark,
+html body .mun-brand-wordmark * {
   text-transform: none !important;
 }
+
+/* —— Clicky dark mode: final override (wins over earlier html.dark rules) —— */
+html.dark {
+  --clicky-paper: #12141a;
+  --clicky-paper-deep: #1a1d26;
+  --clicky-ink: #f5f5f7;
+  --clicky-ink-soft: #a1a1a6;
+  --clicky-ink-faint: #6e6e73;
+  --clicky-muted: #8e8e93;
+  --clicky-line: rgba(255, 255, 255, 0.12);
+  --clicky-window: #1c1f28;
+  --clicky-blue: #0a84ff;
+  --clicky-blue-hover: #2997ff;
+  --clicky-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.4);
+  --clicky-shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
+  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1.2px);
+  --dashboard-cream: var(--clicky-paper);
+  --dashboard-card: var(--clicky-window);
+  --dashboard-shadow: var(--clicky-shadow);
+  --color-bg-page: var(--clicky-paper);
+  --background: var(--clicky-paper);
+  --color-text: var(--clicky-ink);
+  --brand-navy: var(--clicky-ink);
+  --brand-muted: var(--clicky-ink-soft);
+  --hairline: var(--clicky-line);
+  --accent: var(--clicky-blue);
+  --brand-accent: var(--clicky-blue);
+  --brand-accent-bright: var(--clicky-blue-hover);
+  --apple-bg-primary: var(--clicky-paper);
+  --apple-bg-secondary: var(--clicky-paper-deep);
+  --apple-bg-tertiary: var(--clicky-window);
+  --content-material: var(--clicky-paper);
+  --material-thin: var(--clicky-paper);
+  --material-thick: var(--clicky-window);
+}
+
+html.dark,
+html.dark body,
+html.dark body.mun-apple-site,
+html.dark .mun-apple-site,
+html.dark .mun-clicky-site,
+html.dark .marketing-shell,
+html.dark .mun-clicky-auth {
+  background-color: var(--clicky-paper) !important;
+  background-image: var(--clicky-dot) !important;
+  background-size: 22px 22px !important;
+  color: var(--clicky-ink) !important;
+}
+
+html.dark .clicky-pill-ghost,
+html.dark .clicky-pill.clicky-pill-ghost {
+  background: var(--clicky-window) !important;
+  color: var(--clicky-ink) !important;
+  border-color: var(--clicky-line) !important;
+}
+
+html.dark .clicky-pill-primary,
+html.dark .clicky-pill.clicky-pill-primary,
+html.dark .clicky-btn-primary {
+  background: var(--clicky-blue) !important;
+  color: #fff !important;
+}
+
+html.dark .clicky-sticky,
+html.dark .clicky-sticky--blue {
+  color: #121212 !important;
+}
+
+html.dark .clicky-window,
+html.dark .clicky-preview-body,
+html.dark .marketing-session-surface,
+html.dark .marketing-preview-surface,
+html.dark .marketing-light-surface,
+html.dark .dashboard-app-frame,
+html.dark .mun-page-shell,
+html.dark .mun-clicky-auth-card,
+html.dark .mun-clicky-gate-card {
+  background-color: var(--clicky-window) !important;
+  color: var(--clicky-ink) !important;
+  border-color: var(--clicky-line) !important;
+}
+
+html.dark .clicky-window-bar {
+  background: linear-gradient(180deg, #2a2d36 0%, #1f222b 100%) !important;
+  border-bottom-color: var(--clicky-line) !important;
+}
+
+html.dark .bg-white,
+html.dark .bg-\[var\(--clicky-window\)\] {
+  background-color: var(--clicky-window) !important;
+}
+
+html.dark .marketing-header {
+  background: color-mix(in srgb, var(--clicky-paper) 88%, transparent) !important;
+  border-bottom-color: var(--clicky-line) !important;
+}
+
+html.dark .marketing-header-brand,
+html.dark .case-preserve {
+  color: var(--clicky-ink) !important;
+}
+
+html.dark .text-brand-navy {
+  color: var(--clicky-ink) !important;
+}
+
+html.dark .text-brand-muted {
+  color: var(--clicky-ink-soft) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: var(--clicky-paper) !important;
+  color: var(--clicky-ink) !important;
+  border-color: var(--clicky-line) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: var(--clicky-ink-faint) !important;
+}
+
+html.dark .mun-apple-btn-glass-gray,
+html.dark .mun-apple-btn-ghost {
+  background: var(--clicky-window) !important;
+  color: var(--clicky-ink) !important;
+  border-color: var(--clicky-line) !important;
+}
+
 

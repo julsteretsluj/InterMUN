@@ -21,7 +21,12 @@ export function AppleAppProviders({ children }: { children: ReactNode }) {
 /** Ambient glass canvas + Apple typography context for every route. */
 export function AppleSiteShell({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <GlassCanvas className={cn("mun-apple-site min-h-full bg-[var(--dashboard-cream)] text-brand-navy", className)}>
+    <GlassCanvas
+      className={cn(
+        "mun-apple-site mun-clicky-site min-h-full bg-[var(--clicky-paper)] text-[var(--clicky-ink)]",
+        className
+      )}
+    >
       {children}
     </GlassCanvas>
   );

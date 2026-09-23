@@ -39,12 +39,12 @@ export function AdminAppChrome({
   }
 
   return (
-    <AppleProductPage width="wide" className="min-h-screen bg-[var(--dashboard-cream)] py-8 md:py-12">
+    <AppleProductPage width="wide" className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] py-8 md:py-12">
       <AppleWindowWithSidebar
         title="Admin"
         subtitle={activeEventName ?? appName}
-        className="bg-[var(--dashboard-card)]"
-        sidebarClassName="hidden flex-col bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] md:flex"
+        className="dashboard-app-frame bg-[var(--clicky-window)]"
+        sidebarClassName="hidden flex-col bg-[color:color-mix(in_srgb,var(--clicky-paper)_82%,var(--clicky-window))] md:flex"
         trailing={
           <ChromePreferencesMenu
             account={{
@@ -103,7 +103,7 @@ export function AdminAppChrome({
           </AppleSidebar>
         }
       >
-        <div className="mun-apple-page-body space-y-4 bg-[var(--dashboard-card)] p-4 md:p-6">{children}</div>
+        <div className="mun-apple-page-body space-y-4 bg-[var(--clicky-window)] p-4 md:p-6">{children}</div>
       </AppleWindowWithSidebar>
     </AppleProductPage>
   );

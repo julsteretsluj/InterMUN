@@ -124,7 +124,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
   return (
     <section
       className={cn(
-        "rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] md:p-6",
+        "rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] md:p-6",
         "space-y-4",
         className
       )}
@@ -186,7 +186,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                     enterGuided();
                     goTo(sortedDelegates.findIndex((x) => x.id === d.id));
                   }}
-                  className="rounded-full border border-[color-mix(in_srgb,#febc2e_45%,var(--clicky-line))] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-[var(--clicky-ink)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_50%,var(--clicky-line))]"
+                  className="rounded-full border border-[color-mix(in_srgb,#febc2e_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-window)_70%,transparent)] px-2.5 py-0.5 text-xs font-medium text-[var(--clicky-ink)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_50%,var(--clicky-line))]"
                 >
                   {d.country}
                 </button>

@@ -193,7 +193,7 @@ export function OrbAnimationOverlay({
     <div
       className={cn(
         "fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden transition-opacity ease-out",
-        isLight ? "bg-brand-cream [color-scheme:light]" : "bg-black",
+        isLight ? "bg-brand-cream" : "bg-black",
         fading ? "pointer-events-none opacity-0 duration-[320ms]" : "opacity-100 duration-0",
         phase === "loading" && "opacity-100"
       )}
@@ -206,7 +206,7 @@ export function OrbAnimationOverlay({
         <button
           type="button"
           onClick={dismissEarly}
-          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white/90 text-brand-navy shadow-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]"
+          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-[color-mix(in_srgb,var(--clicky-window)_90%,transparent)] text-brand-navy shadow-sm transition hover:bg-[var(--clicky-window)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]"
           aria-label="Close"
         >
           <X className="h-5 w-5" aria-hidden />

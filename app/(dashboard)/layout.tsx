@@ -188,9 +188,9 @@ export default async function DashboardLayout({
   return (
     <AppleAppFrame appName={appName}>
     <TourShell view={tourView}>
-    <div className="min-h-screen bg-[var(--dashboard-cream)] text-brand-navy lg:p-3">
-      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--dashboard-card)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-[22px] lg:border lg:border-[var(--clicky-line)]">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--clicky-line)] bg-[color:color-mix(in_srgb,var(--dashboard-cream)_70%,white)] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
+    <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
+      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--clicky-window)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-[22px] lg:border lg:border-[var(--clicky-line)]">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--clicky-line)] bg-[color:color-mix(in_srgb,var(--clicky-paper)_82%,var(--clicky-window))] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
         <Link
           href={
             isChairRole(effectiveRole) ? "/chair" : isAdvisorRole(effectiveRole) ? "/advisor" : "/delegate"
@@ -249,7 +249,7 @@ export default async function DashboardLayout({
         ) : null}
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--dashboard-cream)] lg:min-h-0">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--clicky-paper)] lg:min-h-0">
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}

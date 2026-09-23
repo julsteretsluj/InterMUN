@@ -65,7 +65,7 @@ function MarketingRollCallCard({
         </div>
         {!heroCompact ? <p className="text-sm text-[var(--clicky-ink-soft)]">{t("rollCallIntro")}</p> : null}
       </div>
-      <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4")}>
+      <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-3" : "space-y-4")}>
         {!heroCompact ? (
         <button type="button" className={initBtn}>
           {t("initializeRowsAllAllocations")}
@@ -83,8 +83,7 @@ function MarketingRollCallCard({
               key={row.id}
               className={cn(
                 MARKETING_SESSION_INSET,
-                "flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between",
-                heroCompact ? "px-2 py-1.5" : "px-3 py-2"
+                "flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
               )}
             >
               <span className="shrink-0 font-medium">{row.country}</span>

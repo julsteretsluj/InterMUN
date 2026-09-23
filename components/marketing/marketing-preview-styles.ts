@@ -9,21 +9,21 @@ export const MARKETING_CHAMBER_PREVIEW = "marketing-chamber-preview";
 const ROLL_CLICKY: Record<RollAttendance, { active: string; inactive: string }> = {
   present_abstain: {
     active:
-      "border-[color-mix(in_srgb,#febc2e_55%,var(--clicky-line))] bg-[color-mix(in_srgb,#febc2e_20%,white)] text-[var(--clicky-ink)] shadow-sm",
+      "border-[color-mix(in_srgb,#febc2e_55%,var(--clicky-line))] bg-[color-mix(in_srgb,#febc2e_22%,var(--clicky-window))] text-[var(--clicky-ink)] shadow-sm",
     inactive:
-      "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
+      "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
   },
   present_voting: {
     active:
-      "border-[color-mix(in_srgb,var(--clicky-mint)_50%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-mint)_16%,white)] text-[var(--clicky-ink)] shadow-sm",
+      "border-[color-mix(in_srgb,var(--clicky-mint)_50%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-mint)_18%,var(--clicky-window))] text-[var(--clicky-ink)] shadow-sm",
     inactive:
-      "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
+      "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
   },
   absent: {
     active:
-      "border-[color-mix(in_srgb,var(--clicky-coral)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-coral)_12%,white)] text-[var(--clicky-ink)] shadow-sm",
+      "border-[color-mix(in_srgb,var(--clicky-coral)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-coral)_14%,var(--clicky-window))] text-[var(--clicky-ink)] shadow-sm",
     inactive:
-      "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
+      "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]",
   },
 };
 
@@ -35,9 +35,9 @@ export function marketingRollAttendanceButtonClass(value: RollAttendance, active
   }`;
 }
 
-/** Locked light-surface tokens for marketing demos (immune to dark mode). */
+/** Theme-aware surface tokens for marketing demos. */
 export const PREVIEW_CARD =
-  "marketing-preview-surface rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-4 text-[var(--clicky-ink)] shadow-[var(--clicky-shadow)] [color-scheme:light]";
+  "marketing-preview-surface rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] p-4 text-[var(--clicky-ink)] shadow-[var(--clicky-shadow)]";
 export const PREVIEW_LABEL =
   "text-[0.6875rem] font-semibold tracking-[0.06em] text-[var(--clicky-ink-faint)]";
 export const PREVIEW_MUTED = "text-sm text-[var(--clicky-ink-soft)]";
@@ -47,18 +47,18 @@ export const PREVIEW_ROW =
 
 /** Session-floor card chrome — clicky window inset. */
 export const MARKETING_SESSION_SURFACE =
-  "marketing-session-surface rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-4 text-[var(--clicky-ink)] shadow-[var(--clicky-shadow)] md:p-5";
+  "marketing-session-surface rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] p-5 text-[var(--clicky-ink)] shadow-[var(--clicky-shadow)] md:p-6";
 
 /** @deprecated Prefer MARKETING_SESSION_SURFACE — kept for role-feature previews. */
 export const MARKETING_DARK_GLASS_CARD = MARKETING_SESSION_SURFACE;
 
 /** Nested row / inset inside a session surface card. */
 export const MARKETING_SESSION_INSET =
-  "rounded-[var(--clicky-radius-sm)] bg-[var(--clicky-paper)]";
+  "rounded-[var(--clicky-radius-sm)] bg-[var(--clicky-paper)] px-3.5 py-2.5";
 
 /** Nested content island — same theme tokens as the parent session card. */
 export const MARKETING_LIGHT_SURFACE =
-  "marketing-light-surface rounded-[var(--clicky-radius-sm)] bg-white text-[var(--clicky-ink)]";
+  "marketing-light-surface rounded-[var(--clicky-radius-sm)] bg-[var(--clicky-window)] text-[var(--clicky-ink)]";
 
 /** Session floor labels. */
 export const SESSION_FLOOR_LABEL =
@@ -66,7 +66,7 @@ export const SESSION_FLOOR_LABEL =
 
 /** Shared secondary / ghost control inside previews. */
 export const PREVIEW_BTN_GHOST =
-  "inline-flex items-center gap-1.5 rounded-full border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)] transition hover:bg-[var(--clicky-paper)]";
+  "inline-flex items-center gap-1.5 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)] transition hover:bg-[var(--clicky-paper)]";
 
 /** Shared primary control inside previews. */
 export const PREVIEW_BTN_PRIMARY =
@@ -74,4 +74,4 @@ export const PREVIEW_BTN_PRIMARY =
 
 /** Shared field chrome inside previews. */
 export const PREVIEW_FIELD =
-  "w-full rounded-[var(--clicky-radius-sm)] border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm text-[var(--clicky-ink)] outline-none transition focus:border-[var(--clicky-blue)] focus:shadow-[0_0_0_3px_rgba(0,122,255,0.18)]";
+  "w-full rounded-[var(--clicky-radius-sm)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2 text-sm text-[var(--clicky-ink)] outline-none transition focus:border-[var(--clicky-blue)] focus:shadow-[0_0_0_3px_rgba(0,122,255,0.18)]";

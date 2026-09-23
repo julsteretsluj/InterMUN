@@ -155,7 +155,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
         />
       </label>
 
-      <div className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)]/50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
+      <div className="rounded-lg border border-[var(--clicky-line)] bg-[color-mix(in_srgb,var(--clicky-paper)_50%,transparent)] px-3 py-2 dark:border-white/10">
         <p className="text-[10px] font-semibold  tracking-wide text-[var(--clicky-ink-soft)]">{t("preview")}</p>
         <p className="mt-1 text-sm text-[var(--clicky-ink)]">{preview || t("previewDash")}</p>
       </div>
@@ -181,7 +181,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
           {suggestions.map((row) => (
             <li
               key={row.id}
-              className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm dark:border-white/10 dark:bg-black/15"
+              className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2 text-sm dark:border-white/10 dark:bg-black/15"
             >
               <div className="flex flex-wrap items-center gap-2 text-[11px] text-[var(--clicky-ink-soft)]">
                 <span

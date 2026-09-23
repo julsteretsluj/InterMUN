@@ -99,7 +99,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
             <button
               type="button"
               onClick={() => copyText("event", eventCode)}
-              className="rounded-lg border border-[var(--clicky-line)] p-1.5 text-[var(--clicky-ink-soft)] hover:bg-white"
+              className="rounded-lg border border-[var(--clicky-line)] p-1.5 text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-window)]"
               aria-label={tPreview("copyCode")}
             >
               {copiedKey === "event" ? (
@@ -127,7 +127,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
             return (
               <form
                 key={row.id}
-                className="space-y-2 rounded-lg border border-[var(--clicky-line)] bg-white p-3"
+                className="space-y-2 rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] p-3"
                 onSubmit={(e) => {
                   e.preventDefault();
                   saveCommitteeCode(row.id);

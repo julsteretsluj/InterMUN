@@ -23,7 +23,7 @@ export function MarketingChamberFrame({
         <span className="clicky-traffic" aria-hidden />
         <span className="clicky-window-title">{label.toLowerCase()}</span>
       </div>
-      <div className="clicky-preview-body bg-[var(--clicky-window)] p-3 md:p-4">{children}</div>
+      <div className="clicky-preview-body bg-[var(--clicky-window)]">{children}</div>
     </div>
   );
 }

@@ -142,9 +142,7 @@ export async function MarketingHome() {
         <div className="relative mx-auto max-w-4xl px-4 md:px-8">
           <p className="clicky-eyebrow mb-4 text-center">on the floor</p>
           <WindowFrame filename="session-floor.mov" className="clicky-float-a" floatClass="">
-            <div className="p-2 md:p-3">
-              <MarketingHeroSessionPreview heroCompact />
-            </div>
+            <MarketingHeroSessionPreview heroCompact />
           </WindowFrame>
         </div>
       </section>
@@ -240,7 +238,7 @@ export async function MarketingHome() {
               <div
                 key={item.t}
                 className={cn(
-                  "rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-5",
+                  "rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] p-5",
                   i % 2 === 1 && "sm:translate-y-4"
                 )}
               >

@@ -51,9 +51,9 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
   return (
     <AppleAppFrame appName={appName}>
     <TourShell view="advisor">
-    <div className="min-h-screen bg-[var(--dashboard-cream)] text-brand-navy lg:p-3">
-      <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--dashboard-card)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-2xl lg:border lg:border-[var(--hairline)] lg:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.45)]">
-        <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden bg-[color:color-mix(in_srgb,var(--dashboard-cream)_64%,white)] shadow-[inset_-1px_0_0_var(--hairline)] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
+    <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
+      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--clicky-window)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-[22px] lg:border lg:border-[var(--clicky-line)]">
+        <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--clicky-line)] bg-[color:color-mix(in_srgb,var(--clicky-paper)_82%,var(--clicky-window))] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
           <Link
             href="/advisor"
             aria-label={`${appName} home`}
@@ -80,7 +80,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
           </div>
         </aside>
 
-        <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--dashboard-cream)] lg:min-h-0">
+        <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--clicky-paper)] lg:min-h-0">
           <DashboardTopBar
             userName={displayName}
             userEmail={user.email ?? ""}

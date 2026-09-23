@@ -123,7 +123,7 @@ export function MarketingSessionSpeakersPanel({
       </div>
 
       <div className={cn(MARKETING_SESSION_SURFACE, heroCompact ? "space-y-2" : "space-y-4")}>
-        <div className={cn("space-y-2", MARKETING_SESSION_INSET, heroCompact ? "p-2" : "space-y-3 p-3")}>
+        <div className={cn("space-y-2", MARKETING_SESSION_INSET, !heroCompact && "space-y-3")}>
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
             {!heroCompact ? (
@@ -154,7 +154,7 @@ export function MarketingSessionSpeakersPanel({
               type="button"
               onClick={() => setRunning((v) => !v)}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-full border border-[var(--clicky-line)] bg-white font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]",
+                "inline-flex items-center gap-1.5 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-window)] font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]",
                 heroCompact ? "px-2 py-1.5 text-xs" : "px-3 py-2 text-sm"
               )}
             >

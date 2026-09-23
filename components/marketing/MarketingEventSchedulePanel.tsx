@@ -167,7 +167,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       {mainTab === "lunch" ? (
         <div className="space-y-2 rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
           <p className="text-[0.65rem] text-[var(--clicky-ink-faint)]">{t("lunchOverlapHelp")}</p>
-          <div className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-xs text-[var(--clicky-ink)]">
+          <div className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2 text-xs text-[var(--clicky-ink)]">
             <span className="font-semibold text-[var(--clicky-ink)]">
               {t("dayLabel", { day: LUNCH_OVERLAP_FIXTURE.day })} · {LUNCH_OVERLAP_FIXTURE.overlapStart}–
               {LUNCH_OVERLAP_FIXTURE.overlapEnd}
@@ -232,7 +232,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
             </span>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
+          <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)]">
             <table className="w-full min-w-[32rem] text-xs">
               <thead>
                 <tr className="border-b border-[var(--clicky-line)] bg-[var(--clicky-paper)] text-left text-[0.65rem]  tracking-wide text-[var(--clicky-ink-faint)]">
@@ -318,7 +318,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                 };
               })
             }
-            className="rounded-lg border border-[var(--clicky-line)] bg-white px-2.5 py-1 text-[0.65rem] font-semibold text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
+            className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-2.5 py-1 text-[0.65rem] font-semibold text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
           >
             {t("addBlock")}
           </button>

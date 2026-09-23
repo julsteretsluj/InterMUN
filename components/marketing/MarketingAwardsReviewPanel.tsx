@@ -136,7 +136,7 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
           className={cn(
             "shrink-0 rounded-t-lg border-b-2 px-2.5 py-1.5 text-xs font-medium transition",
             committeeFilter === "all"
-              ? "border-[var(--clicky-blue)] bg-white text-[var(--clicky-ink)]"
+              ? "border-[var(--clicky-blue)] bg-[var(--clicky-window)] text-[var(--clicky-ink)]"
               : "border-transparent text-[var(--clicky-ink-faint)] hover:text-[var(--clicky-ink)]"
           )}
         >
@@ -153,7 +153,7 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
             className={cn(
               "shrink-0 rounded-t-lg border-b-2 px-2.5 py-1.5 text-xs font-medium transition",
               committeeFilter === tab.id
-                ? "border-[var(--clicky-blue)] bg-white text-[var(--clicky-ink)]"
+                ? "border-[var(--clicky-blue)] bg-[var(--clicky-window)] text-[var(--clicky-ink)]"
                 : "border-transparent text-[var(--clicky-ink-faint)] hover:text-[var(--clicky-ink)]"
             )}
           >
@@ -165,7 +165,7 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
         ))}
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
+      <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)]">
         <table className="w-full min-w-[36rem] text-xs">
           <thead>
             <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem]  tracking-wider text-[var(--clicky-ink-faint)]">

@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 const INITIAL_STATE: ConferenceInquiryState | null = null;
 
 const INPUT_CLASS =
-  "mt-1.5 w-full rounded-[var(--clicky-radius-sm)] border border-[var(--clicky-line)] bg-white px-3 py-2.5 text-[0.9375rem] text-[var(--clicky-ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--clicky-muted)] focus:border-[var(--clicky-blue)] focus:shadow-[0_0_0_3px_rgba(0,122,255,0.18)] [color-scheme:light]";
+  "mt-1.5 w-full rounded-[var(--clicky-radius-sm)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-2.5 text-[0.9375rem] text-[var(--clicky-ink)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--clicky-muted)] focus:border-[var(--clicky-blue)] focus:shadow-[0_0_0_3px_rgba(0,122,255,0.18)]";
 
 const LABEL_CLASS =
   "block text-[0.6875rem] font-semibold tracking-[0.08em] text-[var(--clicky-muted)]";
@@ -176,7 +176,7 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
                 {interests.map((item) => (
                   <label
                     key={item.value}
-                    className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] transition-colors hover:bg-white has-[:checked]:border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] has-[:checked]:bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)]"
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] transition-colors hover:bg-[var(--clicky-window)] has-[:checked]:border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] has-[:checked]:bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)]"
                   >
                     <input
                       type="checkbox"

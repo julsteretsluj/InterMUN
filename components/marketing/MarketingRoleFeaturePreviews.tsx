@@ -90,7 +90,7 @@ export function ChairRollCallQuorumDemo() {
               key={row.id}
               className={cn(
                 MARKETING_SESSION_INSET,
-                "flex flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
+                "flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
               )}
             >
               <span className="font-medium">{row.country}</span>
@@ -197,7 +197,7 @@ export function ChairSessionTimerDemo() {
         <button
           type="button"
           onClick={() => setRunning((v) => !v)}
-          className="inline-flex items-center gap-1 rounded-full border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)]"
+          className="inline-flex items-center gap-1 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)]"
         >
           {running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
           {running ? t("pause") : t("start")}
@@ -337,7 +337,7 @@ export function DelegateSpeechPlannerDemo() {
               onClick={() => toggle(p.id)}
               className={cn(
                 "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border",
-                p.done ? "border-[var(--clicky-blue)] bg-[var(--clicky-blue)] text-white" : "border-[var(--clicky-line)] bg-white"
+                p.done ? "border-[var(--clicky-blue)] bg-[var(--clicky-blue)] text-white" : "border-[var(--clicky-line)] bg-[var(--clicky-window)]"
               )}
               aria-label={p.done ? t("markUndone") : t("markDone")}
             >

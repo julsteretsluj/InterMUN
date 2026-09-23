@@ -53,7 +53,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       className={`${sans.variable} ${documentSerif.variable} h-full antialiased`}
     >
-      <body className="mun-apple-site flex min-h-full flex-col font-sans text-brand-navy">
+      <body className="mun-apple-site mun-clicky-site flex min-h-full flex-col font-sans text-[var(--clicky-ink)]">
         <Script id="intermun-theme-init" strategy="beforeInteractive">
           {themeInit}
         </Script>

@@ -62,7 +62,7 @@ export function MarketingPrimaryNav() {
       <div className="relative justify-self-end md:hidden">
         <button
           type="button"
-          className="rounded-full border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)]"
+          className="rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)]"
           aria-expanded={open}
           aria-controls="marketing-mobile-nav"
           onClick={() => setOpen((v) => !v)}
@@ -72,7 +72,7 @@ export function MarketingPrimaryNav() {
         {open ? (
           <div
             id="marketing-mobile-nav"
-            className="absolute right-0 top-[calc(100%+0.5rem)] z-40 w-56 rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-2 shadow-[var(--clicky-shadow)]"
+            className="absolute right-0 top-[calc(100%+0.5rem)] z-40 w-56 rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-window)] p-2 shadow-[var(--clicky-shadow)]"
           >
             <nav className="flex flex-col gap-0.5 text-sm">
               {links.map((link) => (

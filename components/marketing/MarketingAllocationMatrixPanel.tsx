@@ -163,7 +163,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
+        <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)]">
           <table className="w-full min-w-[32rem] text-xs">
             <thead>
               <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem]  tracking-wider text-[var(--clicky-ink-faint)]">
@@ -225,7 +225,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
               key={label}
               type="button"
               onClick={() => quickAddSeat(label)}
-              className="rounded-lg border border-[var(--clicky-line)] bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
+              className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-2.5 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
             >
               {label}
             </button>
@@ -251,7 +251,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
           </div>
           <button
             type="submit"
-            className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
+            className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-window)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
           >
             {t("add")}
           </button>
@@ -272,7 +272,7 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
                   "shrink-0 rounded-lg border px-2.5 py-1 text-[0.65rem] font-semibold transition",
                   selected
                     ? "border-[color-mix(in_srgb,var(--clicky-blue)_60%,#d4d4d8)] bg-[color-mix(in_srgb,var(--clicky-blue)_14%,#ffffff)] text-[var(--clicky-ink)]"
-                    : "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]"
+                    : "border-[var(--clicky-line)] bg-[var(--clicky-window)] text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]"
                 )}
               >
                 {tab.label}

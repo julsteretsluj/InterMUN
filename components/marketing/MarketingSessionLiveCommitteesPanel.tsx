@@ -121,7 +121,7 @@ export function MarketingSessionLiveCommitteesPanel({
   return (
     <section
       className={cn(
-        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] sm:p-5",
+        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] sm:p-5",
         className
       )}
     >
@@ -180,7 +180,7 @@ export function MarketingSessionLiveCommitteesPanel({
                     aria-pressed={selected}
                     aria-label={`${cardPriority}. ${title}`}
                     className={cn(
-                      "relative rounded-[var(--clicky-radius-sm)] border bg-white px-3.5 py-3 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
+                      "relative rounded-[var(--clicky-radius-sm)] border bg-[var(--clicky-window)] px-3.5 py-3 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
                       selected
                         ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,#0B1F3A)] bg-[color-mix(in_srgb,var(--clicky-blue)_6%,#ffffff)] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_25%,transparent)]"
                         : "border-[var(--clicky-line)]"
