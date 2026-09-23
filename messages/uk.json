@@ -891,7 +891,8 @@
     "smtProfile": "Профіль",
     "crisis": "Криза",
     "smtDelegates": "Делегати",
-    "openingSpeech": "🎙️ Вступні промови"
+    "openingSpeech": "🎙️ Вступні промови",
+    "speechNotes": "Нотатки промови"
   },
   "setupPage": {
     "title": "Supabase не налаштовано",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Нотатки промови"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Перед конференцією"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Хід сеансу",
+        "hint": "Етапи та оновлення SMT"
       },
       "delegates": {
         "label": "Делегати",
@@ -2725,9 +2727,32 @@
         "hint": "Звіт про інцидент"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Вступні промови",
+        "hint": "Список доповідачів від А до Я з 60 секундами (розширити до 90 секунд рухом)"
+      },
+      "speechNotes": {
+        "label": "Нотатки промови",
+        "hint": "Нотатки, прив’язані до поточного спікера на таймері"
+      },
+      "notesModeration": {
+        "label": "Перегляд нот",
+        "hint": "Отримав нотатки делегації в очікуванні рішення на трибуні"
       }
+    },
+    "hub": {
+      "sessionTitle": "Засідання комітету",
+      "sessionLive": "Сесія в прямому ефірі",
+      "sessionLiveNamed": "Наживо · {title}",
+      "sessionIdle": "Поки немає позначки часу сеансу",
+      "sessionCta": "Відкрити контроль сеансу",
+      "heldNotes": "{count, plural, one {# нотатка очікує на розгляд} other {# нотатки очікують на розгляд}}",
+      "floorTitle": "На підлозі",
+      "floorBody": "Таймер, список доповідачів і рухи – це три інструменти, якими ви користуєтеся під час дебатів.",
+      "chamberTitle": "Камерний догляд",
+      "chamberBody": "Тримайте кімнату інформованою, справедливою та оцінюйте, не виходячи з помосту.",
+      "peopleTitle": "Люди та нотатки",
+      "peopleBody": "Список, перегляд нотаток і нотатки промови кожного доповідача зберігаються разом, тому між сесіями нічого не потрапляє.",
+      "seeAllTools": "Перегляньте кожен інструмент для крісла →"
     }
   },
   "awardsRubric": {

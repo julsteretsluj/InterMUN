@@ -20,11 +20,14 @@ export const CORE_MESSAGE_NAMESPACES = [
 /**
  * Catalogs only needed on public / setup / gate surfaces. Authenticated app
  * shells omit these on every navigation to cut RSC + client payload.
+ *
+ * Do NOT list namespaces still used inside the signed-in app (e.g.
+ * conferenceSetupForm on /chair/room-code + /smt/room-codes,
+ * secretariatRegistration on /admin intake, seamunConferenceLinks on
+ * /official-links) — omitting them surfaces missing-key fallbacks.
  */
 export const APP_DEFERRED_MESSAGE_NAMESPACES = [
   "marketing",
-  "secretariatRegistration",
-  "conferenceSetupForm",
   "conferenceSetupPage",
   "setupPage",
   "authWizard",
@@ -38,7 +41,6 @@ export const APP_DEFERRED_MESSAGE_NAMESPACES = [
   "allocationCodeGate",
   "allocationCodeGateForm",
   "allocationSignupPage",
-  "seamunConferenceLinks",
 ] as const;
 
 /** Public / marketing / auth / gate surfaces. */

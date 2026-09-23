@@ -891,7 +891,8 @@
     "smtProfile": "輪廓",
     "crisis": "危機",
     "smtDelegates": "代表們",
-    "openingSpeech": "🎙️開幕致辭"
+    "openingSpeech": "🎙️開幕致辭",
+    "speechNotes": "演講筆記"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "演講筆記"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "會前"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "會議進度",
+        "hint": "階段和 SMT 更新"
       },
       "delegates": {
         "label": "代表們",
@@ -2725,9 +2727,32 @@
         "hint": "事件報告"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "開幕致辭",
+        "hint": "A–Z 發言者列表，包含 60 秒（透過動議延長至 90 秒）"
+      },
+      "speechNotes": {
+        "label": "演講筆記",
+        "hint": "與計時器上當前發言者相關的註釋"
+      },
+      "notesModeration": {
+        "label": "筆記回顧",
+        "hint": "舉行代表團會議等候講台決定"
       }
+    },
+    "hub": {
+      "sessionTitle": "委員會會議",
+      "sessionLive": "會議正在進行中",
+      "sessionLiveNamed": "直播 · {title}",
+      "sessionIdle": "尚無即時會話時間戳",
+      "sessionCta": "開啟會話控制",
+      "heldNotes": "{count, plural, one {# 等待審核的註釋} other {# 筆筆記等待審核}}",
+      "floorTitle": "在地板上",
+      "floorBody": "計時器、發言者名單和動議是辯論中可以使用的三種工具。",
+      "chamberTitle": "房間護理",
+      "chamberBody": "在不離開講台流程的情況下，讓房間保持知情、公平和評分。",
+      "peopleTitle": "人物與筆記",
+      "peopleBody": "名冊、筆記回顧和每位演講者的演講筆記放在一起，因此會議之間不會發生任何衝突。",
+      "seeAllTools": "查看每一款椅子工具 →"
     }
   },
   "awardsRubric": {

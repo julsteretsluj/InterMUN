@@ -891,7 +891,8 @@
     "smtProfile": "ကိုယ်ရေးအကျဉ်း",
     "crisis": "အကျပ်အတည်း",
     "smtDelegates": "ကိုယ်စားလှယ်တွေ",
-    "openingSpeech": "🎙️ အဖွင့်မိန့်ခွန်း"
+    "openingSpeech": "🎙️ အဖွင့်မိန့်ခွန်း",
+    "speechNotes": "မိန့်ခွန်းမှတ်စုများ"
   },
   "setupPage": {
     "title": "Supabase ကို စီစဉ်မထားပါ။",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "မိန့်ခွန်းမှတ်စုများ"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "ညီလာခံမတိုင်ခင်"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "ကဏ္ဍတိုးတက်မှု",
+        "hint": "အဆင့်များနှင့် SMT အပ်ဒိတ်များ"
       },
       "delegates": {
         "label": "ကိုယ်စားလှယ်တွေ",
@@ -2725,9 +2727,32 @@
         "hint": "အဖြစ်အပျက်သတင်းပေးပို့ခြင်း။"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "အဖွင့်မိန့်ခွန်းများ",
+        "hint": "A–Z စပီကာများ စာရင်းတွင် 60s (ရွေ့လျားမှုဖြင့် 90s အထိ)"
+      },
+      "speechNotes": {
+        "label": "မိန့်ခွန်းမှတ်စုများ",
+        "hint": "တိုင်မာပေါ်ရှိ လက်ရှိစပီကာနှင့် ချိတ်ဆက်ထားသော မှတ်စုများ"
+      },
+      "notesModeration": {
+        "label": "မှတ်ချက်သုံးသပ်ချက်",
+        "hint": "ဒိုင်ဆုံးဖြတ်ချက်ကို စောင့်မျှော်နေသော ကိုယ်စားလှယ်အဖွဲ့၏ မှတ်စုများ"
       }
+    },
+    "hub": {
+      "sessionTitle": "ကော်မတီအစည်းအဝေး",
+      "sessionLive": "ဆက်ရှင်သည် တိုက်ရိုက်လွှင့်နေသည်။",
+      "sessionLiveNamed": "တိုက်ရိုက် · {title}",
+      "sessionIdle": "တိုက်ရိုက်အစည်းအဝေးအချိန်တံဆိပ်မရသေးပါ။",
+      "sessionCta": "စက်ရှင်ထိန်းချုပ်မှုကို ဖွင့်ပါ။",
+      "heldNotes": "{count, plural, one {# note waiting for review} other {# notes waiting for review}}",
+      "floorTitle": "ကြမ်းပြင်ပေါ်မှာ",
+      "floorBody": "တိုင်မာ၊ စပီကာများစာရင်းနှင့် ရွေ့လျားမှုများသည် အလယ်အလတ်စကားစစ်ထိုးပွဲအတွက် သင်ရောက်ရှိနိုင်သော ကိရိယာသုံးခုဖြစ်သည်။",
+      "chamberTitle": "လွှတ်တော်နဲ့ အလှူခံတယ်။",
+      "chamberBody": "အခန်းကို အသိပေး၊ တရားမျှတပြီး အမှတ်ပေးဇယားကို လမ်းကြောင်းမှန်ပေါ်မထွက်ဘဲထားပါ။",
+      "peopleTitle": "လူများနှင့် မှတ်စုများ",
+      "peopleBody": "စာရင်းဇယား၊ မှတ်စုသုံးသပ်ချက်နှင့် စပီကာတစ်ခုချင်း စကားပြောမှတ်စုများသည် တွဲနေသောကြောင့် အစည်းအဝေးများကြားတွင် မည်သည့်အရာမှ မကျရောက်ပါ။",
+      "seeAllTools": "ထိုင်ခုံကိရိယာ → တိုင်းကိုကြည့်ပါ။"
     }
   },
   "awardsRubric": {

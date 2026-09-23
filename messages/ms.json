@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Krisis",
     "smtDelegates": "Perwakilan",
-    "openingSpeech": "🎙️ Ucapan perasmian"
+    "openingSpeech": "🎙️ Ucapan perasmian",
+    "speechNotes": "Nota ucapan"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Nota ucapan"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Sebelum persidangan"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Kemajuan sesi",
+        "hint": "Peringkat & kemas kini SMT"
       },
       "delegates": {
         "label": "Perwakilan",
@@ -2725,9 +2727,32 @@
         "hint": "Pelaporan kejadian"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Ucapan perasmian",
+        "hint": "Senarai pembesar suara A–Z dengan 60s (lanjutkan hingga 90s dengan gerakan)"
+      },
+      "speechNotes": {
+        "label": "Nota ucapan",
+        "hint": "Nota terikat pada pembesar suara semasa pada pemasa"
+      },
+      "notesModeration": {
+        "label": "Semakan nota",
+        "hint": "Mengadakan nota delegasi menunggu keputusan dais"
       }
+    },
+    "hub": {
+      "sessionTitle": "Sesi AJK",
+      "sessionLive": "Sesi bersiaran langsung",
+      "sessionLiveNamed": "Langsung · {title}",
+      "sessionIdle": "Tiada cap masa sesi langsung lagi",
+      "sessionCta": "Kawalan sesi terbuka",
+      "heldNotes": "{count, plural, one {# note waiting for review} other {# notes waiting for review}}",
+      "floorTitle": "Di atas lantai",
+      "floorBody": "Pemasa, senarai pembesar suara dan gerakan ialah tiga alat yang anda capai untuk pertengahan perbahasan.",
+      "chamberTitle": "Penjagaan bilik",
+      "chamberBody": "Pastikan bilik dimaklumkan, adil dan diberi markah tanpa meninggalkan aliran pentas.",
+      "peopleTitle": "Orang & nota",
+      "peopleBody": "Jadual, semakan nota dan nota pertuturan setiap penceramah duduk bersama supaya tiada apa-apa yang terjebak antara sesi.",
+      "seeAllTools": "Lihat setiap alatan kerusi →"
     }
   },
   "awardsRubric": {

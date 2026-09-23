@@ -891,7 +891,8 @@
     "smtProfile": "Профиль",
     "crisis": "Кризис",
     "smtDelegates": "Делегаты",
-    "openingSpeech": "🎙️ Вступительные речи"
+    "openingSpeech": "🎙️ Вступительные речи",
+    "speechNotes": "Речевые заметки"
   },
   "setupPage": {
     "title": "Супабаза не настроена",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Речевые заметки"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Перед конференцией"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Ход сеанса",
+        "hint": "Обновления этапов и SMT"
       },
       "delegates": {
         "label": "Делегаты",
@@ -2725,9 +2727,32 @@
         "hint": "Отчеты об инцидентах"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Вступительные речи",
+        "hint": "Список выступающих от A до Z с 60-ми (расширяется до 90-х с помощью движения)"
+      },
+      "speechNotes": {
+        "label": "Речевые заметки",
+        "hint": "Заметки, привязанные к текущему докладчику по таймеру"
+      },
+      "notesModeration": {
+        "label": "Обзор заметок",
+        "hint": "Записки делегации, ожидающие решения Президиума"
       }
+    },
+    "hub": {
+      "sessionTitle": "Заседание комитета",
+      "sessionLive": "Сессия в прямом эфире",
+      "sessionLiveNamed": "Прямой эфир · {title}",
+      "sessionIdle": "Времени сеанса в реальном времени пока нет.",
+      "sessionCta": "Открыть контроль сеанса",
+      "heldNotes": "{count, plural, one {# заметка ожидает проверки} other {# заметки ждут проверки}}",
+      "floorTitle": "На полу",
+      "floorBody": "Таймер, список выступающих и предложения — это три инструмента, которые вы можете использовать в середине дискуссии.",
+      "chamberTitle": "Камерный уход",
+      "chamberBody": "Держите комнату в курсе, честной и результативной, не покидая помост.",
+      "peopleTitle": "Люди и заметки",
+      "peopleBody": "Реестр, обзор заметок и заметки для каждого докладчика расположены вместе, поэтому между сессиями ничего не выпадает.",
+      "seeAllTools": "Посмотреть все инструменты для стульев →"
     }
   },
   "awardsRubric": {

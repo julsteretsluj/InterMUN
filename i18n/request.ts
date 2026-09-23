@@ -12,12 +12,17 @@ import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME, resolveLocale } from "@/lib/i18n/lo
 const mergedLocaleCache = new Map<string, Record<string, unknown>>();
 
 async function loadMergedMessages(locale: string): Promise<Record<string, unknown>> {
-  const cached = mergedLocaleCache.get(locale);
-  if (cached) return cached;
+  // Dev: skip in-memory cache so edits under messages/ pick up without a full
+  // process restart (Next still may need a refresh for JSON module HMR).
+  const useCache = process.env.NODE_ENV === "production";
+  if (useCache) {
+    const cached = mergedLocaleCache.get(locale);
+    if (cached) return cached;
+  }
 
   const enMessages = (await import(`../messages/en.json`)).default as Record<string, unknown>;
   if (locale === DEFAULT_LOCALE) {
-    mergedLocaleCache.set(locale, enMessages);
+    if (useCache) mergedLocaleCache.set(locale, enMessages);
     return enMessages;
   }
 
@@ -26,7 +31,7 @@ async function loadMergedMessages(locale: string): Promise<Record<string, unknow
     unknown
   >;
   const merged = deepMergeMessages(enMessages, localeMessages) as Record<string, unknown>;
-  mergedLocaleCache.set(locale, merged);
+  if (useCache) mergedLocaleCache.set(locale, merged);
   return merged;
 }
 

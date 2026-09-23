@@ -891,7 +891,8 @@
     "smtProfile": "প্রোফাইল",
     "crisis": "সংকট",
     "smtDelegates": "প্রতিনিধি",
-    "openingSpeech": "🎙️ উদ্বোধনী বক্তৃতা"
+    "openingSpeech": "🎙️ উদ্বোধনী বক্তৃতা",
+    "speechNotes": "বক্তৃতা নোট"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "বক্তৃতা নোট"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "সম্মেলনের আগে"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "সেশনের অগ্রগতি",
+        "hint": "পর্যায় এবং SMT আপডেট"
       },
       "delegates": {
         "label": "প্রতিনিধি",
@@ -2725,9 +2727,32 @@
         "hint": "ঘটনা রিপোর্টিং"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "উদ্বোধনী বক্তৃতা",
+        "hint": "A–Z স্পিকারের তালিকা 60s সহ (গতির দ্বারা 90s পর্যন্ত প্রসারিত করুন)"
+      },
+      "speechNotes": {
+        "label": "বক্তৃতা নোট",
+        "hint": "টাইমারে বর্তমান স্পিকারের সাথে নোট বাঁধা"
+      },
+      "notesModeration": {
+        "label": "নোট পর্যালোচনা",
+        "hint": "মঞ্চের সিদ্ধান্তের অপেক্ষায় প্রতিনিধি দলের নোট রাখা"
       }
+    },
+    "hub": {
+      "sessionTitle": "কমিটির অধিবেশন",
+      "sessionLive": "অধিবেশন লাইভ হয়",
+      "sessionLiveNamed": "লাইভ · {title}",
+      "sessionIdle": "এখনও কোন লাইভ সেশন টাইমস্ট্যাম্প",
+      "sessionCta": "অধিবেশন নিয়ন্ত্রণ খুলুন",
+      "heldNotes": "{count, plural, one {# টি নোট পর্যালোচনার জন্য অপেক্ষা করছে} other {# টি নোট পর্যালোচনার জন্য অপেক্ষা করছে}}",
+      "floorTitle": "মেঝেতে",
+      "floorBody": "টাইমার, স্পিকার তালিকা এবং গতি হল তিনটি টুল যা আপনি মধ্য-বিতর্কের জন্য পৌঁছান।",
+      "chamberTitle": "চেম্বার যত্ন",
+      "chamberBody": "মঞ্চের প্রবাহ না রেখে রুমকে অবহিত, ন্যায্য এবং স্কোর রাখুন।",
+      "peopleTitle": "মানুষ এবং নোট",
+      "peopleBody": "রোস্টার, নোট পর্যালোচনা, এবং প্রতি-স্পীকার বক্তৃতা নোট একসাথে বসে তাই সেশনের মধ্যে কিছুই পড়ে না।",
+      "seeAllTools": "প্রতিটি চেয়ার টুল দেখুন →"
     }
   },
   "awardsRubric": {

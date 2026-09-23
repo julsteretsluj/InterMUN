@@ -891,7 +891,8 @@
     "smtProfile": "Προφίλ",
     "crisis": "Κρίση",
     "smtDelegates": "Αντιπρόσωποι",
-    "openingSpeech": "🎙️ Εναρκτήρια ομιλίες"
+    "openingSpeech": "🎙️ Εναρκτήρια ομιλίες",
+    "speechNotes": "Σημειώσεις ομιλίας"
   },
   "setupPage": {
     "title": "Το Supabase δεν έχει ρυθμιστεί",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Σημειώσεις ομιλίας"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Πριν το συνέδριο"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Πρόοδος συνεδρίας",
+        "hint": "Ενημερώσεις σταδίων και SMT"
       },
       "delegates": {
         "label": "Αντιπρόσωποι",
@@ -2725,9 +2727,32 @@
         "hint": "Αναφορά περιστατικών"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Εναρκτήρια ομιλίες",
+        "hint": "Λίστα ηχείων A–Z με 60s (επέκταση στα 90s με κίνηση)"
+      },
+      "speechNotes": {
+        "label": "Σημειώσεις ομιλίας",
+        "hint": "Σημειώσεις που συνδέονται με το τρέχον ηχείο στο χρονόμετρο"
+      },
+      "notesModeration": {
+        "label": "Σημείωση αναθεώρηση",
+        "hint": "Κράτησε σημειώσεις της αντιπροσωπείας εν αναμονή της απόφασης"
       }
+    },
+    "hub": {
+      "sessionTitle": "συνεδρίαση της επιτροπής",
+      "sessionLive": "Η συνεδρία είναι ζωντανή",
+      "sessionLiveNamed": "Ζωντανά · {title}",
+      "sessionIdle": "Δεν υπάρχει ακόμη χρονική σήμανση ζωντανής συνεδρίας",
+      "sessionCta": "Άνοιγμα ελέγχου συνεδρίας",
+      "heldNotes": "{count, plural, one {# σημείωση σε αναμονή για έλεγχο} other {# σημειώσεις σε αναμονή για έλεγχο}}",
+      "floorTitle": "Στο πάτωμα",
+      "floorBody": "Ο χρονοδιακόπτης, η λίστα ηχείων και οι κινήσεις είναι τα τρία εργαλεία που μπορείτε να χρησιμοποιήσετε για να συζητήσετε στη μέση.",
+      "chamberTitle": "Φροντίδα επιμελητηρίου",
+      "chamberBody": "Κρατήστε το δωμάτιο ενημερωμένο, δίκαιο και βαθμολογημένο χωρίς να φύγετε από τη ροή.",
+      "peopleTitle": "Άνθρωποι & σημειώσεις",
+      "peopleBody": "Ο κατάλογος, η αναθεώρηση σημειώσεων και οι σημειώσεις ομιλίας ανά ομιλητή βρίσκονται μαζί, ώστε να μην πέφτει τίποτα μεταξύ των συνεδριών.",
+      "seeAllTools": "Δείτε κάθε εργαλείο καρέκλας →"
     }
   },
   "awardsRubric": {

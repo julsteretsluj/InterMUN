@@ -891,7 +891,8 @@
     "smtProfile": "プロフィール",
     "crisis": "危機",
     "smtDelegates": "代表者",
-    "openingSpeech": "🎙️ 開会の挨拶"
+    "openingSpeech": "🎙️ 開会の挨拶",
+    "speechNotes": "スピーチメモ"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "スピーチメモ"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "カンファレンス前"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "セッションの進行状況",
+        "hint": "ステージとSMTのアップデート"
       },
       "delegates": {
         "label": "代表者",
@@ -2725,9 +2727,32 @@
         "hint": "インシデントの報告"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "開会の挨拶",
+        "hint": "60 秒を含む A ～ Z のスピーカー リスト (モーションにより 90 秒まで延長)"
+      },
+      "speechNotes": {
+        "label": "スピーチメモ",
+        "hint": "タイマー上の現在のスピーカーに関連付けられたメモ"
+      },
+      "notesModeration": {
+        "label": "ノートのレビュー",
+        "hint": "演目の決定を待つ代表団メモを保持"
       }
+    },
+    "hub": {
+      "sessionTitle": "委員会セッション",
+      "sessionLive": "セッションはライブ中です",
+      "sessionLiveNamed": "ライブ · {title}",
+      "sessionIdle": "ライブセッションのタイムスタンプはまだありません",
+      "sessionCta": "オープンセッション制御",
+      "heldNotes": "{count, plural, one {# レビュー待ちのノート} other {# 件のノートがレビュー待ち}}",
+      "floorTitle": "床の上で",
+      "floorBody": "タイマー、発言者リスト、モーションは、議論の途中で使用する 3 つのツールです。",
+      "chamberTitle": "チャンバーのケア",
+      "chamberBody": "フロアの流れを離れることなく、部屋に情報を提供し、公平に保ち、得点を決めます。",
+      "peopleTitle": "人物とメモ",
+      "peopleBody": "名簿、メモレビュー、講演者ごとのスピーチメモが一緒に保存されるため、セッション間に何も落ちません。",
+      "seeAllTools": "すべての椅子ツールを見る→"
     }
   },
   "awardsRubric": {

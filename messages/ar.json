@@ -891,7 +891,8 @@
     "smtProfile": "حساب تعريفي",
     "crisis": "مصيبة",
     "smtDelegates": "المندوبون",
-    "openingSpeech": "🎙️ الكلمات الإفتتاحية"
+    "openingSpeech": "🎙️ الكلمات الإفتتاحية",
+    "speechNotes": "ملاحظات الكلام"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "ملاحظات الكلام"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "قبل المؤتمر"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "تقدم الجلسة",
+        "hint": "مراحل وتحديثات SMT"
       },
       "delegates": {
         "label": "المندوبون",
@@ -2725,9 +2727,32 @@
         "hint": "الإبلاغ عن الحوادث"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "الكلمات الافتتاحية",
+        "hint": "قائمة المتحدثين من الألف إلى الياء مع الستينيات (تمتد إلى التسعينيات بالحركة)"
+      },
+      "speechNotes": {
+        "label": "ملاحظات الكلام",
+        "hint": "ملاحظات مرتبطة بالمتحدث الحالي على جهاز ضبط الوقت"
+      },
+      "notesModeration": {
+        "label": "مراجعة الملاحظة",
+        "hint": "وعقد الوفد مذكراته في انتظار قرار المنصة"
       }
+    },
+    "hub": {
+      "sessionTitle": "جلسة اللجنة",
+      "sessionLive": "الجلسة مباشرة",
+      "sessionLiveNamed": "مباشر · {title}",
+      "sessionIdle": "لا يوجد طابع زمني للجلسة المباشرة حتى الآن",
+      "sessionCta": "التحكم بالجلسة المفتوحة",
+      "heldNotes": "{count, plural, one {# ملاحظة في انتظار المراجعة} other {# ملاحظات في انتظار المراجعة}}",
+      "floorTitle": "على الأرض",
+      "floorBody": "المؤقت وقائمة المتحدثين والحركات هي الأدوات الثلاث التي يمكنك الوصول إليها في منتصف المناقشة.",
+      "chamberTitle": "رعاية الغرفة",
+      "chamberBody": "أبقِ الغرفة مطلعة وعادلة ومسجلة دون ترك تدفق المنصة.",
+      "peopleTitle": "الناس والملاحظات",
+      "peopleBody": "يتم تجميع القائمة ومراجعة الملاحظات وملاحظات الكلام لكل متحدث معًا بحيث لا يقع أي شيء بين الجلسات.",
+      "seeAllTools": "شاهد كل أداة كرسي →"
     }
   },
   "awardsRubric": {

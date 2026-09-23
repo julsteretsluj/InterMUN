@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Kryzys",
     "smtDelegates": "Delegaci",
-    "openingSpeech": "🎙️ Przemówienia otwierające"
+    "openingSpeech": "🎙️ Przemówienia otwierające",
+    "speechNotes": "Notatki z przemówienia"
   },
   "setupPage": {
     "title": "Supabase nie jest skonfigurowany",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Notatki z przemówienia"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Przed konferencją"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Postęp sesji",
+        "hint": "Etapy i aktualizacje SMT"
       },
       "delegates": {
         "label": "Delegaci",
@@ -2725,9 +2727,32 @@
         "hint": "Zgłaszanie incydentów"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Przemówienia otwierające",
+        "hint": "Lista głośników A – Z z latami 60. (ruchem wydłużaj do lat 90.)"
+      },
+      "speechNotes": {
+        "label": "Notatki z przemówienia",
+        "hint": "Notatki powiązane z bieżącym mówcą na timerze"
+      },
+      "notesModeration": {
+        "label": "Uwaga recenzja",
+        "hint": "Przetrzymał notatki delegacji w oczekiwaniu na decyzję na podium"
       }
+    },
+    "hub": {
+      "sessionTitle": "Posiedzenie komisji",
+      "sessionLive": "Sesja jest na żywo",
+      "sessionLiveNamed": "Na żywo · {title}",
+      "sessionIdle": "Nie ma jeszcze sygnatury czasowej sesji na żywo",
+      "sessionCta": "Otwórz kontrolę sesji",
+      "heldNotes": "{count, plural, one {# notatka oczekuje na sprawdzenie} other {# notatki czekają na sprawdzenie}}",
+      "floorTitle": "Na podłodze",
+      "floorBody": "Timer, lista mówców i wnioski to trzy narzędzia, po które sięgasz w połowie debaty.",
+      "chamberTitle": "Opieka komornicza",
+      "chamberBody": "Dbaj o to, aby sala była poinformowana, uczciwa i punktowana, bez opuszczania podestu.",
+      "peopleTitle": "Ludzie i notatki",
+      "peopleBody": "Lista uczestników, przegląd notatek i notatki poszczególnych mówców są ze sobą powiązane, więc nic nie wypada pomiędzy sesjami.",
+      "seeAllTools": "Zobacz każde narzędzie do krzesła →"
     }
   },
   "awardsRubric": {

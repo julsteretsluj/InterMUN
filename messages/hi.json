@@ -891,7 +891,8 @@
     "smtProfile": "प्रोफ़ाइल",
     "crisis": "संकट",
     "smtDelegates": "प्रतिनिधियों",
-    "openingSpeech": "🎙️ उद्घाटन भाषण"
+    "openingSpeech": "🎙️ उद्घाटन भाषण",
+    "speechNotes": "भाषण नोट्स"
   },
   "setupPage": {
     "title": "सुपाबेस कॉन्फ़िगर नहीं है",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "भाषण नोट्स"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "सम्मेलन से पहले"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "सत्र की प्रगति",
+        "hint": "चरण और एसएमटी अपडेट"
       },
       "delegates": {
         "label": "प्रतिनिधियों",
@@ -2725,9 +2727,32 @@
         "hint": "घटना की रिपोर्टिंग"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "उद्घाटन भाषण",
+        "hint": "60 के दशक के साथ ए-जेड वक्ताओं की सूची (गति द्वारा 90 के दशक तक विस्तारित)"
+      },
+      "speechNotes": {
+        "label": "भाषण नोट्स",
+        "hint": "टाइमर पर वर्तमान स्पीकर से जुड़े नोट्स"
+      },
+      "notesModeration": {
+        "label": "नोट समीक्षा",
+        "hint": "मंच के निर्णय की प्रतीक्षा में प्रतिनिधिमंडल के नोट्स रखे"
       }
+    },
+    "hub": {
+      "sessionTitle": "समिति सत्र",
+      "sessionLive": "सत्र लाइव है",
+      "sessionLiveNamed": "लाइव · {title}",
+      "sessionIdle": "अभी तक कोई लाइव सत्र टाइमस्टैम्प नहीं है",
+      "sessionCta": "सत्र नियंत्रण खोलें",
+      "heldNotes": "{count, plural, one {# नोट समीक्षा की प्रतीक्षा में है} other {# नोट समीक्षा की प्रतीक्षा में हैं}}",
+      "floorTitle": "फर्श पर",
+      "floorBody": "टाइमर, स्पीकर सूची और गति तीन उपकरण हैं जिन तक आप मध्य-बहस के लिए पहुंचते हैं।",
+      "chamberTitle": "चैंबर की देखभाल",
+      "chamberBody": "मंच के प्रवाह को छोड़े बिना कमरे को सूचित, निष्पक्ष और स्कोरयुक्त रखें।",
+      "peopleTitle": "लोग और नोट्स",
+      "peopleBody": "रोस्टर, नोट समीक्षा, और प्रति वक्ता भाषण नोट्स एक साथ बैठते हैं ताकि सत्रों के बीच कुछ भी न हो।",
+      "seeAllTools": "प्रत्येक कुर्सी उपकरण देखें →"
     }
   },
   "awardsRubric": {

@@ -891,7 +891,8 @@
     "smtProfile": "Profiel",
     "crisis": "Crisis",
     "smtDelegates": "Afgevaardigden",
-    "openingSpeech": "🎙️ Openingstoespraken"
+    "openingSpeech": "🎙️ Openingstoespraken",
+    "speechNotes": "Spraaknotities"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Spraaknotities"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Vóór de conferentie"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Sessievoortgang",
+        "hint": "Fasen en SMT-updates"
       },
       "delegates": {
         "label": "Afgevaardigden",
@@ -2725,9 +2727,32 @@
         "hint": "Incidentrapportage"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Openingstoespraken",
+        "hint": "A-Z-luidsprekerlijst met jaren 60 (door beweging uit te breiden tot 90)"
+      },
+      "speechNotes": {
+        "label": "Spraaknotities",
+        "hint": "Notities gekoppeld aan de huidige spreker op de timer"
+      },
+      "notesModeration": {
+        "label": "Opmerking beoordeling",
+        "hint": "De delegatienota's worden bewaard in afwachting van een podiumbesluit"
       }
+    },
+    "hub": {
+      "sessionTitle": "Commissiesessie",
+      "sessionLive": "Sessie is live",
+      "sessionLiveNamed": "Leef · {title}",
+      "sessionIdle": "Nog geen tijdstempel voor livesessies",
+      "sessionCta": "Sessiecontrole openen",
+      "heldNotes": "{count, plural, one {# notitie wacht op beoordeling} other {# notities wachten op beoordeling}}",
+      "floorTitle": "Op de vloer",
+      "floorBody": "Timer, sprekerslijst en moties zijn de drie hulpmiddelen die u tijdens het debat kunt gebruiken.",
+      "chamberTitle": "Kamer zorg",
+      "chamberBody": "Houd de kamer geïnformeerd, eerlijk en gescoord zonder de podiumstroom te verlaten.",
+      "peopleTitle": "Mensen en notities",
+      "peopleBody": "Rooster, notitieoverzicht en toespraaknotities per spreker zitten bij elkaar, zodat er niets tussen de sessies door valt.",
+      "seeAllTools": "Bekijk elk stoelhulpmiddel →"
     }
   },
   "awardsRubric": {

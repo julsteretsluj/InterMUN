@@ -44,6 +44,7 @@ export const CHAIR_STAFF_TAB_NAV_HREF_ORDER = [
   "/voting",
   "/chair/session/roll-call",
   "/chair/session/timer",
+  "/chair/session/speech-notes",
   "/chair/session/announcements",
   "/chair/allocation-matrix",
   "/chair/digital-room",
@@ -112,6 +113,7 @@ export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "voting",
   "rollCall",
   "timer",
+  "speechNotes",
   "announcements",
   "delegates",
   "digitalRoom",
@@ -178,12 +180,15 @@ export const CHAIR_HUB_TILE_HREF_ORDER = [
   "/chair/session/speakers",
   "/chair/session/opening-speech",
   "/chair/session/motions",
+  "/chair/motions-points",
   "/chair/session/agenda",
   "/voting",
   "/chair/session/roll-call",
   "/chair/session/timer",
+  "/chair/session/speech-notes",
   "/chair/session/announcements",
   "/chair/allocation-matrix",
+  "/chair/notes-moderation",
   "/chair/digital-room",
   "/chair/prep-checklist",
   "/chair/flow-checklist",
@@ -199,7 +204,7 @@ export const CHAIR_HUB_TILE_HREF_ORDER = [
 export const DELEGATE_DASHBOARD_TAB_ORDER = ["overview", "checklist", "chairs"] as const;
 
 /** Chair dashboard top tabs. */
-export const CHAIR_DASHBOARD_TAB_ORDER = ["overview", "guidance"] as const;
+export const CHAIR_DASHBOARD_TAB_ORDER = ["overview", "guidance", "jump"] as const;
 
 /** Admin header links (href). */
 export const ADMIN_NAV_HREF_ORDER = [

@@ -891,7 +891,8 @@
     "smtProfile": "Wasifu",
     "crisis": "Mgogoro",
     "smtDelegates": "Wajumbe",
-    "openingSpeech": "🎙️ Hotuba za ufunguzi"
+    "openingSpeech": "🎙️ Hotuba za ufunguzi",
+    "speechNotes": "Vidokezo vya hotuba"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Vidokezo vya hotuba"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Kabla ya kongamano"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Maendeleo ya kikao",
+        "hint": "Hatua na masasisho ya SMT"
       },
       "delegates": {
         "label": "Wajumbe",
@@ -2725,9 +2727,32 @@
         "hint": "Kuripoti tukio"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Hotuba za ufunguzi",
+        "hint": "Orodhesha ya wasemaji wa A–Z yenye 60s (nyongeza hadi 90 kwa mwendo)"
+      },
+      "speechNotes": {
+        "label": "Vidokezo vya hotuba",
+        "hint": "Vidokezo vinavyounganishwa na kipaza sauti cha sasa kwenye kipima muda"
+      },
+      "notesModeration": {
+        "label": "Kumbuka ukaguzi",
+        "hint": "Maandishi ya wajumbe yaliyoshikiliwa yanayosubiri uamuzi wa siku moja"
       }
+    },
+    "hub": {
+      "sessionTitle": "Kikao cha kamati",
+      "sessionLive": "Kipindi ni cha moja kwa moja",
+      "sessionLiveNamed": "Moja kwa moja · {title}",
+      "sessionIdle": "Bado hakuna muhuri wa muda wa kipindi cha moja kwa moja",
+      "sessionCta": "Fungua udhibiti wa kipindi",
+      "heldNotes": "{count, plural, one {Ujumbe # unasubiri ukaguzi} other {Vidokezo # vinavyosubiri kukaguliwa}}",
+      "floorTitle": "Kwenye sakafu",
+      "floorBody": "Kipima muda, orodha ya wasemaji na miondoko ni zana tatu unazofikia katikati ya mjadala.",
+      "chamberTitle": "Utunzaji wa chumba",
+      "chamberBody": "Weka chumba kikiwa na taarifa, haki, na alama bila kuacha mtiririko wa jukwaa.",
+      "peopleTitle": "Watu & madokezo",
+      "peopleBody": "Orodha, mapitio ya dokezo, na madokezo ya hotuba ya kila mzungumzaji hukaa pamoja ili hakuna chochote kitakachoanguka kati ya vipindi.",
+      "seeAllTools": "Tazama kila zana ya kiti →"
     }
   },
   "awardsRubric": {

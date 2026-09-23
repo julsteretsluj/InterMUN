@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Krise",
     "smtDelegates": "Delegierte",
-    "openingSpeech": "🎙️ Eröffnungsreden"
+    "openingSpeech": "🎙️ Eröffnungsreden",
+    "speechNotes": "Sprachnotizen"
   },
   "setupPage": {
     "title": "Supabase ist nicht konfiguriert",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Sprachnotizen"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Vor der Konferenz"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Sitzungsfortschritt",
+        "hint": "Phasen- und SMT-Updates"
       },
       "delegates": {
         "label": "Delegierte",
@@ -2725,9 +2727,32 @@
         "hint": "Meldung von Vorfällen"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Eröffnungsreden",
+        "hint": "Rednerliste von A–Z mit 60ern (durch Antrag auf 90er erweiterbar)"
+      },
+      "speechNotes": {
+        "label": "Sprachnotizen",
+        "hint": "Notizen, die im Timer an den aktuellen Sprecher gebunden sind"
+      },
+      "notesModeration": {
+        "label": "Notizenrezension",
+        "hint": "Delegationsnotizen warten auf die Entscheidung des Podiums"
       }
+    },
+    "hub": {
+      "sessionTitle": "Ausschusssitzung",
+      "sessionLive": "Die Sitzung ist live",
+      "sessionLiveNamed": "Live · {title}",
+      "sessionIdle": "Noch kein Zeitstempel für die Live-Sitzung",
+      "sessionCta": "Sitzungssteuerung öffnen",
+      "heldNotes": "{count, plural, one {# Notiz wartet auf Überprüfung} other {# Notizen warten auf Überprüfung}}",
+      "floorTitle": "Auf dem Boden",
+      "floorBody": "Timer, Rednerliste und Anträge sind die drei Tools, auf die Sie mitten in der Debatte zurückgreifen.",
+      "chamberTitle": "Kammerpflege",
+      "chamberBody": "Halten Sie den Raum auf dem Laufenden, fair und punkten Sie, ohne das Podium zu verlassen.",
+      "peopleTitle": "Personen und Notizen",
+      "peopleBody": "Teilnehmerliste, Notizenüberprüfung und Redenotizen pro Sprecher sind zusammen, sodass nichts zwischen den Sitzungen verloren geht.",
+      "seeAllTools": "Sehen Sie sich jedes Stuhlwerkzeug an →"
     }
   },
   "awardsRubric": {

@@ -891,7 +891,8 @@
     "smtProfile": "Perfil",
     "crisis": "Crise",
     "smtDelegates": "Delegadas",
-    "openingSpeech": "🎙️ Discursos de abertura"
+    "openingSpeech": "🎙️ Discursos de abertura",
+    "speechNotes": "Notas de discurso"
   },
   "setupPage": {
     "title": "Supabase não está configurado",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Notas de discurso"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Antes da conferência"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Progresso da sessão",
+        "hint": "Atualizações de estágios e SMT"
       },
       "delegates": {
         "label": "Delegadas",
@@ -2725,9 +2727,32 @@
         "hint": "Relatório de incidentes"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Discursos de abertura",
+        "hint": "Lista de palestrantes de A a Z com anos 60 (estender até anos 90 por movimento)"
+      },
+      "speechNotes": {
+        "label": "Notas de discurso",
+        "hint": "Notas vinculadas ao orador atual no cronômetro"
+      },
+      "notesModeration": {
+        "label": "Revisão de notas",
+        "hint": "Notas de delegação retidas aguardando decisão do tablado"
       }
+    },
+    "hub": {
+      "sessionTitle": "Sessão do comitê",
+      "sessionLive": "A sessão está ao vivo",
+      "sessionLiveNamed": "Ao vivo · {title}",
+      "sessionIdle": "Ainda não há carimbo de data/hora da sessão ao vivo",
+      "sessionCta": "Controle de sessão aberta",
+      "heldNotes": "{count, plural, one {# nota aguardando revisão} other {# notas aguardando revisão}}",
+      "floorTitle": "No chão",
+      "floorBody": "Cronômetro, lista de palestrantes e moções são as três ferramentas que você utiliza no meio do debate.",
+      "chamberTitle": "Cuidados de câmara",
+      "chamberBody": "Mantenha a sala informada, justa e pontuada sem sair do fluxo do estrado.",
+      "peopleTitle": "Pessoas e notas",
+      "peopleBody": "A lista, a revisão das notas e as notas do discurso por orador ficam juntas para que nada caia entre as sessões.",
+      "seeAllTools": "Veja todas as ferramentas de cadeira →"
     }
   },
   "awardsRubric": {

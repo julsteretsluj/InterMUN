@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Krisis",
     "smtDelegates": "Delegasi",
-    "openingSpeech": "🎙️ Pidato pembukaan"
+    "openingSpeech": "🎙️ Pidato pembukaan",
+    "speechNotes": "Catatan pidato"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasi",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Catatan pidato"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Sebelum konferensi"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Kemajuan sesi",
+        "hint": "Tahapan & pembaruan SMT"
       },
       "delegates": {
         "label": "Delegasi",
@@ -2725,9 +2727,32 @@
         "hint": "Pelaporan insiden"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Pidato pembukaan",
+        "hint": "Daftar pembicara A–Z dengan 60 detik (diperpanjang hingga 90 detik berdasarkan gerakan)"
+      },
+      "speechNotes": {
+        "label": "Catatan pidato",
+        "hint": "Catatan terkait dengan pembicara saat ini pada pengatur waktu"
+      },
+      "notesModeration": {
+        "label": "Ulasan catatan",
+        "hint": "Mengadakan catatan delegasi menunggu keputusan dais"
       }
+    },
+    "hub": {
+      "sessionTitle": "Sesi Komite",
+      "sessionLive": "Sesi sedang berlangsung",
+      "sessionLiveNamed": "Langsung · {title}",
+      "sessionIdle": "Belum ada stempel waktu sesi langsung",
+      "sessionCta": "Buka kontrol sesi",
+      "heldNotes": "{count, plural, one {# catatan menunggu ulasan} other {# catatan menunggu untuk ditinjau}}",
+      "floorTitle": "Di lantai",
+      "floorBody": "Timer, daftar pembicara, dan mosi adalah tiga alat yang Anda gunakan di tengah debat.",
+      "chamberTitle": "Perawatan kamar",
+      "chamberBody": "Jaga agar ruangan tetap terinformasi, adil, dan mendapat skor tanpa meninggalkan aliran mimbar.",
+      "peopleTitle": "Orang & catatan",
+      "peopleBody": "Daftar nama, ulasan catatan, dan catatan pidato per pembicara disatukan sehingga tidak ada yang terlewat di antara sesi.",
+      "seeAllTools": "Lihat setiap alat kursi →"
     }
   },
   "awardsRubric": {

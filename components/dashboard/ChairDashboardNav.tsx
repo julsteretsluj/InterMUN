@@ -58,6 +58,7 @@ export type ChairNavItemKey =
   | "archive"
   | "officialLinks"
   | "notesModeration"
+  | "speechNotes"
   | "roomCode"
   | "settings";
 
@@ -132,6 +133,11 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     href: "/chair/session/timer",
     itemKey: "timer",
     emoji: "⏱️",
+  },
+  {
+    href: "/chair/session/speech-notes",
+    itemKey: "speechNotes",
+    emoji: "🗒️",
   },
   { href: "/voting", itemKey: "voting", emoji: "🗳️" },
   { href: "/chair/awards", itemKey: "score", emoji: "📊" },

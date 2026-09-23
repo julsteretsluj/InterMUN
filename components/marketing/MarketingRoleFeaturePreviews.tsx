@@ -66,7 +66,8 @@ export function ChairRollCallQuorumDemo() {
   const tc = useTranslations("sessionControlClient");
   const [rows, setRows] = useState(ROLL_SEED);
   const { present, voting, total } = useMemo(() => quorumFromRows(rows), [rows]);
-  const quorumMet = present >= Math.ceil(total / 2);
+  // Match live chair floor + SEAMUN I RoP: ⅔ of committee present.
+  const quorumMet = total > 0 && present >= Math.ceil((total * 2) / 3);
 
   return (
     <div className="space-y-4">

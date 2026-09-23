@@ -891,7 +891,8 @@
     "smtProfile": "轮廓",
     "crisis": "危机",
     "smtDelegates": "代表们",
-    "openingSpeech": "🎙️开幕致辞"
+    "openingSpeech": "🎙️开幕致辞",
+    "speechNotes": "演讲笔记"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "演讲笔记"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "会前"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "会议进度",
+        "hint": "阶段和 SMT 更新"
       },
       "delegates": {
         "label": "代表们",
@@ -2725,9 +2727,32 @@
         "hint": "事件报告"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "开幕致辞",
+        "hint": "A–Z 发言者列表，包含 60 秒（通过动议延长至 90 秒）"
+      },
+      "speechNotes": {
+        "label": "演讲笔记",
+        "hint": "与计时器上当前发言者相关的注释"
+      },
+      "notesModeration": {
+        "label": "笔记回顾",
+        "hint": "举行代表团会议等待讲台决定"
       }
+    },
+    "hub": {
+      "sessionTitle": "委员会会议",
+      "sessionLive": "会议正在进行中",
+      "sessionLiveNamed": "直播 · {title}",
+      "sessionIdle": "尚无实时会话时间戳",
+      "sessionCta": "打开会话控制",
+      "heldNotes": "{count, plural, one {# 等待审核的注释} other {# 条笔记等待审核}}",
+      "floorTitle": "在地板上",
+      "floorBody": "计时器、发言者名单和动议是辩论中可以使用的三种工具。",
+      "chamberTitle": "房间护理",
+      "chamberBody": "在不离开讲台流程的情况下，让房间保持知情、公平和评分。",
+      "peopleTitle": "人物与笔记",
+      "peopleBody": "名册、笔记回顾和每位演讲者的演讲笔记放在一起，因此会议之间不会发生任何冲突。",
+      "seeAllTools": "查看每一款椅子工具 →"
     }
   },
   "awardsRubric": {

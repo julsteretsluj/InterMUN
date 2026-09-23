@@ -25,16 +25,31 @@ export const EU_PARTY_LABELS: Record<EuPartyKey, string> = {
   independents: "Non-Inscrits / Independents (NI)",
 };
 
-export const EU_PARTY_SPEECH_SHARE: Record<EuPartyKey, number> = {
-  s_and_d: 0.261,
-  epp: 0.217,
-  renew: 0.174,
-  left: 0.087,
-  green: 0.087,
-  c_and_r: 0.087,
-  patriots: 0.087,
-  independents: 0.087,
+/**
+ * Proportional speech shares from SEAMUN I 2027 EU RoP, as parts per 10_000 (sum = 10_000).
+ *
+ * The RoP table prints “8.7% each” for the five smaller parties, but
+ * 26.1 + 21.7 + 17.4 + 8.7×5 = 108.7% — that 8.7% is (100−65.2)/4 (remainder split
+ * across four parties instead of five). Correct share for each of the five is
+ * (100 − 26.1 − 21.7 − 17.4) / 5 = 6.96% → 696 / 10_000.
+ */
+export const EU_PARTY_SPEECH_SHARE_BPS: Record<EuPartyKey, number> = {
+  s_and_d: 2610,
+  epp: 2170,
+  renew: 1740,
+  left: 696,
+  green: 696,
+  c_and_r: 696,
+  patriots: 696,
+  independents: 696,
 };
+
+const SHARE_BPS_DENOM = 10_000;
+
+/** Decimal shares (sum ≈ 1). Prefer {@link EU_PARTY_SPEECH_SHARE_BPS} for apportionment. */
+export const EU_PARTY_SPEECH_SHARE: Record<EuPartyKey, number> = Object.fromEntries(
+  EU_PARLIAMENT_PARTY_KEYS.map((key) => [key, EU_PARTY_SPEECH_SHARE_BPS[key] / SHARE_BPS_DENOM])
+) as Record<EuPartyKey, number>;
 
 export type EuPartySecondsBreakdown = {
   party: EuPartyKey;
@@ -43,12 +58,37 @@ export type EuPartySecondsBreakdown = {
   totalSeconds: number;
 };
 
-export function deriveDefaultEuPartySeatCounts(totalDelegates: number): Record<EuPartyKey, number> {
-  const safeTotal = Math.max(8, Math.floor(totalDelegates));
-  const byParty = {} as Record<EuPartyKey, number>;
-  for (const key of EU_PARLIAMENT_PARTY_KEYS) {
-    byParty[key] = Math.max(1, Math.round(safeTotal * EU_PARTY_SPEECH_SHARE[key]));
+/** Hamilton / largest-remainder over integer basis-point weights. */
+function apportionByBps(total: number, bps: number[]): number[] {
+  const safeTotal = Math.max(0, Math.floor(total));
+  if (bps.length === 0) return [];
+  if (safeTotal === 0) return bps.map(() => 0);
+
+  const exact = bps.map((w) => (safeTotal * w) / SHARE_BPS_DENOM);
+  const floors = exact.map((v) => Math.floor(v));
+  let rem = safeTotal - floors.reduce((a, b) => a + b, 0);
+  const byFrac = exact
+    .map((v, i) => ({ i, frac: v - floors[i]! }))
+    .sort((a, b) => b.frac - a.frac || a.i - b.i);
+
+  const out = [...floors];
+  for (let k = 0; k < rem; k++) {
+    const idx = byFrac[k % byFrac.length]!.i;
+    out[idx] = (out[idx] ?? 0) + 1;
   }
+  return out;
+}
+
+export function deriveDefaultEuPartySeatCounts(totalDelegates: number): Record<EuPartyKey, number> {
+  const n = EU_PARLIAMENT_PARTY_KEYS.length;
+  const safeTotal = Math.max(n, Math.floor(totalDelegates));
+  const bps = EU_PARLIAMENT_PARTY_KEYS.map((key) => EU_PARTY_SPEECH_SHARE_BPS[key]);
+  // Guarantee ≥1 seat each, then Hamilton-apportion the rest so seats sum to safeTotal.
+  const extras = apportionByBps(safeTotal - n, bps);
+  const byParty = {} as Record<EuPartyKey, number>;
+  EU_PARLIAMENT_PARTY_KEYS.forEach((key, i) => {
+    byParty[key] = 1 + (extras[i] ?? 0);
+  });
   return byParty;
 }
 
@@ -71,27 +111,25 @@ export function calculateEuPartyTimeAllocation(params: {
   const speechSeconds = Math.floor(totalSeconds * speechRatio);
   const inquirySeconds = Math.max(0, totalSeconds - speechSeconds);
 
+  const n = EU_PARLIAMENT_PARTY_KEYS.length;
+  const bps = EU_PARLIAMENT_PARTY_KEYS.map((key) => EU_PARTY_SPEECH_SHARE_BPS[key]);
   const basePool = Math.floor(speechSeconds / 2);
   const proportionalPool = Math.max(0, speechSeconds - basePool);
-  const basePerParty = Math.floor(basePool / EU_PARLIAMENT_PARTY_KEYS.length);
+  const basePerParty = Math.floor(basePool / n);
+  const baseLeftover = Math.max(0, basePool - basePerParty * n);
+  const baseExtra = apportionByBps(baseLeftover, bps);
+  const proportionalSeconds = apportionByBps(proportionalPool, bps);
 
-  const breakdown = EU_PARLIAMENT_PARTY_KEYS.map((party) => {
-    const proportionalSeconds = Math.floor(proportionalPool * EU_PARTY_SPEECH_SHARE[party]);
-    const total = basePerParty + proportionalSeconds;
+  const breakdown: EuPartySecondsBreakdown[] = EU_PARLIAMENT_PARTY_KEYS.map((party, i) => {
+    const baseSeconds = basePerParty + (baseExtra[i] ?? 0);
+    const prop = proportionalSeconds[i] ?? 0;
     return {
       party,
-      baseSeconds: basePerParty,
-      proportionalSeconds,
-      totalSeconds: total,
+      baseSeconds,
+      proportionalSeconds: prop,
+      totalSeconds: baseSeconds + prop,
     };
   });
-
-  const assigned = breakdown.reduce((sum, row) => sum + row.totalSeconds, 0);
-  const remainder = Math.max(0, speechSeconds - assigned);
-  if (remainder > 0) {
-    breakdown[0]!.totalSeconds += remainder;
-    breakdown[0]!.proportionalSeconds += remainder;
-  }
 
   return { speechSeconds, inquirySeconds, breakdown };
 }

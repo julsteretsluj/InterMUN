@@ -891,7 +891,8 @@
     "smtProfile": "Hồ sơ",
     "crisis": "Khủng hoảng",
     "smtDelegates": "Đại biểu",
-    "openingSpeech": "🎙️ Phát biểu khai mạc"
+    "openingSpeech": "🎙️ Phát biểu khai mạc",
+    "speechNotes": "ghi chú bài phát biểu"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "ghi chú bài phát biểu"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Trước hội nghị"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Tiến trình phiên",
+        "hint": "Các giai đoạn & cập nhật SMT"
       },
       "delegates": {
         "label": "Đại biểu",
@@ -2725,9 +2727,32 @@
         "hint": "Báo cáo sự cố"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Bài phát biểu khai mạc",
+        "hint": "Danh sách người nói A–Z với 60 giây (mở rộng đến 90 giây bằng chuyển động)"
+      },
+      "speechNotes": {
+        "label": "ghi chú bài phát biểu",
+        "hint": "Ghi chú được gắn với loa hiện tại trên bộ hẹn giờ"
+      },
+      "notesModeration": {
+        "label": "Ghi chú xem xét",
+        "hint": "Đoàn đại biểu cầm phiếu chờ quyết định"
       }
+    },
+    "hub": {
+      "sessionTitle": "Phiên họp ủy ban",
+      "sessionLive": "Phiên đang diễn ra",
+      "sessionLiveNamed": "Trực tiếp · {title}",
+      "sessionIdle": "Chưa có dấu thời gian của phiên trực tiếp",
+      "sessionCta": "Kiểm soát phiên mở",
+      "heldNotes": "{count, plural, one {# ghi chú đang chờ xem xét} other {# ghi chú đang chờ xem xét}}",
+      "floorTitle": "Trên sàn",
+      "floorBody": "Đồng hồ bấm giờ, danh sách người phát biểu và chuyển động là ba công cụ bạn sử dụng khi đang tranh luận.",
+      "chamberTitle": "Chăm sóc buồng",
+      "chamberBody": "Giữ cho phòng luôn được cập nhật thông tin, công bằng và ghi điểm mà không cần rời khỏi bảng điều khiển.",
+      "peopleTitle": "Người & ghi chú",
+      "peopleBody": "Danh sách, đánh giá ghi chú và ghi chú bài phát biểu của mỗi diễn giả nằm cạnh nhau để không có nội dung nào rơi vào giữa các phiên họp.",
+      "seeAllTools": "Xem mọi dụng cụ làm ghế →"
     }
   },
   "awardsRubric": {

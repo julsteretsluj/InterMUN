@@ -891,7 +891,8 @@
     "smtProfile": "ໂປຣໄຟລ໌",
     "crisis": "ວິກິດການ",
     "smtDelegates": "ຜູ້ແທນ",
-    "openingSpeech": "🎙️ກ່າວເປີດ"
+    "openingSpeech": "🎙️ກ່າວເປີດ",
+    "speechNotes": "ບັນທຶກສຽງເວົ້າ"
   },
   "setupPage": {
     "title": "Supabase ບໍ່ໄດ້ຕັ້ງຄ່າ",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "ບັນທຶກສຽງເວົ້າ"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "ກ່ອນກອງປະຊຸມ"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "ຄວາມຄືບໜ້າຂອງເຊດຊັນ",
+        "hint": "ຂັ້ນຕອນ ແລະການປັບປຸງ SMT"
       },
       "delegates": {
         "label": "ຜູ້ແທນ",
@@ -2725,9 +2727,32 @@
         "hint": "ລາຍງານເຫດການ"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "ກ່າວ​ຄຳ​ປາ​ໄສ",
+        "hint": "ລາຍການລຳໂພງ A–Z ທີ່ມີ 60s (ຂະຫຍາຍເປັນ 90s ໂດຍການເຄື່ອນໄຫວ)"
+      },
+      "speechNotes": {
+        "label": "ບັນທຶກສຽງເວົ້າ",
+        "hint": "ບັນທຶກທີ່ຜູກມັດກັບລຳໂພງປັດຈຸບັນຢູ່ໃນເຄື່ອງຈັບເວລາ"
+      },
+      "notesModeration": {
+        "label": "ບັນທຶກການທົບທວນຄືນ",
+        "hint": "ບັນທຶກຄະນະຜູ້ແທນລໍຖ້າການຕັດສິນໃຈຂອງ dais"
       }
+    },
+    "hub": {
+      "sessionTitle": "ກອງ​ປະ​ຊຸມ​ຄະ​ນະ​ກໍາ​ມະ​",
+      "sessionLive": "ເຊດຊັນກຳລັງຖ່າຍທອດສົດ",
+      "sessionLiveNamed": "ສົດ · {title}",
+      "sessionIdle": "ບໍ່ມີການສະແຕມເວລາຂອງເຊດຊັນສົດເທື່ອ",
+      "sessionCta": "ເປີດການຄວບຄຸມເຊດຊັນ",
+      "heldNotes": "{count, plural, one {# ບັນທຶກລໍຖ້າການກວດສອບ} other {# ບັນທຶກລໍຖ້າການກວດສອບ}}",
+      "floorTitle": "ຢູ່ເທິງພື້ນ",
+      "floorBody": "ເຄື່ອງຈັບເວລາ, ລາຍຊື່ລໍາໂພງ, ແລະການເຄື່ອນໄຫວແມ່ນສາມເຄື່ອງມືທີ່ເຈົ້າເຂົ້າເຖິງສໍາລັບການໂຕ້ວາທີກາງ.",
+      "chamberTitle": "ການດູແລຫ້ອງ",
+      "chamberBody": "ຮັກສາຫ້ອງໃຫ້ແຈ້ງ, ຍຸຕິທໍາ, ແລະຄະແນນໂດຍບໍ່ມີການເຮັດໃຫ້ການໄຫຼ dais.",
+      "peopleTitle": "ຄົນ & ບັນທຶກ",
+      "peopleBody": "ບັນຊີລາຍການ, ການທົບທວນຄືນບັນທຶກ, ແລະບັນທຶກສຽງເວົ້າຕໍ່ລໍາໂພງນັ່ງຢູ່ຮ່ວມກັນດັ່ງນັ້ນບໍ່ມີຫຍັງຢູ່ໃນລະຫວ່າງກອງປະຊຸມ.",
+      "seeAllTools": "ເບິ່ງເຄື່ອງມືເກົ້າອີ້ທຸກໆ →"
     }
   },
   "awardsRubric": {

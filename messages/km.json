@@ -891,7 +891,8 @@
     "smtProfile": "ប្រវត្តិរូប",
     "crisis": "វិបត្តិ",
     "smtDelegates": "ប្រតិភូ",
-    "openingSpeech": "🎙️ សុន្ទរកថាបើក"
+    "openingSpeech": "🎙️ សុន្ទរកថាបើក",
+    "speechNotes": "សុន្ទរកថា"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "សុន្ទរកថា"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "មុនពេលសន្និសីទ"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "វឌ្ឍនភាពវគ្គ",
+        "hint": "ដំណាក់កាល និងការធ្វើបច្ចុប្បន្នភាព SMT"
       },
       "delegates": {
         "label": "ប្រតិភូ",
@@ -2725,9 +2727,32 @@
         "hint": "ការរាយការណ៍អំពីឧប្បត្តិហេតុ"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "សុន្ទរកថាបើក",
+        "hint": "បញ្ជីឧបករណ៍បំពងសម្លេង A-Z ជាមួយ 60s (ពង្រីកដល់ 90s តាមចលនា)"
+      },
+      "speechNotes": {
+        "label": "សុន្ទរកថា",
+        "hint": "កំណត់ចំណាំដែលភ្ជាប់ជាមួយឧបករណ៍បំពងសំឡេងបច្ចុប្បន្ននៅលើកម្មវិធីកំណត់ម៉ោង"
+      },
+      "notesModeration": {
+        "label": "ការពិនិត្យឡើងវិញចំណាំ",
+        "hint": "កំណត់ចំណាំគណៈប្រតិភូកំពុងរង់ចាំការសម្រេចចិត្តរបស់ dais"
       }
+    },
+    "hub": {
+      "sessionTitle": "សម័យប្រជុំគណៈកម្មាធិការ",
+      "sessionLive": "Session បានផ្សាយបន្តផ្ទាល់",
+      "sessionLiveNamed": "ផ្សាយផ្ទាល់ · {title}",
+      "sessionIdle": "មិន​ទាន់​មាន​ពេលវេលា​នៃ​វគ្គ​បន្ត​ផ្ទាល់​នៅ​ឡើយ​ទេ។",
+      "sessionCta": "បើកការគ្រប់គ្រងសម័យ",
+      "heldNotes": "{count, plural, one {# ចំណាំ រង់ចាំការពិនិត្យឡើងវិញ} other {កំណត់ចំណាំ # រង់ចាំការពិនិត្យឡើងវិញ}}",
+      "floorTitle": "នៅលើឥដ្ឋ",
+      "floorBody": "កម្មវិធីកំណត់ម៉ោង បញ្ជីវាគ្មិន និងចលនាគឺជាឧបករណ៍បីដែលអ្នកឈានដល់សម្រាប់ការជជែកពិភាក្សាពាក់កណ្តាល។",
+      "chamberTitle": "បន្ទប់ថែទាំ",
+      "chamberBody": "រក្សា​បន្ទប់​ឱ្យ​មាន​ព័ត៌មាន យុត្តិធម៌ និង​ការ​ស៊ុត​បាល់​បញ្ចូល​ទី​ដោយ​មិន​ចាក​ចេញ​ពី​លំហូរ​ទឹក​ចេញ។",
+      "peopleTitle": "មនុស្ស & កំណត់ចំណាំ",
+      "peopleBody": "បញ្ជីឈ្មោះ ការពិនិត្យចំណាំ និងកំណត់ចំណាំការនិយាយដោយអ្នកនិយាយអង្គុយជាមួយគ្នា ដូច្នេះគ្មានអ្វីធ្លាក់រវាងវគ្គនោះទេ។",
+      "seeAllTools": "មើលរាល់ឧបករណ៍កៅអី →"
     }
   },
   "awardsRubric": {

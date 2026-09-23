@@ -299,6 +299,8 @@ export type SessionFloorSection =
   | "roll-call"
   | "all";
 
+export type TimerWorkflowTab = "setup" | "clock" | "notes" | "log";
+
 export function SessionControlClient({
   conferenceId,
   conferenceTitle,
@@ -308,6 +310,7 @@ export function SessionControlClient({
   debateTopicOptions,
   committeeLabelRaw,
   activeSection = "all",
+  initialTimerWorkflowTab,
 }: {
   conferenceId: string;
   conferenceTitle: string;
@@ -322,6 +325,8 @@ export function SessionControlClient({
   committeeLabelRaw?: string | null;
   /** Default `"all"` keeps a single scroll (e.g. committee room). */
   activeSection?: SessionFloorSection;
+  /** Open a specific timer workflow tab (e.g. speech notes deep link). */
+  initialTimerWorkflowTab?: TimerWorkflowTab;
 }) {
   const tTopics = useTranslations("agendaTopics");
   const tTimer = useTranslations("session.timerPage");
@@ -439,7 +444,9 @@ export function SessionControlClient({
   const [daisEditResources, setDaisEditResources] = useState<GuideResource[]>([]);
   const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
-  const [timerWorkflowTab, setTimerWorkflowTab] = useState<"setup" | "clock" | "notes" | "log">("setup");
+  const [timerWorkflowTab, setTimerWorkflowTab] = useState<TimerWorkflowTab>(
+    initialTimerWorkflowTab ?? "setup"
+  );
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
   const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
@@ -4464,7 +4471,10 @@ export function SessionControlClient({
           ) : null}
 
           {timerWorkflowTab === "notes" ? (
-          <div className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-3 space-y-3 text-brand-navy">
+          <div
+            id="speech-notes"
+            className="scroll-mt-24 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] p-3 space-y-3 text-brand-navy"
+          >
             <div>
               <p className={surfaceLabel}>{tTimer("speechNotesCurrentSpeaker")}</p>
               <p className="text-xs text-brand-muted mt-1 leading-snug">

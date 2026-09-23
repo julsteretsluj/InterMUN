@@ -891,7 +891,8 @@
     "smtProfile": "Perfil",
     "crisis": "Crisis",
     "smtDelegates": "Delegadas",
-    "openingSpeech": "🎙️ Discursos de apertura"
+    "openingSpeech": "🎙️ Discursos de apertura",
+    "speechNotes": "notas de discurso"
   },
   "setupPage": {
     "title": "Supabase no está configurada",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "notas de discurso"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Antes de la conferencia"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Progreso de la sesión",
+        "hint": "Actualizaciones de etapas y SMT"
       },
       "delegates": {
         "label": "Delegadas",
@@ -2725,9 +2727,32 @@
         "hint": "Informe de incidentes"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Discursos de apertura",
+        "hint": "Lista de oradores de la A a la Z con 60 (ampliada a 90 por movimiento)"
+      },
+      "speechNotes": {
+        "label": "notas de discurso",
+        "hint": "Notas vinculadas al orador actual en el cronómetro"
+      },
+      "notesModeration": {
+        "label": "Revisión de notas",
+        "hint": "Notas de la delegación retenidas a la espera de la decisión del estrado"
       }
+    },
+    "hub": {
+      "sessionTitle": "Sesión del comité",
+      "sessionLive": "La sesión está en vivo.",
+      "sessionLiveNamed": "En vivo · {title}",
+      "sessionIdle": "Aún no hay marca de tiempo de sesión en vivo",
+      "sessionCta": "Control de sesión abierta",
+      "heldNotes": "{count, plural, one {# nota en espera de revisión} other {# notas en espera de revisión}}",
+      "floorTitle": "Sobre el piso",
+      "floorBody": "El cronómetro, la lista de oradores y las mociones son las tres herramientas que puede utilizar a mitad del debate.",
+      "chamberTitle": "Cuidado de la cámara",
+      "chamberBody": "Mantenga la sala informada, justa y calificada sin abandonar el flujo del estrado.",
+      "peopleTitle": "Personas y notas",
+      "peopleBody": "La lista, la revisión de notas y las notas de los discursos por orador se combinan para que nada quede entre sesiones.",
+      "seeAllTools": "Ver cada herramienta de silla →"
     }
   },
   "awardsRubric": {

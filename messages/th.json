@@ -891,7 +891,8 @@
     "smtProfile": "ประวัติโดยย่อ",
     "crisis": "วิกฤติ",
     "smtDelegates": "ผู้ได้รับมอบหมาย",
-    "openingSpeech": "🎙️ กล่าวเปิดงาน"
+    "openingSpeech": "🎙️ กล่าวเปิดงาน",
+    "speechNotes": "บันทึกคำพูด"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "บันทึกคำพูด"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "ก่อนการประชุม"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "ความคืบหน้าของเซสชั่น",
+        "hint": "การอัปเดตสเตจและ SMT"
       },
       "delegates": {
         "label": "ผู้ได้รับมอบหมาย",
@@ -2725,9 +2727,32 @@
         "hint": "การรายงานเหตุการณ์"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "กล่าวเปิดงาน",
+        "hint": "รายชื่อผู้พูด A–Z ในยุค 60 (ขยายเป็น 90 โดยการเคลื่อนไหว)"
+      },
+      "speechNotes": {
+        "label": "บันทึกคำพูด",
+        "hint": "หมายเหตุที่เชื่อมโยงกับผู้พูดคนปัจจุบันในตัวจับเวลา"
+      },
+      "notesModeration": {
+        "label": "หมายเหตุ ทบทวน",
+        "hint": "จัดทำบันทึกของคณะผู้แทนเพื่อรอการตัดสินใจของเวที"
       }
+    },
+    "hub": {
+      "sessionTitle": "สมัยประชุมคณะกรรมการ",
+      "sessionLive": "เซสชั่นกำลังถ่ายทอดสด",
+      "sessionLiveNamed": "ถ่ายทอดสด · {title}",
+      "sessionIdle": "ยังไม่มีการประทับเวลาเซสชันสด",
+      "sessionCta": "เปิดการควบคุมเซสชัน",
+      "heldNotes": "{count, plural, one {# หมายเหตุรอการตรวจสอบ} other {# บันทึกที่รอการตรวจสอบ}}",
+      "floorTitle": "บนพื้น",
+      "floorBody": "ตัวจับเวลา รายชื่อวิทยากร และการเคลื่อนไหวเป็นเครื่องมือสามประการที่คุณเข้าถึงได้ในระหว่างการอภิปราย",
+      "chamberTitle": "การดูแลห้อง",
+      "chamberBody": "แจ้งให้ห้องทราบ ยุติธรรม และให้คะแนนโดยไม่ต้องออกจากเวที",
+      "peopleTitle": "ผู้คนและบันทึกย่อ",
+      "peopleBody": "บัญชีรายชื่อ การตรวจทานบันทึกย่อ และบันทึกคำพูดของผู้พูดจะนั่งอยู่ด้วยกัน จึงไม่เกิดการตกหล่นระหว่างเซสชัน",
+      "seeAllTools": "ดูเครื่องมือเก้าอี้ทุกชิ้น →"
     }
   },
   "awardsRubric": {

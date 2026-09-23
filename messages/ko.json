@@ -891,7 +891,8 @@
     "smtProfile": "윤곽",
     "crisis": "위기",
     "smtDelegates": "대표자",
-    "openingSpeech": "🎙️ 개회사"
+    "openingSpeech": "🎙️ 개회사",
+    "speechNotes": "음성 메모"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "음성 메모"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "회의 전"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "세션 진행",
+        "hint": "스테이지 및 SMT 업데이트"
       },
       "delegates": {
         "label": "대표자",
@@ -2725,9 +2727,32 @@
         "hint": "사고 보고"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "개회사",
+        "hint": "A~Z 스피커 목록(60초 포함)(모션에 따라 90초로 확장)"
+      },
+      "speechNotes": {
+        "label": "음성 메모",
+        "hint": "타이머의 현재 발언자와 연결된 메모"
+      },
+      "notesModeration": {
+        "label": "메모 검토",
+        "hint": "단의 결정을 기다리는 대표단 메모 보관"
       }
+    },
+    "hub": {
+      "sessionTitle": "위원회 세션",
+      "sessionLive": "세션이 실시간으로 진행 중입니다.",
+      "sessionLiveNamed": "라이브 · {title}",
+      "sessionIdle": "아직 실시간 세션 타임스탬프가 없습니다.",
+      "sessionCta": "세션 제어 열기",
+      "heldNotes": "{count, plural, one {검토를 기다리는 메모 #개} other {검토 대기 중인 메모 #개}}",
+      "floorTitle": "바닥에",
+      "floorBody": "타이머, 발언자 목록, 동작은 토론 중간에 사용할 수 있는 세 가지 도구입니다.",
+      "chamberTitle": "챔버 케어",
+      "chamberBody": "단상 흐름을 벗어나지 않고도 방에 정보를 제공하고 공정하게 유지하며 점수를 매길 수 있습니다.",
+      "peopleTitle": "인물 및 메모",
+      "peopleBody": "명단, 메모 검토, 발표자별 연설 메모가 함께 있으므로 세션 사이에 아무 것도 떨어지지 않습니다.",
+      "seeAllTools": "모든 의자 도구 보기 →"
     }
   },
   "awardsRubric": {

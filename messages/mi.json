@@ -891,7 +891,8 @@
     "smtProfile": "Kōtaha",
     "crisis": "Te raruraru",
     "smtDelegates": "Nga Kai-whakahaere",
-    "openingSpeech": "🎙️ Whakatuwhera korero"
+    "openingSpeech": "🎙️ Whakatuwhera korero",
+    "speechNotes": "Nga korero korero"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Nga korero korero"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "I mua i te huihuinga"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Te ahunga whakamua o te huihuinga",
+        "hint": "Nga waahanga me nga whakahou SMT"
       },
       "delegates": {
         "label": "Nga Kai-whakahaere",
@@ -2725,9 +2727,32 @@
         "hint": "Te ripoata mai i nga aitua"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Ko nga korero whakatuwhera",
+        "hint": "He rarangi kaikōrero A–Z me te 60s (whakaroa ki te 90s ma te nekehanga)"
+      },
+      "speechNotes": {
+        "label": "Nga korero korero",
+        "hint": "Ko nga korero kua herea ki te kaikorero o naianei i runga i te matama"
+      },
+      "notesModeration": {
+        "label": "Panui arotake",
+        "hint": "Ka mau nga korero mo te roopu e tatari ana ki te whakatau"
       }
+    },
+    "hub": {
+      "sessionTitle": "Huihuinga komiti",
+      "sessionLive": "Kei te ora te hui",
+      "sessionLiveNamed": "Ora · {title}",
+      "sessionIdle": "Karekau ano he tohu wa waahi ora",
+      "sessionCta": "Whakatuwheratia te mana hui",
+      "heldNotes": "{count, plural, one {# tuhipoka e tatari ana mo te arotake} other {# tuhipoka e tatari ana mo te arotake}}",
+      "floorTitle": "I runga i te papa",
+      "floorBody": "Ko te taima, te rarangi kaikorero, me nga motini nga taputapu e toru ka taea e koe mo te tautohetohe waenga.",
+      "chamberTitle": "Te tiaki ruma",
+      "chamberBody": "Kia mau tonu nga korero mo te ruma, kia tika, kia whai piro me te kore e waiho i te rere o te papa.",
+      "peopleTitle": "Tangata & tuhipoka",
+      "peopleBody": "Ka noho tahi te rarangi, te arotake tuhipoka, me nga korero korero mo ia kaikorero kia kore ai e taka ki waenga i nga wahanga.",
+      "seeAllTools": "Tirohia ia taputapu tuuru →"
     }
   },
   "awardsRubric": {

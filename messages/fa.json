@@ -891,7 +891,8 @@
     "smtProfile": "نمایه",
     "crisis": "بحران",
     "smtDelegates": "نمایندگان",
-    "openingSpeech": "🎙️ سخنرانی افتتاحیه"
+    "openingSpeech": "🎙️ سخنرانی افتتاحیه",
+    "speechNotes": "یادداشت های سخنرانی"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "یادداشت های سخنرانی"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "قبل از کنفرانس"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "پیشرفت جلسه",
+        "hint": "به روز رسانی مراحل و SMT"
       },
       "delegates": {
         "label": "نمایندگان",
@@ -2725,9 +2727,32 @@
         "hint": "گزارش حوادث"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "سخنرانی های افتتاحیه",
+        "hint": "لیست بلندگوهای A–Z با 60 ثانیه (با حرکت تا 90 افزایش می یابد)"
+      },
+      "speechNotes": {
+        "label": "یادداشت های سخنرانی",
+        "hint": "یادداشت هایی به بلندگوی فعلی روی تایمر گره خورده است"
+      },
+      "notesModeration": {
+        "label": "بررسی یادداشت",
+        "hint": "یادداشت های هیئت در انتظار تصمیم گیری بود"
       }
+    },
+    "hub": {
+      "sessionTitle": "جلسه کمیته",
+      "sessionLive": "جلسه به صورت زنده است",
+      "sessionLiveNamed": "زنده · {title}",
+      "sessionIdle": "هنوز مهر زمانی جلسه زنده وجود ندارد",
+      "sessionCta": "کنترل جلسه را باز کنید",
+      "heldNotes": "{count, plural, one {# یادداشت در انتظار بررسی} other {# یادداشت در انتظار بررسی}}",
+      "floorTitle": "روی زمین",
+      "floorBody": "تایمر، لیست سخنرانان، و حرکات سه ابزاری هستند که در اواسط مناظره به آنها دسترسی پیدا می کنید.",
+      "chamberTitle": "مراقبت از اتاق",
+      "chamberBody": "اتاق را مطلع، منصفانه، و امتیازدهی کنید بدون اینکه جریان دایس را ترک کنید.",
+      "peopleTitle": "افراد و یادداشت ها",
+      "peopleBody": "فهرست، مرور یادداشت‌ها و یادداشت‌های سخنرانی هر گوینده کنار هم قرار می‌گیرند تا چیزی بین جلسات قرار نگیرد.",
+      "seeAllTools": "هر ابزار صندلی را ببینید →"
     }
   },
   "awardsRubric": {

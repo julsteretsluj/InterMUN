@@ -891,7 +891,8 @@
     "smtProfile": "Profilo",
     "crisis": "Crisi",
     "smtDelegates": "Delegati",
-    "openingSpeech": "🎙️Discorsi di apertura"
+    "openingSpeech": "🎙️Discorsi di apertura",
+    "speechNotes": "Note del discorso"
   },
   "setupPage": {
     "title": "Supabase non è configurato",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Note del discorso"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Prima della conferenza"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Avanzamento della sessione",
+        "hint": "Aggiornamenti su fasi e SMT"
       },
       "delegates": {
         "label": "Delegati",
@@ -2725,9 +2727,32 @@
         "hint": "Segnalazione di incidenti"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Discorsi di apertura",
+        "hint": "Elenco degli oratori dalla A alla Z con gli anni '60 (esteso agli anni '90 tramite movimento)"
+      },
+      "speechNotes": {
+        "label": "Note del discorso",
+        "hint": "Note legate all'oratore corrente sul timer"
+      },
+      "notesModeration": {
+        "label": "Nota revisione",
+        "hint": "Ha tenuto le note della delegazione in attesa della decisione sul palco"
       }
+    },
+    "hub": {
+      "sessionTitle": "Sessione del comitato",
+      "sessionLive": "La sessione è in diretta",
+      "sessionLiveNamed": "Dal vivo · {title}",
+      "sessionIdle": "Ancora nessun timestamp della sessione live",
+      "sessionCta": "Apri il controllo della sessione",
+      "heldNotes": "{count, plural, one {# nota in attesa di revisione} other {# note in attesa di revisione}}",
+      "floorTitle": "Sul pavimento",
+      "floorBody": "Il timer, l'elenco degli oratori e le mozioni sono i tre strumenti a tua disposizione durante il dibattito.",
+      "chamberTitle": "Cura della camera",
+      "chamberBody": "Mantieni la stanza informata, corretta e valutata senza lasciare il flusso della pedana.",
+      "peopleTitle": "Persone e note",
+      "peopleBody": "L'elenco, la revisione delle note e le note del discorso per relatore si trovano insieme in modo che nulla cada tra le sessioni.",
+      "seeAllTools": "Vedi tutti gli strumenti per sedie →"
     }
   },
   "awardsRubric": {

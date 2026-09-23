@@ -59,23 +59,102 @@ function StatusWifiIcon({ className }: { className?: string }) {
   );
 }
 
-function StatusBatteryIcon({ className }: { className?: string }) {
+const BATTERY_FILL_MAX_WIDTH = 16.5;
+
+type BatteryManagerLike = EventTarget & {
+  level: number;
+};
+
+type NavigatorWithBattery = Navigator & {
+  getBattery?: () => Promise<BatteryManagerLike>;
+};
+
+type BatterySnapshot = {
+  /** 0–100 integer from Battery Status API `level` (0–1). */
+  percent: number;
+};
+
+const batteryListeners = new Set<() => void>();
+let batterySnapshot: BatterySnapshot | null = null;
+let batteryInitStarted = false;
+let batteryManager: BatteryManagerLike | null = null;
+
+function readBatterySnapshot(manager: BatteryManagerLike): BatterySnapshot {
+  // API level is 0–1; clamp before scaling so we never show >100% or negative.
+  const level = Number.isFinite(manager.level) ? Math.min(1, Math.max(0, manager.level)) : 0;
+  return { percent: Math.round(level * 100) };
+}
+
+function publishBatterySnapshot(manager: BatteryManagerLike) {
+  batterySnapshot = readBatterySnapshot(manager);
+  batteryListeners.forEach((listener) => listener());
+}
+
+function ensureBatterySubscription() {
+  if (batteryInitStarted || typeof navigator === "undefined") return;
+  batteryInitStarted = true;
+  const getBattery = (navigator as NavigatorWithBattery).getBattery;
+  if (typeof getBattery !== "function") return;
+
+  void getBattery.call(navigator).then((manager) => {
+    batteryManager = manager;
+    publishBatterySnapshot(manager);
+    manager.addEventListener("levelchange", onBatteryChange);
+  });
+}
+
+function onBatteryChange() {
+  if (batteryManager) publishBatterySnapshot(batteryManager);
+}
+
+function subscribeBattery(onStoreChange: () => void) {
+  batteryListeners.add(onStoreChange);
+  ensureBatterySubscription();
+  // Keep the BatteryManager for the page lifetime once acquired — tearing it
+  // down on the last unsubscribe races the async getBattery() handshake.
+  return () => {
+    batteryListeners.delete(onStoreChange);
+  };
+}
+
+function useBatteryStatus(): BatterySnapshot | null {
+  return useSyncExternalStore(subscribeBattery, () => batterySnapshot, () => null);
+}
+
+function StatusBatteryIcon({
+  className,
+  percent,
+}: {
+  className?: string;
+  /** 0–100; when null, draw a full shell with no fill (unknown). */
+  percent: number | null;
+}) {
+  const fillWidth =
+    percent == null ? 0 : Math.max(0, Math.min(BATTERY_FILL_MAX_WIDTH, (percent / 100) * BATTERY_FILL_MAX_WIDTH));
+
   return (
     <svg className={cn("mun-apple-status-icon mun-apple-status-icon-battery", className)} viewBox="0 0 25 11" aria-hidden>
       <rect x="0.75" y="0.75" width="20.5" height="9.5" rx="2.25" fill="none" stroke="currentColor" strokeWidth="1.25" />
       <rect x="22.75" y="3.25" width="1.5" height="4.5" rx="0.75" fill="currentColor" />
-      <rect x="2.25" y="2.25" width="16.5" height="6.5" rx="1.25" fill="currentColor" />
+      {fillWidth > 0 ? (
+        <rect x="2.25" y="2.25" width={fillWidth} height="6.5" rx="1.25" fill="currentColor" />
+      ) : null}
     </svg>
   );
 }
 
 function StatusIndicators({ showCellular = false, showBatteryLabel = false }: { showCellular?: boolean; showBatteryLabel?: boolean }) {
+  const battery = useBatteryStatus();
+  const percent = battery?.percent ?? null;
+
   return (
     <span className="mun-apple-status-bar-indicators">
       {showCellular ? <StatusCellularIcon /> : null}
       <StatusWifiIcon />
-      {showBatteryLabel ? <span className="mun-apple-status-bar-battery-label">100%</span> : null}
-      <StatusBatteryIcon />
+      {showBatteryLabel && percent != null ? (
+        <span className="mun-apple-status-bar-battery-label">{percent}%</span>
+      ) : null}
+      <StatusBatteryIcon percent={percent} />
     </span>
   );
 }

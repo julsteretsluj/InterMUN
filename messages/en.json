@@ -932,6 +932,7 @@
     "pointsLog": "• Points log",
     "formalMotions": "Formal motions",
     "timer": "Timer",
+    "speechNotes": "Speech notes",
     "smtProfile": "Profile",
     "smtDelegates": "Delegates"
   },
@@ -1422,6 +1423,7 @@
       "amendments": "Amendments",
       "discipline": "Disciplinary",
       "timer": "Timer",
+      "speechNotes": "Speech notes",
       "announcements": "Announcements",
       "motionsPoints": "Motions & Points",
       "voting": "Voting",
@@ -3021,6 +3023,21 @@
     "welcome": "Welcome, Chair of {committee}",
     "featureStrip": "Digital Room · Motions · Voting · Speakers",
     "activeCommitteeLine": "Active committee: <line></line>. Session data syncs through your account; prep/flow checklists and Motions & Points are saved in this browser for this committee - same idea as <seamuns>SEAMUNs Chair Room</seamuns>.",
+    "hub": {
+      "sessionTitle": "Committee session",
+      "sessionLive": "Session is live",
+      "sessionLiveNamed": "Live · {title}",
+      "sessionIdle": "No live session timestamp yet",
+      "sessionCta": "Open session control",
+      "heldNotes": "{count, plural, one {# note waiting for review} other {# notes waiting for review}}",
+      "floorTitle": "On the floor",
+      "floorBody": "Timer, speakers list, and motions are the three tools you reach for mid-debate.",
+      "chamberTitle": "Chamber care",
+      "chamberBody": "Keep the room informed, fair, and scored without leaving the dais flow.",
+      "peopleTitle": "People & notes",
+      "peopleBody": "Roster, note review, and per-speaker speech notes sit together so nothing falls between sessions.",
+      "seeAllTools": "See every chair tool →"
+    },
     "tiles": {
       "prepChecklist": {
         "label": "Prep checklist",
@@ -3070,6 +3087,10 @@
         "label": "Timer",
         "hint": "Floor clock, presets, pause log"
       },
+      "speechNotes": {
+        "label": "Speech notes",
+        "hint": "Notes tied to the current speaker on the timer"
+      },
       "announcements": {
         "label": "Announcements",
         "hint": "Dais lines, pin, schedule"
@@ -3077,6 +3098,10 @@
       "motionsPoints": {
         "label": "Motions & Points",
         "hint": "Shared log & presets for your committee"
+      },
+      "notesModeration": {
+        "label": "Note review",
+        "hint": "Held delegation notes awaiting dais decision"
       },
       "voting": {
         "label": "Voting",

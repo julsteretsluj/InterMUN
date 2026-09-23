@@ -891,7 +891,8 @@
     "smtProfile": "פּרוֹפִיל",
     "crisis": "מַשׁבֵּר",
     "smtDelegates": "נציגים",
-    "openingSpeech": "🎙️ נאומי פתיחה"
+    "openingSpeech": "🎙️ נאומי פתיחה",
+    "speechNotes": "הערות דיבור"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "הערות דיבור"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "לפני הכנס"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "התקדמות הפגישה",
+        "hint": "שלבים ועדכוני SMT"
       },
       "delegates": {
         "label": "נציגים",
@@ -2725,9 +2727,32 @@
         "hint": "דיווח על תקריות"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "נאומי פתיחה",
+        "hint": "רשימת רמקולים מ-A–Z עם שנות ה-60 (הרחבה עד שנות ה-90 בתנועה)"
+      },
+      "speechNotes": {
+        "label": "הערות דיבור",
+        "hint": "הערות הקשורות לרמקול הנוכחי בטיימר"
+      },
+      "notesModeration": {
+        "label": "הערה סקירה",
+        "hint": "החזיק רשימות משלחת בהמתנה להחלטה על הבמה"
       }
+    },
+    "hub": {
+      "sessionTitle": "מושב הוועדה",
+      "sessionLive": "הפגישה בשידור חי",
+      "sessionLiveNamed": "בשידור חי · {title}",
+      "sessionIdle": "עדיין אין חותמת זמן של הפעלה חיה",
+      "sessionCta": "פתח את בקרת הפגישה",
+      "heldNotes": "{count, plural, one {הערה אחת ממתינה לבדיקה} other {# הערות ממתינות לבדיקה}}",
+      "floorTitle": "על הרצפה",
+      "floorBody": "טיימר, רשימת דוברים ותנועות הם שלושת הכלים שאתה מגיע אליהם באמצע הדיון.",
+      "chamberTitle": "טיפול לשכת",
+      "chamberBody": "שמרו על החדר מעודכן, הוגן וציון מבלי לעזוב את זרימת הבמה.",
+      "peopleTitle": "אנשים והערות",
+      "peopleBody": "סגל, סקירת הערות והערות דיבור לכל דובר יושבים יחד כך ששום דבר לא נופל בין הפעלות.",
+      "seeAllTools": "ראה כל כלי כיסא →"
     }
   },
   "awardsRubric": {

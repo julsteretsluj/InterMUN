@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Kriz",
     "smtDelegates": "Delegeler",
-    "openingSpeech": "🎙️Açılış konuşmaları"
+    "openingSpeech": "🎙️Açılış konuşmaları",
+    "speechNotes": "Konuşma notları"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Konuşma notları"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Konferanstan önce"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Oturum ilerlemesi",
+        "hint": "Aşamalar ve SMT güncellemeleri"
       },
       "delegates": {
         "label": "Delegeler",
@@ -2725,9 +2727,32 @@
         "hint": "Olay raporlama"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Açılış konuşmaları",
+        "hint": "60'lı A'dan Z'ye konuşmacı listesi (hareketle 90'lara kadar genişletilebilir)"
+      },
+      "speechNotes": {
+        "label": "Konuşma notları",
+        "hint": "Zamanlayıcıda geçerli konuşmacıya bağlı notlar"
+      },
+      "notesModeration": {
+        "label": "Not incelemesi",
+        "hint": "Kürsü kararını bekleyen heyet notları tutuldu"
       }
+    },
+    "hub": {
+      "sessionTitle": "Komite oturumu",
+      "sessionLive": "Oturum yayında",
+      "sessionLiveNamed": "Canlı · {title}",
+      "sessionIdle": "Henüz canlı oturum zaman damgası yok",
+      "sessionCta": "Oturum kontrolünü aç",
+      "heldNotes": "{count, plural, one {# not incelenmeyi bekliyor} other {İncelenmeyi bekleyen # not}}",
+      "floorTitle": "Yerde",
+      "floorBody": "Zamanlayıcı, konuşmacı listesi ve hareketler, tartışmanın ortasında erişebileceğiniz üç araçtır.",
+      "chamberTitle": "Oda bakımı",
+      "chamberBody": "Dais akışından ayrılmadan odayı bilgili, adil ve puanlı tutun.",
+      "peopleTitle": "Kişiler ve notlar",
+      "peopleBody": "Kadro, not incelemesi ve konuşmacı başına konuşma notları bir arada yer aldığından oturumların arasına hiçbir şey düşmez.",
+      "seeAllTools": "Tüm sandalye araçlarını görün →"
     }
   },
   "awardsRubric": {

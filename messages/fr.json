@@ -891,7 +891,8 @@
     "smtProfile": "Profil",
     "crisis": "Crise",
     "smtDelegates": "Déléguées",
-    "openingSpeech": "🎙️ Discours d'ouverture"
+    "openingSpeech": "🎙️ Discours d'ouverture",
+    "speechNotes": "Notes de discours"
   },
   "setupPage": {
     "title": "La Supabase n'est pas configurée",
@@ -1396,7 +1397,8 @@
       "fwcMovement": "Movement",
       "fwcMap": "Hawkins",
       "fwcBackroom": "Backroom",
-      "fwcEvidence": "Evidence"
+      "fwcEvidence": "Evidence",
+      "speechNotes": "Notes de discours"
     }
   },
   "smtNav": {
@@ -2641,8 +2643,8 @@
         "hint": "Avant la conférence"
       },
       "flowChecklist": {
-        "label": "Session progress",
-        "hint": "Stages & SMT updates"
+        "label": "Progression de la séance",
+        "hint": "Étapes et mises à jour SMT"
       },
       "delegates": {
         "label": "Déléguées",
@@ -2725,9 +2727,32 @@
         "hint": "Rapport d'incident"
       },
       "openingSpeech": {
-        "label": "Opening speeches",
-        "hint": "A–Z speakers list with 60s (extend to 90s by motion)"
+        "label": "Discours d'ouverture",
+        "hint": "Liste des intervenants de A à Z avec les années 60 (étendre jusqu'aux années 90 par mouvement)"
+      },
+      "speechNotes": {
+        "label": "Notes de discours",
+        "hint": "Notes liées à l'orateur actuel sur la minuterie"
+      },
+      "notesModeration": {
+        "label": "Examen des notes",
+        "hint": "Les notes de la délégation ont été conservées en attendant la décision sur l'estrade"
       }
+    },
+    "hub": {
+      "sessionTitle": "Séance du comité",
+      "sessionLive": "La séance est en direct",
+      "sessionLiveNamed": "En direct · {title}",
+      "sessionIdle": "Pas encore d'horodatage de session en direct",
+      "sessionCta": "Contrôle de session ouverte",
+      "heldNotes": "{count, plural, one {# note en attente d'examen} other {# notes en attente d'examen}}",
+      "floorTitle": "Sur le sol",
+      "floorBody": "Le minuteur, la liste des intervenants et les motions sont les trois outils que vous utilisez à mi-débat.",
+      "chamberTitle": "Soins en chambre",
+      "chamberBody": "Gardez la salle informée, juste et notée sans quitter l'estrade.",
+      "peopleTitle": "Personnes et notes",
+      "peopleBody": "La liste, la révision des notes et les notes de discours de chaque intervenant sont regroupées afin que rien ne tombe entre les sessions.",
+      "seeAllTools": "Voir tous les outils de chaise →"
     }
   },
   "awardsRubric": {
