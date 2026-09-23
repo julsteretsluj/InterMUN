@@ -2417,7 +2417,8 @@
       "score": "分数",
       "photo": "照片",
       "school": "学校",
-      "party": "政治团体"
+      "party": "政治团体",
+      "placardCode": "标牌代码"
     },
     "noRows": "没有找到该委员会的分配行。",
     "pendingApprovalsTitle": "等待注册批准",
@@ -4630,20 +4631,27 @@
       "contact": "接触",
       "signIn": "登入",
       "getStarted": "开始使用",
-      "features": "Features"
+      "features": "Features",
+      "about": "关于",
+      "menu": "菜单",
+      "closeMenu": "关闭",
+      "moreOnTheFloor": "更多内容在地板上"
     },
     "playOrbAnimation": "播放 InterMUN 动画",
     "hero": {
       "eyebrow": "房间层软件·模拟联合国",
       "title": "一个选项卡用于",
       "titleEmphasis": "整个委员会。",
-      "subtitle": "InterMUN 连接讲台程序、代表准备和秘书处监督——无需安装应用程序、分散的聊天线程或纸质标语牌。",
+      "subtitle": "会议软件在木槌需要之前不会造成影响。",
       "ctaStart": "举办活动",
-      "ctaJoin": "我有房间代码",
+      "ctaJoin": "加入您的会议",
       "chip1": "点名 → 法定人数",
       "chip2": "GSL 和正式动议",
       "chip3": "31 种界面语言",
-      "previewLabel": "会议楼层"
+      "previewLabel": "会议楼层",
+      "sticky1": "点名、计时器和动作都集中在一层楼。",
+      "sticky2": "专为那些讨厌摆弄拉环的椅子而设计。",
+      "floorEyebrow": "在地板上"
     },
     "steps": {
       "eyebrow": "闸门流量",
@@ -4719,7 +4727,9 @@
       "title": "专为当今的模拟联合国而设计",
       "paragraph1": "InterMUN 是一个浏览器工作区，用协调的委员会工具取代了通常的电子表格、群聊和打印标语牌的组合。",
       "paragraph2": "主席获得反映会议实际展开方式的程序控制。 代表们在会场旁边进行结构化准备。 秘书处保持整个活动的可见性，而不是盘旋在每项动议上。",
-      "paragraph3": "无论您是管理一个房间还是整个周末的会议，InterMUN 都能让主席、代表和工作人员从开幕点名到闭幕式保持一致。"
+      "paragraph3": "无论您是管理一个房间还是整个周末的会议，InterMUN 都能让主席、代表和工作人员从开幕点名到闭幕式保持一致。",
+      "dreamEyebrow": "梦想",
+      "footerLabel": "关于 {app}"
     },
     "contact": {
       "eyebrow": "联系我们",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "代表人数（大约）",
         "fieldInterests": "兴趣",
         "fieldMessage": "信息",
-        "fieldSubmittedAt": "提交时间（UTC）"
+        "fieldSubmittedAt": "提交时间（UTC）",
+        "showOptionalDetails": "添加活动详细信息（可选）"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "创建账户",
       "ctaJoin": "登入",
       "copyright": "© {year} InterMUN",
-      "contact": "接触"
+      "contact": "接触",
+      "tagline": "会议软件在木槌需要之前不会造成影响。",
+      "product": "产品",
+      "resources": "资源",
+      "howItWorks": "它是如何运作的",
+      "privacy": "隐私",
+      "terms": "条款"
     },
     "preview": {
       "rollCallLabel": "点名",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "主席和秘书处在会议周末之前通常会问什么。",
+      "q1": "这是给谁的？",
+      "a1": "代表、主席、顾问和秘书处——一个具有角色感知工具的会议工作空间。",
+      "q2": "我们可以以不同的方式管理记者团和GA吗？",
+      "a2": "是的。 程序简介使记者团的 RoP 范围仅限于该会议厅，而无需改变其他委员会。",
+      "q3": "人们如何进入一个房间？",
+      "a3": "活动代码，然后是房间/委员会代码，然后是可选的标牌代码 - 专为实际登记排队而设计。",
+      "q4": "周末直播准备好了吗？",
+      "a4": "会议发言、投票、笔记、文件和监督都是为跨议院同时使用而构建的。"
+    },
+    "aboutPage": {
+      "metaTitle": "约{app}",
+      "metaDescription": "了解 {app} 存在的原因以及它如何支持模拟联合国会议。",
+      "eyebrow": "关于 {app}",
+      "title": "专为整个会议团队打造。",
+      "intro": "{app} 将代表、主席、顾问和秘书处带入一个共享工作空间——从准备到最后敲定。 我们认为困难的部分是界面，而不是外交。",
+      "purposeTitle": "我们的宗旨",
+      "purposeP1": "当人们能够专注于外交、程序、研究和协作时，模拟联合国处于最佳状态。 {app} 的存在是为了减少这些时刻的管理摩擦。",
+      "purposeP2": "该平台连接了准备、实时会议工具、文档、投票、笔记和监督，而无需取代使会议变得重要的人员。",
+      "rolesTitle": "围绕每个角色进行设计",
+      "rolesDelegates": "代表们进行研究、起草、协作并跟随发言。",
+      "rolesChairs": "主席负责点名、发言、动议、计时器和投票。",
+      "rolesAdvisors": "顾问以适当的知名度支持其代表团。",
+      "rolesSecretariat": "秘书处负责协调各商会并监督整个会议的进展。",
+      "techTitle": "会议优先技术",
+      "techP1": "功能围绕真实的周末工作流程、角色边界以及房间快速移动时平静的用户界面而设计。 可访问性和安全角色访问是设计的一部分。",
+      "techCtaBefore": "想在您的会议上获得{app}吗？",
+      "techCtaLink": "问好"
+    },
+    "documentPage": {
+      "lastUpdated": "最后更新·{date}"
+    },
+    "termsPage": {
+      "metaTitle": "服务条款 | {app}",
+      "metaDescription": "管理{app}的访问和使用的条款。",
+      "eyebrow": "合法的",
+      "title": "服务条款",
+      "intro": "这些条款管辖您对 {app} 的访问和使用。 使用该服务即表示您同意这些条款。",
+      "updated": "2026 年 7 月 25 日",
+      "contactFormFallback": "我们网站上的联系表格",
+      "usingTitle": "使用服务",
+      "usingP1": "您必须提供准确的信息，仅将服务用于合法的会议和教育目的，并遵循会议组织者的合理指示。",
+      "usingP2": "如果您自己在法律上无法接受这些条款，则必须获得家长、监护人、学校或会议组织者的授权。 组织者有责任确保其参与者获得适当的授权。",
+      "accountsTitle": "帐户和访问",
+      "accountsL1": "对您的凭据和会议访问代码保密。",
+      "accountsL2": "请勿冒充他人或歪曲您的角色。",
+      "accountsL3": "请勿访问您无权使用的数据、委员会或管理工具。",
+      "accountsL4": "如果您怀疑未经授权的帐户被使用，请立即告诉我们或您的组织者。",
+      "contentTitle": "你的内容",
+      "contentP1": "您保留对您创建的内容的所有权。 您授予我们有限的许可，仅在运营、保护和改进服务以及支持您的会议所需时托管、处理、复制和显示该内容。",
+      "contentP2": "您有责任确保您的内容合法并且您有权共享该内容。 除非适合目标会议受众，否则请勿上传机密材料。",
+      "acceptableTitle": "可接受的使用",
+      "acceptableP1": "您不得破坏服务、绕过访问控制、探测漏洞、未经许可抓取数据、传播恶意软件、骚扰他人、侵犯知识产权或使用该平台进行欺诈或非法活动。 我们可能会调查并限制威胁参与者、会议或服务的活动。",
+      "organisersTitle": "会议主办方",
+      "organisersP1": "组织者控制会议配置、角色分配、参与规则以及其工作区中的大部分内容。 他们负责会议运营、参与者通知和同意以及从服务导出的信息的合法使用。",
+      "availabilityTitle": "可用性和变更",
+      "availabilityP1": "我们可能会更新、暂停或终止部分服务。 我们的目标是提供一个可靠的平台，但不保证不间断或无错误的操作。 我们可能会更新这些条款，更新生效后继续使用即表示接受修订后的条款。",
+      "suspensionTitle": "暂停和终止",
+      "suspensionP1": "为了保护服务或其用户、应对非法行为、执行这些条款或遵守法律义务，我们可能会在合理必要的情况下暂停或终止访问。 您可以随时停止使用该服务。",
+      "liabilityTitle": "免责声明和责任",
+      "liabilityP1": "在法律允许的范围内，服务按“原样”和“可用”提供，不提供这些条款中未明确规定的保证。 {app}是会议工具，不控制参与者的行为或保证会议结果。",
+      "liabilityP2": "在法律允许的范围内，我们不对间接、偶然、特殊、后果性或惩罚性损害承担责任，也不对因使用服务而造成的数据、收入或机会损失承担责任。 无法合法排除的权利不受影响。",
+      "privacyTitle": "隐私和联系方式",
+      "privacyP1": "我们的<privacy>隐私政策</privacy>解释了我们如何处理个人信息。",
+      "questions": "有关这些条款的问题可以发送至<contact></contact>。"
+    },
+    "privacyPage": {
+      "metaTitle": "隐私政策 | {app}",
+      "metaDescription": "{app}如何收集、使用、存储和保护个人信息。",
+      "eyebrow": "合法的",
+      "title": "隐私政策",
+      "intro": "本政策解释了当您使用我们的网站、应用程序和会议服务时{app}如何处理个人信息。",
+      "updated": "2026 年 7 月 25 日",
+      "contactFormFallback": "我们网站上的联系表格",
+      "collectTitle": "我们收集的信息",
+      "collectIntro": "根据您使用服务的方式，我们可能会收集：",
+      "collectL1": "帐户详细信息，例如您的姓名、电子邮件地址、个人资料和角色。",
+      "collectL2": "会议信息、委员会任务和参与记录。",
+      "collectL3": "您创建的内容，包括文档、注释、消息、投票和提交。",
+      "collectL4": "您上传的文件以及发送给会议团队或我们的通信。",
+      "collectL5": "操作、保护和改进服务所需的技术和使用数据。",
+      "useTitle": "我们如何使用信息",
+      "useL1": "提供帐户、会议工作区和基于角色的功能。",
+      "useL2": "将内容交付给有权访问内容的参与者和工作人员。",
+      "useL3": "维护安全性、防止滥用、解决问题并提高可靠性。",
+      "useL4": "回复支持、合作伙伴关系和会议询问。",
+      "useL5": "遵守适用法律并执行我们的服务条款。",
+      "sharingTitle": "共享和会议访问",
+      "sharingP1": "我们不出售个人信息。 信息可能会根据会议组织者和授权参与者的角色和使用的功能与他们共享。",
+      "sharingP2": "我们还可能使用值得信赖的服务提供商来提供托管、身份验证、电子邮件、存储、安全和相关基础设施。 他们处理信息可能只是为了向我们提供这些服务。",
+      "retentionTitle": "保留和安全",
+      "retentionP1": "我们会根据提供服务、支持会议、履行法律义务、解决争议和保护平台所需的时间保留信息。 保留期限可能因数据类型和会议要求而异。",
+      "retentionP2": "我们使用旨在保护信息的技术和组织保障措施。 没有任何在线服务可以保证绝对安全，因此用户还应该保护自己的凭据并及时报告可疑的帐户滥用行为。",
+      "rightsTitle": "您的选择和权利",
+      "rightsP1": "您可以在服务中更新某些帐户信息。 根据您所在的位置，您可能还有权访问、更正、删除、限制或接收您的个人信息的副本。",
+      "rightsP2": "会议记录可以与您的会议组织者共同控制或代表您的会议组织者控制。 在适当的情况下，我们可能会向该组织者提出请求。",
+      "childrenTitle": "儿童和学生参与者",
+      "childrenP1": "会议和学校有责任确保参与者有权使用该服务，并获得任何所需的家长或监护人同意。 如果您认为参与者的信息未经适当授权而提供，请联系我们。",
+      "changesTitle": "变更及联系方式",
+      "changesP1": "随着服务或适用要求的变化，我们可能会更新本政策。 上面的日期显示的是最新版本。",
+      "contact": "如有隐私问题或请求，请联系<contact></contact>。"
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "每个委员会在其会议内都有一个委员会代码（代表输入会议代码后的第二个门）。 代码在同一会议活动中必须是唯一的。",
     "testingOverride": "启用测试覆盖：您可以跨委员会切换和管理委员会代码，而无需检查席位分配。",
     "chairScope": "作为主席台，您只能看到您拥有席位的委员会。 保存后会将您转到您的个人资料； 已经通过委员会大门的代表将保持登录状态，直到退出为止。",
-    "staffAfterSave": "保存后，您可以进入该委员会或在讲台上分享代码。"
+    "staffAfterSave": "保存后，您可以进入该委员会或在讲台上分享代码。",
+    "noSmtChairBinding": "在从主席视图管理其会议室代码之前，请在您的 SMT 个人资料中选择一个主席委员会。",
+    "setChairBinding": "设立主席委员会",
+    "smtChairScope": "您仅作为您所在委员会的主席进行预审。"
   },
   "chairAllocationPasswordsPage": {
     "copyList": "复制列表 (TSV)",

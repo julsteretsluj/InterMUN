@@ -2417,7 +2417,8 @@
       "score": "Punktzahl",
       "photo": "Foto",
       "school": "Schule",
-      "party": "Fraktion"
+      "party": "Fraktion",
+      "placardCode": "Plakatcode"
     },
     "noRows": "Für diesen Ausschuss wurden keine Zuteilungszeilen gefunden.",
     "pendingApprovalsTitle": "Anmeldegenehmigungen stehen noch aus",
@@ -4630,20 +4631,27 @@
       "contact": "Kontakt",
       "signIn": "anmelden",
       "getStarted": "Fangen Sie an",
-      "features": "Features"
+      "features": "Features",
+      "about": "Um",
+      "menu": "Speisekarte",
+      "closeMenu": "Schließen",
+      "moreOnTheFloor": "Mehr auf dem Boden"
     },
     "playOrbAnimation": "Spielen Sie die InterMUN-Animation ab",
     "hero": {
       "eyebrow": "Kammerbodensoftware · Modell UN",
       "title": "Eine Registerkarte für die",
       "titleEmphasis": "ganzes Komitee.",
-      "subtitle": "InterMUN verbindet Podiumsverfahren, Delegiertenvorbereitung und Sekretariatsaufsicht – ohne App-Installationen, verstreute Chat-Threads oder Papierplakate.",
+      "subtitle": "Konferenzsoftware, die nicht im Weg ist, bis der Hammer sie braucht.",
       "ctaStart": "Veranstalten Sie eine Veranstaltung",
-      "ctaJoin": "Ich habe einen Zimmercode",
+      "ctaJoin": "Nehmen Sie an Ihrer Konferenz teil",
       "chip1": "Appell → Quorum",
       "chip2": "GSL und formelle Anträge",
       "chip3": "31 Schnittstellensprachen",
-      "previewLabel": "Sitzungsgeschoss"
+      "previewLabel": "Sitzungsgeschoss",
+      "sticky1": "Appell, Timer und Anträge auf einer Etage.",
+      "sticky2": "Gebaut für Stühle, die das Jonglieren mit Tabs hassen.",
+      "floorEyebrow": "Auf dem Boden"
     },
     "steps": {
       "eyebrow": "Torfluss",
@@ -4719,7 +4727,9 @@
       "title": "Speziell für das heutige Model UN entwickelt",
       "paragraph1": "InterMUN ist ein Browser-Arbeitsbereich, der die übliche Mischung aus Tabellenkalkulationen, Gruppenchats und gedruckten Plakaten durch koordinierte Ausschusstools ersetzt.",
       "paragraph2": "Die Vorsitzenden erhalten eine Verfahrenskontrolle, die den tatsächlichen Ablauf der Sitzungen widerspiegelt. Die Delegierten werden neben dem Saal strukturiert vorbereitet. Das Sekretariat sorgt für die veranstaltungsweite Sichtbarkeit, ohne sich über jede einzelne Bewegung im Klaren zu sein.",
-      "paragraph3": "Unabhängig davon, ob Sie eine Konferenz in einem Raum oder ein komplettes Wochenende abhalten, sorgt InterMUN dafür, dass Vorsitzende, Delegierte und Mitarbeiter vom Eröffnungsappell bis zur Abschlusszeremonie aufeinander abgestimmt sind."
+      "paragraph3": "Unabhängig davon, ob Sie eine Konferenz in einem Raum oder ein komplettes Wochenende abhalten, sorgt InterMUN dafür, dass Vorsitzende, Delegierte und Mitarbeiter vom Eröffnungsappell bis zur Abschlusszeremonie aufeinander abgestimmt sind.",
+      "dreamEyebrow": "Der Traum",
+      "footerLabel": "Über {app}"
     },
     "contact": {
       "eyebrow": "Nehmen Sie Kontakt auf",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Delegierte (ca.)",
         "fieldInterests": "Interessen",
         "fieldMessage": "Nachricht",
-        "fieldSubmittedAt": "Eingereicht bei (UTC)"
+        "fieldSubmittedAt": "Eingereicht bei (UTC)",
+        "showOptionalDetails": "Veranstaltungsdetails hinzufügen (optional)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Benutzerkonto erstellen",
       "ctaJoin": "anmelden",
       "copyright": "© {year} InterMUN",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "tagline": "Konferenzsoftware, die nicht im Weg ist, bis der Hammer sie braucht.",
+      "product": "Produkt",
+      "resources": "Ressourcen",
+      "howItWorks": "Wie es funktioniert",
+      "privacy": "Privatsphäre",
+      "terms": "Bedingungen"
     },
     "preview": {
       "rollCallLabel": "Appell",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Häufig gefragt",
+      "subtitle": "Was Vorsitzende und Sekretariat normalerweise vor einem Konferenzwochenende fragen.",
+      "q1": "Für wen ist das?",
+      "a1": "Delegierte, Vorsitzende, Berater und Sekretariat – ein Konferenzarbeitsbereich mit rollenbewussten Tools.",
+      "q2": "Können wir Pressekorps und GA unterschiedlich leiten?",
+      "a2": "Ja. Verfahrensprofile sorgen dafür, dass die RoP des Pressekorps auf diese Kammer beschränkt bleibt, ohne dass andere Ausschüsse geändert werden.",
+      "q3": "Wie kommen Menschen in einen Raum?",
+      "a3": "Veranstaltungscode, dann Raum-/Komiteecode, dann optionale Plakatcodes – entworfen für echte Check-in-Warteschlangen.",
+      "q4": "Ist es bereit für ein Live-Wochenende?",
+      "a4": "Sitzungssaal, Abstimmungen, Notizen, Dokumente und Aufsicht sind für die gleichzeitige Nutzung in allen Kammern konzipiert."
+    },
+    "aboutPage": {
+      "metaTitle": "Ungefähr {app}",
+      "metaDescription": "Erfahren Sie, warum {app} existiert und wie es Model United Nations-Konferenzen unterstützt.",
+      "eyebrow": "Über {app}",
+      "title": "Entwickelt für das gesamte Konferenzteam.",
+      "intro": "{app} bringt Delegierte, Vorsitzende, Berater und Sekretariat in einen gemeinsamen Arbeitsbereich – von der Vorbereitung bis zum letzten Hammer. Wir glauben, dass der schwierige Teil die Schnittstelle ist, nicht die Diplomatie.",
+      "purposeTitle": "Unser Ziel",
+      "purposeP1": "Model United Nations ist am besten, wenn sich die Menschen auf Diplomatie, Verfahren, Forschung und Zusammenarbeit konzentrieren können. {app} existiert, um die Verwaltungsreibung in diesen Momenten zu verringern.",
+      "purposeP2": "Die Plattform verbindet Vorbereitung, Live-Sitzungstools, Dokumente, Abstimmungen, Notizen und Aufsicht – ohne die Menschen zu ersetzen, die eine Konferenz ausmachen.",
+      "rolesTitle": "Designed around every role",
+      "rolesDelegates": "Die Delegierten recherchieren, entwerfen, arbeiten zusammen und folgen den Reden.",
+      "rolesChairs": "Die Vorsitzenden führen Namensaufrufe, Redner, Anträge, Timer und Abstimmungen durch.",
+      "rolesAdvisors": "Berater unterstützen ihre Delegationen mit der richtigen Sichtbarkeit.",
+      "rolesSecretariat": "Das Sekretariat koordiniert die Kammern und sieht konferenzweite Fortschritte.",
+      "techTitle": "Conference-first technology",
+      "techP1": "Die Funktionen sind auf echte Wochenend-Workflows, Rollengrenzen und eine ruhige Benutzeroberfläche ausgerichtet, wenn sich der Raum schnell bewegt. Barrierefreiheit und sicherer Rollenzugriff sind Teil des Designs.",
+      "techCtaBefore": "Möchten Sie {app} bei Ihrer Konferenz?",
+      "techCtaLink": "Sag Hallo"
+    },
+    "documentPage": {
+      "lastUpdated": "Zuletzt aktualisiert · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Nutzungsbedingungen | {app}",
+      "metaDescription": "Die Bedingungen für den Zugriff auf und die Nutzung von {app}.",
+      "eyebrow": "Legal",
+      "title": "Nutzungsbedingungen",
+      "intro": "Diese Bedingungen regeln Ihren Zugriff auf und Ihre Nutzung von {app}. Durch die Nutzung des Dienstes stimmen Sie diesen Bedingungen zu.",
+      "updated": "25. Juli 2026",
+      "contactFormFallback": "das Kontaktformular auf unserer Website",
+      "usingTitle": "Nutzung des Dienstes",
+      "usingP1": "Sie müssen genaue Angaben machen, den Dienst nur für rechtmäßige Konferenz- und Bildungszwecke nutzen und angemessene Anweisungen Ihres Konferenzorganisators befolgen.",
+      "usingP2": "Wenn Sie rechtlich nicht in der Lage sind, diese Bedingungen selbst zu akzeptieren, muss ein Elternteil, Erziehungsberechtigter, eine Schule oder ein Konferenzorganisator Ihre Nutzung genehmigen. Die Veranstalter sind dafür verantwortlich, dass ihre Teilnehmer über die entsprechende Berechtigung verfügen.",
+      "accountsTitle": "Konten und Zugriff",
+      "accountsL1": "Behandeln Sie Ihre Zugangsdaten und Zugangscodes zur Konferenz vertraulich.",
+      "accountsL2": "Geben Sie sich nicht als eine andere Person aus und stellen Sie Ihre Rolle nicht falsch dar.",
+      "accountsL3": "Greifen Sie nicht auf Daten, Gremien oder Verwaltungstools zu, zu deren Nutzung Sie nicht berechtigt sind.",
+      "accountsL4": "Informieren Sie uns oder Ihren Veranstalter umgehend, wenn Sie den Verdacht einer unbefugten Kontonutzung haben.",
+      "contentTitle": "Ihre Inhalte",
+      "contentP1": "Sie behalten das Eigentum an den von Ihnen erstellten Inhalten. Sie erteilen uns eine begrenzte Lizenz zum Hosten, Verarbeiten, Reproduzieren und Anzeigen dieser Inhalte, nur soweit dies für den Betrieb, die Sicherung und die Verbesserung des Dienstes und die Unterstützung Ihrer Konferenz erforderlich ist.",
+      "contentP2": "Sie sind dafür verantwortlich, sicherzustellen, dass Ihre Inhalte rechtmäßig sind und Sie die Erlaubnis haben, sie zu teilen. Laden Sie kein vertrauliches Material hoch, es sei denn, es ist für das beabsichtigte Konferenzpublikum geeignet.",
+      "acceptableTitle": "Akzeptable Verwendung",
+      "acceptableP1": "Es ist Ihnen nicht gestattet, den Dienst zu stören, Zugriffskontrollen zu umgehen, nach Schwachstellen zu suchen, Daten ohne Erlaubnis zu kratzen, Malware zu verbreiten, andere zu belästigen, geistiges Eigentum zu verletzen oder die Plattform für Betrug oder rechtswidrige Aktivitäten zu nutzen. Wir können Aktivitäten untersuchen und einschränken, die Teilnehmer, Konferenzen oder den Dienst gefährden.",
+      "organisersTitle": "Konferenzorganisatoren",
+      "organisersP1": "Organisatoren steuern die Konferenzkonfiguration, Rollenzuweisungen, Teilnahmeregeln und einen Großteil der Inhalte in ihrem Arbeitsbereich. Sie sind für den Konferenzbetrieb, die Mitteilungen und Einwilligungen der Teilnehmer sowie die rechtmäßige Nutzung der aus dem Dienst exportierten Informationen verantwortlich.",
+      "availabilityTitle": "Verfügbarkeit und Änderungen",
+      "availabilityP1": "Wir können Teile des Dienstes aktualisieren, aussetzen oder einstellen. Unser Ziel ist es, eine zuverlässige Plattform bereitzustellen, garantieren jedoch keinen unterbrechungsfreien oder fehlerfreien Betrieb. Wir können diese Bedingungen aktualisieren, und die fortgesetzte Nutzung nach Inkrafttreten einer Aktualisierung stellt die Annahme der überarbeiteten Bedingungen dar.",
+      "suspensionTitle": "Aussetzung und Kündigung",
+      "suspensionP1": "Wir können den Zugriff sperren oder beenden, wenn dies zum Schutz des Dienstes oder seiner Benutzer, zur Reaktion auf rechtswidriges Verhalten, zur Durchsetzung dieser Bedingungen oder zur Einhaltung gesetzlicher Verpflichtungen erforderlich ist. Sie können die Nutzung des Dienstes jederzeit beenden.",
+      "liabilityTitle": "Haftungsausschluss und Haftung",
+      "liabilityP1": "Soweit gesetzlich zulässig, wird der Dienst „wie besehen“ und „wie verfügbar“ bereitgestellt, ohne Gewährleistungen, die nicht ausdrücklich in diesen Bedingungen aufgeführt sind. {app} ist ein Konferenztool und kontrolliert weder das Verhalten der Teilnehmer noch garantiert es Konferenzergebnisse.",
+      "liabilityP2": "Soweit gesetzlich zulässig, haften wir nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden oder für den Verlust von Daten, Einnahmen oder Chancen, die sich aus der Nutzung des Dienstes ergeben. Rechte, die gesetzlich nicht ausgeschlossen werden können, bleiben unberührt.",
+      "privacyTitle": "Datenschutz und Kontakt",
+      "privacyP1": "Unsere <privacy>Datenschutzerklärung</privacy> erklärt, wie wir mit personenbezogenen Daten umgehen.",
+      "questions": "Fragen zu diesen Bedingungen können an <contact></contact> gesendet werden."
+    },
+    "privacyPage": {
+      "metaTitle": "Datenschutzrichtlinie | {app}",
+      "metaDescription": "Wie {app} personenbezogene Daten erhebt, nutzt, speichert und schützt.",
+      "eyebrow": "Legal",
+      "title": "Datenschutzrichtlinie",
+      "intro": "In dieser Richtlinie wird erläutert, wie {app} mit personenbezogenen Daten umgeht, wenn Sie unsere Website, Anwendungen und Konferenzdienste nutzen.",
+      "updated": "25. Juli 2026",
+      "contactFormFallback": "das Kontaktformular auf unserer Website",
+      "collectTitle": "Informationen, die wir sammeln",
+      "collectIntro": "Abhängig davon, wie Sie den Dienst nutzen, können wir Folgendes erfassen:",
+      "collectL1": "Kontodetails wie Ihr Name, Ihre E-Mail-Adresse, Ihr Profil und Ihre Rolle.",
+      "collectL2": "Konferenzinformationen, Ausschussaufgaben und Teilnahmeunterlagen.",
+      "collectL3": "Von Ihnen erstellte Inhalte, einschließlich Dokumente, Notizen, Nachrichten, Abstimmungen und Einsendungen.",
+      "collectL4": "Von Ihnen hochgeladene Dateien und Mitteilungen, die Sie an Konferenzteams oder an uns senden.",
+      "collectL5": "Technische Daten und Nutzungsdaten, die für den Betrieb, die Sicherung und die Verbesserung des Dienstes erforderlich sind.",
+      "useTitle": "Wie wir Informationen nutzen",
+      "useL1": "Stellen Sie Konten, Konferenzarbeitsbereiche und rollenbasierte Funktionen bereit.",
+      "useL2": "Stellen Sie Inhalte den zugriffsberechtigten Teilnehmern und Mitarbeitern zur Verfügung.",
+      "useL3": "Sorgen Sie für Sicherheit, verhindern Sie Missbrauch, beheben Sie Probleme und verbessern Sie die Zuverlässigkeit.",
+      "useL4": "Beantworten Sie Support-, Partnerschafts- und Konferenzanfragen.",
+      "useL5": "Halten Sie sich an geltendes Recht und setzen Sie unsere Nutzungsbedingungen durch.",
+      "sharingTitle": "Freigabe und Konferenzzugang",
+      "sharingP1": "Wir verkaufen keine persönlichen Daten. Informationen können entsprechend ihrer Rolle und den von ihnen genutzten Funktionen an Ihren Konferenzorganisator und autorisierte Teilnehmer weitergegeben werden.",
+      "sharingP2": "Wir können auch vertrauenswürdige Dienstleister für Hosting, Authentifizierung, E-Mail, Speicherung, Sicherheit und zugehörige Infrastruktur nutzen. Sie dürfen Informationen nur verarbeiten, um uns diese Dienste bereitzustellen.",
+      "retentionTitle": "Aufbewahrung und Sicherheit",
+      "retentionP1": "Wir bewahren Informationen so lange auf, wie es für die Bereitstellung des Dienstes, die Unterstützung einer Konferenz, die Erfüllung gesetzlicher Verpflichtungen, die Beilegung von Streitigkeiten und den Schutz der Plattform erforderlich ist. Die Aufbewahrungsfristen können je nach Datentyp und Konferenzanforderungen variieren.",
+      "retentionP2": "Zum Schutz der Informationen setzen wir technische und organisatorische Sicherheitsmaßnahmen ein. Kein Online-Dienst kann absolute Sicherheit garantieren, daher sollten Nutzer auch ihre Zugangsdaten schützen und Verdachtsfälle eines Kontomissbrauchs zeitnah melden.",
+      "rightsTitle": "Ihre Wahlmöglichkeiten und Rechte",
+      "rightsP1": "Sie können bestimmte Kontoinformationen innerhalb des Dienstes aktualisieren. Abhängig von Ihrem Standort haben Sie möglicherweise auch das Recht, auf Ihre persönlichen Daten zuzugreifen, diese zu korrigieren, zu löschen, einzuschränken oder eine Kopie davon zu erhalten.",
+      "rightsP2": "Konferenzaufzeichnungen können gemeinsam mit oder im Namen Ihres Konferenzorganisators kontrolliert werden. Gegebenenfalls können wir eine Anfrage an diesen Veranstalter richten.",
+      "childrenTitle": "Kinder und studentische Teilnehmer",
+      "childrenP1": "Konferenzen und Schulen sind dafür verantwortlich, sicherzustellen, dass die Teilnehmer zur Nutzung des Dienstes berechtigt sind und die erforderliche Zustimmung der Eltern oder Erziehungsberechtigten eingeholt wurde. Bitte kontaktieren Sie uns, wenn Sie glauben, dass die Informationen eines Teilnehmers ohne entsprechende Genehmigung weitergegeben wurden.",
+      "changesTitle": "Änderungen und Kontakt",
+      "changesP1": "Wir können diese Richtlinie aktualisieren, wenn sich der Service oder die geltenden Anforderungen ändern. Das Datum oben zeigt die letzte Überarbeitung.",
+      "contact": "Bei Fragen oder Wünschen zum Datenschutz wenden Sie sich bitte an <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Jeder Ausschuss hat innerhalb seiner Konferenz einen Ausschusscode (zweiter Zugang, nachdem die Delegierten den Konferenzcode eingegeben haben). Codes müssen innerhalb derselben Konferenzveranstaltung eindeutig sein.",
     "testingOverride": "Testüberschreibung aktiviert: Sie können Ausschusscodes ausschussübergreifend ändern und verwalten, ohne Sitzplatzzuteilungsprüfungen durchzuführen.",
     "chairScope": "Als Podium sehen Sie nur Ausschüsse, in denen Sie einen Sitz haben. Beim Speichern gelangen Sie zu Ihrem Profil. Delegierte, die das Komitee-Tor bereits passiert haben, bleiben angemeldet, bis sie sich abmelden.",
-    "staffAfterSave": "Nach dem Speichern können Sie diesem Ausschuss beitreten oder den Code auf dem Podium teilen."
+    "staffAfterSave": "Nach dem Speichern können Sie diesem Ausschuss beitreten oder den Code auf dem Podium teilen.",
+    "noSmtChairBinding": "Wählen Sie in Ihrem SMT-Profil einen Vorsitzenden des Ausschusses aus, bevor Sie dessen Raumcode aus der Vorsitzendenansicht verwalten.",
+    "setChairBinding": "Setzen Sie den Vorsitzenden des Ausschusses ein",
+    "smtChairScope": "Sie werden nur als Vorsitzender Ihres gebundenen Ausschusses in die Vorschau aufgenommen."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Kopierliste (TSV)",

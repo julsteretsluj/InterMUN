@@ -1,227 +1,467 @@
 {
-  "generatedAt": "2026-08-14T07:00:54.661Z",
+  "generatedAt": "2026-09-23T12:09:35.716Z",
   "summary": {
     "localeCount": 31,
-    "hardcodedCount": 700,
+    "hardcodedCount": 881,
     "placeholderMismatchCount": 700,
-    "localesWithParityIssues": 0,
+    "localesWithParityIssues": 30,
     "hardcodedByDomain": {
-      "page_or_layout": 123,
-      "server_action": 223,
+      "page_or_layout": 130,
+      "server_action": 297,
       "api": 10,
-      "component": 90,
-      "library_surface": 254
+      "component": 140,
+      "library_surface": 304
     }
   },
   "localeParity": [
     {
       "locale": "ar",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "bn",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "de",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "el",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "es",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "fa",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "fr",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "he",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "hi",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "id",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "it",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "ja",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "km",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "ko",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "lo",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "mi",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "ms",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "my",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "nl",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "pl",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "pt",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "pt-BR",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "ru",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "sw",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "th",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "tr",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "uk",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "vi",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "zh-CN",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     },
     {
       "locale": "zh-TW",
-      "missingCount": 0,
+      "missingCount": 7,
       "extraCount": 0,
-      "missingPreview": [],
+      "missingPreview": [
+        "chairAllocationMatrixPage.columns.placardCode",
+        "chairRoomCodePage.noSmtChairBinding",
+        "chairRoomCodePage.setChairBinding",
+        "chairRoomCodePage.smtChairScope",
+        "marketing.about.p1",
+        "marketing.about.p2",
+        "marketing.about.p3"
+      ],
       "extraPreview": []
     }
   ],
@@ -6790,9 +7030,25 @@
   "hardcodedInventory": [
     {
       "file": "app/(auth)/layout.tsx",
+      "line": 27,
+      "kind": "jsx_text",
+      "text": "live session floor",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(auth)/layout.tsx",
+      "line": 28,
+      "kind": "jsx_text",
+      "text": "delegate prep workspace",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(auth)/layout.tsx",
       "line": 29,
       "kind": "jsx_text",
-      "text": "Est. 2026 — Conference platform",
+      "text": "secretariat oversight",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -6917,32 +7173,48 @@
       "suggestedKeyPrefix": "pageTitles"
     },
     {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2445,
-      "kind": "jsx_text",
-      "text": "= 1 && idx",
+      "file": "app/(dashboard)/chair/fwc/backroom/page.tsx",
+      "line": 42,
+      "kind": "attribute_literal",
+      "text": "FWC Backroom",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/fwc/backroom/page.tsx",
+      "line": 51,
+      "kind": "attribute_literal",
+      "text": "FWC Backroom",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2537,
+      "line": 3033,
       "kind": "jsx_text",
-      "text": "= 1 && n",
+      "text": "Press Corps RoP",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2828,
+      "line": 3055,
       "kind": "attribute_literal",
       "text": "Dismiss message",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
     {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 3558,
+      "kind": "attribute_literal",
+      "text": "e.g. 90",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 160,
+      "line": 148,
       "kind": "attribute_literal",
       "text": "In committee",
       "domain": "page_or_layout",
@@ -6950,7 +7222,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 209,
+      "line": 186,
       "kind": "attribute_literal",
       "text": "Country",
       "domain": "page_or_layout",
@@ -6958,7 +7230,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 210,
+      "line": 187,
       "kind": "attribute_literal",
       "text": "Name",
       "domain": "page_or_layout",
@@ -6966,7 +7238,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 211,
+      "line": 188,
       "kind": "attribute_literal",
       "text": "School",
       "domain": "page_or_layout",
@@ -6974,7 +7246,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 212,
+      "line": 189,
       "kind": "attribute_literal",
       "text": "Pronouns",
       "domain": "page_or_layout",
@@ -6982,7 +7254,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 226,
+      "line": 203,
       "kind": "attribute_literal",
       "text": "Account name",
       "domain": "page_or_layout",
@@ -6990,7 +7262,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 228,
+      "line": 205,
       "kind": "attribute_literal",
       "text": "Role",
       "domain": "page_or_layout",
@@ -6998,7 +7270,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 230,
+      "line": 207,
       "kind": "attribute_literal",
       "text": "Pronouns",
       "domain": "page_or_layout",
@@ -7006,7 +7278,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 233,
+      "line": 210,
       "kind": "attribute_literal",
       "text": "School",
       "domain": "page_or_layout",
@@ -7014,7 +7286,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 243,
+      "line": 220,
       "kind": "jsx_text",
       "text": "Dais",
       "domain": "page_or_layout",
@@ -7022,7 +7294,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 245,
+      "line": 222,
       "kind": "attribute_literal",
       "text": "Role",
       "domain": "page_or_layout",
@@ -7030,7 +7302,7 @@
     },
     {
       "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
-      "line": 246,
+      "line": 223,
       "kind": "attribute_literal",
       "text": "Name",
       "domain": "page_or_layout",
@@ -7041,6 +7313,46 @@
       "line": 57,
       "kind": "jsx_text",
       "text": "No slides linked yet",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/fwc/directives/page.tsx",
+      "line": 66,
+      "kind": "attribute_literal",
+      "text": "FWC directives",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/fwc/directives/page.tsx",
+      "line": 108,
+      "kind": "jsx_text",
+      "text": "Directive queue",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/fwc/map/page.tsx",
+      "line": 115,
+      "kind": "attribute_literal",
+      "text": "Hawkins map",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/fwc/movement/page.tsx",
+      "line": 80,
+      "kind": "attribute_literal",
+      "text": "FWC movement",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/fwc/movement/page.tsx",
+      "line": 118,
+      "kind": "jsx_text",
+      "text": "Your movements",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7064,7 +7376,7 @@
       "file": "app/(marketing)/about/page.tsx",
       "line": 17,
       "kind": "attribute_literal",
-      "text": "Built for the whole conference team.",
+      "text": "built for the whole conference team.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7072,15 +7384,23 @@
       "file": "app/(marketing)/about/page.tsx",
       "line": 21,
       "kind": "object_message_literal",
-      "text": "Our purpose",
+      "text": "our purpose",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
     {
       "file": "app/(marketing)/about/page.tsx",
-      "line": 38,
+      "line": 37,
       "kind": "object_message_literal",
-      "text": "Designed around every role",
+      "text": "designed around every role",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(marketing)/about/page.tsx",
+      "line": 40,
+      "kind": "jsx_text",
+      "text": "Delegates research, draft, collaborate, and follow the floor.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7088,7 +7408,7 @@
       "file": "app/(marketing)/about/page.tsx",
       "line": 41,
       "kind": "jsx_text",
-      "text": "Delegates can research, draft, collaborate, and follow committee activity.",
+      "text": "Chairs run roll call, speakers, motions, timers, and votes.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7096,7 +7416,7 @@
       "file": "app/(marketing)/about/page.tsx",
       "line": 42,
       "kind": "jsx_text",
-      "text": "Chairs can run roll call, speakers lists, motions, timers, and votes.",
+      "text": "Advisors support their delegations with the right visibility.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7104,31 +7424,15 @@
       "file": "app/(marketing)/about/page.tsx",
       "line": 43,
       "kind": "jsx_text",
-      "text": "Advisors can support their delegations with appropriate visibility.",
+      "text": "Secretariat coordinates chambers and sees conference-wide progress.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
     {
       "file": "app/(marketing)/about/page.tsx",
-      "line": 44,
-      "kind": "jsx_text",
-      "text": "Secretariat teams can coordinate committees and understand conference-wide progress.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(marketing)/about/page.tsx",
-      "line": 49,
+      "line": 48,
       "kind": "object_message_literal",
-      "text": "Conference-first technology",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(marketing)/layout.tsx",
-      "line": 37,
-      "kind": "jsx_text",
-      "text": "About",
+      "text": "conference-first technology",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -7430,15 +7734,7 @@
     },
     {
       "file": "app/actions/activeDebateTopic.ts",
-      "line": 14,
-      "kind": "object_message_literal",
-      "text": "Choose a topic.",
-      "domain": "server_action",
-      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
-    },
-    {
-      "file": "app/actions/activeDebateTopic.ts",
-      "line": 20,
+      "line": 36,
       "kind": "object_message_literal",
       "text": "You must be signed in.",
       "domain": "server_action",
@@ -7446,7 +7742,7 @@
     },
     {
       "file": "app/actions/activeDebateTopic.ts",
-      "line": 30,
+      "line": 46,
       "kind": "object_message_literal",
       "text": "Only chairs can change the live debate topic.",
       "domain": "server_action",
@@ -7454,7 +7750,7 @@
     },
     {
       "file": "app/actions/activeDebateTopic.ts",
-      "line": 34,
+      "line": 50,
       "kind": "object_message_literal",
       "text": "No active committee.",
       "domain": "server_action",
@@ -7462,7 +7758,31 @@
     },
     {
       "file": "app/actions/activeDebateTopic.ts",
-      "line": 38,
+      "line": 141,
+      "kind": "object_message_literal",
+      "text": "Choose a topic.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 147,
+      "kind": "object_message_literal",
+      "text": "That topic is not part of this committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 160,
+      "kind": "object_message_literal",
+      "text": "Choose a topic.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 168,
       "kind": "object_message_literal",
       "text": "That topic is not part of this committee.",
       "domain": "server_action",
@@ -7534,7 +7854,7 @@
     },
     {
       "file": "app/actions/advisorStaff.ts",
-      "line": 169,
+      "line": 159,
       "kind": "object_message_literal",
       "text": "Not signed in.",
       "domain": "server_action",
@@ -7542,7 +7862,7 @@
     },
     {
       "file": "app/actions/advisorStaff.ts",
-      "line": 173,
+      "line": 163,
       "kind": "object_message_literal",
       "text": "Only chair or SMT can forward notes.",
       "domain": "server_action",
@@ -7926,7 +8246,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 206,
+      "line": 207,
       "kind": "object_message_literal",
       "text": "Invalid award category.",
       "domain": "server_action",
@@ -7934,7 +8254,39 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 212,
+      "line": 224,
+      "kind": "object_message_literal",
+      "text": "Select a submitted resolution.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 231,
+      "kind": "object_message_literal",
+      "text": "Resolution not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 235,
+      "kind": "object_message_literal",
+      "text": "Only submitted (finalized) resolutions can receive Best Resolution.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 239,
+      "kind": "object_message_literal",
+      "text": "This resolution has no main submitter to record as recipient.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 261,
       "kind": "object_message_literal",
       "text": "Select a committee for this award.",
       "domain": "server_action",
@@ -7942,7 +8294,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 283,
+      "line": 324,
       "kind": "object_message_literal",
       "text": "Only chairs, SMT, and website admins can delete awards.",
       "domain": "server_action",
@@ -7950,7 +8302,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 355,
+      "line": 396,
       "kind": "object_message_literal",
       "text": "You must be signed in as a chair, SMT member, or admin.",
       "domain": "server_action",
@@ -7958,7 +8310,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 369,
+      "line": 410,
       "kind": "object_message_literal",
       "text": "Only committee chairs (or admins) can submit nominations to SMT.",
       "domain": "server_action",
@@ -7966,7 +8318,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 379,
+      "line": 420,
       "kind": "object_message_literal",
       "text": "You must be allocated as chair for this committee to submit.",
       "domain": "server_action",
@@ -7974,7 +8326,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 400,
+      "line": 441,
       "kind": "object_message_literal",
       "text": "These nominations were already sent to SMT.",
       "domain": "server_action",
@@ -7982,7 +8334,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 403,
+      "line": 444,
       "kind": "object_message_literal",
       "text": "Nothing to submit yet. Save your required slots first.",
       "domain": "server_action",
@@ -7990,7 +8342,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 405,
+      "line": 446,
       "kind": "object_message_literal",
       "text": "Could not submit nominations. Ensure every required slot is complete.",
       "domain": "server_action",
@@ -7998,7 +8350,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 413,
+      "line": 454,
       "kind": "object_message_literal",
       "text": "You must be signed in as a chair, SMT member, or admin.",
       "domain": "server_action",
@@ -8006,7 +8358,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 433,
+      "line": 474,
       "kind": "object_message_literal",
       "text": "Invalid nomination form data.",
       "domain": "server_action",
@@ -8014,7 +8366,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 436,
+      "line": 477,
       "kind": "object_message_literal",
       "text": "Invalid rank for overall Best Delegate.",
       "domain": "server_action",
@@ -8022,7 +8374,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 442,
+      "line": 483,
       "kind": "object_message_literal",
       "text": "Invalid rank for this nomination type.",
       "domain": "server_action",
@@ -8030,7 +8382,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 445,
+      "line": 486,
       "kind": "object_message_literal",
       "text": "Invalid rank for Honourable Mention.",
       "domain": "server_action",
@@ -8038,7 +8390,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 468,
+      "line": 509,
       "kind": "object_message_literal",
       "text": "Select a nominee for this slot.",
       "domain": "server_action",
@@ -8046,7 +8398,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 475,
+      "line": 516,
       "kind": "object_message_literal",
       "text": "Choose a band and Low or High for every criterion (scores 1–8 each).",
       "domain": "server_action",
@@ -8054,7 +8406,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 496,
+      "line": 537,
       "kind": "object_message_literal",
       "text": "You must be allocated to this committee as chair to save nominations.",
       "domain": "server_action",
@@ -8062,7 +8414,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 509,
+      "line": 550,
       "kind": "object_message_literal",
       "text": "That delegate is not seated in this committee.",
       "domain": "server_action",
@@ -8070,7 +8422,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 519,
+      "line": 560,
       "kind": "object_message_literal",
       "text": "Nominees must be delegates or country seats, not the committee chair.",
       "domain": "server_action",
@@ -8078,7 +8430,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 522,
+      "line": 563,
       "kind": "object_message_literal",
       "text": "SMT, admins, and advisors cannot receive award nominations.",
       "domain": "server_action",
@@ -8086,7 +8438,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 533,
+      "line": 574,
       "kind": "object_message_literal",
       "text": "Score every seated delegate in the matrix first (${matrixStatus.missing.length} of ${matrixStatus.total} still incomplete). Award nominations do not replace the full-delegate matrix.",
       "domain": "server_action",
@@ -8094,7 +8446,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 541,
+      "line": 582,
       "kind": "object_message_literal",
       "text": "This Honourable Mention slot is not used for your committee size.",
       "domain": "server_action",
@@ -8102,7 +8454,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 570,
+      "line": 611,
       "kind": "object_message_literal",
       "text": "This nomination was already submitted to SMT and cannot be edited here.",
       "domain": "server_action",
@@ -8110,7 +8462,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 614,
+      "line": 655,
       "kind": "object_message_literal",
       "text": "Only SMT and website admins can reject nominations.",
       "domain": "server_action",
@@ -8118,7 +8470,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 619,
+      "line": 660,
       "kind": "object_message_literal",
       "text": "Missing nomination.",
       "domain": "server_action",
@@ -8126,7 +8478,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 629,
+      "line": 670,
       "kind": "object_message_literal",
       "text": "Nomination not found.",
       "domain": "server_action",
@@ -8134,7 +8486,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 632,
+      "line": 673,
       "kind": "object_message_literal",
       "text": "This nomination is no longer pending.",
       "domain": "server_action",
@@ -8142,7 +8494,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 662,
+      "line": 703,
       "kind": "object_message_literal",
       "text": "Only SMT and website admins can run the ladder.",
       "domain": "server_action",
@@ -8150,7 +8502,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 668,
+      "line": 709,
       "kind": "object_message_literal",
       "text": "Invalid ladder matchup.",
       "domain": "server_action",
@@ -8158,7 +8510,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 679,
+      "line": 720,
       "kind": "object_message_literal",
       "text": "Nomination not found.",
       "domain": "server_action",
@@ -8166,7 +8518,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 682,
+      "line": 723,
       "kind": "object_message_literal",
       "text": "Ladder matchups are only for overall Best Delegate nominations.",
       "domain": "server_action",
@@ -8174,7 +8526,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 685,
+      "line": 726,
       "kind": "object_message_literal",
       "text": "Both nominees must still be pending.",
       "domain": "server_action",
@@ -8182,7 +8534,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 688,
+      "line": 729,
       "kind": "object_message_literal",
       "text": "Both nominees need a valid chair evidence statement before SMT can advance the ladder.",
       "domain": "server_action",
@@ -8190,7 +8542,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 718,
+      "line": 759,
       "kind": "object_message_literal",
       "text": "Only SMT and website admins can approve nominations.",
       "domain": "server_action",
@@ -8198,7 +8550,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 724,
+      "line": 765,
       "kind": "object_message_literal",
       "text": "Missing nomination or award type.",
       "domain": "server_action",
@@ -8206,7 +8558,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 727,
+      "line": 768,
       "kind": "object_message_literal",
       "text": "Invalid award category.",
       "domain": "server_action",
@@ -8214,7 +8566,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 735,
+      "line": 776,
       "kind": "object_message_literal",
       "text": "This award type cannot be set from a chair nomination.",
       "domain": "server_action",
@@ -8222,7 +8574,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 744,
+      "line": 785,
       "kind": "object_message_literal",
       "text": "Nomination not found.",
       "domain": "server_action",
@@ -8230,7 +8582,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 747,
+      "line": 788,
       "kind": "object_message_literal",
       "text": "This nomination is no longer pending.",
       "domain": "server_action",
@@ -8238,7 +8590,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 773,
+      "line": 814,
       "kind": "object_message_literal",
       "text": "Award type does not match this nomination.",
       "domain": "server_action",
@@ -8246,7 +8598,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 781,
+      "line": 822,
       "kind": "object_message_literal",
       "text": "Award type does not match this nomination.",
       "domain": "server_action",
@@ -8254,7 +8606,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 785,
+      "line": 826,
       "kind": "object_message_literal",
       "text": "Award type does not match this nomination.",
       "domain": "server_action",
@@ -8262,7 +8614,7 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 788,
+      "line": 829,
       "kind": "object_message_literal",
       "text": "Award type does not match this nomination.",
       "domain": "server_action",
@@ -8270,9 +8622,49 @@
     },
     {
       "file": "app/actions/awards.ts",
-      "line": 794,
+      "line": 835,
       "kind": "object_message_literal",
       "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 968,
+      "kind": "object_message_literal",
+      "text": "Only SMT and website admins can record Best Resolution.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 971,
+      "kind": "object_message_literal",
+      "text": "Invalid Best Resolution award type.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 982,
+      "kind": "object_message_literal",
+      "text": "Resolution not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 984,
+      "kind": "object_message_literal",
+      "text": "Chairs must forward this resolution to secretariat first.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 990,
+      "kind": "object_message_literal",
+      "text": "This resolution has no main submitter to record as recipient.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.awards"
     },
@@ -8302,7 +8694,7 @@
     },
     {
       "file": "app/actions/committee-session.ts",
-      "line": 232,
+      "line": 233,
       "kind": "object_message_literal",
       "text": "End time must be in the future.",
       "domain": "server_action",
@@ -8310,7 +8702,7 @@
     },
     {
       "file": "app/actions/committee-session.ts",
-      "line": 312,
+      "line": 313,
       "kind": "object_message_literal",
       "text": "End time must be in the future, or choose no limit.",
       "domain": "server_action",
@@ -8318,7 +8710,7 @@
     },
     {
       "file": "app/actions/committee-session.ts",
-      "line": 341,
+      "line": 342,
       "kind": "object_message_literal",
       "text": "Missing session title.",
       "domain": "server_action",
@@ -8477,6 +8869,486 @@
       "suggestedKeyPrefix": "serverActions.exportMaterials"
     },
     {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 214,
+      "kind": "object_message_literal",
+      "text": "Server is not configured to write FWC crisis state.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 247,
+      "kind": "object_message_literal",
+      "text": "Invalid conference id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 317,
+      "kind": "object_message_literal",
+      "text": "Only chairs and secretariat can do this.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 338,
+      "kind": "object_message_literal",
+      "text": "Your chair account is not linked to this FWC committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 344,
+      "kind": "object_message_literal",
+      "text": "You are not seated in this FWC committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 437,
+      "kind": "object_message_literal",
+      "text": "No FWC character state for this seat.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 456,
+      "kind": "object_message_literal",
+      "text": "Invalid evaluation verdict.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 461,
+      "kind": "object_message_literal",
+      "text": "Criterion scores are required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 469,
+      "kind": "object_message_literal",
+      "text": "Criterion",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 477,
+      "kind": "object_message_literal",
+      "text": "Viability score must equal the sum of criterion scores (max 25).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 543,
+      "kind": "jsx_text",
+      "text": "| undefined): Partial",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 570,
+      "kind": "object_message_literal",
+      "text": "FWC meters are not initialized.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 601,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 647,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 649,
+      "kind": "object_message_literal",
+      "text": "Only FWC delegates and chairs can submit directives.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 665,
+      "kind": "object_message_literal",
+      "text": "Invalid directive type.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 670,
+      "kind": "object_message_literal",
+      "text": "A title is required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 671,
+      "kind": "object_message_literal",
+      "text": "Request body is required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 706,
+      "kind": "object_message_literal",
+      "text": "No FWC seat found for your account.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 712,
+      "kind": "object_message_literal",
+      "text": "Joint directives need 2–5 co-submitters besides the submitter.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 724,
+      "kind": "object_message_literal",
+      "text": "Every joint co-submitter must be a seated FWC character.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 728,
+      "kind": "object_message_literal",
+      "text": "Co-submitters are only used on joint directives.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 736,
+      "kind": "object_message_literal",
+      "text": "Cabinet and Rapid Crisis Actions cannot be anonymized.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 739,
+      "kind": "object_message_literal",
+      "text": "Anonymity is only available on personal, joint, and press-release directives.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 744,
+      "kind": "object_message_literal",
+      "text": "This character cannot use anonymity.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 750,
+      "kind": "object_message_literal",
+      "text": "Anonymity can only be used once per session.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 765,
+      "kind": "object_message_literal",
+      "text": "Anonymity can only be used once per session.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 811,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 890,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 905,
+      "kind": "object_message_literal",
+      "text": "Invalid directive id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 922,
+      "kind": "object_message_literal",
+      "text": "Invalid approval status.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 938,
+      "kind": "object_message_literal",
+      "text": "Directive not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 955,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 957,
+      "kind": "object_message_literal",
+      "text": "Only FWC delegates and chairs can queue movement.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 973,
+      "kind": "object_message_literal",
+      "text": "A target grid is required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 974,
+      "kind": "object_message_literal",
+      "text": "Invalid terrain type.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 976,
+      "kind": "object_message_literal",
+      "text": "Impassable terrain cannot be entered.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 981,
+      "kind": "object_message_literal",
+      "text": "Invalid post-movement action.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1010,
+      "kind": "object_message_literal",
+      "text": "No FWC character seat found for movement.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1023,
+      "kind": "object_message_literal",
+      "text": "You already have a movement queued.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1055,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1070,
+      "kind": "object_message_literal",
+      "text": "Invalid movement id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1072,
+      "kind": "object_message_literal",
+      "text": "Decision must be approved or rejected.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1085,
+      "kind": "object_message_literal",
+      "text": "Movement not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1087,
+      "kind": "object_message_literal",
+      "text": "This movement is no longer queued.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1110,
+      "kind": "object_message_literal",
+      "text": "Could not update movement.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1121,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1148,
+      "kind": "object_message_literal",
+      "text": "No meter values to update.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1158,
+      "kind": "object_message_literal",
+      "text": "FWC meters are not initialized.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1200,
+      "kind": "object_message_literal",
+      "text": "No evidence rows to import.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1325,
+      "kind": "jsx_text",
+      "text": "mapEvidenceRow(row as Record",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1337,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1415,
+      "kind": "object_message_literal",
+      "text": "Invalid evidence id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1424,
+      "kind": "object_message_literal",
+      "text": "Evidence item not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1446,
+      "kind": "object_message_literal",
+      "text": "Invalid character seat.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1469,
+      "kind": "object_message_literal",
+      "text": "Could not update evidence.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1480,
+      "kind": "object_message_literal",
+      "text": "Choose an .xlsx file.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1482,
+      "kind": "object_message_literal",
+      "text": "Upload a valid .xlsx evidence library.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1493,
+      "kind": "object_message_literal",
+      "text": "Could not read that spreadsheet.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
+      "file": "app/actions/fwcCrisis.ts",
+      "line": 1496,
+      "kind": "object_message_literal",
+      "text": "That spreadsheet has no evidence rows.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.fwcCrisis"
+    },
+    {
       "file": "app/actions/noteMessaging.ts",
       "line": 28,
       "kind": "object_message_literal",
@@ -8518,7 +9390,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 55,
+      "line": 57,
       "kind": "object_message_literal",
       "text": "Only staff can create resolutions.",
       "domain": "server_action",
@@ -8526,7 +9398,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 57,
+      "line": 59,
       "kind": "object_message_literal",
       "text": "Invalid conference id.",
       "domain": "server_action",
@@ -8534,7 +9406,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 64,
+      "line": 66,
       "kind": "object_message_literal",
       "text": "Maximum of 3 draft resolutions per committee.",
       "domain": "server_action",
@@ -8542,7 +9414,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 103,
+      "line": 105,
       "kind": "object_message_literal",
       "text": "Only staff can edit clauses.",
       "domain": "server_action",
@@ -8550,7 +9422,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 106,
+      "line": 108,
       "kind": "object_message_literal",
       "text": "Invalid IDs.",
       "domain": "server_action",
@@ -8558,17 +9430,9 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 109,
+      "line": 111,
       "kind": "object_message_literal",
       "text": "Clause text is required.",
-      "domain": "server_action",
-      "suggestedKeyPrefix": "serverActions.resolutions"
-    },
-    {
-      "file": "app/actions/resolutions.ts",
-      "line": 140,
-      "kind": "object_message_literal",
-      "text": "Only staff can edit clauses.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8576,7 +9440,7 @@
       "file": "app/actions/resolutions.ts",
       "line": 142,
       "kind": "object_message_literal",
-      "text": "Invalid clause id.",
+      "text": "Only staff can edit clauses.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8584,15 +9448,15 @@
       "file": "app/actions/resolutions.ts",
       "line": 144,
       "kind": "object_message_literal",
-      "text": "Clause text is required.",
+      "text": "Invalid clause id.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 159,
+      "line": 146,
       "kind": "object_message_literal",
-      "text": "Only staff can delete clauses.",
+      "text": "Clause text is required.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8600,15 +9464,15 @@
       "file": "app/actions/resolutions.ts",
       "line": 161,
       "kind": "object_message_literal",
-      "text": "Invalid clause id.",
+      "text": "Only staff can delete clauses.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 173,
+      "line": 163,
       "kind": "object_message_literal",
-      "text": "Only delegates can sign resolutions.",
+      "text": "Invalid clause id.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8616,13 +9480,21 @@
       "file": "app/actions/resolutions.ts",
       "line": 175,
       "kind": "object_message_literal",
+      "text": "Only delegates can sign resolutions.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 177,
+      "kind": "object_message_literal",
       "text": "Invalid resolution id.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 192,
+      "line": 194,
       "kind": "object_message_literal",
       "text": "Only delegates can join blocs.",
       "domain": "server_action",
@@ -8630,7 +9502,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 195,
+      "line": 197,
       "kind": "object_message_literal",
       "text": "Invalid IDs.",
       "domain": "server_action",
@@ -8638,7 +9510,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 205,
+      "line": 207,
       "kind": "object_message_literal",
       "text": "Resolution not found.",
       "domain": "server_action",
@@ -8646,7 +9518,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 221,
+      "line": 223,
       "kind": "object_message_literal",
       "text": "Bloc does not belong to this committee.",
       "domain": "server_action",
@@ -8654,7 +9526,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 256,
+      "line": 258,
       "kind": "object_message_literal",
       "text": "Only chairs can configure blocs.",
       "domain": "server_action",
@@ -8662,7 +9534,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 258,
+      "line": 260,
       "kind": "object_message_literal",
       "text": "Invalid conference id.",
       "domain": "server_action",
@@ -8670,7 +9542,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 333,
+      "line": 335,
       "kind": "object_message_literal",
       "text": "Not authenticated.",
       "domain": "server_action",
@@ -8678,17 +9550,9 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 334,
+      "line": 336,
       "kind": "object_message_literal",
       "text": "Invalid resolution id.",
-      "domain": "server_action",
-      "suggestedKeyPrefix": "serverActions.resolutions"
-    },
-    {
-      "file": "app/actions/resolutions.ts",
-      "line": 337,
-      "kind": "object_message_literal",
-      "text": "A Google Docs link is required.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8696,15 +9560,15 @@
       "file": "app/actions/resolutions.ts",
       "line": 339,
       "kind": "object_message_literal",
-      "text": "Enter a valid Google Docs link.",
+      "text": "A Google Docs link is required.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 366,
+      "line": 341,
       "kind": "object_message_literal",
-      "text": "Not authenticated.",
+      "text": "Enter a valid Google Docs link.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8712,13 +9576,21 @@
       "file": "app/actions/resolutions.ts",
       "line": 368,
       "kind": "object_message_literal",
+      "text": "Not authenticated.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 370,
+      "kind": "object_message_literal",
       "text": "Invalid IDs.",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 371,
+      "line": 373,
       "kind": "object_message_literal",
       "text": "Invalid sponsor role.",
       "domain": "server_action",
@@ -8726,7 +9598,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 380,
+      "line": 382,
       "kind": "object_message_literal",
       "text": "Resolution not found.",
       "domain": "server_action",
@@ -8734,7 +9606,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 382,
+      "line": 384,
       "kind": "object_message_literal",
       "text": "This resolution is finalized.",
       "domain": "server_action",
@@ -8742,7 +9614,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 407,
+      "line": 409,
       "kind": "object_message_literal",
       "text": "You cannot edit sponsors on this draft.",
       "domain": "server_action",
@@ -8750,7 +9622,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 447,
+      "line": 449,
       "kind": "object_message_literal",
       "text": "Not authenticated.",
       "domain": "server_action",
@@ -8758,7 +9630,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 448,
+      "line": 450,
       "kind": "object_message_literal",
       "text": "Invalid resolution id.",
       "domain": "server_action",
@@ -8766,7 +9638,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 456,
+      "line": 458,
       "kind": "object_message_literal",
       "text": "Resolution not found.",
       "domain": "server_action",
@@ -8774,7 +9646,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 458,
+      "line": 460,
       "kind": "object_message_literal",
       "text": "This resolution is already finalized.",
       "domain": "server_action",
@@ -8782,7 +9654,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 461,
+      "line": 463,
       "kind": "object_message_literal",
       "text": "Add a Google Docs link before finalizing.",
       "domain": "server_action",
@@ -8790,7 +9662,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 470,
+      "line": 472,
       "kind": "object_message_literal",
       "text": "Could not read the Google Doc.",
       "domain": "server_action",
@@ -8798,7 +9670,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 476,
+      "line": 478,
       "kind": "object_message_literal",
       "text": "No numbered operative clauses were found in the doc. Number your clauses (1., 2., ...) and try again.",
       "domain": "server_action",
@@ -8806,7 +9678,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 501,
+      "line": 503,
       "kind": "object_message_literal",
       "text": "Only staff can record clause vote outcomes.",
       "domain": "server_action",
@@ -8814,7 +9686,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 504,
+      "line": 506,
       "kind": "object_message_literal",
       "text": "Invalid IDs.",
       "domain": "server_action",
@@ -8822,7 +9694,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 507,
+      "line": 509,
       "kind": "object_message_literal",
       "text": "Invalid clause ids.",
       "domain": "server_action",
@@ -8830,7 +9702,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 517,
+      "line": 519,
       "kind": "object_message_literal",
       "text": "Some clause ids do not belong to resolution.",
       "domain": "server_action",
@@ -8838,7 +9710,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 563,
+      "line": 565,
       "kind": "object_message_literal",
       "text": "Not authenticated.",
       "domain": "server_action",
@@ -8846,7 +9718,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 565,
+      "line": 567,
       "kind": "object_message_literal",
       "text": "Invalid clause ids.",
       "domain": "server_action",
@@ -8854,7 +9726,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 584,
+      "line": 586,
       "kind": "object_message_literal",
       "text": "Only delegates or staff can send resolutions by email.",
       "domain": "server_action",
@@ -8862,7 +9734,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 587,
+      "line": 589,
       "kind": "object_message_literal",
       "text": "Invalid IDs.",
       "domain": "server_action",
@@ -8870,7 +9742,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 592,
+      "line": 594,
       "kind": "object_message_literal",
       "text": "Enter a valid delegate email.",
       "domain": "server_action",
@@ -8878,7 +9750,7 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 621,
+      "line": 623,
       "kind": "object_message_literal",
       "text": "Email server is not configured. Set SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS.",
       "domain": "server_action",
@@ -8886,9 +9758,33 @@
     },
     {
       "file": "app/actions/resolutions.ts",
-      "line": 654,
+      "line": 656,
       "kind": "object_message_literal",
       "text": "Could not send resolution email.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 672,
+      "kind": "object_message_literal",
+      "text": "Only chairs can forward resolutions to secretariat.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 674,
+      "kind": "object_message_literal",
+      "text": "Invalid conference id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 762,
+      "kind": "object_message_literal",
+      "text": "Resolutions ready for Best Resolution review",
       "domain": "server_action",
       "suggestedKeyPrefix": "serverActions.resolutions"
     },
@@ -8966,7 +9862,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 76,
+      "line": 81,
       "kind": "object_message_literal",
       "text": "Session title and a valid 6-character committee code (letters/digits) are required.",
       "domain": "server_action",
@@ -8974,7 +9870,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 83,
+      "line": 88,
       "kind": "object_message_literal",
       "text": "Not signed in.",
       "domain": "server_action",
@@ -8982,7 +9878,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 91,
+      "line": 96,
       "kind": "object_message_literal",
       "text": "Only secretariat can edit committees.",
       "domain": "server_action",
@@ -8990,7 +9886,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 136,
+      "line": 146,
       "kind": "object_message_literal",
       "text": "Committee label and a valid 6-character room code (letters/digits) are required.",
       "domain": "server_action",
@@ -8998,7 +9894,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 143,
+      "line": 153,
       "kind": "object_message_literal",
       "text": "Not signed in.",
       "domain": "server_action",
@@ -9006,7 +9902,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 152,
+      "line": 162,
       "kind": "object_message_literal",
       "text": "Only secretariat can edit committees.",
       "domain": "server_action",
@@ -9014,7 +9910,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 186,
+      "line": 196,
       "kind": "object_message_literal",
       "text": "Missing committee.",
       "domain": "server_action",
@@ -9022,7 +9918,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 192,
+      "line": 202,
       "kind": "object_message_literal",
       "text": "Not signed in.",
       "domain": "server_action",
@@ -9030,7 +9926,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 201,
+      "line": 211,
       "kind": "object_message_literal",
       "text": "Only secretariat can add topics.",
       "domain": "server_action",
@@ -9038,7 +9934,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 209,
+      "line": 219,
       "kind": "object_message_literal",
       "text": "Could not create topic row.",
       "domain": "server_action",
@@ -9046,7 +9942,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 233,
+      "line": 243,
       "kind": "object_message_literal",
       "text": "Missing event.",
       "domain": "server_action",
@@ -9054,7 +9950,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 239,
+      "line": 249,
       "kind": "object_message_literal",
       "text": "Not signed in.",
       "domain": "server_action",
@@ -9062,7 +9958,7 @@
     },
     {
       "file": "app/actions/smtConference.ts",
-      "line": 248,
+      "line": 258,
       "kind": "object_message_literal",
       "text": "Only secretariat can edit the conference schedule.",
       "domain": "server_action",
@@ -9070,7 +9966,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 38,
+      "line": 64,
       "kind": "object_message_literal",
       "text": "You must be signed in.",
       "domain": "server_action",
@@ -9078,7 +9974,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 45,
+      "line": 71,
       "kind": "object_message_literal",
       "text": "Only secretariat accounts can save these bindings.",
       "domain": "server_action",
@@ -9086,7 +9982,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 48,
+      "line": 74,
       "kind": "object_message_literal",
       "text": "Select a conference event first (event gate).",
       "domain": "server_action",
@@ -9094,7 +9990,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 55,
+      "line": 81,
       "kind": "object_message_literal",
       "text": "Invalid chair committee selection.",
       "domain": "server_action",
@@ -9102,7 +9998,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 61,
+      "line": 87,
       "kind": "object_message_literal",
       "text": "Chair committee must belong to the active event.",
       "domain": "server_action",
@@ -9110,7 +10006,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 62,
+      "line": 88,
       "kind": "object_message_literal",
       "text": "Pick a delegate committee, not the secretariat sheet.",
       "domain": "server_action",
@@ -9118,7 +10014,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 68,
+      "line": 94,
       "kind": "object_message_literal",
       "text": "Invalid delegate seat selection.",
       "domain": "server_action",
@@ -9126,7 +10022,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 74,
+      "line": 100,
       "kind": "object_message_literal",
       "text": "Invalid delegate seat selection.",
       "domain": "server_action",
@@ -9134,7 +10030,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 76,
+      "line": 102,
       "kind": "object_message_literal",
       "text": "Pick a delegate placard, not a dais seat.",
       "domain": "server_action",
@@ -9142,7 +10038,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 83,
+      "line": 109,
       "kind": "object_message_literal",
       "text": "Delegate seat must belong to the active event.",
       "domain": "server_action",
@@ -9150,7 +10046,7 @@
     },
     {
       "file": "app/actions/smtDashboardSurface.ts",
-      "line": 84,
+      "line": 110,
       "kind": "object_message_literal",
       "text": "Pick a delegate committee seat, not secretariat.",
       "domain": "server_action",
@@ -9382,7 +10278,7 @@
     },
     {
       "file": "app/smt/allocation-matrix/AllocationMatrixManagerClient.tsx",
-      "line": 425,
+      "line": 433,
       "kind": "jsx_text",
       "text": "country",
       "domain": "page_or_layout",
@@ -9414,7 +10310,7 @@
     },
     {
       "file": "app/smt/awards/SmtAwardsTabs.tsx",
-      "line": 94,
+      "line": 99,
       "kind": "attribute_literal",
       "text": "SMT awards",
       "domain": "page_or_layout",
@@ -9422,7 +10318,7 @@
     },
     {
       "file": "app/smt/awards/SmtAwardsTabs.tsx",
-      "line": 104,
+      "line": 116,
       "kind": "jsx_text",
       "text": "Final recorded awards",
       "domain": "page_or_layout",
@@ -9430,7 +10326,7 @@
     },
     {
       "file": "app/smt/awards/SmtAwardsTabs.tsx",
-      "line": 107,
+      "line": 119,
       "kind": "jsx_text",
       "text": "Print selected",
       "domain": "page_or_layout",
@@ -9621,20 +10517,20 @@
       "suggestedKeyPrefix": "pageTitles"
     },
     {
-      "file": "app/smt/awards/page.tsx",
-      "line": 312,
-      "kind": "jsx_text",
-      "text": "00092_profiles_restore_staff_select",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
       "file": "app/smt/conference/page.tsx",
       "line": 93,
       "kind": "jsx_text",
       "text": "Event & committee sessions",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "components/BrandWordmark.tsx",
+      "line": 68,
+      "kind": "jsx_text",
+      "text": ".site",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.BrandWordmark.tsx"
     },
     {
       "file": "components/EmojiQuickInsert.tsx",
@@ -9662,7 +10558,7 @@
     },
     {
       "file": "components/InterMunEmblem.tsx",
-      "line": 63,
+      "line": 42,
       "kind": "attribute_literal",
       "text": "InterMUN",
       "domain": "component",
@@ -9670,7 +10566,7 @@
     },
     {
       "file": "components/admin/AdminAppChrome.tsx",
-      "line": 47,
+      "line": 44,
       "kind": "attribute_literal",
       "text": "Admin",
       "domain": "component",
@@ -9678,7 +10574,7 @@
     },
     {
       "file": "components/admin/AdminAppChrome.tsx",
-      "line": 62,
+      "line": 61,
       "kind": "attribute_literal",
       "text": "Admin navigation",
       "domain": "component",
@@ -9766,9 +10662,17 @@
     },
     {
       "file": "components/chair/ChairScheduledSessionsPanel.tsx",
-      "line": 156,
+      "line": 159,
       "kind": "jsx_text",
       "text": "= startMs && nowMs",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.chair"
+    },
+    {
+      "file": "components/chair/GuidedMotionWizard.tsx",
+      "line": 262,
+      "kind": "attribute_literal",
+      "text": "Close",
       "domain": "component",
       "suggestedKeyPrefix": "components.chair"
     },
@@ -10005,8 +10909,248 @@
       "suggestedKeyPrefix": "components.delegation-notes"
     },
     {
-      "file": "components/marketing/ConferenceInquiryForm.tsx",
+      "file": "components/fwc/FwcBackroomClient.tsx",
+      "line": 66,
+      "kind": "jsx_text",
+      "text": "Rapid crisis actions sort first.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 96,
+      "kind": "jsx_text",
+      "text": "Submit a directive",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 104,
+      "kind": "jsx_text",
+      "text": "Title",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 111,
+      "kind": "attribute_literal",
+      "text": "Short operational title",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 116,
+      "kind": "jsx_text",
+      "text": "Type",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 147,
+      "kind": "attribute_literal",
+      "text": "e.g. B2 or J10–K11",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 163,
+      "kind": "attribute_literal",
+      "text": "What you intend to do, with timing and assets",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 177,
+      "kind": "attribute_literal",
+      "text": "Clearance, units, vehicles, powers invoked",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 182,
+      "kind": "jsx_text",
+      "text": "Reason",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 189,
+      "kind": "attribute_literal",
+      "text": "Why this action, why now",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 199,
+      "kind": "jsx_text",
+      "text": "No other FWC characters are seated yet.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveForm.tsx",
+      "line": 237,
+      "kind": "jsx_text",
+      "text": "Submit anonymously",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcDirectiveList.tsx",
+      "line": 104,
+      "kind": "jsx_text",
+      "text": "Resolution:",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcEvaluationForm.tsx",
+      "line": 181,
+      "kind": "jsx_text",
+      "text": "Reason:",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcEvaluationForm.tsx",
+      "line": 305,
+      "kind": "attribute_literal",
+      "text": "Start of Afternoon Block",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcEvaluationForm.tsx",
+      "line": 357,
+      "kind": "attribute_literal",
+      "text": "Shown on cabinet/press outcomes when appropriate",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcHawkinsBoard.tsx",
+      "line": 144,
+      "kind": "jsx_text",
+      "text": "rightPct || yPct",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcHawkinsBoard.tsx",
+      "line": 162,
+      "kind": "attribute_literal",
+      "text": "Hawkins Parallel Tactical Board",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcHawkinsBoard.tsx",
+      "line": 179,
+      "kind": "attribute_literal",
+      "text": "Zoom out",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcHawkinsBoard.tsx",
       "line": 190,
+      "kind": "attribute_literal",
+      "text": "Zoom in",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcHawkinsBoard.tsx",
+      "line": 213,
+      "kind": "attribute_literal",
+      "text": "Hawkins Parallel Tactical Board — Hawkins, Indiana, 1986",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMapClient.tsx",
+      "line": 60,
+      "kind": "attribute_literal",
+      "text": "Character marker legend",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMetersEditor.tsx",
+      "line": 62,
+      "kind": "jsx_text",
+      "text": "Crisis meters",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMetersEditor.tsx",
+      "line": 63,
+      "kind": "jsx_text",
+      "text": "Adjust chamber-wide Hawkins risk meters.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMetersStrip.tsx",
+      "line": 10,
+      "kind": "attribute_literal",
+      "text": "Hawkins crisis meters",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMetersStrip.tsx",
+      "line": 14,
+      "kind": "jsx_text",
+      "text": "Crisis meters",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMetersStrip.tsx",
+      "line": 15,
+      "kind": "jsx_text",
+      "text": "Read-only",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMovementForm.tsx",
+      "line": 84,
+      "kind": "jsx_text",
+      "text": "Queue movement",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/fwc/FwcMovementForm.tsx",
+      "line": 113,
+      "kind": "attribute_literal",
+      "text": "e.g. C4",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.fwc"
+    },
+    {
+      "file": "components/marketing/ConferenceInquiryForm.tsx",
+      "line": 49,
+      "kind": "jsx_text",
+      "text": "inquiry.form",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/ConferenceInquiryForm.tsx",
+      "line": 210,
       "kind": "jsx_text",
       "text": "Website",
       "domain": "component",
@@ -10032,7 +11176,7 @@
       "file": "components/marketing/MarketingChamberFrame.tsx",
       "line": 11,
       "kind": "attribute_literal",
-      "text": "Preview",
+      "text": "preview.app",
       "domain": "component",
       "suggestedKeyPrefix": "components.marketing"
     },
@@ -10117,10 +11261,154 @@
       "suggestedKeyPrefix": "components.marketing"
     },
     {
+      "file": "components/marketing/MarketingFeaturesDemos.tsx",
+      "line": 123,
+      "kind": "jsx_text",
+      "text": "more on the floor",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
       "file": "components/marketing/MarketingGateCodesPanel.tsx",
       "line": 21,
       "kind": "object_message_literal",
       "text": "Legal",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHeroSpline.tsx",
+      "line": 18,
+      "kind": "attribute_literal",
+      "text": "Interactive 3D preview — drag to change perspective",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 143,
+      "kind": "jsx_text",
+      "text": "on the floor",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 256,
+      "kind": "jsx_text",
+      "text": "the dream",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 262,
+      "kind": "jsx_text",
+      "text": "InterMUN",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 271,
+      "kind": "jsx_text",
+      "text": "InterMUN",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 285,
+      "kind": "jsx_text",
+      "text": "frequently asked",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 286,
+      "kind": "jsx_text",
+      "text": "what chairs and secretariat usually ask before a conference weekend.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 290,
+      "kind": "jsx_text",
+      "text": "who is this for?",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 291,
+      "kind": "jsx_text",
+      "text": "delegates, chairs, advisors, and secretariat — one conference workspace with role-aware tools.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 294,
+      "kind": "jsx_text",
+      "text": "can we run press corps and ga differently?",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 295,
+      "kind": "jsx_text",
+      "text": "yes. procedure profiles keep press corps RoP scoped to that chamber without changing other committees.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 298,
+      "kind": "jsx_text",
+      "text": "how do people get into a room?",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 299,
+      "kind": "jsx_text",
+      "text": "event code, then room / committee code, then optional placard codes — designed for real check-in lines.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 302,
+      "kind": "jsx_text",
+      "text": "is it ready for a live weekend?",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingHome.tsx",
+      "line": 303,
+      "kind": "jsx_text",
+      "text": "session floor, voting, notes, documents, and oversight are built for concurrent use across chambers.",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingOriginGlobe.tsx",
+      "line": 20,
+      "kind": "attribute_literal",
+      "text": "Interactive globe — drag to change perspective",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingPrimaryNav.tsx",
+      "line": 46,
+      "kind": "object_message_literal",
+      "text": "about",
       "domain": "component",
       "suggestedKeyPrefix": "components.marketing"
     },
@@ -10150,7 +11438,7 @@
     },
     {
       "file": "components/marketing/MarketingSessionSpeakersPanel.tsx",
-      "line": 193,
+      "line": 189,
       "kind": "jsx_text",
       "text": "Canada",
       "domain": "component",
@@ -10158,17 +11446,65 @@
     },
     {
       "file": "components/marketing/MarketingSessionSpeakersPanel.tsx",
-      "line": 194,
+      "line": 190,
       "kind": "jsx_text",
       "text": "Ghana",
       "domain": "component",
       "suggestedKeyPrefix": "components.marketing"
     },
     {
+      "file": "components/marketing/MarketingSetupChecklistPanel.tsx",
+      "line": 13,
+      "kind": "object_message_literal",
+      "text": "Confirm event + committee sessions",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingSetupChecklistPanel.tsx",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "Set room codes + chair access",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingSetupChecklistPanel.tsx",
+      "line": 21,
+      "kind": "object_message_literal",
+      "text": "Prepare allocations + sign-in docs",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingSetupChecklistPanel.tsx",
+      "line": 25,
+      "kind": "object_message_literal",
+      "text": "Publish global docs (RoP / criteria)",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
       "file": "components/marketing/MarketingSiteFooter.tsx",
-      "line": 19,
+      "line": 30,
+      "kind": "jsx_text",
+      "text": "product",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/MarketingSiteFooter.tsx",
+      "line": 47,
+      "kind": "jsx_text",
+      "text": "resources",
+      "domain": "component",
+      "suggestedKeyPrefix": "components.marketing"
+    },
+    {
+      "file": "components/marketing/OrbAnimationOverlay.tsx",
+      "line": 210,
       "kind": "attribute_literal",
-      "text": "Company and legal",
+      "text": "Close",
       "domain": "component",
       "suggestedKeyPrefix": "components.marketing"
     },
@@ -10187,46 +11523,6 @@
       "text": "status ${res.status}",
       "domain": "component",
       "suggestedKeyPrefix": "components.press-corps"
-    },
-    {
-      "file": "components/report/ReportView.tsx",
-      "line": 84,
-      "kind": "jsx_text",
-      "text": "Submit report",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.report"
-    },
-    {
-      "file": "components/report/ReportView.tsx",
-      "line": 87,
-      "kind": "jsx_text",
-      "text": "Report type",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.report"
-    },
-    {
-      "file": "components/report/ReportView.tsx",
-      "line": 95,
-      "kind": "jsx_text",
-      "text": "AI use",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.report"
-    },
-    {
-      "file": "components/report/ReportView.tsx",
-      "line": 102,
-      "kind": "jsx_text",
-      "text": "Description",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.report"
-    },
-    {
-      "file": "components/report/ReportView.tsx",
-      "line": 106,
-      "kind": "attribute_literal",
-      "text": "Describe the incident...",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.report"
     },
     {
       "file": "components/resolutions/GoogleDocsEmbed.tsx",
@@ -10265,14 +11561,6 @@
       "line": 115,
       "kind": "jsx_text",
       "text": "Promise",
-      "domain": "component",
-      "suggestedKeyPrefix": "components.ui"
-    },
-    {
-      "file": "components/ui/AppleGateLayout.tsx",
-      "line": 26,
-      "kind": "jsx_text",
-      "text": "Est. 2026 — Conference platform",
       "domain": "component",
       "suggestedKeyPrefix": "components.ui"
     },
@@ -10545,6 +11833,38 @@
       "line": 67,
       "kind": "object_message_literal",
       "text": "Strongest committee-level position paper.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 72,
+      "kind": "object_message_literal",
+      "text": "Best Resolution (committee)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 73,
+      "kind": "object_message_literal",
+      "text": "Strongest passed or forwarded resolution in this committee.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 78,
+      "kind": "object_message_literal",
+      "text": "Best Resolution (conference-wide)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 79,
+      "kind": "object_message_literal",
+      "text": "Outstanding operative draft chosen by secretariat from chair-forwarded resolutions.",
       "domain": "library_surface",
       "suggestedKeyPrefix": "common"
     },
@@ -10965,6 +12285,358 @@
       "suggestedKeyPrefix": "common"
     },
     {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 36,
+      "kind": "object_message_literal",
+      "text": "Encapsulated Spore Sample",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 45,
+      "kind": "object_message_literal",
+      "text": "MKUltra Subject Telemetry Log",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 54,
+      "kind": "object_message_literal",
+      "text": "Crushed Civilian Vehicle",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 63,
+      "kind": "object_message_literal",
+      "text": "35mm Photo of Dimensional Portal",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 72,
+      "kind": "object_message_literal",
+      "text": "Intercepted Soviet Radio Transcript",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 81,
+      "kind": "object_message_literal",
+      "text": "Tape Recording of Creature Roar",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 90,
+      "kind": "object_message_literal",
+      "text": "Corrupted Tendril Vine Segment",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 99,
+      "kind": "object_message_literal",
+      "text": "Unmarked Wiretap Log Sheet",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 108,
+      "kind": "object_message_literal",
+      "text": "Forged U.S. Identification Papers",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 117,
+      "kind": "object_message_literal",
+      "text": "MKUltra Clinical Sedative Vials",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 126,
+      "kind": "object_message_literal",
+      "text": "Analog Wall-of-Lights Frequency Log",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 135,
+      "kind": "object_message_literal",
+      "text": "Scorched Shell Casing & Burn Pattern",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 144,
+      "kind": "object_message_literal",
+      "text": "Molted Demogorgon Skin Husk",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 153,
+      "kind": "object_message_literal",
+      "text": "Encrypted Russian Transceiver Tape",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 162,
+      "kind": "object_message_literal",
+      "text": "Signed DoE Media Gag Order",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 171,
+      "kind": "object_message_literal",
+      "text": "Overclocked Portal Drill Blueprint",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 180,
+      "kind": "object_message_literal",
+      "text": "Broken Subterranean Elevator Keycard",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 189,
+      "kind": "object_message_literal",
+      "text": "Toxic Spore Cloud Air Filter",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 198,
+      "kind": "object_message_literal",
+      "text": "Polaroid of Vecna Mindscape Victim",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 207,
+      "kind": "object_message_literal",
+      "text": "Confidential Autopsy Report",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 216,
+      "kind": "object_message_literal",
+      "text": "High-Purity Industrial Salt Container",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 225,
+      "kind": "object_message_literal",
+      "text": "Scrambled CB Radio Transceiver",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 234,
+      "kind": "object_message_literal",
+      "text": "Severed Biological Tendril Claw",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 243,
+      "kind": "object_message_literal",
+      "text": "Military Martial Law Lockdown Order",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 252,
+      "kind": "object_message_literal",
+      "text": "Corrupted Soil & Groundwater Sample",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 261,
+      "kind": "object_message_literal",
+      "text": "Classified Executive Immunity Decree",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 270,
+      "kind": "object_message_literal",
+      "text": "Smashed Rotary Telephone",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 279,
+      "kind": "object_message_literal",
+      "text": "Portable Electro-Magnetic Compass",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 288,
+      "kind": "object_message_literal",
+      "text": "Aerial Reconnaissance Map of Rifts",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/evidence-library.ts",
+      "line": 297,
+      "kind": "object_message_literal",
+      "text": "Starcourt Mall Sub-Level Structural Blueprint",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 34,
+      "kind": "error_literal",
+      "text": "Not a valid .xlsx file.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 44,
+      "kind": "error_literal",
+      "text": "Workbook is missing xl/workbook.xml.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 49,
+      "kind": "error_literal",
+      "text": "Workbook has no sheets.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 69,
+      "kind": "error_literal",
+      "text": "No evidence rows found. Expected an Evidence ID column and at least one data row.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 103,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 107,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 115,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 119,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 129,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 132,
+      "kind": "jsx_text",
+      "text": "([\\s\\S]*?)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 293,
+      "kind": "error_literal",
+      "text": "Could not read compressed spreadsheet entries.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/fwc/parse-evidence-xlsx.ts",
+      "line": 299,
+      "kind": "error_literal",
+      "text": "Unsupported spreadsheet compression.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/hooks/useActionBusy.ts",
+      "line": 14,
+      "kind": "jsx_text",
+      "text": "Promise",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/hooks/useCommitteeLiveStore.ts",
+      "line": 47,
+      "kind": "jsx_text",
+      "text": "(entry: StoreEntry",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
       "file": "lib/i18n/localize-country-name.ts",
       "line": 22,
       "kind": "jsx_text",
@@ -10982,9 +12654,25 @@
     },
     {
       "file": "lib/opening-orb.ts",
-      "line": 38,
+      "line": 58,
       "kind": "error_literal",
       "text": "opening-orb fetch failed",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/opening-speech.ts",
+      "line": 93,
+      "kind": "object_message_literal",
+      "text": "No delegate allocations are available for opening speeches.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/opening-speech.ts",
+      "line": 114,
+      "kind": "object_message_literal",
+      "text": "Every delegation is blocked from the speaker list (discipline).",
       "domain": "library_surface",
       "suggestedKeyPrefix": "common"
     },
@@ -12334,7 +14022,7 @@
     },
     {
       "file": "lib/speaker-queue.ts",
-      "line": 54,
+      "line": 69,
       "kind": "object_message_literal",
       "text": "That delegation is already on the list (waiting or current).",
       "domain": "library_surface",
@@ -12342,7 +14030,7 @@
     },
     {
       "file": "lib/speaker-queue.ts",
-      "line": 68,
+      "line": 83,
       "kind": "object_message_literal",
       "text": "Could not check disciplinary status.",
       "domain": "library_surface",

@@ -2,13 +2,14 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import type { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
 
 export type MarketingDocumentSection = {
   title: string;
   content: ReactNode;
 };
 
-export function MarketingDocumentPage({
+export async function MarketingDocumentPage({
   eyebrow,
   title,
   intro,
@@ -21,6 +22,8 @@ export function MarketingDocumentPage({
   updated?: string;
   sections: MarketingDocumentSection[];
 }) {
+  const t = await getTranslations("marketing.documentPage");
+
   return (
     <>
       <section className="clicky-doc-hero border-b border-[var(--clicky-line)]">
@@ -35,8 +38,8 @@ export function MarketingDocumentPage({
             <div>
               <p className="clicky-lede text-[1.1rem]">{intro}</p>
               {updated ? (
-                <p className="mt-4 font-mono text-[0.7rem]  tracking-wider text-[var(--clicky-ink-faint)]">
-                  last updated · {updated}
+                <p className="mt-4 font-mono text-[0.7rem] tracking-wider text-[var(--clicky-ink-faint)]">
+                  {t("lastUpdated", { date: updated })}
                 </p>
               ) : null}
             </div>

@@ -122,7 +122,7 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
             onClick={() => setShowDetails(true)}
             className="text-sm font-medium text-[var(--clicky-blue)] hover:underline"
           >
-            add event details (optional)
+            {t("showOptionalDetails")}
           </button>
         ) : (
           <div className="space-y-5 border-t border-[var(--clicky-line)] pt-5">

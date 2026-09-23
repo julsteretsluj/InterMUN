@@ -2417,7 +2417,8 @@
       "score": "Punto",
       "photo": "Foto",
       "school": "Scuola",
-      "party": "Gruppo politico"
+      "party": "Gruppo politico",
+      "placardCode": "Codice cartello"
     },
     "noRows": "Nessuna riga di allocazione trovata per questo comitato.",
     "pendingApprovalsTitle": "In attesa di approvazioni di registrazione",
@@ -4630,20 +4631,27 @@
       "contact": "Contatto",
       "signIn": "Registrazione",
       "getStarted": "Inizia",
-      "features": "Features"
+      "features": "Features",
+      "about": "Di",
+      "menu": "Menu",
+      "closeMenu": "Vicina",
+      "moreOnTheFloor": "Altro sul pavimento"
     },
     "playOrbAnimation": "Riproduci l'animazione InterMUN",
     "hero": {
       "eyebrow": "Software per il pavimento della camera · Modello UN",
       "title": "Una scheda per",
       "titleEmphasis": "intero comitato.",
-      "subtitle": "InterMUN collega la procedura dalis, la preparazione dei delegati e la supervisione della segreteria, senza installazioni di app, thread di chat sparsi o cartelli cartacei.",
+      "subtitle": "Software per conferenze che resta in disparte finché il martelletto non ne ha bisogno.",
       "ctaStart": "Ospita un evento",
-      "ctaJoin": "Ho un codice della stanza",
+      "ctaJoin": "Partecipa alla tua conferenza",
       "chip1": "Appello → quorum",
       "chip2": "GSL e mozioni formali",
       "chip3": "31 lingue di interfaccia",
-      "previewLabel": "Piano della sessione"
+      "previewLabel": "Piano della sessione",
+      "sticky1": "Appello, timer e movimenti in un unico piano.",
+      "sticky2": "Costruito per sedie che odiano i giocolieri con le linguette.",
+      "floorEyebrow": "Sul pavimento"
     },
     "steps": {
       "eyebrow": "Flusso del cancello",
@@ -4719,7 +4727,9 @@
       "title": "Costruito appositamente per il modello ONU di oggi",
       "paragraph1": "InterMUN è uno spazio di lavoro del browser che sostituisce il solito mix di fogli di calcolo, chat di gruppo e cartelli stampati con strumenti di commissione coordinati.",
       "paragraph2": "I presidenti ottengono un controllo procedurale che rispecchia il modo in cui si svolgono effettivamente le sessioni. I delegati ricevono una preparazione strutturata accanto al pavimento. La segreteria mantiene la visibilità dell'intero evento senza indugiare su ogni movimento.",
-      "paragraph3": "Sia che tu gestisca una sala o una conferenza intera nel fine settimana, InterMUN mantiene sedie, delegati e personale allineati dall'appello di apertura fino alla cerimonia di chiusura."
+      "paragraph3": "Sia che tu gestisca una sala o una conferenza intera nel fine settimana, InterMUN mantiene sedie, delegati e personale allineati dall'appello di apertura fino alla cerimonia di chiusura.",
+      "dreamEyebrow": "Il sogno",
+      "footerLabel": "Circa {app}"
     },
     "contact": {
       "eyebrow": "Mettiti in contatto",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Delegati (circa)",
         "fieldInterests": "Interessi",
         "fieldMessage": "Messaggio",
-        "fieldSubmittedAt": "Inviato a (UTC)"
+        "fieldSubmittedAt": "Inviato a (UTC)",
+        "showOptionalDetails": "Aggiungi i dettagli dell'evento (facoltativo)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Creare un account",
       "ctaJoin": "Registrazione",
       "copyright": "© {year}InterMUN",
-      "contact": "Contatto"
+      "contact": "Contatto",
+      "tagline": "Software per conferenze che resta in disparte finché il martelletto non ne ha bisogno.",
+      "product": "Prodotto",
+      "resources": "Risorse",
+      "howItWorks": "Come funziona",
+      "privacy": "Privacy",
+      "terms": "Termini"
     },
     "preview": {
       "rollCallLabel": "Appello",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Chiesto frequentemente",
+      "subtitle": "Cosa chiedono solitamente i presidenti e la segreteria prima di un fine settimana di conferenza.",
+      "q1": "Per chi è questo?",
+      "a1": "Delegati, presidenti, consulenti e segretariato: uno spazio di lavoro per conferenze con strumenti basati sul ruolo.",
+      "q2": "Possiamo gestire i corpi di stampa e GA in modo diverso?",
+      "a2": "SÌ. I profili procedurali mantengono il RoP del corpo stampa limitato a quella Camera senza modificare altri comitati.",
+      "q3": "Come entrano le persone in una stanza?",
+      "a3": "Codice evento, quindi codice camera/comitato, quindi codici cartelli opzionali: progettati per vere e proprie code al check-in.",
+      "q4": "È pronto per un fine settimana dal vivo?",
+      "a4": "La sessione, le votazioni, le note, i documenti e la supervisione sono progettati per l'uso simultaneo tra le camere."
+    },
+    "aboutPage": {
+      "metaTitle": "Circa {app}",
+      "metaDescription": "Scopri perché {app} esiste e come supporta le conferenze modello delle Nazioni Unite.",
+      "eyebrow": "Circa {app}",
+      "title": "Costruito per l'intero team della conferenza.",
+      "intro": "{app} riunisce delegati, presidenti, consulenti e segretariato in uno spazio di lavoro condiviso, dalla preparazione fino al martelletto finale. Pensiamo che la parte difficile sia l’interfaccia, non la diplomazia.",
+      "purposeTitle": "Il nostro scopo",
+      "purposeP1": "Il modello delle Nazioni Unite dà il meglio di sé quando le persone possono concentrarsi sulla diplomazia, sulle procedure, sulla ricerca e sulla collaborazione. {app} esiste per ridurre gli attriti amministrativi attorno a quei momenti.",
+      "purposeP2": "La piattaforma collega preparazione, strumenti per sessioni live, documenti, votazioni, note e supervisione, senza sostituire le persone che danno importanza alla conferenza.",
+      "rolesTitle": "Progettato attorno a ogni ruolo",
+      "rolesDelegates": "I delegati ricercano, redigono, collaborano e seguono la parola.",
+      "rolesChairs": "I presidenti gestiscono l'appello nominale, gli oratori, le mozioni, i timer e le votazioni.",
+      "rolesAdvisors": "I consulenti supportano le loro delegazioni con la giusta visibilità.",
+      "rolesSecretariat": "Il Segretariato coordina le camere e controlla i progressi dell'intera conferenza.",
+      "techTitle": "Tecnologia per conferenze",
+      "techP1": "Le funzionalità sono modellate sui flussi di lavoro reali del fine settimana, sui confini dei ruoli e su un'interfaccia utente tranquilla quando la stanza si muove velocemente. L'accessibilità e l'accesso sicuro ai ruoli fanno parte della progettazione.",
+      "techCtaBefore": "Vuoi {app} alla tua conferenza?",
+      "techCtaLink": "Salutami"
+    },
+    "documentPage": {
+      "lastUpdated": "Ultimo aggiornamento · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Termini di servizio | {app}",
+      "metaDescription": "I termini che regolano l'accesso e l'uso di {app}.",
+      "eyebrow": "Legale",
+      "title": "Termini di servizio",
+      "intro": "I presenti termini regolano l'accesso e l'utilizzo di {app}. Utilizzando il servizio, accetti questi termini.",
+      "updated": "25 luglio 2026",
+      "contactFormFallback": "il modulo di contatto sul nostro sito web",
+      "usingTitle": "Utilizzando il servizio",
+      "usingP1": "È necessario fornire informazioni accurate, utilizzare il servizio solo per scopi didattici e congressuali legittimi e seguire le istruzioni ragionevoli dell'organizzatore della conferenza.",
+      "usingP2": "Se non sei legalmente in grado di accettare questi termini da solo, un genitore, tutore, scuola o organizzatore di conferenze deve autorizzare il tuo utilizzo. Gli organizzatori hanno la responsabilità di garantire che i propri partecipanti siano opportunamente autorizzati.",
+      "accountsTitle": "Conti e accesso",
+      "accountsL1": "Mantieni riservate le tue credenziali e i codici di accesso alla conferenza.",
+      "accountsL2": "Non impersonare un'altra persona né travisare il tuo ruolo.",
+      "accountsL3": "Non accedere a dati, comitati o strumenti amministrativi per i quali non sei autorizzato a utilizzare.",
+      "accountsL4": "Informa tempestivamente noi o il tuo organizzatore se sospetti un utilizzo non autorizzato dell'account.",
+      "contentTitle": "I tuoi contenuti",
+      "contentP1": "Mantieni la proprietà dei contenuti che crei. Ci concedi una licenza limitata per ospitare, elaborare, riprodurre e visualizzare tali contenuti solo se necessario per gestire, proteggere e migliorare il servizio e supportare la tua conferenza.",
+      "contentP2": "Sei responsabile di garantire che i tuoi contenuti siano legali e di avere il permesso di condividerli. Non caricare materiale riservato a meno che non sia appropriato per il pubblico previsto per la conferenza.",
+      "acceptableTitle": "Uso accettabile",
+      "acceptableP1": "Non puoi interrompere il servizio, aggirare i controlli di accesso, sondare le vulnerabilità, acquisire dati senza autorizzazione, distribuire malware, molestare altri, violare la proprietà intellettuale o utilizzare la piattaforma per frode o attività illegali. Potremmo indagare e limitare le attività che minacciano i partecipanti, le conferenze o il servizio.",
+      "organisersTitle": "Organizzatori di conferenze",
+      "organisersP1": "Gli organizzatori controllano la configurazione della conferenza, le assegnazioni dei ruoli, le regole di partecipazione e gran parte del contenuto all'interno del proprio spazio di lavoro. Sono responsabili delle operazioni della conferenza, degli avvisi e dei consensi dei partecipanti e dell'uso legittimo delle informazioni esportate dal servizio.",
+      "availabilityTitle": "Disponibilità e modifiche",
+      "availabilityP1": "Potremmo aggiornare, sospendere o interrompere parti del servizio. Il nostro obiettivo è fornire una piattaforma affidabile ma non garantiamo un funzionamento ininterrotto o privo di errori. Potremmo aggiornare questi termini e l'uso continuato dopo l'entrata in vigore di un aggiornamento costituisce l'accettazione dei termini modificati.",
+      "suspensionTitle": "Sospensione e risoluzione",
+      "suspensionP1": "Potremmo sospendere o interrompere l'accesso ove ragionevolmente necessario per proteggere il servizio o i suoi utenti, rispondere a condotte illecite, far rispettare questi termini o rispettare gli obblighi legali. Puoi interrompere l'utilizzo del servizio in qualsiasi momento.",
+      "liabilityTitle": "Esclusioni e responsabilità",
+      "liabilityP1": "Nella misura consentita dalla legge, il servizio viene fornito \"così com'è\" e \"come disponibile\", senza garanzie non espressamente indicate nei presenti termini. {app} è uno strumento per conferenze e non controlla la condotta dei partecipanti né garantisce i risultati della conferenza.",
+      "liabilityP2": "Nella misura consentita dalla legge, non saremo responsabili per danni indiretti, incidentali, speciali, consequenziali o punitivi o per la perdita di dati, entrate o opportunità derivanti dall'uso del servizio. I diritti che non possono essere legalmente esclusi rimangono inalterati.",
+      "privacyTitle": "Privacy e contatti",
+      "privacyP1": "La nostra <privacy>Informativa sulla privacy</privacy> spiega come gestiamo le informazioni personali.",
+      "questions": "Domande su questi termini possono essere inviate a <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Informativa sulla privacy | {app}",
+      "metaDescription": "Come {app} raccoglie, utilizza, archivia e protegge le informazioni personali.",
+      "eyebrow": "Legale",
+      "title": "politica sulla riservatezza",
+      "intro": "Questa politica spiega come {app} gestisce le informazioni personali quando utilizzi il nostro sito Web, le nostre applicazioni e i servizi di conferenza.",
+      "updated": "25 luglio 2026",
+      "contactFormFallback": "il modulo di contatto sul nostro sito web",
+      "collectTitle": "Informazioni che raccogliamo",
+      "collectIntro": "A seconda di come utilizzi il servizio, potremmo raccogliere:",
+      "collectL1": "Dettagli dell'account come nome, indirizzo email, profilo e ruolo.",
+      "collectL2": "Informazioni sulla conferenza, incarichi dei comitati e record di partecipazione.",
+      "collectL3": "Contenuti creati da te, inclusi documenti, note, messaggi, voti e invii.",
+      "collectL4": "File caricati e comunicazioni inviate ai team della conferenza o a noi.",
+      "collectL5": "Dati tecnici e di utilizzo necessari per il funzionamento, la sicurezza e il miglioramento del servizio.",
+      "useTitle": "Come utilizziamo le informazioni",
+      "useL1": "Fornire account, spazi di lavoro per conferenze e funzionalità basate sui ruoli.",
+      "useL2": "Consegnare i contenuti ai partecipanti e al personale autorizzato ad accedervi.",
+      "useL3": "Mantieni la sicurezza, previeni gli abusi, risolvi i problemi e migliora l'affidabilità.",
+      "useL4": "Rispondere a richieste di supporto, partnership e conferenze.",
+      "useL5": "Rispettare la legge applicabile e applicare i nostri Termini di servizio.",
+      "sharingTitle": "Condivisione e accesso alla conferenza",
+      "sharingP1": "Non vendiamo informazioni personali. Le informazioni potrebbero essere condivise con l'organizzatore della conferenza e i partecipanti autorizzati in base ai loro ruoli e alle funzionalità che utilizzano.",
+      "sharingP2": "Potremmo anche utilizzare fornitori di servizi affidabili per hosting, autenticazione, posta elettronica, archiviazione, sicurezza e infrastruttura correlata. Possono elaborare le informazioni solo per fornirci tali servizi.",
+      "retentionTitle": "Conservazione e sicurezza",
+      "retentionP1": "Conserviamo le informazioni per il tempo necessario a fornire il servizio, supportare una conferenza, adempiere agli obblighi legali, risolvere controversie e proteggere la piattaforma. I periodi di conservazione possono variare in base al tipo di dati e ai requisiti della conferenza.",
+      "retentionP2": "Utilizziamo misure di sicurezza tecniche e organizzative progettate per proteggere le informazioni. Nessun servizio online può garantire una sicurezza assoluta, quindi gli utenti dovrebbero anche proteggere le proprie credenziali e segnalare tempestivamente sospetti usi impropri dell'account.",
+      "rightsTitle": "Le tue scelte e i tuoi diritti",
+      "rightsP1": "È possibile aggiornare alcune informazioni sull'account all'interno del servizio. A seconda della tua posizione, potresti anche avere il diritto di accedere, correggere, eliminare, limitare o ricevere una copia delle tue informazioni personali.",
+      "rightsP2": "I registri della conferenza possono essere controllati congiuntamente o per conto dell'organizzatore della conferenza. Potremmo indirizzare una richiesta a tale organizzatore, ove appropriato.",
+      "childrenTitle": "Partecipanti bambini e studenti",
+      "childrenP1": "Le conferenze e le scuole hanno la responsabilità di garantire che i partecipanti siano autorizzati a utilizzare il servizio e che sia stato ottenuto il consenso dei genitori o dei tutori necessari. Ti preghiamo di contattarci se ritieni che le informazioni di un partecipante siano state fornite senza la dovuta autorizzazione.",
+      "changesTitle": "Modifiche e contatti",
+      "changesP1": "Potremmo aggiornare questa politica man mano che il servizio o i requisiti applicabili cambiano. La data sopra mostra l'ultima revisione.",
+      "contact": "Per domande o richieste sulla privacy, contattare <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Ciascun comitato dispone di un codice comitato all'interno della propria conferenza (secondo cancello dopo che i delegati hanno inserito il codice conferenza). I codici devono essere univoci all'interno dello stesso evento congressuale.",
     "testingOverride": "Ignora test abilitato: puoi cambiare e gestire i codici comitato tra comitati senza controlli di assegnazione dei posti.",
     "chairScope": "Come pedana, vedi solo i comitati in cui hai un posto. Il salvataggio ti invia al tuo profilo; i delegati che hanno già superato il cancello del comitato rimangono collegati fino alla disconnessione.",
-    "staffAfterSave": "Dopo aver salvato, puoi entrare in quel comitato o condividere il codice sul palco."
+    "staffAfterSave": "Dopo aver salvato, puoi entrare in quel comitato o condividere il codice sul palco.",
+    "noSmtChairBinding": "Scegli un comitato presidente sul tuo profilo SMT prima di gestirne il codice camera dalla visualizzazione presidente.",
+    "setChairBinding": "Imposta il comitato di presidenza",
+    "smtChairScope": "Stai visualizzando l'anteprima come presidente solo per il tuo comitato vincolato."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Elenco copie (TSV)",

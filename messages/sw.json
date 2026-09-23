@@ -2417,7 +2417,8 @@
       "score": "Alama",
       "photo": "Picha",
       "school": "Shule",
-      "party": "Kundi la kisiasa"
+      "party": "Kundi la kisiasa",
+      "placardCode": "Nambari ya mabango"
     },
     "noRows": "Hakuna safu mlalo za ugawaji zilizopatikana kwa kamati hii.",
     "pendingApprovalsTitle": "Inasubiri idhini za kujisajili",
@@ -4630,20 +4631,27 @@
       "contact": "Wasiliana",
       "signIn": "Ingia",
       "getStarted": "Anza",
-      "features": "Features"
+      "features": "Features",
+      "about": "Kuhusu",
+      "menu": "Menyu",
+      "closeMenu": "Funga",
+      "moreOnTheFloor": "Zaidi kwenye sakafu"
     },
     "playOrbAnimation": "Cheza uhuishaji wa InterMUN",
     "hero": {
       "eyebrow": "Programu ya ghorofa ya chumba · Mfano wa UN",
       "title": "Tabo moja ya",
       "titleEmphasis": "kamati nzima.",
-      "subtitle": "InterMUN huunganisha utaratibu wa jukwaa, utayarishaji wa majukumu na usimamizi wa sekretarieti - bila usakinishaji wa programu, mazungumzo yaliyotawanyika au mabango ya karatasi.",
+      "subtitle": "Programu ya mkutano ambayo inakaa nje ya njia hadi gavel inapohitaji.",
       "ctaStart": "Mwenyeji wa tukio",
-      "ctaJoin": "Nina msimbo wa chumba",
+      "ctaJoin": "Jiunge na mkutano wako",
       "chip1": "Piga simu → akidi",
       "chip2": "GSL & mwendo rasmi",
       "chip3": "Lugha 31 za kiolesura",
-      "previewLabel": "Sakafu ya kikao"
+      "previewLabel": "Sakafu ya kikao",
+      "sticky1": "Pindua simu, vipima muda, na usogeze katika ghorofa moja.",
+      "sticky2": "Imeundwa kwa ajili ya viti wanaochukia tabo za mauzauza.",
+      "floorEyebrow": "Kwenye sakafu"
     },
     "steps": {
       "eyebrow": "Mtiririko wa lango",
@@ -4719,7 +4727,9 @@
       "title": "Madhumuni yamejengwa kwa Modeli ya leo ya UN",
       "paragraph1": "InterMUN ni nafasi ya kazi ya kivinjari ambayo inachukua nafasi ya mchanganyiko wa kawaida wa lahajedwali, soga za kikundi na mabango yaliyochapishwa yenye zana za kamati zilizoratibiwa.",
       "paragraph2": "Viti hupata udhibiti wa kiutaratibu unaoakisi jinsi vikao vinavyoendelea. Wajumbe wanapata maandalizi yaliyopangwa kando ya sakafu. Sekretarieti huweka mwonekano mzima wa tukio bila kuelea juu ya kila hoja.",
-      "paragraph3": "Iwe unaendesha chumba kimoja au kongamano la wikendi kamili, InterMUN huweka viti, wajumbe na wafanyakazi wakiwa sawa kutoka kwa orodha ya majina ya ufunguzi kupitia hafla ya kufunga."
+      "paragraph3": "Iwe unaendesha chumba kimoja au kongamano la wikendi kamili, InterMUN huweka viti, wajumbe na wafanyakazi wakiwa sawa kutoka kwa orodha ya majina ya ufunguzi kupitia hafla ya kufunga.",
+      "dreamEyebrow": "Ndoto",
+      "footerLabel": "Kuhusu {app}"
     },
     "contact": {
       "eyebrow": "Wasiliana",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Wajumbe (takriban.)",
         "fieldInterests": "Maslahi",
         "fieldMessage": "Ujumbe",
-        "fieldSubmittedAt": "Imewasilishwa kwa (UTC)"
+        "fieldSubmittedAt": "Imewasilishwa kwa (UTC)",
+        "showOptionalDetails": "Ongeza maelezo ya tukio (si lazima)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Fungua akaunti",
       "ctaJoin": "Ingia",
       "copyright": "© {year} InterMUN",
-      "contact": "Wasiliana"
+      "contact": "Wasiliana",
+      "tagline": "Programu ya mkutano ambayo inakaa nje ya njia hadi gavel inapohitaji.",
+      "product": "Bidhaa",
+      "resources": "Rasilimali",
+      "howItWorks": "Jinsi inavyofanya kazi",
+      "privacy": "Faragha",
+      "terms": "Masharti"
     },
     "preview": {
       "rollCallLabel": "Piga simu",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Inaulizwa mara kwa mara",
+      "subtitle": "Ni viti gani na sekretarieti huuliza kwa kawaida kabla ya wikendi ya mkutano.",
+      "q1": "Huyu ni kwa ajili ya nani?",
+      "a1": "Wajumbe, viti, washauri na sekretarieti - sehemu moja ya kazi ya mkutano iliyo na zana za kufahamu jukumu.",
+      "q2": "Je, tunaweza kuendesha vyombo vya habari na GA tofauti?",
+      "a2": "Ndiyo. Wasifu wa utaratibu huweka vyombo vya habari RoP kwenye chumba hicho bila kubadilisha kamati zingine.",
+      "q3": "Watu huingiaje kwenye chumba?",
+      "a3": "Msimbo wa tukio, kisha msimbo wa chumba/kamati, kisha misimbo ya mabango ya hiari - iliyoundwa kwa ajili ya njia halisi za kuingia.",
+      "q4": "Je, iko tayari kwa wikendi moja kwa moja?",
+      "a4": "Sakafu ya kikao, upigaji kura, madokezo, hati na uangalizi hujengwa kwa matumizi ya wakati mmoja katika vyumba vyote."
+    },
+    "aboutPage": {
+      "metaTitle": "Kuhusu {app}",
+      "metaDescription": "Jifunze kwa nini {app} ipo na jinsi inavyotumia Mikutano ya Mfano ya Umoja wa Mataifa.",
+      "eyebrow": "Kuhusu {app}",
+      "title": "Imeundwa kwa ajili ya timu nzima ya mkutano.",
+      "intro": "{app} huleta wajumbe, viti, washauri na sekretarieti katika nafasi moja ya kazi iliyoshirikiwa—kutoka kwa maandalizi hadi sehemu ya mwisho. Tunafikiri sehemu ngumu ni interface, sio diplomasia.",
+      "purposeTitle": "Kusudi letu",
+      "purposeP1": "Umoja wa Mataifa wa mfano uko katika kiwango bora zaidi wakati watu wanaweza kuzingatia diplomasia, utaratibu, utafiti na ushirikiano. {app} inapatikana ili kupunguza msuguano wa msimamizi katika nyakati hizo.",
+      "purposeP2": "Jukwaa huunganisha maandalizi, zana za kikao cha moja kwa moja, hati, upigaji kura, madokezo na uangalizi—bila kuchukua nafasi ya wanadamu wanaofanya jambo la mkutano.",
+      "rolesTitle": "Imeundwa karibu na kila jukumu",
+      "rolesDelegates": "Wajumbe utafiti, rasimu, kushirikiana, na kufuata sakafu.",
+      "rolesChairs": "Viti huendesha wito, wasemaji, miondoko, vipima muda na kura.",
+      "rolesAdvisors": "Washauri huunga mkono wajumbe wao kwa mwonekano sahihi.",
+      "rolesSecretariat": "Sekretarieti inaratibu vyumba na kuona maendeleo ya mkutano mzima.",
+      "techTitle": "Teknolojia ya mkutano wa kwanza",
+      "techP1": "Vipengele huwekwa kulingana na utendakazi halisi wa wikendi, mipaka ya majukumu na UI tulivu wakati chumba kinasonga haraka. Ufikivu na ufikiaji wa jukumu salama ni sehemu ya muundo.",
+      "techCtaBefore": "Je, unataka {app} kwenye kongamano lako?",
+      "techCtaLink": "Sema hello"
+    },
+    "documentPage": {
+      "lastUpdated": "Ilisasishwa mwisho · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Masharti ya Huduma | {app}",
+      "metaDescription": "Sheria na masharti yanayosimamia ufikiaji na matumizi ya {app}.",
+      "eyebrow": "Kisheria",
+      "title": "Masharti ya Huduma",
+      "intro": "Sheria na masharti haya yanasimamia ufikiaji na matumizi yako ya {app}. Kwa kutumia huduma, unakubali masharti haya.",
+      "updated": "25 Julai 2026",
+      "contactFormFallback": "fomu ya mawasiliano kwenye tovuti yetu",
+      "usingTitle": "Kutumia huduma",
+      "usingP1": "Ni lazima utoe maelezo sahihi, utumie huduma kwa madhumuni halali ya mkutano na elimu pekee, na ufuate maagizo yanayofaa kutoka kwa mratibu wako wa kongamano.",
+      "usingP2": "Ikiwa huwezi kukubali sheria na masharti haya wewe mwenyewe, ni lazima mzazi, mlezi, shule au mwandalizi wa mkutano aidhinishe matumizi yako. Waandaaji wana jukumu la kuhakikisha kuwa washiriki wao wameidhinishwa ipasavyo.",
+      "accountsTitle": "Akaunti na ufikiaji",
+      "accountsL1": "Weka kitambulisho chako na misimbo ya kufikia mkutano kwa siri.",
+      "accountsL2": "Usiige mtu mwingine au kuwakilisha vibaya jukumu lako.",
+      "accountsL3": "Usifikie data, kamati, au zana za usimamizi ambazo hujaidhinishwa kutumia.",
+      "accountsL4": "Tuambie au mwandalizi wako mara moja ikiwa unashuku matumizi ya akaunti ambayo hayajaidhinishwa.",
+      "contentTitle": "Maudhui yako",
+      "contentP1": "Unabaki na umiliki wa maudhui unayounda. Unatupa leseni ndogo ya kupangisha, kuchakata, kuzalisha na kuonyesha maudhui hayo inapohitajika tu ili kuendesha, kulinda na kuboresha huduma na kusaidia mkutano wako.",
+      "contentP2": "Una jukumu la kuhakikisha kuwa maudhui yako ni halali na una ruhusa ya kuyashiriki. Usipakie nyenzo za siri isipokuwa zinafaa kwa hadhira inayolengwa ya mkutano.",
+      "acceptableTitle": "Matumizi yanayokubalika",
+      "acceptableP1": "Huruhusiwi kutatiza huduma, kukwepa vidhibiti vya ufikiaji, kuchunguza uwezekano wa kuathiriwa, kufuta data bila ruhusa, kusambaza programu hasidi, kunyanyasa wengine, kukiuka haki miliki, au kutumia mfumo kwa ulaghai au shughuli zisizo halali. Tunaweza kuchunguza na kuzuia shughuli zinazotishia washiriki, makongamano au huduma.",
+      "organisersTitle": "Waandaaji wa kongamano",
+      "organisersP1": "Waandaaji hudhibiti usanidi wa kongamano, kazi za majukumu, sheria za ushiriki, na mengi ya maudhui ndani ya nafasi yao ya kazi. Wanawajibika kwa shughuli zao za kongamano, arifa na idhini za washiriki, na matumizi halali ya maelezo yanayosafirishwa kutoka kwa huduma.",
+      "availabilityTitle": "Upatikanaji na mabadiliko",
+      "availabilityP1": "Tunaweza kusasisha, kusimamisha, au kusimamisha sehemu za huduma. Tunalenga kutoa jukwaa la kuaminika lakini hatuhakikishi utendakazi usiokatizwa au usio na hitilafu. Tunaweza kusasisha sheria na masharti haya, na kuendelea kutumia baada ya sasisho kutekelezwa kunajumuisha kukubali sheria na masharti yaliyorekebishwa.",
+      "suspensionTitle": "Kusimamishwa na kusitisha",
+      "suspensionP1": "Tunaweza kusimamisha au kukomesha ufikiaji inapobidi ili kulinda huduma au watumiaji wake, kujibu mwenendo usio halali, kutekeleza masharti haya, au kutii majukumu ya kisheria. Unaweza kuacha kutumia huduma wakati wowote.",
+      "liabilityTitle": "Kanusho na dhima",
+      "liabilityP1": "Kwa kiwango kinachoruhusiwa na sheria, huduma hutolewa \"kama ilivyo\" na \"kama inapatikana,\" bila dhamana ambazo hazijasemwa wazi katika masharti haya. {app} ni zana ya mkutano na haidhibiti mwenendo wa mshiriki au kuhakikisha matokeo ya mkutano.",
+      "liabilityP2": "Kwa kiwango kinachoruhusiwa na sheria, hatutawajibika kwa uharibifu usio wa moja kwa moja, wa bahati nasibu, maalum, wa matokeo au wa adhabu, au kwa kupoteza data, mapato au fursa inayotokana na matumizi ya huduma. Haki ambazo haziwezi kutengwa kisheria bado hazijaathiriwa.",
+      "privacyTitle": "Faragha na mawasiliano",
+      "privacyP1": "<privacy>Sera yetu ya Faragha</privacy> inaeleza jinsi tunavyoshughulikia taarifa za kibinafsi.",
+      "questions": "Maswali kuhusu sheria na masharti haya yanaweza kutumwa kwa <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Sera ya Faragha | {app}",
+      "metaDescription": "Jinsi {app} hukusanya, kutumia, kuhifadhi na kulinda taarifa za kibinafsi.",
+      "eyebrow": "Kisheria",
+      "title": "Sera ya Faragha",
+      "intro": "Sera hii inafafanua jinsi {app} hushughulikia maelezo ya kibinafsi unapotumia tovuti yetu, programu na huduma za mkutano.",
+      "updated": "25 Julai 2026",
+      "contactFormFallback": "fomu ya mawasiliano kwenye tovuti yetu",
+      "collectTitle": "Habari tunazokusanya",
+      "collectIntro": "Kulingana na jinsi unavyotumia huduma, tunaweza kukusanya:",
+      "collectL1": "Maelezo ya akaunti kama vile jina lako, anwani ya barua pepe, wasifu na jukumu lako.",
+      "collectL2": "Taarifa za mkutano, kazi za kamati, na rekodi za ushiriki.",
+      "collectL3": "Maudhui unayounda, ikiwa ni pamoja na hati, madokezo, ujumbe, kura na mawasilisho.",
+      "collectL4": "Faili unazopakia na mawasiliano unayotuma kwa timu za mikutano au kwetu.",
+      "collectL5": "Data ya kiufundi na matumizi inayohitajika kufanya kazi, kulinda na kuboresha huduma.",
+      "useTitle": "Jinsi tunavyotumia habari",
+      "useL1": "Toa akaunti, nafasi za kazi za mikutano na vipengele vinavyotegemea jukumu.",
+      "useL2": "Peana maudhui kwa washiriki na wafanyakazi walioidhinishwa kuyafikia.",
+      "useL3": "Dumisha usalama, zuia matumizi mabaya, suluhisha matatizo, na uboreshe kutegemewa.",
+      "useL4": "Jibu maswali ya usaidizi, ushirikiano na mkutano.",
+      "useL5": "Zingatia sheria zinazotumika na utekeleze Sheria na Masharti yetu.",
+      "sharingTitle": "Kushiriki na ufikiaji wa mkutano",
+      "sharingP1": "Hatuuzi taarifa za kibinafsi. Taarifa inaweza kushirikiwa na mwandalizi wa mkutano wako na washiriki walioidhinishwa kulingana na majukumu yao na vipengele wanavyotumia.",
+      "sharingP2": "Tunaweza pia kutumia watoa huduma wanaoaminika kwa upangishaji, uthibitishaji, barua pepe, hifadhi, usalama na miundombinu inayohusiana. Wanaweza kuchakata maelezo ili tu kutoa huduma hizo kwetu.",
+      "retentionTitle": "Uhifadhi na usalama",
+      "retentionP1": "Tunahifadhi maelezo kwa muda unaohitajika ili kutoa huduma, kusaidia mkutano, kutimiza majukumu ya kisheria, kutatua mizozo na kulinda mfumo. Vipindi vya kuhifadhi vinaweza kutofautiana kulingana na aina ya data na mahitaji ya mkutano.",
+      "retentionP2": "Tunatumia ulinzi wa kiufundi na wa shirika ulioundwa ili kulinda maelezo. Hakuna huduma ya mtandaoni inayoweza kuhakikisha usalama kamili, kwa hivyo watumiaji wanapaswa pia kulinda vitambulisho vyao na kuripoti utumizi mbaya wa akaunti mara moja.",
+      "rightsTitle": "Chaguo na haki zako",
+      "rightsP1": "Unaweza kusasisha maelezo fulani ya akaunti ndani ya huduma. Kulingana na eneo lako, unaweza pia kuwa na haki za kufikia, kusahihisha, kufuta, kuzuia au kupokea nakala ya maelezo yako ya kibinafsi.",
+      "rightsP2": "Rekodi za mkutano zinaweza kudhibitiwa kwa pamoja na au kwa niaba ya mratibu wako wa mkutano. Tunaweza kuelekeza ombi kwa mratibu huyo inapobidi.",
+      "childrenTitle": "Watoto na washiriki wa wanafunzi",
+      "childrenP1": "Kongamano na shule zina wajibu wa kuhakikisha kuwa washiriki wameidhinishwa kutumia huduma na kwamba idhini yoyote inayohitajika ya mzazi au mlezi imepatikana. Tafadhali wasiliana nasi ikiwa unaamini kuwa maelezo ya mshiriki yalitolewa bila idhini inayofaa.",
+      "changesTitle": "Mabadiliko na mawasiliano",
+      "changesP1": "Tunaweza kusasisha sera hii kadri huduma au mahitaji yanayotumika yanabadilika. Tarehe iliyo hapo juu inaonyesha marekebisho ya hivi karibuni.",
+      "contact": "Kwa maswali ya faragha au maombi, wasiliana na <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Kila kamati ina kanuni za kamati ndani ya kongamano lake (lango la pili baada ya wajumbe kuingiza kanuni za mkutano). Misimbo lazima iwe ya kipekee ndani ya tukio sawa la mkutano.",
     "testingOverride": "Ubatilishaji wa majaribio umewashwa: unaweza kubadilisha na kudhibiti misimbo ya kamati katika kamati zote bila ukaguzi wa mgao wa viti.",
     "chairScope": "Kama jukwaa, unaona tu kamati ambapo una kiti. Kuhifadhi hukutuma kwa wasifu wako; wajumbe ambao tayari wamepita kwenye lango la kamati wawe wameingia hadi watoke nje.",
-    "staffAfterSave": "Baada ya kuhifadhi, unaweza kuingiza kamati hiyo au kushiriki msimbo kwenye jukwaa."
+    "staffAfterSave": "Baada ya kuhifadhi, unaweza kuingiza kamati hiyo au kushiriki msimbo kwenye jukwaa.",
+    "noSmtChairBinding": "Chagua kamati ya mwenyekiti kwenye wasifu wako wa SMT kabla ya kudhibiti msimbo wake wa chumba kutoka kwa mwonekano wa mwenyekiti.",
+    "setChairBinding": "Weka kamati ya mwenyekiti",
+    "smtChairScope": "Unahakiki kama mwenyekiti wa kamati yako yenye dhamana pekee."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Orodha ya nakala (TSV)",

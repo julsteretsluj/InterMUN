@@ -100,10 +100,12 @@ function DemoSectionList({
 }
 
 export function MarketingFeaturesDemos({ role }: { role: MarketingFeatureRole }) {
+  const t = useTranslations("marketing");
   const demos = DEMO_CONFIG[role];
   const primary = demos.slice(0, PRIMARY_COUNT);
   const more = demos.slice(PRIMARY_COUNT);
   const [showMore, setShowMore] = useState(false);
+  const moreLabel = t("nav.moreOnTheFloor");
 
   return (
     <>
@@ -117,10 +119,10 @@ export function MarketingFeaturesDemos({ role }: { role: MarketingFeatureRole })
                 onClick={() => setShowMore(true)}
                 className="clicky-pill clicky-pill-ghost"
               >
-                more on the floor
+                {moreLabel}
               </button>
             ) : (
-              <p className="clicky-eyebrow mb-2">more on the floor</p>
+              <p className="clicky-eyebrow mb-2">{moreLabel}</p>
             )}
           </div>
           {showMore ? <DemoSectionList demos={more} role={role} startIndex={PRIMARY_COUNT} /> : null}

@@ -2417,7 +2417,8 @@
       "score": "skor",
       "photo": "Foto",
       "school": "Sekolah",
-      "party": "Kumpulan politik"
+      "party": "Kumpulan politik",
+      "placardCode": "Kod placard"
     },
     "noRows": "Tiada baris peruntukan ditemui untuk jawatankuasa ini.",
     "pendingApprovalsTitle": "Menunggu kelulusan pendaftaran",
@@ -4630,20 +4631,27 @@
       "contact": "Kenalan",
       "signIn": "Log masuk",
       "getStarted": "Mulakan",
-      "features": "Features"
+      "features": "Features",
+      "about": "Tentang",
+      "menu": "Menu",
+      "closeMenu": "tutup",
+      "moreOnTheFloor": "Lebih banyak di atas lantai"
     },
     "playOrbAnimation": "Mainkan animasi InterMUN",
     "hero": {
       "eyebrow": "Perisian tingkat bilik · Model UN",
       "title": "Satu tab untuk",
       "titleEmphasis": "keseluruhan jawatankuasa.",
-      "subtitle": "InterMUN menghubungkan prosedur pelamin, persediaan perwakilan dan pengawasan sekretariat — tanpa pemasangan apl, utas sembang bertaburan atau pelekat kertas.",
+      "subtitle": "Perisian persidangan yang tidak menghalangnya sehingga palu memerlukannya.",
       "ctaStart": "Menganjurkan acara",
-      "ctaJoin": "Saya mempunyai kod bilik",
+      "ctaJoin": "Sertai persidangan anda",
       "chip1": "Panggilan gulung → kuorum",
       "chip2": "GSL & usul rasmi",
       "chip3": "31 bahasa antara muka",
-      "previewLabel": "Lantai sesi"
+      "previewLabel": "Lantai sesi",
+      "sticky1": "Panggilan lancar, pemasa dan gerakan dalam satu tingkat.",
+      "sticky2": "Dibina untuk kerusi yang membenci tab juggling.",
+      "floorEyebrow": "Di atas lantai"
     },
     "steps": {
       "eyebrow": "Aliran pintu",
@@ -4719,7 +4727,9 @@
       "title": "Dibina dengan tujuan untuk Model PBB hari ini",
       "paragraph1": "InterMUN ialah ruang kerja penyemak imbas yang menggantikan campuran biasa hamparan, sembang kumpulan dan pelekat bercetak dengan alatan jawatankuasa yang diselaraskan.",
       "paragraph2": "Kerusi mendapat kawalan prosedur yang mencerminkan bagaimana sesi sebenarnya berlaku. Perwakilan mendapat persediaan berstruktur di sebelah lantai. Urusetia mengekalkan keterlihatan seluruh acara tanpa berlegar di atas setiap gerakan.",
-      "paragraph3": "Sama ada anda menjalankan satu bilik atau persidangan hujung minggu penuh, InterMUN memastikan kerusi, perwakilan dan kakitangan sejajar dari panggilan pembukaan hingga majlis penutup."
+      "paragraph3": "Sama ada anda menjalankan satu bilik atau persidangan hujung minggu penuh, InterMUN memastikan kerusi, perwakilan dan kakitangan sejajar dari panggilan pembukaan hingga majlis penutup.",
+      "dreamEyebrow": "Mimpi itu",
+      "footerLabel": "Kira-kira {app}"
     },
     "contact": {
       "eyebrow": "Hubungi",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Perwakilan (lebih kurang)",
         "fieldInterests": "minat",
         "fieldMessage": "Mesej",
-        "fieldSubmittedAt": "Dihantar di (UTC)"
+        "fieldSubmittedAt": "Dihantar di (UTC)",
+        "showOptionalDetails": "Tambahkan butiran acara (pilihan)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Buat akaun",
       "ctaJoin": "Log masuk",
       "copyright": "© {year} InterMUN",
-      "contact": "Kenalan"
+      "contact": "Kenalan",
+      "tagline": "Perisian persidangan yang tidak menghalangnya sehingga palu memerlukannya.",
+      "product": "produk",
+      "resources": "Sumber",
+      "howItWorks": "Bagaimana ia berfungsi",
+      "privacy": "Privasi",
+      "terms": "Syarat"
     },
     "preview": {
       "rollCallLabel": "Roll call",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Kerap ditanya",
+      "subtitle": "Apa yang biasanya ditanya oleh kerusi dan urusetia sebelum hujung minggu persidangan.",
+      "q1": "ini untuk siapa?",
+      "a1": "Perwakilan, kerusi, penasihat dan urusetia — satu ruang kerja persidangan dengan alatan sedar peranan.",
+      "q2": "Bolehkah kita menjalankan korps akhbar dan GA secara berbeza?",
+      "a2": "ya. Profil prosedur memastikan RoP kor akhbar berada dalam ruang lingkup itu tanpa menukar jawatankuasa lain.",
+      "q3": "Bagaimana orang boleh masuk ke dalam bilik?",
+      "a3": "Kod acara, kemudian kod bilik / jawatankuasa, kemudian kod plakad pilihan — direka untuk barisan daftar masuk sebenar.",
+      "q4": "Adakah ia bersedia untuk hujung minggu secara langsung?",
+      "a4": "Lantai sesi, pengundian, nota, dokumen dan pengawasan dibina untuk kegunaan serentak merentas dewan."
+    },
+    "aboutPage": {
+      "metaTitle": "Kira-kira {app}",
+      "metaDescription": "Ketahui sebab {app} wujud dan cara ia menyokong persidangan Model PBB.",
+      "eyebrow": "Kira-kira {app}",
+      "title": "Dibina untuk seluruh pasukan persidangan.",
+      "intro": "{app} membawa perwakilan, kerusi, penasihat dan urusetia ke dalam satu ruang kerja kongsi—dari persediaan hingga palu terakhir. Kami fikir bahagian yang sukar ialah antara muka, bukan diplomasi.",
+      "purposeTitle": "tujuan kita",
+      "purposeP1": "Model Pertubuhan Bangsa-Bangsa Bersatu adalah yang terbaik apabila orang ramai boleh memberi tumpuan kepada diplomasi, prosedur, penyelidikan dan kerjasama. {app} wujud untuk mengurangkan geseran pentadbir di sekitar detik tersebut.",
+      "purposeP2": "Platform ini menghubungkan penyediaan, alatan sesi langsung, dokumen, pengundian, nota dan pengawasan—tanpa menggantikan manusia yang membuat perkara persidangan.",
+      "rolesTitle": "Direka untuk setiap peranan",
+      "rolesDelegates": "Mewakilkan penyelidikan, draf, bekerjasama dan ikuti pendapat.",
+      "rolesChairs": "Kerusi menjalankan panggilan gulung, pembesar suara, gerakan, pemasa dan undian.",
+      "rolesAdvisors": "Advisors support their delegations with the right visibility.",
+      "rolesSecretariat": "Sekretariat menyelaraskan dewan dan melihat kemajuan seluruh persidangan.",
+      "techTitle": "Teknologi yang mengutamakan persidangan",
+      "techP1": "Ciri dibentuk mengikut aliran kerja hujung minggu sebenar, sempadan peranan dan UI yang tenang apabila bilik bergerak pantas. Kebolehcapaian dan akses peranan selamat adalah sebahagian daripada reka bentuk.",
+      "techCtaBefore": "Mahukan {app} di persidangan anda?",
+      "techCtaLink": "Tanya khabar"
+    },
+    "documentPage": {
+      "lastUpdated": "Kemas kini terakhir · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Syarat Perkhidmatan | {app}",
+      "metaDescription": "Terma yang mengawal akses kepada dan penggunaan {app}.",
+      "eyebrow": "sah",
+      "title": "Syarat Perkhidmatan",
+      "intro": "Syarat ini mengawal akses anda kepada dan penggunaan {app}. Dengan menggunakan perkhidmatan ini, anda bersetuju menerima syarat ini.",
+      "updated": "25 Julai 2026",
+      "contactFormFallback": "borang hubungan di laman web kami",
+      "usingTitle": "Menggunakan perkhidmatan",
+      "usingP1": "Anda mesti memberikan maklumat yang tepat, menggunakan perkhidmatan ini hanya untuk tujuan persidangan dan pendidikan yang sah, dan mengikut arahan yang munasabah daripada penganjur persidangan anda.",
+      "usingP2": "Jika anda tidak boleh menerima syarat ini sendiri secara sah, ibu bapa, penjaga, sekolah atau penganjur persidangan mesti membenarkan penggunaan anda. Penganjur bertanggungjawab untuk memastikan peserta mereka mendapat kebenaran yang sewajarnya.",
+      "accountsTitle": "Akaun dan akses",
+      "accountsL1": "Pastikan bukti kelayakan dan kod akses persidangan anda sulit.",
+      "accountsL2": "Jangan menyamar sebagai orang lain atau salah nyatakan peranan anda.",
+      "accountsL3": "Jangan akses data, jawatankuasa atau alat pentadbiran yang anda tidak dibenarkan untuk menggunakan.",
+      "accountsL4": "Beritahu kami atau penganjur anda dengan segera jika anda mengesyaki penggunaan akaun yang tidak dibenarkan.",
+      "contentTitle": "kandungan anda",
+      "contentP1": "Anda mengekalkan pemilikan kandungan yang anda buat. Anda memberi kami lesen terhad untuk mengehoskan, memproses, menghasilkan semula dan memaparkan kandungan itu hanya seperti yang diperlukan untuk mengendalikan, melindungi dan meningkatkan perkhidmatan serta menyokong persidangan anda.",
+      "contentP2": "Anda bertanggungjawab untuk memastikan kandungan anda sah dan anda mempunyai kebenaran untuk berkongsinya. Jangan muat naik bahan sulit melainkan ia sesuai untuk penonton persidangan yang dimaksudkan.",
+      "acceptableTitle": "Penggunaan yang boleh diterima",
+      "acceptableP1": "Anda tidak boleh mengganggu perkhidmatan, memintas kawalan akses, menyiasat kelemahan, mengikis data tanpa kebenaran, mengedar perisian hasad, mengganggu orang lain, melanggar harta intelek atau menggunakan platform untuk penipuan atau aktiviti yang menyalahi undang-undang. Kami mungkin menyiasat dan menyekat aktiviti yang mengancam peserta, persidangan atau perkhidmatan.",
+      "organisersTitle": "Penganjur persidangan",
+      "organisersP1": "Penganjur mengawal konfigurasi persidangan, tugasan peranan, peraturan penyertaan dan kebanyakan kandungan dalam ruang kerja mereka. Mereka bertanggungjawab untuk operasi persidangan mereka, notis dan persetujuan peserta, dan penggunaan sah maklumat yang dieksport daripada perkhidmatan.",
+      "availabilityTitle": "Ketersediaan dan perubahan",
+      "availabilityP1": "Kami mungkin mengemas kini, menggantung atau menghentikan bahagian perkhidmatan. Kami berhasrat untuk menyediakan platform yang boleh dipercayai tetapi tidak menjamin operasi tanpa gangguan atau bebas ralat. Kami mungkin mengemas kini syarat ini dan penggunaan berterusan selepas kemas kini berkuat kuasa merupakan penerimaan syarat yang disemak.",
+      "suspensionTitle": "Penggantungan dan penamatan",
+      "suspensionP1": "Kami mungkin menggantung atau menamatkan akses jika perlu untuk melindungi perkhidmatan atau penggunanya, bertindak balas terhadap kelakuan yang menyalahi undang-undang, menguatkuasakan syarat ini atau mematuhi kewajipan undang-undang. Anda boleh berhenti menggunakan perkhidmatan pada bila-bila masa.",
+      "liabilityTitle": "Penafian dan liabiliti",
+      "liabilityP1": "Setakat yang dibenarkan oleh undang-undang, perkhidmatan disediakan \"sebagaimana sedia ada\" dan \"sebagaimana tersedia,\" tanpa jaminan yang tidak dinyatakan secara jelas dalam syarat ini. {app} ialah alat persidangan dan tidak mengawal kelakuan peserta atau menjamin hasil persidangan.",
+      "liabilityP2": "Setakat yang dibenarkan oleh undang-undang, kami tidak akan bertanggungjawab untuk kerosakan tidak langsung, sampingan, khas, berbangkit atau punitif, atau untuk kehilangan data, hasil atau peluang yang timbul daripada penggunaan perkhidmatan. Hak yang tidak boleh dikecualikan secara sah tetap tidak terjejas.",
+      "privacyTitle": "Privasi dan hubungan",
+      "privacyP1": "<privacy>Dasar Privasi</privacy> kami menerangkan cara kami mengendalikan maklumat peribadi.",
+      "questions": "Soalan tentang syarat ini boleh dihantar ke <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Dasar Privasi | {app}",
+      "metaDescription": "Bagaimana {app} mengumpul, menggunakan, menyimpan dan melindungi maklumat peribadi.",
+      "eyebrow": "sah",
+      "title": "Dasar Privasi",
+      "intro": "Dasar ini menerangkan cara {app} mengendalikan maklumat peribadi apabila anda menggunakan tapak web, aplikasi dan perkhidmatan persidangan kami.",
+      "updated": "25 Julai 2026",
+      "contactFormFallback": "borang hubungan di laman web kami",
+      "collectTitle": "Maklumat yang kami kumpul",
+      "collectIntro": "Bergantung pada cara anda menggunakan perkhidmatan tersebut, kami mungkin mengumpul:",
+      "collectL1": "Butiran akaun seperti nama, alamat e-mel, profil dan peranan anda.",
+      "collectL2": "Maklumat persidangan, tugasan jawatankuasa, dan rekod penyertaan.",
+      "collectL3": "Kandungan yang anda buat, termasuk dokumen, nota, mesej, undian dan penyerahan.",
+      "collectL4": "Fail yang anda muat naik dan komunikasi yang anda hantar kepada pasukan persidangan atau kepada kami.",
+      "collectL5": "Data teknikal dan penggunaan diperlukan untuk mengendalikan, menjamin dan meningkatkan perkhidmatan.",
+      "useTitle": "Bagaimana kita menggunakan maklumat",
+      "useL1": "Menyediakan akaun, ruang kerja persidangan dan ciri berasaskan peranan.",
+      "useL2": "Menghantar kandungan kepada peserta dan kakitangan yang diberi kuasa untuk mengaksesnya.",
+      "useL3": "Kekalkan keselamatan, cegah penyalahgunaan, selesaikan masalah dan tingkatkan kebolehpercayaan.",
+      "useL4": "Jawab pertanyaan sokongan, perkongsian dan persidangan.",
+      "useL5": "Mematuhi undang-undang yang terpakai dan menguatkuasakan Syarat Perkhidmatan kami.",
+      "sharingTitle": "Perkongsian dan akses persidangan",
+      "sharingP1": "Kami tidak menjual maklumat peribadi. Maklumat boleh dikongsi dengan penganjur persidangan anda dan peserta yang diberi kuasa mengikut peranan mereka dan ciri yang mereka gunakan.",
+      "sharingP2": "Kami juga mungkin menggunakan penyedia perkhidmatan yang dipercayai untuk pengehosan, pengesahan, e-mel, storan, keselamatan dan infrastruktur yang berkaitan. Mereka mungkin memproses maklumat hanya untuk menyediakan perkhidmatan tersebut kepada kami.",
+      "retentionTitle": "Pengekalan dan keselamatan",
+      "retentionP1": "Kami menyimpan maklumat selama yang diperlukan untuk menyediakan perkhidmatan, menyokong persidangan, memenuhi kewajipan undang-undang, menyelesaikan pertikaian dan melindungi platform. Tempoh pengekalan boleh berbeza mengikut jenis data dan keperluan persidangan.",
+      "retentionP2": "Kami menggunakan perlindungan teknikal dan organisasi yang direka untuk melindungi maklumat. Tiada perkhidmatan dalam talian boleh menjamin keselamatan mutlak, jadi pengguna juga harus melindungi kelayakan mereka dan melaporkan penyalahgunaan akaun yang disyaki dengan segera.",
+      "rightsTitle": "Pilihan dan hak anda",
+      "rightsP1": "Anda boleh mengemas kini maklumat akaun tertentu dalam perkhidmatan. Bergantung pada lokasi anda, anda juga mungkin mempunyai hak untuk mengakses, membetulkan, memadam, menyekat atau menerima salinan maklumat peribadi anda.",
+      "rightsP2": "Rekod persidangan mungkin dikawal bersama dengan atau bagi pihak penganjur persidangan anda. Kami boleh mengarahkan permintaan kepada penganjur tersebut jika sesuai.",
+      "childrenTitle": "Kanak-kanak dan peserta pelajar",
+      "childrenP1": "Persidangan dan sekolah bertanggungjawab untuk memastikan bahawa peserta diberi kuasa untuk menggunakan perkhidmatan dan bahawa mana-mana persetujuan ibu bapa atau penjaga yang diperlukan telah diperolehi. Sila hubungi kami jika anda percaya maklumat peserta diberikan tanpa kebenaran yang sewajarnya.",
+      "changesTitle": "Perubahan dan kenalan",
+      "changesP1": "Kami mungkin mengemas kini dasar ini apabila perkhidmatan atau keperluan yang berkenaan berubah. Tarikh di atas menunjukkan semakan terkini.",
+      "contact": "Untuk pertanyaan atau permintaan privasi, hubungi <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Setiap jawatankuasa mempunyai kod jawatankuasa dalam persidangannya (pintu kedua selepas perwakilan memasukkan kod persidangan). Kod mestilah unik dalam acara persidangan yang sama.",
     "testingOverride": "Penggantian ujian didayakan: anda boleh menukar dan mengurus kod jawatankuasa merentas jawatankuasa tanpa semakan peruntukan tempat duduk.",
     "chairScope": "Sebagai pelamin, anda hanya melihat jawatankuasa di mana anda mempunyai kerusi. Menyimpan menghantar anda ke profil anda; perwakilan yang telah melepasi pintu masuk jawatankuasa kekal dilog masuk sehingga mereka log keluar.",
-    "staffAfterSave": "Selepas menyimpan, anda boleh memasuki jawatankuasa itu atau berkongsi kod di pelamin."
+    "staffAfterSave": "Selepas menyimpan, anda boleh memasuki jawatankuasa itu atau berkongsi kod di pelamin.",
+    "noSmtChairBinding": "Pilih jawatankuasa pengerusi pada profil SMT anda sebelum mengurus kod biliknya dari pandangan kerusi.",
+    "setChairBinding": "Tetapkan jawatankuasa pengerusi",
+    "smtChairScope": "Anda sedang pratonton sebagai pengerusi jawatankuasa terikat anda sahaja."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Salin senarai (TSV)",

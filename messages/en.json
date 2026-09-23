@@ -291,7 +291,6 @@
     "guidedPressConferenceRequiresMinutes": "Press conference requires total time (minutes).",
     "guidedPressConferenceRequiresCommittee": "Press conference requires a committee or delegate.",
     "guidedPressWritingRequiresMinutes": "Writing time requires total time (minutes).",
-
     "liveDebateTopic": "Live debate topic",
     "motionControlHelp": "Chair workflow: capture motions, open one vote at a time, record votes by allocation, then close the motion to finalize pass/fail.",
     "tabAgenda": "Agenda",
@@ -5015,7 +5014,11 @@
       "secretariat": "Secretariat",
       "contact": "Contact",
       "signIn": "Sign in",
-      "getStarted": "Join your conference"
+      "getStarted": "Join your conference",
+      "about": "About",
+      "menu": "Menu",
+      "closeMenu": "Close",
+      "moreOnTheFloor": "More on the floor"
     },
     "playOrbAnimation": "Play InterMUN animation",
     "exploreChairs": "Explore all dais features",
@@ -5025,13 +5028,16 @@
       "eyebrow": "Model United Nations platform",
       "title": "The whole conference team,",
       "titleEmphasis": "in one tab.",
-      "subtitle": "InterMUN connects dais procedure, delegate prep, advisor oversight, and secretariat control — without app installs, scattered chat threads, or paper placards.",
+      "subtitle": "Conference software that stays out of the way until the gavel needs it.",
       "ctaStart": "Host an event",
-      "ctaJoin": "I have a room code",
+      "ctaJoin": "Join your conference",
       "chip1": "Roll call → quorum",
       "chip2": "GSL & formal motions",
       "chip3": "31 interface languages",
-      "previewLabel": "Session floor"
+      "previewLabel": "Session floor",
+      "sticky1": "Roll call, timers, and motions in one floor.",
+      "sticky2": "Built for chairs who hate juggling tabs.",
+      "floorEyebrow": "On the floor"
     },
     "steps": {
       "eyebrow": "Gate flow",
@@ -5108,9 +5114,8 @@
       "paragraph1": "InterMUN is a browser workspace that replaces the usual mix of spreadsheets, group chats, and printed placards with coordinated committee tooling.",
       "paragraph2": "Chairs gain procedural control that mirrors how sessions actually unfold. Delegates get structured prep beside the floor. Secretariat keeps event-wide visibility without hovering over every motion.",
       "paragraph3": "Whether you run one room or a full weekend conference, InterMUN keeps chairs, delegates, and staff aligned from the opening roll call through closing ceremony.",
-      "p1": "InterMUN is a browser workspace that replaces the usual mix of spreadsheets, group chats, and printed placards with coordinated committee tooling.",
-      "p2": "Chairs gain procedural control that mirrors how sessions actually unfold. Delegates get structured prep beside the floor. Secretariat keeps event-wide visibility without hovering over every motion.",
-      "p3": "Whether you run one room or a full weekend conference, InterMUN keeps chairs, delegates, and staff aligned from the opening roll call through closing ceremony."
+      "dreamEyebrow": "The dream",
+      "footerLabel": "About {app}"
     },
     "origin": {
       "eyebrow": "Our roots",
@@ -5173,7 +5178,8 @@
         "fieldDelegateCount": "Delegates (approx.)",
         "fieldInterests": "Interests",
         "fieldMessage": "Message",
-        "fieldSubmittedAt": "Submitted at (UTC)"
+        "fieldSubmittedAt": "Submitted at (UTC)",
+        "showOptionalDetails": "Add event details (optional)"
       }
     },
     "footer": {
@@ -5183,7 +5189,13 @@
       "ctaStart": "Create account",
       "ctaJoin": "Sign in",
       "copyright": "© {year} InterMUN",
-      "contact": "Contact"
+      "contact": "Contact",
+      "tagline": "Conference software that stays out of the way until the gavel needs it.",
+      "product": "Product",
+      "resources": "Resources",
+      "howItWorks": "How it works",
+      "privacy": "Privacy",
+      "terms": "Terms"
     },
     "preview": {
       "rollCallLabel": "Roll call",
@@ -5542,6 +5554,110 @@
         "check_topics": "Agenda topics configured",
         "check_newsroom": "Newsroom feed wired"
       }
+    },
+    "faq": {
+      "title": "Frequently asked",
+      "subtitle": "What chairs and secretariat usually ask before a conference weekend.",
+      "q1": "Who is this for?",
+      "a1": "Delegates, chairs, advisors, and secretariat — one conference workspace with role-aware tools.",
+      "q2": "Can we run press corps and GA differently?",
+      "a2": "Yes. Procedure profiles keep press corps RoP scoped to that chamber without changing other committees.",
+      "q3": "How do people get into a room?",
+      "a3": "Event code, then room / committee code, then optional placard codes — designed for real check-in lines.",
+      "q4": "Is it ready for a live weekend?",
+      "a4": "Session floor, voting, notes, documents, and oversight are built for concurrent use across chambers."
+    },
+    "aboutPage": {
+      "metaTitle": "About {app}",
+      "metaDescription": "Learn why {app} exists and how it supports Model United Nations conferences.",
+      "eyebrow": "About {app}",
+      "title": "Built for the whole conference team.",
+      "intro": "{app} brings delegates, chairs, advisors, and secretariat into one shared workspace—from prep through the final gavel. We think the hard part is the interface, not the diplomacy.",
+      "purposeTitle": "Our purpose",
+      "purposeP1": "Model United Nations is at its best when people can focus on diplomacy, procedure, research, and collaboration. {app} exists to cut the admin friction around those moments.",
+      "purposeP2": "The platform connects preparation, live session tools, documents, voting, notes, and oversight—without replacing the humans who make a conference matter.",
+      "rolesTitle": "Designed around every role",
+      "rolesDelegates": "Delegates research, draft, collaborate, and follow the floor.",
+      "rolesChairs": "Chairs run roll call, speakers, motions, timers, and votes.",
+      "rolesAdvisors": "Advisors support their delegations with the right visibility.",
+      "rolesSecretariat": "Secretariat coordinates chambers and sees conference-wide progress.",
+      "techTitle": "Conference-first technology",
+      "techP1": "Features are shaped around real weekend workflows, role boundaries, and calm UI when the room is moving fast. Accessibility and secure role access are part of the design.",
+      "techCtaBefore": "Want {app} at your conference?",
+      "techCtaLink": "Say hello"
+    },
+    "documentPage": {
+      "lastUpdated": "Last updated · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Terms of Service | {app}",
+      "metaDescription": "The terms governing access to and use of {app}.",
+      "eyebrow": "Legal",
+      "title": "Terms of Service",
+      "intro": "These terms govern your access to and use of {app}. By using the service, you agree to these terms.",
+      "updated": "25 July 2026",
+      "contactFormFallback": "the contact form on our website",
+      "usingTitle": "Using the service",
+      "usingP1": "You must provide accurate information, use the service only for lawful conference and educational purposes, and follow reasonable instructions from your conference organiser.",
+      "usingP2": "If you are not legally able to accept these terms yourself, a parent, guardian, school, or conference organiser must authorise your use. Organisers are responsible for ensuring that their participants are appropriately authorised.",
+      "accountsTitle": "Accounts and access",
+      "accountsL1": "Keep your credentials and conference access codes confidential.",
+      "accountsL2": "Do not impersonate another person or misrepresent your role.",
+      "accountsL3": "Do not access data, committees, or administrative tools you are not authorised to use.",
+      "accountsL4": "Tell us or your organiser promptly if you suspect unauthorised account use.",
+      "contentTitle": "Your content",
+      "contentP1": "You retain ownership of content you create. You grant us a limited licence to host, process, reproduce, and display that content only as needed to operate, secure, and improve the service and support your conference.",
+      "contentP2": "You are responsible for ensuring that your content is lawful and that you have permission to share it. Do not upload confidential material unless it is appropriate for the intended conference audience.",
+      "acceptableTitle": "Acceptable use",
+      "acceptableP1": "You may not disrupt the service, bypass access controls, probe for vulnerabilities, scrape data without permission, distribute malware, harass others, infringe intellectual property, or use the platform for fraud or unlawful activity. We may investigate and restrict activity that threatens participants, conferences, or the service.",
+      "organisersTitle": "Conference organisers",
+      "organisersP1": "Organisers control conference configuration, role assignments, participation rules, and much of the content within their workspace. They are responsible for their conference operations, participant notices and consents, and lawful use of information exported from the service.",
+      "availabilityTitle": "Availability and changes",
+      "availabilityP1": "We may update, suspend, or discontinue parts of the service. We aim to provide a reliable platform but do not guarantee uninterrupted or error-free operation. We may update these terms, and continued use after an update takes effect constitutes acceptance of the revised terms.",
+      "suspensionTitle": "Suspension and termination",
+      "suspensionP1": "We may suspend or terminate access where reasonably necessary to protect the service or its users, respond to unlawful conduct, enforce these terms, or comply with legal obligations. You may stop using the service at any time.",
+      "liabilityTitle": "Disclaimers and liability",
+      "liabilityP1": "To the extent permitted by law, the service is provided “as is” and “as available,” without warranties that are not expressly stated in these terms. {app} is a conference tool and does not control participant conduct or guarantee conference outcomes.",
+      "liabilityP2": "To the extent permitted by law, we will not be liable for indirect, incidental, special, consequential, or punitive damages, or for loss of data, revenue, or opportunity arising from use of the service. Rights that cannot legally be excluded remain unaffected.",
+      "privacyTitle": "Privacy and contact",
+      "privacyP1": "Our <privacy>Privacy Policy</privacy> explains how we handle personal information.",
+      "questions": "Questions about these terms can be sent to <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Privacy Policy | {app}",
+      "metaDescription": "How {app} collects, uses, stores, and protects personal information.",
+      "eyebrow": "Legal",
+      "title": "Privacy Policy",
+      "intro": "This policy explains how {app} handles personal information when you use our website, applications, and conference services.",
+      "updated": "25 July 2026",
+      "contactFormFallback": "the contact form on our website",
+      "collectTitle": "Information we collect",
+      "collectIntro": "Depending on how you use the service, we may collect:",
+      "collectL1": "Account details such as your name, email address, profile, and role.",
+      "collectL2": "Conference information, committee assignments, and participation records.",
+      "collectL3": "Content you create, including documents, notes, messages, votes, and submissions.",
+      "collectL4": "Files you upload and communications you send to conference teams or to us.",
+      "collectL5": "Technical and usage data needed to operate, secure, and improve the service.",
+      "useTitle": "How we use information",
+      "useL1": "Provide accounts, conference workspaces, and role-based features.",
+      "useL2": "Deliver content to the participants and staff authorised to access it.",
+      "useL3": "Maintain security, prevent abuse, troubleshoot problems, and improve reliability.",
+      "useL4": "Respond to support, partnership, and conference enquiries.",
+      "useL5": "Comply with applicable law and enforce our Terms of Service.",
+      "sharingTitle": "Sharing and conference access",
+      "sharingP1": "We do not sell personal information. Information may be shared with your conference organiser and authorised participants according to their roles and the features they use.",
+      "sharingP2": "We may also use trusted service providers for hosting, authentication, email, storage, security, and related infrastructure. They may process information only to provide those services to us.",
+      "retentionTitle": "Retention and security",
+      "retentionP1": "We retain information for as long as needed to provide the service, support a conference, meet legal obligations, resolve disputes, and protect the platform. Retention periods can vary by data type and conference requirements.",
+      "retentionP2": "We use technical and organisational safeguards designed to protect information. No online service can guarantee absolute security, so users should also protect their credentials and report suspected account misuse promptly.",
+      "rightsTitle": "Your choices and rights",
+      "rightsP1": "You may update certain account information within the service. Depending on your location, you may also have rights to access, correct, delete, restrict, or receive a copy of your personal information.",
+      "rightsP2": "Conference records may be controlled jointly with or on behalf of your conference organiser. We may direct a request to that organiser where appropriate.",
+      "childrenTitle": "Children and student participants",
+      "childrenP1": "Conferences and schools are responsible for ensuring that participants are authorised to use the service and that any required parent or guardian consent has been obtained. Please contact us if you believe a participant’s information was provided without appropriate authorisation.",
+      "changesTitle": "Changes and contact",
+      "changesP1": "We may update this policy as the service or applicable requirements change. The date above shows the latest revision.",
+      "contact": "For privacy questions or requests, contact <contact></contact>."
     }
   },
   "guidedTour": {

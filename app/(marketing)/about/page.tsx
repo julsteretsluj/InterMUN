@@ -1,61 +1,57 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { MarketingDocumentPage } from "@/components/marketing/MarketingDocumentPage";
 import { getAppName } from "@/lib/branding";
 
-export const metadata: Metadata = {
-  title: "About InterMUN",
-  description: "Learn why InterMUN exists and how it supports Model United Nations conferences.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("marketing.aboutPage");
+  const appName = getAppName();
+  return {
+    title: t("metaTitle", { app: appName }),
+    description: t("metaDescription", { app: appName }),
+  };
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const t = await getTranslations("marketing.aboutPage");
   const appName = getAppName();
 
   return (
     <MarketingDocumentPage
-      eyebrow={`about ${appName}`}
-      title="built for the whole conference team."
-      intro={`${appName} brings delegates, chairs, advisors, and secretariat into one shared workspace—from prep through the final gavel. we think the hard part is the interface, not the diplomacy.`}
+      eyebrow={t("eyebrow", { app: appName })}
+      title={t("title")}
+      intro={t("intro", { app: appName })}
       sections={[
         {
-          title: "our purpose",
+          title: t("purposeTitle"),
           content: (
             <>
-              <p>
-                Model United Nations is at its best when people can focus on diplomacy, procedure,
-                research, and collaboration. {appName} exists to cut the admin friction around those
-                moments.
-              </p>
-              <p>
-                The platform connects preparation, live session tools, documents, voting, notes, and
-                oversight—without replacing the humans who make a conference matter.
-              </p>
+              <p>{t("purposeP1", { app: appName })}</p>
+              <p>{t("purposeP2")}</p>
             </>
           ),
         },
         {
-          title: "designed around every role",
+          title: t("rolesTitle"),
           content: (
             <ul className="list-disc space-y-2 pl-5">
-              <li>Delegates research, draft, collaborate, and follow the floor.</li>
-              <li>Chairs run roll call, speakers, motions, timers, and votes.</li>
-              <li>Advisors support their delegations with the right visibility.</li>
-              <li>Secretariat coordinates chambers and sees conference-wide progress.</li>
+              <li>{t("rolesDelegates")}</li>
+              <li>{t("rolesChairs")}</li>
+              <li>{t("rolesAdvisors")}</li>
+              <li>{t("rolesSecretariat")}</li>
             </ul>
           ),
         },
         {
-          title: "conference-first technology",
+          title: t("techTitle"),
           content: (
             <>
+              <p>{t("techP1")}</p>
               <p>
-                Features are shaped around real weekend workflows, role boundaries, and calm UI when
-                the room is moving fast. Accessibility and secure role access are part of the design.
-              </p>
-              <p>
-                Want {appName} at your conference?{" "}
+                {t("techCtaBefore", { app: appName })}{" "}
                 <Link href="/#contact" className="font-semibold text-[var(--clicky-blue)] hover:underline">
-                  say hello
+                  {t("techCtaLink")}
                 </Link>
                 .
               </p>

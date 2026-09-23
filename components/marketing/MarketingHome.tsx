@@ -102,10 +102,10 @@ export async function MarketingHome() {
         <div className="relative mx-auto flex min-h-[min(72vh,36rem)] max-w-6xl flex-col justify-center px-4 py-16 md:min-h-[min(78vh,42rem)] md:px-8 md:py-20">
           <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
             <div className="clicky-sticky absolute left-0 top-[14%] hidden max-w-[9.5rem] clicky-float-a sm:block md:left-2 md:max-w-[11rem]">
-              roll call, timers, and motions in one floor.
+              {t("hero.sticky1")}
             </div>
             <div className="clicky-sticky clicky-sticky--blue absolute right-0 top-[20%] hidden max-w-[9rem] clicky-float-b sm:block md:right-2 md:max-w-[10rem]">
-              built for chairs who hate juggling tabs.
+              {t("hero.sticky2")}
             </div>
             <span className="clicky-kaomoji absolute bottom-[16%] left-[4%] hidden clicky-float-c md:block">
               ¯\_(ツ)_/¯
@@ -123,14 +123,14 @@ export async function MarketingHome() {
               {appName}
             </h1>
             <p className="mt-4 text-base text-[var(--clicky-ink-soft)] md:text-lg">
-              conference software that stays out of the way until the gavel needs it.
+              {t("hero.subtitle")}
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link href="/register/secretariat" className="clicky-pill clicky-pill-primary">
-                host an event
+                {t("hero.ctaStart")}
               </Link>
               <Link href="/signup" className="clicky-pill clicky-pill-ghost">
-                join your conference
+                {t("hero.ctaJoin")}
               </Link>
             </div>
           </div>
@@ -140,7 +140,7 @@ export async function MarketingHome() {
       {/* Floor demo — below the fold */}
       <section className="border-t border-[var(--clicky-line)] bg-[var(--clicky-paper-deep)]/40 py-12 md:py-16">
         <div className="relative mx-auto max-w-4xl px-4 md:px-8">
-          <p className="clicky-eyebrow mb-4 text-center">on the floor</p>
+          <p className="clicky-eyebrow mb-4 text-center">{t("hero.floorEyebrow")}</p>
           <WindowFrame filename="session-floor.mov" className="clicky-float-a" floatClass="">
             <MarketingHeroSessionPreview heroCompact />
           </WindowFrame>
@@ -250,31 +250,18 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      {/* Founder note — hard-coded so about keys never leak */}
       <section id="about" className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-8">
-          <p className="clicky-kaomoji text-white/50">the dream</p>
+          <p className="clicky-kaomoji text-white/50">{t("about.dreamEyebrow")}</p>
           <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold leading-tight tracking-[-0.03em]">
-            purpose-built for today&apos;s model un
+            {t("about.title")}
           </h2>
           <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-white/75">
-            <p>
-              <span className="case-preserve">InterMUN</span> is a browser workspace that replaces the usual mix of
-              spreadsheets, group chats, and printed placards with coordinated committee tooling.
-            </p>
-            <p>
-              chairs gain procedural control that mirrors how sessions actually unfold. delegates get structured prep
-              beside the floor. secretariat keeps event-wide visibility without hovering over every motion.
-            </p>
-            <p>
-              whether you run one room or a full weekend conference,{" "}
-              <span className="case-preserve">InterMUN</span> keeps chairs, delegates, and staff aligned from the
-              opening roll call through closing ceremony.
-            </p>
+            <p>{t("about.paragraph1")}</p>
+            <p>{t("about.paragraph2")}</p>
+            <p>{t("about.paragraph3")}</p>
           </div>
-          <p className="mt-10 text-sm text-white/45">
-            about <span className="case-preserve">{appName}</span>
-          </p>
+          <p className="mt-10 text-sm text-white/45">{t("about.footerLabel", { app: appName })}</p>
         </div>
       </section>
 
@@ -282,25 +269,25 @@ export async function MarketingHome() {
       <section className="border-t border-[var(--clicky-line)] py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[0.8fr_1.2fr] md:px-8">
           <div>
-            <h2 className="clicky-section-title">frequently asked</h2>
-            <p className="clicky-lede mt-3">what chairs and secretariat usually ask before a conference weekend.</p>
+            <h2 className="clicky-section-title">{t("faq.title")}</h2>
+            <p className="clicky-lede mt-3">{t("faq.subtitle")}</p>
           </div>
           <div className="clicky-faq">
             <details open>
-              <summary>who is this for?</summary>
-              <p>delegates, chairs, advisors, and secretariat — one conference workspace with role-aware tools.</p>
+              <summary>{t("faq.q1")}</summary>
+              <p>{t("faq.a1")}</p>
             </details>
             <details>
-              <summary>can we run press corps and ga differently?</summary>
-              <p>yes. procedure profiles keep press corps RoP scoped to that chamber without changing other committees.</p>
+              <summary>{t("faq.q2")}</summary>
+              <p>{t("faq.a2")}</p>
             </details>
             <details>
-              <summary>how do people get into a room?</summary>
-              <p>event code, then room / committee code, then optional placard codes — designed for real check-in lines.</p>
+              <summary>{t("faq.q3")}</summary>
+              <p>{t("faq.a3")}</p>
             </details>
             <details>
-              <summary>is it ready for a live weekend?</summary>
-              <p>session floor, voting, notes, documents, and oversight are built for concurrent use across chambers.</p>
+              <summary>{t("faq.q4")}</summary>
+              <p>{t("faq.a4")}</p>
             </details>
           </div>
         </div>

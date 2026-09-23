@@ -2417,7 +2417,8 @@
       "score": "Tohu",
       "photo": "Whakaahua",
       "school": "Kura",
-      "party": "Rōpū tōrangapū"
+      "party": "Rōpū tōrangapū",
+      "placardCode": "Waehere tohu"
     },
     "noRows": "Karekau he rarangi tohatoha i kitea mo tenei komiti.",
     "pendingApprovalsTitle": "E tatari ana mo nga whakaaetanga hainatanga",
@@ -4630,20 +4631,27 @@
       "contact": "Whakapā",
       "signIn": "Waitohu mai",
       "getStarted": "Tīmatahia",
-      "features": "Features"
+      "features": "Features",
+      "about": "Mō",
+      "menu": "Tahua",
+      "closeMenu": "Katia",
+      "moreOnTheFloor": "Ētahi atu papa"
     },
     "playOrbAnimation": "Whakatangihia te hākoritanga InterMUN",
     "hero": {
       "eyebrow": "Pūmanawa ruma-papa · Tauira UN",
       "title": "Kotahi ripa mo te",
       "titleEmphasis": "komiti katoa.",
-      "subtitle": "Ka hono a InterMUN i nga tikanga o te papa, te whakarite i nga kaitono, me te tirotiro i te hekeretari - kaore he whakaurunga taupānga, he miro korerorero marara, he panui pepa ranei.",
+      "subtitle": "Ko nga raupaparorohiko huihuinga ka noho noa kia tae noa ki te hiahia o te kara.",
       "ctaStart": "Whakahaerehia he huihuinga",
-      "ctaJoin": "He waehere ruma taku",
+      "ctaJoin": "Hono mai ki to hui",
       "chip1": "Huri waea → koorum",
       "chip2": "GSL me nga motini okawa",
       "chip3": "31 reo atanga",
-      "previewLabel": "Papa wahanga"
+      "previewLabel": "Papa wahanga",
+      "sticky1": "Huri waea, taima, me nga motini ki te papa kotahi.",
+      "sticky2": "He mea hanga mo nga tuuru e kino ana ki nga ripa tarai.",
+      "floorEyebrow": "I runga i te papa"
     },
     "steps": {
       "eyebrow": "Rere kuaha",
@@ -4719,7 +4727,9 @@
       "title": "He mea hanga mo te Tauira UN o tenei ra",
       "paragraph1": "Ko te InterMUN he mokowāmahi tirotiro e whakakapi ana i te ranunga o nga ripanga, nga korerorero a-rōpū, me nga panui kua taia me nga taputapu a te komiti.",
       "paragraph2": "Ka riro i nga heamana te mana whakahaere e whakaata ana i te ahuatanga o nga huihuinga. Ko nga kaikawe he whakarite i te taha o te papa. Ko te Hekeretari ka pupuri i te tirohanga whanui o te huihuinga me te kore e paopao ki runga i ia nekehanga.",
-      "paragraph3": "Ahakoa kei te whakahaere koe i tetahi rūma, i tetahi huihuinga mutunga wiki ranei, ka noho tonu a InterMUN i nga tuuru, i nga kaikawe me nga kaimahi kia rite mai i te karangatanga o te roopu whakatuwhera i te hui kati."
+      "paragraph3": "Ahakoa kei te whakahaere koe i tetahi rūma, i tetahi huihuinga mutunga wiki ranei, ka noho tonu a InterMUN i nga tuuru, i nga kaikawe me nga kaimahi kia rite mai i te karangatanga o te roopu whakatuwhera i te hui kati.",
+      "dreamEyebrow": "Ko te moemoea",
+      "footerLabel": "Mō {app}"
     },
     "contact": {
       "eyebrow": "Whakapa atu",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Nga Kaituku (approx.)",
         "fieldInterests": "Nga painga",
         "fieldMessage": "Karere",
-        "fieldSubmittedAt": "I tukuna i (UTC)"
+        "fieldSubmittedAt": "I tukuna i (UTC)",
+        "showOptionalDetails": "Tāpirihia ngā taipitopito takahanga (he kōwhiri)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Waihanga pūkete",
       "ctaJoin": "Waitohu mai",
       "copyright": "© {year} InterMUN",
-      "contact": "Whakapā"
+      "contact": "Whakapā",
+      "tagline": "Ko nga raupaparorohiko huihuinga ka noho noa kia tae noa ki te hiahia o te kara.",
+      "product": "Hua",
+      "resources": "Rauemi",
+      "howItWorks": "Pehea te mahi",
+      "privacy": "Tūmataitinga",
+      "terms": "Nga tikanga"
     },
     "preview": {
       "rollCallLabel": "Huri waea",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "He maha nga patai",
+      "subtitle": "He aha nga tuuru me te hekeretari e patai ana i mua i te huihuinga wiki.",
+      "q1": "Mo wai tenei?",
+      "a1": "Nga kaitautapa, nga tuuru, nga kaitohutohu, me te hekeretari - kotahi te waahi mahi hui me nga taputapu mohio-mahi.",
+      "q2": "Ka taea e taatau te whakahaere i nga roopu perehi me te GA rereke?",
+      "a2": "Ae. Ko nga whakaaturanga o nga tikanga e pupuri ana i nga roopu perehi RoP ki tera ruma me te kore e whakarereke i etahi atu komiti.",
+      "q3": "Me pehea e uru ai nga tangata ki roto i te ruma?",
+      "a3": "Waehere takahanga, katahi te waehere ruma / komiti, katahi ko nga tohu tohu tohu — i hangaia mo nga rarangi taki-mai.",
+      "q4": "Kua rite mo te wiki ora?",
+      "a4": "Ko te papa huihuinga, te pooti, ​​nga tuhipoka, nga tuhinga, me te tirotiro ka hangaia mo te whakamahi i nga wa katoa puta noa i nga ruma."
+    },
+    "aboutPage": {
+      "metaTitle": "Mō {app}",
+      "metaDescription": "Akohia he aha i noho ai a {app} me pehea te tautoko i nga huihuinga Tauira United Nations.",
+      "eyebrow": "Mō {app}",
+      "title": "I hangaia mo te roopu hui katoa.",
+      "intro": "{app} ka kawe mai i nga kaikawe, i nga tuuru, i nga kaitohutohu, i te hekeretari ki roto i te mokowāmahi kotahi—mai i te takahanga ki te whao whakamutunga. Ki ta matou whakaaro ko te waahanga uaua ko te atanga, kaua ko te tohu tohu.",
+      "purposeTitle": "To tatou kaupapa",
+      "purposeP1": "Ko te tauira o te United Nations kei te pai rawa atu ka taea e te tangata te aro ki te takawaenga, te tikanga, te rangahau, me te mahi tahi. Kei te noho a {app} ki te tapahi i te ngangau a te kaiwhakahaere i aua wa.",
+      "purposeP2": "Ka hono te papaaho ki te whakarite, ki nga taputapu huihuinga ora, ki nga tuhinga, ki te pooti, ​​ki nga tuhipoka, me te tirotiro—kaore e whakakapi i nga tangata e mahi ana i tetahi huihuinga.",
+      "rolesTitle": "I hoahoatia mo nga mahi katoa",
+      "rolesDelegates": "Ka tukuna he rangahau, he tauira, he mahi tahi, he whai i te papa.",
+      "rolesChairs": "Ka whakahaerehia e nga heamana te karanga, nga kaikorero, nga motini, nga taima, me nga pooti.",
+      "rolesAdvisors": "Ka tautoko nga Kaitohutohu i o raatau roopu me te kite tika.",
+      "rolesSecretariat": "Ko te Hekeretari te whakarite i nga ruuma me te kite i te ahunga whakamua puta noa i te huihuinga.",
+      "techTitle": "Hangarau hui-tuatahi",
+      "techP1": "Ka hangaia nga ahuatanga ki nga rerenga mahi o te wiki, nga rohe mahi, me te UI marino i te wa e tere haere ana te ruuma. Ko te urunga me te whai waahi haumaru he waahanga o te hoahoa.",
+      "techCtaBefore": "Kei te hiahia {app} i to hui?",
+      "techCtaLink": "Kia ora"
+    },
+    "documentPage": {
+      "lastUpdated": "Whakahoutanga whakamutunga · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Nga Ture Ratonga | {app}",
+      "metaDescription": "Ko nga kupu e whakahaere ana i te uru me te whakamahi o {app}.",
+      "eyebrow": "Ture",
+      "title": "Nga Ture Ratonga",
+      "intro": "Ko enei tikanga ka whakahaere i to urunga me to whakamahi i te {app}. Ma te whakamahi i te ratonga, ka whakaae koe ki enei tikanga.",
+      "updated": "25 Hōngongoi 2026",
+      "contactFormFallback": "te puka whakapā i runga i to maatau paetukutuku",
+      "usingTitle": "Ma te whakamahi i te ratonga",
+      "usingP1": "Me whakarato koe i nga korero tika, whakamahia te ratonga mo nga huihuinga tika me nga kaupapa ako, me te whai i nga tohutohu tika mai i to kaiwhakahaere hui.",
+      "usingP2": "Ki te kore e taea e koe e te ture te whakaae ki enei tikanga, me whakamana e te matua, kaitiaki, kura, whakahaere huihuinga ranei to whakamahi. Ko nga kaiwhakariterite te kawenga ki te whakarite kia tika te whakamana i o raatau kaiuru.",
+      "accountsTitle": "Nga kaute me te uru",
+      "accountsL1": "Kia noho matatapu o tohu me o waehere uru hui.",
+      "accountsL2": "Kaua e whakapohehe i tetahi atu tangata, kaua e pohehe i to mahi.",
+      "accountsL3": "Kaua e uru ki nga raraunga, ki nga komiti, ki nga taputapu whakahaere kaore koe i te mana ki te whakamahi.",
+      "accountsL4": "Korero wawe mai ki a matou, ki to kaiwhakarite ranei mena ka whakapae koe he whakamahi putea kore mana.",
+      "contentTitle": "To ihirangi",
+      "contentP1": "Kei a koe te mana o nga ihirangi ka hangaia e koe. Ka tukuna mai e koe he raihana iti ki a matou ki te manaaki, ki te tukatuka, ki te whakaputa, ki te whakaatu i taua ihirangi mena e hiahiatia ana hei whakahaere, kia mau, kia pai ake te ratonga me te tautoko i to hui.",
+      "contentP2": "Kei a koe te kawenga ki te whakarite kia tika to ihirangi me te whai whakaaetanga ki te tiri. Kaua e tuku korero huna ki te kore e tika mo te hunga whakarongo ki te huihuinga.",
+      "acceptableTitle": "Te whakamahi pai",
+      "acceptableP1": "Kare pea koe e whakararuraru i te ratonga, karo i nga mana uru, te tirotiro mo nga whakaraeraetanga, te tango raraunga me te kore whakaaetanga, te tohatoha kino, te whakararu i etahi atu, te takahi i nga rawa hinengaro, te whakamahi ranei i te papaaho mo te mahi tinihanga, mahi kino ranei. Ka taea e matou te tirotiro me te aukati i nga mahi e whakawehi ana i nga kaiuru, i nga huihuinga, i te ratonga ranei.",
+      "organisersTitle": "Nga kaiwhakarite hui",
+      "organisersP1": "Ka whakahaerehia e nga kaiwhakarite te whirihoranga o te huihuinga, nga mahi mahi, nga ture whakauru, me te nuinga o nga korero kei roto i o raatau mokowāmahi. Kei a raatau te kawenga mo a raatau huihuinga, panui me nga whakaaetanga a te hunga whakauru, me te whakamahi tika i nga korero i kaweake mai i te ratonga.",
+      "availabilityTitle": "Te waatea me nga huringa",
+      "availabilityP1": "Ka taea e matou te whakahou, te whakamutu, te whakakore ranei i nga waahanga o te ratonga. E whai ana matou ki te whakarato i tetahi turanga pono engari kaua e kii he mahi karekau, he hapa kore ranei. Ka taea e matou te whakahou i enei tikanga, me te whakamahi tonu i muri i te mana o te whakahou ka whakaaehia nga tikanga kua whakahoutia.",
+      "suspensionTitle": "Whakatarewa me te whakamutu",
+      "suspensionP1": "Ka taea e matou te whakatarewa, te whakamutu ranei i te uru ki nga waahi e tika ana hei whakamarumaru i te ratonga, i ona kaiwhakamahi ranei, ki te whakautu ki nga mahi kino, ki te whakamana i enei tikanga, ki te whai ranei i nga herenga ture. Ka mutu pea te whakamahi i te ratonga i nga wa katoa.",
+      "liabilityTitle": "Nga Whakakahoretanga me te taunahatanga",
+      "liabilityP1": "Ki te nui e whakaaetia ana e te ture, ka tukuna te ratonga \"penei tonu\" me te \"kei te waatea,\" kaore he raihana kaore i te tino whakahuahia i roto i enei tikanga. Ko te {app} he taputapu huihuinga me te kore e whakahaere i te whakahaere a te kaiuru, te whakapumau ranei i nga putanga o te huihuinga.",
+      "liabilityP2": "Ki te nui e whakaaetia ana e te ture, e kore matou e whai mana mo nga wharanga koretake, ohorere, motuhake, huanga, whiu whiu ranei, mo te ngaronga o nga raraunga, moni whiwhi, whai waahi ranei i puta mai i te whakamahinga o te ratonga. Ko nga motika kaore e taea te whakakorehia i raro i te ture ka noho kore e pa.",
+      "privacyTitle": "Tūmataiti me te whakapā",
+      "privacyP1": "Ko ta matou <privacy>Privacy Policy</privacy> e whakamarama ana me pehea e whakahaere ai matou i nga korero whaiaro.",
+      "questions": "Ka taea te tuku atu nga patai mo enei kupu ki <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Kaupapahere Tūmataiti | {app}",
+      "metaDescription": "Me pehea {app} kohikohi, whakamahi, penapena me te tiaki i nga korero whaiaro.",
+      "eyebrow": "Ture",
+      "title": "Kaupapahere Tūmataiti",
+      "intro": "Ko tenei kaupapa here e whakamarama ana me pehea te whakahaere a {app} i nga korero whaiaro ina whakamahi koe i to maatau paetukutuku, tono, me nga ratonga huihuinga.",
+      "updated": "25 Hōngongoi 2026",
+      "contactFormFallback": "te puka whakapā i runga i to maatau paetukutuku",
+      "collectTitle": "Ko nga korero ka kohia e matou",
+      "collectIntro": "I runga i to whakamahi i te ratonga, ka kohia pea e matou:",
+      "collectL1": "Nga korero mo te kaute penei i to ingoa, wahitau imeera, kōtaha me to tūranga.",
+      "collectL2": "Nga korero mo te huihuinga, nga mahi a te komiti, me nga rekoata whakauru.",
+      "collectL3": "Ihirangi ka hangaia e koe, tae atu ki nga tuhinga, tuhipoka, karere, pooti, ​​me nga tukunga.",
+      "collectL4": "Ko nga konae ka tukuna e koe me nga korero ka tukuna e koe ki nga roopu hui, ki a maatau ranei.",
+      "collectL5": "Ko nga raraunga hangarau me te whakamahinga e hiahiatia ana hei whakahaere, kia mau, kia pai ake te ratonga.",
+      "useTitle": "Me pehea te whakamahi i nga korero",
+      "useL1": "Whakaratohia nga kaute, mokowāmahi hui, me nga ahuatanga e pa ana ki te mahi.",
+      "useL2": "Tukuna nga korero ki nga kaiuru me nga kaimahi kua whakamanahia kia uru atu.",
+      "useL3": "Kia mau ki te haumarutanga, aukati i te mahi kino, raru raruraru, me te whakapai ake i te pono.",
+      "useL4": "Whakautu ki te tautoko, te whakahoahoa, me nga uiuinga hui.",
+      "useL5": "Kia mau ki nga ture e tika ana me te whakamana i a maatau Ture Ratonga.",
+      "sharingTitle": "Te tiri me te uru ki te huihuinga",
+      "sharingP1": "Kaore matou e hoko korero whaiaro. Ka tohatohahia nga korero ki to kaiwhakahaere hui me nga kaiuru whai mana i runga i o raatau mahi me nga ahuatanga e whakamahia ana e ratou.",
+      "sharingP2": "Ka whakamahi pea matou i nga kaiwhakarato ratonga pono mo te manaaki, motuhēhēnga, imeera, rokiroki, haumarutanga, me nga hanganga e pa ana. Ka taea e ratou te tukatuka korero hei whakarato i aua ratonga ki a matou.",
+      "retentionTitle": "Te pupuri me te haumaru",
+      "retentionP1": "Ka pupuri matou i nga korero mo te wa e tika ana ki te whakarato i te ratonga, ki te tautoko i tetahi huihuinga, ki te whakatutuki i nga herenga ture, ki te whakatau i nga tautohetohe, me te tiaki i te turanga. Ka rereke nga wa pupuri i runga i te momo raraunga me nga whakaritenga hui.",
+      "retentionP2": "Ka whakamahi matou i nga whakamarumaru hangarau me te whakahaere i hangaia hei tiaki i nga korero. Karekau he ratonga ipurangi e taea te whakapumau i te tino haumarutanga, no reira me tiaki nga kaiwhakamahi i o raatau tohu me te whakaatu wawe i te whakapae he kino te putea.",
+      "rightsTitle": "Ko o whiringa me o tika",
+      "rightsP1": "Ka taea e koe te whakahou i etahi korero kaute i roto i te ratonga. I runga i to waahi, ka whai mana ano koe ki te uru, ki te whakatika, ki te muku, ki te aukati, ki te whiwhi kape ranei i o korero whaiaro.",
+      "rightsP2": "Ko nga rekoata huihuinga ka taea te whakahaere tahi me to kaiwhakahaere hui ranei. Ka tukuna pea he tono ki taua kaiwhakarite ina e tika ana.",
+      "childrenTitle": "Nga tamariki me nga akonga whakauru",
+      "childrenP1": "Ko nga huihuinga me nga kura te kawenga ki te whakarite kua whakamanahia nga kaiuru ki te whakamahi i te ratonga me te whakaae mai o nga matua me nga kaitiaki. Tena koa whakapiri mai ki a maatau ki te whakapono koe i tukuna mai nga korero a te kaiuru me te kore whakaaetanga tika.",
+      "changesTitle": "Nga huringa me te whakapiri",
+      "changesP1": "Ka taea e matou te whakahou i tenei kaupapa here na te mea ka huri te ratonga me nga whakaritenga e tika ana. Ko te ra i runga ake nei e whakaatu ana i te whakahoutanga hou.",
+      "contact": "Mo nga patai, mo nga tono mooni, whakapaa atu ki <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Kei ia komiti he waehere komiti i roto i tana huihuinga (te rua o nga keeti i muri i te whakaurunga o nga kaikawe ki te waehere huihuinga). Me ahurei nga waehere i roto i te huihuinga huihuinga kotahi.",
     "testingOverride": "Ka taea te whakakore i nga whakamatautau: ka taea e koe te huri me te whakahaere i nga waehere komiti puta noa i nga komiti kaore he arowhai toha nohoanga.",
     "chairScope": "Hei raahi, ka kite noa koe i nga komiti kei reira to tuuru. Ko te penapena ka tukuna koe ki to kōtaha; ko nga kaikawe kua paahitia i mua i te keeti o te komiti ka noho haina kia puta ra ano.",
-    "staffAfterSave": "I muri i te penapena, ka taea e koe te whakauru ki taua komiti, ka tohatoha ranei i te waehere ki runga i te raahi."
+    "staffAfterSave": "I muri i te penapena, ka taea e koe te whakauru ki taua komiti, ka tohatoha ranei i te waehere ki runga i te raahi.",
+    "noSmtChairBinding": "Tīpakohia he komiti heamana i to kōtaha SMT i mua i te whakahaere i tana waehere ruma mai i te tirohanga tuuru.",
+    "setChairBinding": "Whakaritea te komiti heamana",
+    "smtChairScope": "Kei te arokite koe hei heamana mo to komiti here anake."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Tārua rārangi (TSV)",

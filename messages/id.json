@@ -2417,7 +2417,8 @@
       "score": "Skor",
       "photo": "Foto",
       "school": "Sekolah",
-      "party": "Kelompok politik"
+      "party": "Kelompok politik",
+      "placardCode": "Kode plakat"
     },
     "noRows": "Tidak ditemukan baris alokasi untuk komite ini.",
     "pendingApprovalsTitle": "Menunggu persetujuan pendaftaran",
@@ -4630,20 +4631,27 @@
       "contact": "Kontak",
       "signIn": "Masuk",
       "getStarted": "Mulailah",
-      "features": "Features"
+      "features": "Features",
+      "about": "Tentang",
+      "menu": "Menu",
+      "closeMenu": "Menutup",
+      "moreOnTheFloor": "Lebih banyak di lantai"
     },
     "playOrbAnimation": "Mainkan animasi InterMUN",
     "hero": {
       "eyebrow": "Perangkat lunak di lantai kamar · Model UN",
       "title": "Satu tab untuk",
       "titleEmphasis": "seluruh panitia.",
-      "subtitle": "InterMUN menghubungkan prosedur mimbar, persiapan delegasi, dan pengawasan sekretariat — tanpa pemasangan aplikasi, rangkaian obrolan yang tersebar, atau plakat kertas.",
+      "subtitle": "Perangkat lunak konferensi yang tidak digunakan sampai palu membutuhkannya.",
       "ctaStart": "Selenggarakan sebuah acara",
-      "ctaJoin": "Saya punya kode kamar",
+      "ctaJoin": "Bergabunglah dengan konferensi Anda",
       "chip1": "Absensi → kuorum",
       "chip2": "GSL & mosi formal",
       "chip3": "31 bahasa antarmuka",
-      "previewLabel": "Lantai sesi"
+      "previewLabel": "Lantai sesi",
+      "sticky1": "Roll call, pengatur waktu, dan gerakan dalam satu lantai.",
+      "sticky2": "Dibuat untuk kursi yang tidak menyukai tab juggling.",
+      "floorEyebrow": "Di lantai"
     },
     "steps": {
       "eyebrow": "Aliran gerbang",
@@ -4719,7 +4727,9 @@
       "title": "Dibuat khusus untuk Model PBB saat ini",
       "paragraph1": "InterMUN adalah ruang kerja browser yang menggantikan campuran spreadsheet, obrolan grup, dan plakat cetak dengan peralatan komite terkoordinasi.",
       "paragraph2": "Kursi mendapatkan kontrol prosedural yang mencerminkan bagaimana sesi sebenarnya berlangsung. Delegasi mendapatkan persiapan terstruktur di samping lantai. Sekretariat menjaga visibilitas seluruh acara tanpa mengawasi setiap gerakan.",
-      "paragraph3": "Baik Anda menyelenggarakan satu ruangan atau konferensi akhir pekan penuh, InterMUN menjaga keselarasan ketua, delegasi, dan staf mulai dari absensi pembukaan hingga upacara penutupan."
+      "paragraph3": "Baik Anda menyelenggarakan satu ruangan atau konferensi akhir pekan penuh, InterMUN menjaga keselarasan ketua, delegasi, dan staf mulai dari absensi pembukaan hingga upacara penutupan.",
+      "dreamEyebrow": "Mimpi itu",
+      "footerLabel": "Tentang {app}"
     },
     "contact": {
       "eyebrow": "Hubungi kami",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Delegasi (kira-kira)",
         "fieldInterests": "Minat",
         "fieldMessage": "Pesan",
-        "fieldSubmittedAt": "Dikirim pada (UTC)"
+        "fieldSubmittedAt": "Dikirim pada (UTC)",
+        "showOptionalDetails": "Tambahkan detail acara (opsional)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Buat akun",
       "ctaJoin": "Masuk",
       "copyright": "© {year} InterMUN",
-      "contact": "Kontak"
+      "contact": "Kontak",
+      "tagline": "Perangkat lunak konferensi yang tidak digunakan sampai palu membutuhkannya.",
+      "product": "Produk",
+      "resources": "Sumber daya",
+      "howItWorks": "Bagaimana cara kerjanya",
+      "privacy": "Pribadi",
+      "terms": "Ketentuan"
     },
     "preview": {
       "rollCallLabel": "Panggilan absensi",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Sering ditanyakan",
+      "subtitle": "Ketua dan sekretariat apa yang biasanya ditanyakan sebelum konferensi akhir pekan.",
+      "q1": "Untuk siapa ini?",
+      "a1": "Delegasi, ketua, penasihat, dan sekretariat — satu ruang kerja konferensi dengan alat yang sadar peran.",
+      "q2": "Bisakah kita menjalankan korps pers dan GA secara berbeda?",
+      "a2": "Ya. Profil prosedur membuat RoP korps pers tetap tercakup dalam ruangan tersebut tanpa mengubah komite lainnya.",
+      "q3": "Bagaimana cara orang masuk ke sebuah ruangan?",
+      "a3": "Kode acara, lalu kode ruangan / panitia, lalu kode plakat opsional — dirancang untuk jalur check-in yang sebenarnya.",
+      "q4": "Apakah sudah siap untuk siaran langsung akhir pekan?",
+      "a4": "Lantai sesi, pemungutan suara, catatan, dokumen, dan pengawasan dibuat untuk digunakan secara bersamaan di seluruh ruangan."
+    },
+    "aboutPage": {
+      "metaTitle": "Tentang {app}",
+      "metaDescription": "Pelajari mengapa {app} ada dan bagaimana hal ini mendukung konferensi Model United Nations.",
+      "eyebrow": "Tentang {app}",
+      "title": "Dibangun untuk seluruh tim konferensi.",
+      "intro": "{app} menyatukan delegasi, ketua, penasihat, dan sekretariat ke dalam satu ruang kerja bersama—mulai dari persiapan hingga pemukulan palu terakhir. Menurut kami, bagian tersulitnya adalah antarmukanya, bukan diplomasinya.",
+      "purposeTitle": "Tujuan kami",
+      "purposeP1": "Model United Nations akan menjadi yang terbaik ketika masyarakat dapat fokus pada diplomasi, prosedur, penelitian, dan kolaborasi. {app} ada untuk mengurangi gesekan admin pada momen tersebut.",
+      "purposeP2": "Platform ini menghubungkan persiapan, alat sesi langsung, dokumen, pemungutan suara, catatan, dan pengawasan—tanpa menggantikan manusia yang membuat konferensi menjadi penting.",
+      "rolesTitle": "Dirancang untuk setiap peran",
+      "rolesDelegates": "Delegasi meneliti, menyusun, berkolaborasi, dan mengikuti diskusi.",
+      "rolesChairs": "Kursi menjalankan absensi, pengeras suara, gerakan, pengatur waktu, dan pemungutan suara.",
+      "rolesAdvisors": "Penasihat mendukung delegasi mereka dengan visibilitas yang tepat.",
+      "rolesSecretariat": "Sekretariat mengoordinasikan ruang-ruang dan mengawasi kemajuan konferensi.",
+      "techTitle": "Teknologi yang mengutamakan konferensi",
+      "techP1": "Fitur dibentuk berdasarkan alur kerja akhir pekan yang nyata, batasan peran, dan UI yang tenang saat ruangan bergerak cepat. Aksesibilitas dan akses peran yang aman adalah bagian dari desain.",
+      "techCtaBefore": "Ingin {app} di konferensi Anda?",
+      "techCtaLink": "Katakan halo"
+    },
+    "documentPage": {
+      "lastUpdated": "Terakhir diperbarui · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Ketentuan Layanan | {app}",
+      "metaDescription": "Ketentuan yang mengatur akses dan penggunaan {app}.",
+      "eyebrow": "Legal",
+      "title": "Ketentuan Layanan",
+      "intro": "Ketentuan ini mengatur akses Anda dan penggunaan {app}. Dengan menggunakan layanan ini, Anda menyetujui persyaratan ini.",
+      "updated": "25 Juli 2026",
+      "contactFormFallback": "formulir kontak di situs web kami",
+      "usingTitle": "Menggunakan layanan",
+      "usingP1": "Anda harus memberikan informasi yang akurat, menggunakan layanan hanya untuk tujuan konferensi dan pendidikan yang sah, dan mengikuti instruksi yang wajar dari penyelenggara konferensi Anda.",
+      "usingP2": "Jika Anda sendiri secara hukum tidak dapat menerima persyaratan ini, orang tua, wali, sekolah, atau penyelenggara konferensi harus mengizinkan penggunaan Anda. Penyelenggara bertanggung jawab untuk memastikan bahwa pesertanya diberi wewenang yang sesuai.",
+      "accountsTitle": "Akun dan akses",
+      "accountsL1": "Jaga kerahasiaan kredensial dan kode akses konferensi Anda.",
+      "accountsL2": "Jangan meniru identitas orang lain atau salah menggambarkan peran Anda.",
+      "accountsL3": "Jangan mengakses data, komite, atau alat administratif yang tidak boleh Anda gunakan.",
+      "accountsL4": "Beritahu kami atau penyelenggara Anda segera jika Anda mencurigai adanya penggunaan akun yang tidak sah.",
+      "contentTitle": "Konten Anda",
+      "contentP1": "Anda mempertahankan kepemilikan atas konten yang Anda buat. Anda memberi kami lisensi terbatas untuk menghosting, memproses, mereproduksi, dan menampilkan konten tersebut hanya jika diperlukan untuk mengoperasikan, mengamankan, dan meningkatkan layanan serta mendukung konferensi Anda.",
+      "contentP2": "Anda bertanggung jawab untuk memastikan bahwa konten Anda sah dan Anda memiliki izin untuk membagikannya. Jangan mengunggah materi rahasia kecuali materi tersebut sesuai untuk audiens konferensi yang dituju.",
+      "acceptableTitle": "Penggunaan yang dapat diterima",
+      "acceptableP1": "Anda tidak boleh mengganggu layanan, melewati kontrol akses, menyelidiki kerentanan, mengikis data tanpa izin, mendistribusikan malware, melecehkan orang lain, melanggar kekayaan intelektual, atau menggunakan platform untuk penipuan atau aktivitas yang melanggar hukum. Kami dapat menyelidiki dan membatasi aktivitas yang mengancam peserta, konferensi, atau layanan.",
+      "organisersTitle": "Penyelenggara konferensi",
+      "organisersP1": "Penyelenggara mengontrol konfigurasi konferensi, penetapan peran, aturan partisipasi, dan sebagian besar konten dalam ruang kerja mereka. Mereka bertanggung jawab atas operasional konferensi, pemberitahuan dan persetujuan peserta, serta penggunaan informasi yang diekspor dari layanan secara sah.",
+      "availabilityTitle": "Ketersediaan dan perubahan",
+      "availabilityP1": "Kami dapat memperbarui, menangguhkan, atau menghentikan bagian dari layanan. Kami bertujuan untuk menyediakan platform yang andal tetapi tidak menjamin pengoperasian tanpa gangguan atau bebas kesalahan. Kami dapat memperbarui ketentuan ini, dan penggunaan berkelanjutan setelah pembaruan berlaku merupakan penerimaan terhadap ketentuan yang direvisi.",
+      "suspensionTitle": "Penangguhan dan penghentian",
+      "suspensionP1": "Kami dapat menangguhkan atau menghentikan akses jika diperlukan secara wajar untuk melindungi layanan atau penggunanya, menanggapi perilaku yang melanggar hukum, menegakkan ketentuan ini, atau mematuhi kewajiban hukum. Anda dapat berhenti menggunakan layanan ini kapan saja.",
+      "liabilityTitle": "Penafian dan tanggung jawab",
+      "liabilityP1": "Sejauh diizinkan oleh undang-undang, layanan disediakan “sebagaimana adanya” dan “sebagaimana tersedia”, tanpa jaminan yang tidak dinyatakan secara tegas dalam ketentuan ini. {app} adalah alat konferensi dan tidak mengontrol perilaku peserta atau menjamin hasil konferensi.",
+      "liabilityP2": "Sejauh diizinkan oleh hukum, kami tidak akan bertanggung jawab atas kerugian tidak langsung, insidental, khusus, konsekuensial, atau hukuman, atau atas hilangnya data, pendapatan, atau peluang yang timbul dari penggunaan layanan. Hak-hak yang tidak dapat dikecualikan secara hukum tetap tidak terpengaruh.",
+      "privacyTitle": "Privasi dan kontak",
+      "privacyP1": "<privacy>Kebijakan Privasi</privacy> kami menjelaskan cara kami menangani informasi pribadi.",
+      "questions": "Pertanyaan tentang persyaratan ini dapat dikirimkan ke <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Kebijakan Privasi | {app}",
+      "metaDescription": "Bagaimana {app} mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pribadi.",
+      "eyebrow": "Legal",
+      "title": "Kebijakan Privasi",
+      "intro": "Kebijakan ini menjelaskan bagaimana {app} menangani informasi pribadi saat Anda menggunakan situs web, aplikasi, dan layanan konferensi kami.",
+      "updated": "25 Juli 2026",
+      "contactFormFallback": "formulir kontak di situs web kami",
+      "collectTitle": "Informasi yang kami kumpulkan",
+      "collectIntro": "Tergantung pada cara Anda menggunakan layanan ini, kami dapat mengumpulkan:",
+      "collectL1": "Detail akun seperti nama, alamat email, profil, dan peran Anda.",
+      "collectL2": "Informasi konferensi, tugas komite, dan catatan partisipasi.",
+      "collectL3": "Konten yang Anda buat, termasuk dokumen, catatan, pesan, suara, dan kiriman.",
+      "collectL4": "File yang Anda unggah dan komunikasi yang Anda kirim ke tim konferensi atau kepada kami.",
+      "collectL5": "Data teknis dan penggunaan diperlukan untuk mengoperasikan, mengamankan, dan meningkatkan layanan.",
+      "useTitle": "Bagaimana kami menggunakan informasi",
+      "useL1": "Menyediakan akun, ruang kerja konferensi, dan fitur berbasis peran.",
+      "useL2": "Mengirimkan konten kepada peserta dan staf yang berwenang untuk mengaksesnya.",
+      "useL3": "Menjaga keamanan, mencegah penyalahgunaan, memecahkan masalah, dan meningkatkan keandalan.",
+      "useL4": "Menanggapi pertanyaan dukungan, kemitraan, dan konferensi.",
+      "useL5": "Mematuhi hukum yang berlaku dan menegakkan Ketentuan Layanan kami.",
+      "sharingTitle": "Berbagi dan akses konferensi",
+      "sharingP1": "Kami tidak menjual informasi pribadi. Informasi dapat dibagikan kepada penyelenggara konferensi Anda dan peserta resmi sesuai dengan peran dan fitur yang mereka gunakan.",
+      "sharingP2": "Kami juga dapat menggunakan penyedia layanan tepercaya untuk hosting, otentikasi, email, penyimpanan, keamanan, dan infrastruktur terkait. Mereka mungkin memproses informasi hanya untuk memberikan layanan tersebut kepada kami.",
+      "retentionTitle": "Retensi dan keamanan",
+      "retentionP1": "Kami menyimpan informasi selama diperlukan untuk menyediakan layanan, mendukung konferensi, memenuhi kewajiban hukum, menyelesaikan perselisihan, dan melindungi platform. Periode penyimpanan dapat bervariasi berdasarkan tipe data dan persyaratan konferensi.",
+      "retentionP2": "Kami menggunakan perlindungan teknis dan organisasi yang dirancang untuk melindungi informasi. Tidak ada layanan online yang dapat menjamin keamanan mutlak, sehingga pengguna juga harus melindungi kredensial mereka dan segera melaporkan dugaan penyalahgunaan akun.",
+      "rightsTitle": "Pilihan dan hak Anda",
+      "rightsP1": "Anda dapat memperbarui informasi akun tertentu dalam layanan. Tergantung pada lokasi Anda, Anda mungkin juga memiliki hak untuk mengakses, memperbaiki, menghapus, membatasi, atau menerima salinan informasi pribadi Anda.",
+      "rightsP2": "Catatan konferensi dapat dikontrol bersama dengan atau atas nama penyelenggara konferensi Anda. Kami dapat mengarahkan permintaan ke penyelenggara tersebut jika diperlukan.",
+      "childrenTitle": "Peserta anak-anak dan pelajar",
+      "childrenP1": "Konferensi dan sekolah bertanggung jawab untuk memastikan bahwa peserta diizinkan untuk menggunakan layanan ini dan bahwa persetujuan orang tua atau wali yang diperlukan telah diperoleh. Silakan hubungi kami jika Anda yakin informasi peserta diberikan tanpa izin yang sesuai.",
+      "changesTitle": "Perubahan dan kontak",
+      "changesP1": "Kami dapat memperbarui kebijakan ini seiring perubahan layanan atau persyaratan yang berlaku. Tanggal di atas menunjukkan revisi terbaru.",
+      "contact": "Untuk pertanyaan atau permintaan privasi, hubungi <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Setiap panitia mempunyai kode panitia dalam konferensinya (gerbang kedua setelah delegasi memasukkan kode konferensi). Kode harus unik dalam acara konferensi yang sama.",
     "testingOverride": "Penggantian pengujian diaktifkan: Anda dapat mengganti dan mengelola kode komite di seluruh komite tanpa pemeriksaan alokasi kursi.",
     "chairScope": "Sebagai mimbar, Anda hanya melihat komite tempat Anda duduk. Menyimpan mengirim Anda ke profil Anda; delegasi yang sudah melewati gerbang panitia tetap login sampai logout.",
-    "staffAfterSave": "Setelah disimpan, Anda dapat masuk ke panitia itu atau membagikan kodenya di mimbar."
+    "staffAfterSave": "Setelah disimpan, Anda dapat masuk ke panitia itu atau membagikan kodenya di mimbar.",
+    "noSmtChairBinding": "Pilih komite ketua di profil SMT Anda sebelum mengelola kode ruangannya dari tampilan kursi.",
+    "setChairBinding": "Tetapkan ketua panitia",
+    "smtChairScope": "Anda hanya melakukan pratinjau sebagai ketua komite terikat Anda."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Salin daftar (TSV)",

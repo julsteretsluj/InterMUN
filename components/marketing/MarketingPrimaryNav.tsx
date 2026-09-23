@@ -43,7 +43,7 @@ export function MarketingPrimaryNav() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "/about", label: "about" },
+    { href: "/about", label: t("nav.about") },
     { href: "/#how-it-works", label: t("nav.howItWorks") },
     { href: "/#contact", label: t("nav.contact") },
   ] as const;
@@ -67,7 +67,7 @@ export function MarketingPrimaryNav() {
           aria-controls="marketing-mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "close" : "menu"}
+          {open ? t("nav.closeMenu") : t("nav.menu")}
         </button>
         {open ? (
           <div
@@ -90,28 +90,28 @@ export function MarketingPrimaryNav() {
                 className="rounded-lg px-3 py-2 text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
                 onClick={() => setOpen(false)}
               >
-                chairs
+                {t("nav.chairs")}
               </Link>
               <Link
                 href="/features/delegates"
                 className="rounded-lg px-3 py-2 text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
                 onClick={() => setOpen(false)}
               >
-                delegates
+                {t("nav.delegates")}
               </Link>
               <Link
                 href="/features/secretariat"
                 className="rounded-lg px-3 py-2 text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
                 onClick={() => setOpen(false)}
               >
-                secretariat
+                {t("nav.secretariat")}
               </Link>
               <Link
                 href="/signup"
                 className="mt-1 rounded-full bg-[var(--clicky-blue)] px-3 py-2 text-center font-semibold text-white"
                 onClick={() => setOpen(false)}
               >
-                join your conference
+                {t("nav.getStarted")}
               </Link>
             </nav>
           </div>

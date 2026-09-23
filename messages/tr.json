@@ -2417,7 +2417,8 @@
       "score": "Gol",
       "photo": "Fotoğraf",
       "school": "Okul",
-      "party": "Siyasi grup"
+      "party": "Siyasi grup",
+      "placardCode": "Afiş kodu"
     },
     "noRows": "Bu komite için tahsis satırı bulunamadı.",
     "pendingApprovalsTitle": "Kayıt onayları bekleniyor",
@@ -4630,20 +4631,27 @@
       "contact": "Temas etmek",
       "signIn": "Oturum aç",
       "getStarted": "Başlayın",
-      "features": "Features"
+      "features": "Features",
+      "about": "Hakkında",
+      "menu": "Menü",
+      "closeMenu": "Kapalı",
+      "moreOnTheFloor": "Daha çok yerde"
     },
     "playOrbAnimation": "InterMUN animasyonunu oynat",
     "hero": {
       "eyebrow": "Oda zemini yazılımı · Model BM",
       "title": "Bir sekme",
       "titleEmphasis": "tüm komite.",
-      "subtitle": "InterMUN, uygulama yüklemeleri, dağınık sohbet dizileri veya kağıt pankartlar olmadan kürsü prosedürünü, delege hazırlığını ve sekreterya gözetimini birbirine bağlar.",
+      "subtitle": "Tokmak ihtiyaç duyana kadar ayak altından çekilmeyen konferans yazılımı.",
       "ctaStart": "Bir etkinliğe ev sahipliği yapın",
-      "ctaJoin": "Oda kodum var",
+      "ctaJoin": "Konferansınıza katılın",
       "chip1": "Yoklama → yeter sayı",
       "chip2": "GSL ve resmi önergeler",
       "chip3": "31 arayüz dili",
-      "previewLabel": "Oturum katı"
+      "previewLabel": "Oturum katı",
+      "sticky1": "Yoklama, zamanlayıcılar ve hareketler tek katta.",
+      "sticky2": "Hokkabazlık yapmaktan nefret eden sandalyeler için tasarlandı.",
+      "floorEyebrow": "Yerde"
     },
     "steps": {
       "eyebrow": "Kapı akışı",
@@ -4719,7 +4727,9 @@
       "title": "Günümüzün Model BM'si için özel olarak tasarlandı",
       "paragraph1": "InterMUN, olağan elektronik tablo, grup sohbeti ve basılı pankart karışımını koordineli komite araçlarıyla değiştiren bir tarayıcı çalışma alanıdır.",
       "paragraph2": "Başkanlar, oturumların gerçekte nasıl geliştiğini yansıtan prosedürel kontrolü kazanır. Delegeler sahanın yanında planlı bir hazırlık yapıyor. Secretariat, her hareketin üzerinde durmadan etkinlik genelinde görünürlüğü korur.",
-      "paragraph3": "İster bir oda, ister tam bir hafta sonu konferansı yönetin, InterMUN açılış yoklamasından kapanış törenine kadar sandalyeleri, delegeleri ve personeli aynı hizada tutar."
+      "paragraph3": "İster bir oda, ister tam bir hafta sonu konferansı yönetin, InterMUN açılış yoklamasından kapanış törenine kadar sandalyeleri, delegeleri ve personeli aynı hizada tutar.",
+      "dreamEyebrow": "Rüya",
+      "footerLabel": "{app} Hakkında"
     },
     "contact": {
       "eyebrow": "İletişime geçin",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Delegeler (yaklaşık)",
         "fieldInterests": "İlgi alanları",
         "fieldMessage": "Mesaj",
-        "fieldSubmittedAt": "(UTC) tarihinde gönderildi"
+        "fieldSubmittedAt": "(UTC) tarihinde gönderildi",
+        "showOptionalDetails": "Etkinlik ayrıntılarını ekleyin (isteğe bağlı)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Hesap oluşturmak",
       "ctaJoin": "Oturum aç",
       "copyright": "© {year} InterMUN",
-      "contact": "Temas etmek"
+      "contact": "Temas etmek",
+      "tagline": "Tokmak ihtiyaç duyana kadar ayak altından çekilmeyen konferans yazılımı.",
+      "product": "Ürün",
+      "resources": "Kaynaklar",
+      "howItWorks": "Nasıl çalışır?",
+      "privacy": "Mahremiyet",
+      "terms": "Şartlar"
     },
     "preview": {
       "rollCallLabel": "Yoklama",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Sık sorulanlar",
+      "subtitle": "Konferans haftasonundan önce başkanlar ve sekreterlik genellikle ne sorar?",
+      "q1": "Bu kimin için?",
+      "a1": "Delegeler, başkanlar, danışmanlar ve sekreterlik; role duyarlı araçlara sahip tek bir konferans çalışma alanı.",
+      "q2": "Basın birliklerini ve GA'yı farklı şekilde yönetebilir miyiz?",
+      "a2": "Evet. Prosedür profilleri, basın teşkilatının RoP kapsamını diğer komiteleri değiştirmeden o odaya ayarlar.",
+      "q3": "İnsanlar bir odaya nasıl girerler?",
+      "a3": "Etkinlik kodu, ardından oda/komite kodu, ardından isteğe bağlı pankart kodları; gerçek check-in hatları için tasarlanmıştır.",
+      "q4": "Canlı bir hafta sonuna hazır mıyız?",
+      "a4": "Oturum alanı, oylama, notlar, belgeler ve gözetim, odalar arasında eş zamanlı kullanım için tasarlanmıştır."
+    },
+    "aboutPage": {
+      "metaTitle": "{app} Hakkında",
+      "metaDescription": "{app}'ın neden var olduğunu ve Model Birleşmiş Milletler konferanslarını nasıl desteklediğini öğrenin.",
+      "eyebrow": "{app} Hakkında",
+      "title": "Tüm konferans ekibi için tasarlandı.",
+      "intro": "{app} hazırlıktan son tokmağa kadar delegeleri, başkanları, danışmanları ve sekreterliği tek bir ortak çalışma alanına getirir. İşin zor kısmının diplomasi değil arayüz olduğunu düşünüyoruz.",
+      "purposeTitle": "Amacımız",
+      "purposeP1": "Model Birleşmiş Milletler, insanlar diplomasiye, prosedürlere, araştırmaya ve işbirliğine odaklanabildiğinde en iyi duruma gelir. {app} bu anlardaki yönetici sürtüşmesini ortadan kaldırmak için var.",
+      "purposeP2": "Platform, konferans konusunu oluşturan kişilerin yerini almadan hazırlık, canlı oturum araçları, belgeler, oylama, notlar ve gözetimi birbirine bağlar.",
+      "rolesTitle": "Her role göre tasarlandı",
+      "rolesDelegates": "Delegeler araştırma yapar, taslak hazırlar, işbirliği yapar ve konuyu takip eder.",
+      "rolesChairs": "Sandalyeler yoklamayı, konuşmacıları, önergeleri, zamanlayıcıları ve oylamaları yönetir.",
+      "rolesAdvisors": "Danışmanlar delegasyonlarını doğru görünürlükle destekler.",
+      "rolesSecretariat": "Sekreterlik odaları koordine eder ve konferans çapındaki ilerlemeyi görür.",
+      "techTitle": "Konferans öncelikli teknoloji",
+      "techP1": "Özellikler, gerçek hafta sonu iş akışları, rol sınırları ve oda hızlı hareket ederken sakin kullanıcı arayüzü etrafında şekillenir. Erişilebilirlik ve güvenli rol erişimi tasarımın bir parçasıdır.",
+      "techCtaBefore": "Konferansınızda {app} ister misiniz?",
+      "techCtaLink": "Merhaba de"
+    },
+    "documentPage": {
+      "lastUpdated": "Son güncelleme · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Hizmet Şartları | {app}",
+      "metaDescription": "{app} erişimini ve kullanımını düzenleyen şartlar.",
+      "eyebrow": "Yasal",
+      "title": "Hizmet Şartları",
+      "intro": "Bu şartlar {app} erişiminizi ve kullanımınızı yönetir. Hizmeti kullanarak bu şartları kabul etmiş olursunuz.",
+      "updated": "25 Temmuz 2026",
+      "contactFormFallback": "web sitemizdeki iletişim formu",
+      "usingTitle": "Hizmeti kullanma",
+      "usingP1": "Doğru bilgi vermeli, hizmeti yalnızca yasal konferans ve eğitim amaçlı kullanmalı ve konferans organizatörünüzün makul talimatlarına uymalısınız.",
+      "usingP2": "Bu şartları yasal olarak kendiniz kabul edemiyorsanız, bir ebeveyn, veli, okul veya konferans organizatörünün kullanımınıza izin vermesi gerekir. Organizatörler, katılımcılarının uygun şekilde yetkilendirilmesinden sorumludur.",
+      "accountsTitle": "Hesaplar ve erişim",
+      "accountsL1": "Kimlik bilgilerinizi ve konferans erişim kodlarınızı gizli tutun.",
+      "accountsL2": "Başka bir kişinin kimliğine bürünmeyin veya rolünüzü yanlış tanıtmayın.",
+      "accountsL3": "Kullanmaya yetkili olmadığınız verilere, komitelere veya idari araçlara erişmeyin.",
+      "accountsL4": "Yetkisiz hesap kullanıldığından şüpheleniyorsanız bunu bize veya organizatörünüze derhal bildirin.",
+      "contentTitle": "İçeriğiniz",
+      "contentP1": "Oluşturduğunuz içeriğin mülkiyeti sizde kalır. Bu içeriği yalnızca hizmeti işletmek, güvence altına almak ve geliştirmek ve konferansınızı desteklemek için gerektiği şekilde barındırmak, işlemek, çoğaltmak ve görüntülemek için bize sınırlı bir lisans veriyorsunuz.",
+      "contentP2": "İçeriğinizin yasal olduğundan ve paylaşma izninizin olduğundan emin olmak sizin sorumluluğunuzdadır. Hedeflenen konferans izleyicisine uygun olmadığı sürece gizli materyali yüklemeyin.",
+      "acceptableTitle": "Kabul edilebilir kullanım",
+      "acceptableP1": "Hizmeti kesintiye uğratamaz, erişim kontrollerini atlayamaz, güvenlik açıklarını araştıramaz, verileri izinsiz kazıyamaz, kötü amaçlı yazılım dağıtamaz, başkalarını taciz edemez, fikri mülkiyet haklarını ihlal edemez veya platformu dolandırıcılık veya yasa dışı faaliyetler için kullanamazsınız. Katılımcıları, konferansları veya hizmeti tehdit eden faaliyetleri araştırabilir ve kısıtlayabiliriz.",
+      "organisersTitle": "Konferans organizatörleri",
+      "organisersP1": "Organizatörler konferans yapılandırmasını, rol atamalarını, katılım kurallarını ve çalışma alanlarındaki içeriğin çoğunu kontrol eder. Konferans operasyonlarından, katılımcı bildirimlerinden ve onaylarından ve hizmetten aktarılan bilgilerin yasal olarak kullanılmasından sorumludurlar.",
+      "availabilityTitle": "Kullanılabilirlik ve değişiklikler",
+      "availabilityP1": "Hizmetin bazı kısımlarını güncelleyebilir, askıya alabilir veya durdurabiliriz. Güvenilir bir platform sağlamayı hedefliyoruz ancak kesintisiz veya hatasız çalışmayı garanti etmiyoruz. Bu şartları güncelleyebiliriz ve güncelleme yürürlüğe girdikten sonra kullanmaya devam etmek, revize edilen şartların kabul edildiği anlamına gelir.",
+      "suspensionTitle": "Askıya alma ve fesih",
+      "suspensionP1": "Hizmeti veya kullanıcılarını korumak, yasa dışı davranışlara yanıt vermek, bu şartları uygulamak veya yasal yükümlülüklere uymak için makul olarak gerekli olduğunda erişimi askıya alabilir veya sonlandırabiliriz. İstediğiniz zaman hizmeti kullanmayı bırakabilirsiniz.",
+      "liabilityTitle": "Sorumluluk reddi beyanları ve sorumluluk",
+      "liabilityP1": "Yasaların izin verdiği ölçüde, hizmet, bu şartlarda açıkça belirtilmeyen garantiler olmaksızın \"olduğu gibi\" ve \"mevcut olduğu şekilde\" sağlanır. {app} bir konferans aracıdır ve katılımcının davranışını kontrol etmez veya konferans sonuçlarını garanti etmez.",
+      "liabilityP2": "Yasaların izin verdiği ölçüde, hizmetin kullanımından kaynaklanan dolaylı, arızi, özel, sonuçsal veya cezai zararlardan veya veri, gelir veya fırsat kaybından sorumlu olmayacağız. Yasal olarak hariç tutulamayan haklar etkilenmeden kalır.",
+      "privacyTitle": "Gizlilik ve iletişim",
+      "privacyP1": "<privacy>Gizlilik Politikamız</privacy>, kişisel bilgileri nasıl kullandığımızı açıklamaktadır.",
+      "questions": "Bu şartlarla ilgili sorularınızı <contact></contact> adresine gönderebilirsiniz."
+    },
+    "privacyPage": {
+      "metaTitle": "Gizlilik Politikası | {app}",
+      "metaDescription": "{app} kişisel bilgileri nasıl toplar, kullanır, saklar ve korur.",
+      "eyebrow": "Yasal",
+      "title": "Gizlilik Politikası",
+      "intro": "Bu politika, web sitemizi, uygulamalarımızı ve konferans hizmetlerimizi kullandığınızda {app}'nin kişisel bilgileri nasıl ele aldığını açıklamaktadır.",
+      "updated": "25 Temmuz 2026",
+      "contactFormFallback": "web sitemizdeki iletişim formu",
+      "collectTitle": "Topladığımız bilgiler",
+      "collectIntro": "Hizmeti nasıl kullandığınıza bağlı olarak şunları toplayabiliriz:",
+      "collectL1": "Adınız, e-posta adresiniz, profiliniz ve rolünüz gibi hesap ayrıntıları.",
+      "collectL2": "Konferans bilgileri, komite atamaları ve katılım kayıtları.",
+      "collectL3": "Belgeler, notlar, mesajlar, oylar ve gönderimler dahil, oluşturduğunuz içerik.",
+      "collectL4": "Yüklediğiniz dosyalar ve konferans ekiplerine veya bize gönderdiğiniz iletişimler.",
+      "collectL5": "Hizmeti çalıştırmak, güvence altına almak ve iyileştirmek için gereken teknik veriler ve kullanım verileri.",
+      "useTitle": "Bilgileri nasıl kullanıyoruz?",
+      "useL1": "Hesaplar, konferans çalışma alanları ve rol tabanlı özellikler sağlayın.",
+      "useL2": "İçeriği katılımcılara ve erişim yetkisine sahip personele sunun.",
+      "useL3": "Güvenliği koruyun, kötüye kullanımı önleyin, sorunları giderin ve güvenilirliği artırın.",
+      "useL4": "Destek, ortaklık ve konferans sorularına yanıt verin.",
+      "useL5": "Yürürlükteki yasalara uyun ve Hizmet Şartlarımızı uygulayın.",
+      "sharingTitle": "Paylaşım ve konferans erişimi",
+      "sharingP1": "Kişisel bilgileri satmıyoruz. Rollerine ve kullandıkları özelliklere göre konferans düzenleyicinizle ve yetkili katılımcılarla bilgiler paylaşılabilir.",
+      "sharingP2": "Barındırma, kimlik doğrulama, e-posta, depolama, güvenlik ve ilgili altyapı için de güvenilir hizmet sağlayıcıları kullanabiliriz. Bilgileri yalnızca bize bu hizmetleri sağlamak için işleyebilirler.",
+      "retentionTitle": "Saklama ve güvenlik",
+      "retentionP1": "Hizmeti sağlamak, bir konferansı desteklemek, yasal yükümlülükleri yerine getirmek, anlaşmazlıkları çözmek ve platformu korumak için gereken süre boyunca bilgileri saklıyoruz. Saklama süreleri veri türüne ve konferans gereksinimlerine göre değişebilir.",
+      "retentionP2": "Bilgileri korumak için tasarlanmış teknik ve organizasyonel koruma önlemleri kullanıyoruz. Hiçbir çevrimiçi hizmet mutlak güvenliği garanti edemez; bu nedenle kullanıcılar aynı zamanda kimlik bilgilerini korumalı ve şüpheli hesap kötüye kullanımını derhal bildirmelidir.",
+      "rightsTitle": "Seçimleriniz ve haklarınız",
+      "rightsP1": "Hizmet içindeki belirli hesap bilgilerini güncelleyebilirsiniz. Bulunduğunuz yere bağlı olarak kişisel bilgilerinize erişme, bunları düzeltme, silme, kısıtlama veya bir kopyasını alma haklarına da sahip olabilirsiniz.",
+      "rightsP2": "Konferans kayıtları, konferans organizatörünüzle birlikte veya onun adına kontrol edilebilir. Uygun olduğu takdirde bu organizatöre bir talep yönlendirebiliriz.",
+      "childrenTitle": "Çocuklar ve öğrenci katılımcılar",
+      "childrenP1": "Konferanslar ve okullar, katılımcıların hizmeti kullanma yetkisine sahip olduğundan ve gerekli ebeveyn veya vasi izninin alındığından emin olmaktan sorumludur. Bir katılımcının bilgilerinin uygun yetkilendirme olmadan verildiğini düşünüyorsanız lütfen bizimle iletişime geçin.",
+      "changesTitle": "Değişiklikler ve iletişim",
+      "changesP1": "Hizmet veya geçerli gereksinimler değiştikçe bu politikayı güncelleyebiliriz. Yukarıdaki tarih en son revizyonu göstermektedir.",
+      "contact": "Gizlilikle ilgili sorularınız veya istekleriniz için <contact></contact> ile iletişime geçin."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Her komitenin kendi konferansında bir komite kodu vardır (delegelerin konferans kodunu girdikten sonraki ikinci kapı). Kodlar aynı konferans etkinliğinde benzersiz olmalıdır.",
     "testingOverride": "Testi geçersiz kılma etkinleştirildi: Komite kodlarını, koltuk tahsis kontrolleri olmadan komiteler arasında değiştirebilir ve yönetebilirsiniz.",
     "chairScope": "Dais olarak sadece sandalyenizin olduğu komiteleri görürsünüz. Kaydettiğinizde profilinize yönlendirilirsiniz; Komite kapısını zaten geçmiş olan delegeler, çıkış yapana kadar oturumları açık kalır.",
-    "staffAfterSave": "Kaydettikten sonra o komiteye girebilir veya kodu kürsüde paylaşabilirsiniz."
+    "staffAfterSave": "Kaydettikten sonra o komiteye girebilir veya kodu kürsüde paylaşabilirsiniz.",
+    "noSmtChairBinding": "Oda kodunu sandalye görünümünden yönetmeden önce SMT profilinizde bir başkan komitesi seçin.",
+    "setChairBinding": "Başkanlık komitesini belirleyin",
+    "smtChairScope": "Yalnızca bağlı komitenizin başkanı olarak ön izleme yapıyorsunuz."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Listeyi kopyala (TSV)",

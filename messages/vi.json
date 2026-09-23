@@ -2417,7 +2417,8 @@
       "score": "Điểm",
       "photo": "Ảnh",
       "school": "Trường học",
-      "party": "Nhóm chính trị"
+      "party": "Nhóm chính trị",
+      "placardCode": "Mã áp phích"
     },
     "noRows": "Không tìm thấy hàng phân bổ nào cho ủy ban này.",
     "pendingApprovalsTitle": "Đang chờ phê duyệt đăng ký",
@@ -4630,20 +4631,27 @@
       "contact": "Liên hệ",
       "signIn": "Đăng nhập",
       "getStarted": "Bắt đầu",
-      "features": "Features"
+      "features": "Features",
+      "about": "Về",
+      "menu": "Thực đơn",
+      "closeMenu": "Đóng",
+      "moreOnTheFloor": "Thêm trên sàn"
     },
     "playOrbAnimation": "Chơi hoạt hình InterMUN",
     "hero": {
       "eyebrow": "Phần mềm sàn buồng · Model UN",
       "title": "Một tab cho",
       "titleEmphasis": "toàn bộ ủy ban.",
-      "subtitle": "InterMUN kết nối quy trình dais, sự chuẩn bị của đại biểu và giám sát ban thư ký — không cần cài đặt ứng dụng, các chuỗi trò chuyện rải rác hoặc bảng hiệu giấy.",
+      "subtitle": "Phần mềm hội nghị luôn hoạt động cho đến khi búa cần nó.",
       "ctaStart": "Tổ chức một sự kiện",
-      "ctaJoin": "Tôi có mã phòng",
+      "ctaJoin": "Tham gia hội nghị của bạn",
       "chip1": "Điểm danh → số đại biểu",
       "chip2": "GSL & các kiến ​​nghị chính thức",
       "chip3": "31 ngôn ngữ giao diện",
-      "previewLabel": "Sàn phiên"
+      "previewLabel": "Sàn phiên",
+      "sticky1": "Cuộc gọi điểm danh, bộ hẹn giờ và chuyển động trong một tầng.",
+      "sticky2": "Được thiết kế dành cho những chiếc ghế ghét trò chơi tung hứng.",
+      "floorEyebrow": "Trên sàn"
     },
     "steps": {
       "eyebrow": "Dòng chảy cổng",
@@ -4719,7 +4727,9 @@
       "title": "Được xây dựng có mục đích cho Mô hình LHQ ngày nay",
       "paragraph1": "InterMUN là không gian làm việc trên trình duyệt thay thế sự kết hợp thông thường giữa bảng tính, cuộc trò chuyện nhóm và bảng in bằng công cụ phối hợp của ủy ban.",
       "paragraph2": "Những chiếc ghế có được quyền kiểm soát theo thủ tục phản ánh cách các phiên họp thực sự diễn ra. Các đại biểu chuẩn bị sẵn sàng ngay trên sàn. Ban thư ký duy trì khả năng hiển thị trong toàn bộ sự kiện mà không cần di chuột qua mọi chuyển động.",
-      "paragraph3": "Cho dù bạn điều hành một phòng hay cả một hội nghị cuối tuần, InterMUN vẫn đảm bảo các chủ tọa, đại biểu và nhân viên được sắp xếp phù hợp từ điểm danh khai mạc cho đến lễ bế mạc."
+      "paragraph3": "Cho dù bạn điều hành một phòng hay cả một hội nghị cuối tuần, InterMUN vẫn đảm bảo các chủ tọa, đại biểu và nhân viên được sắp xếp phù hợp từ điểm danh khai mạc cho đến lễ bế mạc.",
+      "dreamEyebrow": "giấc mơ",
+      "footerLabel": "Khoảng {app}"
     },
     "contact": {
       "eyebrow": "Hãy liên lạc",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Đại biểu (dự kiến)",
         "fieldInterests": "Sở thích",
         "fieldMessage": "Tin nhắn",
-        "fieldSubmittedAt": "Đã gửi vào (UTC)"
+        "fieldSubmittedAt": "Đã gửi vào (UTC)",
+        "showOptionalDetails": "Thêm chi tiết sự kiện (tùy chọn)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Tạo tài khoản",
       "ctaJoin": "Đăng nhập",
       "copyright": "© {year} InterMUN",
-      "contact": "Liên hệ"
+      "contact": "Liên hệ",
+      "tagline": "Phần mềm hội nghị luôn hoạt động cho đến khi búa cần nó.",
+      "product": "Sản phẩm",
+      "resources": "Tài nguyên",
+      "howItWorks": "Nó hoạt động như thế nào",
+      "privacy": "Sự riêng tư",
+      "terms": "Điều khoản"
     },
     "preview": {
       "rollCallLabel": "Cuộc gọi điểm danh",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Thường xuyên hỏi",
+      "subtitle": "Những gì chủ tọa và ban thư ký thường hỏi trước hội nghị cuối tuần.",
+      "q1": "Cái này dành cho ai?",
+      "a1": "Các đại biểu, chủ tọa, cố vấn và ban thư ký — một không gian làm việc của hội nghị với các công cụ nhận thức vai trò.",
+      "q2": "Chúng ta có thể điều hành quân đoàn báo chí và GA theo cách khác nhau không?",
+      "a2": "Đúng. Hồ sơ thủ tục giữ cho RoP của đoàn báo chí nằm trong phạm vi phòng đó mà không thay đổi các ủy ban khác.",
+      "q3": "Mọi người vào phòng bằng cách nào?",
+      "a3": "Mã sự kiện, sau đó là mã phòng / ủy ban, rồi mã bảng hiệu tùy chọn - được thiết kế cho các dòng đăng ký thực sự.",
+      "q4": "Nó đã sẵn sàng cho một ngày cuối tuần trực tiếp chưa?",
+      "a4": "Sàn phiên, biểu quyết, ghi chú, tài liệu và giám sát được xây dựng để sử dụng đồng thời giữa các phòng."
+    },
+    "aboutPage": {
+      "metaTitle": "Khoảng {app}",
+      "metaDescription": "Tìm hiểu lý do tại sao {app} tồn tại và cách nó hỗ trợ các hội nghị Kiểu mẫu của Liên hợp quốc.",
+      "eyebrow": "Khoảng {app}",
+      "title": "Được xây dựng cho toàn bộ nhóm hội nghị.",
+      "intro": "{app} đưa các đại biểu, chủ tọa, cố vấn và ban thư ký vào một không gian làm việc chung—từ giai đoạn chuẩn bị cho đến giai đoạn cuối cùng. Chúng tôi nghĩ phần khó là giao diện chứ không phải ngoại giao.",
+      "purposeTitle": "Mục đích của chúng tôi",
+      "purposeP1": "Mô hình Liên Hợp Quốc hoạt động tốt nhất khi mọi người có thể tập trung vào ngoại giao, thủ tục, nghiên cứu và hợp tác. {app} tồn tại để giảm bớt xích mích của quản trị viên xung quanh những khoảnh khắc đó.",
+      "purposeP2": "Nền tảng này kết nối quá trình chuẩn bị, các công cụ phiên trực tiếp, tài liệu, biểu quyết, ghi chú và giám sát—mà không cần thay thế những người tạo ra vấn đề trong hội nghị.",
+      "rolesTitle": "Được thiết kế xoay quanh mọi vai trò",
+      "rolesDelegates": "Các đại biểu nghiên cứu, soạn thảo, cộng tác và theo dõi diễn đàn.",
+      "rolesChairs": "Ghế chạy điểm danh, diễn giả, chuyển động, tính giờ và biểu quyết.",
+      "rolesAdvisors": "Các cố vấn hỗ trợ phái đoàn của họ với tầm nhìn phù hợp.",
+      "rolesSecretariat": "Ban thư ký điều phối các phòng và theo dõi tiến trình của toàn hội nghị.",
+      "techTitle": "Công nghệ hội nghị đầu tiên",
+      "techP1": "Các tính năng được định hình dựa trên quy trình làm việc thực tế vào cuối tuần, ranh giới vai trò và giao diện người dùng yên tĩnh khi phòng di chuyển nhanh. Khả năng truy cập và quyền truy cập vai trò an toàn là một phần của thiết kế.",
+      "techCtaBefore": "Muốn {app} tại hội nghị của bạn?",
+      "techCtaLink": "Nói xin chào"
+    },
+    "documentPage": {
+      "lastUpdated": "Cập nhật lần cuối · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Điều khoản dịch vụ | {app}",
+      "metaDescription": "Các điều khoản quản lý việc truy cập và sử dụng {app}.",
+      "eyebrow": "Hợp pháp",
+      "title": "Điều khoản dịch vụ",
+      "intro": "Các điều khoản này chi phối việc bạn truy cập và sử dụng {app}. Bằng cách sử dụng dịch vụ, bạn đồng ý với các điều khoản này.",
+      "updated": "25 tháng 7 năm 2026",
+      "contactFormFallback": "mẫu liên hệ trên trang web của chúng tôi",
+      "usingTitle": "Sử dụng dịch vụ",
+      "usingP1": "Bạn phải cung cấp thông tin chính xác, chỉ sử dụng dịch vụ cho mục đích giáo dục và hội nghị hợp pháp và tuân theo các hướng dẫn hợp lý từ người tổ chức hội nghị của bạn.",
+      "usingP2": "Nếu bạn không thể tự mình chấp nhận các điều khoản này về mặt pháp lý thì phụ huynh, người giám hộ, trường học hoặc người tổ chức hội nghị phải cho phép bạn sử dụng. Các nhà tổ chức có trách nhiệm đảm bảo rằng những người tham gia của họ được ủy quyền phù hợp.",
+      "accountsTitle": "Tài khoản và quyền truy cập",
+      "accountsL1": "Giữ bí mật thông tin đăng nhập và mã truy cập hội nghị của bạn.",
+      "accountsL2": "Không mạo danh người khác hoặc xuyên tạc vai trò của bạn.",
+      "accountsL3": "Không truy cập dữ liệu, ủy ban hoặc công cụ quản trị mà bạn không được phép sử dụng.",
+      "accountsL4": "Hãy báo ngay cho chúng tôi hoặc người tổ chức của bạn nếu bạn nghi ngờ việc sử dụng tài khoản trái phép.",
+      "contentTitle": "Nội dung của bạn",
+      "contentP1": "Bạn giữ quyền sở hữu nội dung bạn tạo. Bạn cấp cho chúng tôi giấy phép có giới hạn để lưu trữ, xử lý, tái tạo và hiển thị nội dung đó chỉ khi cần thiết để vận hành, bảo mật và cải thiện dịch vụ cũng như hỗ trợ hội nghị của bạn.",
+      "contentP2": "Bạn có trách nhiệm đảm bảo rằng nội dung của bạn là hợp pháp và bạn có quyền chia sẻ nội dung đó. Không tải lên tài liệu bí mật trừ khi nó phù hợp với đối tượng dự định của hội nghị.",
+      "acceptableTitle": "Sử dụng chấp nhận được",
+      "acceptableP1": "Bạn không được làm gián đoạn dịch vụ, bỏ qua các biện pháp kiểm soát truy cập, thăm dò lỗ hổng, thu thập dữ liệu mà không được phép, phát tán phần mềm độc hại, quấy rối người khác, vi phạm quyền sở hữu trí tuệ hoặc sử dụng nền tảng này để lừa đảo hoặc hoạt động bất hợp pháp. Chúng tôi có thể điều tra và hạn chế hoạt động đe dọa người tham gia, hội nghị hoặc dịch vụ.",
+      "organisersTitle": "Ban tổ chức hội nghị",
+      "organisersP1": "Người tổ chức kiểm soát cấu hình hội nghị, phân công vai trò, quy tắc tham gia và phần lớn nội dung trong không gian làm việc của họ. Họ chịu trách nhiệm về hoạt động hội nghị, thông báo và sự đồng ý của người tham gia cũng như việc sử dụng hợp pháp thông tin được xuất từ ​​dịch vụ.",
+      "availabilityTitle": "Tính sẵn có và những thay đổi",
+      "availabilityP1": "Chúng tôi có thể cập nhật, tạm dừng hoặc ngừng các phần của dịch vụ. Chúng tôi mong muốn cung cấp một nền tảng đáng tin cậy nhưng không đảm bảo hoạt động không bị gián đoạn hoặc không có lỗi. Chúng tôi có thể cập nhật các điều khoản này và việc tiếp tục sử dụng sau khi bản cập nhật có hiệu lực sẽ cấu thành việc chấp nhận các điều khoản đã sửa đổi.",
+      "suspensionTitle": "Đình chỉ và chấm dứt",
+      "suspensionP1": "Chúng tôi có thể tạm dừng hoặc chấm dứt quyền truy cập khi cần thiết một cách hợp lý để bảo vệ dịch vụ hoặc người dùng dịch vụ, phản hồi hành vi trái pháp luật, thực thi các điều khoản này hoặc tuân thủ các nghĩa vụ pháp lý. Bạn có thể ngừng sử dụng dịch vụ bất cứ lúc nào.",
+      "liabilityTitle": "Tuyên bố từ chối trách nhiệm và trách nhiệm pháp lý",
+      "liabilityP1": "Trong phạm vi được pháp luật cho phép, dịch vụ được cung cấp “nguyên trạng” và “có sẵn” mà không có bảo đảm không được nêu rõ ràng trong các điều khoản này. {app} là một công cụ hội nghị và không kiểm soát hành vi của người tham gia hoặc đảm bảo kết quả hội nghị.",
+      "liabilityP2": "Trong phạm vi được pháp luật cho phép, chúng tôi sẽ không chịu trách nhiệm về các thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, do hậu quả hoặc mang tính trừng phạt hoặc về việc mất dữ liệu, doanh thu hoặc cơ hội phát sinh từ việc sử dụng dịch vụ. Các quyền không thể bị loại trừ về mặt pháp lý vẫn không bị ảnh hưởng.",
+      "privacyTitle": "Quyền riêng tư và liên hệ",
+      "privacyP1": "<privacy>Chính sách quyền riêng tư</privacy> của chúng tôi giải thích cách chúng tôi xử lý thông tin cá nhân.",
+      "questions": "Câu hỏi về các điều khoản này có thể được gửi đến <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Chính sách bảo mật | {app}",
+      "metaDescription": "Cách {app} thu thập, sử dụng, lưu trữ và bảo vệ thông tin cá nhân.",
+      "eyebrow": "Hợp pháp",
+      "title": "Chính sách bảo mật",
+      "intro": "Chính sách này giải thích cách {app} xử lý thông tin cá nhân khi bạn sử dụng trang web, ứng dụng và dịch vụ hội nghị của chúng tôi.",
+      "updated": "25 tháng 7 năm 2026",
+      "contactFormFallback": "mẫu liên hệ trên trang web của chúng tôi",
+      "collectTitle": "Thông tin chúng tôi thu thập",
+      "collectIntro": "Tùy thuộc vào cách bạn sử dụng dịch vụ, chúng tôi có thể thu thập:",
+      "collectL1": "Chi tiết tài khoản như tên, địa chỉ email, hồ sơ và vai trò của bạn.",
+      "collectL2": "Thông tin hội nghị, nhiệm vụ của ủy ban và hồ sơ tham gia.",
+      "collectL3": "Nội dung bạn tạo, bao gồm tài liệu, ghi chú, tin nhắn, phiếu bầu và nội dung gửi.",
+      "collectL4": "Các tệp bạn tải lên và thông tin liên lạc bạn gửi cho các nhóm hội nghị hoặc cho chúng tôi.",
+      "collectL5": "Dữ liệu kỹ thuật và cách sử dụng cần thiết để vận hành, bảo mật và cải thiện dịch vụ.",
+      "useTitle": "Cách chúng tôi sử dụng thông tin",
+      "useL1": "Cung cấp tài khoản, không gian làm việc hội nghị và các tính năng dựa trên vai trò.",
+      "useL2": "Cung cấp nội dung cho người tham gia và nhân viên được ủy quyền truy cập nội dung đó.",
+      "useL3": "Duy trì bảo mật, ngăn chặn lạm dụng, khắc phục sự cố và cải thiện độ tin cậy.",
+      "useL4": "Trả lời các yêu cầu hỗ trợ, hợp tác và hội nghị.",
+      "useL5": "Tuân thủ luật hiện hành và thực thi Điều khoản dịch vụ của chúng tôi.",
+      "sharingTitle": "Chia sẻ và truy cập hội nghị",
+      "sharingP1": "Chúng tôi không bán thông tin cá nhân. Thông tin có thể được chia sẻ với người tổ chức hội nghị và những người tham gia được ủy quyền của bạn tùy theo vai trò của họ và các tính năng họ sử dụng.",
+      "sharingP2": "Chúng tôi cũng có thể sử dụng các nhà cung cấp dịch vụ đáng tin cậy để lưu trữ, xác thực, email, lưu trữ, bảo mật và cơ sở hạ tầng liên quan. Họ chỉ có thể xử lý thông tin để cung cấp những dịch vụ đó cho chúng tôi.",
+      "retentionTitle": "Lưu giữ và bảo mật",
+      "retentionP1": "Chúng tôi lưu giữ thông tin trong khoảng thời gian cần thiết để cung cấp dịch vụ, hỗ trợ hội nghị, đáp ứng các nghĩa vụ pháp lý, giải quyết tranh chấp và bảo vệ nền tảng. Thời gian lưu giữ có thể khác nhau tùy theo loại dữ liệu và yêu cầu hội nghị.",
+      "retentionP2": "Chúng tôi sử dụng các biện pháp bảo vệ kỹ thuật và tổ chức được thiết kế để bảo vệ thông tin. Không có dịch vụ trực tuyến nào có thể đảm bảo tính bảo mật tuyệt đối, vì vậy người dùng cũng nên bảo vệ thông tin đăng nhập của mình và báo cáo kịp thời việc sử dụng tài khoản bị nghi ngờ.",
+      "rightsTitle": "Lựa chọn và quyền của bạn",
+      "rightsP1": "Bạn có thể cập nhật thông tin tài khoản nhất định trong dịch vụ. Tùy thuộc vào vị trí của bạn, bạn cũng có thể có quyền truy cập, sửa, xóa, hạn chế hoặc nhận bản sao thông tin cá nhân của mình.",
+      "rightsP2": "Hồ sơ hội nghị có thể được kiểm soát cùng với hoặc thay mặt cho người tổ chức hội nghị của bạn. Chúng tôi có thể gửi yêu cầu tới nhà tổ chức đó nếu thích hợp.",
+      "childrenTitle": "Trẻ em và học sinh tham gia",
+      "childrenP1": "Các hội nghị và trường học có trách nhiệm đảm bảo rằng những người tham gia được phép sử dụng dịch vụ và đã có được sự đồng ý cần thiết của phụ huynh hoặc người giám hộ. Vui lòng liên hệ với chúng tôi nếu bạn cho rằng thông tin của người tham gia đã được cung cấp mà không có sự cho phép thích hợp.",
+      "changesTitle": "Thay đổi và liên hệ",
+      "changesP1": "Chúng tôi có thể cập nhật chính sách này khi dịch vụ hoặc các yêu cầu hiện hành thay đổi. Ngày ở trên hiển thị bản sửa đổi mới nhất.",
+      "contact": "Nếu có câu hỏi hoặc yêu cầu về quyền riêng tư, hãy liên hệ với <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Mỗi ủy ban có một mã ủy ban trong hội nghị của mình (cổng thứ hai sau khi các đại biểu nhập mã hội nghị). Mã phải là duy nhất trong cùng một sự kiện hội nghị.",
     "testingOverride": "Đã bật ghi đè kiểm tra: bạn có thể chuyển đổi và quản lý mã ủy ban giữa các ủy ban mà không cần kiểm tra phân bổ chỗ ngồi.",
     "chairScope": "Với tư cách là người đứng đầu, bạn chỉ nhìn thấy các ủy ban nơi bạn có ghế. Việc lưu sẽ đưa bạn đến hồ sơ của bạn; các đại biểu đã vượt qua cổng ủy ban vẫn đăng nhập cho đến khi đăng xuất.",
-    "staffAfterSave": "Sau khi lưu, bạn có thể vào ủy ban đó hoặc chia sẻ mã trên dais."
+    "staffAfterSave": "Sau khi lưu, bạn có thể vào ủy ban đó hoặc chia sẻ mã trên dais.",
+    "noSmtChairBinding": "Chọn một ủy ban chủ tịch trên hồ sơ SMT của bạn trước khi quản lý mã phòng của ủy ban đó từ chế độ xem ghế.",
+    "setChairBinding": "Quyết định chủ tịch ủy ban",
+    "smtChairScope": "Bạn đang xem trước với tư cách là chủ tịch chỉ cho ủy ban ràng buộc của bạn."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Sao chép danh sách (TSV)",

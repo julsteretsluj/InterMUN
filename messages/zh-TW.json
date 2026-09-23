@@ -2417,7 +2417,8 @@
       "score": "分數",
       "photo": "照片",
       "school": "學校",
-      "party": "政治團體"
+      "party": "政治團體",
+      "placardCode": "標示牌代碼"
     },
     "noRows": "沒有找到該委員會的分配行。",
     "pendingApprovalsTitle": "等待註冊批准",
@@ -4630,20 +4631,27 @@
       "contact": "接觸",
       "signIn": "登入",
       "getStarted": "開始使用",
-      "features": "Features"
+      "features": "Features",
+      "about": "關於",
+      "menu": "選單",
+      "closeMenu": "關閉",
+      "moreOnTheFloor": "更多內容在地板上"
     },
     "playOrbAnimation": "播放 InterMUN 動畫",
     "hero": {
       "eyebrow": "房間層軟體·模擬聯合國",
       "title": "一個選項卡用於",
       "titleEmphasis": "整個委員會。",
-      "subtitle": "InterMUN 連接講台程序、代表準備和秘書處監督——無需安裝應用程式、分散的聊天線程或紙質標語牌。",
+      "subtitle": "會議軟體在木槌需要之前不會造成影響。",
       "ctaStart": "舉辦活動",
-      "ctaJoin": "我有房間代碼",
+      "ctaJoin": "加入您的會議",
       "chip1": "點名 → 法定人數",
       "chip2": "GSL 和正式動議",
       "chip3": "31 種介面語言",
-      "previewLabel": "會議樓層"
+      "previewLabel": "會議樓層",
+      "sticky1": "點名、計時器和動作都集中在一層樓。",
+      "sticky2": "專為那些討厭擺弄拉環的椅子而設計。",
+      "floorEyebrow": "在地板上"
     },
     "steps": {
       "eyebrow": "閘門流量",
@@ -4719,7 +4727,9 @@
       "title": "專為現今的模擬聯合國設計",
       "paragraph1": "InterMUN 是一個瀏覽器工作區，以協調的委員會工具取代了通常的電子表格、群組聊天和列印標語牌的組合。",
       "paragraph2": "主席獲得反映會議實際展開方式的程序控制。 代表們在會場旁進行結構化準備。 秘書處保持整個活動的可見性，而不是盤旋在每項動議上。",
-      "paragraph3": "無論您是管理房間還是整個週末的會議，InterMUN 都能讓主席、代表和工作人員從開幕點名到閉幕式保持一致。"
+      "paragraph3": "無論您是管理房間還是整個週末的會議，InterMUN 都能讓主席、代表和工作人員從開幕點名到閉幕式保持一致。",
+      "dreamEyebrow": "夢想",
+      "footerLabel": "關於 {app}"
     },
     "contact": {
       "eyebrow": "聯絡我們",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "代表人數（約）",
         "fieldInterests": "興趣",
         "fieldMessage": "訊息",
-        "fieldSubmittedAt": "提交時間（UTC）"
+        "fieldSubmittedAt": "提交時間（UTC）",
+        "showOptionalDetails": "新增活動詳細資訊（可選）"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "建立帳戶",
       "ctaJoin": "登入",
       "copyright": "© {year} InterMUN",
-      "contact": "接觸"
+      "contact": "接觸",
+      "tagline": "會議軟體在木槌需要之前不會造成影響。",
+      "product": "產品",
+      "resources": "資源",
+      "howItWorks": "它是如何運作的",
+      "privacy": "隱私",
+      "terms": "條款"
     },
     "preview": {
       "rollCallLabel": "點名",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "常見問題",
+      "subtitle": "主席和秘書處在會議週末之前通常會問什麼。",
+      "q1": "這是給誰的？",
+      "a1": "代表、主席、顧問和秘書處－一個具有角色感知工具的會議工作空間。",
+      "q2": "我們可以用不同的方式管理記者團和GA嗎？",
+      "a2": "是的。 程序簡介使記者團的 RoP 範圍僅限於該會議廳，而無需改變其他委員會。",
+      "q3": "人們如何進入一個房間？",
+      "a3": "活動代碼，然後是房間/委員會代碼，然後是可選的標誌代碼 - 專為實際登記排隊而設計。",
+      "q4": "週末直播準備好了嗎？",
+      "a4": "會議發言、投票、筆記、文件和監督都是為跨議院同時使用而建構的。"
+    },
+    "aboutPage": {
+      "metaTitle": "約{app}",
+      "metaDescription": "了解 {app} 存在的原因以及它如何支持模擬聯合國會議。",
+      "eyebrow": "關於 {app}",
+      "title": "專為整個會議團隊打造。",
+      "intro": "{app} 將代表、主席、顧問和秘書處帶入一個共享工作空間－從準備到最後敲定。 我們認為困難的部分是介面，而不是外交。",
+      "purposeTitle": "我們的宗旨",
+      "purposeP1": "當人們能夠專注於外交、程序、研究和協作時，模擬聯合國處於最佳狀態。 {app} 的存在是為了減少這些時刻的管理摩擦。",
+      "purposeP2": "該平台連接了準備、即時會議工具、文件、投票、筆記和監督，而無需取代使會議變得重要的人員。",
+      "rolesTitle": "圍繞每個角色進行設計",
+      "rolesDelegates": "代表們進行研究、起草、協作並跟隨發言。",
+      "rolesChairs": "主席負責點名、發言、動議、計時器和投票。",
+      "rolesAdvisors": "顧問以適當的知名度支持其代表團。",
+      "rolesSecretariat": "秘書處負責協調各商會並監督整個會議的進度。",
+      "techTitle": "會議優先技術",
+      "techP1": "功能圍繞著真實的週末工作流程、角色邊界以及房間快速移動時平靜的使用者介面而設計。 可訪問性和安全性角色存取是設計的一部分。",
+      "techCtaBefore": "想在您的會議上獲得{app}嗎？",
+      "techCtaLink": "問好"
+    },
+    "documentPage": {
+      "lastUpdated": "最後更新·{date}"
+    },
+    "termsPage": {
+      "metaTitle": "服務條款 | {app}",
+      "metaDescription": "管理{app}的存取和使用的條款。",
+      "eyebrow": "合法的",
+      "title": "服務條款",
+      "intro": "這些條款管轄您對 {app} 的存取和使用。 使用該服務即表示您同意這些條款。",
+      "updated": "2026 年 7 月 25 日",
+      "contactFormFallback": "我們網站上的聯絡表格",
+      "usingTitle": "使用服務",
+      "usingP1": "您必須提供準確的信息，僅將服務用於合法的會議和教育目的，並遵循會議組織者的合理指示。",
+      "usingP2": "如果您自己在法律上無法接受這些條款，則必須獲得家長、監護人、學校或會議組織者的授權。 組織者有責任確保其參與者獲得適當的授權。",
+      "accountsTitle": "帳戶和訪問",
+      "accountsL1": "對您的憑證和會議存取代碼保密。",
+      "accountsL2": "請勿冒充他人或歪曲您的角色。",
+      "accountsL3": "請勿存取您無權使用的資料、委員會或管理工具。",
+      "accountsL4": "如果您懷疑未經授權的帳戶被使用，請立即告訴我們或您的組織者。",
+      "contentTitle": "你的內容",
+      "contentP1": "您保留您創建的內容的所有權。 您授予我們有限的許可，僅在營運、保護和改進服務以及支援您的會議所需時託管、處理、複製和顯示該內容。",
+      "contentP2": "您有責任確保您的內容合法且您有權分享該內容。 除非適合目標會議受眾，否則請勿上傳機密資料。",
+      "acceptableTitle": "可接受的使用",
+      "acceptableP1": "您不得破壞服務、繞過存取控制、探測漏洞、未經許可抓取資料、傳播惡意軟體、騷擾他人、侵犯智慧財產權或使用該平台進行詐欺或非法活動。 我們可能會調查並限制威脅參與者、會議或服務的活動。",
+      "organisersTitle": "會議主辦單位",
+      "organisersP1": "組織者控制會議配置、角色分配、參與規則以及其工作區中的大部分內容。 他們負責會議運營、參與者通知和同意以及從服務導出的資訊的合法使用。",
+      "availabilityTitle": "可用性和變更",
+      "availabilityP1": "我們可能會更新、暫停或終止部分服務。 我們的目標是提供一個可靠的平台，但不保證不間斷或無錯誤的操作。 我們可能會更新這些條款，並在更新生效後繼續使用即表示接受修訂後的條款。",
+      "suspensionTitle": "暫停和終止",
+      "suspensionP1": "為了保護服務或其使用者、應對非法行為、執行這些條款或遵守法律義務，我們可能會在合理必要的情況下暫停或終止存取。 您可以隨時停止使用該服務。",
+      "liabilityTitle": "免責聲明和責任",
+      "liabilityP1": "在法律允許的範圍內，服務是「原樣」和「可用」提供，不提供這些條款中未明確規定的保證。 {app}是會議工具，不控制參與者的行為或保證會議結果。",
+      "liabilityP2": "在法律允許的範圍內，我們不對間接、偶然、特殊、後果性或懲罰性損害承擔責任，也不對因使用服務而造成的數據、收入或機會損失承擔責任。 無法合法排除的權利不受影響。",
+      "privacyTitle": "隱私和聯絡方式",
+      "privacyP1": "我們的<privacy>隱私權政策</privacy>解釋了我們如何處理個人資訊。",
+      "questions": "有關這些條款的問題可以發送至<contact></contact>。"
+    },
+    "privacyPage": {
+      "metaTitle": "隱私權政策 | {app}",
+      "metaDescription": "{app}如何收集、使用、儲存和保護個人資訊。",
+      "eyebrow": "合法的",
+      "title": "隱私權政策",
+      "intro": "This policy explains how {app} handles personal information when you use our website, applications, and conference services.",
+      "updated": "2026 年 7 月 25 日",
+      "contactFormFallback": "我們網站上的聯絡表格",
+      "collectTitle": "我們收集的資訊",
+      "collectIntro": "Depending on how you use the service, we may collect:",
+      "collectL1": "帳戶詳細信息，例如您的姓名、電子郵件地址、個人資料和角色。",
+      "collectL2": "會議資訊、委員會任務和參與記錄。",
+      "collectL3": "您創建的內容，包括文件、註釋、訊息、投票和提交。",
+      "collectL4": "Files you upload and communications you send to conference teams or to us.",
+      "collectL5": "操作、保護和改進服務所需的技術和使用資料。",
+      "useTitle": "我們如何使用資訊",
+      "useL1": "Provide accounts, conference workspaces, and role-based features.",
+      "useL2": "將內容交付給有權存取內容的參與者和工作人員。",
+      "useL3": "維護安全性、防止濫用、解決問題並提高可靠性。",
+      "useL4": "回覆支援、合作夥伴關係和會議詢問。",
+      "useL5": "遵守適用法律並執行我們的服務條款。",
+      "sharingTitle": "共享和會議訪問",
+      "sharingP1": "我們不出售個人資訊。 資訊可能會根據會議組織者和授權參與者的角色和使用的功能與他們共享。",
+      "sharingP2": "我們也可能使用值得信賴的服務提供者來提供託管、身分驗證、電子郵件、儲存、安全和相關基礎架構。 他們處理資訊可能只是為了向我們提供這些服務。",
+      "retentionTitle": "保留和安全",
+      "retentionP1": "我們會根據提供服務、支援會議、履行法律義務、解決爭議和保護平台所需的時間保留資訊。 保留期限可能因資料類型和會議要求而異。",
+      "retentionP2": "我們使用旨在保護資訊的技術和組織保障措施。 沒有任何線上服務可以保證絕對安全，因此用戶還應該保護自己的憑證並及時報告可疑的帳戶濫用行為。",
+      "rightsTitle": "您的選擇和權利",
+      "rightsP1": "您可以在服務中更新某些帳戶資訊。 根據您所在的位置，您可能還有權限存取、更正、刪除、限製或接收您的個人資訊的副本。",
+      "rightsP2": "會議記錄可以與您的會議組織者共同控製或代表您的會議組織者控制。 在適當的情況下，我們可能會向該組織者提出請求。",
+      "childrenTitle": "兒童和學生參與者",
+      "childrenP1": "會議和學校有責任確保參與者有權使用該服務，並獲得任何所需的家長或監護人同意。 如果您認為參與者的資訊未經適當授權而提供，請與我們聯絡。",
+      "changesTitle": "變更及聯絡方式",
+      "changesP1": "隨著服務或適用要求的變化，我們可能會更新本政策。 上面的日期顯示的是最新版本。",
+      "contact": "如有隱私問題或要求，請聯絡<contact></contact>。"
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "每個委員會在其會議內都有一個委員會代碼（代表輸入會議代碼後的第二個門）。 代碼在同一會議活動中必須是唯一的。",
     "testingOverride": "啟用測試覆蓋：您可以跨委員會切換和管理委員會代碼，而無需檢查席位分配。",
     "chairScope": "身為主席台，您只能看到您擁有席位的委員會。 儲存後會將您轉到您的個人資料；已經通過委員會大門的代表將保持登入狀態，直到登出為止。",
-    "staffAfterSave": "儲存後，您可以進入該委員會或在講台上分享代碼。"
+    "staffAfterSave": "儲存後，您可以進入該委員會或在講台上分享代碼。",
+    "noSmtChairBinding": "在從主席視圖管理其會議室代碼之前，請在您的 SMT 個人資料中選擇一個主席委員會。",
+    "setChairBinding": "設立主席委員會",
+    "smtChairScope": "您僅作為您所在委員會的主席進行預審。"
   },
   "chairAllocationPasswordsPage": {
     "copyList": "複製列表 (TSV)",

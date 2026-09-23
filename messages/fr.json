@@ -2417,7 +2417,8 @@
       "score": "Score",
       "photo": "Photo",
       "school": "École",
-      "party": "Groupe politique"
+      "party": "Groupe politique",
+      "placardCode": "Code de la plaque"
     },
     "noRows": "Aucune ligne d'allocation trouvée pour ce comité.",
     "pendingApprovalsTitle": "En attente d'approbation d'inscription",
@@ -4630,20 +4631,27 @@
       "contact": "Contact",
       "signIn": "Se connecter",
       "getStarted": "Commencer",
-      "features": "Features"
+      "features": "Features",
+      "about": "À propos",
+      "menu": "Menu",
+      "closeMenu": "Fermer",
+      "moreOnTheFloor": "Plus sur le sol"
     },
     "playOrbAnimation": "Jouer l'animation InterMUN",
     "hero": {
       "eyebrow": "Logiciel de plancher de chambre · Modèle UN",
       "title": "Un onglet pour le",
       "titleEmphasis": "comité entier.",
-      "subtitle": "InterMUN connecte la procédure d'estrade, la préparation des délégués et la supervision du secrétariat, sans installations d'applications, fils de discussion dispersés ou pancartes papier.",
+      "subtitle": "Un logiciel de conférence qui reste à l'écart jusqu'à ce que le marteau en ait besoin.",
       "ctaStart": "Organiser un événement",
-      "ctaJoin": "J'ai un code de chambre",
+      "ctaJoin": "Rejoignez votre conférence",
       "chip1": "Appel nominal → quorum",
       "chip2": "GSL et requêtes formelles",
       "chip3": "31 langues d'interface",
-      "previewLabel": "Salle de séance"
+      "previewLabel": "Salle de séance",
+      "sticky1": "Appel nominal, minuteries et motions sur un seul étage.",
+      "sticky2": "Conçu pour les chaises qui détestent jongler avec les languettes.",
+      "floorEyebrow": "Sur le sol"
     },
     "steps": {
       "eyebrow": "Flux de porte",
@@ -4719,7 +4727,9 @@
       "title": "Conçu spécialement pour le modèle UN d'aujourd'hui",
       "paragraph1": "InterMUN est un espace de travail de navigateur qui remplace le mélange habituel de feuilles de calcul, de discussions de groupe et de pancartes imprimées par des outils de comité coordonnés.",
       "paragraph2": "Les présidents bénéficient d’un contrôle procédural qui reflète le déroulement réel des sessions. Les délégués bénéficient d'une préparation structurée sur place. Le Secrétariat conserve une visibilité sur l'ensemble de l'événement sans survoler chaque mouvement.",
-      "paragraph3": "Que vous organisiez une conférence dans une seule salle ou un week-end complet, InterMUN maintient les présidents, les délégués et le personnel alignés depuis l'appel d'ouverture jusqu'à la cérémonie de clôture."
+      "paragraph3": "Que vous organisiez une conférence dans une seule salle ou un week-end complet, InterMUN maintient les présidents, les délégués et le personnel alignés depuis l'appel d'ouverture jusqu'à la cérémonie de clôture.",
+      "dreamEyebrow": "Le rêve",
+      "footerLabel": "À propos de {app}"
     },
     "contact": {
       "eyebrow": "Entrer en contact",
@@ -4773,7 +4783,8 @@
         "fieldDelegateCount": "Délégués (environ)",
         "fieldInterests": "Intérêts",
         "fieldMessage": "Message",
-        "fieldSubmittedAt": "Soumis à (UTC)"
+        "fieldSubmittedAt": "Soumis à (UTC)",
+        "showOptionalDetails": "Ajouter les détails de l'événement (facultatif)"
       },
       "registerSecretariat": "Ready to onboard? Start the full secretariat registration.",
       "registerSecretariatLink": "Register your conference"
@@ -4785,7 +4796,13 @@
       "ctaStart": "Créer un compte",
       "ctaJoin": "Se connecter",
       "copyright": "© {year}InterMUN",
-      "contact": "Contact"
+      "contact": "Contact",
+      "tagline": "Un logiciel de conférence qui reste à l'écart jusqu'à ce que le marteau en ait besoin.",
+      "product": "Produit",
+      "resources": "Ressources",
+      "howItWorks": "Comment ça marche",
+      "privacy": "Confidentialité",
+      "terms": "Termes"
     },
     "preview": {
       "rollCallLabel": "Appel",
@@ -5154,6 +5171,110 @@
       "tooltip": "This project originated in Thailand",
       "mapAria": "Stylized map with a pin on Thailand",
       "location": "Bangkok, Thailand"
+    },
+    "faq": {
+      "title": "Foire aux questions",
+      "subtitle": "Ce que les présidents et le secrétariat demandent habituellement avant un week-end de conférence.",
+      "q1": "C'est pour qui ?",
+      "a1": "Délégués, présidents, conseillers et secrétariat : un seul espace de travail de conférence doté d'outils adaptés aux rôles.",
+      "q2": "Pouvons-nous gérer la presse et l’AG différemment ?",
+      "a2": "Oui. Les profils de procédure maintiennent le RoP du corps de presse limité à cette chambre sans modifier les autres comités.",
+      "q3": "Comment les gens entrent-ils dans une pièce ?",
+      "a3": "Code d'événement, puis code de salle/comité, puis codes d'étiquette facultatifs — conçus pour les véritables files d'attente d'enregistrement.",
+      "q4": "Est-ce prêt pour un week-end en direct ?",
+      "a4": "Les sessions, le vote, les notes, les documents et la surveillance sont conçus pour une utilisation simultanée entre les chambres."
+    },
+    "aboutPage": {
+      "metaTitle": "À propos de {app}",
+      "metaDescription": "Découvrez pourquoi {app} existe et comment il soutient les conférences Model United Nations.",
+      "eyebrow": "À propos de {app}",
+      "title": "Conçu pour toute l’équipe de la conférence.",
+      "intro": "{app} rassemble les délégués, les présidents, les conseillers et le secrétariat dans un seul espace de travail partagé, de la préparation au marteau final. Nous pensons que le plus difficile est l’interface, pas la diplomatie.",
+      "purposeTitle": "Notre objectif",
+      "purposeP1": "Le modèle des Nations Unies atteint son apogée lorsque les gens peuvent se concentrer sur la diplomatie, la procédure, la recherche et la collaboration. {app} existe pour réduire les frictions administratives autour de ces moments.",
+      "purposeP2": "La plateforme connecte la préparation, les outils de session en direct, les documents, le vote, les notes et la supervision, sans remplacer les humains qui font d'une conférence un sujet important.",
+      "rolesTitle": "Conçu autour de chaque rôle",
+      "rolesDelegates": "Les délégués recherchent, rédigent, collaborent et suivent le débat.",
+      "rolesChairs": "Les présidents organisent l'appel nominal, les orateurs, les motions, les chronomètres et les votes.",
+      "rolesAdvisors": "Les conseillers soutiennent leurs délégations avec la bonne visibilité.",
+      "rolesSecretariat": "Le Secrétariat coordonne les chambres et voit les progrès à l’échelle de la conférence.",
+      "techTitle": "Technologie de conférence avant tout",
+      "techP1": "Les fonctionnalités sont conçues autour de flux de travail réels du week-end, de limites de rôles et d'une interface utilisateur calme lorsque la salle évolue rapidement. L'accessibilité et l'accès sécurisé aux rôles font partie de la conception.",
+      "techCtaBefore": "Envie de {app} à votre conférence ?",
+      "techCtaLink": "Dis bonjour"
+    },
+    "documentPage": {
+      "lastUpdated": "Dernière mise à jour · {date}"
+    },
+    "termsPage": {
+      "metaTitle": "Conditions d'utilisation | {app}",
+      "metaDescription": "Les conditions régissant l'accès et l'utilisation de {app}.",
+      "eyebrow": "Légale",
+      "title": "Conditions d'utilisation",
+      "intro": "Ces conditions régissent votre accès et votre utilisation de {app}. En utilisant le service, vous acceptez ces conditions.",
+      "updated": "25 juillet 2026",
+      "contactFormFallback": "le formulaire de contact sur notre site internet",
+      "usingTitle": "Utiliser le service",
+      "usingP1": "Vous devez fournir des informations exactes, utiliser le service uniquement à des fins légales de conférence et éducatives, et suivre les instructions raisonnables de votre organisateur de conférence.",
+      "usingP2": "Si vous n'êtes pas légalement en mesure d'accepter ces conditions vous-même, un parent, un tuteur, une école ou un organisateur de conférence doit autoriser votre utilisation. Les organisateurs sont responsables de s'assurer que leurs participants sont dûment autorisés.",
+      "accountsTitle": "Comptes et accès",
+      "accountsL1": "Gardez vos informations d'identification et vos codes d'accès à la conférence confidentiels.",
+      "accountsL2": "Ne vous faites pas passer pour une autre personne et ne déformez pas votre rôle.",
+      "accountsL3": "N’accédez pas aux données, comités ou outils administratifs que vous n’êtes pas autorisé à utiliser.",
+      "accountsL4": "Informez-nous rapidement ou informez votre organisateur si vous soupçonnez une utilisation non autorisée de votre compte.",
+      "contentTitle": "Votre contenu",
+      "contentP1": "Vous conservez la propriété du contenu que vous créez. Vous nous accordez une licence limitée pour héberger, traiter, reproduire et afficher ce contenu uniquement dans la mesure nécessaire pour exploiter, sécuriser et améliorer le service et prendre en charge votre conférence.",
+      "contentP2": "Vous êtes responsable de vous assurer que votre contenu est licite et que vous avez la permission de le partager. Ne téléchargez pas de matériel confidentiel à moins qu'il ne soit approprié pour le public visé par la conférence.",
+      "acceptableTitle": "Utilisation acceptable",
+      "acceptableP1": "Vous ne pouvez pas perturber le service, contourner les contrôles d'accès, rechercher des vulnérabilités, récupérer des données sans autorisation, distribuer des logiciels malveillants, harceler autrui, enfreindre la propriété intellectuelle ou utiliser la plateforme à des fins de fraude ou d'activités illégales. Nous pouvons enquêter et restreindre les activités qui menacent les participants, les conférences ou le service.",
+      "organisersTitle": "Organisateurs de conférences",
+      "organisersP1": "Les organisateurs contrôlent la configuration de la conférence, l'attribution des rôles, les règles de participation et une grande partie du contenu de leur espace de travail. Ils sont responsables des opérations de leur conférence, des avis et consentements des participants, ainsi que de l'utilisation licite des informations exportées du service.",
+      "availabilityTitle": "Disponibilité et modifications",
+      "availabilityP1": "Nous pouvons mettre à jour, suspendre ou interrompre certaines parties du service. Notre objectif est de fournir une plate-forme fiable mais ne garantissons pas un fonctionnement ininterrompu ou sans erreur. Nous pouvons mettre à jour ces conditions, et la poursuite de leur utilisation après la prise d’effet d’une mise à jour constitue l’acceptation des conditions révisées.",
+      "suspensionTitle": "Suspension et résiliation",
+      "suspensionP1": "Nous pouvons suspendre ou résilier l'accès lorsque cela est raisonnablement nécessaire pour protéger le service ou ses utilisateurs, répondre à une conduite illégale, faire respecter les présentes conditions ou nous conformer aux obligations légales. Vous pouvez cesser d'utiliser le service à tout moment.",
+      "liabilityTitle": "Avis de non-responsabilité et responsabilité",
+      "liabilityP1": "Dans la mesure permise par la loi, le service est fourni « tel quel » et « tel que disponible », sans garanties qui ne sont pas expressément énoncées dans les présentes conditions. {app} est un outil de conférence et ne contrôle pas le comportement des participants ni ne garantit les résultats de la conférence.",
+      "liabilityP2": "Dans la mesure permise par la loi, nous ne serons pas responsables des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs, ni de la perte de données, de revenus ou d'opportunités découlant de l'utilisation du service. Les droits qui ne peuvent légalement être exclus restent inchangés.",
+      "privacyTitle": "Confidentialité et contact",
+      "privacyP1": "Notre <privacy>Politique de confidentialité</privacy> explique comment nous traitons les informations personnelles.",
+      "questions": "Les questions concernant ces conditions peuvent être envoyées à <contact></contact>."
+    },
+    "privacyPage": {
+      "metaTitle": "Politique de confidentialité | {app}",
+      "metaDescription": "Comment {app} collecte, utilise, stocke et protège les informations personnelles.",
+      "eyebrow": "Légale",
+      "title": "politique de confidentialité",
+      "intro": "Cette politique explique comment {app} traite les informations personnelles lorsque vous utilisez notre site Web, nos applications et nos services de conférence.",
+      "updated": "25 juillet 2026",
+      "contactFormFallback": "le formulaire de contact sur notre site internet",
+      "collectTitle": "Informations que nous collectons",
+      "collectIntro": "En fonction de la manière dont vous utilisez le service, nous pouvons collecter :",
+      "collectL1": "Détails du compte tels que votre nom, votre adresse e-mail, votre profil et votre rôle.",
+      "collectL2": "Informations sur la conférence, missions des comités et dossiers de participation.",
+      "collectL3": "Contenu que vous créez, y compris les documents, notes, messages, votes et soumissions.",
+      "collectL4": "Fichiers que vous téléchargez et communications que vous envoyez aux équipes de conférence ou à nous.",
+      "collectL5": "Données techniques et d'utilisation nécessaires au fonctionnement, à la sécurisation et à l'amélioration du service.",
+      "useTitle": "Comment nous utilisons les informations",
+      "useL1": "Fournissez des comptes, des espaces de travail de conférence et des fonctionnalités basées sur les rôles.",
+      "useL2": "Livrez le contenu aux participants et au personnel autorisé à y accéder.",
+      "useL3": "Maintenez la sécurité, prévenez les abus, résolvez les problèmes et améliorez la fiabilité.",
+      "useL4": "Répondez aux demandes de soutien, de partenariat et de conférence.",
+      "useL5": "Respectez la loi applicable et appliquez nos conditions de service.",
+      "sharingTitle": "Accès au partage et aux conférences",
+      "sharingP1": "Nous ne vendons pas d'informations personnelles. Les informations peuvent être partagées avec l'organisateur de votre conférence et les participants autorisés en fonction de leurs rôles et des fonctionnalités qu'ils utilisent.",
+      "sharingP2": "Nous pouvons également faire appel à des fournisseurs de services de confiance pour l'hébergement, l'authentification, la messagerie électronique, le stockage, la sécurité et l'infrastructure associée. Ils peuvent traiter les informations uniquement pour nous fournir ces services.",
+      "retentionTitle": "Rétention et sécurité",
+      "retentionP1": "Nous conservons les informations aussi longtemps que nécessaire pour fournir le service, soutenir une conférence, respecter les obligations légales, résoudre les litiges et protéger la plateforme. Les périodes de conservation peuvent varier selon le type de données et les exigences de la conférence.",
+      "retentionP2": "Nous utilisons des garanties techniques et organisationnelles conçues pour protéger les informations. Aucun service en ligne ne peut garantir une sécurité absolue, les utilisateurs doivent donc également protéger leurs informations d'identification et signaler rapidement toute utilisation abusive de leur compte.",
+      "rightsTitle": "Vos choix et droits",
+      "rightsP1": "Vous pouvez mettre à jour certaines informations de compte au sein du service. En fonction de votre emplacement, vous pouvez également avoir le droit d'accéder, de corriger, de supprimer, de restreindre ou de recevoir une copie de vos informations personnelles.",
+      "rightsP2": "Les enregistrements de la conférence peuvent être contrôlés conjointement avec ou au nom de l'organisateur de votre conférence. Nous pouvons adresser une demande à cet organisateur, le cas échéant.",
+      "childrenTitle": "Enfants et étudiants participants",
+      "childrenP1": "Les conférences et les écoles sont responsables de s'assurer que les participants sont autorisés à utiliser le service et que tout consentement requis d'un parent ou d'un tuteur a été obtenu. Veuillez nous contacter si vous pensez que les informations d’un participant ont été fournies sans autorisation appropriée.",
+      "changesTitle": "Modifications et contact",
+      "changesP1": "Nous pouvons mettre à jour cette politique à mesure que le service ou les exigences applicables changent. La date ci-dessus indique la dernière révision.",
+      "contact": "Pour toute question ou demande relative à la confidentialité, contactez <contact></contact>."
     }
   },
   "notFoundPage": {
@@ -5635,7 +5756,10 @@
     "intro": "Chaque comité a un code de comité au sein de sa conférence (deuxième porte après que les délégués ont saisi le code de la conférence). Les codes doivent être uniques au sein du même événement de conférence.",
     "testingOverride": "Remplacement des tests activé : vous pouvez changer et gérer les codes de comité entre les comités sans vérification de l'attribution des sièges.",
     "chairScope": "Sur l'estrade, vous ne voyez que les commissions où vous avez un siège. Enregistrer vous renvoie à votre profil ; les délégués qui ont déjà franchi la porte du comité restent connectés jusqu'à ce qu'ils se déconnectent.",
-    "staffAfterSave": "Après avoir enregistré, vous pouvez entrer dans ce comité ou partager le code sur l'estrade."
+    "staffAfterSave": "Après avoir enregistré, vous pouvez entrer dans ce comité ou partager le code sur l'estrade.",
+    "noSmtChairBinding": "Choisissez un comité président sur votre profil SMT avant de gérer son code de salle depuis la vue président.",
+    "setChairBinding": "Définir le comité présidentiel",
+    "smtChairScope": "Vous présentez votre candidature en tant que président de votre comité lié uniquement."
   },
   "chairAllocationPasswordsPage": {
     "copyList": "Copier la liste (TSV)",

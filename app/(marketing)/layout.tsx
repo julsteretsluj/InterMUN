@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { MarketingMazeScript } from "@/components/marketing/MarketingMazeScript";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
@@ -12,6 +13,7 @@ export default async function MarketingLayout({
   children: React.ReactNode;
 }) {
   const appName = getAppName();
+  const t = await getTranslations("marketing");
 
   return (
     <div className="marketing-shell mun-apple-site relative min-h-screen">
@@ -37,13 +39,13 @@ export default async function MarketingLayout({
               href="/login"
               className="clicky-pill clicky-pill-ghost !hidden !py-1.5 !text-xs sm:!inline-flex"
             >
-              sign in
+              {t("nav.signIn")}
             </Link>
             <Link
               href="/signup"
               className="clicky-pill clicky-pill-primary !hidden !py-1.5 !text-xs sm:!inline-flex"
             >
-              join your conference
+              {t("nav.getStarted")}
             </Link>
           </div>
         </div>
