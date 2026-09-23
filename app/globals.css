@@ -9015,11 +9015,22 @@ html body :is(
   .case-preserve,
   .case-preserve *,
   .marketing-header-brand,
+  .marketing-header-brand *,
   .mun-brand-wordmark,
   .mun-brand-wordmark *,
   .mun-brand-word,
   .mun-brand-word-suffix
 ) {
+  text-transform: none !important;
+}
+
+/* Extra specificity so brand lockups always beat the sitewide lowercase rule */
+html body .case-preserve,
+html body .case-preserve *,
+html body .marketing-header-brand,
+html body .marketing-header-brand *,
+html body .mun-brand-wordmark,
+html body .mun-brand-wordmark * {
   text-transform: none !important;
 }
 

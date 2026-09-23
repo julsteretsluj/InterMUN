@@ -10,6 +10,7 @@ import {
   MarketingHeroSessionPreview,
   MarketingSmtOversightPreview,
 } from "@/components/marketing/MarketingInteractivePreviews";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import { getAppName, getPartnershipContactEmail } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
@@ -110,7 +111,9 @@ export async function MarketingHome() {
           </div>
 
           <div className="relative z-[1] mx-auto max-w-2xl pt-6 text-center md:pt-10">
-            <p className="clicky-kaomoji mb-3">^ ω ^</p>
+            <div className="mb-4 flex justify-center">
+              <InterMunEmblem alt="" className="max-h-14 w-auto md:max-h-16" />
+            </div>
             <h1 className="case-preserve text-[clamp(2.6rem,8vw,4.5rem)] font-bold leading-[0.95] tracking-[-0.045em] text-[var(--clicky-ink)]">
               {appName}
             </h1>

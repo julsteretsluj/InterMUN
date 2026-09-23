@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { getAppName, getAppTagline } from "@/lib/branding";
 
@@ -17,7 +18,7 @@ export async function AppleGateLayout({ children }: AppleGateLayoutProps) {
     <div className="mun-clicky-auth">
       <aside className="mun-clicky-auth-brand">
         <div className="relative z-[1]">
-          <p className="clicky-kaomoji text-white/40">^ ω ^</p>
+          <InterMunEmblem alt="" className="max-h-14 w-auto" surface="dark" />
           <h1 className="case-preserve mt-6 text-4xl font-bold tracking-[-0.04em] text-[#f7f6f2]">
             {appName}
           </h1>

@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import { getAppName, getPartnershipContactEmail } from "@/lib/branding";
 
 export async function MarketingSiteFooter() {
@@ -14,7 +15,10 @@ export async function MarketingSiteFooter() {
     <footer className="relative z-10 border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-12 text-[#f7f6f2]">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
         <div>
-          <p className="case-preserve text-lg font-bold tracking-[-0.03em]">{appName}</p>
+          <div className="flex items-center gap-2.5">
+            <InterMunEmblem alt="" className="max-h-8 w-auto" surface="dark" />
+            <p className="case-preserve text-lg font-bold tracking-[-0.03em]">{appName}</p>
+          </div>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55">
             conference software that stays out of the way until the gavel needs it.
           </p>
