@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "위원회를 전환할 수 없습니다. 다시 시도하거나 룸 게이트를 통해 로그인하세요.",
     "dashboardCommitteeAllocationsHeading": "이번 위원회 세션의 할당",
     "dashboardCommitteeNoAllocationsListed": "이 세션에는 할당 행이 나열되지 않습니다.",
-    "dashboardCommitteeApplySwitch": "대시보드를 이 위원회로 전환",
-    "timerExpiryAlarmTitle": "타이머 소리",
-    "timerExpiryAlarmLabel": "인앱 카운트다운이 0에 도달하면 짧은 차임벨을 재생합니다(음성 타이머, 세션 시간 제한, 허브 마감 시간).",
-    "timerExpiryAlarmHint": "기본적으로 꺼져 있습니다. 이 브라우저에만 저장됩니다."
+    "dashboardCommitteeApplySwitch": "대시보드를 이 위원회로 전환"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "모양 및 접근성 설정 열기",
     "accountAria": "계정 및 환경설정",
     "profile": "프로필",
-    "appearanceAndAccess": "접근성 및 색상"
+    "appearanceAndAccess": "접근성 및 색상",
+    "timerExpiryAlarmTitle": "타이머 소리",
+    "timerExpiryAlarmLabel": "인앱 카운트다운이 0에 도달하면 짧은 차임벨을 재생합니다(음성 타이머, 세션 시간 제한, 허브 마감 시간).",
+    "timerExpiryAlarmHint": "기본적으로 꺼져 있습니다. 이 브라우저에만 저장됩니다.",
+    "timerExpiryAlarmShort": "타이머 종료 시 차임"
   }
 }

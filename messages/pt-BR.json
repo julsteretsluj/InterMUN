@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Não foi possível mudar de comitê. Tente novamente ou faça login pelo portão da sala.",
     "dashboardCommitteeAllocationsHeading": "Alocações nesta sessão do comitê",
     "dashboardCommitteeNoAllocationsListed": "Nenhuma linha de alocação está listada para esta sessão.",
-    "dashboardCommitteeApplySwitch": "Mudar painel para este comitê",
-    "timerExpiryAlarmTitle": "Som do temporizador",
-    "timerExpiryAlarmLabel": "Toque um breve sinal sonoro quando qualquer contagem regressiva no aplicativo chegar a zero (cronômetro de fala, limite de tempo da sessão, prazos do hub).",
-    "timerExpiryAlarmHint": "Desativado por padrão. Armazenado apenas neste navegador."
+    "dashboardCommitteeApplySwitch": "Mudar painel para este comitê"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Abrir configurações de aparência e acessibilidade",
     "accountAria": "Conta e preferências",
     "profile": "Perfil",
-    "appearanceAndAccess": "Acessibilidade e cor"
+    "appearanceAndAccess": "Acessibilidade e cor",
+    "timerExpiryAlarmTitle": "Som do temporizador",
+    "timerExpiryAlarmLabel": "Toque um breve sinal sonoro quando qualquer contagem regressiva no aplicativo chegar a zero (cronômetro de fala, limite de tempo da sessão, prazos do hub).",
+    "timerExpiryAlarmHint": "Desativado por padrão. Armazenado apenas neste navegador.",
+    "timerExpiryAlarmShort": "Sinal ao fim do temporizador"
   }
 }

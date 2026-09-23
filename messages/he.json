@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "לא ניתן היה להחליף ועדה. נסה שוב או היכנס דרך שער החדר.",
     "dashboardCommitteeAllocationsHeading": "הקצאות במושב הוועדה",
     "dashboardCommitteeNoAllocationsListed": "לא מופיעות שורות הקצאה עבור הפעלה זו.",
-    "dashboardCommitteeApplySwitch": "החלף את לוח המחוונים לוועדה זו",
-    "timerExpiryAlarmTitle": "צליל טיימר",
-    "timerExpiryAlarmLabel": "הפעל צלצול קצר כאשר כל ספירה לאחור בתוך האפליקציה מגיעה לאפס (טיימר דיבור, מגבלת זמן הפעלה, מועדי מוקד).",
-    "timerExpiryAlarmHint": "כבוי כברירת מחדל. מאוחסן בדפדפן זה בלבד."
+    "dashboardCommitteeApplySwitch": "החלף את לוח המחוונים לוועדה זו"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "פתח הגדרות מראה ונגישות",
     "accountAria": "חשבון והעדפות",
     "profile": "פרופיל",
-    "appearanceAndAccess": "נגישות וצבע"
+    "appearanceAndAccess": "נגישות וצבע",
+    "timerExpiryAlarmTitle": "צליל טיימר",
+    "timerExpiryAlarmLabel": "הפעל צלצול קצר כאשר כל ספירה לאחור בתוך האפליקציה מגיעה לאפס (טיימר דיבור, מגבלת זמן הפעלה, מועדי מוקד).",
+    "timerExpiryAlarmHint": "כבוי כברירת מחדל. מאוחסן בדפדפן זה בלבד.",
+    "timerExpiryAlarmShort": "צלצול בסיום הטיימר"
   }
 }

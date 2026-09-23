@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "无法切换委员会。 请重试或通过房门登录。",
     "dashboardCommitteeAllocationsHeading": "本次委员会会议的分配",
     "dashboardCommitteeNoAllocationsListed": "此会话没有列出分配行。",
-    "dashboardCommitteeApplySwitch": "将仪表板切换到该委员会",
-    "timerExpiryAlarmTitle": "定时器声音",
-    "timerExpiryAlarmLabel": "当任何应用内倒计时达到零时（语音计时器、会话时间限制、中心截止日期），播放短提示音。",
-    "timerExpiryAlarmHint": "默认关闭。 仅存储在此浏览器中。"
+    "dashboardCommitteeApplySwitch": "将仪表板切换到该委员会"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "打开外观与无访问性设置",
     "accountAria": "账户与偏好",
     "profile": "个人资料",
-    "appearanceAndAccess": "无障碍与颜色"
+    "appearanceAndAccess": "无障碍与颜色",
+    "timerExpiryAlarmTitle": "定时器声音",
+    "timerExpiryAlarmLabel": "当任何应用内倒计时达到零时（语音计时器、会话时间限制、中心截止日期），播放短提示音。",
+    "timerExpiryAlarmHint": "默认关闭。 仅存储在此浏览器中。",
+    "timerExpiryAlarmShort": "计时结束时提示音"
   }
 }

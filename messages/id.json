@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Tidak dapat berpindah panitia. Coba lagi atau masuk melalui gerbang kamar.",
     "dashboardCommitteeAllocationsHeading": "Alokasi dalam sesi komite ini",
     "dashboardCommitteeNoAllocationsListed": "Tidak ada baris alokasi yang dicantumkan untuk sesi ini.",
-    "dashboardCommitteeApplySwitch": "Ganti dasbor ke komite ini",
-    "timerExpiryAlarmTitle": "Suara pengatur waktu",
-    "timerExpiryAlarmLabel": "Mainkan lonceng singkat ketika hitungan mundur dalam aplikasi mencapai nol (pengatur waktu bicara, batas waktu sesi, tenggat waktu hub).",
-    "timerExpiryAlarmHint": "Mati secara default. Disimpan di browser ini saja."
+    "dashboardCommitteeApplySwitch": "Ganti dasbor ke komite ini"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Buka pengaturan tampilan dan aksesibilitas",
     "accountAria": "Akun dan preferensi",
     "profile": "Profil",
-    "appearanceAndAccess": "Aksesibilitas & warna"
+    "appearanceAndAccess": "Aksesibilitas & warna",
+    "timerExpiryAlarmTitle": "Suara pengatur waktu",
+    "timerExpiryAlarmLabel": "Mainkan lonceng singkat ketika hitungan mundur dalam aplikasi mencapai nol (pengatur waktu bicara, batas waktu sesi, tenggat waktu hub).",
+    "timerExpiryAlarmHint": "Mati secara default. Disimpan di browser ini saja.",
+    "timerExpiryAlarmShort": "Lonceng saat timer habis"
   }
 }

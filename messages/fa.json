@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "تغییر کمیته ممکن نیست. دوباره امتحان کنید یا از طریق گیت اتاق وارد شوید.",
     "dashboardCommitteeAllocationsHeading": "تخصیص در این جلسه کمیته",
     "dashboardCommitteeNoAllocationsListed": "هیچ ردیف تخصیصی برای این جلسه فهرست نشده است.",
-    "dashboardCommitteeApplySwitch": "داشبورد را به این کمیته تغییر دهید",
-    "timerExpiryAlarmTitle": "صدای تایمر",
-    "timerExpiryAlarmLabel": "وقتی شمارش معکوس درون‌برنامه‌ای به صفر می‌رسد (تایمر گفتار، محدودیت زمانی جلسه، مهلت‌های هاب) صدای زنگ کوتاهی پخش کنید.",
-    "timerExpiryAlarmHint": "به طور پیش فرض خاموش است. فقط در این مرورگر ذخیره می شود."
+    "dashboardCommitteeApplySwitch": "داشبورد را به این کمیته تغییر دهید"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "باز کردن تنظیمات ظاهر و دسترس‌پذیری",
     "accountAria": "حساب و ترجیحات",
     "profile": "نمایه",
-    "appearanceAndAccess": "دسترس‌پذیری و رنگ"
+    "appearanceAndAccess": "دسترس‌پذیری و رنگ",
+    "timerExpiryAlarmTitle": "صدای تایمر",
+    "timerExpiryAlarmLabel": "وقتی شمارش معکوس درون‌برنامه‌ای به صفر می‌رسد (تایمر گفتار، محدودیت زمانی جلسه، مهلت‌های هاب) صدای زنگ کوتاهی پخش کنید.",
+    "timerExpiryAlarmHint": "به طور پیش فرض خاموش است. فقط در این مرورگر ذخیره می شود.",
+    "timerExpiryAlarmShort": "زنگ هنگام پایان تایمر"
   }
 }

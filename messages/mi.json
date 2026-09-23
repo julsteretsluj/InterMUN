@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Kaore i taea te huri komiti. Ngana ano, takiuru mai ranei ma te keeti rūma.",
     "dashboardCommitteeAllocationsHeading": "Nga tohatoha i tenei huihuinga komiti",
     "dashboardCommitteeNoAllocationsListed": "Karekau he rarangi toha i te raarangi mo tenei wahanga.",
-    "dashboardCommitteeApplySwitch": "Hurihia te papatohu ki tenei komiti",
-    "timerExpiryAlarmTitle": "Oro taima",
-    "timerExpiryAlarmLabel": "Whakatangihia he tangihanga poto ina tae ki te kore te kaute-a-taupānga (te taima whaikorero, te rohe wa o te huihuinga, nga wa kati).",
-    "timerExpiryAlarmHint": "Weto ma te taunoa. Kua rongoa ki tenei kaitirotiro anake."
+    "dashboardCommitteeApplySwitch": "Hurihia te papatohu ki tenei komiti"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Tuwhera ngā tautuhinga āhua me te wātea ā-tae",
     "accountAria": "Pūkete me ngā manakohanga",
     "profile": "Kōtaha",
-    "appearanceAndAccess": "Wātea ā-tae me te tae"
+    "appearanceAndAccess": "Wātea ā-tae me te tae",
+    "timerExpiryAlarmTitle": "Oro taima",
+    "timerExpiryAlarmLabel": "Whakatangihia he tangihanga poto ina tae ki te kore te kaute-a-taupānga (te taima whaikorero, te rohe wa o te huihuinga, nga wa kati).",
+    "timerExpiryAlarmHint": "Weto ma te taunoa. Kua rongoa ki tenei kaitirotiro anake.",
+    "timerExpiryAlarmShort": "Tangihanga i te kore"
   }
 }

@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Impossible de changer de comité. Réessayez ou connectez-vous via la porte de la chambre.",
     "dashboardCommitteeAllocationsHeading": "Allocations pour cette session du comité",
     "dashboardCommitteeNoAllocationsListed": "Aucune ligne d'allocation n'est répertoriée pour cette session.",
-    "dashboardCommitteeApplySwitch": "Basculer le tableau de bord vers ce comité",
-    "timerExpiryAlarmTitle": "Son de la minuterie",
-    "timerExpiryAlarmLabel": "Jouez un court carillon lorsqu'un compte à rebours dans l'application atteint zéro (minuterie de parole, limite de durée de session, délais du hub).",
-    "timerExpiryAlarmHint": "Désactivé par défaut. Stocké dans ce navigateur uniquement."
+    "dashboardCommitteeApplySwitch": "Basculer le tableau de bord vers ce comité"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Ouvrir les réglages d’apparence et d’accessibilité",
     "accountAria": "Compte et préférences",
     "profile": "Profil",
-    "appearanceAndAccess": "Accessibilité et couleur"
+    "appearanceAndAccess": "Accessibilité et couleur",
+    "timerExpiryAlarmTitle": "Son de la minuterie",
+    "timerExpiryAlarmLabel": "Jouez un court carillon lorsqu'un compte à rebours dans l'application atteint zéro (minuterie de parole, limite de durée de session, délais du hub).",
+    "timerExpiryAlarmHint": "Désactivé par défaut. Stocké dans ce navigateur uniquement.",
+    "timerExpiryAlarmShort": "Carillon en fin de minuteur"
   }
 }

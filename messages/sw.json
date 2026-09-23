@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Haikuweza kubadilisha kamati. Jaribu tena au ingia kupitia lango la chumba.",
     "dashboardCommitteeAllocationsHeading": "Mgao katika kikao hiki cha kamati",
     "dashboardCommitteeNoAllocationsListed": "Hakuna safu mlalo za ugawaji zilizoorodheshwa kwa kipindi hiki.",
-    "dashboardCommitteeApplySwitch": "Badili dashibodi hadi kwenye kamati hii",
-    "timerExpiryAlarmTitle": "Sauti ya kipima muda",
-    "timerExpiryAlarmLabel": "Cheza sauti ya kengele fupi wakati hesabu yoyote ya ndani ya programu inapofikia sifuri (kipima muda cha hotuba, kikomo cha muda wa kikao, makataa ya kituo).",
-    "timerExpiryAlarmHint": "Imezimwa kwa chaguo-msingi. Imehifadhiwa katika kivinjari hiki pekee."
+    "dashboardCommitteeApplySwitch": "Badili dashibodi hadi kwenye kamati hii"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Fungua mipangilio ya muonekano na ufikivu",
     "accountAria": "Akaunti na mapendeleo",
     "profile": "Wasifu",
-    "appearanceAndAccess": "Ufikivu na rangi"
+    "appearanceAndAccess": "Ufikivu na rangi",
+    "timerExpiryAlarmTitle": "Sauti ya kipima muda",
+    "timerExpiryAlarmLabel": "Cheza sauti ya kengele fupi wakati hesabu yoyote ya ndani ya programu inapofikia sifuri (kipima muda cha hotuba, kikomo cha muda wa kikao, makataa ya kituo).",
+    "timerExpiryAlarmHint": "Imezimwa kwa chaguo-msingi. Imehifadhiwa katika kivinjari hiki pekee.",
+    "timerExpiryAlarmShort": "Kengele timer ikifika sifuri"
   }
 }

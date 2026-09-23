@@ -9,6 +9,7 @@ import { ChevronDown, Settings } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AccessibilitySettingsPanel } from "@/components/AccessibilitySettingsPanel";
 import { ThemeSettingsPanel } from "@/components/ThemeSettingsPanel";
+import { TimerExpiryAlarmSettingsPanel } from "@/components/TimerExpiryAlarmSettingsPanel";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { SignOutButton } from "@/components/SignOutButton";
 import {
@@ -57,7 +58,7 @@ type AccountProps = {
 
 /**
  * Preferences / account disclosure for chrome surfaces.
- * Language lives in a separate control; this menu covers appearance, colour, and accessibility.
+ * Language lives in a separate control; this menu covers appearance, colour, accessibility, and timer sound.
  */
 export function ChromePreferencesMenu({
   className,
@@ -193,6 +194,7 @@ export function ChromePreferencesMenu({
             <p className="tag tag-neutral mb-0">{t("appearanceAndAccess")}</p>
             <ThemeSettingsPanel />
             <AccessibilitySettingsPanel />
+            <TimerExpiryAlarmSettingsPanel />
           </div>
 
           {footer}

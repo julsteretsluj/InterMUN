@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "委員会を切り替えることができませんでした。 もう一度試すか、ルームゲートからサインインしてください。",
     "dashboardCommitteeAllocationsHeading": "この委員会セッションでの割り当て",
     "dashboardCommitteeNoAllocationsListed": "このセッションには割り当て行がリストされていません。",
-    "dashboardCommitteeApplySwitch": "ダッシュボードをこの委員会に切り替える",
-    "timerExpiryAlarmTitle": "タイマー音",
-    "timerExpiryAlarmLabel": "アプリ内のカウントダウンがゼロになったときに短いチャイムを鳴らします (スピーチ タイマー、セッション時間制限、ハブの期限)。",
-    "timerExpiryAlarmHint": "デフォルトではオフです。 このブラウザにのみ保存されます。"
+    "dashboardCommitteeApplySwitch": "ダッシュボードをこの委員会に切り替える"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "外観とアクセシビリティの設定を開く",
     "accountAria": "アカウントと設定",
     "profile": "プロフィール",
-    "appearanceAndAccess": "アクセシビリティとカラー"
+    "appearanceAndAccess": "アクセシビリティとカラー",
+    "timerExpiryAlarmTitle": "タイマー音",
+    "timerExpiryAlarmLabel": "アプリ内のカウントダウンがゼロになったときに短いチャイムを鳴らします (スピーチ タイマー、セッション時間制限、ハブの期限)。",
+    "timerExpiryAlarmHint": "デフォルトではオフです。 このブラウザにのみ保存されます。",
+    "timerExpiryAlarmShort": "タイマー終了時にチャイム"
   }
 }

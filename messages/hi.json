@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "समिति नहीं बदली जा सकी. पुनः प्रयास करें या कमरे के गेट से साइन इन करें।",
     "dashboardCommitteeAllocationsHeading": "इस समिति सत्र में आवंटन",
     "dashboardCommitteeNoAllocationsListed": "इस सत्र के लिए कोई आवंटन पंक्तियाँ सूचीबद्ध नहीं हैं।",
-    "dashboardCommitteeApplySwitch": "डैशबोर्ड को इस समिति में बदलें",
-    "timerExpiryAlarmTitle": "टाइमर ध्वनि",
-    "timerExpiryAlarmLabel": "जब कोई इन-ऐप उलटी गिनती शून्य (भाषण टाइमर, सत्र समय सीमा, हब समय सीमा) तक पहुंच जाए तो एक छोटी घंटी बजाएं।",
-    "timerExpiryAlarmHint": "डिफ़ॉल्ट रूप से बंद. केवल इस ब्राउज़र में संग्रहीत."
+    "dashboardCommitteeApplySwitch": "डैशबोर्ड को इस समिति में बदलें"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "रूप और पहुँच सेटिंग खोलें",
     "accountAria": "खाता और प्राथमिकताएँ",
     "profile": "प्रोफ़ाइल",
-    "appearanceAndAccess": "पहुँचयोग्यता और रंग"
+    "appearanceAndAccess": "पहुँचयोग्यता और रंग",
+    "timerExpiryAlarmTitle": "टाइमर ध्वनि",
+    "timerExpiryAlarmLabel": "जब कोई इन-ऐप उलटी गिनती शून्य (भाषण टाइमर, सत्र समय सीमा, हब समय सीमा) तक पहुंच जाए तो एक छोटी घंटी बजाएं।",
+    "timerExpiryAlarmHint": "डिफ़ॉल्ट रूप से बंद. केवल इस ब्राउज़र में संग्रहीत.",
+    "timerExpiryAlarmShort": "टाइमर शून्य पर घंटी"
   }
 }

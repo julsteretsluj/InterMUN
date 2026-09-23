@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Kan niet van commissie wisselen. Probeer het opnieuw of log in via het kamerpoortje.",
     "dashboardCommitteeAllocationsHeading": "Toewijzingen in deze commissiesessie",
     "dashboardCommitteeNoAllocationsListed": "Er zijn geen toewijzingsrijen vermeld voor deze sessie.",
-    "dashboardCommitteeApplySwitch": "Schakel dashboard naar deze commissie",
-    "timerExpiryAlarmTitle": "Timergeluid",
-    "timerExpiryAlarmLabel": "Speel een korte bel wanneer een in-app-aftelling nul bereikt (spraaktimer, sessietijdslimiet, hub-deadlines).",
-    "timerExpiryAlarmHint": "Standaard uitgeschakeld. Alleen in deze browser opgeslagen."
+    "dashboardCommitteeApplySwitch": "Schakel dashboard naar deze commissie"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Weergave- en toegankelijkheidsinstellingen openen",
     "accountAria": "Account en voorkeuren",
     "profile": "Profiel",
-    "appearanceAndAccess": "Toegankelijkheid & kleur"
+    "appearanceAndAccess": "Toegankelijkheid & kleur",
+    "timerExpiryAlarmTitle": "Timergeluid",
+    "timerExpiryAlarmLabel": "Speel een korte bel wanneer een in-app-aftelling nul bereikt (spraaktimer, sessietijdslimiet, hub-deadlines).",
+    "timerExpiryAlarmHint": "Standaard uitgeschakeld. Alleen in deze browser opgeslagen.",
+    "timerExpiryAlarmShort": "Bel bij timer-einde"
   }
 }

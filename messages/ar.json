@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "لا يمكن تبديل اللجنة. حاول مرة أخرى أو قم بتسجيل الدخول عبر بوابة الغرفة.",
     "dashboardCommitteeAllocationsHeading": "المخصصات في جلسة اللجنة هذه",
     "dashboardCommitteeNoAllocationsListed": "لم يتم سرد أية صفوف تخصيص لهذه الجلسة.",
-    "dashboardCommitteeApplySwitch": "تبديل لوحة القيادة إلى هذه اللجنة",
-    "timerExpiryAlarmTitle": "صوت الموقت",
-    "timerExpiryAlarmLabel": "قم بتشغيل رنين قصير عندما يصل أي عد تنازلي داخل التطبيق إلى الصفر (مؤقت الكلام، الحد الزمني للجلسة، المواعيد النهائية للمركز).",
-    "timerExpiryAlarmHint": "إيقاف بشكل افتراضي. مخزنة في هذا المتصفح فقط."
+    "dashboardCommitteeApplySwitch": "تبديل لوحة القيادة إلى هذه اللجنة"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "فتح إعدادات المظهر وإمكانية الوصول",
     "accountAria": "الحساب والتفضيلات",
     "profile": "الملف الشخصي",
-    "appearanceAndAccess": "إمكانية الوصول واللون"
+    "appearanceAndAccess": "إمكانية الوصول واللون",
+    "timerExpiryAlarmTitle": "صوت الموقت",
+    "timerExpiryAlarmLabel": "قم بتشغيل رنين قصير عندما يصل أي عد تنازلي داخل التطبيق إلى الصفر (مؤقت الكلام، الحد الزمني للجلسة، المواعيد النهائية للمركز).",
+    "timerExpiryAlarmHint": "إيقاف بشكل افتراضي. مخزنة في هذا المتصفح فقط.",
+    "timerExpiryAlarmShort": "رنين عند انتهاء المؤقت"
   }
 }

@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "কমিটি পরিবর্তন করা যায়নি। আবার চেষ্টা করুন বা রুমের গেট দিয়ে সাইন ইন করুন।",
     "dashboardCommitteeAllocationsHeading": "এই কমিটির অধিবেশনে বরাদ্দ",
     "dashboardCommitteeNoAllocationsListed": "এই অধিবেশনের জন্য কোনো বরাদ্দ সারি তালিকাভুক্ত করা হয় না।",
-    "dashboardCommitteeApplySwitch": "এই কমিটিতে ড্যাশবোর্ড পরিবর্তন করুন",
-    "timerExpiryAlarmTitle": "টাইমার শব্দ",
-    "timerExpiryAlarmLabel": "যেকোনো ইন-অ্যাপ কাউন্টডাউন শূন্যে পৌঁছালে একটি ছোট চাঁই বাজান (স্পিচ টাইমার, সেশনের সময়সীমা, হাবের সময়সীমা)।",
-    "timerExpiryAlarmHint": "ডিফল্টরূপে বন্ধ। শুধুমাত্র এই ব্রাউজারে সংরক্ষিত।"
+    "dashboardCommitteeApplySwitch": "এই কমিটিতে ড্যাশবোর্ড পরিবর্তন করুন"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "চেহারা ও অ্যাক্সেসিবিলিটি সেটিং খুলুন",
     "accountAria": "অ্যাকাউন্ট ও পছন্দসমূহ",
     "profile": "প্রোফাইল",
-    "appearanceAndAccess": "অ্যাক্সেসিবিলিটি ও রঙ"
+    "appearanceAndAccess": "অ্যাক্সেসিবিলিটি ও রঙ",
+    "timerExpiryAlarmTitle": "টাইমার শব্দ",
+    "timerExpiryAlarmLabel": "যেকোনো ইন-অ্যাপ কাউন্টডাউন শূন্যে পৌঁছালে একটি ছোট চাঁই বাজান (স্পিচ টাইমার, সেশনের সময়সীমা, হাবের সময়সীমা)।",
+    "timerExpiryAlarmHint": "ডিফল্টরূপে বন্ধ। শুধুমাত্র এই ব্রাউজারে সংরক্ষিত।",
+    "timerExpiryAlarmShort": "টাইমার শূন্যে চাঁই"
   }
 }

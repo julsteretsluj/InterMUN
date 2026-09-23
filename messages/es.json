@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "No se pudo cambiar de comité. Inténtalo de nuevo o inicia sesión a través de la puerta de la habitación.",
     "dashboardCommitteeAllocationsHeading": "Asignaciones en esta sesión del comité",
     "dashboardCommitteeNoAllocationsListed": "No se enumeran filas de asignación para esta sesión.",
-    "dashboardCommitteeApplySwitch": "Cambiar el panel a este comité",
-    "timerExpiryAlarmTitle": "Sonido del temporizador",
-    "timerExpiryAlarmLabel": "Reproduzca un breve timbre cuando cualquier cuenta regresiva en la aplicación llegue a cero (temporizador de voz, límite de tiempo de sesión, fechas límite del centro).",
-    "timerExpiryAlarmHint": "Desactivado de forma predeterminada. Almacenado únicamente en este navegador."
+    "dashboardCommitteeApplySwitch": "Cambiar el panel a este comité"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Abrir ajustes de apariencia y accesibilidad",
     "accountAria": "Cuenta y preferencias",
     "profile": "Perfil",
-    "appearanceAndAccess": "Accesibilidad y color"
+    "appearanceAndAccess": "Accesibilidad y color",
+    "timerExpiryAlarmTitle": "Sonido del temporizador",
+    "timerExpiryAlarmLabel": "Reproduzca un breve timbre cuando cualquier cuenta regresiva en la aplicación llegue a cero (temporizador de voz, límite de tiempo de sesión, fechas límite del centro).",
+    "timerExpiryAlarmHint": "Desactivado de forma predeterminada. Almacenado únicamente en este navegador.",
+    "timerExpiryAlarmShort": "Campanilla al llegar a cero"
   }
 }

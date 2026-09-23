@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Der Ausschuss konnte nicht gewechselt werden. Versuchen Sie es noch einmal oder melden Sie sich über das Zimmertor an.",
     "dashboardCommitteeAllocationsHeading": "Zuteilungen in dieser Ausschusssitzung",
     "dashboardCommitteeNoAllocationsListed": "Für diese Sitzung sind keine Zuordnungszeilen aufgeführt.",
-    "dashboardCommitteeApplySwitch": "Dashboard zu diesem Ausschuss wechseln",
-    "timerExpiryAlarmTitle": "Timer-Sound",
-    "timerExpiryAlarmLabel": "Spielen Sie einen kurzen Signalton ab, wenn ein In-App-Countdown Null erreicht (Sprachtimer, Sitzungszeitlimit, Hub-Fristen).",
-    "timerExpiryAlarmHint": "Standardmäßig deaktiviert. Wird nur in diesem Browser gespeichert."
+    "dashboardCommitteeApplySwitch": "Dashboard zu diesem Ausschuss wechseln"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Darstellung und Barrierefreiheit öffnen",
     "accountAria": "Konto und Einstellungen",
     "profile": "Profil",
-    "appearanceAndAccess": "Barrierefreiheit & Farbe"
+    "appearanceAndAccess": "Barrierefreiheit & Farbe",
+    "timerExpiryAlarmTitle": "Timer-Sound",
+    "timerExpiryAlarmLabel": "Spielen Sie einen kurzen Signalton ab, wenn ein In-App-Countdown Null erreicht (Sprachtimer, Sitzungszeitlimit, Hub-Fristen).",
+    "timerExpiryAlarmHint": "Standardmäßig deaktiviert. Wird nur in diesem Browser gespeichert.",
+    "timerExpiryAlarmShort": "Ton bei Timer-Ende"
   }
 }

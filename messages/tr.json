@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Komite değiştirilemedi. Tekrar deneyin veya oda kapısından giriş yapın.",
     "dashboardCommitteeAllocationsHeading": "Bu komite oturumundaki tahsisler",
     "dashboardCommitteeNoAllocationsListed": "Bu oturum için hiçbir ayırma satırı listelenmiyor.",
-    "dashboardCommitteeApplySwitch": "Kontrol panelini bu komiteye değiştir",
-    "timerExpiryAlarmTitle": "Zamanlayıcı sesi",
-    "timerExpiryAlarmLabel": "Herhangi bir uygulama içi geri sayım sıfıra ulaştığında kısa bir zil sesi çalın (konuşma zamanlayıcısı, oturum süresi sınırı, hub son tarihleri).",
-    "timerExpiryAlarmHint": "Varsayılan olarak kapalıdır. Yalnızca bu tarayıcıda depolanır."
+    "dashboardCommitteeApplySwitch": "Kontrol panelini bu komiteye değiştir"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Görünüm ve erişilebilirlik ayarlarını aç",
     "accountAria": "Hesap ve tercihler",
     "profile": "Profil",
-    "appearanceAndAccess": "Erişilebilirlik ve renk"
+    "appearanceAndAccess": "Erişilebilirlik ve renk",
+    "timerExpiryAlarmTitle": "Zamanlayıcı sesi",
+    "timerExpiryAlarmLabel": "Herhangi bir uygulama içi geri sayım sıfıra ulaştığında kısa bir zil sesi çalın (konuşma zamanlayıcısı, oturum süresi sınırı, hub son tarihleri).",
+    "timerExpiryAlarmHint": "Varsayılan olarak kapalıdır. Yalnızca bu tarayıcıda depolanır.",
+    "timerExpiryAlarmShort": "Sıfırda zil sesi"
   }
 }

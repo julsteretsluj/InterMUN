@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "ไม่สามารถเปลี่ยนคณะได้ ลองอีกครั้งหรือลงชื่อเข้าใช้ผ่านประตูห้อง",
     "dashboardCommitteeAllocationsHeading": "การจัดสรรในสมัยคณะกรรมการชุดนี้",
     "dashboardCommitteeNoAllocationsListed": "ไม่มีแถวการจัดสรรแสดงอยู่ในเซสชันนี้",
-    "dashboardCommitteeApplySwitch": "สลับแดชบอร์ดไปที่คณะกรรมการนี้",
-    "timerExpiryAlarmTitle": "เสียงจับเวลา",
-    "timerExpiryAlarmLabel": "เล่นเสียงระฆังสั้น ๆ เมื่อการนับถอยหลังในแอปถึงศูนย์ (ตัวจับเวลาคำพูด การจำกัดเวลาเซสชัน กำหนดเวลาของฮับ)",
-    "timerExpiryAlarmHint": "ปิดโดยค่าเริ่มต้น เก็บไว้ในเบราว์เซอร์นี้เท่านั้น"
+    "dashboardCommitteeApplySwitch": "สลับแดชบอร์ดไปที่คณะกรรมการนี้"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "เปิดการตั้งค่าลักษณะและการเข้าถึง",
     "accountAria": "บัญชีและการตั้งค่า",
     "profile": "โปรไฟล์",
-    "appearanceAndAccess": "การเข้าถึงและสี"
+    "appearanceAndAccess": "การเข้าถึงและสี",
+    "timerExpiryAlarmTitle": "เสียงจับเวลา",
+    "timerExpiryAlarmLabel": "เล่นเสียงระฆังสั้น ๆ เมื่อการนับถอยหลังในแอปถึงศูนย์ (ตัวจับเวลาคำพูด การจำกัดเวลาเซสชัน กำหนดเวลาของฮับ)",
+    "timerExpiryAlarmHint": "ปิดโดยค่าเริ่มต้น เก็บไว้ในเบราว์เซอร์นี้เท่านั้น",
+    "timerExpiryAlarmShort": "เสียงเมื่อหมดเวลา"
   }
 }

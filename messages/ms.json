@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Tidak dapat bertukar jawatankuasa. Cuba lagi atau log masuk melalui pintu pagar bilik.",
     "dashboardCommitteeAllocationsHeading": "Peruntukan dalam sesi panitia ini",
     "dashboardCommitteeNoAllocationsListed": "Tiada baris peruntukan disenaraikan untuk sesi ini.",
-    "dashboardCommitteeApplySwitch": "Tukar papan pemuka kepada jawatankuasa ini",
-    "timerExpiryAlarmTitle": "Bunyi pemasa",
-    "timerExpiryAlarmLabel": "Mainkan loceng pendek apabila mana-mana kira detik dalam apl mencecah sifar (pemasa pertuturan, had masa sesi, tarikh akhir hab).",
-    "timerExpiryAlarmHint": "Mati secara lalai. Disimpan dalam pelayar ini sahaja."
+    "dashboardCommitteeApplySwitch": "Tukar papan pemuka kepada jawatankuasa ini"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Buka tetapan penampilan dan kebolehaksesan",
     "accountAria": "Akaun dan keutamaan",
     "profile": "Profil",
-    "appearanceAndAccess": "Kebolehaksesan & warna"
+    "appearanceAndAccess": "Kebolehaksesan & warna",
+    "timerExpiryAlarmTitle": "Bunyi pemasa",
+    "timerExpiryAlarmLabel": "Mainkan loceng pendek apabila mana-mana kira detik dalam apl mencecah sifar (pemasa pertuturan, had masa sesi, tarikh akhir hab).",
+    "timerExpiryAlarmHint": "Mati secara lalai. Disimpan dalam pelayar ini sahaja.",
+    "timerExpiryAlarmShort": "Loceng bila pemasa habis"
   }
 }

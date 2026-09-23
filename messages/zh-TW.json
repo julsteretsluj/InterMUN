@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "無法切換委員會。 請重試或透過房門登入。",
     "dashboardCommitteeAllocationsHeading": "本次委員會會議的分配",
     "dashboardCommitteeNoAllocationsListed": "此會話沒有列出分配行。",
-    "dashboardCommitteeApplySwitch": "將儀表板切換到該委員會",
-    "timerExpiryAlarmTitle": "定時器聲音",
-    "timerExpiryAlarmLabel": "當任何應用程式內倒數達到零時（語音計時器、會話時間限制、中心截止日期），播放短提示音。",
-    "timerExpiryAlarmHint": "預設關閉。 僅儲存在此瀏覽器中。"
+    "dashboardCommitteeApplySwitch": "將儀表板切換到該委員會"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "開啟外觀與無障礙設定",
     "accountAria": "帳戶與偏好",
     "profile": "個人資料",
-    "appearanceAndAccess": "無障礙與顏色"
+    "appearanceAndAccess": "無障礙與顏色",
+    "timerExpiryAlarmTitle": "定時器聲音",
+    "timerExpiryAlarmLabel": "當任何應用程式內倒數達到零時（語音計時器、會話時間限制、中心截止日期），播放短提示音。",
+    "timerExpiryAlarmHint": "預設關閉。 僅儲存在此瀏覽器中。",
+    "timerExpiryAlarmShort": "計時結束時提示音"
   }
 }

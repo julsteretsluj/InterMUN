@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "ບໍ່ສາມາດປ່ຽນຄະນະກໍາມະໄດ້. ລອງອີກຄັ້ງ ຫຼືເຂົ້າສູ່ລະບົບຜ່ານປະຕູຫ້ອງ.",
     "dashboardCommitteeAllocationsHeading": "ການຈັດສັນໃນກອງປະຊຸມຄະນະກໍາມະການນີ້",
     "dashboardCommitteeNoAllocationsListed": "ບໍ່ມີແຖວການຈັດສັນຢູ່ໃນລາຍການສໍາລັບເຊດຊັນນີ້.",
-    "dashboardCommitteeApplySwitch": "ປ່ຽນ dashboard ໄປຫາຄະນະກໍາມະການນີ້",
-    "timerExpiryAlarmTitle": "ສຽງຈັບເວລາ",
-    "timerExpiryAlarmLabel": "ຫຼິ້ນກະດິ່ງສັ້ນເມື່ອການນັບຖອຍຫຼັງໃນແອັບຮອດສູນ (ໂມງຈັບເວລາສຽງເວົ້າ, ກຳນົດເວລາຂອງເຊດຊັນ, ເສັ້ນຕາຍສູນ).",
-    "timerExpiryAlarmHint": "ປິດຕາມຄ່າເລີ່ມຕົ້ນ. ເກັບຮັກສາໄວ້ໃນຕົວທ່ອງເວັບນີ້ເທົ່ານັ້ນ."
+    "dashboardCommitteeApplySwitch": "ປ່ຽນ dashboard ໄປຫາຄະນະກໍາມະການນີ້"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "ເປີດການຕັ້ງຄ່າຮູບແບບ ແລະ ການເຂົ້າເຖິງ",
     "accountAria": "ບັນຊີ ແລະ ການຕັ້ງຄ່າ",
     "profile": "ໂປຣໄຟລ໌",
-    "appearanceAndAccess": "ການເຂົ້າເຖິງ ແລະ ສີ"
+    "appearanceAndAccess": "ການເຂົ້າເຖິງ ແລະ ສີ",
+    "timerExpiryAlarmTitle": "ສຽງຈັບເວລາ",
+    "timerExpiryAlarmLabel": "ຫຼິ້ນກະດິ່ງສັ້ນເມື່ອການນັບຖອຍຫຼັງໃນແອັບຮອດສູນ (ໂມງຈັບເວລາສຽງເວົ້າ, ກຳນົດເວລາຂອງເຊດຊັນ, ເສັ້ນຕາຍສູນ).",
+    "timerExpiryAlarmHint": "ປິດຕາມຄ່າເລີ່ມຕົ້ນ. ເກັບຮັກສາໄວ້ໃນຕົວທ່ອງເວັບນີ້ເທົ່ານັ້ນ.",
+    "timerExpiryAlarmShort": "ສຽງເມື່ອຮອດສູນ"
   }
 }

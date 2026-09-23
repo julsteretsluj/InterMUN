@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Impossibile cambiare comitato. Riprova o accedi tramite il cancello della stanza.",
     "dashboardCommitteeAllocationsHeading": "Assegnazioni in questa sessione della commissione",
     "dashboardCommitteeNoAllocationsListed": "Per questa sessione non sono elencate righe di allocazione.",
-    "dashboardCommitteeApplySwitch": "Passa la dashboard a questo comitato",
-    "timerExpiryAlarmTitle": "Suono del timer",
-    "timerExpiryAlarmLabel": "Riproduci un breve segnale acustico quando il conto alla rovescia in-app raggiunge lo zero (timer vocale, limite di tempo della sessione, scadenze dell'hub).",
-    "timerExpiryAlarmHint": "Disattivato per impostazione predefinita. Memorizzato solo in questo browser."
+    "dashboardCommitteeApplySwitch": "Passa la dashboard a questo comitato"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Apri impostazioni di aspetto e accessibilità",
     "accountAria": "Account e preferenze",
     "profile": "Profilo",
-    "appearanceAndAccess": "Accessibilità e colore"
+    "appearanceAndAccess": "Accessibilità e colore",
+    "timerExpiryAlarmTitle": "Suono del timer",
+    "timerExpiryAlarmLabel": "Riproduci un breve segnale acustico quando il conto alla rovescia in-app raggiunge lo zero (timer vocale, limite di tempo della sessione, scadenze dell'hub).",
+    "timerExpiryAlarmHint": "Disattivato per impostazione predefinita. Memorizzato solo in questo browser.",
+    "timerExpiryAlarmShort": "Suono a fine timer"
   }
 }

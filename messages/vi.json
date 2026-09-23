@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Không thể chuyển đổi ủy ban. Hãy thử lại hoặc đăng nhập qua cổng phòng.",
     "dashboardCommitteeAllocationsHeading": "Phân bổ trong phiên họp ủy ban này",
     "dashboardCommitteeNoAllocationsListed": "Không có hàng phân bổ nào được liệt kê cho phiên này.",
-    "dashboardCommitteeApplySwitch": "Chuyển bảng điều khiển sang ủy ban này",
-    "timerExpiryAlarmTitle": "Âm thanh hẹn giờ",
-    "timerExpiryAlarmLabel": "Phát một tiếng chuông ngắn khi bất kỳ bộ đếm ngược nào trong ứng dụng về 0 (đồng hồ đếm giờ phát biểu, giới hạn thời gian phiên, thời hạn trung tâm).",
-    "timerExpiryAlarmHint": "Tắt theo mặc định. Chỉ được lưu trữ trong trình duyệt này."
+    "dashboardCommitteeApplySwitch": "Chuyển bảng điều khiển sang ủy ban này"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Mở cài đặt giao diện và trợ năng",
     "accountAria": "Tài khoản và tùy chọn",
     "profile": "Hồ sơ",
-    "appearanceAndAccess": "Trợ năng và màu sắc"
+    "appearanceAndAccess": "Trợ năng và màu sắc",
+    "timerExpiryAlarmTitle": "Âm thanh hẹn giờ",
+    "timerExpiryAlarmLabel": "Phát một tiếng chuông ngắn khi bất kỳ bộ đếm ngược nào trong ứng dụng về 0 (đồng hồ đếm giờ phát biểu, giới hạn thời gian phiên, thời hạn trung tâm).",
+    "timerExpiryAlarmHint": "Tắt theo mặc định. Chỉ được lưu trữ trong trình duyệt này.",
+    "timerExpiryAlarmShort": "Chuông khi hết giờ"
   }
 }

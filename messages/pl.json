@@ -3453,10 +3453,7 @@
     "dashboardCommitteeSwitchError": "Nie można zmienić komisji. Spróbuj ponownie lub zaloguj się przez bramę do pokoju.",
     "dashboardCommitteeAllocationsHeading": "Przydziały na tej sesji komisji",
     "dashboardCommitteeNoAllocationsListed": "Dla tej sesji nie są wyświetlane żadne wiersze alokacji.",
-    "dashboardCommitteeApplySwitch": "Przełącz pulpit na ten komitet",
-    "timerExpiryAlarmTitle": "Dźwięk timera",
-    "timerExpiryAlarmLabel": "Odtwórz krótki sygnał dźwiękowy, gdy odliczanie w aplikacji osiągnie zero (licznik mowy, limit czasu sesji, ostateczne terminy w centrum).",
-    "timerExpiryAlarmHint": "Domyślnie wyłączone. Przechowywane wyłącznie w tej przeglądarce."
+    "dashboardCommitteeApplySwitch": "Przełącz pulpit na ten komitet"
   },
   "guides": {
     "default": {
@@ -5865,6 +5862,10 @@
     "openAria": "Otwórz ustawienia wyglądu i dostępności",
     "accountAria": "Konto i preferencje",
     "profile": "Profil",
-    "appearanceAndAccess": "Dostępność i kolor"
+    "appearanceAndAccess": "Dostępność i kolor",
+    "timerExpiryAlarmTitle": "Dźwięk timera",
+    "timerExpiryAlarmLabel": "Odtwórz krótki sygnał dźwiękowy, gdy odliczanie w aplikacji osiągnie zero (licznik mowy, limit czasu sesji, ostateczne terminy w centrum).",
+    "timerExpiryAlarmHint": "Domyślnie wyłączone. Przechowywane wyłącznie w tej przeglądarce.",
+    "timerExpiryAlarmShort": "Dźwięk przy zerze"
   }
 }

@@ -581,7 +581,11 @@
     "openAria": "Open appearance and accessibility settings",
     "accountAria": "Account and preferences",
     "profile": "Profile",
-    "appearanceAndAccess": "Accessibility & colour"
+    "appearanceAndAccess": "Accessibility & colour",
+    "timerExpiryAlarmTitle": "Timer sound",
+    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
+    "timerExpiryAlarmHint": "Off by default. Stored in this browser only.",
+    "timerExpiryAlarmShort": "Chime when timers hit zero"
   },
   "dashboardTopBar": {
     "delegateHub": "Delegate hub",
@@ -3850,10 +3854,7 @@
     "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
     "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
     "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "layers": {
