@@ -3319,10 +3319,10 @@
       "agenda": "의제"
     },
     "roll": {
-      "absent": "결석 (롤)",
-      "present_abstain": "있음 — 기권할 수 있음(롤)",
-      "present_voting": "현재 및 투표(롤)",
-      "unknown": "— (롤)"
+      "absent": "결석",
+      "present_abstain": "있음 — 기권할 수 있음",
+      "present_voting": "현재 및 투표",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

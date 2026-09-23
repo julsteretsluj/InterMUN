@@ -3865,7 +3865,7 @@ export function SessionControlClient({
                           <div>
                             <p className="font-medium text-brand-navy">{displayCountry(call.country)}</p>
                             <p className="text-xs text-brand-muted mt-0.5">
-                              Roll: {rollLabel} · Recorded:{" "}
+                              {rollLabel} · Recorded:{" "}
                               <span className="font-medium text-brand-navy">
                                 {recorded === "yes"
                                   ? tSessionControl("yes")

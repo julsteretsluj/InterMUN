@@ -3319,10 +3319,10 @@
       "agenda": "အစီအစဉ်"
     },
     "roll": {
-      "absent": "ယောင် (လိပ်)",
-      "present_abstain": "ပစ္စုပ္ပန်- ကြဉ်ရှောင်ခြင်း (လိပ်)၊",
-      "present_voting": "ပစ္စုပ္ပန်နှင့် မဲပေးခြင်း (အလိပ်)",
-      "unknown": "— (လိပ်)"
+      "absent": "ပျက်ကွက်",
+      "present_abstain": "လက်ရှိ — ရှောင်နိုင်သည်",
+      "present_voting": "လက်ရှိနှင့် မဲပေးခြင်း",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

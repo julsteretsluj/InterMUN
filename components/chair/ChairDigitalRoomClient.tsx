@@ -313,7 +313,7 @@ export function ChairDigitalRoomClient({
                           rollClass
                         )}
                       >
-                        {t("rollPrefix", { label: rollLabel })}
+                        {rollLabel}
                       </span>
                       <span
                         className={cn(

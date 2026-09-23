@@ -571,7 +571,7 @@ export function VotingPanel({
                                 <p className="mt-0.5 text-xs text-brand-muted">{t("unseatedPlacard")}</p>
                               ) : null}
                               <p className="mt-0.5 text-xs text-brand-muted">
-                                {t("rollPrefix")} {rollAttendanceLabel(row.rollAttendance)} · {t("recordedPrefix")}{" "}
+                                {rollAttendanceLabel(row.rollAttendance)} · {t("recordedPrefix")}{" "}
                                 <span className="font-medium text-brand-navy">
                                   {recorded === "yes"
                                     ? t("recordedYes")

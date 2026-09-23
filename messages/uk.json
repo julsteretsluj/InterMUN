@@ -3319,10 +3319,10 @@
       "agenda": "Порядок денний"
     },
     "roll": {
-      "absent": "Відсутній (рулон)",
+      "absent": "Відсутній",
       "present_abstain": "Присутній — може утриматися",
-      "present_voting": "Присутні та голосують (реєстрація)",
-      "unknown": "— (рол)"
+      "present_voting": "Присутні та голосують",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

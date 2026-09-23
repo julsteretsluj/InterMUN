@@ -3319,10 +3319,10 @@
       "agenda": "Agenda"
     },
     "roll": {
-      "absent": "Ausente (rolar)",
-      "present_abstain": "Presente - pode abster-se (rolar)",
-      "present_voting": "Presente e votação (rolagem)",
-      "unknown": "- (rolar)"
+      "absent": "Ausente",
+      "present_abstain": "Presente - pode abster-se",
+      "present_voting": "Presente e votação",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

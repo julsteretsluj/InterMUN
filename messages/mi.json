@@ -3319,10 +3319,10 @@
       "agenda": "Kaupapa"
     },
     "roll": {
-      "absent": "Kei te ngaro (roll)",
-      "present_abstain": "I tenei wa — ka taea te karo (ka huri)",
+      "absent": "Kei te ngaro",
+      "present_abstain": "I tenei wa — ka taea te karo",
       "present_voting": "Whakaatu me te pooti",
-      "unknown": "— (roll)"
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

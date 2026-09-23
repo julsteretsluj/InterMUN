@@ -3319,10 +3319,10 @@
       "agenda": "กำหนดการ"
     },
     "roll": {
-      "absent": "ขาด (ม้วน)",
-      "present_abstain": "ปัจจุบัน — อาจงด (ม้วน)",
-      "present_voting": "นำเสนอและลงคะแนนเสียง (ม้วน)",
-      "unknown": "- (ม้วน)"
+      "absent": "ขาด",
+      "present_abstain": "ปัจจุบัน — อาจงด",
+      "present_voting": "นำเสนอและลงคะแนนเสียง",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

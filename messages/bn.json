@@ -3319,10 +3319,10 @@
       "agenda": "এজেন্ডা"
     },
     "roll": {
-      "absent": "অনুপস্থিত (রোল)",
-      "present_abstain": "বর্তমান - বিরত থাকতে পারে (রোল)",
-      "present_voting": "বর্তমান এবং ভোটদান (রোল)",
-      "unknown": "— (রোল)"
+      "absent": "অনুপস্থিত",
+      "present_abstain": "বর্তমান - বিরত থাকতে পারে",
+      "present_voting": "বর্তমান এবং ভোটদান",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

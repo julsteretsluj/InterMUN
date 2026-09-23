@@ -3319,10 +3319,10 @@
       "agenda": "סֵדֶר הַיוֹם"
     },
     "roll": {
-      "absent": "נעדר (גלגול)",
-      "present_abstain": "הווה - רשאי להימנע (להתגלגל)",
-      "present_voting": "נוכח והצביע (רול)",
-      "unknown": "- (גלגול)"
+      "absent": "נעדר",
+      "present_abstain": "הווה - רשאי להימנע",
+      "present_voting": "נוכח והצביע",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

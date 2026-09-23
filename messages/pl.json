@@ -3319,10 +3319,10 @@
       "agenda": "Porządek obrad"
     },
     "roll": {
-      "absent": "Nieobecny (rolka)",
-      "present_abstain": "Obecny — może wstrzymać się od głosu (roll)",
-      "present_voting": "Obecność i głosowanie (rolka)",
-      "unknown": "- (rolka)"
+      "absent": "Nieobecny",
+      "present_abstain": "Obecny — może wstrzymać się od głosu",
+      "present_voting": "Obecność i głosowanie",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

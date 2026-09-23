@@ -3320,9 +3320,9 @@
     },
     "roll": {
       "absent": "不在（ロール）",
-      "present_abstain": "出席 — 棄権してもよい (ロール)",
+      "present_abstain": "出席 — 棄権してもよい",
       "present_voting": "プレゼントと投票（ロール）",
-      "unknown": "— (ロール)"
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

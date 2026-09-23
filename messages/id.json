@@ -3319,10 +3319,10 @@
       "agenda": "Agenda"
     },
     "roll": {
-      "absent": "Absen (berputar)",
-      "present_abstain": "Hadir — mungkin abstain (berguling)",
-      "present_voting": "Presentasi dan pemungutan suara (roll)",
-      "unknown": "— (berguling)"
+      "absent": "Absen",
+      "present_abstain": "Hadir — mungkin abstain",
+      "present_voting": "Presentasi dan pemungutan suara",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

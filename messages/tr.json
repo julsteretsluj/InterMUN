@@ -3319,10 +3319,10 @@
       "agenda": "Gündem"
     },
     "roll": {
-      "absent": "Yok (rulo)",
-      "present_abstain": "Mevcut - çekimser kalabilir (yuvarlanır)",
-      "present_voting": "Sunum ve oylama (roll)",
-      "unknown": "- (rulo)"
+      "absent": "Yok",
+      "present_abstain": "Mevcut - çekimser kalabilir",
+      "present_voting": "Sunum ve oylama",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

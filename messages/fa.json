@@ -3319,10 +3319,10 @@
       "agenda": "دستور کار"
     },
     "roll": {
-      "absent": "غایب (رول)",
-      "present_abstain": "حاضر - ممکن است پرهیز کند (رول)",
-      "present_voting": "ارائه و رای دادن (رول)",
-      "unknown": "- (رول)"
+      "absent": "غایب",
+      "present_abstain": "حاضر - ممکن است پرهیز کند",
+      "present_voting": "ارائه و رای دادن",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

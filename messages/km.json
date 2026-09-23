@@ -3319,10 +3319,10 @@
       "agenda": "របៀបវារៈ"
     },
     "roll": {
-      "absent": "អវត្តមាន (វិល)",
-      "present_abstain": "បច្ចុប្បន្ន - អាចបដិសេធ (វិល)",
-      "present_voting": "វត្តមាន និងការបោះឆ្នោត (វិល)",
-      "unknown": "- (រមៀល)"
+      "absent": "អវត្តមាន",
+      "present_abstain": "បច្ចុប្បន្ន - អាចបដិសេធ",
+      "present_voting": "វត្តមាន និងការបោះឆ្នោត",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

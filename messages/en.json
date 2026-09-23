@@ -3723,10 +3723,10 @@
       "agenda": "Agenda"
     },
     "roll": {
-      "absent": "Absent (roll)",
-      "present_abstain": "Present — may abstain (roll)",
-      "present_voting": "Present and voting (roll)",
-      "unknown": "— (roll)"
+      "absent": "Absent",
+      "present_abstain": "Present — may abstain",
+      "present_voting": "Present and voting",
+      "unknown": "—"
     }
   },
   "profile": {

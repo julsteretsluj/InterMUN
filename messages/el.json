@@ -3319,10 +3319,10 @@
       "agenda": "Ημερήσια διάταξη"
     },
     "roll": {
-      "absent": "Απουσία (ρολό)",
-      "present_abstain": "Παρών — μπορεί να απέχει (ρολό)",
-      "present_voting": "Παρουσία και ψηφοφορία (roll)",
-      "unknown": "— (ρολό)"
+      "absent": "Απουσία",
+      "present_abstain": "Παρών — μπορεί να απέχει",
+      "present_voting": "Παρουσία και ψηφοφορία",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

@@ -3319,10 +3319,10 @@
       "agenda": "Chương trình nghị sự"
     },
     "roll": {
-      "absent": "Vắng mặt (cuộn)",
-      "present_abstain": "Hiện tại - có thể bỏ phiếu trắng (cuộn)",
-      "present_voting": "Trình bày và biểu quyết (cuộn)",
-      "unknown": "- (cuộn)"
+      "absent": "Vắng mặt",
+      "present_abstain": "Hiện tại - có thể bỏ phiếu trắng",
+      "present_voting": "Trình bày và biểu quyết",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

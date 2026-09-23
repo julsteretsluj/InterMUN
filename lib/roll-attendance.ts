@@ -35,15 +35,15 @@ export function rollAttendanceShortLabel(a: RollAttendance): string {
 
 /** Line used next to recorded votes (chair session). */
 export function rollAttendanceRollLabel(a: RollAttendance | undefined): string {
-  if (!a) return "— (roll)";
+  if (!a) return "—";
   switch (a) {
     case "absent":
-      return "Absent (roll)";
+      return "Absent";
     case "present_abstain":
-      return "Present — may abstain (roll)";
+      return "Present — may abstain";
     case "present_voting":
-      return "Present and voting (roll)";
+      return "Present and voting";
     default:
-      return "— (roll)";
+      return "—";
   }
 }

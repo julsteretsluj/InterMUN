@@ -3319,10 +3319,10 @@
       "agenda": "ວາລະ"
     },
     "roll": {
-      "absent": "ບໍ່ຢູ່ (ມ້ວນ)",
-      "present_abstain": "ປະຈຸບັນ - ອາດຈະງົດ (ມ້ວນ)",
-      "present_voting": "ປະຈຸບັນ ແລະ ການລົງຄະແນນສຽງ (ມ້ວນ)",
-      "unknown": "— (ມ້ວນ​)"
+      "absent": "ບໍ່ຢູ່",
+      "present_abstain": "ປະຈຸບັນ - ອາດຈະງົດ",
+      "present_voting": "ປະຈຸບັນ ແລະ ການລົງຄະແນນສຽງ",
+      "unknown": "—"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

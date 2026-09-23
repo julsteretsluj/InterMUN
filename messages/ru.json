@@ -3319,10 +3319,10 @@
       "agenda": "Повестка дня"
     },
     "roll": {
-      "absent": "Отсутствует (ролл)",
-      "present_abstain": "Присутствует — может воздержаться (перекат)",
-      "present_voting": "Присутствие и голосование (список)",
-      "unknown": "- (рулон)"
+      "absent": "Отсутствует",
+      "present_abstain": "Присутствует — может воздержаться",
+      "present_voting": "Присутствие и голосование",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

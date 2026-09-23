@@ -3319,10 +3319,10 @@
       "agenda": "Ajenda"
     },
     "roll": {
-      "absent": "Haipo (roll)",
-      "present_abstain": "Sasa - inaweza kuacha (kusonga)",
-      "present_voting": "Kuwasilisha na kupiga kura (orodha)",
-      "unknown": "- (roll)"
+      "absent": "Haipo",
+      "present_abstain": "Sasa - inaweza kuacha",
+      "present_voting": "Kuwasilisha na kupiga kura",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

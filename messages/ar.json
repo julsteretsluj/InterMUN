@@ -3319,10 +3319,10 @@
       "agenda": "جدول الأعمال"
     },
     "roll": {
-      "absent": "غائب (لفة)",
-      "present_abstain": "حاضر - قد يمتنع عن التصويت (لفة)",
-      "present_voting": "الحاضر والتصويت (لفة)",
-      "unknown": "- (لفافة)"
+      "absent": "غائب",
+      "present_abstain": "حاضر - قد يمتنع عن التصويت",
+      "present_voting": "الحاضر والتصويت",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",

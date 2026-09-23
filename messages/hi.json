@@ -3319,10 +3319,10 @@
       "agenda": "कार्यसूची"
     },
     "roll": {
-      "absent": "अनुपस्थित (रोल)",
-      "present_abstain": "उपस्थित - अनुपस्थित रह सकते हैं (रोल)",
-      "present_voting": "प्रस्तुति और मतदान (रोल)",
-      "unknown": "- (रोल)"
+      "absent": "अनुपस्थित",
+      "present_abstain": "उपस्थित - अनुपस्थित रह सकते हैं",
+      "present_voting": "प्रस्तुति और मतदान",
+      "unknown": "-"
     },
     "votingRightsLost": "This delegate lost voting rights due to disciplinary strike(s).",
     "votingRightsLostShort": "voting disabled",
