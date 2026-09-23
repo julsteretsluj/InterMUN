@@ -23,37 +23,40 @@ export function MarketingDocumentPage({
 }) {
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)]">
-        <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mun-marketing-hero-copy mx-auto max-w-3xl px-4 py-14 md:px-6 md:py-20 md:pl-10">
-          <p className="mun-marketing-eyebrow">{eyebrow}</p>
-          <h1 className="font-sans mt-4 text-4xl font-semibold tracking-[-0.035em] md:text-5xl">{title}</h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-[color:var(--marketing-ink-soft)] md:text-lg">{intro}</p>
-          {updated ? (
-            <p className="mt-4 font-mono text-xs uppercase tracking-wider text-[color:var(--marketing-ink-soft)]">
-              Last updated: {updated}
-            </p>
-          ) : null}
+      <section className="clicky-doc-hero border-b border-[var(--clicky-line)]">
+        <div className="mx-auto max-w-6xl px-4 md:px-8">
+          <div className="clicky-doc-grid">
+            <div>
+              <p className="clicky-eyebrow">{eyebrow.toLowerCase()}</p>
+              <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)] font-bold lowercase leading-[1.05] tracking-[-0.04em] text-[var(--clicky-ink)]">
+                {title}
+              </h1>
+            </div>
+            <div>
+              <p className="clicky-lede text-[1.1rem]">{intro}</p>
+              {updated ? (
+                <p className="mt-4 font-mono text-[0.7rem] uppercase tracking-wider text-[var(--clicky-ink-faint)]">
+                  last updated · {updated}
+                </p>
+              ) : null}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[var(--marketing-chamber-deep)]">
-        <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
-          <div className="space-y-8">
-            {sections.map((section, i) => (
-              <section
-                key={section.title}
-                className={`rounded-[var(--radius-xl)] border border-[color:var(--marketing-hairline)] bg-white p-6 shadow-[var(--dashboard-shadow)] md:p-8 ${
-                  i % 2 === 1 ? "md:ml-6 md:mr-0" : "md:mr-6"
-                }`}
-              >
-                <h2 className="font-sans text-2xl font-semibold tracking-[-0.03em] md:text-3xl">{section.title}</h2>
-                <div className="mt-4 space-y-4 text-sm leading-7 text-[color:var(--marketing-ink-soft)] md:text-base">
-                  {section.content}
-                </div>
-              </section>
-            ))}
-          </div>
+      <section className="py-12 md:py-16">
+        <div className="mx-auto max-w-3xl px-4 md:px-8">
+          {sections.map((section, i) => (
+            <article
+              key={section.title}
+              className={`clicky-doc-card ${i % 2 === 1 ? "md:ml-8" : "md:mr-8"}`}
+            >
+              <h2 className="text-xl font-bold lowercase tracking-[-0.03em] md:text-2xl">{section.title}</h2>
+              <div className="mt-4 space-y-4 text-sm leading-7 text-[var(--clicky-ink-soft)] md:text-base">
+                {section.content}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </>

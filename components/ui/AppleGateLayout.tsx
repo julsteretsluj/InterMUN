@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { PublicPageControls } from "@/components/PublicPageControls";
-import { BrandWordmark } from "@/components/BrandWordmark";
-import { getAppTagline } from "@/lib/branding";
+import { getAppName, getAppTagline } from "@/lib/branding";
 
 type AppleGateLayoutProps = {
   children: React.ReactNode;
@@ -13,40 +11,34 @@ type AppleGateLayoutProps = {
 export async function AppleGateLayout({ children }: AppleGateLayoutProps) {
   const t = await getTranslations("authWizard");
   const tagline = getAppTagline();
+  const appName = getAppName();
 
   return (
-    <div className="mun-seamun-split min-h-screen">
-      <aside className="mun-seamun-brand-panel">
-        <div className="mun-seamun-brand-glow" aria-hidden />
-        <div className="mun-seamun-brand-letter" aria-hidden>
-          I
+    <div className="mun-clicky-auth">
+      <aside className="mun-clicky-auth-brand">
+        <div className="relative z-[1]">
+          <p className="clicky-kaomoji text-white/40">^ ω ^</p>
+          <h1 className="mt-6 text-4xl font-bold lowercase tracking-[-0.04em] text-[#f7f6f2]">
+            {appName.toLowerCase()}
+          </h1>
+          <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/70">{tagline}</p>
         </div>
-        <div className="relative z-[1] flex flex-1 flex-col justify-between">
-          <div>
-            <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
-            <h1 className="mun-seamun-brand-title mt-5">
-              <BrandWordmark variant="wordmark" surface="dark" size="hero" align="start" />
-            </h1>
-            <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
-          </div>
-          <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/80">
-            Select your room, enter your codes, and step into session.
-          </p>
-        </div>
+        <p className="relative z-[1] max-w-sm text-sm leading-relaxed text-white/40 lowercase">
+          select your room, enter your codes, and step into session.
+        </p>
       </aside>
 
-      <section className="mun-seamun-form-panel">
-        <div className="mb-8 flex items-center justify-between gap-3">
+      <section className="mun-clicky-auth-form">
+        <div className="mb-6 flex max-w-md items-center justify-between gap-3 self-center w-full mx-auto">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm font-medium text-brand-muted transition hover:text-brand-navy"
+            className="text-sm font-medium lowercase text-[var(--clicky-ink-soft)] transition hover:text-[var(--clicky-ink)]"
           >
-            <ChevronLeft className="size-4 shrink-0" aria-hidden />
-            {t("backToHome")}
+            ← {t("backToHome").toLowerCase()}
           </Link>
           <PublicPageControls compact />
         </div>
-        <div className="mun-seamun-form-card">{children}</div>
+        <div className="mun-clicky-auth-card">{children}</div>
       </section>
     </div>
   );

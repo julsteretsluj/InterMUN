@@ -71,20 +71,20 @@ export function ChairRollCallQuorumDemo() {
   return (
     <div className="space-y-4">
       <div className={cn("flex items-center justify-between gap-2", MARKETING_CHAMBER_PREVIEW)}>
-        <h3 className="font-sans text-lg font-semibold text-brand-navy">✅ {tc("rollCallTracker")}</h3>
+        <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{tc("rollCallTracker")}</h3>
         <span
           className={cn(
             "rounded-full px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider",
             quorumMet
-              ? "border border-emerald-500/40 bg-emerald-400/15 text-emerald-900"
-              : "border border-amber-500/40 bg-amber-400/15 text-amber-950"
+              ? "border border-[color-mix(in_srgb,var(--clicky-mint)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-mint)_15%,white)] text-[var(--clicky-ink)]"
+              : "border border-[color-mix(in_srgb,#febc2e_45%,var(--clicky-line))] bg-[color-mix(in_srgb,#febc2e_15%,white)] text-[var(--clicky-ink)]"
           )}
         >
           {quorumMet ? t("quorumMet") : t("quorumNotMet")} · {t("quorumCount", { present, total })}
         </span>
       </div>
       <div className={cn(MARKETING_DARK_GLASS_CARD, "space-y-3")}>
-        <ul className="space-y-2 text-sm text-brand-navy">
+        <ul className="space-y-2 text-sm text-[var(--clicky-ink)]">
           {rows.map((row) => (
             <li
               key={row.id}
@@ -116,7 +116,7 @@ export function ChairRollCallQuorumDemo() {
             </li>
           ))}
         </ul>
-        <p className="font-mono text-xs text-brand-muted">{t("votingHeadcount", { voting, present })}</p>
+        <p className="font-mono text-xs text-[var(--clicky-ink-soft)]">{t("votingHeadcount", { voting, present })}</p>
       </div>
     </div>
   );
@@ -182,22 +182,22 @@ export function ChairSessionTimerDemo() {
             className={cn(
               "rounded-full border px-2.5 py-1 text-xs font-semibold",
               presetId === p.id
-                ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,#fff)] text-[var(--accent)]"
-                : "border-zinc-200 text-zinc-600"
+                ? "border-[var(--clicky-blue)] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,#fff)] text-[var(--clicky-blue)]"
+                : "border-[var(--clicky-line)] text-[var(--clicky-ink-soft)]"
             )}
           >
             {t(p.labelKey)}
           </button>
         ))}
       </div>
-      <p className="mt-4 text-center font-mono text-4xl font-bold tabular-nums text-zinc-900" suppressHydrationWarning>
+      <p className="mt-4 text-center font-mono text-4xl font-bold tabular-nums text-[var(--clicky-ink)]" suppressHydrationWarning>
         {formatTimer(secondsLeft)}
       </p>
       <div className="mt-4 flex justify-center gap-2">
         <button
           type="button"
           onClick={() => setRunning((v) => !v)}
-          className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold"
+          className="inline-flex items-center gap-1 rounded-full border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink)]"
         >
           {running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
           {running ? t("pause") : t("start")}
@@ -208,7 +208,7 @@ export function ChairSessionTimerDemo() {
             setSecondsLeft(preset.seconds);
             setRunning(false);
           }}
-          className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600"
+          className="inline-flex items-center gap-1 rounded-full border border-[var(--clicky-line)] px-3 py-1.5 text-xs font-semibold text-[var(--clicky-ink-soft)]"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           {t("reset")}
@@ -251,7 +251,7 @@ export function DelegateAmendmentFloorDemo() {
     <div className={PREVIEW_CARD}>
       <span className={PREVIEW_LABEL}>{t("amendmentLabel")}</span>
       <p className={cn("mt-2 text-sm", PREVIEW_HEADING)}>{t("amendmentTitle")}</p>
-      <p className="mt-1 text-xs text-zinc-500">{t("amendmentHint")}</p>
+      <p className="mt-1 text-xs text-[var(--clicky-ink-faint)]">{t("amendmentHint")}</p>
       <div className="mt-3 grid grid-cols-3 gap-2 text-center">
         {(["yes", "no", "abstain"] as const).map((key) => (
           <button
@@ -261,8 +261,8 @@ export function DelegateAmendmentFloorDemo() {
             className={cn(
               "rounded-xl border px-2 py-2 text-xs font-semibold",
               cast === key
-                ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,#fff)] text-[var(--accent)]"
-                : "border-zinc-200 text-zinc-700"
+                ? "border-[var(--clicky-blue)] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,#fff)] text-[var(--clicky-blue)]"
+                : "border-[var(--clicky-line)] text-[var(--clicky-ink-soft)]"
             )}
           >
             {t(key)}
@@ -292,7 +292,7 @@ export function DelegateStanceHeatmapDemo() {
   return (
     <div className={PREVIEW_CARD}>
       <span className={PREVIEW_LABEL}>{t("stanceLabel")}</span>
-      <p className="mt-1 text-xs text-zinc-500">{t("stanceHint")}</p>
+      <p className="mt-1 text-xs text-[var(--clicky-ink-faint)]">{t("stanceHint")}</p>
       {/* Real in-app stance map grid, driven by static demo data. */}
       <div className="mt-3">
         <CountryStanceGrid
@@ -331,19 +331,19 @@ export function DelegateSpeechPlannerDemo() {
       <span className={PREVIEW_LABEL}>{t("speechLabel")}</span>
       <ul className="mt-3 space-y-2">
         {points.map((p) => (
-          <li key={p.id} className="flex items-start gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2">
+          <li key={p.id} className="flex items-start gap-2 rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-2">
             <button
               type="button"
               onClick={() => toggle(p.id)}
               className={cn(
                 "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border",
-                p.done ? "border-[var(--accent)] bg-[var(--accent)] text-white" : "border-zinc-300 bg-white"
+                p.done ? "border-[var(--clicky-blue)] bg-[var(--clicky-blue)] text-white" : "border-[var(--clicky-line)] bg-white"
               )}
               aria-label={p.done ? t("markUndone") : t("markDone")}
             >
               {p.done ? <Check className="h-3 w-3" /> : null}
             </button>
-            <span className={cn("text-sm", p.done ? "text-zinc-400 line-through" : "text-zinc-800")}>{p.text}</span>
+            <span className={cn("text-sm", p.done ? "text-[var(--clicky-ink-faint)] line-through" : "text-[var(--clicky-ink)]")}>{p.text}</span>
           </li>
         ))}
       </ul>
@@ -352,9 +352,9 @@ export function DelegateSpeechPlannerDemo() {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder={t("speechPlaceholder")}
-          className="min-w-0 flex-1 rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900"
+          className="min-w-0 flex-1 rounded-lg border border-[var(--clicky-line)] px-3 py-2 text-sm text-[var(--clicky-ink)]"
         />
-        <button type="button" onClick={add} className="rounded-lg border border-zinc-200 px-3 py-2 text-xs font-semibold">
+        <button type="button" onClick={add} className="rounded-full border border-[var(--clicky-line)] px-3 py-2 text-xs font-semibold text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]">
           {t("addPoint")}
         </button>
       </div>

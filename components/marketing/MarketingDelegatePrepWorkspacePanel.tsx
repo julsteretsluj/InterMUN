@@ -29,14 +29,14 @@ export function MarketingDelegatePrepWorkspacePanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">{tPrep("prepWorkspaceTitle")}</h3>
-          <p className="mt-1 text-sm text-brand-muted">{tPrep("prepWorkspaceHint")}</p>
+          <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{tPrep("prepWorkspaceTitle")}</h3>
+          <p className="mt-1 text-sm text-[var(--clicky-ink-soft)]">{tPrep("prepWorkspaceHint")}</p>
         </div>
       ) : null}
 
       <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
         <div
-          className="flex flex-wrap gap-2 border-b border-[var(--hairline)] pb-3"
+          className="flex flex-wrap gap-2 border-b border-[var(--clicky-line)] pb-3"
           role="tablist"
           aria-label={tPrep("prepWorkspaceTitle")}
         >
@@ -50,8 +50,8 @@ export function MarketingDelegatePrepWorkspacePanel({
               className={cn(
                 "rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition",
                 tab === key
-                  ? "border-brand-accent/45 bg-brand-accent/12 text-brand-navy"
-                  : "border-brand-navy/15 bg-white text-brand-muted hover:border-brand-accent/30"
+                  ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)] text-[var(--clicky-ink)]"
+                  : "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))]"
               )}
             >
               {tPrep(`prepTile.${key}`)}
@@ -100,15 +100,15 @@ function DocumentsWorkspace() {
       <button
         type="button"
         onClick={() => setShowForm(true)}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-95"
+        className="inline-flex items-center gap-2 rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-95"
       >
         <Plus className="h-4 w-4" aria-hidden />
         {t("addDocument")}
       </button>
 
       {showForm ? (
-        <div className="mun-card space-y-3 border-[var(--hairline)]">
-          <h3 className="font-sans font-semibold text-brand-navy">{t("newDocumentTitle")}</h3>
+        <div className="mun-card space-y-3 border-[var(--clicky-line)]">
+          <h3 className="font-sans font-semibold text-[var(--clicky-ink)]">{t("newDocumentTitle")}</h3>
           <div className="space-y-3">
             <div>
               <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>
@@ -119,7 +119,7 @@ function DocumentsWorkspace() {
               >
                 <option value="prep_doc">{t("types.prep_doc")}</option>
               </select>
-              <p className="mt-1 text-xs text-brand-muted">{t("delegatePositionPaperNote")}</p>
+              <p className="mt-1 text-xs text-[var(--clicky-ink-soft)]">{t("delegatePositionPaperNote")}</p>
             </div>
             <div>
               <label className="mun-label mb-1 block normal-case">{t("titleLabel")}</label>
@@ -150,7 +150,7 @@ function DocumentsWorkspace() {
               />
             </div>
             {status ? (
-              <p className="text-sm text-brand-muted" role="status">
+              <p className="text-sm text-[var(--clicky-ink-soft)]" role="status">
                 {status}
               </p>
             ) : null}
@@ -172,7 +172,7 @@ function DocumentsWorkspace() {
           {saved.map((doc) => (
             <li
               key={doc.id}
-              className="rounded-lg border border-brand-navy/10 bg-white px-3 py-2 text-sm font-medium text-brand-navy"
+              className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
             >
               {doc.title}
             </li>
@@ -206,14 +206,14 @@ function SpeechesWorkspace() {
       <button
         type="button"
         onClick={() => setShowForm(true)}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-95"
+        className="inline-flex items-center gap-2 rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-95"
       >
         <Plus className="h-4 w-4" aria-hidden />
         {t("newSpeech")}
       </button>
 
       {showForm ? (
-        <div className="mun-card space-y-3 border-[var(--hairline)]">
+        <div className="mun-card space-y-3 border-[var(--clicky-line)]">
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -237,7 +237,7 @@ function SpeechesWorkspace() {
             className="mun-field h-32 resize-y"
           />
           {status ? (
-            <p className="text-sm text-brand-diplomatic" role="status">
+            <p className="text-sm text-[var(--clicky-blue)]" role="status">
               {status}
             </p>
           ) : null}
@@ -256,7 +256,7 @@ function SpeechesWorkspace() {
         {items.map((speech) => (
           <li
             key={speech.id}
-            className="rounded-lg border border-brand-navy/10 bg-white px-3 py-2 text-sm font-medium text-brand-navy"
+            className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm font-medium text-[var(--clicky-ink)]"
           >
             {speech.title}
           </li>
@@ -293,8 +293,8 @@ function StancesWorkspace() {
   return (
     <div className="space-y-6" role="tabpanel">
       <div>
-        <h3 className="mb-2 font-semibold text-brand-navy">{t("heatmapTitle")}</h3>
-        <p className="mb-3 text-sm text-brand-muted">{t("heatmapHelp")}</p>
+        <h3 className="mb-2 font-semibold text-[var(--clicky-ink)]">{t("heatmapTitle")}</h3>
+        <p className="mb-3 text-sm text-[var(--clicky-ink-soft)]">{t("heatmapHelp")}</p>
         <div className="mb-4 flex flex-wrap items-end gap-3">
           <input
             type="text"
@@ -304,7 +304,7 @@ function StancesWorkspace() {
             className="mun-field w-48 min-w-0"
           />
           <div className="flex items-center gap-2">
-            <label className="text-sm text-brand-navy">{t("extentLabel")}</label>
+            <label className="text-sm text-[var(--clicky-ink)]">{t("extentLabel")}</label>
             <input
               type="range"
               min={1}
@@ -313,12 +313,12 @@ function StancesWorkspace() {
               onChange={(e) => setStanceForm({ ...stanceForm, extent: +e.target.value })}
               className="w-24"
             />
-            <span className="text-sm tabular-nums text-brand-muted">{stanceForm.extent}</span>
+            <span className="text-sm tabular-nums text-[var(--clicky-ink-soft)]">{stanceForm.extent}</span>
           </div>
           <button
             type="button"
             onClick={addStance}
-            className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+            className="rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-medium text-white hover:opacity-90"
           >
             {t("add")}
           </button>
@@ -327,8 +327,8 @@ function StancesWorkspace() {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-brand-navy">{t("notesPerAllocation")}</h3>
-        <p className="mb-2 text-sm font-medium text-brand-navy">Kenya</p>
+        <h3 className="mb-2 font-semibold text-[var(--clicky-ink)]">{t("notesPerAllocation")}</h3>
+        <p className="mb-2 text-sm font-medium text-[var(--clicky-ink)]">Kenya</p>
         <textarea
           value={noteContent}
           onChange={(e) => setNoteContent(e.target.value)}
@@ -336,7 +336,7 @@ function StancesWorkspace() {
           placeholder={t("notesPlaceholder")}
         />
         {status ? (
-          <p className="mt-2 text-sm text-brand-diplomatic" role="status">
+          <p className="mt-2 text-sm text-[var(--clicky-blue)]" role="status">
             {status}
           </p>
         ) : null}

@@ -1,10 +1,8 @@
 import { PublicPageControls } from "@/components/PublicPageControls";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
-import { BrandWordmark } from "@/components/BrandWordmark";
-import { getAppTagline } from "@/lib/branding";
+import { getAppName, getAppTagline } from "@/lib/branding";
 
 export default async function AuthLayout({
   children,
@@ -13,55 +11,41 @@ export default async function AuthLayout({
 }) {
   const t = await getTranslations("authWizard");
   const tagline = getAppTagline();
+  const appName = getAppName();
 
   return (
     <MarketingOpening>
-      <div className="mun-seamun-split min-h-screen">
-        <aside className="mun-seamun-brand-panel" aria-hidden={false}>
-          <div className="mun-seamun-brand-glow" aria-hidden />
-          <div className="mun-seamun-brand-letter" aria-hidden>
-            I
+      <div className="mun-clicky-auth">
+        <aside className="mun-clicky-auth-brand" aria-hidden={false}>
+          <div className="relative z-[1]">
+            <p className="clicky-kaomoji text-white/40">^ ω ^</p>
+            <h1 className="mt-6 text-4xl font-bold lowercase tracking-[-0.04em] text-[#f7f6f2]">
+              {appName.toLowerCase()}
+            </h1>
+            <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/70">{tagline}</p>
+            <ul className="mt-10 space-y-3 text-sm lowercase text-white/55">
+              <li>live session floor</li>
+              <li>delegate prep workspace</li>
+              <li>secretariat oversight</li>
+            </ul>
           </div>
-          <div className="relative z-[1] flex flex-1 flex-col justify-between">
-            <div>
-              <p className="mun-seamun-eyebrow text-white/85">Est. 2026 — Conference platform</p>
-              <h1 className="mun-seamun-brand-title mt-5">
-                <BrandWordmark variant="wordmark" surface="dark" size="hero" align="start" />
-              </h1>
-              <p className="mt-4 max-w-sm text-[1.05rem] leading-relaxed text-white/90">{tagline}</p>
-              <ul className="mt-10 space-y-3 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white/80">
-                <li className="flex items-center gap-3">
-                  <span className="h-px w-4 bg-white/40" aria-hidden />
-                  Live session tools
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="h-px w-4 bg-white/40" aria-hidden />
-                  Delegate prep workspace
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="h-px w-4 bg-white/40" aria-hidden />
-                  Secretariat oversight
-                </li>
-              </ul>
-            </div>
-            <p className="border-t border-white/15 pt-6 font-sans text-sm italic font-medium text-white/80">
-              “Diplomacy is the art of letting someone else have your way.”
-            </p>
-          </div>
+          <p className="relative z-[1] max-w-sm text-sm leading-relaxed text-white/40">
+            we believe conference weekends fail on interface, not diplomacy. this is the calm desk for
+            chairs and the clear backpack for delegates.
+          </p>
         </aside>
 
-        <section className="mun-seamun-form-panel">
-          <div className="mb-8 flex items-center justify-between gap-3">
+        <section className="mun-clicky-auth-form">
+          <div className="mb-6 flex max-w-md items-center justify-between gap-3 self-center w-full mx-auto">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 text-sm font-medium text-brand-muted transition hover:text-brand-navy"
+              className="text-sm font-medium lowercase text-[var(--clicky-ink-soft)] transition hover:text-[var(--clicky-ink)]"
             >
-              <ChevronLeft className="size-4 shrink-0" aria-hidden />
-              {t("backToHome")}
+              ← {t("backToHome").toLowerCase()}
             </Link>
             <PublicPageControls compact />
           </div>
-          <div className="mun-seamun-form-card">{children}</div>
+          <div className="mun-clicky-auth-card">{children}</div>
         </section>
       </div>
     </MarketingOpening>

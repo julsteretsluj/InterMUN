@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { MarketingEmph } from "@/components/marketing/MarketingEmph";
 import { MarketingFeaturesDemos, type MarketingFeatureRole } from "@/components/marketing/MarketingFeaturesDemos";
 
 const ROLE_PATH: Record<MarketingFeatureRole, string> = {
@@ -12,7 +11,6 @@ const ROLE_PATH: Record<MarketingFeatureRole, string> = {
   secretariat: "/features/secretariat",
 };
 
-/** Hosting requires a partnership inquiry — delegates still self-serve via signup. */
 const FEATURE_PAGE_CTA_HREF: Record<MarketingFeatureRole, string> = {
   chairs: "/#contact",
   delegates: "/signup",
@@ -24,43 +22,57 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
   return (
     <>
-      <section className="border-b border-[var(--hairline)] bg-[var(--marketing-chamber-deep)]">
-        <div className="mx-auto max-w-[46rem] px-5 py-20 text-left md:px-10 md:py-28 md:pl-16">
-          <p className="mun-animate-rise text-[0.8125rem] font-medium tracking-[0.08em] text-[color:var(--accent-text)]">{t("eyebrow")}</p>
-          <h1 className="font-sans mun-animate-rise mun-animate-delay-1 mt-4 text-[length:var(--apple-text-hero-size)] font-semibold tracking-[-0.035em] text-brand-navy">
-            {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
-          </h1>
-          <p className="mun-animate-rise mun-animate-delay-2 mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-brand-muted">
-            {t("subtitle")}
-          </p>
+      <section className="border-b border-[var(--clicky-line)]">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-[1fr_0.85fr] md:px-8 md:py-24">
+          <div>
+            <p className="clicky-eyebrow">{t("eyebrow")}</p>
+            <h1 className="mt-4 text-[clamp(2.2rem,5vw,3.5rem)] font-bold lowercase leading-[1.02] tracking-[-0.045em] text-[var(--clicky-ink)]">
+              {t("title")}{" "}
+              <span className="text-[var(--clicky-blue)]">{t("titleEmphasis")}</span>
+            </h1>
+            <p className="clicky-lede mt-5">{t("subtitle")}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href={FEATURE_PAGE_CTA_HREF[role]} className="clicky-pill clicky-pill-primary">
+                {t("ctaStart")}
+              </Link>
+              <Link href="/" className="clicky-pill clicky-pill-ghost">
+                {t("ctaBack")}
+              </Link>
+            </div>
+          </div>
+          <div className="clicky-window clicky-window-lg self-end overflow-hidden md:rotate-1">
+            <div className="clicky-window-bar">
+              <span className="clicky-traffic" aria-hidden />
+              <span className="clicky-window-title">{role}.preview</span>
+            </div>
+            <div className="bg-[var(--clicky-window)] p-5">
+              <p className="text-sm leading-relaxed text-[var(--clicky-ink-soft)]">{t("ctaSubtitle")}</p>
+              <p className="clicky-kaomoji mt-6">^ ω ^</p>
+            </div>
+          </div>
         </div>
       </section>
 
       <MarketingFeaturesDemos role={role} />
 
-      <section className="border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)]">
-        <div className="mx-auto max-w-[38rem] px-5 py-20 text-center md:px-10 md:py-28">
-          <h2 className="font-sans text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.03em] text-brand-navy">
-            {t("ctaTitle")} <MarketingEmph>{t("ctaTitleEmphasis")}</MarketingEmph>
+      <section className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-20">
+        <div className="mx-auto max-w-2xl px-4 text-center md:px-8">
+          <h2 className="text-[clamp(1.6rem,3vw,2.25rem)] font-bold lowercase tracking-[-0.03em]">
+            {t("ctaTitle")} {t("ctaTitleEmphasis")}
           </h2>
-          <p className="mt-4 text-[1.0625rem] leading-relaxed text-brand-muted">{t("ctaSubtitle")}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href={FEATURE_PAGE_CTA_HREF[role]} className="mun-apple-btn mun-apple-btn-filled-blue">
-              {t("ctaStart")}
-            </Link>
-            <Link href="/" className="mun-apple-btn mun-apple-btn-glass-gray">
-              {t("ctaBack")}
-            </Link>
-          </div>
+          <p className="mt-4 text-white/65">{t("ctaSubtitle")}</p>
+          <Link href={FEATURE_PAGE_CTA_HREF[role]} className="clicky-pill clicky-pill-primary mt-8 inline-flex">
+            {t("ctaStart")}
+          </Link>
         </div>
       </section>
 
-      <nav className="border-t border-[var(--hairline)] py-8" aria-label={t("relatedNavLabel")}>
-        <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-wrap justify-center gap-6 px-5 text-[0.875rem] text-brand-muted md:px-10">
+      <nav className="border-t border-[var(--clicky-line)] py-8" aria-label={t("relatedNavLabel")}>
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 px-4 text-sm lowercase text-[var(--clicky-ink-soft)] md:px-8">
           {(Object.keys(ROLE_PATH) as MarketingFeatureRole[])
             .filter((r) => r !== role)
             .map((r) => (
-              <Link key={r} href={ROLE_PATH[r]} className="transition-apple hover:text-[color:var(--accent-text)]">
+              <Link key={r} href={ROLE_PATH[r]} className="hover:text-[var(--clicky-blue)]">
                 {t(`related.${r}`)}
               </Link>
             ))}

@@ -112,16 +112,16 @@ export function MarketingSessionSpeakersPanel({
   return (
     <section className={cn(heroCompact ? "space-y-2" : "space-y-3", className)}>
       <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
-          🎤 {tq("speakerList")}
+        <h3 className={cn("font-sans font-semibold text-[var(--clicky-ink)]", heroCompact ? "text-base" : "text-lg")}>
+          {tq("speakerList")}
         </h3>
         {!compactIntro ? (
-          <p className="mt-1 text-sm text-brand-muted">
+          <p className="mt-1 text-sm text-[var(--clicky-ink-soft)]">
             {tq("introPrefix")}{" "}
-            <span className="font-medium text-brand-navy">{tq("requestToSpeak")}</span> {tq("introMiddle")}{" "}
-            <span className="font-medium text-[var(--accent)]">{tq("sessionTimerLink")}</span>{" "}
+            <span className="font-medium text-[var(--clicky-ink)]">{tq("requestToSpeak")}</span> {tq("introMiddle")}{" "}
+            <span className="font-medium text-[var(--clicky-blue)]">{tq("sessionTimerLink")}</span>{" "}
             {tq("introSuffixPrefix")}{" "}
-            <strong className="font-medium text-brand-navy">{tq("advanceSpeaker")}</strong>.
+            <strong className="font-medium text-[var(--clicky-ink)]">{tq("advanceSpeaker")}</strong>.
           </p>
         ) : null}
       </div>
@@ -131,21 +131,21 @@ export function MarketingSessionSpeakersPanel({
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
             {!heroCompact ? (
-              <p className="mt-0.5 text-[0.65rem] font-normal normal-case text-brand-muted">
+              <p className="mt-0.5 text-[0.65rem] font-normal normal-case text-[var(--clicky-ink-soft)]">
                 {tTimer("remainingHelpPerSpeaker")}
               </p>
             ) : null}
           </div>
           <div className="flex flex-wrap items-end justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-xs text-brand-muted">{tTimer("currentSpeaker")}</p>
-              <p className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
+              <p className="text-xs text-[var(--clicky-ink-soft)]">{tTimer("currentSpeaker")}</p>
+              <p className={cn("font-sans font-semibold text-[var(--clicky-ink)]", heroCompact ? "text-sm" : "text-base")}>
                 {current?.country ?? tq("dash")}
               </p>
             </div>
             <p
               className={cn(
-                "font-mono font-semibold tabular-nums text-[var(--accent)]",
+                "font-mono font-semibold tabular-nums text-[var(--clicky-blue)]",
                 heroCompact ? "text-xl" : "text-2xl"
               )}
               suppressHydrationWarning
@@ -158,7 +158,7 @@ export function MarketingSessionSpeakersPanel({
               type="button"
               onClick={() => setRunning((v) => !v)}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg border border-brand-navy/20 bg-white font-medium text-zinc-900 hover:bg-brand-cream",
+                "inline-flex items-center gap-1.5 rounded-full border border-[var(--clicky-line)] bg-white font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]",
                 heroCompact ? "px-2 py-1.5 text-xs" : "px-3 py-2 text-sm"
               )}
             >
@@ -170,7 +170,7 @@ export function MarketingSessionSpeakersPanel({
               onClick={advance}
               disabled={queue.length < 2}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg bg-brand-accent font-medium text-white hover:opacity-90 disabled:opacity-50",
+                "inline-flex items-center gap-1.5 rounded-full bg-[var(--clicky-blue)] font-medium text-white hover:bg-[var(--clicky-blue-hover)] disabled:opacity-50",
                 heroCompact ? "px-2 py-1.5 text-xs" : "px-3 py-2 text-sm"
               )}
             >
@@ -182,10 +182,10 @@ export function MarketingSessionSpeakersPanel({
 
         {!heroCompact ? (
         <div className="flex flex-wrap items-end gap-2">
-          <label className="min-w-[12rem] flex-1 text-sm text-brand-navy">
+          <label className="min-w-[12rem] flex-1 text-sm text-[var(--clicky-ink)]">
             <span className={SESSION_FLOOR_LABEL}>{tq("addDelegation")}</span>
             <select
-              className="mt-1 w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+              className="mt-1 w-full rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-2 text-sm text-[var(--clicky-ink)] shadow-inner focus:border-[color-mix(in_srgb,var(--clicky-blue)_50%,var(--clicky-line))] focus:outline-none focus:ring-2 focus:ring-[color-mix(in_srgb,var(--clicky-blue)_40%,transparent)]"
               defaultValue=""
               aria-label={tq("addDelegation")}
             >
@@ -196,25 +196,25 @@ export function MarketingSessionSpeakersPanel({
           </label>
           <button
             type="button"
-            className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]"
+            className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-4 py-2 text-sm font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper-deep)]"
           >
             {tq("add")}
           </button>
         </div>
         ) : null}
 
-        <ul className={cn("text-brand-navy", heroCompact ? "space-y-1" : "space-y-2")}>
+        <ul className={cn("text-[var(--clicky-ink)]", heroCompact ? "space-y-1" : "space-y-2")}>
           {(heroCompact ? sorted.slice(0, 3) : sorted).map((row, pos) => (
             <li
               key={row.id}
               className={cn(
-                "flex flex-wrap items-center justify-between gap-2 border-b border-[var(--hairline)]",
+                "flex flex-wrap items-center justify-between gap-2 border-b border-[var(--clicky-line)]",
                 heroCompact ? "py-1.5" : "py-2"
               )}
             >
               <span className="font-medium">
                 {row.country}{" "}
-                <span className="text-xs font-normal text-brand-muted">
+                <span className="text-xs font-normal text-[var(--clicky-ink-soft)]">
                   ({tq(`status.${row.status}`)})
                 </span>
               </span>
@@ -222,7 +222,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos <= 0}
-                  className="rounded-md p-1.5 text-brand-muted hover:bg-brand-navy/5 hover:text-brand-navy disabled:opacity-30"
+                  className="rounded-md p-1.5 text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)] hover:text-[var(--clicky-ink)] disabled:opacity-30"
                   title={tq("moveUp")}
                   aria-label={tq("moveUp")}
                   onClick={() => moveRow(row.id, "up")}
@@ -232,7 +232,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos >= sorted.length - 1}
-                  className="rounded-md p-1.5 text-brand-muted hover:bg-brand-navy/5 hover:text-brand-navy disabled:opacity-30"
+                  className="rounded-md p-1.5 text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)] hover:text-[var(--clicky-ink)] disabled:opacity-30"
                   title={tq("moveDown")}
                   aria-label={tq("moveDown")}
                   onClick={() => moveRow(row.id, "down")}
@@ -241,7 +241,7 @@ export function MarketingSessionSpeakersPanel({
                 </button>
                 <button
                   type="button"
-                  className="text-xs font-medium text-amber-700 hover:underline dark:text-amber-400"
+                  className="text-xs font-medium text-[var(--clicky-ink-soft)] hover:underline"
                   onClick={() => setCurrent(row.id)}
                 >
                   {tq("current")}

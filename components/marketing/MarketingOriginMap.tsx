@@ -40,7 +40,7 @@ export function MarketingOriginMap({
 
         <div className="hidden min-w-0 flex-col items-start md:flex">
           <p className="mun-marketing-origin-location-label">{locationLabel}</p>
-          <p className="mun-marketing-origin-location-copy mt-2 max-w-[12rem] text-sm leading-relaxed text-brand-muted">
+          <p className="mun-marketing-origin-location-copy mt-2 max-w-[12rem] text-sm leading-relaxed text-[var(--clicky-ink-soft)]">
             {tooltip}
           </p>
         </div>
@@ -52,7 +52,7 @@ export function MarketingOriginMap({
         aria-label={tooltip}
       >
         <span
-          className="pointer-events-none absolute left-1/2 top-full mt-2 w-max max-w-[14rem] -translate-x-1/2 rounded-xl border border-[var(--hairline)] bg-[color-mix(in_srgb,var(--material-thick)_94%,transparent)] px-3 py-2 text-left text-xs font-medium leading-snug text-brand-navy opacity-0 shadow-[var(--marketing-float-shadow)] backdrop-blur-md transition-opacity duration-[var(--dur-base)] group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-w-[16rem] sm:text-sm md:hidden"
+          className="pointer-events-none absolute left-1/2 top-full mt-2 w-max max-w-[14rem] -translate-x-1/2 rounded-xl border border-[var(--clicky-line)] bg-[color-mix(in_srgb,var(--material-thick)_94%,transparent)] px-3 py-2 text-left text-xs font-medium leading-snug text-[var(--clicky-ink)] opacity-0 shadow-[var(--marketing-float-shadow)] backdrop-blur-md transition-opacity duration-[var(--dur-base)] group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-w-[16rem] sm:text-sm md:hidden"
           role="tooltip"
         >
           {tooltip}

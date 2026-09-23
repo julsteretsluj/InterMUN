@@ -13,51 +13,49 @@ export default function AboutPage() {
 
   return (
     <MarketingDocumentPage
-      eyebrow={`About ${appName}`}
-      title="Built for the whole conference team."
-      intro={`${appName} brings delegates, chairs, advisors, and secretariat teams into one shared conference workspace—from preparation through the final gavel.`}
+      eyebrow={`about ${appName.toLowerCase()}`}
+      title="built for the whole conference team."
+      intro={`${appName} brings delegates, chairs, advisors, and secretariat into one shared workspace—from prep through the final gavel. we think the hard part is the interface, not the diplomacy.`}
       sections={[
         {
-          title: "Our purpose",
+          title: "our purpose",
           content: (
             <>
               <p>
-                Model United Nations is at its best when participants can focus on diplomacy, procedure,
-                research, and collaboration. We built {appName} to reduce the administrative friction around
-                those moments.
+                Model United Nations is at its best when people can focus on diplomacy, procedure,
+                research, and collaboration. {appName} exists to cut the admin friction around those
+                moments.
               </p>
               <p>
-                The platform connects committee preparation, live session tools, documents, voting,
-                communication, and conference oversight without replacing the people who make a conference
-                meaningful.
+                The platform connects preparation, live session tools, documents, voting, notes, and
+                oversight—without replacing the humans who make a conference matter.
               </p>
             </>
           ),
         },
         {
-          title: "Designed around every role",
+          title: "designed around every role",
           content: (
             <ul className="list-disc space-y-2 pl-5">
-              <li>Delegates can research, draft, collaborate, and follow committee activity.</li>
-              <li>Chairs can run roll call, speakers lists, motions, timers, and votes.</li>
-              <li>Advisors can support their delegations with appropriate visibility.</li>
-              <li>Secretariat teams can coordinate committees and understand conference-wide progress.</li>
+              <li>Delegates research, draft, collaborate, and follow the floor.</li>
+              <li>Chairs run roll call, speakers, motions, timers, and votes.</li>
+              <li>Advisors support their delegations with the right visibility.</li>
+              <li>Secretariat coordinates chambers and sees conference-wide progress.</li>
             </ul>
           ),
         },
         {
-          title: "Conference-first technology",
+          title: "conference-first technology",
           content: (
             <>
               <p>
-                Every feature is shaped around real conference workflows, role boundaries, and the need for
-                a calm interface during fast-moving sessions. Accessibility, privacy, and secure
-                role-based access are part of that design—not afterthoughts.
+                Features are shaped around real weekend workflows, role boundaries, and calm UI when
+                the room is moving fast. Accessibility and secure role access are part of the design.
               </p>
               <p>
-                Interested in using {appName} at your conference?{" "}
-                <Link href="/#contact" className="font-semibold text-[var(--accent)] hover:underline">
-                  Get in touch with us
+                Want {appName} at your conference?{" "}
+                <Link href="/#contact" className="font-semibold text-[var(--clicky-blue)] hover:underline">
+                  say hello
                 </Link>
                 .
               </p>

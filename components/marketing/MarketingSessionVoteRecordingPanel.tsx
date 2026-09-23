@@ -83,43 +83,43 @@ export function MarketingSessionVoteRecordingPanel({
     <section className={cn("space-y-3", className)}>
       {!compactIntro ? (
         <div className={MARKETING_CHAMBER_PREVIEW}>
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("currentOpenMotion")}</h3>
-          <p className="mt-1 text-sm text-brand-muted">{t("chairRecordVotesHint")}</p>
+          <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{t("currentOpenMotion")}</h3>
+          <p className="mt-1 text-sm text-[var(--clicky-ink-soft)]">{t("chairRecordVotesHint")}</p>
         </div>
       ) : null}
 
       <article className={cn(MARKETING_SESSION_SURFACE, "space-y-5 p-5")}>
         <header className="space-y-1">
-          <p className="text-[0.75rem] font-medium text-brand-muted">{t("voteTypes.motion")}</p>
-          <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-brand-navy">{MOTION_TITLE}</h3>
-          <p className="text-[0.8125rem] text-brand-muted">
+          <p className="text-[0.75rem] font-medium text-[var(--clicky-ink-soft)]">{t("voteTypes.motion")}</p>
+          <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-[var(--clicky-ink)]">{MOTION_TITLE}</h3>
+          <p className="text-[0.8125rem] text-[var(--clicky-ink-soft)]">
             {t("majorityLine", { label: majorityLabel })}
           </p>
         </header>
 
-        <div className="flex gap-6 text-[0.9375rem] text-brand-navy">
+        <div className="flex gap-6 text-[0.9375rem] text-[var(--clicky-ink)]">
           <span>
-            <span className="text-brand-muted">{t("yes")} </span>
+            <span className="text-[var(--clicky-ink-soft)]">{t("yes")} </span>
             <span className="font-semibold tabular-nums">{yes}</span>
           </span>
           <span>
-            <span className="text-brand-muted">{t("no")} </span>
+            <span className="text-[var(--clicky-ink-soft)]">{t("no")} </span>
             <span className="font-semibold tabular-nums">{no}</span>
           </span>
-          <span className={cn("font-medium", passes ? "text-[var(--accent)]" : "text-brand-muted")}>
+          <span className={cn("font-medium", passes ? "text-[var(--clicky-blue)]" : "text-[var(--clicky-ink-soft)]")}>
             {total > 0 ? (passes ? t("preliminaryPassing") : t("preliminaryFailing")) : null}
           </span>
         </div>
 
-        <div className="space-y-1 border-t border-[var(--hairline)] pt-2">
+        <div className="space-y-1 border-t border-[var(--clicky-line)] pt-2">
           {delegates.map((row) => (
             <div
               key={row.id}
               className="flex items-center justify-between gap-3 py-2.5 text-[0.9375rem]"
             >
               <div className="min-w-0">
-                <p className="font-medium text-brand-navy">{row.country}</p>
-                <p className="text-[0.75rem] text-brand-muted">{recordedLabel(row.vote, t)}</p>
+                <p className="font-medium text-[var(--clicky-ink)]">{row.country}</p>
+                <p className="text-[0.75rem] text-[var(--clicky-ink-soft)]">{recordedLabel(row.vote, t)}</p>
               </div>
               <div className="flex shrink-0 gap-1.5" role="group" aria-label={`${row.country}: ${t("recordVoteChoice")}`}>
                 <button
@@ -129,7 +129,7 @@ export function MarketingSessionVoteRecordingPanel({
                     "rounded-[var(--radius-md)] px-2.5 py-1 text-[0.75rem] font-medium transition-apple",
                     row.vote === "yes"
                       ? "bg-[var(--accent-fill)] text-white"
-                      : "bg-[var(--apple-bg-secondary)] text-brand-navy"
+                      : "bg-[var(--clicky-paper)] text-[var(--clicky-ink)]"
                   )}
                 >
                   {t("yes")}
@@ -141,7 +141,7 @@ export function MarketingSessionVoteRecordingPanel({
                     "rounded-[var(--radius-md)] px-2.5 py-1 text-[0.75rem] font-medium transition-apple",
                     row.vote === "no"
                       ? "bg-[var(--system-red-fill)] text-white"
-                      : "bg-[var(--apple-bg-secondary)] text-brand-navy"
+                      : "bg-[var(--clicky-paper)] text-[var(--clicky-ink)]"
                   )}
                 >
                   {t("no")}
@@ -149,7 +149,7 @@ export function MarketingSessionVoteRecordingPanel({
                 <button
                   type="button"
                   onClick={() => clearVote(row.id)}
-                  className="rounded-[var(--radius-md)] px-2 py-1 text-[0.75rem] text-brand-muted transition-apple hover:text-brand-navy"
+                  className="rounded-[var(--radius-md)] px-2 py-1 text-[0.75rem] text-[var(--clicky-ink-soft)] transition-apple hover:text-[var(--clicky-ink)]"
                 >
                   {t("clear")}
                 </button>

@@ -13,7 +13,6 @@ import {
   AppleMenuTrigger,
 } from "@/components/ui/AppleMenu";
 
-/** Marketing header: collapse role feature links into one Features menu. */
 export function MarketingFeaturesMenu() {
   const t = useTranslations("marketing");
   const router = useRouter();
@@ -22,7 +21,7 @@ export function MarketingFeaturesMenu() {
     <AppleMenu>
       <AppleMenuTrigger
         aria-label={t("nav.features")}
-        className="marketing-nav-link rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium"
+        className="marketing-nav-link rounded-full px-2 py-1 text-sm font-medium lowercase"
       >
         {t("nav.features")}
       </AppleMenuTrigger>
@@ -42,11 +41,11 @@ export function MarketingPrimaryNav() {
   const t = useTranslations("marketing");
 
   return (
-    <nav className="marketing-nav hidden items-center justify-self-center gap-1 lg:flex lg:gap-2">
-      <Link href="/about">About</Link>
-      <Link href="/#how-it-works">{t("nav.howItWorks")}</Link>
+    <nav className="marketing-nav hidden items-center justify-self-center gap-0.5 md:flex">
+      <Link href="/about">about</Link>
+      <Link href="/#how-it-works">{t("nav.howItWorks").toLowerCase()}</Link>
       <MarketingFeaturesMenu />
-      <Link href="/#contact">{t("nav.contact")}</Link>
+      <Link href="/#contact">{t("nav.contact").toLowerCase()}</Link>
     </nav>
   );
 }

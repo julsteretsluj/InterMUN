@@ -1,0 +1,640 @@
+/* Clicky-era design system — heyclicky / wispr / ohhmy / momento / clico inspired.
+ * Soft desktop metaphor + calm product chrome. Applied site-wide via tokens. */
+
+:root {
+  --clicky-paper: #f7f6f2;
+  --clicky-paper-deep: #efece4;
+  --clicky-ink: #121212;
+  --clicky-ink-soft: #5c5c57;
+  --clicky-ink-faint: #9a9890;
+  --clicky-muted: #9a9890;
+  --clicky-line: rgba(18, 18, 18, 0.1);
+  --clicky-blue: #007aff;
+  --clicky-blue-hover: #0066d6;
+  --clicky-coral: #ff5f57;
+  --clicky-mint: #28c840;
+  --clicky-window: #ffffff;
+  --clicky-shadow: 0 1px 0 rgba(18, 18, 18, 0.04), 0 12px 40px rgba(18, 18, 18, 0.08);
+  --clicky-shadow-lg: 0 2px 0 rgba(18, 18, 18, 0.03), 0 24px 64px rgba(18, 18, 18, 0.12);
+  --clicky-radius-sm: 10px;
+  --clicky-radius: 14px;
+  --clicky-radius-lg: 22px;
+  --clicky-dot: radial-gradient(circle, rgba(18, 18, 18, 0.11) 1px, transparent 1.2px);
+}
+
+/* —— Global canvas —— */
+html {
+  --dashboard-cream: var(--clicky-paper);
+  --dashboard-card: var(--clicky-window);
+  --dashboard-shadow: var(--clicky-shadow);
+  --color-bg-page: var(--clicky-paper);
+  --navy-deep: var(--clicky-ink);
+  --navy: var(--clicky-ink);
+  --color-text: var(--clicky-ink);
+  --marketing-ink: var(--clicky-ink);
+  --marketing-ink-soft: var(--clicky-ink-soft);
+  --marketing-chamber-elevated: #fffef9;
+  --marketing-chamber-deep: var(--clicky-paper-deep);
+  --marketing-hairline: var(--clicky-line);
+}
+
+/* Dot-grid paper for marketing + auth */
+.marketing-shell,
+.mun-clicky-auth {
+  background-color: var(--clicky-paper);
+  background-image: var(--clicky-dot);
+  background-size: 22px 22px;
+  color: var(--clicky-ink);
+}
+
+.marketing-shell .marketing-header {
+  background: color-mix(in srgb, var(--clicky-paper) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid var(--clicky-line);
+}
+
+.marketing-shell .marketing-header-brand {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+}
+
+.marketing-shell .marketing-nav a,
+.marketing-shell .marketing-nav button {
+  color: var(--clicky-ink-soft);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  padding: 0.35rem 0.65rem;
+  border-radius: 980px;
+  transition: color 200ms var(--ease-apple), background 200ms var(--ease-apple);
+}
+
+.marketing-shell .marketing-nav a:hover,
+.marketing-shell .marketing-nav button:hover {
+  color: var(--clicky-ink);
+  background: rgba(18, 18, 18, 0.05);
+}
+
+/* Window chrome (heyclicky / macOS metaphor) */
+.clicky-window {
+  position: relative;
+  border-radius: var(--clicky-radius);
+  border: 1px solid var(--clicky-line);
+  background: var(--clicky-window);
+  box-shadow: var(--clicky-shadow);
+  overflow: hidden;
+}
+
+.clicky-window-lg {
+  border-radius: var(--clicky-radius-lg);
+  box-shadow: var(--clicky-shadow-lg);
+}
+
+.clicky-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--clicky-line);
+  background: linear-gradient(180deg, #fbfbfa 0%, #f3f2ee 100%);
+}
+
+.clicky-traffic {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: #ff5f57;
+  box-shadow: 1.1rem 0 0 #febc2e, 2.2rem 0 0 #28c840;
+}
+
+.clicky-window-title {
+  margin-left: 2.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--clicky-ink-faint);
+  letter-spacing: 0.01em;
+}
+
+.clicky-kaomoji {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85rem;
+  color: var(--clicky-ink-soft);
+  user-select: none;
+}
+
+.clicky-sticky {
+  border-radius: 4px 12px 12px 12px;
+  background: #fff7a8;
+  border: 1px solid rgba(18, 18, 18, 0.08);
+  box-shadow: var(--clicky-shadow);
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--clicky-ink);
+  transform: rotate(-1.5deg);
+}
+
+.clicky-sticky--blue {
+  background: #d7ebff;
+  transform: rotate(1.2deg);
+}
+
+.clicky-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 980px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: background 200ms var(--ease-apple), color 200ms var(--ease-apple), border-color 200ms var(--ease-apple);
+}
+
+.clicky-pill-primary {
+  background: var(--clicky-blue);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.clicky-pill-primary:hover {
+  background: var(--clicky-blue-hover);
+}
+
+.clicky-pill-ghost {
+  background: #fff;
+  color: var(--clicky-ink);
+  border: 1px solid var(--clicky-line);
+}
+
+.clicky-pill-ghost:hover {
+  background: var(--clicky-paper-deep);
+}
+
+.clicky-section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--clicky-ink);
+  text-transform: lowercase;
+}
+
+.clicky-lede {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--clicky-ink-soft);
+  max-width: 36rem;
+}
+
+.clicky-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--clicky-blue);
+}
+
+/* Product page shell */
+.mun-page-shell {
+  border-radius: var(--clicky-radius-lg) !important;
+  border: 1px solid var(--clicky-line) !important;
+  background: var(--clicky-window) !important;
+  box-shadow: var(--clicky-shadow) !important;
+}
+
+.mun-page-shell h2 {
+  letter-spacing: -0.03em !important;
+}
+
+/* Dashboard frame softening */
+.dashboard-app-frame {
+  border-radius: var(--clicky-radius-lg) !important;
+  box-shadow: var(--clicky-shadow-lg) !important;
+  border-color: var(--clicky-line) !important;
+}
+
+/* Auth split — momento precision + heyclicky paper */
+.mun-clicky-auth {
+  display: grid;
+  min-height: 100vh;
+}
+
+@media (min-width: 960px) {
+  .mun-clicky-auth {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+}
+
+.mun-clicky-auth-brand {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 2.75rem;
+  background: var(--clicky-ink);
+  color: #f7f6f2;
+  overflow: hidden;
+}
+
+@media (min-width: 960px) {
+  .mun-clicky-auth-brand {
+    display: flex;
+  }
+}
+
+.mun-clicky-auth-brand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.2px);
+  background-size: 24px 24px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.mun-clicky-auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .mun-clicky-auth-form {
+    padding: 2.5rem 3rem;
+  }
+}
+
+.mun-clicky-auth-card {
+  width: 100%;
+  max-width: 26rem;
+  margin-inline: auto;
+  border-radius: var(--clicky-radius-lg);
+  border: 1px solid var(--clicky-line);
+  background: var(--clicky-window);
+  box-shadow: var(--clicky-shadow);
+  padding: 1.75rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .mun-clicky-auth-card {
+    padding: 2rem 1.75rem;
+  }
+}
+
+/* Feature / about document pages */
+.clicky-doc-hero {
+  padding: 3.5rem 0 2rem;
+}
+
+.clicky-doc-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .clicky-doc-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+.clicky-doc-card {
+  border-radius: var(--clicky-radius);
+  border: 1px solid var(--clicky-line);
+  background: var(--clicky-window);
+  box-shadow: var(--clicky-shadow);
+  padding: 1.35rem 1.25rem;
+}
+
+.clicky-doc-card + .clicky-doc-card {
+  margin-top: 1rem;
+}
+
+.clicky-doc-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.clicky-doc-card p,
+.clicky-doc-card li {
+  color: var(--clicky-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Gate pages */
+.mun-clicky-gate {
+  min-height: 100vh;
+  background-color: var(--clicky-paper);
+  background-image: var(--clicky-dot);
+  background-size: 22px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.mun-clicky-gate-card {
+  width: 100%;
+  max-width: 26rem;
+  border-radius: var(--clicky-radius-lg);
+  border: 1px solid var(--clicky-line);
+  background: var(--clicky-window);
+  box-shadow: var(--clicky-shadow-lg);
+  overflow: hidden;
+}
+
+/* Home floating desktop stage */
+.clicky-desktop-stage {
+  position: relative;
+  min-height: min(72vh, 640px);
+  padding: 2rem 1rem 3rem;
+}
+
+@media (min-width: 768px) {
+  .clicky-desktop-stage {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
+
+.clicky-float-a {
+  animation: clicky-float 8s var(--ease-apple-out) infinite;
+}
+
+.clicky-float-b {
+  animation: clicky-float 9.5s var(--ease-apple-out) infinite;
+  animation-delay: -2s;
+}
+
+.clicky-float-c {
+  animation: clicky-float 7.2s var(--ease-apple-out) infinite;
+  animation-delay: -4s;
+}
+
+@keyframes clicky-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.clicky-faq summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--clicky-line);
+}
+
+.clicky-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.clicky-faq details[open] summary {
+  color: var(--clicky-blue);
+}
+
+.clicky-faq details p {
+  padding: 0.5rem 0 1.1rem;
+  color: var(--clicky-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Primary button (forms / gates) */
+.clicky-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 980px;
+  padding: 0.7rem 1.35rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-transform: lowercase;
+  background: var(--clicky-blue);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: background 200ms var(--ease-apple);
+}
+
+.clicky-btn-primary:hover:not(:disabled) {
+  background: var(--clicky-blue-hover);
+}
+
+.clicky-btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Preview bodies — keep demos on clicky blue, not pink/magenta chamber accents */
+.clicky-preview-body,
+.clicky-window {
+  --accent: var(--clicky-blue);
+  --accent-bright: #5ac8fa;
+  --brand-accent: var(--clicky-blue);
+  --brand-accent-bright: #5ac8fa;
+  --logo-magenta: var(--clicky-blue);
+  --system-pink: var(--clicky-blue);
+  --hairline: var(--clicky-line);
+  --material-thin: var(--clicky-paper);
+  --material-thick: var(--clicky-paper-deep);
+  --apple-bg-secondary: var(--clicky-paper);
+  --dashboard-card: var(--clicky-window);
+  --dashboard-shadow: var(--clicky-shadow);
+  color: var(--clicky-ink);
+}
+
+.clicky-preview-body,
+.clicky-window .marketing-session-surface,
+.clicky-window .marketing-chamber-preview,
+.clicky-window .marketing-preview-surface {
+  color: var(--clicky-ink);
+}
+
+.clicky-preview-body .bg-brand-accent,
+.clicky-window .bg-brand-accent {
+  background-color: var(--clicky-blue) !important;
+}
+
+.clicky-preview-body .text-brand-navy,
+.clicky-window .text-brand-navy,
+.clicky-preview-body .text-zinc-900,
+.clicky-window .text-zinc-900,
+.clicky-preview-body .text-zinc-800,
+.clicky-window .text-zinc-800 {
+  color: var(--clicky-ink) !important;
+}
+
+.clicky-preview-body .text-brand-muted,
+.clicky-window .text-brand-muted,
+.clicky-preview-body .text-zinc-600,
+.clicky-window .text-zinc-600,
+.clicky-preview-body .text-zinc-500,
+.clicky-window .text-zinc-500,
+.clicky-preview-body .text-zinc-400,
+.clicky-window .text-zinc-400 {
+  color: var(--clicky-ink-soft) !important;
+}
+
+.clicky-preview-body .border-zinc-200,
+.clicky-window .border-zinc-200,
+.clicky-preview-body .border-zinc-100,
+.clicky-window .border-zinc-100,
+.clicky-preview-body .border-zinc-300,
+.clicky-window .border-zinc-300,
+.clicky-preview-body [class*="border-brand-navy"],
+.clicky-window [class*="border-brand-navy"] {
+  border-color: var(--clicky-line) !important;
+}
+
+.clicky-preview-body .bg-zinc-50,
+.clicky-window .bg-zinc-50,
+.clicky-preview-body .bg-zinc-100,
+.clicky-window .bg-zinc-100 {
+  background-color: var(--clicky-paper) !important;
+}
+
+/* Stance / status chips inside previews — traffic-light clicky, not loud Tailwind */
+.clicky-preview-body [class*="bg-emerald-"],
+.clicky-window [class*="bg-emerald-"] {
+  background-color: color-mix(in srgb, var(--clicky-mint) 72%, white) !important;
+  color: #fff !important;
+}
+
+.clicky-preview-body [class*="bg-rose-"],
+.clicky-window [class*="bg-rose-"] {
+  background-color: color-mix(in srgb, var(--clicky-coral) 72%, white) !important;
+  color: #fff !important;
+}
+
+.clicky-preview-body [class*="bg-amber-"],
+.clicky-window [class*="bg-amber-"] {
+  background-color: color-mix(in srgb, #febc2e 78%, white) !important;
+  color: var(--clicky-ink) !important;
+}
+
+.clicky-preview-body [class*="bg-zinc-400"],
+.clicky-window [class*="bg-zinc-400"] {
+  background-color: color-mix(in srgb, var(--clicky-ink-faint) 70%, white) !important;
+  color: #fff !important;
+}
+
+.clicky-preview-body button.rounded-lg,
+.clicky-window button.rounded-lg,
+.clicky-preview-body .inline-flex.rounded-lg,
+.clicky-window .inline-flex.rounded-lg {
+  border-radius: 980px !important;
+}
+
+.clicky-preview-body button.rounded-lg.bg-brand-accent,
+.clicky-window button.rounded-lg.bg-brand-accent,
+.clicky-preview-body a.rounded-lg.bg-brand-accent,
+.clicky-window .inline-flex.rounded-lg.bg-brand-accent,
+.clicky-preview-body button.bg-\[var\(--clicky-blue\)\],
+.clicky-window button.bg-\[var\(--clicky-blue\)\] {
+  border-radius: 980px !important;
+}
+
+.clicky-preview-body input,
+.clicky-preview-body select,
+.clicky-preview-body textarea,
+.clicky-window .marketing-preview-surface input,
+.clicky-window .marketing-session-surface input,
+.clicky-window .marketing-preview-surface select,
+.clicky-window .marketing-session-surface select,
+.clicky-window .marketing-preview-surface textarea,
+.clicky-window .marketing-session-surface textarea {
+  border-radius: var(--clicky-radius-sm) !important;
+  border-color: var(--clicky-line) !important;
+}
+
+/* Soften header chrome controls on marketing */
+.marketing-shell .marketing-header-controls {
+  opacity: 0.85;
+}
+
+.marketing-shell .marketing-header-controls button,
+.marketing-shell .marketing-header .mun-apple-btn-glass-gray {
+  border-radius: 980px !important;
+  border-color: var(--clicky-line) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: var(--clicky-ink-soft) !important;
+  box-shadow: none !important;
+}
+
+.marketing-shell .marketing-header-controls button:hover,
+.marketing-shell .marketing-header .mun-apple-btn-glass-gray:hover {
+  background: #fff !important;
+  color: var(--clicky-ink) !important;
+}
+
+/* Auth / gate form fields on clicky paper */
+.mun-clicky-auth {
+  --accent: var(--clicky-blue);
+  --brand-accent: var(--clicky-blue);
+  --logo-magenta: var(--clicky-blue);
+  --system-pink: var(--clicky-blue);
+}
+
+.mun-clicky-auth-card .bg-brand-accent,
+.mun-clicky-auth-card .rounded-full.bg-brand-accent {
+  background-color: var(--clicky-blue) !important;
+}
+
+.mun-clicky-auth-card h1,
+.mun-clicky-auth-card h2 {
+  letter-spacing: -0.03em;
+  color: var(--clicky-ink) !important;
+}
+
+.mun-clicky-auth-card .mun-apple-btn-filled-blue,
+.mun-clicky-auth-card .mun-apple-btn-primary {
+  border-radius: 980px !important;
+}
+
+.mun-clicky-auth-card input,
+.mun-clicky-auth-card select,
+.mun-clicky-auth-card textarea,
+.mun-clicky-gate-card input,
+.mun-clicky-gate-card select,
+.mun-clicky-gate-card textarea {
+  border-radius: var(--clicky-radius-sm) !important;
+  border-color: var(--clicky-line) !important;
+  background: #fff !important;
+}
+
+.mun-clicky-auth-card input:focus,
+.mun-clicky-auth-card select:focus,
+.mun-clicky-auth-card textarea:focus,
+.mun-clicky-gate-card input:focus,
+.mun-clicky-gate-card select:focus,
+.mun-clicky-gate-card textarea:focus {
+  border-color: var(--clicky-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.18) !important;
+}
+
+/* Dashboard product chrome — keep cream canvas, clicky cards */
+.dashboard-app-shell {
+  --dashboard-cream: var(--clicky-paper);
+  --dashboard-card: var(--clicky-window);
+  --dashboard-shadow: var(--clicky-shadow);
+}
+
+.mun-page-shell .mun-apple-btn-primary,
+.dashboard-app-frame .mun-apple-btn-primary {
+  border-radius: 980px !important;
+}
+

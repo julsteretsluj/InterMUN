@@ -206,7 +206,7 @@ export function OrbAnimationOverlay({
         <button
           type="button"
           onClick={dismissEarly}
-          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white/90 text-brand-navy shadow-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white/90 text-brand-navy shadow-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]"
           aria-label="Close"
         >
           <X className="h-5 w-5" aria-hidden />

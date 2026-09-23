@@ -124,15 +124,15 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
   return (
     <section
       className={cn(
-        "rounded-xl border border-brand-navy/12 bg-brand-paper p-4 text-brand-navy [color-scheme:light] md:p-6",
+        "rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] md:p-6",
         "space-y-4",
         className
       )}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h3>
-          <p className="mt-1 text-xs leading-relaxed text-brand-muted">
+          <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{t("title")}</h3>
+          <p className="mt-1 text-xs leading-relaxed text-[var(--clicky-ink-soft)]">
             {t.rich("intro", {
               strong: (chunks) => <strong>{chunks}</strong>,
               completeCount,
@@ -141,7 +141,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
           </p>
         </div>
         <div
-          className="inline-flex shrink-0 rounded-lg border border-brand-navy/15 bg-brand-navy/5 p-1 text-sm font-semibold"
+          className="inline-flex shrink-0 rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-1 text-sm font-semibold"
           role="tablist"
           aria-label={t("modeSwitchLabel")}
         >
@@ -152,7 +152,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
             onClick={() => setMode("list")}
             className={cn(
               "rounded-md px-4 py-2 transition-colors",
-              mode === "list" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
+              mode === "list" ? "bg-[var(--clicky-paper)] text-[var(--clicky-ink)] shadow-sm" : "text-[var(--clicky-ink-soft)] hover:text-[var(--clicky-ink)]"
             )}
           >
             {t("modeList")}
@@ -164,7 +164,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
             onClick={enterGuided}
             className={cn(
               "rounded-md px-4 py-2 transition-colors",
-              mode === "guided" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
+              mode === "guided" ? "bg-[var(--clicky-paper)] text-[var(--clicky-ink)] shadow-sm" : "text-[var(--clicky-ink-soft)] hover:text-[var(--clicky-ink)]"
             )}
           >
             {t("modeGuided")}
@@ -173,10 +173,10 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
       </div>
 
       {hasUnscored ? (
-        <div className="space-y-2 rounded-xl border border-amber-400/35 bg-amber-50/60 px-4 py-3">
-          <p className="text-sm font-semibold text-amber-950">{t("unscoredBannerTitle")}</p>
-          <p className="text-xs text-amber-900/90">{t("unscoredBannerBody")}</p>
-          <p className="text-xs font-medium text-amber-950">{t("unscoredListLabel")}</p>
+        <div className="space-y-2 rounded-xl border border-[color-mix(in_srgb,#febc2e_40%,var(--clicky-line))] bg-[color-mix(in_srgb,#febc2e_12%,white)] px-4 py-3">
+          <p className="text-sm font-semibold text-[var(--clicky-ink)]">{t("unscoredBannerTitle")}</p>
+          <p className="text-xs text-[var(--clicky-ink-soft)]">{t("unscoredBannerBody")}</p>
+          <p className="text-xs font-medium text-[var(--clicky-ink)]">{t("unscoredListLabel")}</p>
           <ul className="flex flex-wrap gap-1.5">
             {unscoredDelegates.map((d) => (
               <li key={d.id}>
@@ -186,7 +186,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                     enterGuided();
                     goTo(sortedDelegates.findIndex((x) => x.id === d.id));
                   }}
-                  className="rounded-full border border-amber-500/40 bg-white/70 px-2.5 py-0.5 text-xs font-medium text-amber-950 hover:border-brand-accent/50"
+                  className="rounded-full border border-[color-mix(in_srgb,#febc2e_45%,var(--clicky-line))] bg-white/70 px-2.5 py-0.5 text-xs font-medium text-[var(--clicky-ink)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_50%,var(--clicky-line))]"
                 >
                   {d.country}
                 </button>
@@ -197,7 +197,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
             <button
               type="button"
               onClick={enterGuided}
-              className="mt-1 rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white"
+              className="mt-1 rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-semibold text-white"
             >
               {t("startGuidedCta")}
             </button>
@@ -207,17 +207,17 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
 
       {mode === "guided" && activeDelegate && activeCriterion ? (
         <div className="space-y-4">
-          <p className="text-xs text-brand-muted">{t("guidedHint")}</p>
+          <p className="text-xs text-[var(--clicky-ink-soft)]">{t("guidedHint")}</p>
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs text-brand-muted">
-              <span className="font-medium text-brand-navy">
+            <div className="flex items-center justify-between text-xs text-[var(--clicky-ink-soft)]">
+              <span className="font-medium text-[var(--clicky-ink)]">
                 {t("guidedProgress", { current: activeIndex + 1, total })}
               </span>
               <span>{t("guidedComplete", { completeCount, total })}</span>
             </div>
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-brand-navy/10">
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--clicky-paper-deep)]">
               <div
-                className="h-full rounded-full bg-brand-accent transition-[width] duration-300"
+                className="h-full rounded-full bg-[var(--clicky-blue)] transition-[width] duration-300"
                 style={{ width: `${total ? (completeCount / total) * 100 : 0}%` }}
               />
             </div>
@@ -232,35 +232,35 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                   title={`${d.country} — ${d.displayName}`}
                   className={cn(
                     "h-2.5 w-2.5 rounded-full border transition-colors",
-                    i === activeIndex ? "ring-2 ring-brand-accent/60 ring-offset-1 ring-offset-brand-paper" : "",
+                    i === activeIndex ? "ring-2 ring-[color-mix(in_srgb,var(--clicky-blue)_60%,transparent)] ring-offset-1 ring-offset-white" : "",
                     isCompleteFor(d.id)
-                      ? "border-emerald-500 bg-emerald-500"
-                      : "border-brand-navy/30 bg-transparent"
+                      ? "border-[var(--clicky-mint)] bg-[var(--clicky-mint)]"
+                      : "border-[var(--clicky-line)] bg-transparent"
                   )}
                 />
               ))}
             </div>
           </div>
 
-          <div className="space-y-3 rounded-xl border border-brand-accent/30 bg-logo-cyan/8 p-4">
+          <div className="space-y-3 rounded-xl border border-[color-mix(in_srgb,var(--clicky-blue)_30%,var(--clicky-line))] bg-[color-mix(in_srgb,var(--clicky-blue)_8%,white)] p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h4 className="font-sans text-base font-semibold text-brand-navy">
+              <h4 className="font-sans text-base font-semibold text-[var(--clicky-ink)]">
                 {activeDelegate.country} — {activeDelegate.displayName}
               </h4>
               <span
                 className={cn(
                   "rounded-full px-2 py-0.5 font-mono text-xs tabular-nums",
                   isCompleteFor(activeDelegate.id)
-                    ? "bg-emerald-500/15 text-emerald-900"
-                    : "bg-amber-500/15 text-amber-900"
+                    ? "bg-[color-mix(in_srgb,var(--clicky-mint)_15%,white)] text-[var(--clicky-ink)]"
+                    : "bg-[color-mix(in_srgb,#febc2e_15%,white)] text-[var(--clicky-ink)]"
                 )}
               >
                 {rubricNumericTotalForKeys(liveByProfile[activeDelegate.id] ?? {}, keys)}/{maxPts}
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-2 text-xs text-brand-muted">
-              <span className="font-medium text-brand-navy">
+            <div className="flex items-center justify-between gap-2 text-xs text-[var(--clicky-ink-soft)]">
+              <span className="font-medium text-[var(--clicky-ink)]">
                 {t("criterionProgress", {
                   current: criterionIndex + 1,
                   total: DELEGATE_CRITERIA.length,
@@ -281,7 +281,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                 type="button"
                 onClick={() => setCriterionIndex((i) => Math.max(0, i - 1))}
                 disabled={criterionIndex === 0}
-                className="rounded-lg border border-brand-navy/20 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-40"
+                className="rounded-lg border border-[var(--clicky-line)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] disabled:opacity-40"
               >
                 {t("prevCriterion")}
               </button>
@@ -289,16 +289,16 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                 type="button"
                 onClick={() => setCriterionIndex((i) => Math.min(DELEGATE_CRITERIA.length - 1, i + 1))}
                 disabled={criterionIndex >= DELEGATE_CRITERIA.length - 1}
-                className="rounded-lg border border-brand-navy/20 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-40"
+                className="rounded-lg border border-[var(--clicky-line)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] disabled:opacity-40"
               >
                 {t("nextCriterion")}
               </button>
             </div>
 
             {!isCompleteFor(activeDelegate.id) ? (
-              <p className="text-xs text-brand-muted">{t("currentIncomplete")}</p>
+              <p className="text-xs text-[var(--clicky-ink-soft)]">{t("currentIncomplete")}</p>
             ) : (
-              <span className="text-xs text-emerald-700">{t("autosaved")}</span>
+              <span className="text-xs text-[var(--clicky-ink-soft)]">{t("autosaved")}</span>
             )}
           </div>
 
@@ -307,7 +307,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
               type="button"
               onClick={() => goTo(activeIndex - 1)}
               disabled={activeIndex === 0}
-              className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy disabled:opacity-40"
+              className="rounded-lg border border-[var(--clicky-line)] px-3 py-2 text-sm font-medium text-[var(--clicky-ink)] disabled:opacity-40"
             >
               {t("previous")}
             </button>
@@ -315,14 +315,14 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
               <button
                 type="button"
                 onClick={() => goTo(activeIndex + 1)}
-                className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white"
+                className="rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-semibold text-white"
               >
                 {t("saveAndNext")}
               </button>
             ) : (
               <button
                 type="button"
-                className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white"
+                className="rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-semibold text-white"
               >
                 {t("finish")}
               </button>
@@ -338,11 +338,11 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
             return (
               <details
                 key={d.id}
-                className="group rounded-xl border border-brand-navy/10 bg-logo-cyan/8 open:border-brand-accent/35"
+                className="group rounded-xl border border-[var(--clicky-line)] bg-[color-mix(in_srgb,var(--clicky-blue)_8%,white)] open:border-[color-mix(in_srgb,var(--clicky-blue)_35%,var(--clicky-line))]"
                 open={d.id === "kenya"}
               >
                 <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2 px-4 py-3 marker:content-none [&::-webkit-details-marker]:hidden">
-                  <span className="font-medium text-brand-navy">
+                  <span className="font-medium text-[var(--clicky-ink)]">
                     {d.country} — {d.displayName}
                   </span>
                   <span className="flex items-center gap-2 text-xs">
@@ -350,16 +350,16 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                       className={cn(
                         "rounded-full px-2 py-0.5 font-mono tabular-nums",
                         rowComplete
-                          ? "bg-emerald-500/15 text-emerald-900"
-                          : "bg-amber-500/15 text-amber-900"
+                          ? "bg-[color-mix(in_srgb,var(--clicky-mint)_15%,white)] text-[var(--clicky-ink)]"
+                          : "bg-[color-mix(in_srgb,#febc2e_15%,white)] text-[var(--clicky-ink)]"
                       )}
                     >
                       {rowTotal}/{maxPts}
                     </span>
-                    <span className="text-brand-muted">{rowComplete ? t("complete") : t("incomplete")}</span>
+                    <span className="text-[var(--clicky-ink-soft)]">{rowComplete ? t("complete") : t("incomplete")}</span>
                   </span>
                 </summary>
-                <div className="space-y-3 border-t border-brand-navy/10 px-4 pb-4 pt-3">
+                <div className="space-y-3 border-t border-[var(--clicky-line)] px-4 pb-4 pt-3">
                   <div className="grid gap-3">
                     {DELEGATE_CRITERIA.map((criterion) => (
                       <RubricCriterionPicker
@@ -372,7 +372,7 @@ export function MarketingChairAwardsRubricPanel({ className }: { className?: str
                   </div>
                   <button
                     type="button"
-                    className="inline-flex rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white"
+                    className="inline-flex rounded-lg bg-[var(--clicky-blue)] px-4 py-2 text-sm font-semibold text-white"
                   >
                     {t("saveThisDelegate")}
                   </button>

@@ -4,25 +4,26 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Minimal light product chrome for marketing previews. */
+/** Clicky macOS-window chrome for marketing product previews. */
 export function MarketingChamberFrame({
   children,
   className,
-  label = "Preview",
+  label = "preview.app",
   variant: _variant = "light",
 }: {
   children: ReactNode;
   className?: string;
   label?: string;
-  /** @deprecated Always renders light; kept for call-site compatibility. */
+  /** @deprecated Always renders light clicky chrome. */
   variant?: "dark" | "light";
 }) {
   return (
-    <div className={cn("mun-chamber-frame mun-chamber-frame-light overflow-hidden", className)}>
-      <div className="mun-chamber-frame-bar">
-        <span className="text-[0.75rem] font-medium tracking-[-0.01em] text-brand-muted">{label}</span>
+    <div className={cn("clicky-window clicky-window-lg overflow-hidden", className)}>
+      <div className="clicky-window-bar">
+        <span className="clicky-traffic" aria-hidden />
+        <span className="clicky-window-title">{label.toLowerCase()}</span>
       </div>
-      <div className="mun-chamber-frame-body">{children}</div>
+      <div className="clicky-preview-body bg-[var(--clicky-window)] p-3 md:p-4">{children}</div>
     </div>
   );
 }

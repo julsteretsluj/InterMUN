@@ -3,43 +3,64 @@
 
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { getPartnershipContactEmail } from "@/lib/branding";
+import { getAppName, getPartnershipContactEmail } from "@/lib/branding";
 
 export async function MarketingSiteFooter() {
   const t = await getTranslations("marketing");
   const contactEmail = getPartnershipContactEmail();
+  const appName = getAppName();
 
   return (
-    <footer className="relative z-10 border-t border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-10">
-      <div className="mx-auto flex max-w-[var(--content-max-width,82.5rem)] flex-col items-start justify-between gap-6 px-4 text-sm text-brand-muted md:flex-row md:items-center md:px-8">
-        <p className="font-sans text-sm font-semibold tracking-[-0.01em] text-brand-navy">
-          {t("footer.copyright", { year: new Date().getFullYear() })}
-        </p>
-        <nav
-          aria-label="Company and legal"
-          className="flex flex-wrap items-center gap-x-5 gap-y-2 font-sans text-xs tracking-wide"
-        >
-          <Link href="/about" className="hover:text-brand-navy">
-            About
-          </Link>
-          <Link href="/privacy" className="hover:text-brand-navy">
-            Privacy
-          </Link>
-          <Link href="/terms" className="hover:text-brand-navy">
-            Terms
-          </Link>
-          {contactEmail ? (
-            <a href={`mailto:${contactEmail}`} className="hover:text-brand-navy">
-              {t("footer.contact")}
-            </a>
-          ) : null}
-          <Link href="/login" className="hover:text-brand-navy">
-            {t("nav.signIn")}
-          </Link>
-          <Link href="/signup" className="hover:text-brand-navy">
-            {t("nav.getStarted")}
-          </Link>
-        </nav>
+    <footer className="relative z-10 border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-12 text-[#f7f6f2]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
+        <div>
+          <p className="text-lg font-bold lowercase tracking-[-0.03em]">{appName.toLowerCase()}</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55">
+            conference software that stays out of the way until the gavel needs it.
+          </p>
+          <p className="mt-6 text-xs text-white/35">
+            {t("footer.copyright", { year: new Date().getFullYear() })}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-white/40">product</p>
+          <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
+            <Link href="/#how-it-works" className="hover:text-white">
+              how it works
+            </Link>
+            <Link href="/features/chairs" className="hover:text-white">
+              chairs
+            </Link>
+            <Link href="/features/delegates" className="hover:text-white">
+              delegates
+            </Link>
+            <Link href="/features/secretariat" className="hover:text-white">
+              secretariat
+            </Link>
+          </nav>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-white/40">resources</p>
+          <nav className="mt-3 flex flex-col gap-2 text-sm text-white/70">
+            <Link href="/about" className="hover:text-white">
+              about
+            </Link>
+            <Link href="/privacy" className="hover:text-white">
+              privacy
+            </Link>
+            <Link href="/terms" className="hover:text-white">
+              terms
+            </Link>
+            {contactEmail ? (
+              <a href={`mailto:${contactEmail}`} className="hover:text-white">
+                {t("footer.contact").toLowerCase()}
+              </a>
+            ) : null}
+            <Link href="/login" className="hover:text-white">
+              {t("nav.signIn").toLowerCase()}
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   );

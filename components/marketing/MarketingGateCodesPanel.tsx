@@ -71,39 +71,39 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
     <div className={cn(PREVIEW_CARD, "space-y-4", className)}>
       <div>
         <span className={PREVIEW_LABEL}>{tPreview("gatesLabel")}</span>
-        <p className="mt-1 text-xs text-zinc-500">{tPage("subtitle")}</p>
+        <p className="mt-1 text-xs text-[var(--clicky-ink-faint)]">{tPage("subtitle")}</p>
       </div>
 
       {message ? (
         <p
-          className="rounded-lg border border-[color-mix(in_srgb,var(--accent)_22%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] px-3 py-2 text-xs text-zinc-900"
+          className="rounded-lg border border-[color-mix(in_srgb,var(--clicky-blue)_22%,#d4d4d8)] bg-[color-mix(in_srgb,var(--clicky-blue)_10%,#ffffff)] px-3 py-2 text-xs text-[var(--clicky-ink)]"
           role="status"
         >
           {message}
         </p>
       ) : null}
 
-      <section className="space-y-2 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-sans text-sm font-semibold text-zinc-900">{tEvent("eventDetails")}</h3>
+      <section className="space-y-2 rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
+        <h3 className="font-sans text-sm font-semibold text-[var(--clicky-ink)]">{tEvent("eventDetails")}</h3>
         <div>
-          <label className="mb-1 block text-[0.65rem] font-medium uppercase tracking-wider text-zinc-500">
+          <label className="mb-1 block text-[0.65rem] font-medium uppercase tracking-wider text-[var(--clicky-ink-faint)]">
             {tEvent("conferenceCodeFirstGate")}
           </label>
           <div className="flex flex-wrap items-center gap-2">
             <input
               value={eventCode}
               onChange={(e) => setEventCode(e.target.value.toUpperCase())}
-              className="min-w-[10rem] flex-1 rounded-lg border border-zinc-200 px-2.5 py-1.5 font-mono text-xs uppercase tracking-wider text-zinc-900"
+              className="min-w-[10rem] flex-1 rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs uppercase tracking-wider text-[var(--clicky-ink)]"
               autoComplete="off"
             />
             <button
               type="button"
               onClick={() => copyText("event", eventCode)}
-              className="rounded-lg border border-zinc-200 p-1.5 text-zinc-600 hover:bg-white"
+              className="rounded-lg border border-[var(--clicky-line)] p-1.5 text-[var(--clicky-ink-soft)] hover:bg-white"
               aria-label={tPreview("copyCode")}
             >
               {copiedKey === "event" ? (
-                <Check className="h-3.5 w-3.5 text-[var(--accent)]" />
+                <Check className="h-3.5 w-3.5 text-[var(--clicky-blue)]" />
               ) : (
                 <Copy className="h-3.5 w-3.5" />
               )}
@@ -111,7 +111,7 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
             <button
               type="button"
               onClick={saveEventCode}
-              className="rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-white"
+              className="rounded-lg bg-[var(--clicky-blue)] px-3 py-1.5 text-xs font-semibold text-white"
             >
               {tCommon("save")}
             </button>
@@ -119,28 +119,28 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
         </div>
       </section>
 
-      <section className="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-sans text-sm font-semibold text-zinc-900">{tRoom("committeeRoomCodes")}</h3>
+      <section className="space-y-3 rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
+        <h3 className="font-sans text-sm font-semibold text-[var(--clicky-ink)]">{tRoom("committeeRoomCodes")}</h3>
         <div className="space-y-2">
           {committees.map((row) => {
             const draft = drafts[row.id] ?? row.code;
             return (
               <form
                 key={row.id}
-                className="space-y-2 rounded-lg border border-zinc-200 bg-white p-3"
+                className="space-y-2 rounded-lg border border-[var(--clicky-line)] bg-white p-3"
                 onSubmit={(e) => {
                   e.preventDefault();
                   saveCommitteeCode(row.id);
                 }}
               >
-                <p className="text-xs font-medium text-zinc-900">{row.label}</p>
-                <p className="text-[0.65rem] text-zinc-500">
+                <p className="text-xs font-medium text-[var(--clicky-ink)]">{row.label}</p>
+                <p className="text-[0.65rem] text-[var(--clicky-ink-faint)]">
                   {tRoom("currentCode")}{" "}
-                  <span className="font-mono text-zinc-800">{row.code}</span>
+                  <span className="font-mono text-[var(--clicky-ink)]">{row.code}</span>
                 </p>
                 <div className="flex flex-wrap items-end gap-2">
                   <div className="min-w-[8rem] flex-1">
-                    <label className="mb-1 block text-[0.65rem] text-zinc-500">{tRoom("newCommitteeCode")}</label>
+                    <label className="mb-1 block text-[0.65rem] text-[var(--clicky-ink-faint)]">{tRoom("newCommitteeCode")}</label>
                     <input
                       value={draft}
                       onChange={(e) =>
@@ -155,24 +155,24 @@ export function MarketingGateCodesPanel({ className }: { className?: string }) {
                       pattern="[A-Z0-9]{6}"
                       placeholder={tRoom("committeeCodePlaceholder")}
                       autoComplete="off"
-                      className="w-full rounded-lg border border-zinc-200 px-2.5 py-1.5 font-mono text-xs uppercase tracking-widest text-zinc-900"
+                      className="w-full rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 font-mono text-xs uppercase tracking-widest text-[var(--clicky-ink)]"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => copyText(row.id, row.code)}
-                    className="rounded-lg border border-zinc-200 p-1.5 text-zinc-600 hover:bg-zinc-50"
+                    className="rounded-lg border border-[var(--clicky-line)] p-1.5 text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]"
                     aria-label={tPreview("copyCode")}
                   >
                     {copiedKey === row.id ? (
-                      <Check className="h-3.5 w-3.5 text-[var(--accent)]" />
+                      <Check className="h-3.5 w-3.5 text-[var(--clicky-blue)]" />
                     ) : (
                       <Copy className="h-3.5 w-3.5" />
                     )}
                   </button>
                   <button
                     type="submit"
-                    className="rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-white"
+                    className="rounded-lg bg-[var(--clicky-blue)] px-3 py-1.5 text-xs font-semibold text-white"
                   >
                     {tCommon("save")}
                   </button>

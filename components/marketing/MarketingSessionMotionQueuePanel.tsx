@@ -50,10 +50,10 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
     <section className={cn("space-y-4", className)}>
       <div className={cn(MARKETING_SESSION_SURFACE, "space-y-5 p-5")}>
         <div className="flex items-baseline justify-between gap-3">
-          <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-brand-navy">
+          <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-[var(--clicky-ink)]">
             {t("motionControl")}
           </h3>
-          <p className="text-[0.8125rem] text-brand-muted">
+          <p className="text-[0.8125rem] text-[var(--clicky-ink-soft)]">
             {t("motionFloorLabel")} {t("closed")}
           </p>
         </div>
@@ -63,15 +63,15 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
         </button>
 
         <div>
-          <p className="mb-3 text-[0.75rem] font-medium text-brand-muted">{t("pendingVoteOrderMostDisruptive")}</p>
-          <ol className="space-y-0 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]">
+          <p className="mb-3 text-[0.75rem] font-medium text-[var(--clicky-ink-soft)]">{t("pendingVoteOrderMostDisruptive")}</p>
+          <ol className="space-y-0 divide-y divide-[var(--clicky-line)] border-y border-[var(--clicky-line)]">
             {motions.map((motion, index) => (
               <li
                 key={motion.id}
-                className="flex items-center justify-between gap-3 py-3 text-[0.9375rem] text-brand-navy"
+                className="flex items-center justify-between gap-3 py-3 text-[0.9375rem] text-[var(--clicky-ink)]"
               >
                 <span className="min-w-0 truncate">
-                  <span className="tabular-nums text-brand-muted">{index + 1}.</span> {motion.title}
+                  <span className="tabular-nums text-[var(--clicky-ink-soft)]">{index + 1}.</span> {motion.title}
                 </span>
               </li>
             ))}

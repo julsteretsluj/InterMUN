@@ -81,8 +81,8 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
   return (
     <section className={cn("mun-card space-y-4 border-white/10", className)}>
       <div>
-        <h3 className="font-sans text-lg font-semibold text-brand-navy">{t("title")}</h3>
-        <p className="mt-1 text-xs leading-relaxed text-brand-muted">{t("introDescription")}</p>
+        <h3 className="font-sans text-lg font-semibold text-[var(--clicky-ink)]">{t("title")}</h3>
+        <p className="mt-1 text-xs leading-relaxed text-[var(--clicky-ink-soft)]">{t("introDescription")}</p>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -111,7 +111,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
 
       <div className="space-y-2">
         <span className="mun-label normal-case block">{t("openingPresets")}</span>
-        <div className="max-h-32 overflow-y-auto rounded-lg border border-brand-navy/10 bg-brand-paper/50 p-2 dark:border-white/10 dark:bg-black/20">
+        <div className="max-h-32 overflow-y-auto rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)]/50 p-2 dark:border-white/10 dark:bg-black/20">
           <div className="flex flex-wrap gap-1.5">
             {presets.map((preset) => (
               <button
@@ -121,8 +121,8 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
                 className={cn(
                   "rounded-full border px-2.5 py-1 text-[11px] font-medium transition",
                   opening === preset
-                    ? "border-brand-accent bg-brand-accent/15 text-brand-navy"
-                    : "border-brand-navy/15 text-brand-muted hover:border-brand-accent/40"
+                    ? "border-[var(--clicky-blue)] bg-[color-mix(in_srgb,var(--clicky-blue)_15%,white)] text-[var(--clicky-ink)]"
+                    : "border-[var(--clicky-line)] text-[var(--clicky-ink-soft)] hover:border-[color-mix(in_srgb,var(--clicky-blue)_40%,var(--clicky-line))]"
                 )}
               >
                 {preset}
@@ -131,7 +131,7 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
           </div>
         </div>
         <label className="block space-y-1">
-          <span className="text-xs text-brand-muted">{t("openingPhraseLabel")}</span>
+          <span className="text-xs text-[var(--clicky-ink-soft)]">{t("openingPhraseLabel")}</span>
           <input
             className="mun-field"
             value={opening}
@@ -155,13 +155,13 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
         />
       </label>
 
-      <div className="rounded-lg border border-brand-navy/10 bg-brand-paper/50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">{t("preview")}</p>
-        <p className="mt-1 text-sm text-brand-navy">{preview || t("previewDash")}</p>
+      <div className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)]/50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--clicky-ink-soft)]">{t("preview")}</p>
+        <p className="mt-1 text-sm text-[var(--clicky-ink)]">{preview || t("previewDash")}</p>
       </div>
 
       {msg ? (
-        <p className="text-sm text-brand-diplomatic" role="status">
+        <p className="text-sm text-[var(--clicky-blue)]" role="status">
           {msg}
         </p>
       ) : null}
@@ -170,10 +170,10 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
         {t("submitClause")}
       </button>
 
-      <div className="border-t border-[var(--hairline)] pt-4">
+      <div className="border-t border-[var(--clicky-line)] pt-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h4 className="text-sm font-semibold text-brand-navy">{t("suggestionsHeading")}</h4>
-          <button type="button" className="text-xs text-brand-diplomatic hover:underline">
+          <h4 className="text-sm font-semibold text-[var(--clicky-ink)]">{t("suggestionsHeading")}</h4>
+          <button type="button" className="text-xs text-[var(--clicky-blue)] hover:underline">
             {t("refresh")}
           </button>
         </div>
@@ -181,26 +181,26 @@ export function MarketingDelegateResolutionBuilderPanel({ className }: { classNa
           {suggestions.map((row) => (
             <li
               key={row.id}
-              className="rounded-lg border border-brand-navy/10 bg-white px-3 py-2 text-sm dark:border-white/10 dark:bg-black/15"
+              className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-sm dark:border-white/10 dark:bg-black/15"
             >
-              <div className="flex flex-wrap items-center gap-2 text-[11px] text-brand-muted">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] text-[var(--clicky-ink-soft)]">
                 <span
                   className={cn(
                     "rounded px-1.5 py-0.5",
                     row.section === "preambulatory"
-                      ? "bg-amber-500/15 text-amber-900"
-                      : "bg-emerald-500/15 text-emerald-900"
+                      ? "bg-[color-mix(in_srgb,#febc2e_15%,white)] text-[var(--clicky-ink)]"
+                      : "bg-[color-mix(in_srgb,var(--clicky-mint)_15%,white)] text-[var(--clicky-ink)]"
                   )}
                 >
                   {row.section === "preambulatory" ? t("badgePreamb") : t("badgeOperative")}
                 </span>
                 {row.yours ? (
-                  <span className="rounded bg-brand-accent/20 px-1.5 py-0.5 text-brand-navy">
+                  <span className="rounded bg-[color-mix(in_srgb,var(--clicky-blue)_20%,white)] px-1.5 py-0.5 text-[var(--clicky-ink)]">
                     {t("badgeYours")}
                   </span>
                 ) : null}
               </div>
-              <p className="mt-1 text-brand-navy">{combineClauseSuggestion(row.opening, row.body)}</p>
+              <p className="mt-1 text-[var(--clicky-ink)]">{combineClauseSuggestion(row.opening, row.body)}</p>
               {row.yours ? (
                 <button
                   type="button"

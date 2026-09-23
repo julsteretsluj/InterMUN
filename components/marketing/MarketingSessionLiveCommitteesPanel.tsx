@@ -126,19 +126,19 @@ export function MarketingSessionLiveCommitteesPanel({
     <section
       className={cn(
         /* marketing-light-surface: lock dark ink inside dark chamber frames (both site themes). */
-        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-xl border border-zinc-300/80 bg-brand-cream p-4 text-zinc-900 [color-scheme:light] sm:p-6",
+        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-xl border border-[var(--clicky-line)]/80 bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] sm:p-6",
         className
       )}
     >
       {!compactIntro ? (
         <>
-          <h1 className="mb-1.5 font-sans text-[1.35rem] font-semibold leading-tight text-zinc-900 sm:text-[1.85rem]">
+          <h1 className="mb-1.5 font-sans text-[1.35rem] font-semibold leading-tight text-[var(--clicky-ink)] sm:text-[1.85rem]">
             {t("welcomeSg")}
           </h1>
-          <p className="mb-6 text-[0.9rem] text-zinc-700 sm:text-[0.95rem]">{t("whichCommittee")}</p>
+          <p className="mb-6 text-[0.9rem] text-[var(--clicky-ink-soft)] sm:text-[0.95rem]">{t("whichCommittee")}</p>
         </>
       ) : (
-        <p className="mb-4 text-[0.7rem] font-semibold uppercase tracking-wide text-zinc-500">
+        <p className="mb-4 text-[0.7rem] font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">
           {t("whichCommittee")}
         </p>
       )}
@@ -147,7 +147,7 @@ export function MarketingSessionLiveCommitteesPanel({
         {sections.map((section, sectionIndex) => (
           <section
             key={section.difficulty}
-            className={sectionIndex > 0 ? "border-t border-zinc-300/70 pt-6 sm:pt-8" : undefined}
+            className={sectionIndex > 0 ? "border-t border-[var(--clicky-line)]/70 pt-6 sm:pt-8" : undefined}
             aria-labelledby={`marketing-smt-difficulty-${section.difficulty}`}
           >
             <div className="mb-3 flex items-center gap-3 sm:mb-4">
@@ -157,7 +157,7 @@ export function MarketingSessionLiveCommitteesPanel({
               >
                 {translateCommitteeTagDifficulty(section.difficulty, tCommitteeTags)}
               </h2>
-              <div className="h-px min-w-0 flex-1 bg-zinc-300/80" role="presentation" aria-hidden />
+              <div className="h-px min-w-0 flex-1 bg-[var(--clicky-line)]" role="presentation" aria-hidden />
             </div>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {section.items.map((item) => {
@@ -184,13 +184,13 @@ export function MarketingSessionLiveCommitteesPanel({
                     aria-pressed={selected}
                     aria-label={`${cardPriority}. ${title}`}
                     className={cn(
-                      "relative rounded-lg border bg-white px-3.5 py-2.5 text-left text-zinc-900 shadow-sm transition-colors hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]",
+                      "relative rounded-lg border bg-white px-3.5 py-2.5 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
                       selected
-                        ? "border-[color-mix(in_srgb,var(--accent)_45%,#0B1F3A)] bg-[color-mix(in_srgb,var(--accent)_6%,#ffffff)] ring-1 ring-[color-mix(in_srgb,var(--accent)_25%,transparent)]"
-                        : "border-zinc-200"
+                        ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,#0B1F3A)] bg-[color-mix(in_srgb,var(--clicky-blue)_6%,#ffffff)] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_25%,transparent)]"
+                        : "border-[var(--clicky-line)]"
                     )}
                   >
-                    <p className="text-sm font-semibold leading-snug text-zinc-900">{title}</p>
+                    <p className="text-sm font-semibold leading-snug text-[var(--clicky-ink)]">{title}</p>
                     {tags ? (
                       <div className="mt-1.5 flex flex-wrap gap-1.5">
                         <span className={lightLockedTagClass(formatTagClass(tags.format))}>
@@ -206,11 +206,11 @@ export function MarketingSessionLiveCommitteesPanel({
                         ) : null}
                       </div>
                     ) : null}
-                    <p className="mt-1.5 text-xs text-zinc-600">
-                      <span className="font-medium text-zinc-800">{t("chairsLabel")} </span>
+                    <p className="mt-1.5 text-xs text-[var(--clicky-ink-soft)]">
+                      <span className="font-medium text-[var(--clicky-ink)]">{t("chairsLabel")} </span>
                       {item.chairNames}
                     </p>
-                    <p className="mt-1.5 text-xs font-mono tracking-widest text-zinc-600">
+                    <p className="mt-1.5 text-xs font-mono tracking-widest text-[var(--clicky-ink-soft)]">
                       {item.committeeCode}
                     </p>
                     <div className="mt-1.5 flow-root">
@@ -218,8 +218,8 @@ export function MarketingSessionLiveCommitteesPanel({
                       {item.topics.length > 0 ? (
                         <ul className="max-h-20 space-y-1 overflow-y-auto">
                           {item.topics.map((topic) => (
-                            <li key={topic} className="text-[0.72rem] leading-snug text-zinc-800">
-                              <span className="font-semibold text-zinc-900">{t("topicLabel")} </span>
+                            <li key={topic} className="text-[0.72rem] leading-snug text-[var(--clicky-ink)]">
+                              <span className="font-semibold text-[var(--clicky-ink)]">{t("topicLabel")} </span>
                               {topic}
                             </li>
                           ))}

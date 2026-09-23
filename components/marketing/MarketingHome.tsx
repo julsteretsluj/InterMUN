@@ -2,188 +2,87 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
-import {
-  Archive,
-  Award,
-  BarChart3,
-  BookOpen,
-  ClipboardList,
-  FileText,
-  Gavel,
-  Globe2,
-  LayoutDashboard,
-  MessageSquare,
-  Mic2,
-  Newspaper,
-  Shield,
-  Timer,
-  Users,
-  Vote,
-} from "lucide-react";
-import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
-import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
-import { MarketingEmph } from "@/components/marketing/MarketingEmph";
-import { MarketingGlassOrbs } from "@/components/marketing/MarketingGlassOrbs";
-import { MarketingHeroSpline } from "@/components/marketing/MarketingHeroSpline";
-import { MarketingOriginMap } from "@/components/marketing/MarketingOriginMap";
-import { getPartnershipContactEmail } from "@/lib/branding";
 import {
   MarketingChairMotionPreview,
   MarketingDelegatePrepPreview,
   MarketingHeroSessionPreview,
   MarketingSmtOversightPreview,
 } from "@/components/marketing/MarketingInteractivePreviews";
+import { getAppName, getPartnershipContactEmail } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-type FeatureItem = {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  index: string;
-};
-
-function RoleFeatureGrid({
-  items,
+function WindowFrame({
+  filename,
+  children,
   className,
-  dark,
+  floatClass,
 }: {
-  items: FeatureItem[];
+  filename: string;
+  children: React.ReactNode;
   className?: string;
-  dark?: boolean;
+  floatClass?: string;
 }) {
   return (
-    <ul className={cn("grid gap-8 sm:grid-cols-2", className)}>
-      {items.map((item) => (
-        <li key={item.title} className="mun-role-feature">
-          <h3
-            className={cn(
-              "text-[1.0625rem] font-semibold tracking-[-0.02em]",
-              dark ? "text-[color:var(--marketing-ink)]" : "text-brand-navy"
-            )}
-          >
-            {item.title}
-          </h3>
-          <p
-            className={cn(
-              "mt-2 text-[0.9375rem] leading-relaxed",
-              dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
-            )}
-          >
-            {item.description}
-          </p>
-        </li>
-      ))}
-    </ul>
+    <div className={cn("clicky-window clicky-window-lg", floatClass, className)}>
+      <div className="clicky-window-bar">
+        <span className="clicky-traffic" aria-hidden />
+        <span className="clicky-window-title">{filename}</span>
+      </div>
+      <div className="clicky-preview-body bg-[var(--clicky-window)]">{children}</div>
+    </div>
   );
 }
 
-function GateFlow({
-  steps,
-}: {
-  steps: { code: string; title: string; description: string }[];
-}) {
-  return (
-    <ol className="mun-gate-flow mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
-      {steps.map((step, i) => (
-        <li
-          key={step.code}
-          className={cn(
-            "mun-gate-card mun-animate-rise",
-            i === 1 && "md:mt-8",
-            i === 2 && "md:mt-4",
-            i === 0 && "mun-animate-delay-1",
-            i === 1 && "mun-animate-delay-2",
-            i === 2 && "mun-animate-delay-3"
-          )}
-        >
-          <span className="mun-gate-code">{step.code}</span>
-          <h3 className="mt-3 font-sans text-lg font-semibold tracking-[-0.02em] text-brand-navy">{step.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-brand-muted">{step.description}</p>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-function RoleSection({
+function RoleStrip({
   id,
-  eyebrow,
+  kicker,
   title,
-  description,
-  items,
-  reversed,
+  body,
+  href,
+  hrefLabel,
   preview,
-  dark,
-  bandClassName,
-  exploreHref,
-  exploreLabel,
+  filename,
+  mirror,
 }: {
   id: string;
-  eyebrow: string;
+  kicker: string;
   title: string;
-  description: string;
-  items: FeatureItem[];
-  reversed?: boolean;
-  preview: ReactNode;
-  dark?: boolean;
-  bandClassName?: string;
-  exploreHref?: string;
-  exploreLabel?: string;
+  body: string;
+  href: string;
+  hrefLabel: string;
+  preview: React.ReactNode;
+  filename: string;
+  mirror?: boolean;
 }) {
   return (
-    <section
-      id={id}
-      className={cn(
-        "scroll-mt-24 py-16 md:py-28",
-        dark
-          ? cn("mun-marketing-role-band text-[color:var(--marketing-ink)]", bandClassName)
-          : reversed
-            ? "bg-[var(--marketing-chamber-deep)]"
-            : "border-t border-[var(--hairline)]"
-      )}
-    >
+    <section id={id} className="scroll-mt-28 border-t border-[var(--clicky-line)] py-16 md:py-24">
       <div
         className={cn(
-          "mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-12 px-4 md:px-8 lg:gap-20",
-          reversed ? "lg:grid-cols-[1.05fr_0.95fr]" : "lg:grid-cols-[0.92fr_1.08fr]",
-          reversed && "lg:[&>div:first-child]:order-2"
+          "mx-auto grid max-w-6xl items-center gap-10 px-4 md:px-8 lg:gap-16",
+          mirror ? "lg:grid-cols-[1.05fr_0.95fr]" : "lg:grid-cols-[0.95fr_1.05fr]"
         )}
       >
-        <div
-          className={cn(
-            "mun-animate-from-left",
-            dark ? "mun-marketing-section-dark" : undefined,
-            reversed && "md:pl-4 lg:pl-8"
-          )}
-        >
-          <p className="text-[0.8125rem] font-medium tracking-[0.08em] text-[color:var(--accent-text)]">{eyebrow}</p>
-          <h2 className="font-sans mt-3 text-[length:var(--apple-text-section-size)] font-semibold tracking-[-0.015em] text-brand-navy">
-            {title}
-          </h2>
-          <p
-            className={cn(
-              "mt-5 max-w-lg text-[1.0625rem] leading-relaxed",
-              dark ? "text-[color:var(--marketing-ink-soft)]" : "text-brand-muted"
-            )}
-          >
-            {description}
-          </p>
-          <RoleFeatureGrid items={items} className="mt-10" dark={dark} />
-          {exploreHref && exploreLabel ? (
-            <Link
-              href={exploreHref}
-              className="mt-8 inline-flex text-[0.9375rem] font-medium text-[color:var(--accent-text)] underline-offset-2 transition-apple hover:underline"
-            >
-              {exploreLabel}
-            </Link>
-          ) : null}
+        <div className={cn(mirror && "lg:order-2")}>
+          <p className="clicky-eyebrow">{kicker}</p>
+          <h2 className="clicky-section-title mt-3">{title}</h2>
+          <p className="clicky-lede mt-4">{body}</p>
+          <Link href={href} className="clicky-pill clicky-pill-ghost mt-8">
+            {hrefLabel}
+          </Link>
         </div>
-        <div className={cn("relative mun-animate-from-right mun-animate-delay-2", reversed && "md:-mt-4")}>
-          <span className="mun-accent-doodle -right-2 -top-3 hidden md:block" aria-hidden />
-          {preview}
+        <div className={cn("relative", mirror ? "lg:order-1 lg:-rotate-1" : "lg:rotate-1")}>
+          <WindowFrame filename={filename}>{preview}</WindowFrame>
+          <span
+            className={cn(
+              "clicky-kaomoji absolute -bottom-3 hidden md:block",
+              mirror ? "-left-2" : "-right-2"
+            )}
+            aria-hidden
+          >
+            {mirror ? "(¬‿¬)" : "^ ω ^"}
+          </span>
         </div>
       </div>
     </section>
@@ -192,346 +91,230 @@ function RoleSection({
 
 export async function MarketingHome() {
   const t = await getTranslations("marketing");
+  const appName = getAppName();
   const partnershipEmail = getPartnershipContactEmail();
-
-  const chairFeatures: FeatureItem[] = [
-    {
-      index: "§ I",
-      icon: <ClipboardList className="h-4 w-4" aria-hidden />,
-      title: t("chairs.feature1Title"),
-      description: t("chairs.feature1Description"),
-    },
-    {
-      index: "§ II",
-      icon: <Gavel className="h-4 w-4" aria-hidden />,
-      title: t("chairs.feature2Title"),
-      description: t("chairs.feature2Description"),
-    },
-    {
-      index: "§ III",
-      icon: <Timer className="h-4 w-4" aria-hidden />,
-      title: t("chairs.feature3Title"),
-      description: t("chairs.feature3Description"),
-    },
-    {
-      index: "§ IV",
-      icon: <Vote className="h-4 w-4" aria-hidden />,
-      title: t("chairs.feature4Title"),
-      description: t("chairs.feature4Description"),
-    },
-  ];
-
-  const delegateFeatures: FeatureItem[] = [
-    {
-      index: "A",
-      icon: <FileText className="h-4 w-4" aria-hidden />,
-      title: t("delegates.feature1Title"),
-      description: t("delegates.feature1Description"),
-    },
-    {
-      index: "B",
-      icon: <BookOpen className="h-4 w-4" aria-hidden />,
-      title: t("delegates.feature2Title"),
-      description: t("delegates.feature2Description"),
-    },
-    {
-      index: "C",
-      icon: <MessageSquare className="h-4 w-4" aria-hidden />,
-      title: t("delegates.feature3Title"),
-      description: t("delegates.feature3Description"),
-    },
-    {
-      index: "D",
-      icon: <Mic2 className="h-4 w-4" aria-hidden />,
-      title: t("delegates.feature4Title"),
-      description: t("delegates.feature4Description"),
-    },
-  ];
-
-  const smtFeatures: FeatureItem[] = [
-    {
-      index: "01",
-      icon: <LayoutDashboard className="h-4 w-4" aria-hidden />,
-      title: t("smt.feature1Title"),
-      description: t("smt.feature1Description"),
-    },
-    {
-      index: "02",
-      icon: <Users className="h-4 w-4" aria-hidden />,
-      title: t("smt.feature2Title"),
-      description: t("smt.feature2Description"),
-    },
-    {
-      index: "03",
-      icon: <Award className="h-4 w-4" aria-hidden />,
-      title: t("smt.feature3Title"),
-      description: t("smt.feature3Description"),
-    },
-    {
-      index: "04",
-      icon: <BarChart3 className="h-4 w-4" aria-hidden />,
-      title: t("smt.feature4Title"),
-      description: t("smt.feature4Description"),
-    },
-  ];
-
-  const platformFeatures: FeatureItem[] = [
-    {
-      index: "LANG",
-      icon: <Globe2 className="h-4 w-4" aria-hidden />,
-      title: t("platform.feature1Title"),
-      description: t("platform.feature1Description"),
-    },
-    {
-      index: "PRESS",
-      icon: <Newspaper className="h-4 w-4" aria-hidden />,
-      title: t("platform.feature2Title"),
-      description: t("platform.feature2Description"),
-    },
-    {
-      index: "ARCH",
-      icon: <Archive className="h-4 w-4" aria-hidden />,
-      title: t("platform.feature3Title"),
-      description: t("platform.feature3Description"),
-    },
-    {
-      index: "ADV",
-      icon: <Shield className="h-4 w-4" aria-hidden />,
-      title: t("platform.feature4Title"),
-      description: t("platform.feature4Description"),
-    },
-  ];
-
-  const gateSteps = [
-    {
-      code: t("steps.step1Code"),
-      title: t("steps.step1Title"),
-      description: t("steps.step1Description"),
-    },
-    {
-      code: t("steps.step2Code"),
-      title: t("steps.step2Title"),
-      description: t("steps.step2Description"),
-    },
-    {
-      code: t("steps.step3Code"),
-      title: t("steps.step3Title"),
-      description: t("steps.step3Description"),
-    },
-  ];
 
   return (
     <>
-      <section className="mun-marketing-hero relative overflow-hidden border-b border-[color:var(--marketing-hairline)] pb-16 md:pb-28">
-        <MarketingGlassOrbs variant="hero" />
-        <div className="relative z-[1] mx-auto w-full max-w-7xl px-4 py-8 md:px-6 md:py-14">
-          <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-16">
-            <div className="mun-marketing-hero-copy mun-animate-rise order-2 lg:order-1 lg:pt-6">
-              <p className="mun-marketing-eyebrow mun-marketing-eyebrow-hero">{t("hero.eyebrow")}</p>
-              <h1 className="font-sans mt-4 text-[clamp(2.25rem,5vw,3.5rem)] font-bold tracking-[-0.02em] text-[color:var(--marketing-ink)]">
-                <span className="block">{t("hero.title")}</span>
-                <MarketingEmph className="mt-2 block text-[1.15em] leading-none md:mt-3">
-                  {t("hero.titleEmphasis")}
-                </MarketingEmph>
-              </h1>
-              <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-[color:var(--marketing-ink-soft)]">{t("hero.subtitle")}</p>
-              <div className="mun-marketing-hero-actions mt-9 flex flex-col items-start gap-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Link href="/register/secretariat" className="mun-apple-btn mun-apple-btn-filled-blue px-6 py-2.5 text-base">
-                    {t("hero.ctaStart")} →
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="mun-apple-btn mun-apple-btn-glass-gray px-6 py-2.5 text-base"
-                  >
-                    {t("hero.ctaJoin")} →
-                  </Link>
-                </div>
-                <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-                  <li className="mun-procedure-chip">{t("hero.chip1")}</li>
-                  <li className="mun-procedure-chip">{t("hero.chip2")}</li>
-                  <li className="mun-procedure-chip">{t("hero.chip3")}</li>
-                </ul>
-              </div>
+      {/* Hero — heyclicky desktop stage */}
+      <section className="clicky-desktop-stage overflow-hidden">
+        <div className="relative mx-auto max-w-6xl">
+          <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
+            <div className="clicky-sticky absolute left-[4%] top-[8%] max-w-[11rem] clicky-float-a">
+              roll call, timers, and motions in one floor.
             </div>
-
-            <div className="mun-marketing-hero-visual mun-animate-from-right mun-animate-delay-1 order-1 flex justify-center lg:order-2 lg:justify-end lg:-mr-4">
-              <MarketingHeroSpline className="w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]" />
+            <div className="clicky-sticky clicky-sticky--blue absolute right-[6%] top-[18%] max-w-[10rem] clicky-float-b">
+              built for chairs who hate juggling tabs.
             </div>
+            <span className="clicky-kaomoji absolute bottom-[22%] left-[8%] clicky-float-c">¯\_(ツ)_/¯</span>
           </div>
 
-          <div className="mun-marketing-hero-demo mun-animate-rise mun-animate-delay-3 relative mt-14 w-full md:mt-18 lg:mt-20 lg:ml-8 lg:max-w-[92%]">
-            <MarketingChamberFrame label={t("hero.previewLabel")}>
-              <MarketingHeroSessionPreview heroCompact />
-            </MarketingChamberFrame>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="relative scroll-mt-24 overflow-hidden border-b border-[var(--hairline)] bg-[var(--marketing-chamber-elevated)] py-20 md:py-28">
-        <MarketingGlassOrbs variant="steps" />
-        <div className="relative mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
-          <div className="mun-animate-rise max-w-xl md:ml-4">
-            <p className="mun-marketing-eyebrow">{t("steps.eyebrow")}</p>
-            <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("steps.title")}</h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("steps.subtitle")}</p>
-          </div>
-          <GateFlow steps={gateSteps} />
-        </div>
-      </section>
-
-      <section id="features" className="scroll-mt-24">
-        <RoleSection
-          id="chairs"
-          eyebrow={t("chairs.eyebrow")}
-          title={t("chairs.title")}
-          description={t("chairs.description")}
-          items={chairFeatures}
-          exploreHref="/features/chairs"
-          exploreLabel={t("exploreChairs")}
-          preview={
-            <MarketingChamberFrame label={t("chairs.previewLabel")}>
-              <MarketingChairMotionPreview />
-            </MarketingChamberFrame>
-          }
-        />
-
-        <RoleSection
-          id="delegates"
-          reversed
-          eyebrow={t("delegates.eyebrow")}
-          title={t("delegates.title")}
-          description={t("delegates.description")}
-          items={delegateFeatures}
-          exploreHref="/features/delegates"
-          exploreLabel={t("exploreDelegates")}
-          preview={
-            <MarketingChamberFrame label={t("delegates.previewLabel")}>
-              <MarketingDelegatePrepPreview />
-            </MarketingChamberFrame>
-          }
-        />
-
-        <RoleSection
-          id="smt"
-          eyebrow={t("smt.eyebrow")}
-          title={t("smt.title")}
-          description={t("smt.description")}
-          items={smtFeatures}
-          exploreHref="/features/secretariat"
-          exploreLabel={t("exploreSecretariat")}
-          preview={
-            <MarketingChamberFrame label={t("smt.previewLabel")}>
-              <MarketingSmtOversightPreview />
-            </MarketingChamberFrame>
-          }
-        />
-
-        <section className="mun-marketing-surface border-t border-[var(--hairline)] py-16 md:py-24">
-          <div className="mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
-            <div className="max-w-2xl">
-              <p className="mun-marketing-eyebrow">{t("platform.eyebrow")}</p>
-              <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("platform.title")}</h2>
-              <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">
-                {t("platform.description")}
-              </p>
-            </div>
-            <RoleFeatureGrid items={platformFeatures} className="mt-12 lg:grid-cols-4" />
-          </div>
-        </section>
-      </section>
-
-      <section id="origin" className="mun-marketing-surface relative scroll-mt-24 overflow-hidden border-t border-[var(--hairline)] py-16 md:py-24">
-        <MarketingGlassOrbs variant="origin" />
-        <div className="relative mx-auto max-w-[var(--content-max-width,82.5rem)] px-4 md:px-8">
-          <div className="max-w-2xl">
-            <p className="mun-marketing-eyebrow">{t("origin.eyebrow")}</p>
-            <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("origin.title")}</h2>
-          </div>
-          <MarketingOriginMap
-            className="mt-12 max-w-4xl"
-            tooltip={t("origin.tooltip")}
-            mapAria={t("origin.mapAria")}
-            locationLabel={t("origin.location")}
-          />
-        </div>
-      </section>
-
-      <section id="about" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-24">
-        <div className="mx-auto grid max-w-[var(--content-max-width,82.5rem)] items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="flex justify-center lg:justify-start">
-            <div className="mun-marketing-contact-card max-w-sm p-8">
-              <BrandWordmark size="hero" />
-              <p className="mun-marketing-eyebrow mt-6 text-center">{t("hero.eyebrow")}</p>
-            </div>
-          </div>
-          <div>
-            <p className="mun-marketing-eyebrow">{t("about.eyebrow")}</p>
-            <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("about.title")}</h2>
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-muted">
-              <p>{t("about.paragraph1")}</p>
-              <p>{t("about.paragraph2")}</p>
-              <p>{t("about.paragraph3")}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="mun-marketing-surface relative scroll-mt-24 overflow-hidden border-t border-[var(--hairline)] py-16 md:py-24">
-        <MarketingGlassOrbs variant="contact" />
-        <div className="relative mx-auto max-w-3xl px-4 md:px-6">
-          <div className="mun-marketing-contact-card">
-            <div className="text-center">
-              <p className="mun-marketing-eyebrow">{t("contact.eyebrow")}</p>
-              <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("contact.title")}</h2>
-              <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("contact.description")}</p>
-            </div>
-            <div className="mt-8 border-t border-[var(--hairline)] pt-8">
-              <ConferenceInquiryForm />
-            </div>
-            <p className="mt-6 text-center text-sm text-brand-muted">
-              {t("contact.registerSecretariat")}{" "}
-              <Link href="/register/secretariat" className="font-semibold text-[color:var(--accent-text)] hover:underline">
-                {t("contact.registerSecretariatLink")} →
+          <div className="relative z-[1] mx-auto max-w-2xl pt-6 text-center md:pt-10">
+            <p className="clicky-kaomoji mb-3">^ ω ^</p>
+            <h1 className="text-[clamp(2.6rem,8vw,4.5rem)] font-bold lowercase leading-[0.95] tracking-[-0.045em] text-[var(--clicky-ink)]">
+              {appName.toLowerCase()}
+            </h1>
+            <p className="mt-4 text-base lowercase text-[var(--clicky-ink-soft)] md:text-lg">
+              {t("hero.subtitle")}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/register/secretariat" className="clicky-pill clicky-pill-primary">
+                {t("hero.ctaStart")}
               </Link>
+              <Link href="/login" className="clicky-pill clicky-pill-ghost">
+                {t("hero.ctaJoin")}
+              </Link>
+            </div>
+            <p className="mt-4 text-xs lowercase text-[var(--clicky-ink-faint)]">
+              {t("hero.chip1")} · {t("hero.chip2")} · {t("hero.chip3")}
             </p>
-            <p className="mt-4 text-center text-sm text-brand-muted">
-              {t("contact.directEmail")}{" "}
-              {partnershipEmail ? (
-                <a
-                  href={`mailto:${partnershipEmail}`}
-                  className="font-mono font-semibold text-[color:var(--accent-text)] hover:underline"
-                  aria-label={t("contact.emailAria")}
-                >
-                  {partnershipEmail}
-                </a>
-              ) : null}
-            </p>
+          </div>
+
+          <div className="relative z-[1] mx-auto mt-12 max-w-4xl md:mt-16">
+            <WindowFrame filename="session-floor.mov" className="clicky-float-a" floatClass="">
+              <div className="p-2 md:p-3">
+                <MarketingHeroSessionPreview heroCompact />
+              </div>
+            </WindowFrame>
           </div>
         </div>
       </section>
 
-      <section className="mun-marketing-hero relative overflow-hidden border-t border-[color:var(--marketing-hairline)] py-16 md:py-24">
-        <MarketingGlassOrbs variant="footer" />
-        <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="relative mx-auto max-w-3xl px-4 text-center md:px-6">
-          <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-          <h2 className="mun-display mt-3 text-3xl md:text-4xl">
-            {t("footer.ctaTitle")}{" "}
-            <MarketingEmph>{t("footer.ctaTitleEmphasis")}</MarketingEmph>
-          </h2>
-          <p className="mt-4 text-base leading-relaxed md:text-lg">{t("footer.ctaSubtitle")}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/signup" className="mun-apple-btn mun-apple-btn-filled-blue px-7 py-3 text-base">
-              {t("footer.ctaStart")} →
-            </Link>
-            <Link
-              href="/login"
-              className="mun-apple-btn mun-apple-btn-glass-gray px-7 py-3 text-base"
-            >
-              {t("footer.ctaJoin")}
-            </Link>
+      {/* How it works — clico numbered, asymmetric */}
+      <section
+        id="how-it-works"
+        className="scroll-mt-28 border-t border-[var(--clicky-line)] bg-[var(--clicky-paper-deep)]/60 py-16 md:py-24"
+      >
+        <div className="mx-auto max-w-6xl px-4 md:px-8">
+          <div className="max-w-xl md:ml-[8%]">
+            <p className="clicky-eyebrow">{t("steps.eyebrow")}</p>
+            <h2 className="clicky-section-title mt-3">{t("steps.title")}</h2>
+            <p className="clicky-lede mt-4">{t("steps.subtitle")}</p>
           </div>
+          <ol className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              { n: "01", title: t("steps.step1Title"), body: t("steps.step1Description"), code: t("steps.step1Code") },
+              { n: "02", title: t("steps.step2Title"), body: t("steps.step2Description"), code: t("steps.step2Code") },
+              { n: "03", title: t("steps.step3Title"), body: t("steps.step3Description"), code: t("steps.step3Code") },
+            ].map((step, i) => (
+              <li
+                key={step.n}
+                className={cn(
+                  "clicky-window p-5",
+                  i === 1 && "md:mt-10",
+                  i === 2 && "md:mt-4"
+                )}
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="text-xs font-semibold text-[var(--clicky-blue)]">{step.n}</span>
+                  <span className="rounded-full bg-[var(--clicky-paper)] px-2 py-0.5 font-mono text-[0.65rem] text-[var(--clicky-ink-faint)]">
+                    {step.code}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em] lowercase">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--clicky-ink-soft)]">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <div id="features">
+        <RoleStrip
+          id="chairs"
+          kicker={t("chairs.eyebrow")}
+          title={t("chairs.title")}
+          body={t("chairs.description")}
+          href="/features/chairs"
+          hrefLabel={t("exploreChairs")}
+          filename="chair-motions.app"
+          preview={
+            <div className="p-2">
+              <MarketingChairMotionPreview />
+            </div>
+          }
+        />
+        <RoleStrip
+          id="delegates"
+          mirror
+          kicker={t("delegates.eyebrow")}
+          title={t("delegates.title")}
+          body={t("delegates.description")}
+          href="/features/delegates"
+          hrefLabel={t("exploreDelegates")}
+          filename="delegate-prep.app"
+          preview={
+            <div className="p-2">
+              <MarketingDelegatePrepPreview />
+            </div>
+          }
+        />
+        <RoleStrip
+          id="smt"
+          kicker={t("smt.eyebrow")}
+          title={t("smt.title")}
+          body={t("smt.description")}
+          href="/features/secretariat"
+          hrefLabel={t("exploreSecretariat")}
+          filename="secretariat.live"
+          preview={
+            <div className="p-2">
+              <MarketingSmtOversightPreview />
+            </div>
+          }
+        />
+      </div>
+
+      {/* Platform — ohhmy bold statement, not card grid clone */}
+      <section className="border-t border-[var(--clicky-line)] py-20 md:py-28">
+        <div className="mx-auto max-w-5xl px-4 text-center md:px-8">
+          <p className="clicky-eyebrow">{t("platform.eyebrow")}</p>
+          <h2 className="mt-4 text-[clamp(2rem,5vw,3.25rem)] font-bold lowercase leading-[1.05] tracking-[-0.04em]">
+            {t("platform.title")}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-[var(--clicky-ink-soft)]">{t("platform.description")}</p>
+          <div className="mt-12 grid gap-3 text-left sm:grid-cols-2">
+            {[
+              { t: t("platform.feature1Title"), d: t("platform.feature1Description") },
+              { t: t("platform.feature2Title"), d: t("platform.feature2Description") },
+              { t: t("platform.feature3Title"), d: t("platform.feature3Description") },
+              { t: t("platform.feature4Title"), d: t("platform.feature4Description") },
+            ].map((item, i) => (
+              <div
+                key={item.t}
+                className={cn(
+                  "rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-white p-5",
+                  i % 2 === 1 && "sm:translate-y-4"
+                )}
+              >
+                <h3 className="font-semibold tracking-[-0.02em] lowercase">{item.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--clicky-ink-soft)]">{item.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Founder note — heyclicky manifesto */}
+      <section id="about" className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-24">
+        <div className="mx-auto max-w-3xl px-4 md:px-8">
+          <p className="clicky-kaomoji text-white/50">the dream</p>
+          <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold lowercase leading-tight tracking-[-0.03em]">
+            {t("about.title")}
+          </h2>
+          <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-white/75">
+            <p>{t("about.p1")}</p>
+            <p>{t("about.p2")}</p>
+            <p>{t("about.p3")}</p>
+          </div>
+          <p className="mt-10 text-sm text-white/45 lowercase">
+            {t("about.eyebrow")} · {appName}
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ — heyclicky style */}
+      <section className="border-t border-[var(--clicky-line)] py-16 md:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[0.8fr_1.2fr] md:px-8">
+          <div>
+            <h2 className="clicky-section-title">frequently asked</h2>
+            <p className="clicky-lede mt-3">what chairs and secretariat usually ask before a conference weekend.</p>
+          </div>
+          <div className="clicky-faq">
+            <details open>
+              <summary>who is this for?</summary>
+              <p>delegates, chairs, advisors, and secretariat — one conference workspace with role-aware tools.</p>
+            </details>
+            <details>
+              <summary>can we run press corps and ga differently?</summary>
+              <p>yes. procedure profiles keep press corps RoP scoped to that chamber without changing other committees.</p>
+            </details>
+            <details>
+              <summary>how do people get into a room?</summary>
+              <p>event code, then room / committee code, then optional placard codes — designed for real check-in lines.</p>
+            </details>
+            <details>
+              <summary>is it ready for a live weekend?</summary>
+              <p>session floor, voting, notes, documents, and oversight are built for concurrent use across chambers.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="scroll-mt-28 border-t border-[var(--clicky-line)] bg-[var(--clicky-paper-deep)]/50 py-16 md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1fr_1.1fr] md:px-8 lg:gap-16">
+          <div className="md:pt-6">
+            <p className="clicky-eyebrow">{t("contact.eyebrow")}</p>
+            <h2 className="clicky-section-title mt-3">{t("contact.title")}</h2>
+            <p className="clicky-lede mt-4">{t("contact.description")}</p>
+            {partnershipEmail ? (
+              <a href={`mailto:${partnershipEmail}`} className="mt-6 inline-block text-sm font-semibold text-[var(--clicky-blue)]">
+                {partnershipEmail}
+              </a>
+            ) : null}
+          </div>
+          <ConferenceInquiryForm />
         </div>
       </section>
     </>

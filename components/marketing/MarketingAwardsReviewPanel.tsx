@@ -118,13 +118,13 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
     <div className={cn(PREVIEW_CARD, "space-y-3", className)}>
       <div>
         <span className={PREVIEW_LABEL}>{tPreview("awardsReviewLabel")}</span>
-        <h3 className="mt-2 font-sans text-sm font-semibold text-zinc-900">{t("title")}</h3>
-        <p className="mt-1 text-[0.65rem] leading-relaxed text-zinc-500">{t("description")}</p>
-        <p className="mt-1 text-[0.65rem] text-zinc-700">{t("evidenceRequiredHint")}</p>
+        <h3 className="mt-2 font-sans text-sm font-semibold text-[var(--clicky-ink)]">{t("title")}</h3>
+        <p className="mt-1 text-[0.65rem] leading-relaxed text-[var(--clicky-ink-faint)]">{t("description")}</p>
+        <p className="mt-1 text-[0.65rem] text-[var(--clicky-ink-soft)]">{t("evidenceRequiredHint")}</p>
       </div>
 
       <div
-        className="flex flex-wrap gap-1 overflow-x-auto border-b border-zinc-200 pb-px"
+        className="flex flex-wrap gap-1 overflow-x-auto border-b border-[var(--clicky-line)] pb-px"
         role="tablist"
         aria-label={t("filterByCommitteeAria")}
       >
@@ -136,12 +136,12 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
           className={cn(
             "shrink-0 rounded-t-lg border-b-2 px-2.5 py-1.5 text-xs font-medium transition",
             committeeFilter === "all"
-              ? "border-[var(--accent)] bg-white text-zinc-900"
-              : "border-transparent text-zinc-500 hover:text-zinc-800"
+              ? "border-[var(--clicky-blue)] bg-white text-[var(--clicky-ink)]"
+              : "border-transparent text-[var(--clicky-ink-faint)] hover:text-[var(--clicky-ink)]"
           )}
         >
           {t("allCommittees")}
-          <span className="ml-1 font-mono text-[0.65rem] text-zinc-400">({NOMINATION_SEED.length})</span>
+          <span className="ml-1 font-mono text-[0.65rem] text-[var(--clicky-ink-faint)]">({NOMINATION_SEED.length})</span>
         </button>
         {COMMITTEE_TABS.map((tab) => (
           <button
@@ -153,22 +153,22 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
             className={cn(
               "shrink-0 rounded-t-lg border-b-2 px-2.5 py-1.5 text-xs font-medium transition",
               committeeFilter === tab.id
-                ? "border-[var(--accent)] bg-white text-zinc-900"
-                : "border-transparent text-zinc-500 hover:text-zinc-800"
+                ? "border-[var(--clicky-blue)] bg-white text-[var(--clicky-ink)]"
+                : "border-transparent text-[var(--clicky-ink-faint)] hover:text-[var(--clicky-ink)]"
             )}
           >
             {tab.label}
-            <span className="ml-1 font-mono text-[0.65rem] text-zinc-400">
+            <span className="ml-1 font-mono text-[0.65rem] text-[var(--clicky-ink-faint)]">
               ({countByCommittee.get(tab.id) ?? 0})
             </span>
           </button>
         ))}
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
+      <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
         <table className="w-full min-w-[36rem] text-xs">
           <thead>
-            <tr className="bg-zinc-50 text-left text-[0.65rem] uppercase tracking-wider text-zinc-500">
+            <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem] uppercase tracking-wider text-[var(--clicky-ink-faint)]">
               <th className="px-2.5 py-2">{t("committee")}</th>
               <th className="px-2.5 py-2">{t("rank")}</th>
               <th className="px-2.5 py-2">{t("awardType")}</th>
@@ -182,21 +182,21 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
             {visibleRows.map((row) => {
               const status = statusById[row.id] ?? "pending";
               return (
-                <tr key={row.id} className="border-t border-zinc-100 align-top">
-                  <td className="px-2.5 py-2 text-zinc-900">{row.committee}</td>
-                  <td className="px-2.5 py-2 font-medium text-zinc-900">{t("topRank", { rank: row.rank })}</td>
-                  <td className="px-2.5 py-2 text-zinc-800">{nominationTypeLabel[row.nominationType]}</td>
-                  <td className="px-2.5 py-2 text-zinc-900">{row.nominee}</td>
-                  <td className="px-2.5 py-2 text-zinc-800">
+                <tr key={row.id} className="border-t border-[var(--clicky-line)] align-top">
+                  <td className="px-2.5 py-2 text-[var(--clicky-ink)]">{row.committee}</td>
+                  <td className="px-2.5 py-2 font-medium text-[var(--clicky-ink)]">{t("topRank", { rank: row.rank })}</td>
+                  <td className="px-2.5 py-2 text-[var(--clicky-ink)]">{nominationTypeLabel[row.nominationType]}</td>
+                  <td className="px-2.5 py-2 text-[var(--clicky-ink)]">{row.nominee}</td>
+                  <td className="px-2.5 py-2 text-[var(--clicky-ink)]">
                     <span className="font-mono tabular-nums">{row.rubricTotal}</span>
-                    <span className="mt-0.5 block text-[0.65rem] text-zinc-500" title={t("bandInitialsTitle")}>
+                    <span className="mt-0.5 block text-[0.65rem] text-[var(--clicky-ink-faint)]" title={t("bandInitialsTitle")}>
                       {row.rubricBands}
                     </span>
                   </td>
-                  <td className="max-w-[12rem] px-2.5 py-2 text-zinc-600">
+                  <td className="max-w-[12rem] px-2.5 py-2 text-[var(--clicky-ink-soft)]">
                     {row.evidence}
                     {!row.evidenceValid ? (
-                      <p className="mt-1 text-[0.6rem] text-amber-800">{t("evidenceTooShort")}</p>
+                      <p className="mt-1 text-[0.6rem] text-[var(--clicky-ink-soft)]">{t("evidenceTooShort")}</p>
                     ) : null}
                   </td>
                   <td className="px-2.5 py-2">
@@ -209,8 +209,8 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
                           className={cn(
                             "rounded px-2 py-1 text-[0.65rem] font-medium disabled:opacity-50",
                             row.nominationType === "committee_honourable_mention"
-                              ? "border border-zinc-200 text-zinc-900"
-                              : "bg-[var(--accent)] text-white"
+                              ? "border border-[var(--clicky-line)] text-[var(--clicky-ink)]"
+                              : "bg-[var(--clicky-blue)] text-white"
                           )}
                         >
                           {approveLabel(row.nominationType, t)}
@@ -228,8 +228,8 @@ export function MarketingAwardsReviewPanel({ className }: { className?: string }
                         className={cn(
                           "inline-flex rounded-full px-2 py-0.5 text-[0.65rem] font-semibold",
                           status === "approved"
-                            ? "bg-emerald-100 text-emerald-800"
-                            : "bg-rose-100 text-rose-800"
+                            ? "bg-[color-mix(in_srgb,var(--clicky-mint)_14%,white)] text-[var(--clicky-ink)]"
+                            : "bg-[color-mix(in_srgb,var(--clicky-coral)_14%,white)] text-[var(--clicky-ink)]"
                         )}
                       >
                         {status === "approved" ? tPreview("approved") : tPreview("rejected")}

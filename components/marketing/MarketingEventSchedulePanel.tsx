@@ -136,11 +136,11 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
     <div className={cn(PREVIEW_CARD, "space-y-3", className)}>
       <div>
         <span className={PREVIEW_LABEL}>{tPreview("scheduleLabel")}</span>
-        <h3 className="mt-2 font-sans text-sm font-semibold text-zinc-900">{t("title")}</h3>
-        <p className="mt-1 text-[0.65rem] leading-relaxed text-zinc-500">{t("subtitle")}</p>
+        <h3 className="mt-2 font-sans text-sm font-semibold text-[var(--clicky-ink)]">{t("title")}</h3>
+        <p className="mt-1 text-[0.65rem] leading-relaxed text-[var(--clicky-ink-faint)]">{t("subtitle")}</p>
       </div>
 
-      <div className="flex flex-wrap gap-1 border-b border-zinc-200 pb-2">
+      <div className="flex flex-wrap gap-1 border-b border-[var(--clicky-line)] pb-2">
         {(
           [
             ["day1", t("dayLabel", { day: 1 })] as const,
@@ -155,8 +155,8 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
             className={cn(
               "rounded-lg px-2.5 py-1 text-xs font-semibold transition",
               mainTab === key
-                ? "bg-[color-mix(in_srgb,var(--accent)_14%,#ffffff)] text-zinc-900 ring-1 ring-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)]"
-                : "text-zinc-500 hover:bg-zinc-50"
+                ? "bg-[color-mix(in_srgb,var(--clicky-blue)_14%,#ffffff)] text-[var(--clicky-ink)] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_35%,#d4d4d8)]"
+                : "text-[var(--clicky-ink-faint)] hover:bg-[var(--clicky-paper)]"
             )}
           >
             {label}
@@ -165,21 +165,21 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       </div>
 
       {mainTab === "lunch" ? (
-        <div className="space-y-2 rounded-lg border border-zinc-200 bg-zinc-50/80 p-3">
-          <p className="text-[0.65rem] text-zinc-500">{t("lunchOverlapHelp")}</p>
-          <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-800">
-            <span className="font-semibold text-zinc-900">
+        <div className="space-y-2 rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
+          <p className="text-[0.65rem] text-[var(--clicky-ink-faint)]">{t("lunchOverlapHelp")}</p>
+          <div className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-2 text-xs text-[var(--clicky-ink)]">
+            <span className="font-semibold text-[var(--clicky-ink)]">
               {t("dayLabel", { day: LUNCH_OVERLAP_FIXTURE.day })} · {LUNCH_OVERLAP_FIXTURE.overlapStart}–
               {LUNCH_OVERLAP_FIXTURE.overlapEnd}
             </span>
-            <span className="text-zinc-500">
+            <span className="text-[var(--clicky-ink-faint)]">
               {" "}
               ({t("overlapMinutes", { count: LUNCH_OVERLAP_FIXTURE.overlapMinutes })})
             </span>
-            <div className="mt-1 text-[0.65rem] leading-snug text-zinc-700">
+            <div className="mt-1 text-[0.65rem] leading-snug text-[var(--clicky-ink-soft)]">
               <span className="font-medium">{LUNCH_OVERLAP_FIXTURE.labelA}</span> (
               {LUNCH_OVERLAP_FIXTURE.lunchAStart}–{LUNCH_OVERLAP_FIXTURE.lunchAEnd}){" "}
-              <span className="text-zinc-500">{t("vs")}</span>{" "}
+              <span className="text-[var(--clicky-ink-faint)]">{t("vs")}</span>{" "}
               <span className="font-medium">{LUNCH_OVERLAP_FIXTURE.labelB}</span> (
               {LUNCH_OVERLAP_FIXTURE.lunchBStart}–{LUNCH_OVERLAP_FIXTURE.lunchBEnd})
             </div>
@@ -188,7 +188,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       ) : (
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-zinc-500">
+            <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">
               {t("groupsLabel")}
             </span>
             <div className="flex flex-wrap gap-1">
@@ -200,8 +200,8 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                   className={cn(
                     "max-w-[9rem] truncate rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold",
                     activeGroupId === group.id
-                      ? "border-[color-mix(in_srgb,var(--accent)_40%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_12%,#ffffff)] text-zinc-900"
-                      : "border-zinc-200 text-zinc-500"
+                      ? "border-[color-mix(in_srgb,var(--clicky-blue)_40%,#d4d4d8)] bg-[color-mix(in_srgb,var(--clicky-blue)_12%,#ffffff)] text-[var(--clicky-ink)]"
+                      : "border-[var(--clicky-line)] text-[var(--clicky-ink-faint)]"
                   )}
                   title={group.name}
                 >
@@ -211,19 +211,19 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
             </div>
           </div>
 
-          <p className="text-[0.65rem] text-zinc-600">
-            <span className="font-semibold uppercase tracking-wide text-zinc-500">{t("renameGroup")}:</span>{" "}
+          <p className="text-[0.65rem] text-[var(--clicky-ink-soft)]">
+            <span className="font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">{t("renameGroup")}:</span>{" "}
             {activeGroup.name}
           </p>
 
-          <div className="flex flex-wrap gap-2 text-[0.6rem] text-zinc-700">
-            <span className="font-semibold uppercase tracking-wide text-zinc-500">{t("legendTitle")}</span>
+          <div className="flex flex-wrap gap-2 text-[0.6rem] text-[var(--clicky-ink-soft)]">
+            <span className="font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">{t("legendTitle")}</span>
             <span className="inline-flex items-center gap-1">
-              <span className="inline-block h-2 w-2 rounded-sm bg-emerald-500" aria-hidden />
+              <span className="inline-block h-2 w-2 rounded-sm bg-[var(--clicky-mint)]" aria-hidden />
               {t("legendSession")}
             </span>
             <span className="inline-flex items-center gap-1">
-              <span className="inline-block h-2 w-2 rounded-sm bg-amber-500" aria-hidden />
+              <span className="inline-block h-2 w-2 rounded-sm bg-[#febc2e]" aria-hidden />
               {t("legendBreak")}
             </span>
             <span className="inline-flex items-center gap-1">
@@ -232,10 +232,10 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
             </span>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
+          <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
             <table className="w-full min-w-[32rem] text-xs">
               <thead>
-                <tr className="border-b border-zinc-200 bg-zinc-50 text-left text-[0.65rem] uppercase tracking-wide text-zinc-500">
+                <tr className="border-b border-[var(--clicky-line)] bg-[var(--clicky-paper)] text-left text-[0.65rem] uppercase tracking-wide text-[var(--clicky-ink-faint)]">
                   <th className="px-2 py-2">{t("colStart")}</th>
                   <th className="px-2 py-2">{t("colEnd")}</th>
                   <th className="px-2 py-2">{t("colKind")}</th>
@@ -245,13 +245,13 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
               </thead>
               <tbody>
                 {rows.map((row) => (
-                  <tr key={row.id} className={cn("border-b border-zinc-100", scheduleSlotRowClass(row.kind))}>
+                  <tr key={row.id} className={cn("border-b border-[var(--clicky-line)]", scheduleSlotRowClass(row.kind))}>
                     <td className="px-2 py-1.5 align-middle">
                       <input
                         type="time"
                         value={row.start}
                         onChange={(e) => updateRow(row.id, { start: e.target.value })}
-                        className="w-[6.5rem] rounded border border-zinc-200 px-1.5 py-1 text-[0.65rem] text-zinc-900"
+                        className="w-[6.5rem] rounded border border-[var(--clicky-line)] px-1.5 py-1 text-[0.65rem] text-[var(--clicky-ink)]"
                       />
                     </td>
                     <td className="px-2 py-1.5 align-middle">
@@ -259,14 +259,14 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                         type="time"
                         value={row.end}
                         onChange={(e) => updateRow(row.id, { end: e.target.value })}
-                        className="w-[6.5rem] rounded border border-zinc-200 px-1.5 py-1 text-[0.65rem] text-zinc-900"
+                        className="w-[6.5rem] rounded border border-[var(--clicky-line)] px-1.5 py-1 text-[0.65rem] text-[var(--clicky-ink)]"
                       />
                     </td>
                     <td className="px-2 py-1.5 align-middle">
                       <select
                         value={row.kind}
                         onChange={(e) => updateRow(row.id, { kind: e.target.value as EventScheduleBlockKind })}
-                        className="max-w-[7rem] rounded border border-zinc-200 px-1.5 py-1 text-[0.65rem] text-zinc-900"
+                        className="max-w-[7rem] rounded border border-[var(--clicky-line)] px-1.5 py-1 text-[0.65rem] text-[var(--clicky-ink)]"
                         aria-label={t("colKind")}
                       >
                         <option value="session">{kindLabel.session}</option>
@@ -279,7 +279,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                         value={row.label}
                         onChange={(e) => updateRow(row.id, { label: e.target.value })}
                         placeholder={t("blockPlaceholder")}
-                        className="w-full min-w-[8rem] rounded border border-zinc-200 px-1.5 py-1 text-[0.65rem] text-zinc-900"
+                        className="w-full min-w-[8rem] rounded border border-[var(--clicky-line)] px-1.5 py-1 text-[0.65rem] text-[var(--clicky-ink)]"
                       />
                     </td>
                     <td className="px-2 py-1.5 text-center align-middle">
@@ -288,7 +288,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                         checked={row.isLunch}
                         onChange={(e) => updateRow(row.id, { isLunch: e.target.checked })}
                         aria-label={t("lunchCheckboxAria")}
-                        className="h-3.5 w-3.5 accent-[var(--accent)]"
+                        className="h-3.5 w-3.5 accent-[var(--clicky-blue)]"
                       />
                     </td>
                   </tr>
@@ -318,7 +318,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
                 };
               })
             }
-            className="rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-[0.65rem] font-semibold text-zinc-900 hover:bg-zinc-50"
+            className="rounded-lg border border-[var(--clicky-line)] bg-white px-2.5 py-1 text-[0.65rem] font-semibold text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
           >
             {t("addBlock")}
           </button>
@@ -328,7 +328,7 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       <button
         type="button"
         onClick={() => setSaved(true)}
-        className="rounded-lg bg-[var(--accent)] px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
+        className="rounded-lg bg-[var(--clicky-blue)] px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
       >
         {saved ? t("saved") : t("saveSchedule")}
       </button>

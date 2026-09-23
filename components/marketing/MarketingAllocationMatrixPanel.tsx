@@ -141,32 +141,32 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
     <div className={cn(PREVIEW_CARD, "space-y-4", className)}>
       <div>
         <span className={PREVIEW_LABEL}>{tPreview("allocationLabel")}</span>
-        <p className="mt-1 text-xs text-zinc-500">{t("showingOneCommitteeAtATime")}</p>
+        <p className="mt-1 text-xs text-[var(--clicky-ink-faint)]">{t("showingOneCommitteeAtATime")}</p>
       </div>
 
       {message ? (
         <p
-          className="rounded-lg border border-[color-mix(in_srgb,var(--accent)_22%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] px-3 py-2 text-xs text-zinc-900"
+          className="rounded-lg border border-[color-mix(in_srgb,var(--clicky-blue)_22%,#d4d4d8)] bg-[color-mix(in_srgb,var(--clicky-blue)_10%,#ffffff)] px-3 py-2 text-xs text-[var(--clicky-ink)]"
           role="status"
         >
           {message}
         </p>
       ) : null}
 
-      <section className="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
+      <section className="space-y-3 rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
         <div>
-          <h3 className="font-sans text-sm font-semibold text-zinc-900">
+          <h3 className="font-sans text-sm font-semibold text-[var(--clicky-ink)]">
             {t("rosterHeading", { heading: active.heading })}
           </h3>
-          <p className="mt-0.5 text-[0.65rem] text-zinc-500">
+          <p className="mt-0.5 text-[0.65rem] text-[var(--clicky-ink-faint)]">
             {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white">
+        <div className="overflow-x-auto rounded-lg border border-[var(--clicky-line)] bg-white">
           <table className="w-full min-w-[32rem] text-xs">
             <thead>
-              <tr className="bg-zinc-50 text-left text-[0.65rem] uppercase tracking-wider text-zinc-500">
+              <tr className="bg-[var(--clicky-paper)] text-left text-[0.65rem] uppercase tracking-wider text-[var(--clicky-ink-faint)]">
                 <th className="px-2.5 py-2">{t("countryPosition")}</th>
                 <th className="px-2.5 py-2">{t("placardCode")}</th>
                 <th className="px-2.5 py-2">{t("assignedAccount")}</th>
@@ -178,27 +178,27 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
               {rows.map((row) => {
                 const linked = Boolean(row.linkedName);
                 return (
-                  <tr key={row.id} className="border-t border-zinc-100">
-                    <td className="px-2.5 py-2 font-medium text-zinc-900">{row.country}</td>
+                  <tr key={row.id} className="border-t border-[var(--clicky-line)]">
+                    <td className="px-2.5 py-2 font-medium text-[var(--clicky-ink)]">{row.country}</td>
                     <td className="px-2.5 py-2">
-                      <span className="font-mono text-[0.65rem] text-zinc-700">
+                      <span className="font-mono text-[0.65rem] text-[var(--clicky-ink-soft)]">
                         {row.code.trim() ? row.code : t("dash")}
                       </span>
                     </td>
                     <td
                       className={cn(
                         "px-2.5 py-2 text-[0.65rem]",
-                        linked ? "text-amber-800/90" : "text-zinc-500"
+                        linked ? "text-[var(--clicky-ink-soft)]" : "text-[var(--clicky-ink-faint)]"
                       )}
                     >
                       {linkedLabel(row, t)}
                     </td>
                     <td className="px-2.5 py-2">
-                      <span className="text-[0.65rem] text-[var(--accent)]">{t("allocationSignupLink")}</span>
+                      <span className="text-[0.65rem] text-[var(--clicky-blue)]">{t("allocationSignupLink")}</span>
                     </td>
                     <td className="px-2.5 py-2">
                       {linked ? (
-                        <span className="text-[0.65rem] text-zinc-400">{t("dash")}</span>
+                        <span className="text-[0.65rem] text-[var(--clicky-ink-faint)]">{t("dash")}</span>
                       ) : (
                         <button
                           type="button"
@@ -217,15 +217,15 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
         </div>
       </section>
 
-      <section className="space-y-2 rounded-xl border border-zinc-200 bg-zinc-50/80 p-3">
-        <h3 className="font-sans text-sm font-semibold text-zinc-900">{t("addOneSeat")}</h3>
+      <section className="space-y-2 rounded-xl border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-3">
+        <h3 className="font-sans text-sm font-semibold text-[var(--clicky-ink)]">{t("addOneSeat")}</h3>
         <div className="flex flex-wrap gap-1.5">
           {active.quickAddLabels.map((label) => (
             <button
               key={label}
               type="button"
               onClick={() => quickAddSeat(label)}
-              className="rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-medium text-zinc-900 hover:bg-zinc-50"
+              className="rounded-lg border border-[var(--clicky-line)] bg-white px-2.5 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
             >
               {label}
             </button>
@@ -241,24 +241,24 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
           }}
         >
           <div>
-            <label className="mb-1 block text-[0.65rem] text-zinc-500">{t("countryPosition")}</label>
+            <label className="mb-1 block text-[0.65rem] text-[var(--clicky-ink-faint)]">{t("countryPosition")}</label>
             <input
               name="country"
               required
               placeholder={t("countryPlaceholder")}
-              className="w-40 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs text-zinc-900"
+              className="w-40 rounded-lg border border-[var(--clicky-line)] px-2.5 py-1.5 text-xs text-[var(--clicky-ink)]"
             />
           </div>
           <button
             type="submit"
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-900 hover:bg-zinc-50"
+            className="rounded-lg border border-[var(--clicky-line)] bg-white px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper)]"
           >
             {t("add")}
           </button>
         </form>
       </section>
 
-      <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-1.5">
+      <div className="rounded-lg border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-1.5">
         <div className="flex gap-1.5 overflow-x-auto">
           {COMMITTEE_FIXTURES.map((tab) => {
             const selected = tab.id === active.id;
@@ -271,8 +271,8 @@ export function MarketingAllocationMatrixPanel({ className }: { className?: stri
                 className={cn(
                   "shrink-0 rounded-lg border px-2.5 py-1 text-[0.65rem] font-semibold transition",
                   selected
-                    ? "border-[color-mix(in_srgb,var(--accent)_60%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_14%,#ffffff)] text-zinc-900"
-                    : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+                    ? "border-[color-mix(in_srgb,var(--clicky-blue)_60%,#d4d4d8)] bg-[color-mix(in_srgb,var(--clicky-blue)_14%,#ffffff)] text-[var(--clicky-ink)]"
+                    : "border-[var(--clicky-line)] bg-white text-[var(--clicky-ink-soft)] hover:bg-[var(--clicky-paper)]"
                 )}
               >
                 {tab.label}

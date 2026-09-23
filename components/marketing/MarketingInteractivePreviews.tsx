@@ -48,14 +48,14 @@ function MarketingRollCallCard({
 }) {
   const t = useTranslations("sessionControlClient");
   const initBtn =
-    "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
+    "rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-4 py-2 text-sm font-medium text-[var(--clicky-ink)] hover:bg-[var(--clicky-paper-deep)]";
 
   return (
     <section className={cn(heroCompact ? "space-y-2" : "space-y-4")}>
       <div className={cn(heroCompact ? "space-y-2" : "space-y-4", MARKETING_CHAMBER_PREVIEW)}>
         <div className="flex items-center justify-between gap-3">
-          <h3 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-base" : "text-lg")}>
-            ✅ {t("rollCallTracker")}
+          <h3 className={cn("font-sans font-semibold text-[var(--clicky-ink)]", heroCompact ? "text-base" : "text-lg")}>
+            {t("rollCallTracker")}
           </h3>
           {!heroCompact ? (
           <HelpButton title={t("rollCallTracker")}>
@@ -63,7 +63,7 @@ function MarketingRollCallCard({
           </HelpButton>
           ) : null}
         </div>
-        {!heroCompact ? <p className="text-sm text-brand-muted">{t("rollCallIntro")}</p> : null}
+        {!heroCompact ? <p className="text-sm text-[var(--clicky-ink-soft)]">{t("rollCallIntro")}</p> : null}
       </div>
       <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4")}>
         {!heroCompact ? (
@@ -72,12 +72,12 @@ function MarketingRollCallCard({
         </button>
         ) : null}
         <div>
-          <h4 className={cn("font-sans font-semibold text-brand-navy", heroCompact ? "text-sm" : "text-base")}>
-            👥 {t("delegates")}
+          <h4 className={cn("font-sans font-semibold text-[var(--clicky-ink)]", heroCompact ? "text-sm" : "text-base")}>
+            {t("delegates")}
           </h4>
-          {!heroCompact ? <p className="mt-1 text-sm text-brand-muted">{t("delegateRollStatusHint")}</p> : null}
+          {!heroCompact ? <p className="mt-1 text-sm text-[var(--clicky-ink-soft)]">{t("delegateRollStatusHint")}</p> : null}
         </div>
-        <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", "text-brand-navy")}>
+        <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", "text-[var(--clicky-ink)]")}>
           {(heroCompact ? rows.slice(0, 3) : rows).map((row) => (
             <li
               key={row.id}
