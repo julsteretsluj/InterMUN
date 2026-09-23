@@ -5,9 +5,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import {
-  formatCommitteeCardTitle,
   resolveCommitteeDisplayTags,
   resolveCommitteeFullName,
 } from "@/lib/committee-card-display";
@@ -23,7 +21,6 @@ import {
   translateCommitteeTagDifficulty,
   translateCommitteeTagFormat,
 } from "@/lib/i18n/committee-display-tags";
-import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { cn } from "@/lib/utils";
 
 type CommitteeFixture = {
@@ -103,7 +100,6 @@ export function MarketingSessionLiveCommitteesPanel({
   const t = useTranslations("smtOverview");
   const tCommitteeTags = useTranslations("committeeTags");
   const tNames = useTranslations("committeeNames.full");
-  const tCommitteeLabels = useTranslations("committeeNames.labels");
   const [selectedId, setSelectedId] = useState("ecosoc");
 
   const localizeKnownCommitteeFullName = useCallback(
@@ -125,8 +121,7 @@ export function MarketingSessionLiveCommitteesPanel({
   return (
     <section
       className={cn(
-        /* marketing-light-surface: lock dark ink inside dark chamber frames (both site themes). */
-        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-xl border border-[var(--clicky-line)]/80 bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] sm:p-6",
+        "marketing-light-surface max-h-[min(28rem,70vh)] overflow-y-auto rounded-[var(--clicky-radius)] border border-[var(--clicky-line)] bg-[var(--clicky-paper)] p-4 text-[var(--clicky-ink)] [color-scheme:light] sm:p-5",
         className
       )}
     >
@@ -138,7 +133,7 @@ export function MarketingSessionLiveCommitteesPanel({
           <p className="mb-6 text-[0.9rem] text-[var(--clicky-ink-soft)] sm:text-[0.95rem]">{t("whichCommittee")}</p>
         </>
       ) : (
-        <p className="mb-4 text-[0.7rem] font-semibold uppercase tracking-wide text-[var(--clicky-ink-faint)]">
+        <p className="mb-4 text-[0.7rem] font-semibold tracking-wide text-[var(--clicky-ink-faint)]">
           {t("whichCommittee")}
         </p>
       )}
@@ -164,17 +159,18 @@ export function MarketingSessionLiveCommitteesPanel({
                 const cardPriority = itemPriorityById.get(item.id) ?? 1;
                 const selected = selectedId === item.id;
                 const tags = resolveCommitteeDisplayTags(item.committee);
-                const localizedFull = localizeKnownCommitteeFullName(
+                const code = item.committeeCode.trim() || item.committee.trim();
+                const fullName = localizeKnownCommitteeFullName(
                   resolveCommitteeFullName(null, item.committee)
                 );
-                const code = item.committee.trim();
+                // Prefer a single clear title — never "ECOSOC — ECOSOC".
+                // When full name matches the code (ignoring case), keep the nicer localized casing.
                 const title =
-                  localizedFull && code
-                    ? `${localizedFull} — ${translateCommitteeLabel(tCommitteeLabels, code)}`
-                    : translateCommitteeLabel(
-                        tCommitteeLabels,
-                        formatCommitteeCardTitle(null, item.committee)
-                      );
+                  fullName && fullName.toLocaleLowerCase() !== code.toLocaleLowerCase()
+                    ? fullName
+                    : (fullName ?? code);
+                const showCodeChip =
+                  Boolean(fullName) && fullName!.toLocaleLowerCase() !== code.toLocaleLowerCase();
 
                 return (
                   <button
@@ -184,15 +180,31 @@ export function MarketingSessionLiveCommitteesPanel({
                     aria-pressed={selected}
                     aria-label={`${cardPriority}. ${title}`}
                     className={cn(
-                      "relative rounded-lg border bg-white px-3.5 py-2.5 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
+                      "relative rounded-[var(--clicky-radius-sm)] border bg-white px-3.5 py-3 text-left text-[var(--clicky-ink)] shadow-sm transition-colors hover:bg-[var(--clicky-paper-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clicky-blue)]",
                       selected
                         ? "border-[color-mix(in_srgb,var(--clicky-blue)_45%,#0B1F3A)] bg-[color-mix(in_srgb,var(--clicky-blue)_6%,#ffffff)] ring-1 ring-[color-mix(in_srgb,var(--clicky-blue)_25%,transparent)]"
                         : "border-[var(--clicky-line)]"
                     )}
                   >
-                    <p className="text-sm font-semibold leading-snug text-[var(--clicky-ink)]">{title}</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold leading-snug text-[var(--clicky-ink)]">{title}</p>
+                        {showCodeChip ? (
+                          <p className="mt-0.5 font-mono text-[0.65rem] tracking-wide text-[var(--clicky-ink-faint)]">
+                            {code}
+                          </p>
+                        ) : null}
+                      </div>
+                      <span
+                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--clicky-blue)] text-[0.7rem] font-semibold text-white"
+                        aria-hidden
+                      >
+                        {cardPriority}
+                      </span>
+                    </div>
+
                     {tags ? (
-                      <div className="mt-1.5 flex flex-wrap gap-1.5">
+                      <div className="mt-2 flex flex-wrap gap-1.5">
                         <span className={lightLockedTagClass(formatTagClass(tags.format))}>
                           {translateCommitteeTagFormat(tags.format, tCommitteeTags)}
                         </span>
@@ -206,26 +218,22 @@ export function MarketingSessionLiveCommitteesPanel({
                         ) : null}
                       </div>
                     ) : null}
-                    <p className="mt-1.5 text-xs text-[var(--clicky-ink-soft)]">
+
+                    <p className="mt-2 text-xs text-[var(--clicky-ink-soft)]">
                       <span className="font-medium text-[var(--clicky-ink)]">{t("chairsLabel")} </span>
                       {item.chairNames}
                     </p>
-                    <p className="mt-1.5 text-xs font-mono tracking-widest text-[var(--clicky-ink-soft)]">
-                      {item.committeeCode}
-                    </p>
-                    <div className="mt-1.5 flow-root">
-                      <NavPriorityBadge priority={cardPriority} variant="tile" className="nav-priority-badge--wrap-tile" />
-                      {item.topics.length > 0 ? (
-                        <ul className="max-h-20 space-y-1 overflow-y-auto">
-                          {item.topics.map((topic) => (
-                            <li key={topic} className="text-[0.72rem] leading-snug text-[var(--clicky-ink)]">
-                              <span className="font-semibold text-[var(--clicky-ink)]">{t("topicLabel")} </span>
-                              {topic}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
+
+                    {item.topics.length > 0 ? (
+                      <ul className="mt-1.5 max-h-20 space-y-1 overflow-y-auto">
+                        {item.topics.map((topic) => (
+                          <li key={topic} className="text-[0.72rem] leading-snug text-[var(--clicky-ink)]">
+                            <span className="font-semibold text-[var(--clicky-ink)]">{t("topicLabel")} </span>
+                            {topic}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </button>
                 );
               })}

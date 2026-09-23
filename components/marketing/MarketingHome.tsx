@@ -263,9 +263,9 @@ export async function MarketingHome() {
             {t("about.title")}
           </h2>
           <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-white/75">
-            <p>{t("about.p1")}</p>
-            <p>{t("about.p2")}</p>
-            <p>{t("about.p3")}</p>
+            <p>{t("about.paragraph1")}</p>
+            <p>{t("about.paragraph2")}</p>
+            <p>{t("about.paragraph3")}</p>
           </div>
           <p className="mt-10 text-sm text-white/45 lowercase">
             {t("about.eyebrow")} · <span className="case-preserve">{appName}</span>

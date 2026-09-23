@@ -60,6 +60,26 @@ export const MARKETING_MESSAGE_NAMESPACES = [
   "setupPage",
   "seamunConferenceLinks",
   "secretariatRegistration",
+  // Interactive marketing demos (home + /features/*) reuse live panel copy
+  "smtOverview",
+  "committeeTags",
+  "committeeNames",
+  "sessionControlClient",
+  "session",
+  "smtConferenceSettings",
+  "smtRoomCodesClient",
+  "smtRoomCodesPage",
+  "voting",
+  "chairSpeakerQueuePanel",
+  "documents",
+  "speeches",
+  "stances",
+  "chairNominationsPanel",
+  "chairAwardsDelegateMatrix",
+  "roleSetupChecklist",
+  "allocationMatrixManager",
+  "delegateResolutionBuilder",
+  "guides",
 ] as const;
 
 const PUBLIC_PATH_PREFIXES = [
