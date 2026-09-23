@@ -4,6 +4,7 @@
 "use client";
 
 import type { ComponentType } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { MarketingFeatureDemoSection } from "@/components/marketing/MarketingFeatureDemoSection";
 import {
@@ -54,15 +55,24 @@ const DEMO_CONFIG: Record<MarketingFeatureRole, DemoConfig[]> = {
     { id: "oversight", sectionKey: "oversight", Component: SmtLiveOversightDemo },
     { id: "allocations", sectionKey: "allocations", Component: SmtAllocationMatrixDemo },
     { id: "gates", sectionKey: "gates", Component: SmtGateCodesDemo },
+    { id: "checklist", sectionKey: "checklist", Component: SmtSetupChecklistDemo },
     { id: "awards", sectionKey: "awards", Component: SmtAwardsReviewDemo },
     { id: "schedule", sectionKey: "schedule", Component: SmtEventScheduleDemo },
-    { id: "checklist", sectionKey: "checklist", Component: SmtSetupChecklistDemo },
   ],
 };
 
-export function MarketingFeaturesDemos({ role }: { role: MarketingFeatureRole }) {
+const PRIMARY_COUNT = 4;
+
+function DemoSectionList({
+  demos,
+  role,
+  startIndex = 0,
+}: {
+  demos: DemoConfig[];
+  role: MarketingFeatureRole;
+  startIndex?: number;
+}) {
   const t = useTranslations(`marketing.featuresPages.${role}`);
-  const demos = DEMO_CONFIG[role];
 
   return (
     <>
@@ -81,10 +91,41 @@ export function MarketingFeaturesDemos({ role }: { role: MarketingFeatureRole })
             bullets={bullets}
             previewLabel={t(`sections.${demo.sectionKey}.previewLabel`)}
             preview={<Component />}
-            reversed={index % 2 === 1}
+            reversed={(startIndex + index) % 2 === 1}
           />
         );
       })}
+    </>
+  );
+}
+
+export function MarketingFeaturesDemos({ role }: { role: MarketingFeatureRole }) {
+  const demos = DEMO_CONFIG[role];
+  const primary = demos.slice(0, PRIMARY_COUNT);
+  const more = demos.slice(PRIMARY_COUNT);
+  const [showMore, setShowMore] = useState(false);
+
+  return (
+    <>
+      <DemoSectionList demos={primary} role={role} />
+      {more.length > 0 ? (
+        <div className="border-t border-[var(--clicky-line)] py-12 md:py-16">
+          <div className="mx-auto max-w-6xl px-4 text-center md:px-8">
+            {!showMore ? (
+              <button
+                type="button"
+                onClick={() => setShowMore(true)}
+                className="clicky-pill clicky-pill-ghost"
+              >
+                more on the floor
+              </button>
+            ) : (
+              <p className="clicky-eyebrow mb-2">more on the floor</p>
+            )}
+          </div>
+          {showMore ? <DemoSectionList demos={more} role={role} startIndex={PRIMARY_COUNT} /> : null}
+        </div>
+      ) : null}
     </>
   );
 }

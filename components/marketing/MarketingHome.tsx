@@ -97,49 +97,55 @@ export async function MarketingHome() {
 
   return (
     <>
-      {/* Hero — heyclicky desktop stage */}
-      <section className="clicky-desktop-stage overflow-hidden">
-        <div className="relative mx-auto max-w-6xl">
-          <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
-            <div className="clicky-sticky absolute left-[4%] top-[8%] max-w-[11rem] clicky-float-a">
+      {/* Hero — quiet first viewport: brand, one line, one CTA pair */}
+      <section className="clicky-desktop-stage overflow-x-clip">
+        <div className="relative mx-auto flex min-h-[min(72vh,36rem)] max-w-6xl flex-col justify-center px-4 py-16 md:min-h-[min(78vh,42rem)] md:px-8 md:py-20">
+          <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+            <div className="clicky-sticky absolute left-0 top-[14%] hidden max-w-[9.5rem] clicky-float-a sm:block md:left-2 md:max-w-[11rem]">
               roll call, timers, and motions in one floor.
             </div>
-            <div className="clicky-sticky clicky-sticky--blue absolute right-[6%] top-[18%] max-w-[10rem] clicky-float-b">
+            <div className="clicky-sticky clicky-sticky--blue absolute right-0 top-[20%] hidden max-w-[9rem] clicky-float-b sm:block md:right-2 md:max-w-[10rem]">
               built for chairs who hate juggling tabs.
             </div>
-            <span className="clicky-kaomoji absolute bottom-[22%] left-[8%] clicky-float-c">¯\_(ツ)_/¯</span>
+            <span className="clicky-kaomoji absolute bottom-[16%] left-[4%] hidden clicky-float-c md:block">
+              ¯\_(ツ)_/¯
+            </span>
+            <span className="clicky-kaomoji absolute right-[8%] bottom-[24%] hidden clicky-float-a lg:block">
+              (⌐■_■)
+            </span>
           </div>
 
-          <div className="relative z-[1] mx-auto max-w-2xl pt-6 text-center md:pt-10">
-            <div className="mb-4 flex justify-center">
+          <div className="relative z-[1] mx-auto max-w-2xl text-center">
+            <div className="mb-5 flex justify-center">
               <InterMunEmblem alt="" className="max-h-14 w-auto md:max-h-16" />
             </div>
             <h1 className="case-preserve text-[clamp(2.6rem,8vw,4.5rem)] font-bold leading-[0.95] tracking-[-0.045em] text-[var(--clicky-ink)]">
               {appName}
             </h1>
-            <p className="mt-4 text-base lowercase text-[var(--clicky-ink-soft)] md:text-lg">
-              {t("hero.subtitle")}
+            <p className="mt-4 text-base text-[var(--clicky-ink-soft)] md:text-lg">
+              conference software that stays out of the way until the gavel needs it.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link href="/register/secretariat" className="clicky-pill clicky-pill-primary">
-                {t("hero.ctaStart")}
+                host an event
               </Link>
-              <Link href="/login" className="clicky-pill clicky-pill-ghost">
-                {t("hero.ctaJoin")}
+              <Link href="/signup" className="clicky-pill clicky-pill-ghost">
+                join your conference
               </Link>
             </div>
-            <p className="mt-4 text-xs lowercase text-[var(--clicky-ink-faint)]">
-              {t("hero.chip1")} · {t("hero.chip2")} · {t("hero.chip3")}
-            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="relative z-[1] mx-auto mt-12 max-w-4xl md:mt-16">
-            <WindowFrame filename="session-floor.mov" className="clicky-float-a" floatClass="">
-              <div className="p-2 md:p-3">
-                <MarketingHeroSessionPreview heroCompact />
-              </div>
-            </WindowFrame>
-          </div>
+      {/* Floor demo — below the fold */}
+      <section className="border-t border-[var(--clicky-line)] bg-[var(--clicky-paper-deep)]/40 py-12 md:py-16">
+        <div className="relative mx-auto max-w-4xl px-4 md:px-8">
+          <p className="clicky-eyebrow mb-4 text-center">on the floor</p>
+          <WindowFrame filename="session-floor.mov" className="clicky-float-a" floatClass="">
+            <div className="p-2 md:p-3">
+              <MarketingHeroSessionPreview heroCompact />
+            </div>
+          </WindowFrame>
         </div>
       </section>
 
@@ -174,7 +180,7 @@ export async function MarketingHome() {
                     {step.code}
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em] lowercase">{step.title}</h3>
+                <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em]">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--clicky-ink-soft)]">{step.body}</p>
               </li>
             ))}
@@ -182,61 +188,49 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <div id="features">
-        <RoleStrip
-          id="chairs"
-          kicker={t("chairs.eyebrow")}
-          title={t("chairs.title")}
-          body={t("chairs.description")}
-          href="/features/chairs"
-          hrefLabel={t("exploreChairs")}
-          filename="chair-motions.app"
-          preview={
-            <div className="p-2">
-              <MarketingChairMotionPreview />
-            </div>
-          }
-        />
-        <RoleStrip
-          id="delegates"
-          mirror
-          kicker={t("delegates.eyebrow")}
-          title={t("delegates.title")}
-          body={t("delegates.description")}
-          href="/features/delegates"
-          hrefLabel={t("exploreDelegates")}
-          filename="delegate-prep.app"
-          preview={
-            <div className="p-2">
-              <MarketingDelegatePrepPreview />
-            </div>
-          }
-        />
-        <RoleStrip
-          id="smt"
-          kicker={t("smt.eyebrow")}
-          title={t("smt.title")}
-          body={t("smt.description")}
-          href="/features/secretariat"
-          hrefLabel={t("exploreSecretariat")}
-          filename="secretariat.live"
-          preview={
-            <div className="p-2">
-              <MarketingSmtOversightPreview />
-            </div>
-          }
-        />
-      </div>
+      <RoleStrip
+        id="for-chairs"
+        kicker={t("chairs.eyebrow")}
+        title={t("chairs.title")}
+        body={t("chairs.description")}
+        href="/features/chairs"
+        hrefLabel={t("exploreChairs")}
+        filename="dais-floor.app"
+        preview={<MarketingChairMotionPreview />}
+      />
 
-      {/* Platform — ohhmy bold statement, not card grid clone */}
-      <section className="border-t border-[var(--clicky-line)] py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-4 text-center md:px-8">
-          <p className="clicky-eyebrow">{t("platform.eyebrow")}</p>
-          <h2 className="mt-4 text-[clamp(2rem,5vw,3.25rem)] font-bold lowercase leading-[1.05] tracking-[-0.04em]">
-            {t("platform.title")}
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-[var(--clicky-ink-soft)]">{t("platform.description")}</p>
-          <div className="mt-12 grid gap-3 text-left sm:grid-cols-2">
+      <RoleStrip
+        id="for-delegates"
+        kicker={t("delegates.eyebrow")}
+        title={t("delegates.title")}
+        body={t("delegates.description")}
+        href="/features/delegates"
+        hrefLabel={t("exploreDelegates")}
+        filename="delegate-prep.app"
+        preview={<MarketingDelegatePrepPreview />}
+        mirror
+      />
+
+      <RoleStrip
+        id="for-secretariat"
+        kicker={t("smt.eyebrow")}
+        title={t("smt.title")}
+        body={t("smt.description")}
+        href="/features/secretariat"
+        hrefLabel={t("exploreSecretariat")}
+        filename="smt-oversight.app"
+        preview={<MarketingSmtOversightPreview />}
+      />
+
+      {/* Platform extras */}
+      <section className="border-t border-[var(--clicky-line)] py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-8">
+          <div className="max-w-lg">
+            <p className="clicky-eyebrow">{t("platform.eyebrow")}</p>
+            <h2 className="clicky-section-title mt-3">{t("platform.title")}</h2>
+            <p className="clicky-lede mt-4">{t("platform.description")}</p>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { t: t("platform.feature1Title"), d: t("platform.feature1Description") },
               { t: t("platform.feature2Title"), d: t("platform.feature2Description") },
@@ -250,7 +244,7 @@ export async function MarketingHome() {
                   i % 2 === 1 && "sm:translate-y-4"
                 )}
               >
-                <h3 className="font-semibold tracking-[-0.02em] lowercase">{item.t}</h3>
+                <h3 className="font-semibold tracking-[-0.02em]">{item.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--clicky-ink-soft)]">{item.d}</p>
               </div>
             ))}
@@ -258,25 +252,35 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      {/* Founder note — heyclicky manifesto */}
+      {/* Founder note — hard-coded so about keys never leak */}
       <section id="about" className="border-t border-[var(--clicky-line)] bg-[var(--clicky-ink)] py-16 text-[#f7f6f2] md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-8">
           <p className="clicky-kaomoji text-white/50">the dream</p>
-          <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold lowercase leading-tight tracking-[-0.03em]">
-            {t("about.title")}
+          <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold leading-tight tracking-[-0.03em]">
+            purpose-built for today&apos;s model un
           </h2>
           <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-white/75">
-            <p>{t("about.paragraph1")}</p>
-            <p>{t("about.paragraph2")}</p>
-            <p>{t("about.paragraph3")}</p>
+            <p>
+              <span className="case-preserve">InterMUN</span> is a browser workspace that replaces the usual mix of
+              spreadsheets, group chats, and printed placards with coordinated committee tooling.
+            </p>
+            <p>
+              chairs gain procedural control that mirrors how sessions actually unfold. delegates get structured prep
+              beside the floor. secretariat keeps event-wide visibility without hovering over every motion.
+            </p>
+            <p>
+              whether you run one room or a full weekend conference,{" "}
+              <span className="case-preserve">InterMUN</span> keeps chairs, delegates, and staff aligned from the
+              opening roll call through closing ceremony.
+            </p>
           </div>
-          <p className="mt-10 text-sm text-white/45 lowercase">
-            {t("about.eyebrow")} · <span className="case-preserve">{appName}</span>
+          <p className="mt-10 text-sm text-white/45">
+            about <span className="case-preserve">{appName}</span>
           </p>
         </div>
       </section>
 
-      {/* FAQ — heyclicky style */}
+      {/* FAQ */}
       <section className="border-t border-[var(--clicky-line)] py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[0.8fr_1.2fr] md:px-8">
           <div>
@@ -306,15 +310,18 @@ export async function MarketingHome() {
 
       {/* Contact */}
       <section id="contact" className="scroll-mt-28 border-t border-[var(--clicky-line)] bg-[var(--clicky-paper-deep)]/50 py-16 md:py-24">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[1fr_1.1fr] md:px-8 lg:gap-16">
-          <div className="md:pt-6">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-[0.9fr_1.1fr] md:px-8">
+          <div>
             <p className="clicky-eyebrow">{t("contact.eyebrow")}</p>
             <h2 className="clicky-section-title mt-3">{t("contact.title")}</h2>
             <p className="clicky-lede mt-4">{t("contact.description")}</p>
             {partnershipEmail ? (
-              <a href={`mailto:${partnershipEmail}`} className="mt-6 inline-block text-sm font-semibold text-[var(--clicky-blue)]">
-                {partnershipEmail}
-              </a>
+              <p className="mt-6 text-sm text-[var(--clicky-ink-soft)]">
+                {t("contact.directEmail")}{" "}
+                <a href={`mailto:${partnershipEmail}`} className="font-medium text-[var(--clicky-blue)]">
+                  {partnershipEmail}
+                </a>
+              </p>
             ) : null}
           </div>
           <ConferenceInquiryForm />

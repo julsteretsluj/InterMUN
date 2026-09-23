@@ -566,7 +566,13 @@ html {
 
 /* Soften header chrome controls on marketing */
 .marketing-shell .marketing-header-controls {
-  opacity: 0.85;
+  opacity: 0.4;
+  transition: opacity 200ms var(--ease-apple);
+}
+
+.marketing-shell .marketing-header-controls:hover,
+.marketing-shell .marketing-header-controls:focus-within {
+  opacity: 1;
 }
 
 .marketing-shell .marketing-header-controls button,
@@ -582,6 +588,11 @@ html {
 .marketing-shell .marketing-header .mun-apple-btn-glass-gray:hover {
   background: #fff !important;
   color: var(--clicky-ink) !important;
+}
+
+.mun-clicky-auth .mun-apple-btn,
+.mun-clicky-auth button:not([class*="case-preserve"]) {
+  text-transform: lowercase !important;
 }
 
 /* Auth / gate form fields on clicky paper */

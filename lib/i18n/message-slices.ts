@@ -76,6 +76,7 @@ export const MARKETING_MESSAGE_NAMESPACES = [
   "stances",
   "chairNominationsPanel",
   "chairAwardsDelegateMatrix",
+  "awardsRubric",
   "roleSetupChecklist",
   "allocationMatrixManager",
   "delegateResolutionBuilder",

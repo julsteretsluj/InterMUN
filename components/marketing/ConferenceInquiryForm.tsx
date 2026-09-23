@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   submitConferenceInquiryAction,
@@ -25,10 +25,12 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
   const partnershipEmail = getPartnershipContactEmail();
   const [state, formAction, pending] = useActionState(submitConferenceInquiryAction, INITIAL_STATE);
   const formRef = useRef<HTMLFormElement>(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     if (state?.success) {
       formRef.current?.reset();
+      setShowDetails(false);
     }
   }, [state?.success]);
 
@@ -98,7 +100,7 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
             />
           </div>
 
-          <div>
+          <div className="sm:col-span-2">
             <label htmlFor="inquiry-role" className={LABEL_CLASS}>
               {t("roleLabel")} <span className="text-[var(--clicky-coral)]">*</span>
             </label>
@@ -112,85 +114,97 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
               <option value="other">{t("roleOther")}</option>
             </select>
           </div>
-
-          <div>
-            <label htmlFor="inquiry-dates" className={LABEL_CLASS}>
-              {t("eventDatesLabel")}
-            </label>
-            <input
-              id="inquiry-dates"
-              name="eventDates"
-              type="text"
-              maxLength={120}
-              className={INPUT_CLASS}
-              placeholder={t("eventDatesPlaceholder")}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="inquiry-committees" className={LABEL_CLASS}>
-              {t("committeeCountLabel")}
-            </label>
-            <input
-              id="inquiry-committees"
-              name="committeeCount"
-              type="text"
-              inputMode="numeric"
-              maxLength={40}
-              className={INPUT_CLASS}
-              placeholder={t("committeeCountPlaceholder")}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="inquiry-delegates" className={LABEL_CLASS}>
-              {t("delegateCountLabel")}
-            </label>
-            <input
-              id="inquiry-delegates"
-              name="delegateCount"
-              type="text"
-              inputMode="numeric"
-              maxLength={40}
-              className={INPUT_CLASS}
-              placeholder={t("delegateCountPlaceholder")}
-            />
-          </div>
         </div>
 
-        <fieldset>
-          <legend className={LABEL_CLASS}>{t("interestsLabel")}</legend>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {interests.map((item) => (
-              <label
-                key={item.value}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] transition-colors hover:bg-white has-[:checked]:border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] has-[:checked]:bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)]"
-              >
+        {!showDetails ? (
+          <button
+            type="button"
+            onClick={() => setShowDetails(true)}
+            className="text-sm font-medium text-[var(--clicky-blue)] hover:underline"
+          >
+            add event details (optional)
+          </button>
+        ) : (
+          <div className="space-y-5 border-t border-[var(--clicky-line)] pt-5">
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div>
+                <label htmlFor="inquiry-dates" className={LABEL_CLASS}>
+                  {t("eventDatesLabel")}
+                </label>
                 <input
-                  type="checkbox"
-                  name="interests"
-                  value={item.value}
-                  className="h-3.5 w-3.5 rounded border-[var(--clicky-line)] text-[var(--clicky-blue)] focus:ring-[var(--clicky-blue)]"
+                  id="inquiry-dates"
+                  name="eventDates"
+                  type="text"
+                  maxLength={120}
+                  className={INPUT_CLASS}
+                  placeholder={t("eventDatesPlaceholder")}
                 />
-                {item.label}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+              </div>
+              <div>
+                <label htmlFor="inquiry-committees" className={LABEL_CLASS}>
+                  {t("committeeCountLabel")}
+                </label>
+                <input
+                  id="inquiry-committees"
+                  name="committeeCount"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={40}
+                  className={INPUT_CLASS}
+                  placeholder={t("committeeCountPlaceholder")}
+                />
+              </div>
+              <div>
+                <label htmlFor="inquiry-delegates" className={LABEL_CLASS}>
+                  {t("delegateCountLabel")}
+                </label>
+                <input
+                  id="inquiry-delegates"
+                  name="delegateCount"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={40}
+                  className={INPUT_CLASS}
+                  placeholder={t("delegateCountPlaceholder")}
+                />
+              </div>
+            </div>
 
-        <div>
-          <label htmlFor="inquiry-message" className={LABEL_CLASS}>
-            {t("messageLabel")}
-          </label>
-          <textarea
-            id="inquiry-message"
-            name="message"
-            rows={4}
-            maxLength={4000}
-            className={cn(INPUT_CLASS, "min-h-[6rem] resize-y")}
-            placeholder={t("messagePlaceholder")}
-          />
-        </div>
+            <fieldset>
+              <legend className={LABEL_CLASS}>{t("interestsLabel")}</legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {interests.map((item) => (
+                  <label
+                    key={item.value}
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--clicky-line)] bg-[var(--clicky-paper)] px-3 py-1.5 text-xs font-medium text-[var(--clicky-ink)] transition-colors hover:bg-white has-[:checked]:border-[color-mix(in_srgb,var(--clicky-blue)_45%,var(--clicky-line))] has-[:checked]:bg-[color-mix(in_srgb,var(--clicky-blue)_12%,white)]"
+                  >
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value={item.value}
+                      className="h-3.5 w-3.5 rounded border-[var(--clicky-line)] text-[var(--clicky-blue)] focus:ring-[var(--clicky-blue)]"
+                    />
+                    {item.label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <div>
+              <label htmlFor="inquiry-message" className={LABEL_CLASS}>
+                {t("messageLabel")}
+              </label>
+              <textarea
+                id="inquiry-message"
+                name="message"
+                rows={3}
+                maxLength={4000}
+                className={cn(INPUT_CLASS, "min-h-[5rem] resize-y")}
+                placeholder={t("messagePlaceholder")}
+              />
+            </div>
+          </div>
+        )}
 
         <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
           <label htmlFor="inquiry-website">Website</label>

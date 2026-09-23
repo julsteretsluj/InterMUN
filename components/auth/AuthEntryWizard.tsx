@@ -315,7 +315,7 @@ export function AuthEntryWizard({
             onClick={() => setStep("conference")}
             className="mun-apple-btn mun-apple-btn-filled-blue mun-apple-btn-block group/continue mx-auto flex w-full max-w-xs items-center justify-center gap-2 rounded-[var(--radius-md)] py-3.5 text-base font-semibold"
           >
-            {tc("continue")}
+            {tc("continue").toLowerCase()}
             <ChevronRight
               className="size-5 transition-transform duration-[var(--dur-base)] ease-[var(--ease-apple)] group-hover/continue:translate-x-0.5"
               strokeWidth={2.25}
@@ -383,7 +383,7 @@ export function AuthEntryWizard({
               disabled={conferencePending}
               className="mun-apple-btn mun-apple-btn-filled-blue mun-apple-btn-block py-3 text-base disabled:opacity-50"
             >
-              {conferencePending ? t("checking") : tc("continue")}
+              {conferencePending ? t("checking").toLowerCase() : tc("continue").toLowerCase()}
             </button>
           </form>
         </div>

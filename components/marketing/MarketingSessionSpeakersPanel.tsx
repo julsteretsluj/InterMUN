@@ -117,11 +117,7 @@ export function MarketingSessionSpeakersPanel({
         </h3>
         {!compactIntro ? (
           <p className="mt-1 text-sm text-[var(--clicky-ink-soft)]">
-            {tq("introPrefix")}{" "}
-            <span className="font-medium text-[var(--clicky-ink)]">{tq("requestToSpeak")}</span> {tq("introMiddle")}{" "}
-            <span className="font-medium text-[var(--clicky-blue)]">{tq("sessionTimerLink")}</span>{" "}
-            {tq("introSuffixPrefix")}{" "}
-            <strong className="font-medium text-[var(--clicky-ink)]">{tq("advanceSpeaker")}</strong>.
+            add delegations in speaking order. use start clock and advance speaker to keep the floor moving.
           </p>
         ) : null}
       </div>

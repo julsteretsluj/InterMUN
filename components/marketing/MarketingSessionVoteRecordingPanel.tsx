@@ -29,11 +29,11 @@ const DELEGATE_SEED: DelegateVoteRow[] = [
   { id: "philippines", country: "Philippines", rollAttendance: "present_voting", vote: "no" },
 ];
 
-function recordedLabel(value: VoteValue, t: (key: string) => string): string {
-  if (value === "yes") return t("recordedYes");
-  if (value === "no") return t("recordedNo");
-  if (value === "abstain") return t("recordedAbstain");
-  return t("recordedNone");
+function recordedLabel(value: VoteValue): string {
+  if (value === "yes") return "yes";
+  if (value === "no") return "no";
+  if (value === "abstain") return "abstain";
+  return "—";
 }
 
 export function MarketingSessionVoteRecordingPanel({
@@ -93,7 +93,7 @@ export function MarketingSessionVoteRecordingPanel({
           <p className="text-[0.75rem] font-medium text-[var(--clicky-ink-soft)]">{t("voteTypes.motion")}</p>
           <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] text-[var(--clicky-ink)]">{MOTION_TITLE}</h3>
           <p className="text-[0.8125rem] text-[var(--clicky-ink-soft)]">
-            {t("majorityLine", { label: majorityLabel })}
+            {majorityLabel} majority
           </p>
         </header>
 
@@ -119,7 +119,7 @@ export function MarketingSessionVoteRecordingPanel({
             >
               <div className="min-w-0">
                 <p className="font-medium text-[var(--clicky-ink)]">{row.country}</p>
-                <p className="text-[0.75rem] text-[var(--clicky-ink-soft)]">{recordedLabel(row.vote, t)}</p>
+                <p className="text-[0.75rem] text-[var(--clicky-ink-soft)]">{recordedLabel(row.vote)}</p>
               </div>
               <div className="flex shrink-0 gap-1.5" role="group" aria-label={`${row.country}: ${t("recordVoteChoice")}`}>
                 <button

@@ -8989,25 +8989,25 @@ html[data-tour] aside.group .hidden.group-hover\:flex {
   color: #1D1D1F;
 }
 
-/* —— Clicky era: sitewide lowercase content —— */
-html,
-body {
+/* —— Clicky era: lowercase on marketing + auth shells only —— */
+/* Dashboard / session stay sentence case so country names and chair labels stay readable. */
+.marketing-shell,
+.mun-clicky-auth {
   text-transform: lowercase;
 }
 
-html body :where(*) {
+.marketing-shell :where(*),
+.mun-clicky-auth :where(*) {
   text-transform: lowercase !important;
 }
 
-/* Beat Tailwind / legacy uppercase + normal-case utilities */
-.uppercase,
-.normal-case,
-.capitalize {
+.marketing-shell :is(.uppercase, .normal-case, .capitalize),
+.mun-clicky-auth :is(.uppercase, .normal-case, .capitalize) {
   text-transform: lowercase !important;
 }
 
-/* Preserve typed values and InterMUN logo casing only */
-html body :is(
+/* Preserve typed values and InterMUN logo casing */
+.marketing-shell :is(
   input,
   textarea,
   [contenteditable="true"],
@@ -9020,17 +9020,28 @@ html body :is(
   .mun-brand-wordmark *,
   .mun-brand-word,
   .mun-brand-word-suffix
+),
+.mun-clicky-auth :is(
+  input,
+  textarea,
+  [contenteditable="true"],
+  [contenteditable=""],
+  .case-preserve,
+  .case-preserve *,
+  .mun-brand-wordmark,
+  .mun-brand-wordmark *,
+  .mun-brand-word,
+  .mun-brand-word-suffix
 ) {
   text-transform: none !important;
 }
 
-/* Extra specificity so brand lockups always beat the sitewide lowercase rule */
-html body .case-preserve,
-html body .case-preserve *,
-html body .marketing-header-brand,
-html body .marketing-header-brand *,
-html body .mun-brand-wordmark,
-html body .mun-brand-wordmark * {
+.marketing-shell .case-preserve,
+.marketing-shell .case-preserve *,
+.marketing-shell .marketing-header-brand,
+.marketing-shell .marketing-header-brand *,
+.mun-clicky-auth .case-preserve,
+.mun-clicky-auth .case-preserve * {
   text-transform: none !important;
 }
 
