@@ -187,7 +187,7 @@
     "rollPresentVoting": "Anwesend und abstimmend",
     "rollPresentVotingTitle": "Anwesend und abstimmend – muss abstimmen, darf sich nicht enthalten",
     "rollAbsent": "Abwesend",
-    "rollCallForCountry": "Appell für {Land}",
+    "rollCallForCountry": "Anwesenheit für {Land}",
     "presetCustom": "Brauch",
     "presetSetAgenda": "Antrag zur Festlegung der Tagesordnung",
     "presetExtendOpeningSpeech": "Antrag auf Verlängerung der Eröffnungsrede",
@@ -277,7 +277,7 @@
     "agendaNoMotionsYet": "Zu diesem Thema liegen noch keine Anträge vor.",
     "agendaByMotion": "Durch Bewegung",
     "tabSetup": "1) Einrichtung",
-    "tabFloorQueue": "2) Warteschlange auf der Etage",
+    "tabFloorQueue": "2) Warteschlange auf der Seite",
     "tabDraftMotion": "3) Antragsentwurf",
     "tabRecordVotes": "4) Stimmen aufzeichnen",
     "tabHistory": "5) Geschichte",
@@ -370,7 +370,7 @@
     "pinToFloor": "Am Boden feststecken",
     "edit": "Bearbeiten",
     "delete": "Löschen",
-    "rollCallTracker": "Appell-Tracker",
+    "rollCallTracker": "Anwesenheits-Tracker",
     "rollCallHelp": "Präsens: kann sich enthalten. Anwesend und abstimmend: muss mit Ja/Nein stimmen. Abwesend: Es wird kein Stimmzettel erfasst.",
     "rollCallIntro": "Wählen Sie für jeden Delegierten „Anwesend“ (kann sich der Stimme enthalten), „Anwesend und abstimmen“ (abstimmen) oder „Abwesend“.",
     "initializeRowsAllAllocations": "Zeilen initialisieren (alle Zuordnungen)",
@@ -432,8 +432,8 @@
     "deleteAnnouncementConfirm": "Diese Ankündigung endgültig löschen? Dies kann nicht rückgängig gemacht werden.",
     "announcementDeleted": "Ankündigung gelöscht.",
     "noAllocationsToAdd": "Keine Zuordnungen zum Hinzufügen.",
-    "rollCallRowsAlreadyExist": "Beim Appell gibt es für jede Zuteilung bereits eine Zeile.",
-    "rollCallRowsAdded": "{count} Appellzeile(n) hinzugefügt.",
+    "rollCallRowsAlreadyExist": "In der Anwesenheitsliste gibt es für jede Zuteilung bereits eine Zeile.",
+    "rollCallRowsAdded": "{count} Anwesenheitszeile(n) hinzugefügt.",
     "motionCreatedOpened": "Antrag erstellt und geöffnet.",
     "motionUpdated": "Antrag aktualisiert.",
     "motionClosed": "Antrag geschlossen.",
@@ -846,7 +846,7 @@
     "sources": "Quellen",
     "notes": "Notizen",
     "notesModeration": "Note review",
-    "rollCallTracker": "✅ Appell-Tracker",
+    "rollCallTracker": "✅ Anwesenheits-Tracker",
     "runningNotes": "Laufnotizen",
     "awardsSmt": "Auszeichnungen",
     "delegateDashboard": "Delegierten-Dashboard",
@@ -1326,7 +1326,7 @@
     "noCommittees": "Für diese Veranstaltung wurden keine Ausschüsse gefunden. Fügen Sie sie hinzu",
     "eventSessionsLink": "Veranstaltungs- und Ausschusssitzungen",
     "orSupabase": "oder in Supabase.",
-    "sessionFloorBanner": "<floor>Sitzungsetage</floor> (Timer, Lautsprecher, Appell) ist nur für <chairs>Podiumsstühle</chairs> vorgesehen. Verwenden Sie unten <live>Live-Ausschüsse</live> für die Übersicht oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
+    "sessionFloorBanner": "<floor>Sitzungsseite</floor> (Timer, Lautsprecher, Anwesenheit) ist nur für <chairs>Podiumsstühle</chairs> vorgesehen. Verwenden Sie unten <live>Live-Ausschüsse</live> für die Übersicht oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
     "welcomeSg": "Willkommen, Generalsekretär!",
     "whichCommittee": "In welchem ​​Ausschuss möchten Sie mitmachen?",
     "sessionsCount": "{count, plural, one {# Sitzung} other {# Sitzungen}}",
@@ -1369,7 +1369,7 @@
       "newsroom": "Newsroom",
       "pressCorps": "Press Corps",
       "milestones": "Milestones",
-      "rollCall": "Appell",
+      "rollCall": "Anwesenheit",
       "session": "Sitzung",
       "agenda": "Agenda",
       "speakers": "Lautsprecher",
@@ -1610,7 +1610,7 @@
     "switchEvent": "Ereignis wechseln",
     "liveCommittees": "Live-Komitees",
     "digitalCommitteeRoom": "Digitaler Ausschussraum",
-    "digitalRoomDescription": "Die Delegierten sehen dieselbe virtuelle Etage unter Ausschussraum im Delegierten-Dashboard (Plakate und Podium verwenden die Zuteilungen dieses Ausschusses).",
+    "digitalRoomDescription": "Die Delegierten sehen dieselbe virtuelle Seite unter Ausschussraum im Delegierten-Dashboard (Plakate und Podium verwenden die Zuteilungen dieses Ausschusses).",
     "helperTextSmtPreview": "Sekretariatsansicht: Live-Vorschau der Zuweisungsmatrix dieses Ausschusses. Weisen Sie Sitzplätze unten oder in der Zuteilungsmatrix zu.",
     "tabs": {
       "ariaLabel": "Ausschussabschnitte",
@@ -1620,7 +1620,7 @@
       "history": "Geschichte"
     },
     "liveFloor": "Live-Boden",
-    "liveFloorDescription": "Live-Sprecherwarteschlange, Appell und Timer für dieses Komitee – dieselben Daten, die Vorsitzende auf der Sitzungsfläche sehen.",
+    "liveFloorDescription": "Live-Sprecherwarteschlange, Anwesenheit und Timer für dieses Komitee – dieselben Daten, die Vorsitzende auf der Sitzungsfläche sehen.",
     "conferenceFallback": "Konferenz",
     "committeeFallback": "Ausschuss",
     "secretariatOversightTitle": "Aufsichtsliste des Sekretariats",
@@ -1767,7 +1767,7 @@
   "chairTopicTabs": {
     "selectLiveTopic": "Live-Thema auswählen",
     "chooseTopicHelp": "Wählen Sie aus, welches Ausschussthema die Bodenwerkzeuge gerade kontrollieren.",
-    "sessionControlHint": "Anträge, Timer und die Rednerliste folgen dieser Themenzeile. Beim Appell wird weiterhin die Zuteilung der einzelnen Delegierten verwendet."
+    "sessionControlHint": "Anträge, Timer und die Rednerliste folgen dieser Themenzeile. Für die Anwesenheit wird weiterhin die Zuteilung der einzelnen Delegierten verwendet."
   },
   "agendaTopics": {
     "climateAction": "Klimaschutz",
@@ -1959,7 +1959,7 @@
   "adminPage": {
     "title": "Website-Administration",
     "intro": "Erstellen Sie Konferenzveranstaltungen und verwalten Sie, wer die Sekretariatstools ausführen darf. Die tägliche Ausschussaufsicht erfolgt im SMT-Dashboard.",
-    "noSessionFloor": "Der Sitzungsbereich (Timer, Redner, Appell) ist nur für <strong>Podiumsstühle</strong> vorgesehen. Verwenden Sie das <strong>SMT-Dashboard</strong> für Live-Ausschüsse oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
+    "noSessionFloor": "Der Sitzungsbereich (Timer, Redner, Anwesenheit) ist nur für <strong>Podiumsstühle</strong> vorgesehen. Verwenden Sie das <strong>SMT-Dashboard</strong> für Live-Ausschüsse oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
     "tabs": {
       "ariaLabel": "Admin-Bereiche",
       "setup": "Aufstellen",
@@ -2653,7 +2653,7 @@
         "hint": "Plakate, Rednerliste, Rollenstatus, Vorsitznotizen (dieses Gerät)"
       },
       "rollCall": {
-        "label": "Appell",
+        "label": "Anwesenheit",
         "hint": "Teilnahme"
       },
       "session": {
@@ -2718,7 +2718,7 @@
       },
       "committeeRoomFull": {
         "label": "Ausschussraum (voll)",
-        "hint": "Virtuelles Layout und Delegiertenetage"
+        "hint": "Virtuelles Layout und Delegiertenseite"
       },
       "crisisReport": {
         "label": "Bericht",
@@ -3286,7 +3286,7 @@
     "hideSettings": "Einstellungen ausblenden",
     "preliminaryPassing": "Bestehen (vorläufig)",
     "preliminaryFailing": "Nicht bestanden (vorläufig)",
-    "delegateRollCall": "Delegiertenappell ({count})",
+    "delegateRollCall": "Delegiertenanwesenheit ({count})",
     "unseatedPlacard": "Platz frei (noch kein Delegierter zugewiesen)",
     "noSeatedDelegates": "Für diesen Antrag stehen keine sitzenden Delegierten zur Verfügung.",
     "rollPrefix": "Rollen:",
@@ -3309,7 +3309,7 @@
     "agendaVoteSection": "Abstimmung über die Tagesordnung",
     "agendaVoteSectionHelp": "Bei Abstimmungen über die Tagesordnung ist standardmäßig eine Zweidrittelmehrheit erforderlich. Notieren Sie auf jedem Plakat „Ja“, „Enthaltung“ (wenn die Abstimmung dies zulässt) oder „Nein“. Die Enthaltung ist für Delegierte, die als anwesend gekennzeichnet sind und nach Abstimmung abstimmen, deaktiviert. Dieser Ablauf ist von den unten aufgeführten formellen Anträgen getrennt.",
     "recordVoteChoice": "Rekordabstimmung",
-    "chairRecordVotesHint": "Tippen Sie für jede sitzende Delegation auf „Ja“, „Enthaltung“ (falls verfügbar), „Nein“ oder „Frei“. Abstinenz folgt den Wurfregeln; Es ist für die Anwesenheit und Abstimmung deaktiviert.",
+    "chairRecordVotesHint": "Tippen Sie für jede sitzende Delegation auf „Ja“, „Enthaltung“ (falls verfügbar), „Nein“ oder „Frei“. Die Enthaltung folgt den Anwesenheitsregeln; sie ist für „Anwesend und abstimmend“ deaktiviert.",
     "abstainNotApplicableMotionType": "Für diesen Bewegungstyp wird keine Enthaltung erfasst (nur Ja/Nein).",
     "abstainDisabledPresentVotingRoll": "Eine Stimmenthaltung ist für Delegierte, die als anwesend gekennzeichnet sind und namentlich abstimmen, nicht möglich.",
     "closeAgendaBallot": "Tagesordnungsabstimmung schließen",
@@ -4346,7 +4346,7 @@
     "gavelAria": "Hammer",
     "viewProfileAria": "Profil ansehen: {title}",
     "noProfileLinkAria": "{title} (kein Profillink)",
-    "committeeFloor": "Ausschussetage",
+    "committeeFloor": "Ausschussseite",
     "virtualRoomFigureAria": "Virtueller Ausschussraum – {committeeName} ({conferenceName})",
     "filteringLiveRegion": "Delegationen filtern. Der erste hervorgehobene Platz ist das erste Spiel im Ring.",
     "helperText": "Auf Plakaten sind das Land (aus den Zuteilungen), der Name, die Schule und die Pronomen aus dem Profil jedes Delegierten aufgeführt. Bearbeiten Sie Ihr Profil unter Profil. Leere Ausschusssitze werden als „Frei“ angezeigt. Klicken Sie auf ein ausgefülltes Plakat oder einen Podiumsplatz, um die Seite dieses Mitglieds zu öffnen (von dort aus chatten und berichten).",
@@ -4369,7 +4369,7 @@
       "rollPromptTitle": "Genehmigung des Vorsitzes erforderlich",
       "rollPromptBodyPickStatus": "Die Sitzung hat begonnen. Wählen Sie Ihren Namensstatus, um das Sprechen und Abstimmen freizuschalten. Diese Auswahl kann nicht geändert werden.",
       "rollPromptBodyWaitSessionStart": "Ich warte darauf, dass der Vorsitzende die Ausschusssitzung beginnt.",
-      "rollPromptBodyWaitRollPrompt": "Warten auf die Aufforderung zum Appell.",
+      "rollPromptBodyWaitRollPrompt": "Warten auf die Aufforderung zur Anwesenheit.",
       "rollPromptBodyMarkedAbsent": "Sie sind derzeit als abwesend markiert. Bitten Sie den Vorsitzenden, Sie als anwesend zu markieren, damit Sie sprechen und abstimmen können.",
       "rollPromptBodyChecking": "Überprüfen Sie Ihren Rollenstatus...",
       "rollPromptSaving": "Sparen...",
@@ -4421,7 +4421,7 @@
       "timerPausesReadOnly": "Timer-Pausen (schreibgeschützt)",
       "speakerList": "Rednerliste",
       "speakerFallback": "Lautsprecher",
-      "rollCallYou": "Appell (Sie)",
+      "rollCallYou": "Anwesenheit (Sie)",
       "fullAnnouncement": "Vollständige Ankündigung",
       "daisAnnouncement": "Dais-Ankündigung",
       "close": "Schließen",
@@ -4470,7 +4470,7 @@
       "saveLimitHelp": "Wendet aktualisierte Grenzwerteinstellungen an, während die Sitzung bereits ausgeführt wird, ohne die Sitzung zu stoppen.",
       "startSession": "Sitzung starten",
       "sidebarUsePrefix": "Verwenden Sie die Seitenleiste für",
-      "rollCall": "Appell",
+      "rollCall": "Anwesenheit",
       "agenda": "Agenda",
       "speakers": "Lautsprecher",
       "formalMotions": "Formelle Anträge",
@@ -4571,7 +4571,7 @@
       "nextSpeaker": "Nächster Redner",
       "speechNotesCurrentSpeaker": "Redenotizen (aktueller Sprecher)",
       "speechNotesHelp": "Notizen sind mit dem Timer-Text „Aktueller Redner“ verknüpft und wenn in der Rednerliste jemand als „Aktuell“ markiert ist, wird seine Delegation als Referenz gespeichert.",
-      "timerFloorLabel": "Timer (Etage):",
+      "timerFloorLabel": "Timer (Seite):",
       "speakerListCurrent": "Rednerliste (aktuell):",
       "noCurrentDelegation": "In der Rednerliste ist keine Delegation als „Aktuell“ markiert.",
       "note": "Notiz",
@@ -4583,7 +4583,7 @@
       "remainingHelpPerSpeaker": "Countdown für den aktuellen Sprecher (wird beim Weiterschalten zurückgesetzt).",
       "remainingHelpNormal": "Countdown für den aktuellen Sprecher (kann kleiner als der Gesamtwert sein).",
       "totalTime": "Gesamtzeit",
-      "totalHelpPerSpeaker": "Pro-Sprecher-Kappe (Nenner auf der Etage; verbleibende Vorab-Nachfüllungen).",
+      "totalHelpPerSpeaker": "Pro-Sprecher-Kappe (Nenner auf der Seite; verbleibende Vorab-Nachfüllungen).",
       "totalHelpNormal": "Volle Länge dieses Timer-Segments (angezeigt nach dem Schrägstrich auf dem Boden).",
       "saveTimer": "Timer speichern",
       "advanceSpeakerReset": "Lautsprecher vorziehen und Uhr zurücksetzen",
@@ -4645,12 +4645,12 @@
       "subtitle": "Konferenzsoftware, die nicht im Weg ist, bis der Hammer sie braucht.",
       "ctaStart": "Veranstalten Sie eine Veranstaltung",
       "ctaJoin": "Nehmen Sie an Ihrer Konferenz teil",
-      "chip1": "Appell → Quorum",
+      "chip1": "Anwesenheit → Quorum",
       "chip2": "GSL und formelle Anträge",
       "chip3": "31 Schnittstellensprachen",
       "previewLabel": "Sitzungsgeschoss",
-      "sticky1": "Appell, Timer und Anträge auf einer Etage.",
-      "sticky2": "Gebaut für Stühle, die das Jonglieren mit Tabs hassen.",
+      "sticky1": "Anwesenheit, Timer und Anträge auf einer Seite.",
+      "sticky2": "Entwickelt für Nutzer, die es hassen, mit Tabs zu jonglieren.",
       "floorEyebrow": "Auf dem Boden"
     },
     "steps": {
@@ -4727,7 +4727,7 @@
       "title": "Speziell für das heutige Model UN entwickelt",
       "paragraph1": "InterMUN ist ein Browser-Arbeitsbereich, der die übliche Mischung aus Tabellenkalkulationen, Gruppenchats und gedruckten Plakaten durch koordinierte Ausschusstools ersetzt.",
       "paragraph2": "Die Vorsitzenden erhalten eine Verfahrenskontrolle, die den tatsächlichen Ablauf der Sitzungen widerspiegelt. Die Delegierten werden neben dem Saal strukturiert vorbereitet. Das Sekretariat sorgt für die veranstaltungsweite Sichtbarkeit, ohne sich über jede einzelne Bewegung im Klaren zu sein.",
-      "paragraph3": "Unabhängig davon, ob Sie eine Konferenz in einem Raum oder ein komplettes Wochenende abhalten, sorgt InterMUN dafür, dass Vorsitzende, Delegierte und Mitarbeiter vom Eröffnungsappell bis zur Abschlusszeremonie aufeinander abgestimmt sind.",
+      "paragraph3": "Unabhängig davon, ob Sie eine Konferenz in einem Raum oder ein komplettes Wochenende abhalten, sorgt InterMUN dafür, dass Vorsitzende, Delegierte und Mitarbeiter von der Eröffnungsanwesenheit bis zur Abschlusszeremonie aufeinander abgestimmt sind.",
       "dreamEyebrow": "Der Traum",
       "footerLabel": "Über {app}"
     },
@@ -4805,9 +4805,9 @@
       "terms": "Bedingungen"
     },
     "preview": {
-      "rollCallLabel": "Appell",
+      "rollCallLabel": "Anwesenheit",
       "rollCallHint": "Tippen Sie auf eine Delegation, um die Anwesenheit zu ändern.",
-      "rollCallCycleAria": "Zyklusappellstatus für {country}",
+      "rollCallCycleAria": "Anwesenheitsstatus wechseln für {country}",
       "quorumLive": "Quorum {present} / {total}",
       "speakersLabel": "Liste der Redner",
       "speakersHint": "Probieren Sie den Floor-Timer aus",
@@ -4851,10 +4851,10 @@
         "eyebrow": "Podium · Stuhlsteuerung",
         "title": "Lassen Sie die Kammer laufen",
         "titleEmphasis": "Verfahrenspräzision.",
-        "subtitle": "Alle Tools, die das Podium benötigt – vom Appell bis zur Abschlussverleihung – in einem einzigen Sitzungsarbeitsbereich, der für echten Ausschussrhythmus konzipiert ist.",
+        "subtitle": "Alle Tools, die das Podium benötigt – von der Anwesenheit bis zur Abschlussverleihung – in einem einzigen Sitzungsarbeitsbereich, der für echten Ausschussrhythmus konzipiert ist.",
         "intro": "Bei jedem Abschnitt unten handelt es sich um eine Live-Demo. Tippen Sie auf Anwesenheitsschaltflächen, ordnen Sie Anträge neu, starten Sie Timer und bewerten Sie Delegierte, um zu sehen, wie InterMUN das Sitzungsverfahren widerspiegelt.",
         "chip1": "6 interaktive Demos",
-        "chip2": "Quorumsbewusster Appell",
+        "chip2": "Quorumsbewusste Anwesenheit",
         "chip3": "Antragspriorität und Abstimmung",
         "ctaTitle": "Bereit zum Vorsitz",
         "ctaTitleEmphasis": "Deine nächste Sitzung?",
@@ -4870,13 +4870,13 @@
         "sections": {
           "rollCall": {
             "index": "§ ICH",
-            "eyebrow": "Appell",
+            "eyebrow": "Anwesenheit",
             "title": "Anwesenheit, die das Quorum in Echtzeit steigert",
             "description": "Markieren Sie jede Delegation als anwesend, als anwesend und abstimmend oder als abwesend. Die Quorums- und Abstimmungszahlen werden sofort aktualisiert, sodass das Podium immer weiß, ob die Kammer fortfahren kann.",
             "bullet1": "Drei Anwesenheitszustände entsprechen dem UN-Verfahren",
             "bullet2": "Live-Quorum-Abzeichen werden beim Eintreffen der Delegierten umgedreht",
             "bullet3": "Anwesenheits- und Abstimmungsauszählung getrennt von Stimmenthaltungsberechtigten",
-            "previewLabel": "Appell"
+            "previewLabel": "Anwesenheit"
           },
           "speakers": {
             "index": "§ II",
@@ -5035,7 +5035,7 @@
             "description": "Sehen Sie, welche Kammern gerade tagen und welche in Bereitschaft sind. Wählen Sie einen Ausschuss aus, um eine Vorschau auf die Erfahrungen der Vorsitzenden und Delegierten im Sekretariat zu erhalten.",
             "bullet1": "Live-/Standby-Anzeige pro Ausschuss",
             "bullet2": "Ein Vorstand für ECOSOC, Recht, WHO, Presse",
-            "bullet3": "Informieren Sie sich in der vollständigen App über Appell und Timer",
+            "bullet3": "Informieren Sie sich in der vollständigen App über Anwesenheit und Timer",
             "previewLabel": "Aufsichtsgremium"
           },
           "allocations": {
