@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "Open de instellingen voor uiterlijk en toegankelijkheid",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "Toegankelijkheid & kleur"
   }
 }

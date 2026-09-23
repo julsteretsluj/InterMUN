@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "開啟外觀和輔助使用設定",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "輔助功能和顏色"
   }
 }

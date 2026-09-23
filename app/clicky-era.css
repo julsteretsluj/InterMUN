@@ -1,19 +1,24 @@
 /* Clicky-era design system — heyclicky / wispr / ohhmy / momento / clico inspired.
- * Soft desktop metaphor + calm product chrome. Applied site-wide via tokens. */
+ * Soft desktop metaphor + calm product chrome. Applied site-wide via tokens.
+ * Accent colour comes from the theme picker (--accent / --accent-bright on <html>). */
 
 :root {
-  --clicky-paper: #f7f6f2;
-  --clicky-paper-deep: #efece4;
+  --clicky-paper-base: #f7f6f2;
+  --clicky-paper-deep-base: #efece4;
+  --clicky-window-base: #ffffff;
+  --clicky-paper: color-mix(in srgb, var(--accent) 5%, var(--clicky-paper-base));
+  --clicky-paper-deep: color-mix(in srgb, var(--accent) 8%, var(--clicky-paper-deep-base));
   --clicky-ink: #121212;
   --clicky-ink-soft: #5c5c57;
   --clicky-ink-faint: #9a9890;
   --clicky-muted: #9a9890;
-  --clicky-line: rgba(18, 18, 18, 0.1);
-  --clicky-blue: #007aff;
-  --clicky-blue-hover: #0066d6;
+  --clicky-line: color-mix(in srgb, var(--accent) 14%, rgba(18, 18, 18, 0.1));
+  /* Follow theme accent (set by theme-init / ThemeSettingsPanel) */
+  --clicky-blue: var(--accent);
+  --clicky-blue-hover: var(--accent-bright);
   --clicky-coral: #ff5f57;
   --clicky-mint: #28c840;
-  --clicky-window: #ffffff;
+  --clicky-window: color-mix(in srgb, var(--accent) 3%, var(--clicky-window-base));
   /* Always-dark inverted bands (about, footer, auth brand) — never remapped with --clicky-ink */
   --clicky-band: #121212;
   --clicky-on-band: #f7f6f2;
@@ -24,7 +29,13 @@
   --clicky-radius-sm: 10px;
   --clicky-radius: 14px;
   --clicky-radius-lg: 22px;
-  --clicky-dot: radial-gradient(circle, rgba(18, 18, 18, 0.22) 1.35px, transparent 1.6px);
+  --clicky-dot: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 55%, #1d1d1f) 1.5px,
+    transparent 1.85px
+  );
+  --clicky-soft-fill: color-mix(in srgb, var(--accent) 12%, transparent);
+  --clicky-soft-fill-strong: color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 /* —— Global canvas —— */
@@ -38,13 +49,12 @@ html {
   --color-text: var(--clicky-ink);
   --marketing-ink: var(--clicky-ink);
   --marketing-ink-soft: var(--clicky-ink-soft);
-  --marketing-chamber-elevated: #fffef9;
+  --marketing-chamber-elevated: color-mix(in srgb, var(--accent) 4%, #fffef9);
   --marketing-chamber-deep: var(--clicky-paper-deep);
   --marketing-hairline: var(--clicky-line);
   --hairline: var(--clicky-line);
-  --accent: var(--clicky-blue);
-  --brand-accent: var(--clicky-blue);
-  --brand-accent-bright: var(--clicky-blue-hover);
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
 }
 
 /* Sitewide clicky paper + dot grid (marketing, auth, gates, dashboard) */
@@ -68,23 +78,30 @@ html.dark body,
 html.dark .mun-apple-site,
 html.dark .marketing-shell,
 html.dark .mun-clicky-auth {
-  --clicky-paper: #12141a;
-  --clicky-paper-deep: #1a1d26;
+  --clicky-paper-base: #12141a;
+  --clicky-paper-deep-base: #1a1d26;
+  --clicky-window-base: #1c1f28;
+  --clicky-paper: color-mix(in srgb, var(--accent) 11%, var(--clicky-paper-base));
+  --clicky-paper-deep: color-mix(in srgb, var(--accent) 15%, var(--clicky-paper-deep-base));
   --clicky-ink: #f5f5f7;
   --clicky-ink-soft: #a1a1a6;
   --clicky-ink-faint: #6e6e73;
   --clicky-muted: #8e8e93;
-  --clicky-line: rgba(255, 255, 255, 0.12);
-  --clicky-window: #1c1f28;
-  --clicky-blue: #0a84ff;
-  --clicky-blue-hover: #2997ff;
+  --clicky-line: color-mix(in srgb, var(--accent) 22%, rgba(255, 255, 255, 0.12));
+  --clicky-window: color-mix(in srgb, var(--accent) 8%, var(--clicky-window-base));
   --clicky-band: #0a0b0e;
   --clicky-on-band: #f5f5f7;
   --clicky-on-band-soft: rgba(245, 245, 247, 0.75);
   --clicky-on-band-faint: rgba(245, 245, 247, 0.45);
   --clicky-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.4);
   --clicky-shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
-  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.35px, transparent 1.6px);
+  --clicky-dot: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 70%, #ffffff) 1.35px,
+    transparent 1.6px
+  );
+  --clicky-soft-fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  --clicky-soft-fill-strong: color-mix(in srgb, var(--accent) 24%, transparent);
   --dashboard-cream: var(--clicky-paper);
   --dashboard-card: var(--clicky-window);
   --dashboard-shadow: var(--clicky-shadow);
@@ -93,9 +110,8 @@ html.dark .mun-clicky-auth {
   --navy: var(--clicky-ink);
   --navy-deep: var(--clicky-ink);
   --hairline: var(--clicky-line);
-  --accent: var(--clicky-blue);
-  --brand-accent: var(--clicky-blue);
-  --brand-accent-bright: var(--clicky-blue-hover);
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
   --marketing-ink: var(--clicky-ink);
   --marketing-ink-soft: var(--clicky-ink-soft);
   --marketing-chamber-deep: var(--clicky-paper-deep);
@@ -124,7 +140,9 @@ html.dark .clicky-pill-ghost {
 }
 
 html.dark .clicky-pill-ghost:hover {
-  background: var(--clicky-paper-deep);
+  background: var(--clicky-soft-fill);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--clicky-line));
+  color: var(--accent-bright);
 }
 
 html.dark .clicky-pill-primary {
@@ -254,7 +272,7 @@ html.dark .clicky-band .clicky-on-band-faint {
 }
 
 .clicky-sticky--blue {
-  background: #d7ebff;
+  background: color-mix(in srgb, var(--accent) 28%, #ffffff);
   transform: rotate(1.2deg);
 }
 
@@ -271,13 +289,13 @@ html.dark .clicky-band .clicky-on-band-faint {
 }
 
 .clicky-pill-primary {
-  background: var(--clicky-blue);
+  background: var(--accent);
   color: #fff;
   border: 1px solid transparent;
 }
 
 .clicky-pill-primary:hover {
-  background: var(--clicky-blue-hover);
+  background: var(--accent-bright);
 }
 
 .clicky-pill-ghost {
@@ -287,7 +305,9 @@ html.dark .clicky-band .clicky-on-band-faint {
 }
 
 .clicky-pill-ghost:hover {
-  background: var(--clicky-paper-deep);
+  background: var(--clicky-soft-fill);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--clicky-line));
+  color: var(--accent);
 }
 
 .clicky-section-title {
@@ -334,12 +354,10 @@ html.dark .clicky-band .clicky-on-band-faint {
   background: var(--clicky-window) !important;
 }
 
-/* Sitewide product chrome → clicky */
+/* Sitewide product chrome → clicky (accent follows theme picker on <html>) */
 .mun-apple-site {
-  --accent: var(--clicky-blue);
-  --accent-bright: #5ac8fa;
-  --brand-accent: var(--clicky-blue);
-  --brand-accent-bright: #5ac8fa;
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
   --hairline: var(--clicky-line);
   --dashboard-cream: var(--clicky-paper);
   --dashboard-card: var(--clicky-window);
@@ -352,12 +370,12 @@ html.dark .clicky-band .clicky-on-band-faint {
 .mun-apple-site .mun-apple-btn-filled-blue,
 .mun-apple-site .mun-apple-btn-primary,
 .mun-apple-site .bg-brand-accent {
-  background-color: var(--clicky-blue) !important;
+  background-color: var(--accent) !important;
 }
 
 .mun-apple-site .mun-apple-btn-filled-blue:hover:not(:disabled),
 .mun-apple-site .mun-apple-btn-primary:hover:not(:disabled) {
-  background-color: var(--clicky-blue-hover) !important;
+  background-color: var(--accent-bright) !important;
 }
 
 .mun-apple-site .mun-apple-btn,
@@ -589,14 +607,14 @@ html.dark .clicky-band .clicky-on-band-faint {
   font-weight: 600;
   letter-spacing: -0.015em;
   text-transform: lowercase;
-  background: var(--clicky-blue);
+  background: var(--accent);
   color: #fff;
   border: 1px solid transparent;
   transition: background 200ms var(--ease-apple);
 }
 
 .clicky-btn-primary:hover:not(:disabled) {
-  background: var(--clicky-blue-hover);
+  background: var(--accent-bright);
 }
 
 .clicky-btn-primary:disabled {
@@ -617,12 +635,10 @@ html.dark .clicky-band .clicky-on-band-faint {
 
 .clicky-preview-body,
 .clicky-window {
-  --accent: var(--clicky-blue);
-  --accent-bright: #5ac8fa;
-  --brand-accent: var(--clicky-blue);
-  --brand-accent-bright: #5ac8fa;
-  --logo-magenta: var(--clicky-blue);
-  --system-pink: var(--clicky-blue);
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
+  --logo-magenta: var(--accent);
+  --system-pink: var(--accent);
   --hairline: var(--clicky-line);
   --material-thin: var(--clicky-paper);
   --material-thick: var(--clicky-paper-deep);
@@ -641,7 +657,7 @@ html.dark .clicky-band .clicky-on-band-faint {
 
 .clicky-preview-body .bg-brand-accent,
 .clicky-window .bg-brand-accent {
-  background-color: var(--clicky-blue) !important;
+  background-color: var(--accent) !important;
 }
 
 .clicky-preview-body .text-brand-navy,
@@ -769,15 +785,14 @@ html.dark .clicky-band .clicky-on-band-faint {
 
 /* Auth / gate form fields on clicky paper */
 .mun-clicky-auth {
-  --accent: var(--clicky-blue);
-  --brand-accent: var(--clicky-blue);
-  --logo-magenta: var(--clicky-blue);
-  --system-pink: var(--clicky-blue);
+  --brand-accent: var(--accent);
+  --logo-magenta: var(--accent);
+  --system-pink: var(--accent);
 }
 
 .mun-clicky-auth-card .bg-brand-accent,
 .mun-clicky-auth-card .rounded-full.bg-brand-accent {
-  background-color: var(--clicky-blue) !important;
+  background-color: var(--accent) !important;
 }
 
 .mun-clicky-auth-card h1,

@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "উপস্থিতি এবং অ্যাক্সেসযোগ্যতা সেটিংস খুলুন",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "অ্যাক্সেসযোগ্যতা এবং রঙ"
   }
 }

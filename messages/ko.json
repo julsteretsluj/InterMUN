@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "모양 및 접근성 설정 열기",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "접근성 및 색상"
   }
 }

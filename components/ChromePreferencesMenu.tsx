@@ -5,7 +5,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ChevronDown, Settings2 } from "lucide-react";
+import { ChevronDown, Settings } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AccessibilitySettingsPanel } from "@/components/AccessibilitySettingsPanel";
 import { ThemeSettingsPanel } from "@/components/ThemeSettingsPanel";
@@ -56,19 +56,22 @@ type AccountProps = {
 };
 
 /**
- * Single preferences / account disclosure for chrome surfaces.
- * Keeps language, theme, and accessibility available without stacking toolbar icons.
+ * Preferences / account disclosure for chrome surfaces.
+ * Language lives in a separate control; this menu covers appearance, colour, and accessibility.
  */
 export function ChromePreferencesMenu({
   className,
   compact = false,
   account,
+  includeLanguage = false,
   extraLinks,
   footer,
 }: {
   className?: string;
   compact?: boolean;
   account?: AccountProps;
+  /** Prefer a standalone LanguageSwitcher in the toolbar; keep false by default. */
+  includeLanguage?: boolean;
   extraLinks?: { href: string; label: string }[];
   footer?: ReactNode;
 }) {
@@ -118,7 +121,7 @@ export function ChromePreferencesMenu({
               <ChevronDown className="hidden h-4 w-4 shrink-0 text-brand-muted sm:block" strokeWidth={1.75} aria-hidden />
             </>
           ) : (
-            <Settings2 className="size-4" strokeWidth={2} aria-hidden />
+            <Settings className="size-4" strokeWidth={2} aria-hidden />
           )}
         </span>
       </ApplePopoverTrigger>
@@ -177,15 +180,20 @@ export function ChromePreferencesMenu({
             </div>
           ) : null}
 
-          <div className="space-y-2">
-            <p className="tag tag-neutral mb-0">{tLang("label")}</p>
-            <div className="rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2">
-              <LanguageSwitcher className="flex w-full min-w-0" />
+          {includeLanguage ? (
+            <div className="space-y-2">
+              <p className="tag tag-neutral mb-0">{tLang("label")}</p>
+              <div className="rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2">
+                <LanguageSwitcher className="flex w-full min-w-0" />
+              </div>
             </div>
-          </div>
+          ) : null}
 
-          <ThemeSettingsPanel />
-          <AccessibilitySettingsPanel />
+          <div className="space-y-3">
+            <p className="tag tag-neutral mb-0">{t("appearanceAndAccess")}</p>
+            <ThemeSettingsPanel />
+            <AccessibilitySettingsPanel />
+          </div>
 
           {footer}
 

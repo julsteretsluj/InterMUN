@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ChromePreferencesMenu } from "@/components/ChromePreferencesMenu";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { useTranslations } from "next-intl";
 import { switchSmtToSecretariatAction } from "@/app/actions/smtDashboardSurface";
 
@@ -81,6 +82,9 @@ export function DashboardTopBar({
           {notifications != null ? (
             <div className="flex shrink-0 items-center">{notifications}</div>
           ) : null}
+          <div className="inline-flex h-8 items-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-1 sm:h-9 sm:px-1.5">
+            <LanguageSwitcher compact className="flex min-w-0" />
+          </div>
           <ChromePreferencesMenu
             account={{
               userName,

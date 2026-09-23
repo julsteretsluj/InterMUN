@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "Ανοίξτε τις ρυθμίσεις εμφάνισης και προσβασιμότητας",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "Προσβασιμότητα & χρώμα"
   }
 }

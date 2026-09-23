@@ -578,9 +578,10 @@
     "selectorAria": "Select language"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "Open appearance and accessibility settings",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "Accessibility & colour"
   },
   "dashboardTopBar": {
     "delegateHub": "Delegate hub",

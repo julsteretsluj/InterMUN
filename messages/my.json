@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "အသွင်အပြင်နှင့် ဝင်ရောက်နိုင်မှု ဆက်တင်များကို ဖွင့်ပါ။",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "အသုံးပြုနိုင်မှုနှင့် အရောင်"
   }
 }

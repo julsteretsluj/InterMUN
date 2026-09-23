@@ -9043,23 +9043,30 @@ html body .mun-brand-wordmark * {
 
 /* —— Clicky dark mode: final override (wins over earlier html.dark rules) —— */
 html.dark {
-  --clicky-paper: #12141a;
-  --clicky-paper-deep: #1a1d26;
+  --clicky-paper-base: #12141a;
+  --clicky-paper-deep-base: #1a1d26;
+  --clicky-window-base: #1c1f28;
+  --clicky-paper: color-mix(in srgb, var(--accent) 11%, var(--clicky-paper-base));
+  --clicky-paper-deep: color-mix(in srgb, var(--accent) 15%, var(--clicky-paper-deep-base));
   --clicky-ink: #f5f5f7;
   --clicky-ink-soft: #a1a1a6;
   --clicky-ink-faint: #6e6e73;
   --clicky-muted: #8e8e93;
-  --clicky-line: rgba(255, 255, 255, 0.12);
-  --clicky-window: #1c1f28;
-  --clicky-blue: #0a84ff;
-  --clicky-blue-hover: #2997ff;
+  --clicky-line: color-mix(in srgb, var(--accent) 22%, rgba(255, 255, 255, 0.12));
+  --clicky-window: color-mix(in srgb, var(--accent) 8%, var(--clicky-window-base));
   --clicky-band: #0a0b0e;
   --clicky-on-band: #f5f5f7;
   --clicky-on-band-soft: rgba(245, 245, 247, 0.75);
   --clicky-on-band-faint: rgba(245, 245, 247, 0.45);
   --clicky-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.4);
   --clicky-shadow-lg: 0 2px 0 rgba(0, 0, 0, 0.3), 0 24px 64px rgba(0, 0, 0, 0.5);
-  --clicky-dot: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.35px, transparent 1.6px);
+  --clicky-dot: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 70%, #ffffff) 1.35px,
+    transparent 1.6px
+  );
+  --clicky-soft-fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  --clicky-soft-fill-strong: color-mix(in srgb, var(--accent) 24%, transparent);
   --dashboard-cream: var(--clicky-paper);
   --dashboard-card: var(--clicky-window);
   --dashboard-shadow: var(--clicky-shadow);
@@ -9069,9 +9076,8 @@ html.dark {
   --brand-navy: var(--clicky-ink);
   --brand-muted: var(--clicky-ink-soft);
   --hairline: var(--clicky-line);
-  --accent: var(--clicky-blue);
-  --brand-accent: var(--clicky-blue);
-  --brand-accent-bright: var(--clicky-blue-hover);
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
   --apple-bg-primary: var(--clicky-paper);
   --apple-bg-secondary: var(--clicky-paper-deep);
   --apple-bg-tertiary: var(--clicky-window);
@@ -9100,11 +9106,23 @@ html.dark .clicky-pill.clicky-pill-ghost {
   border-color: var(--clicky-line) !important;
 }
 
+html.dark .clicky-pill-ghost:hover,
+html.dark .clicky-pill.clicky-pill-ghost:hover {
+  background: var(--clicky-soft-fill) !important;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--clicky-line)) !important;
+  color: var(--accent-bright) !important;
+}
+
 html.dark .clicky-pill-primary,
 html.dark .clicky-pill.clicky-pill-primary,
 html.dark .clicky-btn-primary {
-  background: var(--clicky-blue) !important;
+  background: var(--accent) !important;
   color: #fff !important;
+}
+
+html.dark .clicky-pill-primary:hover,
+html.dark .clicky-btn-primary:hover:not(:disabled) {
+  background: var(--accent-bright) !important;
 }
 
 html.dark .clicky-sticky,

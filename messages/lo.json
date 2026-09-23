@@ -5862,8 +5862,9 @@
     "notesPlaceholder": "Chair notes…"
   },
   "chromePreferences": {
-    "openAria": "Open preferences",
+    "openAria": "ເປີດຮູບລັກສະນະ ແລະການຕັ້ງຄ່າການຊ່ວຍເຂົ້າເຖິງ",
     "accountAria": "Account and preferences",
-    "profile": "Profile"
+    "profile": "Profile",
+    "appearanceAndAccess": "ການເຂົ້າເຖິງ & ສີ"
   }
 }

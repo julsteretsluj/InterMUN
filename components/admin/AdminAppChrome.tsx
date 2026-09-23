@@ -5,6 +5,7 @@
 
 import { usePathname } from "next/navigation";
 import { ChromePreferencesMenu } from "@/components/ChromePreferencesMenu";
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { AppleProductPage } from "@/components/ui/AppleProductPage";
 import { AppleSidebar, AppleSidebarRow, AppleSidebarSection } from "@/components/ui/AppleSidebar";
 import { AppleWindowWithSidebar } from "@/components/ui/AppleWindow";
@@ -46,16 +47,21 @@ export function AdminAppChrome({
         className="dashboard-app-frame bg-[var(--clicky-window)]"
         sidebarClassName="hidden flex-col bg-[color:color-mix(in_srgb,var(--clicky-paper)_82%,var(--clicky-window))] md:flex"
         trailing={
-          <ChromePreferencesMenu
-            account={{
-              userName: "Admin",
-              userEmail: "",
-              profileHref: "/admin",
-              conferenceLine: activeEventName
-                ? [activeEventName, activeEventCode].filter(Boolean).join(" · ")
-                : null,
-            }}
-          />
+          <div className="flex items-center gap-1.5">
+            <div className="inline-flex h-8 items-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-1">
+              <LanguageSwitcher compact className="flex min-w-0" />
+            </div>
+            <ChromePreferencesMenu
+              account={{
+                userName: "Admin",
+                userEmail: "",
+                profileHref: "/admin",
+                conferenceLine: activeEventName
+                  ? [activeEventName, activeEventCode].filter(Boolean).join(" · ")
+                  : null,
+              }}
+            />
+          </div>
         }
         sidebar={
           <AppleSidebar className="h-full min-h-0 w-full" aria-label="Admin navigation">
