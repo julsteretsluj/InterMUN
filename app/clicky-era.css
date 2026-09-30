@@ -267,6 +267,12 @@ html.dark .clicky-band .clicky-on-band-faint {
   user-select: none;
 }
 
+/* On inverted bands, kaomoji must stay light — never inherit paper ink. */
+.mun-clicky-auth-brand .clicky-kaomoji,
+.clicky-band .clicky-kaomoji {
+  color: var(--clicky-on-band-faint);
+}
+
 .clicky-sticky {
   border-radius: 4px 12px 12px 12px;
   background: #fff7a8;
@@ -437,6 +443,22 @@ html.dark .clicky-band .clicky-on-band-faint {
   }
 }
 
+/* Beat `.mun-apple-site h1 { color: var(--apple-label) }` dark ink on the black band. */
+.mun-clicky-auth-brand,
+.mun-clicky-auth-brand :is(h1, h2, h3, h4, h5, h6, p, li, span, a) {
+  color: var(--clicky-on-band) !important;
+}
+
+.mun-clicky-auth-brand .clicky-on-band-soft,
+.mun-clicky-auth-brand :is(p, ul, li):not(.clicky-kaomoji) {
+  color: var(--clicky-on-band-soft) !important;
+}
+
+.mun-clicky-auth-brand .clicky-on-band-faint,
+.mun-clicky-auth-brand .clicky-kaomoji {
+  color: var(--clicky-on-band-faint) !important;
+}
+
 .mun-clicky-auth-brand::before {
   content: "";
   position: absolute;
@@ -452,12 +474,50 @@ html.dark .clicky-band .clicky-on-band-faint {
   flex-direction: column;
   justify-content: center;
   padding: 1.5rem 1.25rem 2.5rem;
+  /* Cover parent dots with a softer grid so chrome + muted copy stay readable. */
+  background-color: var(--clicky-paper);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 18%, rgba(18, 18, 18, 0.22)) 1.05px,
+    transparent 1.3px
+  );
+  background-size: 22px 22px;
+  color: var(--clicky-ink);
+}
+
+html.dark .mun-clicky-auth-form {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 40%, rgba(255, 255, 255, 0.55)) 1.05px,
+    transparent 1.3px
+  );
 }
 
 @media (min-width: 640px) {
   .mun-clicky-auth-form {
     padding: 2.5rem 3rem;
   }
+}
+
+/* Auth form chrome (back link, language, settings) — primary ink, not soft grey. */
+.mun-clicky-auth-chrome,
+.mun-clicky-auth-chrome-link {
+  color: var(--clicky-ink) !important;
+}
+
+.mun-clicky-auth-chrome-link:hover {
+  color: var(--accent) !important;
+}
+
+.mun-clicky-auth-chrome .text-brand-navy,
+.mun-clicky-auth-chrome .text-brand-muted,
+.mun-clicky-auth-chrome button,
+.mun-clicky-auth-chrome select {
+  color: var(--clicky-ink) !important;
+}
+
+.mun-clicky-auth-card .text-brand-muted {
+  color: color-mix(in srgb, var(--clicky-ink) 68%, var(--clicky-ink-soft)) !important;
 }
 
 .mun-clicky-auth-card {

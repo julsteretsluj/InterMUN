@@ -9192,45 +9192,65 @@ html.dark .mun-apple-btn-ghost {
   border-color: var(--clicky-line) !important;
 }
 
-/* Inverted bands must stay dark in both themes (about / footer / feature CTA) */
-.clicky-band {
+/* Inverted bands must stay dark in both themes (about / footer / feature CTA / auth brand) */
+.clicky-band,
+.mun-clicky-auth-brand {
   background-color: #121212 !important;
   background-image: none !important;
   color: #f7f6f2 !important;
 }
 
-/* Beat .mun-apple-site h2 { color: var(--apple-label) } on inverted bands */
-.clicky-band :is(h1, h2, h3, h4, h5, h6) {
+/* Beat .mun-apple-site h1/h2 { color: var(--apple-label) } on inverted bands */
+.clicky-band :is(h1, h2, h3, h4, h5, h6),
+.mun-clicky-auth-brand :is(h1, h2, h3, h4, h5, h6) {
   color: #f7f6f2 !important;
 }
 
-.clicky-band .clicky-on-band-soft {
+.clicky-band .clicky-on-band-soft,
+.mun-clicky-auth-brand .clicky-on-band-soft,
+.mun-clicky-auth-brand :is(p, li):not(.clicky-kaomoji):not(.clicky-on-band-faint) {
   color: rgba(247, 246, 242, 0.75) !important;
 }
 
-.clicky-band .clicky-on-band-faint {
-  color: rgba(247, 246, 242, 0.45) !important;
+.clicky-band .clicky-on-band-faint,
+.mun-clicky-auth-brand .clicky-on-band-faint,
+.mun-clicky-auth-brand .clicky-kaomoji {
+  color: rgba(247, 246, 242, 0.5) !important;
 }
 
 .clicky-band a:hover {
   color: #ffffff !important;
 }
 
-html.dark .clicky-band {
+html.dark .clicky-band,
+html.dark .mun-clicky-auth-brand {
   background-color: #0a0b0e !important;
   color: #f5f5f7 !important;
 }
 
-html.dark .clicky-band :is(h1, h2, h3, h4, h5, h6) {
+html.dark .clicky-band :is(h1, h2, h3, h4, h5, h6),
+html.dark .mun-clicky-auth-brand :is(h1, h2, h3, h4, h5, h6) {
   color: #f5f5f7 !important;
 }
 
-html.dark .clicky-band .clicky-on-band-soft {
+html.dark .clicky-band .clicky-on-band-soft,
+html.dark .mun-clicky-auth-brand .clicky-on-band-soft,
+html.dark .mun-clicky-auth-brand :is(p, li):not(.clicky-kaomoji):not(.clicky-on-band-faint) {
   color: rgba(245, 245, 247, 0.75) !important;
 }
 
-html.dark .clicky-band .clicky-on-band-faint {
-  color: rgba(245, 245, 247, 0.45) !important;
+html.dark .clicky-band .clicky-on-band-faint,
+html.dark .mun-clicky-auth-brand .clicky-on-band-faint,
+html.dark .mun-clicky-auth-brand .clicky-kaomoji {
+  color: rgba(245, 245, 247, 0.5) !important;
+}
+
+/* Auth form chrome — keep primary ink over soft grey / inherited muted */
+html.dark .mun-clicky-auth-chrome,
+html.dark .mun-clicky-auth-chrome-link,
+.mun-clicky-auth-chrome,
+.mun-clicky-auth-chrome-link {
+  color: var(--clicky-ink) !important;
 }
 
 
