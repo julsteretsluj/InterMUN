@@ -40,7 +40,6 @@ export type ChairNavItemKey =
   | "session"
   | "agenda"
   | "speakers"
-  | "openingSpeech"
   | "formalMotions"
   | "resolutions"
   | "amendments"
@@ -118,11 +117,6 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "🎤",
   },
   {
-    href: "/chair/session/opening-speech",
-    itemKey: "openingSpeech",
-    emoji: "🎙️",
-  },
-  {
     href: "/chair/session/motions",
     itemKey: "formalMotions",
     emoji: "📜",
@@ -166,6 +160,14 @@ function navItemIsActive(pathname: string, item: ChairNavItem): boolean {
   const key = item.activeMatch ?? item.href;
   if (key === "/profile") {
     return pathname === "/profile";
+  }
+  // Opening speeches lives under Speakers as a sub-tab (deep link still works).
+  if (
+    item.itemKey === "speakers" &&
+    (pathname === "/chair/session/opening-speech" ||
+      pathname.startsWith("/chair/session/opening-speech/"))
+  ) {
+    return true;
   }
   return pathname === key || pathname.startsWith(`${key}/`);
 }

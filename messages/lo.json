@@ -454,6 +454,8 @@
     "agendaSetDay1Only": "Agenda set. Live topic is {first}.",
     "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker.",
     "openingSpeechExtendedToSeconds": "Opening speech time extended to {seconds} seconds per speaker.",
+    "speakersTabQueue": "Speaker list",
+    "speakersTabOpening": "ກ່າວເປີດ",
     "presetInterview": "Motion for an Interview",
     "presetInterviewTitle": "Motion for an Interview Period",
     "presetPressConference": "Motion for a Press Conference",

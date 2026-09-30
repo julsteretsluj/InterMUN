@@ -300,6 +300,7 @@ export type SessionFloorSection =
   | "all";
 
 export type TimerWorkflowTab = "setup" | "clock" | "notes" | "log";
+export type SpeakersWorkflowTab = "queue" | "opening";
 
 export function SessionControlClient({
   conferenceId,
@@ -311,6 +312,7 @@ export function SessionControlClient({
   committeeLabelRaw,
   activeSection = "all",
   initialTimerWorkflowTab,
+  initialSpeakersWorkflowTab,
 }: {
   conferenceId: string;
   conferenceTitle: string;
@@ -327,6 +329,8 @@ export function SessionControlClient({
   activeSection?: SessionFloorSection;
   /** Open a specific timer workflow tab (e.g. speech notes deep link). */
   initialTimerWorkflowTab?: TimerWorkflowTab;
+  /** Open a specific speakers sub-tab (e.g. opening speeches deep link). */
+  initialSpeakersWorkflowTab?: SpeakersWorkflowTab;
 }) {
   const tTopics = useTranslations("agendaTopics");
   const tTimer = useTranslations("session.timerPage");
@@ -446,6 +450,10 @@ export function SessionControlClient({
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
   const [timerWorkflowTab, setTimerWorkflowTab] = useState<TimerWorkflowTab>(
     initialTimerWorkflowTab ?? "setup"
+  );
+  const [speakersWorkflowTab, setSpeakersWorkflowTab] = useState<SpeakersWorkflowTab>(
+    initialSpeakersWorkflowTab ??
+      (activeSection === "opening-speech" ? "opening" : "queue")
   );
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
@@ -3018,17 +3026,29 @@ export function SessionControlClient({
   const show = (id: Exclude<SessionFloorSection, "all">) =>
     activeSection === "all" || activeSection === id;
   const dedicatedPage = activeSection !== "all";
+  const speakersDedicated =
+    activeSection === "speakers" || activeSection === "opening-speech";
+  const showOpeningSpeechPanel =
+    activeSection === "all" || (speakersDedicated && speakersWorkflowTab === "opening");
+  const showSpeakersQueuePanel =
+    activeSection === "all" || (speakersDedicated && speakersWorkflowTab === "queue");
   const boundVoteItemIdTrimmed = timer.boundVoteItemId.trim();
   const activeMotionForRecordedVotes = boundVoteItemIdTrimmed
     ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed) ?? null
     : openMotion;
 
-  // Jump to the discipline tab when that section is focused (adjust state during render).
+  // Jump to the discipline / opening tabs when those sections are focused (adjust state during render).
   const [prevActiveSection, setPrevActiveSection] = useState<typeof activeSection | null>(null);
   if (activeSection !== prevActiveSection) {
     setPrevActiveSection(activeSection);
     if (activeSection === "discipline") {
       setMotionWorkflowTab("discipline");
+    }
+    if (activeSection === "opening-speech") {
+      setSpeakersWorkflowTab("opening");
+    }
+    if (activeSection === "speakers" && !initialSpeakersWorkflowTab) {
+      setSpeakersWorkflowTab("queue");
     }
   }
 
@@ -4836,34 +4856,68 @@ export function SessionControlClient({
       </section>
       ) : null}
 
-      {show("opening-speech") ? (
-        <ChairOpeningSpeechPanel
-          conferenceId={floorConferenceId}
-          allocations={allocations}
-          isEuParliament={procedureProfile === "eu_parliament"}
-          isCrisisCommittee={isCrisisCommitteeSession}
-          autoSetupOnMount={activeSection === "opening-speech"}
-          includeSpeakerQueue={activeSection === "opening-speech"}
-          speakerListPromptKind={
-            activeSection === "opening-speech" ? speakerListChairPrompt : null
-          }
-          onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
-          onNotify={(text) => setMsg(text)}
-        />
-      ) : null}
+      {speakersDedicated || show("speakers") || show("opening-speech") ? (
+        <div ref={speakersSectionRef} className="space-y-4">
+          {speakersDedicated ? (
+            <div className="flex flex-wrap gap-2">
+              {(
+                [
+                  ["queue", tSessionControl("speakersTabQueue")],
+                  ["opening", tSessionControl("speakersTabOpening")],
+                ] as const
+              ).map(([id, label]) => {
+                const active = speakersWorkflowTab === id;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setSpeakersWorkflowTab(id)}
+                    className={[
+                      "rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
+                      active
+                        ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
+                        : "border-[var(--hairline)] bg-[var(--material-thin)] text-brand-muted hover:text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-black/20",
+                    ].join(" ")}
+                    aria-pressed={active}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
 
-      {show("speakers") ? (
-        <ChairSpeakerQueuePanel
-          ref={speakersSectionRef}
-          conferenceId={floorConferenceId}
-          allocations={allocations}
-          variant="session"
-          isEuParliament={procedureProfile === "eu_parliament"}
-          isCrisisCommittee={isCrisisCommitteeSession}
-          speakerListPromptKind={speakerListChairPrompt}
-          onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
-          onNotify={(text) => setMsg(text)}
-        />
+          {showOpeningSpeechPanel ? (
+            <ChairOpeningSpeechPanel
+              conferenceId={floorConferenceId}
+              allocations={allocations}
+              isEuParliament={procedureProfile === "eu_parliament"}
+              isCrisisCommittee={isCrisisCommitteeSession}
+              autoSetupOnMount={speakersDedicated && speakersWorkflowTab === "opening"}
+              includeSpeakerQueue={speakersDedicated && speakersWorkflowTab === "opening"}
+              speakerListPromptKind={
+                speakersDedicated && speakersWorkflowTab === "opening"
+                  ? speakerListChairPrompt
+                  : null
+              }
+              onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
+              onNotify={(text) => setMsg(text)}
+            />
+          ) : null}
+
+          {showSpeakersQueuePanel ? (
+            <ChairSpeakerQueuePanel
+              conferenceId={floorConferenceId}
+              allocations={allocations}
+              variant="session"
+              isEuParliament={procedureProfile === "eu_parliament"}
+              isCrisisCommittee={isCrisisCommitteeSession}
+              speakerListPromptKind={speakerListChairPrompt}
+              onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
+              onNotify={(text) => setMsg(text)}
+            />
+          ) : null}
+        </div>
       ) : null}
 
       {show("roll-call") ? (

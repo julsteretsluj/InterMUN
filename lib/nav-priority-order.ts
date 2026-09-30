@@ -105,7 +105,6 @@ export const MAIN_TAB_GROUP_ORDER = ["home", "session", "library"] as const;
 export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "session",
   "speakers",
-  "openingSpeech",
   "formalMotions",
   "resolutions",
   "amendments",
@@ -178,7 +177,6 @@ export const DELEGATE_HUB_TILE_KEY_ORDER = [
 export const CHAIR_HUB_TILE_HREF_ORDER = [
   "/chair/session",
   "/chair/session/speakers",
-  "/chair/session/opening-speech",
   "/chair/session/motions",
   "/chair/motions-points",
   "/chair/session/agenda",

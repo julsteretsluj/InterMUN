@@ -4,6 +4,7 @@ import { loadChairSessionConference } from "../loadChairSession";
 import { SessionFloorNoCommittee } from "../SessionFloorNoCommittee";
 import { getTranslations } from "next-intl/server";
 
+/** Deep link into Speakers → Opening speeches (same pattern as speech-notes → Timer). */
 export default async function ChairSessionOpeningSpeechPage() {
   const t = await getTranslations("pageTitles");
   const data = await loadChairSessionConference();
@@ -16,7 +17,11 @@ export default async function ChairSessionOpeningSpeechPage() {
   }
   return (
     <MunPageShell title={t("openingSpeech")} variant="flush">
-      <ChairSessionControlLoader {...data} activeSection="opening-speech" />
+      <ChairSessionControlLoader
+        {...data}
+        activeSection="speakers"
+        initialSpeakersWorkflowTab="opening"
+      />
     </MunPageShell>
   );
 }

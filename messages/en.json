@@ -193,6 +193,8 @@
     "presetExtendOpeningSpeech": "Motion to Extend Opening Speech Time",
     "openingSpeechExtendedTo90": "Opening speech time extended to 90 seconds per speaker.",
     "openingSpeechExtendedToSeconds": "Opening speech time extended to {seconds} seconds per speaker.",
+    "speakersTabQueue": "Speaker list",
+    "speakersTabOpening": "Opening speeches",
     "presetOpenDebate": "Motion to Open Debate",
     "presetOpenGsl": "Motion to Open the General Speakers' List",
     "presetForAgainst": "Motion to Begin For/Against Speeches (resolution)",
@@ -3069,7 +3071,7 @@
       },
       "speakers": {
         "label": "Speakers",
-        "hint": "Same speaker list as Digital Room; syncs to committee room"
+        "hint": "Speaker list and opening speeches (A–Z, 60s / extend to 90s)"
       },
       "openingSpeech": {
         "label": "Opening speeches",

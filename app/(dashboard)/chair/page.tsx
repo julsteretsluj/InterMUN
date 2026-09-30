@@ -111,7 +111,6 @@ export default async function ChairOverviewPage({
     { href: "/chair/session/roll-call", label: tPage("tiles.rollCall.label"), hint: tPage("tiles.rollCall.hint") },
     { href: "/chair/session", label: tPage("tiles.session.label"), hint: tPage("tiles.session.hint") },
     { href: "/chair/session/speakers", label: tPage("tiles.speakers.label"), hint: tPage("tiles.speakers.hint") },
-    { href: "/chair/session/opening-speech", label: tPage("tiles.openingSpeech.label"), hint: tPage("tiles.openingSpeech.hint") },
     { href: "/chair/session/motions", label: tPage("tiles.formalMotions.label"), hint: tPage("tiles.formalMotions.hint") },
     { href: "/chair/session/discipline", label: tPage("tiles.disciplinary.label"), hint: tPage("tiles.disciplinary.hint") },
     { href: "/chair/session/timer", label: tPage("tiles.timer.label"), hint: tPage("tiles.timer.hint") },
