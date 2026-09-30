@@ -434,6 +434,7 @@ export function SessionControlClient({
     return translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle, locale);
   }, [conferenceTitle, debateTopicOptions, floorConferenceId, locale, tTopics, tCommitteeLabels]);
   const [allocations, setAllocations] = useState<Alloc[]>([]);
+  const [allocationsReady, setAllocationsReady] = useState(false);
   const [isCrisisCommitteeSession, setIsCrisisCommitteeSession] = useState(false);
   const [roll, setRoll] = useState<RollRow[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -557,6 +558,12 @@ export function SessionControlClient({
   useEffect(() => {
     if (initialSpeakersWorkflowTab) setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
   }, [initialSpeakersWorkflowTab]);
+
+  // While a floor/roster refresh is in flight, don't let opening-speech treat the
+  // previous empty/stale array as a final "no delegates" result.
+  useEffect(() => {
+    setAllocationsReady(false);
+  }, [floorConferenceId, rosterKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1116,6 +1123,7 @@ export function SessionControlClient({
     const motionSelect =
       "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, open_for_voting, created_at, closed_at";
 
+    try {
     const [
       { data: psRow },
       { data: confRows },
@@ -1452,6 +1460,9 @@ export function SessionControlClient({
       }
     } else {
       setEuTimerMeta(defaultEuTimerMeta());
+    }
+    } finally {
+      setAllocationsReady(true);
     }
   }, [supabase, floorConferenceId, rosterConferenceIdList, conferenceId, canonicalConferenceId, supportsEuTimerMeta]);
 
@@ -4899,6 +4910,9 @@ export function SessionControlClient({
             <ChairOpeningSpeechPanel
               conferenceId={floorConferenceId}
               allocations={allocations}
+              allocationsReady={allocationsReady}
+              rosterConferenceIds={rosterConferenceIdList}
+              canonicalConferenceId={canonicalConferenceId}
               isEuParliament={procedureProfile === "eu_parliament"}
               isCrisisCommittee={isCrisisCommitteeSession}
               autoSetupOnMount={speakersDedicated && speakersWorkflowTab === "opening"}

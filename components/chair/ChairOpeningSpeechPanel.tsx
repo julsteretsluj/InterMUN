@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { ListOrdered, Mic2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -12,6 +12,7 @@ import { useConferenceTimer } from "@/lib/use-conference-timer";
 import {
   OPENING_SPEECH_EXTENDED_SECONDS,
   OPENING_SPEECH_SECONDS,
+  allocationsForOpeningSpeeches,
   isOpeningSpeechFloorLabel,
   openingSpeechSecondsFromFloorLabel,
   setupOpeningSpeeches,
@@ -26,6 +27,11 @@ type Alloc = { id: string; country: string; userRole?: string | null };
 type ChairOpeningSpeechPanelProps = {
   conferenceId: string;
   allocations: Alloc[];
+  /** True after the parent session refresh has populated (or confirmed empty) allocations. */
+  allocationsReady?: boolean;
+  /** Roster scope for fallback reload inside setup (canonical + sibling topics). */
+  rosterConferenceIds?: string[];
+  canonicalConferenceId?: string;
   isEuParliament?: boolean;
   isCrisisCommittee?: boolean;
   /** When true (dedicated route), auto-build the A–Z list once on mount. */
@@ -43,6 +49,9 @@ const CARD =
 export function ChairOpeningSpeechPanel({
   conferenceId,
   allocations,
+  allocationsReady = true,
+  rosterConferenceIds,
+  canonicalConferenceId,
   isEuParliament = false,
   isCrisisCommittee = false,
   autoSetupOnMount = false,
@@ -58,6 +67,14 @@ export function ChairOpeningSpeechPanel({
   const autoRan = useRef(false);
   const [localMsg, setLocalMsg] = useState<string | null>(null);
 
+  const eligibleAllocations = useMemo(
+    () => allocationsForOpeningSpeeches(allocations, isCrisisCommittee),
+    [allocations, isCrisisCommittee]
+  );
+  // Once the parent refresh finishes, allow setup — setupOpeningSpeeches reloads the
+  // roster if the in-memory list is still empty (race with Speakers sub-tab mount).
+  const canSetup = allocationsReady;
+
   const notify = (text: string) => {
     setLocalMsg(text);
     onNotify?.(text);
@@ -71,12 +88,18 @@ export function ChairOpeningSpeechPanel({
   const isExtended = speechSeconds >= OPENING_SPEECH_EXTENDED_SECONDS;
 
   function beginOpeningSpeeches(seconds: number = OPENING_SPEECH_SECONDS) {
+    if (!allocationsReady) {
+      notify(t("waitingForAllocations"));
+      return;
+    }
     startTransition(async () => {
       const result = await setupOpeningSpeeches(supabase, conferenceId, allocations, {
         isCrisisCommittee,
         speechSeconds: seconds,
         existingTimer: liveTimer,
         setFirstCurrent: true,
+        rosterConferenceIds: rosterConferenceIds?.length ? rosterConferenceIds : [conferenceId],
+        canonicalConferenceId: canonicalConferenceId ?? conferenceId,
       });
       if (!result.ok) {
         notify(result.message);
@@ -94,10 +117,20 @@ export function ChairOpeningSpeechPanel({
     });
   }
 
+  // Allow auto-setup again when the live floor conference changes.
+  useEffect(() => {
+    autoRan.current = false;
+  }, [conferenceId]);
+
   useEffect(() => {
     if (!autoSetupOnMount || autoRan.current) return;
-    if (allocations.length === 0) return;
-    // Only auto-fill when the list is empty / not already in opening-speech mode.
+    // Wait for session refresh — do not treat an in-flight empty array as failure.
+    if (!allocationsReady) return;
+    // Roster loaded but only dais/chair seats: skip auto-setup (avoid a false error toast).
+    if (eligibleAllocations.length === 0 && allocations.length > 0) {
+      autoRan.current = true;
+      return;
+    }
     void (async () => {
       const { count } = await supabase
         .from("speaker_queue_entries")
@@ -116,9 +149,8 @@ export function ChairOpeningSpeechPanel({
       autoRan.current = true;
       beginOpeningSpeeches(OPENING_SPEECH_SECONDS);
     })();
-    // Wait until allocations are loaded so auto-setup is not a no-op.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- auto-setup once allocations arrive
-  }, [autoSetupOnMount, conferenceId, allocations.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- auto-setup once session allocations are ready
+  }, [autoSetupOnMount, conferenceId, allocationsReady, eligibleAllocations.length, allocations.length]);
 
   return (
     <section className="space-y-4">
@@ -171,11 +203,15 @@ export function ChairOpeningSpeechPanel({
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            disabled={pending}
+            disabled={pending || !canSetup}
             onClick={() => beginOpeningSpeeches(OPENING_SPEECH_SECONDS)}
             className="rounded-[980px] bg-[#007AFF] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0077ED] disabled:opacity-50"
           >
-            {pending ? t("settingUp") : t("beginButton")}
+            {pending
+              ? t("settingUp")
+              : !allocationsReady
+                ? t("waitingForAllocations")
+                : t("beginButton")}
           </button>
         </div>
 

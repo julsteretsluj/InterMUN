@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
 import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
-import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
+import { isSpeakerListEligibleAllocation } from "@/lib/speaker-list-eligibility";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { EU_PARLIAMENT_PARTY_KEYS, type EuPartyKey } from "@/lib/eu-party-time";
 import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages";
@@ -241,19 +241,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     const activeQueueAllocationIds = useMemo(() => activeAllocationIdsInQueue(queue), [queue]);
     const speakerAllocations = useMemo<SpeakerAllocation[]>(() => {
-      const filtered = allocations.filter((alloc) => {
-        const label = alloc.country?.trim() ?? "";
-        const key = label.toLowerCase();
-        const isDaisSeat =
-          key === DAIS_SEAT_HEAD_CHAIR.toLowerCase() ||
-          key === DAIS_SEAT_CO_CHAIR.toLowerCase() ||
-          key === "co chair";
-        if (isDaisSeat) return false;
-
-        const role = alloc.userRole?.toString().trim().toLowerCase();
-        if (role === "chair" && !isCrisisCommittee) return false;
-        return true;
-      });
+      const filtered = allocations.filter((alloc) =>
+        isSpeakerListEligibleAllocation(alloc, isCrisisCommittee)
+      );
       const decorated = filtered.map((alloc) => {
         const rawCountry = alloc.country?.trim() || t("dash");
         const partyKey = isEuParliament ? parseEuParty(rawCountry) : null;

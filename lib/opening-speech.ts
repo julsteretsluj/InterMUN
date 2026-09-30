@@ -2,12 +2,13 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
+import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import {
   canRequestOrJoinSpeakerList,
   fetchDisciplineForAllocation,
 } from "@/lib/delegate-discipline";
+import { isSpeakerListEligibleAllocation } from "@/lib/speaker-list-eligibility";
 import { upsertAlignedSpeakerTimer, type TimerSpeakerExisting } from "@/lib/timer-speakers";
 import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
 
@@ -20,20 +21,9 @@ export type OpeningSpeechAlloc = {
   id: string;
   country: string;
   userRole?: string | null;
+  user_id?: string | null;
+  conference_id?: string;
 };
-
-function isDaisOrChairSeat(alloc: OpeningSpeechAlloc, isCrisisCommittee: boolean): boolean {
-  const label = alloc.country?.trim() ?? "";
-  const key = label.toLowerCase();
-  const isDaisSeat =
-    key === DAIS_SEAT_HEAD_CHAIR.toLowerCase() ||
-    key === DAIS_SEAT_CO_CHAIR.toLowerCase() ||
-    key === "co chair";
-  if (isDaisSeat) return true;
-  const role = alloc.userRole?.toString().trim().toLowerCase();
-  if (role === "chair" && !isCrisisCommittee) return true;
-  return false;
-}
 
 export function openingSpeechQueueLabel(country: string): string {
   const name = country.trim() || "—";
@@ -41,18 +31,57 @@ export function openingSpeechQueueLabel(country: string): string {
   return `${flag} ${name}`.trim();
 }
 
-/** Delegate seats only, sorted A→Z by country (case-insensitive). */
+/** Delegate seats only, sorted A→Z by country (case-insensitive). Same eligibility as Speakers. */
 export function allocationsForOpeningSpeeches(
   allocations: OpeningSpeechAlloc[],
   isCrisisCommittee = false
 ): OpeningSpeechAlloc[] {
   return allocations
-    .filter((a) => !isDaisOrChairSeat(a, isCrisisCommittee))
+    .filter((a) => isSpeakerListEligibleAllocation(a, isCrisisCommittee))
     .sort((a, b) =>
       (a.country ?? "").trim().localeCompare((b.country ?? "").trim(), undefined, {
         sensitivity: "base",
       })
     );
+}
+
+async function loadRosterAllocationsForOpening(
+  supabase: SupabaseClient,
+  conferenceIds: string[],
+  canonicalConferenceId: string
+): Promise<OpeningSpeechAlloc[]> {
+  const ids = Array.from(new Set(conferenceIds.filter(Boolean)));
+  if (ids.length === 0) return [];
+
+  const { data: allocRows, error } = await supabase
+    .from("allocations")
+    .select("id, country, user_id, conference_id")
+    .in("conference_id", ids)
+    .order("country");
+  if (error || !allocRows?.length) return [];
+
+  const typed = allocRows as {
+    id: string;
+    country: string | null;
+    user_id: string | null;
+    conference_id: string;
+  }[];
+  const userIds = [
+    ...new Set(typed.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+  ];
+  const { data: profiles } =
+    userIds.length > 0
+      ? await supabase.from("profiles").select("id, role").in("id", userIds)
+      : { data: [] as { id: string; role: string | null }[] };
+  const roleById = new Map((profiles ?? []).map((p) => [p.id, p.role ?? null]));
+  const withRoles = typed.map((a) => ({
+    id: a.id,
+    country: a.country ?? "",
+    user_id: a.user_id,
+    conference_id: a.conference_id,
+    userRole: a.user_id ? roleById.get(a.user_id) ?? null : null,
+  }));
+  return mergeAllocationsAcrossSiblingConferences(withRoles, canonicalConferenceId);
 }
 
 export function isOpeningSpeechFloorLabel(label: string | null | undefined): boolean {
@@ -79,16 +108,31 @@ export async function setupOpeningSpeeches(
     existingTimer?: TimerSpeakerExisting | null;
     /** When true, mark the first speaker current (timer stays paused). */
     setFirstCurrent?: boolean;
+    /**
+     * Roster scope (canonical + sibling topic rows). When the in-memory list is still
+     * empty / all-dais, reload from these ids so opening matches the Speakers picker.
+     */
+    rosterConferenceIds?: string[];
+    canonicalConferenceId?: string;
   }
 ): Promise<{ ok: true; count: number; skipped: number } | { ok: false; message: string }> {
   const speechSeconds = Math.max(
     1,
     Math.round(options?.speechSeconds ?? OPENING_SPEECH_SECONDS)
   );
-  const eligible = allocationsForOpeningSpeeches(
-    allocations,
-    options?.isCrisisCommittee ?? false
-  );
+  const isCrisis = options?.isCrisisCommittee ?? false;
+  let eligible = allocationsForOpeningSpeeches(allocations, isCrisis);
+
+  // Parent may call before session refresh finishes, or pass an empty prop briefly —
+  // reload the same roster the Speakers list uses instead of falsely erroring.
+  if (eligible.length === 0) {
+    const rosterIds =
+      options?.rosterConferenceIds?.length ? options.rosterConferenceIds : [conferenceId];
+    const canonicalId = options?.canonicalConferenceId ?? conferenceId;
+    const loaded = await loadRosterAllocationsForOpening(supabase, rosterIds, canonicalId);
+    eligible = allocationsForOpeningSpeeches(loaded, isCrisis);
+  }
+
   if (eligible.length === 0) {
     return { ok: false, message: "No delegate allocations are available for opening speeches." };
   }

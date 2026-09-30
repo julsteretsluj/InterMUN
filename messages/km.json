@@ -5858,6 +5858,8 @@
     "extendHintSuffix": "under Formal motions — on pass, the timer becomes {seconds}s.",
     "beginButton": "Set A–Z list · 60s timer",
     "settingUp": "Setting up…",
+    "waitingForAllocations": "Loading delegations…",
+    "noDelegatesYet": "No delegate seats yet",
     "setupDone": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused).",
     "setupDoneWithSkipped": "Opening speeches ready: {count} speakers A–Z, {seconds}s each (paused). Skipped {skipped} blocked by discipline."
   },
