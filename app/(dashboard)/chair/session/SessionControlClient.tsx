@@ -455,17 +455,6 @@ export function SessionControlClient({
     initialSpeakersWorkflowTab ??
       (activeSection === "opening-speech" ? "opening" : "queue")
   );
-
-  // Persistent floor layout soft-navigates without remounting — sync deep-link tabs.
-  useEffect(() => {
-    setTimerWorkflowTab(initialTimerWorkflowTab ?? "setup");
-  }, [initialTimerWorkflowTab]);
-  useEffect(() => {
-    if (initialSpeakersWorkflowTab) {
-      setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
-    }
-  }, [initialSpeakersWorkflowTab]);
-
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
   const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
@@ -560,6 +549,14 @@ export function SessionControlClient({
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
+
+  // Persistent floor layout soft-navigates without remounting — sync deep-link tabs.
+  useEffect(() => {
+    if (initialTimerWorkflowTab) setTimerWorkflowTab(initialTimerWorkflowTab);
+  }, [initialTimerWorkflowTab]);
+  useEffect(() => {
+    if (initialSpeakersWorkflowTab) setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
+  }, [initialSpeakersWorkflowTab]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1461,14 +1458,6 @@ export function SessionControlClient({
   const debouncedRefresh = useDebouncedCallback(() => {
     void refresh();
   }, 400);
-
-  // Soft navigations update these props without remounting — keep tabs in sync.
-  useEffect(() => {
-    if (initialTimerWorkflowTab) setTimerWorkflowTab(initialTimerWorkflowTab);
-  }, [initialTimerWorkflowTab]);
-  useEffect(() => {
-    if (initialSpeakersWorkflowTab) setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
-  }, [initialSpeakersWorkflowTab]);
 
   useEffect(() => {
     // Deferred to a microtask so state lands asynchronously (no sync cascade).
