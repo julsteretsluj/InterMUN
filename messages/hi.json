@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "फ्लोर",
+      "procedure": "प्रक्रिया",
+      "setup": "सेटअप",
+      "checklists": "चेकलिस्ट",
+      "media": "मीडिया",
+      "docs": "दस्तावेज़ और लिंक",
+      "awards": "पुरस्कार",
+      "reporting": "रिपोर्टिंग",
+      "fwc": "FWC टूल",
+      "live": "लाइव",
+      "allocation": "आवंटन",
+      "roster": "सूची"
+    }
   },
   "marketing": {
     "metaTitle": "{app} - मॉडल संयुक्त राष्ट्र मंच",

@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getConferenceForDashboardCached } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundleCached } from "@/lib/active-debate-topic";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 
@@ -18,20 +18,6 @@ export type ChairSessionConference = {
   debateTopicOptions: { id: string; label: string }[];
   committeeLabelRaw: string | null;
 };
-
-/** Request-scoped: layout + page share one conference resolution. */
-const getConferenceForDashboardCached = cache(
-  async (
-    role: string | null | undefined,
-    userId: string,
-    smtDashboardSurface: "secretariat" | "chair" | "delegate" | null
-  ) =>
-    getConferenceForDashboard({
-      role,
-      userId,
-      smtDashboardSurface,
-    })
-);
 
 /**
  * Chair-only access + active committee. Returns null when no committee is joined (caller shows room-code CTA).
@@ -77,5 +63,5 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
   };
 }
 
-/** Alias so floor layout + pages share one resolution per request. */
+/** Alias so floor layout + overview share one resolution per request. */
 export const loadChairSessionConferenceCached = cache(loadChairSessionConference);

@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "القاعة",
+      "procedure": "الإجراءات",
+      "setup": "الإعداد",
+      "checklists": "قوائم التحقق",
+      "media": "الإعلام",
+      "docs": "المستندات والروابط",
+      "awards": "الجوائز",
+      "reporting": "التقارير",
+      "fwc": "أدوات FWC",
+      "live": "مباشر",
+      "allocation": "التوزيع",
+      "roster": "القائمة"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — منصة نموذج الأمم المتحدة",

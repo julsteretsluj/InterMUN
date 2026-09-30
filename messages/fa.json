@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "صحن",
+      "procedure": "رویه‌ها",
+      "setup": "راه‌اندازی",
+      "checklists": "چک‌لیست‌ها",
+      "media": "رسانه",
+      "docs": "اسناد و پیوندها",
+      "awards": "جوایز",
+      "reporting": "گزارش",
+      "fwc": "ابزار FWC",
+      "live": "زنده",
+      "allocation": "تخصیص",
+      "roster": "فهرست"
+    }
   },
   "marketing": {
     "metaTitle": "{app} - پلت فرم نمونه سازمان ملل متحد",

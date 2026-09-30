@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Plenum",
+      "procedure": "Verfahren",
+      "setup": "Einrichtung",
+      "checklists": "Checklisten",
+      "media": "Medien",
+      "docs": "Docs & Links",
+      "awards": "Auszeichnungen",
+      "reporting": "Berichte",
+      "fwc": "FWC-Tools",
+      "live": "Live",
+      "allocation": "Zuteilung",
+      "roster": "Liste"
+    }
   },
   "marketing": {
     "metaTitle": "{app} – Modellplattform der Vereinten Nationen",

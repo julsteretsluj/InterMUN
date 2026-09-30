@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "מליאה",
+      "procedure": "נוהל",
+      "setup": "הגדרה",
+      "checklists": "רשימות בדיקה",
+      "media": "מדיה",
+      "docs": "מסמכים וקישורים",
+      "awards": "פרסים",
+      "reporting": "דיווח",
+      "fwc": "כלי FWC",
+      "live": "חי",
+      "allocation": "הקצאה",
+      "roster": "רשימה"
+    }
   },
   "marketing": {
     "metaTitle": "{app} - דגם פלטפורמת האומות המאוחדות",

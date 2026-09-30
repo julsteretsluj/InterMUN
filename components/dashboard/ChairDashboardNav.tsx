@@ -8,10 +8,17 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
+import {
+  NavFolder,
+  NavFolderDockTabs,
+  NavFolderSections,
+  useNavFolderExpansion,
+} from "@/components/nav/NavFolder";
 import {
   CHAIR_ITEM_FOLDER,
+  CHAIR_ITEM_SUBFOLDER,
   CHAIR_NAV_FOLDER_ORDER,
+  CHAIR_SUBFOLDER_ORDER,
   folderHasActiveChild,
   groupNavByFolder,
   type NavFolderId,
@@ -328,15 +335,21 @@ export function ChairDashboardSidebar({
         navItems,
         CHAIR_NAV_FOLDER_ORDER,
         (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session",
-        compareNavItems
+        compareNavItems,
+        {
+          getSubfolderId: (item) => CHAIR_ITEM_SUBFOLDER[item.itemKey],
+          subfolderOrder: CHAIR_SUBFOLDER_ORDER,
+        }
       ),
     [navItems, compareNavItems]
   );
 
-  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
-    folderGroups,
-    (item) => navItemIsActive(pathname, item)
+  const isNavActive = useCallback(
+    (item: ChairNavItem) => navItemIsActive(pathname, item),
+    [pathname]
   );
+
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(folderGroups, isNavActive);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -348,27 +361,33 @@ export function ChairDashboardSidebar({
           labelsHidden ? "px-2" : "px-2 group-hover:px-3"
         )}
       >
-        {folderGroups.map(({ folderId, items }) => (
+        {folderGroups.map((group) => (
           <NavFolder
-            key={folderId}
-            folderId={folderId}
+            key={group.folderId}
+            folderId={group.folderId}
             compact={!labelsHidden}
             labelsHidden={labelsHidden}
-            expanded={expandedFolderId === folderId}
-            hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item))}
-            onToggle={() => onFolderToggle(folderId)}
+            expanded={expandedFolderId === group.folderId}
+            hasActiveChild={folderHasActiveChild(group.items, isNavActive)}
+            onToggle={() => onFolderToggle(group.folderId)}
           >
-            {items.map((item) => (
-              <ChairNavRow
-                key={item.href + item.itemKey}
-                item={item}
-                label={item.labelOverride ?? tItems(item.itemKey)}
-                isActive={navItemIsActive(pathname, item)}
-                labelsHidden={labelsHidden}
-                priority={priorityByKey.get(item.itemKey) ?? 0}
-                badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
-              />
-            ))}
+            <NavFolderSections
+              group={group}
+              isItemActive={isNavActive}
+              labelsHidden={labelsHidden}
+              compact={!labelsHidden}
+              renderItem={(item) => (
+                <ChairNavRow
+                  key={item.href + item.itemKey}
+                  item={item}
+                  label={item.labelOverride ?? tItems(item.itemKey)}
+                  isActive={isNavActive(item)}
+                  labelsHidden={labelsHidden}
+                  priority={priorityByKey.get(item.itemKey) ?? 0}
+                  badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
+                />
+              )}
+            />
           </NavFolder>
         ))}
       </nav>
@@ -546,7 +565,11 @@ export function ChairMobileDock({
         navItems,
         CHAIR_NAV_FOLDER_ORDER,
         (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session",
-        (a, b) => (priorityByKey.get(a.itemKey) ?? 9999) - (priorityByKey.get(b.itemKey) ?? 9999)
+        (a, b) => (priorityByKey.get(a.itemKey) ?? 9999) - (priorityByKey.get(b.itemKey) ?? 9999),
+        {
+          getSubfolderId: (item) => CHAIR_ITEM_SUBFOLDER[item.itemKey],
+          subfolderOrder: CHAIR_SUBFOLDER_ORDER,
+        }
       ),
     [navItems, priorityByKey]
   );

@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "พื้น",
+      "procedure": "ระเบียบ",
+      "setup": "ตั้งค่า",
+      "checklists": "เช็คลิสต์",
+      "media": "สื่อ",
+      "docs": "เอกสารและลิงก์",
+      "awards": "รางวัล",
+      "reporting": "รายงาน",
+      "fwc": "เครื่องมือ FWC",
+      "live": "สด",
+      "allocation": "การจัดสรร",
+      "roster": "รายชื่อ"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — โมเดลแพลตฟอร์มของสหประชาชาติ",

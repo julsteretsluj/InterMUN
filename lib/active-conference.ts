@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import { redirect } from "next/navigation";
+import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveConferenceId, clearActiveConference } from "@/lib/active-conference-cookie";
 import { getActiveEventId, clearActiveEvent } from "@/lib/active-event-cookie";
@@ -224,6 +225,23 @@ export async function getConferenceForDashboard(options: {
 
   return asActiveConferenceRow(data);
 }
+
+/**
+ * Request-scoped conference resolution — dashboard layout + session floor share one call.
+ * Primitive args so React `cache()` can dedupe reliably.
+ */
+export const getConferenceForDashboardCached = cache(
+  async (
+    role: string | null | undefined,
+    userId: string,
+    smtDashboardSurface: SmtDashboardSurface | null
+  ) =>
+    getConferenceForDashboard({
+      role,
+      userId,
+      smtDashboardSurface,
+    })
+);
 
 /** Same as {@link getConferenceForDashboard} with SMT surface + user id applied when role is SMT. */
 export async function resolveDashboardConferenceForUser(

@@ -455,6 +455,17 @@ export function SessionControlClient({
     initialSpeakersWorkflowTab ??
       (activeSection === "opening-speech" ? "opening" : "queue")
   );
+
+  // Persistent floor layout soft-navigates without remounting — sync deep-link tabs.
+  useEffect(() => {
+    setTimerWorkflowTab(initialTimerWorkflowTab ?? "setup");
+  }, [initialTimerWorkflowTab]);
+  useEffect(() => {
+    if (initialSpeakersWorkflowTab) {
+      setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
+    }
+  }, [initialSpeakersWorkflowTab]);
+
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
   const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
@@ -537,7 +548,7 @@ export function SessionControlClient({
   );
   /** After dismissing the GSL save reminder, do not re-open on the next save until the floor label changes. */
   const suppressGslSavePromptRef = useRef(false);
-  const speakersSectionRef = useRef<HTMLElement | null>(null);
+  const speakersSectionRef = useRef<HTMLDivElement | null>(null);
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
@@ -1450,6 +1461,14 @@ export function SessionControlClient({
   const debouncedRefresh = useDebouncedCallback(() => {
     void refresh();
   }, 400);
+
+  // Soft navigations update these props without remounting — keep tabs in sync.
+  useEffect(() => {
+    if (initialTimerWorkflowTab) setTimerWorkflowTab(initialTimerWorkflowTab);
+  }, [initialTimerWorkflowTab]);
+  useEffect(() => {
+    if (initialSpeakersWorkflowTab) setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
+  }, [initialSpeakersWorkflowTab]);
 
   useEffect(() => {
     // Deferred to a microtask so state lands asynchronously (no sync cascade).
@@ -3037,7 +3056,7 @@ export function SessionControlClient({
     ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed) ?? null
     : openMotion;
 
-  // Jump to the discipline / opening tabs when those sections are focused (adjust state during render).
+  // Jump to the discipline / speakers tabs when those sections are focused (adjust state during render).
   const [prevActiveSection, setPrevActiveSection] = useState<typeof activeSection | null>(null);
   if (activeSection !== prevActiveSection) {
     setPrevActiveSection(activeSection);
@@ -3047,8 +3066,8 @@ export function SessionControlClient({
     if (activeSection === "opening-speech") {
       setSpeakersWorkflowTab("opening");
     }
-    if (activeSection === "speakers" && !initialSpeakersWorkflowTab) {
-      setSpeakersWorkflowTab("queue");
+    if (activeSection === "speakers") {
+      setSpeakersWorkflowTab(initialSpeakersWorkflowTab ?? "queue");
     }
   }
 

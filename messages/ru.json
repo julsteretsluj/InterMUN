@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Зал",
+      "procedure": "Процедура",
+      "setup": "Настройка",
+      "checklists": "Чек-листы",
+      "media": "Медиа",
+      "docs": "Документы и ссылки",
+      "awards": "Награды",
+      "reporting": "Отчёты",
+      "fwc": "Инструменты FWC",
+      "live": "Эфир",
+      "allocation": "Распределение",
+      "roster": "Список"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Модельная платформа Организации Объединенных Наций",

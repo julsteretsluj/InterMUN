@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Sala",
+      "procedure": "Procedura",
+      "setup": "Konfiguracja",
+      "checklists": "Listy kontrolne",
+      "media": "Media",
+      "docs": "Docs i linki",
+      "awards": "Nagrody",
+      "reporting": "Raporty",
+      "fwc": "Narzędzia FWC",
+      "live": "Na żywo",
+      "allocation": "Przydział",
+      "roster": "Lista"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — platforma Model United Nations",

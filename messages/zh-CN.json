@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "会场",
+      "procedure": "程序",
+      "setup": "设置",
+      "checklists": "清单",
+      "media": "媒体",
+      "docs": "文档与链接",
+      "awards": "奖项",
+      "reporting": "报告",
+      "fwc": "FWC 工具",
+      "live": "实时",
+      "allocation": "分配",
+      "roster": "名单"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — 模拟联合国平台",

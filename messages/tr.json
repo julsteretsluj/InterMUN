@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Salon",
+      "procedure": "Usul",
+      "setup": "Kurulum",
+      "checklists": "Kontrol listeleri",
+      "media": "Medya",
+      "docs": "Belgeler ve bağlantılar",
+      "awards": "Ödüller",
+      "reporting": "Raporlama",
+      "fwc": "FWC araçları",
+      "live": "Canlı",
+      "allocation": "Tahsis",
+      "roster": "Liste"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Model Birleşmiş Milletler platformu",

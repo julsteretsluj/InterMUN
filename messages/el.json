@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Αίθουσα",
+      "procedure": "Διαδικασία",
+      "setup": "Ρύθμιση",
+      "checklists": "Λίστες ελέγχου",
+      "media": "Μέσα",
+      "docs": "Έγγραφα & σύνδεσμοι",
+      "awards": "Βραβεία",
+      "reporting": "Αναφορές",
+      "fwc": "Εργαλεία FWC",
+      "live": "Ζωντανά",
+      "allocation": "Κατανομή",
+      "roster": "Κατάλογος"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Πρότυπο πλατφόρμας των Ηνωμένων Εθνών",

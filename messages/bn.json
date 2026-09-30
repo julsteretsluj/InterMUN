@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "ফ্লোর",
+      "procedure": "প্রক্রিয়া",
+      "setup": "সেটআপ",
+      "checklists": "চেকলিস্ট",
+      "media": "মিডিয়া",
+      "docs": "ডক ও লিংক",
+      "awards": "পুরস্কার",
+      "reporting": "রিপোর্টিং",
+      "fwc": "FWC টুল",
+      "live": "লাইভ",
+      "allocation": "বরাদ্দ",
+      "roster": "তালিকা"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — মডেল জাতিসংঘ প্ল্যাটফর্ম",

@@ -1,23 +1,4 @@
-import { MunPageShell } from "@/components/MunPageShell";
-import { ChairSessionControlLoader } from "@/components/chair/ChairSessionControlLoader";
-import { loadChairSessionConference } from "../loadChairSession";
-import { SessionFloorNoCommittee } from "../SessionFloorNoCommittee";
-import { getTranslations } from "next-intl/server";
-
-export default async function ChairSessionMotionsPage() {
-  const t = await getTranslations("pageTitles");
-  const data = await loadChairSessionConference();
-  if (!data) {
-    return (
-      <MunPageShell title={t("formalMotions")} variant="default">
-        <SessionFloorNoCommittee />
-      </MunPageShell>
-    );
-  }
-
-  return (
-    <MunPageShell title={t("formalMotions")} variant="offset">
-      <ChairSessionControlLoader {...data} activeSection="motions" />
-    </MunPageShell>
-  );
+/** URL anchor for the persistent session floor shell (layout owns the UI). */
+export default function ChairSessionFloorSectionPage() {
+  return null;
 }

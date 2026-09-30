@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
-import { loadChairSessionConference } from "./loadChairSession";
+import { loadChairSessionConferenceCached } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
 import SessionFloorOverview from "./SessionFloorOverview";
 import { getTranslations } from "next-intl/server";
@@ -15,7 +15,7 @@ import {
 
 export default async function ChairSessionPage() {
   const t = await getTranslations("pageTitles");
-  const data = await loadChairSessionConference();
+  const data = await loadChairSessionConferenceCached();
   if (!data) {
     return (
       <MunPageShell

@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Plenário",
+      "procedure": "Procedimento",
+      "setup": "Configuração",
+      "checklists": "Checklists",
+      "media": "Mídia",
+      "docs": "Docs e links",
+      "awards": "Prêmios",
+      "reporting": "Relatórios",
+      "fwc": "Ferramentas FWC",
+      "live": "Ao vivo",
+      "allocation": "Alocação",
+      "roster": "Lista"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Plataforma modelo das Nações Unidas",

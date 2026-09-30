@@ -1,27 +1,4 @@
-import { MunPageShell } from "@/components/MunPageShell";
-import { ChairSessionControlLoader } from "@/components/chair/ChairSessionControlLoader";
-import { loadChairSessionConference } from "../loadChairSession";
-import { SessionFloorNoCommittee } from "../SessionFloorNoCommittee";
-import { getTranslations } from "next-intl/server";
-
-/** Deep link into Speakers → Opening speeches (same pattern as speech-notes → Timer). */
-export default async function ChairSessionOpeningSpeechPage() {
-  const t = await getTranslations("pageTitles");
-  const data = await loadChairSessionConference();
-  if (!data) {
-    return (
-      <MunPageShell title={t("openingSpeech")} variant="split">
-        <SessionFloorNoCommittee />
-      </MunPageShell>
-    );
-  }
-  return (
-    <MunPageShell title={t("openingSpeech")} variant="flush">
-      <ChairSessionControlLoader
-        {...data}
-        activeSection="speakers"
-        initialSpeakersWorkflowTab="opening"
-      />
-    </MunPageShell>
-  );
+/** URL anchor for the persistent session floor shell (layout owns the UI). */
+export default function ChairSessionFloorSectionPage() {
+  return null;
 }

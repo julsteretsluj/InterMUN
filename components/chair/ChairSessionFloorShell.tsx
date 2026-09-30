@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { MunPageShell } from "@/components/MunPageShell";
@@ -26,11 +26,6 @@ export function ChairSessionFloorShell({
   const tDiscipline = useTranslations("chairMotionsPointsLog");
   const route = useMemo(() => resolveChairSessionFloorRoute(pathname), [pathname]);
 
-  // Keep the route resolver warm for soft navigations.
-  useEffect(() => {
-    void route;
-  }, [route]);
-
   if (!route) return null;
 
   const title =
@@ -40,7 +35,10 @@ export function ChairSessionFloorShell({
 
   if (!conference) {
     return (
-      <MunPageShell title={title} variant={route.shellVariant === "flush" ? "split" : route.shellVariant}>
+      <MunPageShell
+        title={title}
+        variant={route.shellVariant === "flush" ? "split" : route.shellVariant}
+      >
         <SessionFloorNoCommittee />
       </MunPageShell>
     );

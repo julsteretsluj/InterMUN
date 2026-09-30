@@ -5,13 +5,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
+import {
+  NavFolder,
+  NavFolderDockTabs,
+  NavFolderSections,
+  useNavFolderExpansion,
+} from "@/components/nav/NavFolder";
 import {
   SMT_ITEM_FOLDER,
+  SMT_ITEM_SUBFOLDER,
   SMT_NAV_FOLDER_ORDER,
+  SMT_SUBFOLDER_ORDER,
   folderHasActiveChild,
   groupNavByFolder,
   type NavFolderId,
@@ -155,15 +162,21 @@ export function SmtDashboardSidebar() {
         SMT_NAV_ITEMS_ORDERED,
         SMT_NAV_FOLDER_ORDER,
         (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations",
-        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999)
+        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999),
+        {
+          getSubfolderId: (item) => SMT_ITEM_SUBFOLDER[item.navKey],
+          subfolderOrder: SMT_SUBFOLDER_ORDER,
+        }
       ),
     [priorityByKey]
   );
 
-  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
-    folderGroups,
-    (item) => smtNavItemIsActive(pathname, item)
+  const isNavActive = useCallback(
+    (item: SmtNavItem) => smtNavItemIsActive(pathname, item),
+    [pathname]
   );
+
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(folderGroups, isNavActive);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -172,24 +185,29 @@ export function SmtDashboardSidebar() {
         data-tour="tour-nav"
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-2 py-2 [scrollbar-width:thin] group-hover:px-3"
       >
-        {folderGroups.map(({ folderId, items }) => (
+        {folderGroups.map((group) => (
           <NavFolder
-            key={folderId}
-            folderId={folderId}
+            key={group.folderId}
+            folderId={group.folderId}
             compact
-            expanded={expandedFolderId === folderId}
-            hasActiveChild={folderHasActiveChild(items, (item) => smtNavItemIsActive(pathname, item))}
-            onToggle={() => onFolderToggle(folderId)}
+            expanded={expandedFolderId === group.folderId}
+            hasActiveChild={folderHasActiveChild(group.items, isNavActive)}
+            onToggle={() => onFolderToggle(group.folderId)}
           >
-            {items.map((item) => (
-              <SmtSidebarLink
-                key={item.href}
-                item={item}
-                label={tNav(item.navKey)}
-                isActive={smtNavItemIsActive(pathname, item)}
-                priority={priorityByKey.get(item.navKey) ?? 0}
-              />
-            ))}
+            <NavFolderSections
+              group={group}
+              isItemActive={isNavActive}
+              compact
+              renderItem={(item) => (
+                <SmtSidebarLink
+                  key={item.href}
+                  item={item}
+                  label={tNav(item.navKey)}
+                  isActive={isNavActive(item)}
+                  priority={priorityByKey.get(item.navKey) ?? 0}
+                />
+              )}
+            />
           </NavFolder>
         ))}
       </nav>
@@ -224,7 +242,11 @@ export function SmtMobileDock() {
         SMT_NAV_ITEMS_ORDERED,
         SMT_NAV_FOLDER_ORDER,
         (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations",
-        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999)
+        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999),
+        {
+          getSubfolderId: (item) => SMT_ITEM_SUBFOLDER[item.navKey],
+          subfolderOrder: SMT_SUBFOLDER_ORDER,
+        }
       ),
     [priorityByKey]
   );

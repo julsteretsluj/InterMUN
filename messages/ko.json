@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "플로어",
+      "procedure": "절차",
+      "setup": "설정",
+      "checklists": "체크리스트",
+      "media": "미디어",
+      "docs": "문서 및 링크",
+      "awards": "시상",
+      "reporting": "보고",
+      "fwc": "FWC 도구",
+      "live": "라이브",
+      "allocation": "배정",
+      "roster": "명단"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — 모델 UN 플랫폼",

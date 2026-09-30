@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Зал",
+      "procedure": "Процедура",
+      "setup": "Налаштування",
+      "checklists": "Чеклісти",
+      "media": "Медіа",
+      "docs": "Документи й посилання",
+      "awards": "Нагороди",
+      "reporting": "Звіти",
+      "fwc": "Інструменти FWC",
+      "live": "Наживо",
+      "allocation": "Розподіл",
+      "roster": "Список"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — модель платформи ООН",

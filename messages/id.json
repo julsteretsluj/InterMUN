@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Lantai",
+      "procedure": "Prosedur",
+      "setup": "Pengaturan",
+      "checklists": "Daftar periksa",
+      "media": "Media",
+      "docs": "Dokumen & tautan",
+      "awards": "Penghargaan",
+      "reporting": "Pelaporan",
+      "fwc": "Alat FWC",
+      "live": "Langsung",
+      "allocation": "Alokasi",
+      "roster": "Daftar"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Model platform Perserikatan Bangsa-Bangsa",

@@ -10,7 +10,7 @@ import { DashboardNotifications } from "@/components/dashboard/DashboardNotifica
 import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getConferenceForDashboardCached } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundleCached } from "@/lib/active-debate-topic";
 import { getAppName } from "@/lib/branding";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
@@ -91,11 +91,11 @@ export default async function DashboardLayout({
     redirect(`${ADVISOR_APP_HOME}${search}`);
   }
 
-  const activeConf = await getConferenceForDashboard({
-    role: normalizedRole,
-    userId: user.id,
-    smtDashboardSurface: isSmtRole(normalizedRole) ? smtSurface : null,
-  });
+  const activeConf = await getConferenceForDashboardCached(
+    normalizedRole,
+    user.id,
+    isSmtRole(normalizedRole) ? smtSurface : null
+  );
 
   if (!activeConf) {
     if (isSmtRole(normalizedRole) && smtSurface !== "secretariat") {

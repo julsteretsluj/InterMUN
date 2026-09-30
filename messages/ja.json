@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "フロア",
+      "procedure": "手続",
+      "setup": "セットアップ",
+      "checklists": "チェックリスト",
+      "media": "メディア",
+      "docs": "資料・リンク",
+      "awards": "表彰",
+      "reporting": "報告",
+      "fwc": "FWCツール",
+      "live": "ライブ",
+      "allocation": "割当",
+      "roster": "名簿"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — 模擬国連プラットフォーム",

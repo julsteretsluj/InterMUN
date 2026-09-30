@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Sàn",
+      "procedure": "Thủ tục",
+      "setup": "Thiết lập",
+      "checklists": "Danh sách kiểm",
+      "media": "Truyền thông",
+      "docs": "Tài liệu & liên kết",
+      "awards": "Giải thưởng",
+      "reporting": "Báo cáo",
+      "fwc": "Công cụ FWC",
+      "live": "Trực tiếp",
+      "allocation": "Phân bổ",
+      "roster": "Danh sách"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Nền tảng kiểu mẫu của Liên Hợp Quốc",

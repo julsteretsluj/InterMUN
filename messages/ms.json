@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Lantai",
+      "procedure": "Prosedur",
+      "setup": "Persediaan",
+      "checklists": "Senarai semak",
+      "media": "Media",
+      "docs": "Dokumen & pautan",
+      "awards": "Anugerah",
+      "reporting": "Pelaporan",
+      "fwc": "Alatan FWC",
+      "live": "Langsung",
+      "allocation": "Peruntukan",
+      "roster": "Senarai"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Model platform Pertubuhan Bangsa-Bangsa Bersatu",

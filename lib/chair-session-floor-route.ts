@@ -1,14 +1,17 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-import type {
-  SessionFloorSection,
-  SpeakersWorkflowTab,
-  TimerWorkflowTab,
-} from "@/app/(dashboard)/chair/session/SessionControlClient";
+export type ChairSessionFloorSection =
+  | "agenda"
+  | "motions"
+  | "discipline"
+  | "timer"
+  | "announcements"
+  | "speakers"
+  | "roll-call";
 
 export type ChairSessionFloorRoute = {
-  section: Exclude<SessionFloorSection, "all">;
+  section: ChairSessionFloorSection;
   /** pageTitles key, or discipline (uses chairMotionsPointsLog.disciplinarySystem). */
   titleKey:
     | "speakers"
@@ -21,8 +24,8 @@ export type ChairSessionFloorRoute = {
     | "announcements"
     | "discipline";
   shellVariant: "flush" | "offset" | "default";
-  timerTab?: TimerWorkflowTab;
-  speakersTab?: SpeakersWorkflowTab;
+  timerTab?: "setup" | "clock" | "notes" | "log";
+  speakersTab?: "queue" | "opening";
 };
 
 /**
@@ -41,7 +44,7 @@ export function resolveChairSessionFloorRoute(pathname: string): ChairSessionFlo
     };
   }
   if (path.endsWith("/timer")) {
-    return { section: "timer", titleKey: "timer", shellVariant: "flush" };
+    return { section: "timer", titleKey: "timer", shellVariant: "offset" };
   }
   if (path.endsWith("/opening-speech")) {
     return {
@@ -73,9 +76,6 @@ export function resolveChairSessionFloorRoute(pathname: string): ChairSessionFlo
   }
   if (path.endsWith("/discipline")) {
     return { section: "discipline", titleKey: "discipline", shellVariant: "flush" };
-  }
-  if (path.endsWith("/timer")) {
-    return { section: "timer", titleKey: "timer", shellVariant: "offset" };
   }
   return null;
 }

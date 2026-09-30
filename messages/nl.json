@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Plenum",
+      "procedure": "Procedure",
+      "setup": "Setup",
+      "checklists": "Checklists",
+      "media": "Media",
+      "docs": "Docs & links",
+      "awards": "Prijzen",
+      "reporting": "Rapportage",
+      "fwc": "FWC-tools",
+      "live": "Live",
+      "allocation": "Toewijzing",
+      "roster": "Lijst"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Model van het platform van de Verenigde Naties",

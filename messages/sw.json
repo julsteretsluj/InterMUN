@@ -4642,7 +4642,21 @@
     "people": "People & awards",
     "library": "Library",
     "account": "Account",
-    "dockFoldersAria": "Navigation folders"
+    "dockFoldersAria": "Navigation folders",
+    "subfolders": {
+      "floor": "Floor",
+      "procedure": "Procedure",
+      "setup": "Setup",
+      "checklists": "Checklists",
+      "media": "Media",
+      "docs": "Docs & links",
+      "awards": "Awards",
+      "reporting": "Reporting",
+      "fwc": "FWC tools",
+      "live": "Live",
+      "allocation": "Allocation",
+      "roster": "Roster"
+    }
   },
   "marketing": {
     "metaTitle": "{app} — Mfumo wa mfano wa Umoja wa Mataifa",
