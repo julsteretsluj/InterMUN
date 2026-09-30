@@ -1,8 +1,12 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
 import { getConferenceForDashboard } from "@/lib/active-conference";
-import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { getResolvedDebateConferenceBundleCached } from "@/lib/active-debate-topic";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 
 export type ChairSessionConference = {
@@ -15,45 +19,52 @@ export type ChairSessionConference = {
   committeeLabelRaw: string | null;
 };
 
+/** Request-scoped: layout + page share one conference resolution. */
+const getConferenceForDashboardCached = cache(
+  async (
+    role: string | null | undefined,
+    userId: string,
+    smtDashboardSurface: "secretariat" | "chair" | "delegate" | null
+  ) =>
+    getConferenceForDashboard({
+      role,
+      userId,
+      smtDashboardSurface,
+    })
+);
+
 /**
  * Chair-only access + active committee. Returns null when no committee is joined (caller shows room-code CTA).
+ * Dedupes auth / conference / debate-bundle work already done by the dashboard layout in the same request.
  */
 export async function loadChairSessionConference(): Promise<ChairSessionConference | null> {
-  const supabase = await createClient();
   const pathname = (await headers()).get("x-pathname") || "/chair/session";
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user, profile, supabase } = await getCachedDashboardAuth();
   if (!user) redirect(`/login?next=${encodeURIComponent(pathname)}`);
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  if (profile?.role !== "chair") {
-    if (profile?.role === "smt") {
+  const role = profile?.role ?? null;
+  if (role !== "chair") {
+    if (role === "smt") {
       const surface = await getSmtDashboardSurface();
       if (surface !== "chair") {
         redirect("/smt?e=smt-no-session-floor");
       }
-    } else if (profile?.role === "admin") {
+    } else if (role === "admin") {
       redirect("/admin?e=no-session-floor");
     } else {
       redirect("/profile");
     }
   }
 
-  const smtSurface = profile?.role === "smt" ? await getSmtDashboardSurface() : null;
-  const active = await getConferenceForDashboard({
-    role: profile?.role === "smt" ? "smt" : "chair",
-    userId: user.id,
-    smtDashboardSurface: smtSurface,
-  });
+  const smtSurface = role === "smt" ? await getSmtDashboardSurface() : null;
+  const active = await getConferenceForDashboardCached(
+    role === "smt" ? "smt" : "chair",
+    user.id,
+    smtSurface
+  );
   if (!active) return null;
 
-  const bundle = await getResolvedDebateConferenceBundle(supabase, active.id);
+  const bundle = await getResolvedDebateConferenceBundleCached(supabase, active.id);
   const conferenceTitle = [active.name, active.committee].filter(Boolean).join(" — ");
   return {
     conferenceId: active.id,
@@ -65,3 +76,6 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
     committeeLabelRaw: bundle.committeeLabelRaw,
   };
 }
+
+/** Alias so floor layout + pages share one resolution per request. */
+export const loadChairSessionConferenceCached = cache(loadChairSessionConference);
