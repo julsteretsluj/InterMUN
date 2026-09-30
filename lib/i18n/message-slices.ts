@@ -25,6 +25,10 @@ export const CORE_MESSAGE_NAMESPACES = [
  * conferenceSetupForm on /chair/room-code + /smt/room-codes,
  * secretariatRegistration on /admin intake, seamunConferenceLinks on
  * /official-links) — omitting them surfaces missing-key fallbacks.
+ *
+ * Soft-nav from /login into the app can keep the public sliced catalog on the
+ * root IntlProvider (layout does not remount). Authenticated layouts re-provide
+ * messages via `AppMessagesProvider` so app namespaces resolve after login.
  */
 export const APP_DEFERRED_MESSAGE_NAMESPACES = [
   "marketing",
@@ -73,6 +77,7 @@ export const MARKETING_MESSAGE_NAMESPACES = [
   "smtRoomCodesPage",
   "voting",
   "chairSpeakerQueuePanel",
+  "chairOpeningSpeechPanel",
   "documents",
   "speeches",
   "stances",

@@ -12,6 +12,7 @@ import { AdvisorDashboardSidebar, AdvisorMobileDock } from "@/components/dashboa
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { TourShell } from "@/components/tour/TourShell";
 import { getTranslations } from "next-intl/server";
+import { AppMessagesProvider } from "@/components/i18n/AppMessagesProvider";
 
 export default async function AdvisorLayout({ children }: { children: React.ReactNode }) {
   const t = await getTranslations("advisorLayout");
@@ -49,6 +50,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
     : schoolLine;
 
   return (
+    <AppMessagesProvider>
     <AppleAppFrame appName={appName}>
     <TourShell view="advisor">
     <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
@@ -111,5 +113,6 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
     </div>
     </TourShell>
     </AppleAppFrame>
+    </AppMessagesProvider>
   );
 }

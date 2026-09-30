@@ -12,6 +12,7 @@ import { AppleAppFrame } from "@/components/ui/AppleAppShell";
 import { getAppName } from "@/lib/branding";
 import { AdminAppChrome } from "@/components/admin/AdminAppChrome";
 import { TourShell } from "@/components/tour/TourShell";
+import { AppMessagesProvider } from "@/components/i18n/AppMessagesProvider";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -57,6 +58,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   );
 
   return (
+    <AppMessagesProvider>
     <AppleAppFrame appName={appName} className="bg-[var(--dashboard-cream)]">
       <TourShell view="admin">
       <AdminAppChrome
@@ -70,5 +72,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <PaperSavedWidget />
       </TourShell>
     </AppleAppFrame>
+    </AppMessagesProvider>
   );
 }

@@ -39,6 +39,7 @@ import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { TourShell } from "@/components/tour/TourShell";
 import { ChairSessionReminderHost } from "@/components/chair/ChairSessionReminderHost";
+import { AppMessagesProvider } from "@/components/i18n/AppMessagesProvider";
 import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
 import {
   buildSeamunPresetSessionsForCommittee,
@@ -186,6 +187,7 @@ export default async function DashboardLayout({
   const chairSiblingIds = isChairRole(effectiveRole) ? liveFloorSiblings : null;
 
   return (
+    <AppMessagesProvider>
     <AppleAppFrame appName={appName}>
     <TourShell view={tourView}>
     <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
@@ -319,5 +321,6 @@ export default async function DashboardLayout({
     </div>
     </TourShell>
     </AppleAppFrame>
+    </AppMessagesProvider>
   );
 }

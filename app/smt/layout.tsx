@@ -12,6 +12,7 @@ import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnno
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { TourShell } from "@/components/tour/TourShell";
+import { AppMessagesProvider } from "@/components/i18n/AppMessagesProvider";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -51,6 +52,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
     : null;
 
   return (
+    <AppMessagesProvider>
     <AppleAppFrame appName={appName}>
     <TourShell view="smt">
     <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
@@ -102,5 +104,6 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
     </div>
     </TourShell>
     </AppleAppFrame>
+    </AppMessagesProvider>
   );
 }
