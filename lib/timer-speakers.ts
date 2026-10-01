@@ -78,22 +78,20 @@ export async function upsertAlignedSpeakerTimer(
     return { data: null, error: null };
   }
 
+  const existingTotal =
+    input.existing && !isSpeakerTimerUnconfigured(input.existing)
+      ? Math.round(input.existing.total_time_seconds ?? 0)
+      : 0;
+  const existingLeft =
+    input.existing && !isSpeakerTimerUnconfigured(input.existing)
+      ? Math.round(input.existing.time_left_seconds ?? 0)
+      : 0;
   const total = Math.max(
     1,
-    Math.round(
-      input.totalTimeSeconds ??
-        (input.existing && !isSpeakerTimerUnconfigured(input.existing)
-          ? input.existing.total_time_seconds
-          : null) ??
-        DEFAULT_SPEAKER_TIMER_SECONDS
-    )
+    Math.round(input.totalTimeSeconds ?? (existingTotal > 0 ? existingTotal : DEFAULT_SPEAKER_TIMER_SECONDS))
   );
   let left = Math.round(
-    input.timeLeftSeconds ??
-      (input.existing && !isSpeakerTimerUnconfigured(input.existing)
-        ? input.existing.time_left_seconds
-        : null) ??
-      total
+    input.timeLeftSeconds ?? (existingLeft > 0 ? existingLeft : total)
   );
   if (left > total) left = total;
   if (left < 0) left = 0;

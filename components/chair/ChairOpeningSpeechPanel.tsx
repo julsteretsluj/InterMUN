@@ -9,19 +9,22 @@ import { ListOrdered, Mic2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { applyOptimisticTimerPatch, refreshSharedConferenceTimer } from "@/lib/hooks/useCommitteeLiveStore";
 import {
+  OPENING_SPEECH_EXTENDED_FLOOR_LABEL,
   OPENING_SPEECH_EXTENDED_SECONDS,
+  OPENING_SPEECH_FLOOR_LABEL,
   OPENING_SPEECH_SECONDS,
   allocationsForOpeningSpeeches,
   isOpeningSpeechFloorLabel,
   openingSpeechSecondsFromFloorLabel,
   setupOpeningSpeeches,
 } from "@/lib/opening-speech";
+import { SPEAKER_QUEUE_LIST_KIND_OPENING } from "@/lib/speaker-queue";
 import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
 } from "@/components/chair/ChairSpeakerQueuePanel";
-import { SPEAKER_QUEUE_LIST_KIND_OPENING } from "@/lib/speaker-queue";
 
 type Alloc = { id: string; country: string; userRole?: string | null };
 
@@ -106,6 +109,17 @@ export function ChairOpeningSpeechPanel({
         notify(result.message);
         return;
       }
+      applyOptimisticTimerPatch(conferenceId, {
+        time_left_seconds: seconds,
+        total_time_seconds: seconds,
+        per_speaker_mode: true,
+        is_running: false,
+        floor_label:
+          seconds >= OPENING_SPEECH_EXTENDED_SECONDS
+            ? OPENING_SPEECH_EXTENDED_FLOOR_LABEL
+            : OPENING_SPEECH_FLOOR_LABEL,
+      });
+      refreshSharedConferenceTimer(conferenceId);
       notify(
         result.skipped > 0
           ? t("setupDoneWithSkipped", {

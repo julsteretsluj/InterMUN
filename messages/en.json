@@ -1822,7 +1822,7 @@
     "current": "Current",
     "remove": "Remove",
     "noActiveSpeaker": "No one is at the mic",
-    "noTimerYet": "Save a speaker timer on Session → Timer to start the clock.",
+    "noTimerYet": "Press Start for a 60s per-speaker clock, or set a custom time on",
     "noTimerYetDigitalRoom": "Set per-speaker time below, then Start.",
     "noWaitingToAdvance": "No waiting speakers in the queue to advance to.",
     "perSpeakerShort": "per speaker",
