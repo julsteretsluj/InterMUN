@@ -738,19 +738,33 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                 className="mt-1 font-mono text-3xl font-semibold tabular-nums tracking-tight text-brand-accent"
                 suppressHydrationWarning
               >
-                {liveTimer ? formatSpeakerClock(remaining) : t("dash")}
+                {timerConfigured ? formatSpeakerClock(remaining) : t("dash")}
               </p>
               <p className="mt-0.5 text-xs text-brand-muted">
-                {liveTimer
-                  ? `${formatSpeakerClock(speakerCap || remaining)}${perSpeakerMode ? ` ${t("perSpeakerShort")}` : ""}`
-                  : isSession ? t("noTimerYet") : t("noTimerYetDigitalRoom")}
-                {liveTimer && !isRunning ? ` ${t("pausedParen")}` : null}
+                {timerConfigured ? (
+                  <>
+                    {`${formatSpeakerClock(speakerCap || remaining)}${perSpeakerMode ? ` ${t("perSpeakerShort")}` : ""}`}
+                    {!isRunning ? ` ${t("pausedParen")}` : null}
+                  </>
+                ) : isSession ? (
+                  <>
+                    {t("noTimerYet")}{" "}
+                    <Link
+                      href="/chair/session/timer"
+                      className="font-medium text-brand-accent underline decoration-brand-accent/40 underline-offset-2"
+                    >
+                      {t("sessionTimerLink")}
+                    </Link>
+                  </>
+                ) : (
+                  t("noTimerYetDigitalRoom")
+                )}
               </p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <FloorTimerRunButtons
-              running={Boolean(liveTimer) && isRunning && remaining > 0}
+              running={clockRunning}
               pending={pendingClock}
               onStart={startSpeakerClock}
               onPause={pauseSpeakerClock}
@@ -956,7 +970,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       }
                     >
                       ({statusLabel(q.status)}
-                      {q.status === "current" && liveTimer
+                      {q.status === "current" && timerConfigured
                         ? ` · ${formatSpeakerClock(remaining)}`
                         : ""}
                       )
