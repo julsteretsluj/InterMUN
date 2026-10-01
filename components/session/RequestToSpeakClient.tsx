@@ -12,6 +12,7 @@ import {
   fetchDisciplineForAllocation,
 } from "@/lib/delegate-discipline";
 import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
+import { SPEAKER_QUEUE_LIST_KIND_GSL } from "@/lib/speaker-queue";
 
 export function RequestToSpeakClient({
   conferenceId,
@@ -56,12 +57,13 @@ export function RequestToSpeakClient({
         return;
       }
 
-      // Dedupe: one active waiting/current entry per allocation.
+      // Dedupe: one active waiting/current entry per allocation on the Speakers list.
       const { data: existing, error: existingErr } = await supabase
         .from("speaker_queue_entries")
         .select("id,status")
         .eq("conference_id", conferenceId)
         .eq("allocation_id", allocationId)
+        .eq("list_kind", SPEAKER_QUEUE_LIST_KIND_GSL)
         .in("status", ["waiting", "current"]);
 
       if (existingErr) throw existingErr;
@@ -75,6 +77,7 @@ export function RequestToSpeakClient({
         .from("speaker_queue_entries")
         .select("sort_order")
         .eq("conference_id", conferenceId)
+        .eq("list_kind", SPEAKER_QUEUE_LIST_KIND_GSL)
         .order("sort_order", { ascending: false })
         .limit(1)
         .maybeSingle();
@@ -90,6 +93,7 @@ export function RequestToSpeakClient({
         sort_order: nextSortOrder,
         label,
         status: "waiting",
+        list_kind: SPEAKER_QUEUE_LIST_KIND_GSL,
       });
 
       if (insErr) throw insErr;

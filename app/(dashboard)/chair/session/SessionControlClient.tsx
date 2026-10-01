@@ -23,7 +23,7 @@ import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
 import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
-import { currentAndNextQueueRows, fetchSpeakerQueue } from "@/lib/speaker-queue";
+import { currentAndNextQueueRows, fetchSpeakerQueue, resolveSpeakerQueueListKind } from "@/lib/speaker-queue";
 import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
@@ -1137,7 +1137,7 @@ export function SessionControlClient({
       { data: resolutionRows },
       { data: clauseRows },
       { data: pauseRows },
-      { data: sqCurrentRow },
+      { data: sqCurrentRows },
       { data: pointRows },
       { data: disciplinaryRows },
     ] =
@@ -1206,10 +1206,10 @@ export function SessionControlClient({
           .limit(20),
         supabase
           .from("speaker_queue_entries")
-          .select("id, allocation_id, label")
+          .select("id, allocation_id, label, list_kind")
           .eq("conference_id", floorConferenceId)
           .eq("status", "current")
-          .maybeSingle(),
+          .limit(4),
         supabase
           .from("chair_session_points")
           .select("id, conference_id, raised_by_allocation_id, point_code, detail, status, created_at")
@@ -1266,7 +1266,19 @@ export function SessionControlClient({
     setRoll(rollMapped.filter((row) => allowedAllocIds.has(row.allocation_id)));
     setAnnouncements((ann as Announcement[]) ?? []);
     setPauseEvents((pauseRows as PauseEvent[]) ?? []);
-    setCurrentSpeakerQueueRow((sqCurrentRow as CurrentSpeakerQueueRow | null) ?? null);
+    {
+      const currents =
+        (sqCurrentRows as (CurrentSpeakerQueueRow & { list_kind?: string | null })[] | null) ?? [];
+      const activeKind = resolveSpeakerQueueListKind(
+        (timerRow as { floor_label?: string | null } | null)?.floor_label
+      );
+      const picked =
+        currents.find((r) => (r.list_kind ?? "gsl") === activeKind) ??
+        currents.find((r) => (r.list_kind ?? "gsl") === "gsl") ??
+        currents[0] ??
+        null;
+      setCurrentSpeakerQueueRow(picked);
+    }
     setSessionPoints((pointRows as SessionPointRow[]) ?? []);
     const dMap: Record<string, DisciplinaryRow> = {};
     for (const row of (disciplinaryRows as DisciplinaryRow[] | null) ?? []) {
@@ -1692,7 +1704,8 @@ export function SessionControlClient({
       if (opts?.successMessage) setMsg(opts.successMessage);
 
       try {
-        const queueRows = await fetchSpeakerQueue(supabase, floorConferenceId);
+        const queueKind = resolveSpeakerQueueListKind(floorLabel);
+        const queueRows = await fetchSpeakerQueue(supabase, floorConferenceId, queueKind);
         const { current, next } = currentAndNextQueueRows(queueRows);
         const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
           if (!row) return "";
@@ -2051,7 +2064,8 @@ export function SessionControlClient({
     };
 
     runBusy("advance", async () => {
-      const rows = await fetchSpeakerQueue(supabase, floorConferenceId);
+      const queueKind = resolveSpeakerQueueListKind(timer.floorLabel);
+      const rows = await fetchSpeakerQueue(supabase, floorConferenceId, queueKind);
       const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
       const currentRow = sorted.find((r) => r.status === "current") ?? null;
       const { next: nextCurrent } = currentAndNextQueueRows(sorted);

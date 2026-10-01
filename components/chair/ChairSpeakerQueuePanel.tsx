@@ -11,7 +11,10 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
-import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
+import {
+  applyOptimisticTimerPatch,
+  refreshSharedConferenceTimer,
+} from "@/lib/hooks/useCommitteeLiveStore";
 import { isSpeakerListEligibleAllocation } from "@/lib/speaker-list-eligibility";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { EU_PARLIAMENT_PARTY_KEYS, type EuPartyKey } from "@/lib/eu-party-time";
@@ -21,9 +24,16 @@ import {
   addAllocationToSpeakerQueue,
   currentAndNextQueueRows,
   fetchSpeakerQueue,
+  SPEAKER_QUEUE_LIST_KIND_GSL,
   type SpeakerQueueEntry,
+  type SpeakerQueueListKind,
 } from "@/lib/speaker-queue";
-import { upsertAlignedSpeakerTimer } from "@/lib/timer-speakers";
+import {
+  DEFAULT_SPEAKER_TIMER_SECONDS,
+  isSpeakerTimerUnconfigured,
+  resolveSpeakerTimerSeconds,
+  upsertAlignedSpeakerTimer,
+} from "@/lib/timer-speakers";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
   notifySpeakerQueueUpdated,
@@ -40,6 +50,8 @@ type ChairSpeakerQueuePanelProps = {
   conferenceId: string;
   allocations: Alloc[];
   variant: "session" | "digital-room";
+  /** Which Speakers-tab list this panel edits (default: GSL / Speaker list). */
+  listKind?: SpeakerQueueListKind;
   isEuParliament?: boolean;
   /** Crisis committees keep crisis actor seats even when linked to chair-role accounts. */
   isCrisisCommittee?: boolean;
@@ -149,6 +161,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       conferenceId,
       allocations,
       variant,
+      listKind = SPEAKER_QUEUE_LIST_KIND_GSL,
       isEuParliament = false,
       isCrisisCommittee = false,
       speakerListPromptKind = null,
@@ -191,12 +204,12 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     const loadQueue = useCallback(async () => {
       try {
-        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+        const rows = await fetchSpeakerQueue(supabase, conferenceId, listKind);
         setQueue(rows);
       } catch {
         setQueue([]);
       }
-    }, [supabase, conferenceId]);
+    }, [supabase, conferenceId, listKind]);
 
     useEffect(() => {
       // Deferred to a microtask so state lands asynchronously (no sync cascade).
@@ -362,13 +375,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       const a = speakerAllocations.find((x) => x.id === pickAlloc);
       if (!a) return;
       runBusy("queue", async () => {
-        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+        const rows = await fetchSpeakerQueue(supabase, conferenceId, listKind);
         const result = await addAllocationToSpeakerQueue(
           supabase,
           conferenceId,
           a.id,
           a.queueLabel,
-          rows
+          rows,
+          listKind
         );
         notify(result.ok ? t("addedToSpeakerList") : result.message);
         void loadQueue();
@@ -384,7 +398,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         return;
       }
       runBusy("queue", async () => {
-        let rows = await fetchSpeakerQueue(supabase, conferenceId);
+        let rows = await fetchSpeakerQueue(supabase, conferenceId, listKind);
         for (let i = 0; i < toAdd.length; i++) {
           const id = toAdd[i]!;
           const alloc = speakerAllocations.find((x) => x.id === id);
@@ -393,14 +407,15 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             conferenceId,
             id,
             alloc?.queueLabel ?? t("dash"),
-            rows
+            rows,
+            listKind
           );
           if (!result.ok) {
             notify(result.message);
             void loadQueue();
             return;
           }
-          rows = await fetchSpeakerQueue(supabase, conferenceId);
+          rows = await fetchSpeakerQueue(supabase, conferenceId, listKind);
         }
         notify(t("addedSpeakersInOrder", { count: toAdd.length }));
         setCaucusBulkPick([]);
@@ -430,7 +445,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     function setCurrent(id: string) {
       runBusy("queue", async () => {
-        const rows = queue.length ? queue : await fetchSpeakerQueue(supabase, conferenceId);
+        const rows = queue.length ? queue : await fetchSpeakerQueue(supabase, conferenceId, listKind);
         const existingCurrent = rows.find((r) => r.status === "current");
         const target = rows.find((r) => r.id === id) ?? null;
         const nextRows = rows.map((r) =>
@@ -449,7 +464,10 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           });
         }
         const { next } = currentAndNextQueueRows(nextRows);
-        const cap = Math.max(1, speakerCap || remaining || 60);
+        const cap = resolveSpeakerTimerSeconds(
+          liveTimer,
+          speakerCap || remaining || DEFAULT_SPEAKER_TIMER_SECONDS
+        );
         const currentLabel = target ? queueLabelForRow(target) : null;
         const nextLabel = next ? queueLabelForRow(next) : null;
         lastSyncedSpeakerKey.current = `${currentLabel ?? ""}|${nextLabel ?? ""}`;
@@ -471,12 +489,13 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           perSpeakerMode: true,
           isRunning: true,
         });
+        refreshSharedConferenceTimer(conferenceId);
         bumpQueueSync();
       });
     }
 
     function pauseSpeakerClock() {
-      if (!liveTimer || remaining <= 0 || !isRunning) {
+      if (!liveTimer || isSpeakerTimerUnconfigured(liveTimer) || remaining <= 0 || !isRunning) {
         notify(tTimer("alreadyPaused"));
         return;
       }
@@ -496,15 +515,21 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           })
           .eq("conference_id", conferenceId);
         if (error) notify(error.message);
+        else refreshSharedConferenceTimer(conferenceId);
       });
     }
 
     function startSpeakerClock() {
       const currentLabel = alignedCurrentLabel;
       const nextLabel = alignedNextLabel;
-      const cap = Math.max(1, speakerCap || remaining || 60);
-      const resumeLeft = liveTimer && remaining > 0 ? Math.max(1, Math.round(remaining)) : cap;
-      if (liveTimer && isRunning && remaining > 0) {
+      const unconfigured = isSpeakerTimerUnconfigured(liveTimer);
+      const cap = resolveSpeakerTimerSeconds(
+        liveTimer,
+        speakerCap || remaining || DEFAULT_SPEAKER_TIMER_SECONDS
+      );
+      const resumeLeft =
+        !unconfigured && liveTimer && remaining > 0 ? Math.max(1, Math.round(remaining)) : cap;
+      if (!unconfigured && liveTimer && isRunning && remaining > 0) {
         notify(tTimer("alreadyRunning"));
         return;
       }
@@ -528,7 +553,11 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           perSpeakerMode: true,
           isRunning: true,
         });
-        if (error) notify(error.message);
+        if (error) {
+          notify(error.message);
+          return;
+        }
+        refreshSharedConferenceTimer(conferenceId);
       });
     }
 
@@ -551,8 +580,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           timeLeftSeconds: cap,
           totalTimeSeconds: cap,
           perSpeakerMode: true,
-          isRunning: Boolean(liveTimer) && isRunning && remaining > 0,
+          isRunning: Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer) && isRunning && remaining > 0,
         });
+        if (!error) refreshSharedConferenceTimer(conferenceId);
         notify(error ? error.message : t("perSpeakerTimeApplied", { clock: formatSpeakerClock(cap) }));
       });
     }
@@ -571,7 +601,10 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         return r;
       });
       const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
-      const cap = Math.max(1, speakerCap || remaining || 60);
+      const cap = resolveSpeakerTimerSeconds(
+        liveTimer,
+        speakerCap || remaining || DEFAULT_SPEAKER_TIMER_SECONDS
+      );
       const currentLabel = queueLabelForRow(nextCurrent);
       const nextLabel = afterNext ? queueLabelForRow(afterNext) : null;
       lastSyncedSpeakerKey.current = `${currentLabel}|${nextLabel ?? ""}`;
@@ -609,6 +642,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           isRunning: true,
         });
         if (error) notify(error.message);
+        else refreshSharedConferenceTimer(conferenceId);
         void loadQueue();
       });
     }
@@ -637,6 +671,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     const isSession = variant === "session";
+    const timerConfigured = Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer);
+    const clockRunning = timerConfigured && isRunning && remaining > 0;
     const headingClass = isSession
       ? "font-sans text-lg font-semibold text-brand-navy"
       : "font-sans text-lg font-semibold text-brand-navy";

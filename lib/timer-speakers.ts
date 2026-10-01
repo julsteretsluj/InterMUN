@@ -14,6 +14,30 @@ export type TimerSpeakerExisting = {
   next_speaker?: string | null;
 };
 
+export const DEFAULT_SPEAKER_TIMER_SECONDS = 60;
+
+/** True when there is no usable per-speaker / floor clock yet (missing row or 0/0 seed). */
+export function isSpeakerTimerUnconfigured(
+  timer: Pick<TimerSpeakerExisting, "total_time_seconds" | "time_left_seconds"> | null | undefined
+): boolean {
+  if (!timer) return true;
+  const total = Math.round(timer.total_time_seconds ?? 0);
+  const left = Math.round(timer.time_left_seconds ?? 0);
+  return total <= 0 && left <= 0;
+}
+
+/** Prefer an existing cap; otherwise fall back to opening-speech / GSL default (60s). */
+export function resolveSpeakerTimerSeconds(
+  timer: TimerSpeakerExisting | null | undefined,
+  fallbackSeconds: number = DEFAULT_SPEAKER_TIMER_SECONDS
+): number {
+  const total = Math.round(timer?.total_time_seconds ?? 0);
+  const left = Math.round(timer?.time_left_seconds ?? 0);
+  if (total > 0) return total;
+  if (left > 0) return left;
+  return Math.max(1, Math.round(fallbackSeconds));
+}
+
 /** Keep the floor timer's current/next speaker in lockstep with the speaker list. */
 export async function upsertAlignedSpeakerTimer(
   supabase: SupabaseClient,
@@ -49,16 +73,27 @@ export async function upsertAlignedSpeakerTimer(
         })
         .eq("conference_id", conferenceId);
     }
+    // No timer row yet — names-only sync must not invent a paused clock.
+    // Start / advance / opening-speech setup create the row intentionally.
+    return { data: null, error: null };
   }
 
   const total = Math.max(
     1,
     Math.round(
-      input.totalTimeSeconds ?? input.existing?.total_time_seconds ?? 60
+      input.totalTimeSeconds ??
+        (input.existing && !isSpeakerTimerUnconfigured(input.existing)
+          ? input.existing.total_time_seconds
+          : null) ??
+        DEFAULT_SPEAKER_TIMER_SECONDS
     )
   );
   let left = Math.round(
-    input.timeLeftSeconds ?? input.existing?.time_left_seconds ?? total
+    input.timeLeftSeconds ??
+      (input.existing && !isSpeakerTimerUnconfigured(input.existing)
+        ? input.existing.time_left_seconds
+        : null) ??
+      total
   );
   if (left > total) left = total;
   if (left < 0) left = 0;
@@ -88,5 +123,16 @@ export async function upsertAlignedSpeakerTimer(
   };
   if (isRunning) payload.current_pause_reason = null;
 
-  return supabase.from("timers").upsert(payload, { onConflict: "conference_id" });
+  const upserted = await supabase
+    .from("timers")
+    .upsert(payload, { onConflict: "conference_id" });
+  if (!upserted.error) return upserted;
+
+  // Sibling topic rows (and some older committees) may lack a timers seed row;
+  // fall back to plain insert, then update, so Speakers Start still works.
+  const inserted = await supabase.from("timers").insert(payload);
+  if (!inserted.error) return inserted;
+
+  const { conference_id: _omit, ...updateFields } = payload;
+  return supabase.from("timers").update(updateFields).eq("conference_id", conferenceId);
 }

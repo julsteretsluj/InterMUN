@@ -152,6 +152,8 @@ function acquireTimer(conferenceId: string): StoreEntry<ConferenceTimerRow> {
     .then(({ data }) => {
       const current = timerById.get(conferenceId);
       if (!current) return;
+      // Optimistic patches / realtime may finish before this fetch; never clobber them.
+      if (!current.loading) return;
       current.value = (data as ConferenceTimerRow | null) ?? null;
       current.loading = false;
       emit(current);
@@ -170,7 +172,11 @@ function acquireTimer(conferenceId: string): StoreEntry<ConferenceTimerRow> {
       (payload) => {
         const current = timerById.get(conferenceId);
         if (!current) return;
-        current.value = (payload.new as ConferenceTimerRow | null) ?? null;
+        if (payload.eventType === "DELETE") {
+          current.value = null;
+        } else {
+          current.value = (payload.new as ConferenceTimerRow | null) ?? null;
+        }
         current.loading = false;
         emit(current);
       }
@@ -268,4 +274,23 @@ export function applyOptimisticTimerPatch(
   entry.value = { ...base, ...patch, conference_id: conferenceId };
   entry.loading = false;
   emit(entry);
+}
+
+/** Re-read the timers row into the shared store after a local write (does not rely on realtime). */
+export function refreshSharedConferenceTimer(conferenceId: string) {
+  const entry = timerById.get(conferenceId);
+  if (!entry) return;
+  const supabase = getBrowserClient();
+  void supabase
+    .from("timers")
+    .select("*")
+    .eq("conference_id", conferenceId)
+    .maybeSingle()
+    .then(({ data }) => {
+      const current = timerById.get(conferenceId);
+      if (!current) return;
+      current.value = (data as ConferenceTimerRow | null) ?? null;
+      current.loading = false;
+      emit(current);
+    });
 }

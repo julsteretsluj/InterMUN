@@ -9,22 +9,38 @@ import {
 } from "@/lib/delegate-discipline";
 import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
 
+/** Speakers tab lists share `speaker_queue_entries` but stay isolated by kind. */
+export type SpeakerQueueListKind = "gsl" | "opening";
+
+export const SPEAKER_QUEUE_LIST_KIND_GSL: SpeakerQueueListKind = "gsl";
+export const SPEAKER_QUEUE_LIST_KIND_OPENING: SpeakerQueueListKind = "opening";
+
+export function resolveSpeakerQueueListKind(
+  floorLabel?: string | null
+): SpeakerQueueListKind {
+  const t = (floorLabel ?? "").trim().toLowerCase();
+  return t.startsWith("opening speech") ? "opening" : "gsl";
+}
+
 export type SpeakerQueueEntry = {
   id: string;
   sort_order: number;
   label: string | null;
   status: string;
   allocation_id: string | null;
+  list_kind?: SpeakerQueueListKind | null;
 };
 
 export async function fetchSpeakerQueue(
   supabase: SupabaseClient,
-  conferenceId: string
+  conferenceId: string,
+  listKind: SpeakerQueueListKind = SPEAKER_QUEUE_LIST_KIND_GSL
 ): Promise<SpeakerQueueEntry[]> {
   const { data, error } = await supabase
     .from("speaker_queue_entries")
-    .select("id, sort_order, label, status, allocation_id")
+    .select("id, sort_order, label, status, allocation_id, list_kind")
     .eq("conference_id", conferenceId)
+    .eq("list_kind", listKind)
     .order("sort_order", { ascending: true });
   if (error) throw error;
   return (data as SpeakerQueueEntry[]) ?? [];
@@ -60,7 +76,8 @@ export async function addAllocationToSpeakerQueue(
   conferenceId: string,
   allocationId: string,
   label: string,
-  existingRows: SpeakerQueueEntry[]
+  existingRows: SpeakerQueueEntry[],
+  listKind: SpeakerQueueListKind = SPEAKER_QUEUE_LIST_KIND_GSL
 ): Promise<{ ok: true } | { ok: false; message: string }> {
   const active = activeAllocationIdsInQueue(existingRows);
   if (active.has(allocationId)) {
@@ -90,6 +107,7 @@ export async function addAllocationToSpeakerQueue(
     label,
     sort_order: max + 1,
     status: "waiting",
+    list_kind: listKind,
   });
   if (error) return { ok: false, message: error.message };
   notifySpeakerQueueUpdated(conferenceId);

@@ -21,6 +21,7 @@ import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
 } from "@/components/chair/ChairSpeakerQueuePanel";
+import { SPEAKER_QUEUE_LIST_KIND_OPENING } from "@/lib/speaker-queue";
 
 type Alloc = { id: string; country: string; userRole?: string | null };
 
@@ -136,6 +137,7 @@ export function ChairOpeningSpeechPanel({
         .from("speaker_queue_entries")
         .select("id", { count: "exact", head: true })
         .eq("conference_id", conferenceId)
+        .eq("list_kind", SPEAKER_QUEUE_LIST_KIND_OPENING)
         .in("status", ["waiting", "current"]);
       const alreadyOpening = isOpeningSpeechFloorLabel(liveTimer?.floor_label);
       if ((count ?? 0) > 0) {
@@ -227,6 +229,7 @@ export function ChairOpeningSpeechPanel({
           conferenceId={conferenceId}
           allocations={allocations}
           variant="session"
+          listKind={SPEAKER_QUEUE_LIST_KIND_OPENING}
           isEuParliament={isEuParliament}
           isCrisisCommittee={isCrisisCommittee}
           speakerListPromptKind={speakerListPromptKind}

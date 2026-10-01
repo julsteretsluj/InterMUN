@@ -5,13 +5,17 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { currentAndNextQueueRows } from "@/lib/speaker-queue";
+import {
+  currentAndNextQueueRows,
+  fetchSpeakerQueue,
+  resolveSpeakerQueueListKind,
+} from "@/lib/speaker-queue";
 import {
   SPEAKER_QUEUE_UPDATED_EVENT,
   speakerQueueUpdatedMatches,
 } from "@/lib/speaker-queue-sync";
 
-/** Live current/next labels from the speaker list (allocation country when linked). */
+/** Live current/next labels from the active speaker list (allocation country when linked). */
 export function useSpeakerQueueLabels(conferenceId: string | null) {
   const [currentLabel, setCurrentLabel] = useState<string | null>(null);
   const [nextLabel, setNextLabel] = useState<string | null>(null);
@@ -24,21 +28,17 @@ export function useSpeakerQueueLabels(conferenceId: string | null) {
     }
     const supabase = createClient();
     return supabase
-      .from("speaker_queue_entries")
-      .select("id, label, status, allocation_id, sort_order")
+      .from("timers")
+      .select("floor_label")
       .eq("conference_id", conferenceId)
-      .in("status", ["current", "waiting"])
-      .order("sort_order", { ascending: true })
-      .then(async ({ data }) => {
-        const rows =
-          (data as {
-            id: string;
-            label: string | null;
-            status: string;
-            allocation_id: string | null;
-            sort_order: number;
-          }[]) ?? [];
-        const { current, next } = currentAndNextQueueRows(rows);
+      .maybeSingle()
+      .then(async ({ data: timerRow }) => {
+        const listKind = resolveSpeakerQueueListKind(
+          (timerRow as { floor_label?: string | null } | null)?.floor_label
+        );
+        const rows = await fetchSpeakerQueue(supabase, conferenceId, listKind);
+        const active = rows.filter((r) => r.status === "current" || r.status === "waiting");
+        const { current, next } = currentAndNextQueueRows(active);
         const allocIds = [...new Set([current?.allocation_id, next?.allocation_id].filter(Boolean))] as string[];
         const countryById = new Map<string, string>();
         if (allocIds.length > 0) {
@@ -75,6 +75,16 @@ export function useSpeakerQueueLabels(conferenceId: string | null) {
           event: "*",
           schema: "public",
           table: "speaker_queue_entries",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void load()
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "timers",
           filter: `conference_id=eq.${conferenceId}`,
         },
         () => void load()

@@ -11,6 +11,7 @@ import {
 import { isSpeakerListEligibleAllocation } from "@/lib/speaker-list-eligibility";
 import { upsertAlignedSpeakerTimer, type TimerSpeakerExisting } from "@/lib/timer-speakers";
 import { notifySpeakerQueueUpdated } from "@/lib/speaker-queue-sync";
+import { SPEAKER_QUEUE_LIST_KIND_OPENING } from "@/lib/speaker-queue";
 
 export const OPENING_SPEECH_SECONDS = 60;
 export const OPENING_SPEECH_EXTENDED_SECONDS = 90;
@@ -95,8 +96,9 @@ export function openingSpeechSecondsFromFloorLabel(label: string | null | undefi
 }
 
 /**
- * Replace the speaker queue with every eligible delegation in alphabetical order,
- * and set a per-speaker floor timer (default 60s, paused).
+ * Replace the opening-speeches list with every eligible delegation in alphabetical
+ * order (does not touch the GSL / Speakers queue), and set a per-speaker floor
+ * timer (default 60s, paused).
  */
 export async function setupOpeningSpeeches(
   supabase: SupabaseClient,
@@ -162,7 +164,8 @@ export async function setupOpeningSpeeches(
   const { error: clearErr } = await supabase
     .from("speaker_queue_entries")
     .delete()
-    .eq("conference_id", conferenceId);
+    .eq("conference_id", conferenceId)
+    .eq("list_kind", SPEAKER_QUEUE_LIST_KIND_OPENING);
   if (clearErr) return { ok: false, message: clearErr.message };
 
   const rows = allowed.map((alloc, index) => ({
@@ -171,6 +174,7 @@ export async function setupOpeningSpeeches(
     label: openingSpeechQueueLabel(alloc.country),
     sort_order: index + 1,
     status: "waiting" as const,
+    list_kind: SPEAKER_QUEUE_LIST_KIND_OPENING,
   }));
 
   const { data: inserted, error: insertErr } = await supabase
