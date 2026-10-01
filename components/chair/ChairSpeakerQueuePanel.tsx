@@ -570,7 +570,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         time_left_seconds: cap,
         total_time_seconds: cap,
         per_speaker_mode: true,
-        is_running: Boolean(liveTimer) && isRunning && remaining > 0,
+        is_running: Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer) && isRunning && remaining > 0,
       });
       runBusy("clock", async () => {
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
