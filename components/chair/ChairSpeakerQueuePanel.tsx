@@ -31,7 +31,9 @@ import {
 import {
   DEFAULT_SPEAKER_TIMER_SECONDS,
   isSpeakerTimerUnconfigured,
+  resolveFloorLabelForSpeakerList,
   resolveSpeakerTimerSeconds,
+  speakerListOwnsFloor,
   upsertAlignedSpeakerTimer,
 } from "@/lib/timer-speakers";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
@@ -217,9 +219,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }, [loadQueue]);
 
     useEffect(() => {
-      const ch = supabase
-        .channel(`chair-speaker-queue-${conferenceId}`)
-        .on(
+    const ch = supabase
+      .channel(`chair-speaker-queue-${conferenceId}-${listKind}`)
+      .on(
           "postgres_changes",
           {
             event: "*",
@@ -245,7 +247,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalUpdate);
         document.removeEventListener("visibilitychange", onVisible);
       };
-    }, [supabase, conferenceId, loadQueue]);
+    }, [supabase, conferenceId, listKind, loadQueue]);
 
     const bumpQueueSync = useCallback(() => {
       notifySpeakerQueueUpdated(conferenceId);
@@ -331,6 +333,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     useEffect(() => {
       if (!currentQueueRow) return;
+      // Only the list that owns the floor may rewrite timer speaker names.
+      // Switching Opening ↔ GSL tabs must not clobber the other list's floor.
+      if (!speakerListOwnsFloor(listKind, liveTimer?.floor_label)) return;
       const currentLabel = queueLabelForRow(currentQueueRow);
       const nextLabel = nextWaitingRow ? queueLabelForRow(nextWaitingRow) : "";
       const key = `${currentLabel}|${nextLabel}`;
@@ -352,6 +357,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       currentQueueRow,
       nextWaitingRow,
       liveTimer,
+      listKind,
       queueLabelForRow,
       supabase,
     ]);
@@ -428,7 +434,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         const removed = queue.find((r) => r.id === id);
         setQueue((prev) => prev.filter((r) => r.id !== id));
         await supabase.from("speaker_queue_entries").delete().eq("id", id);
-        if (removed?.status === "current") {
+        if (removed?.status === "current" && speakerListOwnsFloor(listKind, liveTimer?.floor_label)) {
           const leftover = queue.filter((r) => r.id !== id);
           const { next } = currentAndNextQueueRows(leftover);
           lastSyncedSpeakerKey.current = `|${next ? queueLabelForRow(next) : ""}`;
@@ -470,6 +476,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         );
         const currentLabel = target ? queueLabelForRow(target) : null;
         const nextLabel = next ? queueLabelForRow(next) : null;
+        const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
         lastSyncedSpeakerKey.current = `${currentLabel ?? ""}|${nextLabel ?? ""}`;
         applyOptimisticTimerPatch(conferenceId, {
           current_speaker: currentLabel,
@@ -479,6 +486,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           per_speaker_mode: true,
           is_running: true,
           current_pause_reason: null,
+          floor_label: floorLabel,
         });
         await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
@@ -488,6 +496,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           totalTimeSeconds: cap,
           perSpeakerMode: true,
           isRunning: true,
+          floorLabel,
         });
         refreshSharedConferenceTimer(conferenceId);
         bumpQueueSync();
@@ -533,6 +542,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         notify(tTimer("alreadyRunning"));
         return;
       }
+      const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
       applyOptimisticTimerPatch(conferenceId, {
         current_speaker: currentLabel,
         next_speaker: nextLabel,
@@ -541,6 +551,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         per_speaker_mode: true,
         is_running: true,
         current_pause_reason: null,
+        floor_label: floorLabel,
       });
       notify(tTimer("runningForCommittee"));
       runBusy("clock", async () => {
@@ -552,6 +563,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           totalTimeSeconds: cap,
           perSpeakerMode: true,
           isRunning: true,
+          floorLabel,
         });
         if (error) {
           notify(error.message);
@@ -566,11 +578,15 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         1,
         (Math.max(0, parseInt(capM, 10) || 0) * 60) + Math.max(0, parseInt(capS, 10) || 0)
       );
+      const keepRunning =
+        Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer) && isRunning && remaining > 0;
+      const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
       applyOptimisticTimerPatch(conferenceId, {
         time_left_seconds: cap,
         total_time_seconds: cap,
         per_speaker_mode: true,
-        is_running: Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer) && isRunning && remaining > 0,
+        is_running: keepRunning,
+        floor_label: floorLabel,
       });
       runBusy("clock", async () => {
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
@@ -580,7 +596,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           timeLeftSeconds: cap,
           totalTimeSeconds: cap,
           perSpeakerMode: true,
-          isRunning: Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer) && isRunning && remaining > 0,
+          isRunning: keepRunning,
+          floorLabel,
         });
         if (!error) refreshSharedConferenceTimer(conferenceId);
         notify(error ? error.message : t("perSpeakerTimeApplied", { clock: formatSpeakerClock(cap) }));
@@ -607,6 +624,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       );
       const currentLabel = queueLabelForRow(nextCurrent);
       const nextLabel = afterNext ? queueLabelForRow(afterNext) : null;
+      const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
       lastSyncedSpeakerKey.current = `${currentLabel}|${nextLabel ?? ""}`;
 
       setQueue(afterAdvance);
@@ -618,6 +636,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         per_speaker_mode: true,
         is_running: true,
         current_pause_reason: null,
+        floor_label: floorLabel,
       });
       notify(tEuParty("advancedSpeakerResetClock"));
       notifySpeakerQueueUpdated(conferenceId);
@@ -640,6 +659,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           totalTimeSeconds: cap,
           perSpeakerMode: true,
           isRunning: true,
+          floorLabel,
         });
         if (error) notify(error.message);
         else refreshSharedConferenceTimer(conferenceId);

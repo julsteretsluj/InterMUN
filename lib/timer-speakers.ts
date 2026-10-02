@@ -38,6 +38,47 @@ export function resolveSpeakerTimerSeconds(
   return Math.max(1, Math.round(fallbackSeconds));
 }
 
+function floorLabelLooksLikeOpeningSpeech(label: string | null | undefined): boolean {
+  return (label ?? "").trim().toLowerCase().startsWith("opening speech");
+}
+
+/**
+ * Keep `floor_label` coherent with which Speakers sub-list is driving the clock.
+ * Opening Start/Advance stamps "Opening speeches"; GSL Start clears an opening stamp
+ * so Timer Advance / live widgets resolve the GSL queue.
+ */
+export function resolveFloorLabelForSpeakerList(
+  listKind: "gsl" | "opening",
+  existingFloorLabel: string | null | undefined
+): string | null {
+  const existing = existingFloorLabel?.trim() || null;
+  const existingIsOpening = floorLabelLooksLikeOpeningSpeech(existing);
+  if (listKind === "opening") {
+    return existingIsOpening ? existing : "Opening speeches";
+  }
+  return existingIsOpening ? null : existing;
+}
+
+/** True when this Speakers sub-list should own timer current/next name sync. */
+export function speakerListOwnsFloor(
+  listKind: "gsl" | "opening",
+  floorLabel: string | null | undefined
+): boolean {
+  const openingFloor = floorLabelLooksLikeOpeningSpeech(floorLabel);
+  return listKind === "opening" ? openingFloor : !openingFloor;
+}
+
+/** Running only when the clock has a real duration and is_running is not false. */
+export function isSpeakerTimerActivelyRunning(
+  timer: Pick<
+    TimerSpeakerExisting,
+    "total_time_seconds" | "time_left_seconds" | "is_running"
+  > | null | undefined
+): boolean {
+  if (!timer || isSpeakerTimerUnconfigured(timer)) return false;
+  return timer.is_running !== false;
+}
+
 /** Keep the floor timer's current/next speaker in lockstep with the speaker list. */
 export async function upsertAlignedSpeakerTimer(
   supabase: SupabaseClient,

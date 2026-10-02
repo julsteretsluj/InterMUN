@@ -27,6 +27,10 @@ import { currentAndNextQueueRows, fetchSpeakerQueue, resolveSpeakerQueueListKind
 import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
+  isSpeakerTimerActivelyRunning,
+  isSpeakerTimerUnconfigured,
+} from "@/lib/timer-speakers";
+import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
 } from "@/components/chair/ChairSpeakerQueuePanel";
@@ -583,11 +587,13 @@ export function SessionControlClient({
     };
   }, [supabase, floorConferenceId]);
 
-  const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
-    floorConferenceId,
-    openMotion?.id ?? null,
-    true
-  );
+  const { timer: liveTimerRow, remaining: liveRemaining, isRunning: liveTimerIsRunning } =
+    useConferenceTimer(floorConferenceId, openMotion?.id ?? null, true);
+  const liveClockRunning =
+    Boolean(liveTimerRow) &&
+    !isSpeakerTimerUnconfigured(liveTimerRow) &&
+    liveTimerIsRunning &&
+    liveRemaining > 0;
 
   useEffect(() => {
     let mounted = true;
@@ -1462,7 +1468,8 @@ export function SessionControlClient({
         totalM: String(Math.floor(tt / 60)),
         totalS: String(tt % 60),
         perSpeakerMode: !!tr.per_speaker_mode,
-        isRunning: tr.is_running !== false,
+        // Seeded 0/0 rows default is_running=true in DB — treat as paused until configured.
+        isRunning: isSpeakerTimerActivelyRunning(timerRow),
         purpose: vid ? "motion_vote" : "general_floor",
         boundVoteItemId: vid ?? "",
         floorLabel: floorLabel.trim(),
@@ -1784,12 +1791,17 @@ export function SessionControlClient({
   }
 
   function stopFloorTimer() {
-    if (!liveTimerRow) {
+    if (!liveTimerRow || isSpeakerTimerUnconfigured(liveTimerRow)) {
       setMsg("Save the timer once so there is a row to pause.");
       return;
     }
-    if (!timer.isRunning) {
+    const liveRunning = isSpeakerTimerActivelyRunning(liveTimerRow) && liveRemaining > 0;
+    if (!liveRunning) {
       setMsg(tTimer("alreadyPaused"));
+      // Keep form in sync when Speakers paused first.
+      if (timer.isRunning) {
+        setTimer((t) => ({ ...t, isRunning: false }));
+      }
       return;
     }
     const frozenLeft = Math.max(0, Math.round(liveRemaining));
@@ -1834,17 +1846,27 @@ export function SessionControlClient({
 
   function startFloorTimer() {
     const remainingNow = Math.max(0, Math.round(liveRemaining));
-    if (liveTimerRow && timer.isRunning && remainingNow > 0) {
+    const liveRunning =
+      Boolean(liveTimerRow) &&
+      isSpeakerTimerActivelyRunning(liveTimerRow) &&
+      remainingNow > 0;
+    if (liveRunning) {
       setMsg(tTimer("alreadyRunning"));
+      if (!timer.isRunning) setTimer((t) => ({ ...t, isRunning: true }));
       return;
     }
-    if (liveTimerRow && remainingNow > 0) {
+    if (liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow) && remainingNow > 0) {
       applyOptimisticTimerPatch(floorConferenceId, {
         is_running: true,
         current_pause_reason: null,
         time_left_seconds: remainingNow,
       });
-      setTimer((t) => ({ ...t, isRunning: true }));
+      setTimer((t) => ({
+        ...t,
+        isRunning: true,
+        leftM: String(Math.floor(remainingNow / 60)),
+        leftS: String(remainingNow % 60),
+      }));
       setMsg(tTimer("runningForCommittee"));
       runBusy("timer", async () => {
         const { error } = await supabase
@@ -1852,6 +1874,7 @@ export function SessionControlClient({
           .update({
             is_running: true,
             current_pause_reason: null,
+            time_left_seconds: remainingNow,
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", floorConferenceId);
@@ -1862,7 +1885,19 @@ export function SessionControlClient({
       });
       return;
     }
-    publishFloorTimer({ isRunning: true, successMessage: tTimer("runningForCommittee") });
+    publishFloorTimer({
+      isRunning: true,
+      // Match Speakers Start: unconfigured / exhausted clocks get a fresh 60s floor.
+      timeLeftSeconds: Math.max(
+        1,
+        parseTime(timer.leftM, timer.leftS) || parseTime(timer.totalM, timer.totalS) || 60
+      ),
+      totalTimeSeconds: Math.max(
+        1,
+        parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60
+      ),
+      successMessage: tTimer("runningForCommittee"),
+    });
   }
 
   function startEuTimerSlot(slot: EuTimerSlotKey) {
@@ -2064,7 +2099,9 @@ export function SessionControlClient({
     };
 
     runBusy("advance", async () => {
-      const queueKind = resolveSpeakerQueueListKind(timer.floorLabel);
+      const queueKind = resolveSpeakerQueueListKind(
+        liveTimerRow?.floor_label ?? timer.floorLabel
+      );
       const rows = await fetchSpeakerQueue(supabase, floorConferenceId, queueKind);
       const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
       const currentRow = sorted.find((r) => r.status === "current") ?? null;
@@ -2080,9 +2117,20 @@ export function SessionControlClient({
         return r;
       });
       const { next: afterNext } = currentAndNextQueueRows(afterAdvance);
-      const cap = Math.max(1, parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60);
+      const liveTotal = liveTimerRow?.total_time_seconds ?? 0;
+      const liveLeft = liveTimerRow?.time_left_seconds ?? 0;
+      const cap = Math.max(
+        1,
+        (liveTotal > 0 ? liveTotal : 0) ||
+          (liveLeft > 0 ? liveLeft : 0) ||
+          parseTime(timer.totalM, timer.totalS) ||
+          parseTime(timer.leftM, timer.leftS) ||
+          60
+      );
       const curLabel = labelFor(nextCurrent) || "—";
       const nextLabel = labelFor(afterNext);
+      const floorLabel =
+        (liveTimerRow?.floor_label ?? timer.floorLabel).trim() || null;
 
       applyOptimisticTimerPatch(floorConferenceId, {
         current_speaker: curLabel,
@@ -2092,7 +2140,7 @@ export function SessionControlClient({
         per_speaker_mode: true,
         is_running: true,
         current_pause_reason: null,
-        floor_label: timer.floorLabel.trim() || null,
+        floor_label: floorLabel,
       });
       setTimer((prev) => ({
         ...prev,
@@ -2104,7 +2152,7 @@ export function SessionControlClient({
         totalS: String(cap % 60),
         perSpeakerMode: true,
         isRunning: true,
-        floorLabel: prev.floorLabel,
+        floorLabel: floorLabel ?? prev.floorLabel,
       }));
       setMsg(tSessionControl("advancedSpeakerResetClock"));
       notifySpeakerQueueUpdated(floorConferenceId);
@@ -2135,7 +2183,7 @@ export function SessionControlClient({
           per_speaker_mode: true,
           is_running: true,
           current_pause_reason: null,
-          floor_label: timer.floorLabel.trim() || null,
+          floor_label: floorLabel,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
@@ -4234,7 +4282,7 @@ export function SessionControlClient({
             <h3 className="mr-auto font-sans text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
           )}
             <FloorTimerRunButtons
-              running={Boolean(liveTimerRow) && timer.isRunning && liveRemaining > 0}
+              running={liveClockRunning}
               pending={pendingTimer}
               onStart={startFloorTimer}
               onPause={stopFloorTimer}
@@ -4305,10 +4353,9 @@ export function SessionControlClient({
                 const slotTag = euTimerMeta[slot]?.tag?.trim() || "party timer";
                 const slotFloorLabel = `${slotName} (${slotTag})`;
                 const slotIsLive =
-                  Boolean(liveTimerRow) &&
-                  timer.isRunning &&
-                  liveRemaining > 0 &&
-                  (timer.floorLabel.trim() === slotFloorLabel || timer.floorLabel.trim() === slotName);
+                  liveClockRunning &&
+                  ((liveTimerRow?.floor_label ?? timer.floorLabel).trim() === slotFloorLabel ||
+                    (liveTimerRow?.floor_label ?? timer.floorLabel).trim() === slotName);
                 return (
                   <div
                     key={slot}
@@ -4495,7 +4542,9 @@ export function SessionControlClient({
             <>
           <p className="text-sm text-brand-navy">
             <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
-            <span className="font-medium">{timer.isRunning ? tTimer("running") : tTimer("paused")}</span>
+            <span className="font-medium">
+              {liveClockRunning ? tTimer("running") : tTimer("paused")}
+            </span>
           </p>
           <label className="block text-sm text-brand-navy">
             <span className={surfaceLabel}>{tTimer("pauseReasonLogged")}</span>

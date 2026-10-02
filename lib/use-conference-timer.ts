@@ -9,6 +9,10 @@ import {
   useSharedConferenceTimerRow,
   type ConferenceTimerRow,
 } from "@/lib/hooks/useCommitteeLiveStore";
+import {
+  isSpeakerTimerActivelyRunning,
+  isSpeakerTimerUnconfigured,
+} from "@/lib/timer-speakers";
 
 export type { ConferenceTimerRow };
 
@@ -17,6 +21,8 @@ export function shouldShowLiveFloorTimerUI(
   timer: ConferenceTimerRow,
   isRunning: boolean
 ): boolean {
+  // Seeded 0/0 rows are not a real clock — don't flash a live/running widget.
+  if (isSpeakerTimerUnconfigured(timer)) return false;
   if (isRunning) return true;
   if (timer.current_pause_reason?.trim()) return true;
   if (timer.current_speaker?.trim()) return true;
@@ -63,19 +69,20 @@ export function useConferenceTimer(
     return timerVisibleForFloor(rawTimer, activeVoteItemId) ? rawTimer : null;
   }, [rawTimer, activeVoteItemId, chairSeesRawTimer]);
 
+  const isRunning = isSpeakerTimerActivelyRunning(timer);
+
   useEffect(() => {
     if (!timer?.time_left_seconds) return;
-    if (timer.is_running === false) return;
+    if (!isRunning) return;
     const interval = setInterval(() => {
       setElapsed((e) => Math.min(e + 1, timer.total_time_seconds));
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer?.time_left_seconds, timer?.total_time_seconds, timer?.is_running]);
+  }, [timer?.time_left_seconds, timer?.total_time_seconds, isRunning]);
 
   const remaining = timer ? Math.max(0, timer.time_left_seconds - elapsed) : 0;
   const total = timer?.total_time_seconds || 0;
   const perSpeakerMode = !!timer?.per_speaker_mode;
-  const isRunning = timer ? timer.is_running !== false : false;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
 

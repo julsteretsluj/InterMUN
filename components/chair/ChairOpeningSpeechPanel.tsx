@@ -21,6 +21,7 @@ import {
   setupOpeningSpeeches,
 } from "@/lib/opening-speech";
 import { SPEAKER_QUEUE_LIST_KIND_OPENING } from "@/lib/speaker-queue";
+import { isSpeakerTimerUnconfigured } from "@/lib/timer-speakers";
 import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
@@ -109,15 +110,17 @@ export function ChairOpeningSpeechPanel({
         notify(result.message);
         return;
       }
+      const floorLabel =
+        seconds >= OPENING_SPEECH_EXTENDED_SECONDS
+          ? OPENING_SPEECH_EXTENDED_FLOOR_LABEL
+          : OPENING_SPEECH_FLOOR_LABEL;
       applyOptimisticTimerPatch(conferenceId, {
         time_left_seconds: seconds,
         total_time_seconds: seconds,
         per_speaker_mode: true,
         is_running: false,
-        floor_label:
-          seconds >= OPENING_SPEECH_EXTENDED_SECONDS
-            ? OPENING_SPEECH_EXTENDED_FLOOR_LABEL
-            : OPENING_SPEECH_FLOOR_LABEL,
+        floor_label: floorLabel,
+        current_pause_reason: null,
       });
       refreshSharedConferenceTimer(conferenceId);
       notify(
@@ -192,7 +195,7 @@ export function ChairOpeningSpeechPanel({
                 ? t("statusExtended", { seconds: OPENING_SPEECH_EXTENDED_SECONDS })
                 : t("statusDefault", { seconds: OPENING_SPEECH_SECONDS })}
             </strong>
-            {liveTimer ? (
+            {liveTimer && !isSpeakerTimerUnconfigured(liveTimer) ? (
               <>
                 {" · "}
                 {t("clockRemaining", {

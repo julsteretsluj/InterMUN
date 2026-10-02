@@ -17,6 +17,7 @@ import {
   refreshSharedProcedureState,
   useSharedProcedureState,
 } from "@/lib/hooks/useCommitteeLiveStore";
+import { isSpeakerTimerUnconfigured } from "@/lib/timer-speakers";
 import { cn } from "@/lib/utils";
 
 type WidgetTheme = "light" | "dark" | "page";
@@ -168,8 +169,9 @@ export function ActiveTimerWidgets({
   const speakerHint = nextSpeaker ? t("nextSpeakerHint", { name: nextSpeaker }) : null;
 
   const showFloor = showIdleFloorTimer || (timer != null && shouldShowLiveFloorTimerUI(timer, isRunning));
+  const floorConfigured = Boolean(timer) && !isSpeakerTimerUnconfigured(timer);
   const floorLabel = timer?.floor_label?.trim() || (perSpeakerMode ? t("speakerClock") : t("timer"));
-  const floorClock = timer
+  const floorClock = floorConfigured
     ? `${formatMmSs(remaining)} / ${formatMmSs(total)}`
     : t("dash");
   const floorHint = timer?.current_pause_reason?.trim()
@@ -201,8 +203,8 @@ export function ActiveTimerWidgets({
           label={floorLabel}
           clock={floorClock}
           hint={floorHint}
-          live={Boolean(timer) && isRunning}
-          paused={timer != null && !isRunning && shouldShowLiveFloorTimerUI(timer, isRunning)}
+          live={floorConfigured && isRunning}
+          paused={floorConfigured && !isRunning && shouldShowLiveFloorTimerUI(timer!, isRunning)}
         />
       ) : null}
     </div>
