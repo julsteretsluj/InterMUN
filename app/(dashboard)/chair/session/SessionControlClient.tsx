@@ -74,6 +74,7 @@ import {
 import { HelpButton } from "@/components/HelpButton";
 import { ActiveTimerWidgets } from "@/components/timers/ActiveTimerWidgets";
 import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
+import { AppleToggleField } from "@/components/ui/AppleToggle";
 import {
   canRecordVote,
   disciplineVoteBlockMessage,
@@ -1854,6 +1855,12 @@ export function SessionControlClient({
     runBusy("timer", async () => {
       let left = opts?.timeLeftSeconds ?? parseTime(timer.leftM, timer.leftS);
       let total = opts?.totalTimeSeconds ?? parseTime(timer.totalM, timer.totalS);
+      const floorLabel = opts?.floorLabel ?? timer.floorLabel;
+      const perSpeakerMode = opts?.perSpeakerMode ?? timer.perSpeakerMode;
+      // Speaker remaining is hidden when speaker timer is off — treat total as the segment length.
+      if (!perSpeakerMode && opts?.timeLeftSeconds == null && left <= 0 && total > 0) {
+        left = total;
+      }
       if (left <= 0 && total <= 0) {
         setMsg("Set speaker time and/or total time: at least one must be greater than zero.");
         return;
@@ -1864,8 +1871,6 @@ export function SessionControlClient({
         left = total;
         cappedToTotal = true;
       }
-      const floorLabel = opts?.floorLabel ?? timer.floorLabel;
-      const perSpeakerMode = opts?.perSpeakerMode ?? timer.perSpeakerMode;
       const isRunning = opts?.isRunning ?? timer.isRunning;
       let currentSpeaker = timer.current.trim() || null;
       let nextSpeaker = timer.next.trim() || null;
@@ -2491,7 +2496,7 @@ export function SessionControlClient({
 
   function advanceSpeakerAndResetClock() {
     if (!timer.perSpeakerMode) {
-      setMsg("Turn on per-speaker time first, then save the timer.");
+      setMsg("Turn on speaker timer first, then save the timer.");
       return;
     }
     const labelFor = (row: { allocation_id: string | null; label: string | null } | null) => {
@@ -4959,43 +4964,40 @@ export function SessionControlClient({
               onPause={stopFloorTimer}
             />
           </div>
-          <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
-            <input
-              type="checkbox"
-              className="mt-1 rounded border-brand-line"
-              checked={timer.perSpeakerMode}
-              onChange={(e) => setTimer((t) => ({ ...t, perSpeakerMode: e.target.checked }))}
-            />
-            <span>
-              <span className="font-medium">{tTimer("perSpeakerTitle")}</span>
-              <span className="block text-brand-muted text-xs mt-0.5">
-                {tTimer("perSpeakerHelp")}
-              </span>
-            </span>
-          </label>
+          <AppleToggleField
+            label={tTimer("perSpeakerTitle")}
+            description={tTimer("perSpeakerHelp")}
+            checked={timer.perSpeakerMode}
+            onCheckedChange={(checked) =>
+              setTimer((t) => ({ ...t, perSpeakerMode: checked }))
+            }
+            fieldClassName="rounded-[12px] border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2.5"
+          />
           <div className="flex flex-wrap gap-4 items-end">
-            <label className="text-sm text-brand-navy min-w-[10rem]">
-              <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
-              <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
-                {timer.perSpeakerMode ? tTimer("remainingHelpPerSpeaker") : tTimer("remainingHelpNormal")}
-              </span>
-              <div className="flex gap-1 mt-1 items-center">
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.leftM}
-                  onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.leftS}
-                  onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
-              </div>
-            </label>
+            {timer.perSpeakerMode ? (
+              <label className="text-sm text-brand-navy min-w-[10rem]">
+                <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
+                <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
+                  {tTimer("remainingHelpPerSpeaker")}
+                </span>
+                <div className="flex gap-1 mt-1 items-center">
+                  <input
+                    className={`w-14 ${surfaceFieldSm}`}
+                    inputMode="numeric"
+                    value={timer.leftM}
+                    onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
+                  />
+                  <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
+                  <input
+                    className={`w-14 ${surfaceFieldSm}`}
+                    inputMode="numeric"
+                    value={timer.leftS}
+                    onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
+                  />
+                  <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
+                </div>
+              </label>
+            ) : null}
             <label className="text-sm text-brand-navy min-w-[10rem]">
               <span className={surfaceLabel}>{tTimer("totalTime")}</span>
               <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
@@ -5130,76 +5132,6 @@ export function SessionControlClient({
           </div>
           ) : null}
 
-          {!isEuParliamentProfile && timerWorkflowTab === "clock" ? (
-          <div className="space-y-4">
-          <div className="flex flex-wrap gap-4 items-end">
-            <label className="text-sm text-brand-navy min-w-[10rem]">
-              <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
-              <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
-                {timer.perSpeakerMode ? tTimer("remainingHelpPerSpeaker") : tTimer("remainingHelpNormal")}
-              </span>
-              <div className="flex gap-1 mt-1 items-center">
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.leftM}
-                  onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.leftS}
-                  onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
-              </div>
-            </label>
-            <label className="text-sm text-brand-navy min-w-[10rem]">
-              <span className={surfaceLabel}>{tTimer("totalTime")}</span>
-              <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
-                {timer.perSpeakerMode
-                  ? tTimer("totalHelpPerSpeaker")
-                  : tTimer("totalHelpNormal")}
-              </span>
-              <div className="flex gap-1 mt-1 items-center">
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.totalM}
-                  onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
-                <input
-                  className={`w-14 ${surfaceFieldSm}`}
-                  inputMode="numeric"
-                  value={timer.totalS}
-                  onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
-                />
-                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
-              </div>
-            </label>
-            <button
-              type="button"
-              disabled={pendingTimer}
-              onClick={saveTimer}
-              className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
-            >
-              {tTimer("saveTimer")}
-            </button>
-            {timer.perSpeakerMode ? (
-              <button
-                type="button"
-                disabled={pendingAdvance}
-                onClick={advanceSpeakerAndResetClock}
-                className="px-4 py-2 rounded-lg border border-brand-navy/20 bg-white text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
-              >
-                {tTimer("advanceSpeakerReset")}
-              </button>
-            ) : null}
-          </div>
-          </div>
-          ) : null}
           {timerWorkflowTab === "log" ? (
             pauseEvents.length > 0 ? (
               <div className="pt-1">
