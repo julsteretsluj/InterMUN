@@ -72,7 +72,6 @@ import {
   parseRollAttendance,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
-import { ActiveTimerWidgets } from "@/components/timers/ActiveTimerWidgets";
 import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
 import { AppleToggleField } from "@/components/ui/AppleToggle";
 import {
@@ -4707,16 +4706,6 @@ export function SessionControlClient({
           <HelpButton title={tTimer("controlsTitle")}>
             {tTimer("controlsHelp")}
           </HelpButton>
-        </div>
-        <div className="space-y-3 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-3">
-          <ActiveTimerWidgets
-            conferenceId={floorConferenceId}
-            sessionConferenceId={canonicalConferenceId}
-            activeVoteItemId={openMotion?.id ?? null}
-            chairSeesRawTimer
-            showIdleFloorTimer
-            theme="page"
-          />
         </div>
         <div className="flex flex-wrap gap-2">
           {(
