@@ -14,6 +14,7 @@ import { AuthBrandWordmark } from "@/components/auth/AuthBrandWordmark";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
 import { applyConferenceCodeForAuthWizard } from "@/app/actions/eventGate";
+import { markNavigationLoading } from "@/lib/navigation-loading";
 import { useTranslations } from "next-intl";
 
 type Step = "welcome" | "conference" | "role" | "account";
@@ -229,11 +230,13 @@ export function AuthEntryWizard({
     setLoading(false);
     if (uid) {
       if (nextPath) {
+        markNavigationLoading();
         router.push(nextPath);
         router.refresh();
         return;
       }
       const next = await resolveDashboardPathAfterAuth(supabase, uid);
+      markNavigationLoading();
       router.push(next);
       router.refresh();
     }
@@ -278,15 +281,18 @@ export function AuthEntryWizard({
     setLoading(false);
     if (session && uid) {
       if (nextPath) {
+        markNavigationLoading();
         router.push(nextPath);
         router.refresh();
         return;
       }
       const next = await resolveDashboardPathAfterAuth(supabase, uid);
+      markNavigationLoading();
       router.push(next);
       router.refresh();
       return;
     }
+    markNavigationLoading();
     router.push(nextPath ? `/login?next=${encodeURIComponent(nextPath)}` : "/profile");
     router.refresh();
   }

@@ -3,6 +3,7 @@
 
 "use client";
 
+import { NavigationLoadingListener } from "@/components/navigation/NavigationLoadingListener";
 import { AppleNotificationProvider } from "@/components/ui/AppleNotification";
 import { AppleSystemChrome } from "@/components/ui/AppleStatusBar";
 import { AppleWindow } from "@/components/ui/AppleWindow";
@@ -14,6 +15,7 @@ export function AppleAppProviders({ children }: { children: ReactNode }) {
   return (
     <AppleNotificationProvider>
       <AppleSiteShell>{children}</AppleSiteShell>
+      <NavigationLoadingListener />
     </AppleNotificationProvider>
   );
 }

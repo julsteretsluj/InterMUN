@@ -6,6 +6,7 @@
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { clearRoomAndCommitteeContext } from "@/app/actions/roomGate";
+import { markNavigationLoading } from "@/lib/navigation-loading";
 import { cn } from "@/lib/utils";
 
 export function SignOutButton({ className }: { className?: string }) {
@@ -15,6 +16,7 @@ export function SignOutButton({ className }: { className?: string }) {
   async function signOut() {
     await clearRoomAndCommitteeContext();
     await supabase.auth.signOut();
+    markNavigationLoading();
     router.push("/login");
     router.refresh();
   }
