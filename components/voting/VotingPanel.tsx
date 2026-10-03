@@ -211,6 +211,38 @@ export function VotingPanel({
     };
   }, [supabase]);
 
+  /** Unclosed + open_for_voting (legacy null/undefined counts as open). */
+  function isLiveOpenForVoting(item: VoteItem): boolean {
+    if (item.closed_at) return false;
+    if (isAgendaFloorVoteItem(item)) return true;
+    return item.open_for_voting !== false;
+  }
+
+  /**
+   * Votes RLS requires procedure_states.voting_procedure + current_vote_item_id
+   * for non-agenda ballots. Keep /voting recording in sync with Session → Motions.
+   */
+  async function ensureVotingProcedureForItem(item: VoteItem): Promise<string | null> {
+    if (isAgendaFloorVoteItem(item)) return null;
+    const { data: ps } = await supabase
+      .from("procedure_states")
+      .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+      .eq("conference_id", item.conference_id)
+      .maybeSingle();
+    if (ps?.state === "voting_procedure" && ps.current_vote_item_id === item.id) {
+      return null;
+    }
+    const { error } = await supabase.from("procedure_states").upsert({
+      conference_id: item.conference_id,
+      state: "voting_procedure",
+      current_vote_item_id: item.id,
+      debate_closed: ps?.debate_closed ?? false,
+      motion_floor_open: false,
+      updated_at: new Date().toISOString(),
+    });
+    return error?.message ?? null;
+  }
+
   async function saveSettings(itemId: string, must_vote: boolean, required_majority: string) {
     const item = voteItems.find((v) => v.id === itemId);
     const isAgendaFloor = item ? isAgendaFloorVoteItem(item) : false;
@@ -229,15 +261,69 @@ export function VotingPanel({
 
   async function setClosed(itemId: string, closed: boolean) {
     const item = voteItems.find((v) => v.id === itemId);
+    if (!item) return;
+    const isAgendaFloor = isAgendaFloorVoteItem(item);
+
+    if (!closed && !isAgendaFloor) {
+      const { data: blocking } = await supabase
+        .from("vote_items")
+        .select("id")
+        .eq("conference_id", item.conference_id)
+        .is("closed_at", null)
+        .eq("open_for_voting", true)
+        .neq("id", itemId)
+        .maybeSingle();
+      if (blocking) {
+        setVoteError(t("reopenBlockedOtherOpen"));
+        return;
+      }
+    }
+
     const { error } = await supabase
       .from("vote_items")
-      .update({ closed_at: closed ? new Date().toISOString() : null })
+      .update(
+        closed
+          ? { closed_at: new Date().toISOString() }
+          : { closed_at: null, open_for_voting: isAgendaFloor ? false : true }
+      )
       .eq("id", itemId);
-    if (error) return;
-    if (closed && item && isAgendaFloorVoteItem(item)) {
-      const result = getResult(item);
-      if (result.total > 0 && result.passes) {
-        onAgendaTopicPassed?.(item.conference_id);
+    if (error) {
+      setVoteError(error.message);
+      return;
+    }
+
+    const { data: ps } = await supabase
+      .from("procedure_states")
+      .select("debate_closed, motion_floor_open")
+      .eq("conference_id", item.conference_id)
+      .maybeSingle();
+
+    if (closed) {
+      if (!isAgendaFloor) {
+        await supabase.from("procedure_states").upsert({
+          conference_id: item.conference_id,
+          state: ps?.debate_closed ? "voting_procedure" : "debate_open",
+          current_vote_item_id: null,
+          debate_closed: ps?.debate_closed ?? false,
+          motion_floor_open: ps?.motion_floor_open ?? false,
+          updated_at: new Date().toISOString(),
+        });
+      }
+      if (isAgendaFloor) {
+        const result = getResult(item);
+        if (result.total > 0 && result.passes) {
+          onAgendaTopicPassed?.(item.conference_id);
+        }
+      }
+    } else if (!isAgendaFloor) {
+      const syncErr = await ensureVotingProcedureForItem({
+        ...item,
+        closed_at: null,
+        open_for_voting: true,
+      });
+      if (syncErr) {
+        setVoteError(syncErr);
+        return;
       }
     }
     location.reload();
@@ -249,14 +335,24 @@ export function VotingPanel({
     value: "yes" | "no" | "abstain"
   ) {
     const item = voteItems.find((v) => v.id === itemId);
-    const isAgendaFloor = item ? isAgendaFloorVoteItem(item) : false;
-    const isMustVote = isAgendaFloor || !!item?.must_vote;
+    if (!item) return;
+    const isAgendaFloor = isAgendaFloorVoteItem(item);
+    if (!isAgendaFloor && !isLiveOpenForVoting(item)) {
+      setVoteError(t("notOpenForVotingYet"));
+      return;
+    }
+    const isMustVote = isAgendaFloor || !!item.must_vote;
     if (value === "abstain" && isMustVote) {
       setVoteError(t("abstainNotApplicableMotionType"));
       return;
     }
     if (!canRecordVote(row.discipline)) {
       setVoteError(disciplineVoteBlockMessage(row.discipline) ?? t("votingRightsLost"));
+      return;
+    }
+    const procErr = await ensureVotingProcedureForItem(item);
+    if (procErr) {
+      setVoteError(procErr);
       return;
     }
     const { error } = await supabase
@@ -280,6 +376,14 @@ export function VotingPanel({
   }
 
   async function clearVoteForMotion(itemId: string, row: Pick<VotingRosterEntry, "allocationId">) {
+    const item = voteItems.find((v) => v.id === itemId);
+    if (item) {
+      const procErr = await ensureVotingProcedureForItem(item);
+      if (procErr) {
+        setVoteError(procErr);
+        return;
+      }
+    }
     const { error } = await supabase
       .from("votes")
       .delete()
@@ -308,7 +412,11 @@ export function VotingPanel({
     kind === "motions" ? [] : voteItems.filter((i) => isAgendaFloorVoteItem(i));
   const motionVoteItems =
     kind === "agenda" ? [] : voteItems.filter((i) => !isAgendaFloorVoteItem(i));
-  const openItems = motionVoteItems.filter((i) => !i.closed_at);
+  // Pending stated motions (open_for_voting=false) are not ballots yet — Session → Motions.
+  const openItems = motionVoteItems.filter((i) => isLiveOpenForVoting(i));
+  const pendingStatedCount = motionVoteItems.filter(
+    (i) => !i.closed_at && i.open_for_voting === false
+  ).length;
   const closedItems = motionVoteItems.filter((i) => !!i.closed_at);
 
   function renderVoteCard(item: VoteItemRow) {
@@ -713,6 +821,11 @@ export function VotingPanel({
                 ) : (
                   <p className="mun-muted">{t("noOpenMotion")}</p>
                 )}
+                {pendingStatedCount > 0 ? (
+                  <p className="mun-muted text-sm leading-relaxed">
+                    {t("pendingStatedOnFloor", { count: pendingStatedCount })}
+                  </p>
+                ) : null}
               </section>
             ) : (
               <section className="space-y-3">

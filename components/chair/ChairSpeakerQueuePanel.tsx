@@ -4,7 +4,6 @@
 "use client";
 
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import { ChevronDown, ChevronUp, ListOrdered, SkipForward } from "lucide-react";
 import { FloorTimerRunButtons } from "@/components/timers/FloorTimerRunButtons";
 import { createClient } from "@/lib/supabase/client";
@@ -725,18 +724,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             >
               {t("requestToSpeak")}
             </span>{" "}
-            {t("introMiddle")}{" "}
-            <Link
-              href="/chair/session/timer"
-              className={
-                isSession
-                  ? "font-medium text-brand-accent-bright underline decoration-brand-accent-bright/40 underline-offset-2"
-                  : "font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
-              }
-            >
-              {t("sessionTimerLink")}
-            </Link>{" "}
-            {isSession ? t("introSuffixPrefix") : t("introSuffixDigitalRoom")} <strong className="font-medium">{t("advanceSpeaker")}</strong>.
+            {t("introMiddleInline")}{" "}
+            <strong className="font-medium">{t("advanceSpeaker")}</strong>.
           </p>
         </div>
 
@@ -766,18 +755,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                     {`${formatSpeakerClock(speakerCap || remaining)}${perSpeakerMode ? ` ${t("perSpeakerShort")}` : ""}`}
                     {!isRunning ? ` ${t("pausedParen")}` : null}
                   </>
-                ) : isSession ? (
-                  <>
-                    {t("noTimerYet")}{" "}
-                    <Link
-                      href="/chair/session/timer"
-                      className="font-medium text-brand-accent underline decoration-brand-accent/40 underline-offset-2"
-                    >
-                      {t("sessionTimerLink")}
-                    </Link>
-                  </>
                 ) : (
-                  t("noTimerYetDigitalRoom")
+                  t("noTimerYetInline")
                 )}
               </p>
             </div>
@@ -803,41 +782,39 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               {tTimer("advanceSpeakerReset")}
             </button>
           </div>
-          {!isSession ? (
-            <div className="space-y-2 border-t border-[var(--hairline)] pt-3">
-              <p className={labelClass}>{t("perSpeakerTime")}</p>
-              <p className="text-xs text-brand-muted">{t("perSpeakerTimeHelp")}</p>
-              <div className="flex flex-wrap items-end gap-2">
-                <label className="text-sm text-brand-navy">
-                  <span className="sr-only">{tTimer("totalTime")}</span>
-                  <div className="flex items-center gap-1">
-                    <input
-                      className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
-                      inputMode="numeric"
-                      value={capM}
-                      onChange={(e) => setCapM(e.target.value)}
-                    />
-                    <span className="text-xs text-brand-muted">{tEuParty("unitMinutesShort")}</span>
-                    <input
-                      className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
-                      inputMode="numeric"
-                      value={capS}
-                      onChange={(e) => setCapS(e.target.value)}
-                    />
-                    <span className="text-xs text-brand-muted">{tEuParty("unitSecondsShort")}</span>
-                  </div>
-                </label>
-                <button
-                  type="button"
-                  disabled={pending}
-                  onClick={applyPerSpeakerTime}
-                  className="rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
-                >
-                  {t("applyPerSpeakerTime")}
-                </button>
-              </div>
+          <div className="space-y-2 border-t border-[var(--hairline)] pt-3">
+            <p className={labelClass}>{t("perSpeakerTime")}</p>
+            <p className="text-xs text-brand-muted">{t("perSpeakerTimeHelp")}</p>
+            <div className="flex flex-wrap items-end gap-2">
+              <label className="text-sm text-brand-navy">
+                <span className="sr-only">{tTimer("totalTime")}</span>
+                <div className="flex items-center gap-1">
+                  <input
+                    className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
+                    inputMode="numeric"
+                    value={capM}
+                    onChange={(e) => setCapM(e.target.value)}
+                  />
+                  <span className="text-xs text-brand-muted">{tEuParty("unitMinutesShort")}</span>
+                  <input
+                    className="w-14 rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-2 py-2 text-sm text-brand-navy"
+                    inputMode="numeric"
+                    value={capS}
+                    onChange={(e) => setCapS(e.target.value)}
+                  />
+                  <span className="text-xs text-brand-muted">{tEuParty("unitSecondsShort")}</span>
+                </div>
+              </label>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={applyPerSpeakerTime}
+                className="rounded-[980px] bg-[#007AFF] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0077ED] disabled:opacity-50"
+              >
+                {t("applyPerSpeakerTime")}
+              </button>
             </div>
-          ) : null}
+          </div>
         </div>
 
         {!isSession && localFeedback ? (

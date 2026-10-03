@@ -22,7 +22,10 @@ import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness
 import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
-import { applyOptimisticTimerPatch } from "@/lib/hooks/useCommitteeLiveStore";
+import {
+  applyOptimisticTimerPatch,
+  refreshSharedConferenceTimer,
+} from "@/lib/hooks/useCommitteeLiveStore";
 import { currentAndNextQueueRows, fetchSpeakerQueue, resolveSpeakerQueueListKind } from "@/lib/speaker-queue";
 import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
@@ -454,7 +457,10 @@ export function SessionControlClient({
   const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
   const [timerWorkflowTab, setTimerWorkflowTab] = useState<TimerWorkflowTab>(
-    initialTimerWorkflowTab ?? "setup"
+    // Land on clock/controls so time fields + Save are visible (setup is merged in).
+    initialTimerWorkflowTab === "setup"
+      ? "clock"
+      : (initialTimerWorkflowTab ?? "clock")
   );
   const [speakersWorkflowTab, setSpeakersWorkflowTab] = useState<SpeakersWorkflowTab>(
     initialSpeakersWorkflowTab ??
@@ -472,7 +478,7 @@ export function SessionControlClient({
     totalM: "5",
     totalS: "0",
     perSpeakerMode: false,
-    isRunning: true,
+    isRunning: false,
     /** general_floor = vote_item_id null; motion_vote = bind to selected open-for-voting motion */
     purpose: "general_floor" as "general_floor" | "motion_vote",
     boundVoteItemId: "",
@@ -557,7 +563,11 @@ export function SessionControlClient({
 
   // Persistent floor layout soft-navigates without remounting — sync deep-link tabs.
   useEffect(() => {
-    if (initialTimerWorkflowTab) setTimerWorkflowTab(initialTimerWorkflowTab);
+    if (initialTimerWorkflowTab) {
+      setTimerWorkflowTab(
+        initialTimerWorkflowTab === "setup" ? "clock" : initialTimerWorkflowTab
+      );
+    }
   }, [initialTimerWorkflowTab]);
   useEffect(() => {
     if (initialSpeakersWorkflowTab) setSpeakersWorkflowTab(initialSpeakersWorkflowTab);
@@ -1458,7 +1468,11 @@ export function SessionControlClient({
         vote_item_id?: string | null;
         eu_timer_meta?: unknown;
       };
-      const vid = tr.vote_item_id ?? null;
+      // Timer may still point at a closed/previous motion. A stale bind must not
+      // hide Motions → Votes recording (activeMotionForRecordedVotes).
+      const vidRaw = tr.vote_item_id ?? null;
+      const vid =
+        vidRaw && openForVotingList.some((m) => m.id === vidRaw) ? vidRaw : null;
       const floorLabel = (timerRow as { floor_label?: string | null }).floor_label ?? "";
       setTimer({
         current: timerRow.current_speaker ?? "",
@@ -1743,17 +1757,35 @@ export function SessionControlClient({
         floor_label: floorLabel.trim() || null,
         updated_at: new Date().toISOString(),
       };
-      const firstAttempt = await supabase.from("timers").upsert(
-        supportsEuTimerMeta ? { ...payloadBase, eu_timer_meta: euTimerMeta } : payloadBase,
-        { onConflict: "conference_id" }
-      );
+      const payload = supportsEuTimerMeta
+        ? { ...payloadBase, eu_timer_meta: euTimerMeta }
+        : payloadBase;
+      let firstAttempt = await supabase
+        .from("timers")
+        .upsert(payload, { onConflict: "conference_id" });
       let error = firstAttempt.error;
       let fallbackWithoutMeta = false;
       if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
         setSupportsEuTimerMeta(false);
-        const retry = await supabase.from("timers").upsert(payloadBase, { onConflict: "conference_id" });
-        error = retry.error;
-        fallbackWithoutMeta = !retry.error;
+        firstAttempt = await supabase
+          .from("timers")
+          .upsert(payloadBase, { onConflict: "conference_id" });
+        error = firstAttempt.error;
+        fallbackWithoutMeta = !firstAttempt.error;
+      }
+      // Sibling topic rows may lack a timers seed — insert then update like Speakers Start.
+      if (error) {
+        const inserted = await supabase.from("timers").insert(payloadBase);
+        if (!inserted.error) {
+          error = null;
+        } else {
+          const { conference_id: _omit, ...updateFields } = payloadBase;
+          const updated = await supabase
+            .from("timers")
+            .update(updateFields)
+            .eq("conference_id", floorConferenceId);
+          error = updated.error;
+        }
       }
       setMsg(
         error
@@ -1786,13 +1818,27 @@ export function SessionControlClient({
         perSpeakerMode,
         isRunning,
       }));
+      if (!error) {
+        // Re-read into the shared live store so Speakers / widgets don't wait on realtime.
+        applyOptimisticTimerPatch(floorConferenceId, {
+          current_speaker: currentSpeaker,
+          next_speaker: nextSpeaker,
+          time_left_seconds: left,
+          total_time_seconds: total,
+          per_speaker_mode: perSpeakerMode,
+          is_running: isRunning,
+          floor_label: floorLabel.trim() || null,
+          current_pause_reason: isRunning ? null : undefined,
+        });
+        refreshSharedConferenceTimer(floorConferenceId);
+      }
       void refresh();
     });
   }
 
   function stopFloorTimer() {
     if (!liveTimerRow || isSpeakerTimerUnconfigured(liveTimerRow)) {
-      setMsg("Save the timer once so there is a row to pause.");
+      setMsg(tTimer("alreadyPaused"));
       return;
     }
     const liveRunning = isSpeakerTimerActivelyRunning(liveTimerRow) && liveRemaining > 0;
@@ -1840,6 +1886,8 @@ export function SessionControlClient({
       if (error) {
         setMsg(error.message);
         void refresh();
+      } else {
+        refreshSharedConferenceTimer(floorConferenceId);
       }
     });
   }
@@ -1869,7 +1917,7 @@ export function SessionControlClient({
       }));
       setMsg(tTimer("runningForCommittee"));
       runBusy("timer", async () => {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("timers")
           .update({
             is_running: true,
@@ -1877,11 +1925,22 @@ export function SessionControlClient({
             time_left_seconds: remainingNow,
             updated_at: new Date().toISOString(),
           })
-          .eq("conference_id", floorConferenceId);
-        if (error) {
-          setMsg(error.message);
-          void refresh();
+          .eq("conference_id", floorConferenceId)
+          .select("id");
+        if (error || !data?.length) {
+          // Update missed the row (e.g. soft-nav topic without a seed) — create via publish.
+          publishFloorTimer({
+            isRunning: true,
+            timeLeftSeconds: remainingNow,
+            totalTimeSeconds: Math.max(
+              remainingNow,
+              Math.round(liveTimerRow.total_time_seconds ?? 0) || remainingNow
+            ),
+            successMessage: tTimer("runningForCommittee"),
+          });
+          return;
         }
+        refreshSharedConferenceTimer(floorConferenceId);
       });
       return;
     }
@@ -1964,6 +2023,31 @@ export function SessionControlClient({
       rightsStatement = drafted.trim();
     }
     runBusy("votes", async () => {
+      // Votes RLS requires voting_procedure + current_vote_item_id. Heal drift
+      // (e.g. motion opened but procedure_states upsert lost) before recording.
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+        .eq("conference_id", floorConferenceId)
+        .maybeSingle();
+      if (
+        psRow?.state !== "voting_procedure" ||
+        psRow?.current_vote_item_id !== voteItemId
+      ) {
+        const { error: psErr } = await supabase.from("procedure_states").upsert({
+          conference_id: floorConferenceId,
+          state: "voting_procedure",
+          current_vote_item_id: voteItemId,
+          debate_closed: psRow?.debate_closed ?? false,
+          motion_floor_open: false,
+          updated_at: new Date().toISOString(),
+        });
+        if (psErr) {
+          setMsg(psErr.message);
+          return;
+        }
+      }
+
       const { error } = await supabase.from("votes").upsert(
         { vote_item_id: voteItemId, allocation_id: allocation.id, user_id: uid, value },
         { onConflict: "vote_item_id,allocation_id" }
@@ -2007,6 +2091,28 @@ export function SessionControlClient({
     }
     const voteItemId = activeMotionForRecordedVotes.id;
     runBusy("votes", async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+        .eq("conference_id", floorConferenceId)
+        .maybeSingle();
+      if (
+        psRow?.state !== "voting_procedure" ||
+        psRow?.current_vote_item_id !== voteItemId
+      ) {
+        const { error: psErr } = await supabase.from("procedure_states").upsert({
+          conference_id: floorConferenceId,
+          state: "voting_procedure",
+          current_vote_item_id: voteItemId,
+          debate_closed: psRow?.debate_closed ?? false,
+          motion_floor_open: false,
+          updated_at: new Date().toISOString(),
+        });
+        if (psErr) {
+          setMsg(psErr.message);
+          return;
+        }
+      }
       const { error } = await supabase
         .from("votes")
         .delete()
@@ -2192,6 +2298,8 @@ export function SessionControlClient({
       if (error) {
         setMsg(error.message);
         void refresh();
+      } else {
+        refreshSharedConferenceTimer(floorConferenceId);
       }
     });
   }
@@ -3114,9 +3222,12 @@ export function SessionControlClient({
   const showSpeakersQueuePanel =
     activeSection === "all" || (speakersDedicated && speakersWorkflowTab === "queue");
   const boundVoteItemIdTrimmed = timer.boundVoteItemId.trim();
-  const activeMotionForRecordedVotes = boundVoteItemIdTrimmed
-    ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed) ?? null
-    : openMotion;
+  // Prefer the timer-bound open motion when valid; otherwise the live open vote.
+  // Never return null while openMotion exists (stale timer binds used to blank Votes).
+  const activeMotionForRecordedVotes =
+    (boundVoteItemIdTrimmed
+      ? openVotingMotions.find((m) => m.id === boundVoteItemIdTrimmed)
+      : null) ?? openMotion;
 
   // Jump to the discipline / speakers tabs when those sections are focused (adjust state during render).
   const [prevActiveSection, setPrevActiveSection] = useState<typeof activeSection | null>(null);
@@ -4303,20 +4414,14 @@ export function SessionControlClient({
         </div>
         <div className="flex flex-wrap gap-2">
           {(
-            isEuParliamentProfile
-              ? ([
-                  ["clock", "Guided timers"],
-                  ["notes", "Speech notes"],
-                  ["log", "History"],
-                ] as const)
-              : ([
-                  ["setup", tTimer("tabSetup")],
-                  ["clock", tTimer("tabClock")],
-                  ["notes", tTimer("tabNotes")],
-                  ["log", tTimer("tabLog")],
-                ] as const)
+            [
+              ["clock", tTimer("tabControls")],
+              ["notes", tTimer("tabNotes")],
+              ["log", tTimer("tabLog")],
+            ] as const
           ).map(([id, label]) => {
-            const active = timerWorkflowTab === id;
+            const active =
+              timerWorkflowTab === id || (id === "clock" && timerWorkflowTab === "setup");
             return (
               <button
                 key={id}
@@ -4336,7 +4441,7 @@ export function SessionControlClient({
           })}
         </div>
         <div className={`${surfaceCard} space-y-4`}>
-          {isEuParliamentProfile && timerWorkflowTab === "clock" ? (
+          {isEuParliamentProfile && (timerWorkflowTab === "clock" || timerWorkflowTab === "setup") ? (
           <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
             <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
               {tTimer("euTimerBoardTitle")} ({EU_TIMER_SLOT_COUNT})
@@ -4444,10 +4549,10 @@ export function SessionControlClient({
             </div>
           </div>
           ) : null}
-          {!isEuParliamentProfile && timerWorkflowTab === "setup" ? (
+          {!isEuParliamentProfile && (timerWorkflowTab === "clock" || timerWorkflowTab === "setup") ? (
             <>
           <p className="text-sm text-brand-muted">
-            {tTimer("setupHelp")}
+            {tTimer("controlsSummary")}
           </p>
           <div className="flex flex-wrap gap-3 items-end">
             <label className="block text-sm text-brand-navy min-w-[12rem]">
@@ -4492,69 +4597,67 @@ export function SessionControlClient({
               />
             </label>
           </div>
-          <label className="block text-sm text-brand-navy">
-            <span className={surfaceLabel}>{tTimer("timerPurpose")}</span>
-            <select
-              className={`${surfaceField} mt-1`}
-              value={timer.purpose}
-              onChange={(e) => {
-                const v = e.target.value as "general_floor" | "motion_vote";
-                setTimer((t) => ({
-                  ...t,
-                  purpose: v,
-                  boundVoteItemId: v === "general_floor" ? "" : t.boundVoteItemId,
-                }));
-              }}
-            >
-              <option value="general_floor">{tTimer("purposeGeneralFloor")}</option>
-              <option value="motion_vote">{tTimer("purposeMotionVote")}</option>
-            </select>
-          </label>
-          {timer.purpose === "motion_vote" ? (
-            <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>{tTimer("openMotionForVoting")}</span>
+          <div className="flex flex-wrap gap-4 items-end">
+            <label className="block text-sm text-brand-navy min-w-[14rem] flex-1">
+              <span className={surfaceLabel}>{tTimer("timerPurpose")}</span>
               <select
                 className={`${surfaceField} mt-1`}
-                value={timer.boundVoteItemId}
-                onChange={(e) => setTimer((t) => ({ ...t, boundVoteItemId: e.target.value }))}
+                value={timer.purpose}
+                onChange={(e) => {
+                  const v = e.target.value as "general_floor" | "motion_vote";
+                  setTimer((t) => ({
+                    ...t,
+                    purpose: v,
+                    boundVoteItemId: v === "general_floor" ? "" : t.boundVoteItemId,
+                  }));
+                }}
               >
-                <option value="">{tTimer("selectMotion")}</option>
-                {openVotingMotions.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.title?.trim()
-                      ? translateAgendaTopicLabel(tTopics, m.title, locale)
-                      : tTimer("untitled")}{" "}
-                    · {formatVoteTypeLabel(tVoting, m.vote_type)}
-                    {m.procedure_code ? ` (${m.procedure_code})` : ""}
-                  </option>
-                ))}
+                <option value="general_floor">{tTimer("purposeGeneralFloor")}</option>
+                <option value="motion_vote">{tTimer("purposeMotionVote")}</option>
               </select>
-              {openVotingMotions.length === 0 ? (
-                <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
-                  {tTimer("noOpenMotionWarning")}
-                </p>
-              ) : null}
             </label>
-          ) : null}
-            </>
-          ) : null}
-          {!isEuParliamentProfile && timerWorkflowTab === "clock" ? (
-            <>
-          <p className="text-sm text-brand-navy">
-            <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
-            <span className="font-medium">
-              {liveClockRunning ? tTimer("running") : tTimer("paused")}
-            </span>
-          </p>
-          <label className="block text-sm text-brand-navy">
-            <span className={surfaceLabel}>{tTimer("pauseReasonLogged")}</span>
-            <input
-              className={`${surfaceField} mt-1`}
-              placeholder={tTimer("pauseReasonPlaceholder")}
-              value={pauseReasonDraft}
-              onChange={(e) => setPauseReasonDraft(e.target.value)}
+            {timer.purpose === "motion_vote" ? (
+              <label className="block text-sm text-brand-navy min-w-[14rem] flex-1">
+                <span className={surfaceLabel}>{tTimer("openMotionForVoting")}</span>
+                <select
+                  className={`${surfaceField} mt-1`}
+                  value={timer.boundVoteItemId}
+                  onChange={(e) => setTimer((t) => ({ ...t, boundVoteItemId: e.target.value }))}
+                >
+                  <option value="">{tTimer("selectMotion")}</option>
+                  {openVotingMotions.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.title?.trim()
+                        ? translateAgendaTopicLabel(tTopics, m.title, locale)
+                        : tTimer("untitled")}{" "}
+                      · {formatVoteTypeLabel(tVoting, m.vote_type)}
+                      {m.procedure_code ? ` (${m.procedure_code})` : ""}
+                    </option>
+                  ))}
+                </select>
+                {openVotingMotions.length === 0 ? (
+                  <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
+                    {tTimer("noOpenMotionWarning")}
+                  </p>
+                ) : null}
+              </label>
+            ) : null}
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2.5">
+            <p className="text-sm text-brand-navy">
+              <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
+              <span className="font-medium">
+                {liveClockRunning ? tTimer("running") : tTimer("paused")}
+              </span>
+            </p>
+            <FloorTimerRunButtons
+              size="md"
+              running={liveClockRunning}
+              pending={pendingTimer}
+              onStart={startFloorTimer}
+              onPause={stopFloorTimer}
             />
-          </label>
+          </div>
           <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
             <input
               type="checkbox"
@@ -4568,6 +4671,81 @@ export function SessionControlClient({
                 {tTimer("perSpeakerHelp")}
               </span>
             </span>
+          </label>
+          <div className="flex flex-wrap gap-4 items-end">
+            <label className="text-sm text-brand-navy min-w-[10rem]">
+              <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
+              <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
+                {timer.perSpeakerMode ? tTimer("remainingHelpPerSpeaker") : tTimer("remainingHelpNormal")}
+              </span>
+              <div className="flex gap-1 mt-1 items-center">
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  inputMode="numeric"
+                  value={timer.leftM}
+                  onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
+                />
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  inputMode="numeric"
+                  value={timer.leftS}
+                  onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
+                />
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
+              </div>
+            </label>
+            <label className="text-sm text-brand-navy min-w-[10rem]">
+              <span className={surfaceLabel}>{tTimer("totalTime")}</span>
+              <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
+                {timer.perSpeakerMode
+                  ? tTimer("totalHelpPerSpeaker")
+                  : tTimer("totalHelpNormal")}
+              </span>
+              <div className="flex gap-1 mt-1 items-center">
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  inputMode="numeric"
+                  value={timer.totalM}
+                  onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
+                />
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  inputMode="numeric"
+                  value={timer.totalS}
+                  onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
+                />
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
+              </div>
+            </label>
+            <button
+              type="button"
+              disabled={pendingTimer}
+              onClick={saveTimer}
+              className="rounded-[980px] bg-[#007AFF] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0077ED] disabled:opacity-50"
+            >
+              {tTimer("saveTimer")}
+            </button>
+            {timer.perSpeakerMode ? (
+              <button
+                type="button"
+                disabled={pendingAdvance}
+                onClick={advanceSpeakerAndResetClock}
+                className="rounded-[980px] border border-[var(--hairline)] bg-white px-4 py-2.5 text-sm font-medium text-brand-navy hover:bg-[var(--apple-bg-secondary)] disabled:opacity-50"
+              >
+                {tTimer("advanceSpeakerReset")}
+              </button>
+            ) : null}
+          </div>
+          <label className="block text-sm text-brand-navy">
+            <span className={surfaceLabel}>{tTimer("pauseReasonLogged")}</span>
+            <input
+              className={`${surfaceField} mt-1`}
+              placeholder={tTimer("pauseReasonPlaceholder")}
+              value={pauseReasonDraft}
+              onChange={(e) => setPauseReasonDraft(e.target.value)}
+            />
           </label>
             </>
           ) : null}
@@ -4723,7 +4901,7 @@ export function SessionControlClient({
           ) : null}
           {timerWorkflowTab === "log" ? (
             pauseEvents.length > 0 ? (
-              <div className="border-t border-[var(--hairline)] pt-3">
+              <div className="pt-1">
                 <p className={`${surfaceLabel} mb-2`}>{tTimer("recentPauseLog")}</p>
                 <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
                   {pauseEvents.map((ev) => (
@@ -4739,11 +4917,7 @@ export function SessionControlClient({
             ) : (
               <p className="text-xs text-brand-muted">{tTimer("noPauseEvents")}</p>
             )
-          ) : (
-            <p className="text-xs text-brand-muted">
-              {tTimer("openPauseLogHint")}
-            </p>
-          )}
+          ) : null}
         </div>
       </section>
       ) : null}

@@ -1766,7 +1766,10 @@
     "perSpeakerTime": "Per-speaker time",
     "perSpeakerTimeHelp": "This cap is what each speaker gets. Apply updates the floor timer and resets the current clock. Current speaker stays in sync with this list.",
     "applyPerSpeakerTime": "Apply time",
-    "perSpeakerTimeApplied": "Per-speaker time set to {clock}."
+    "perSpeakerTimeApplied": "Per-speaker time set to {clock}.",
+    "introMiddleInline": "in the committee room. Set time below, then Start / Pause or",
+    "introSuffixInlineTimer": "Set per-speaker time below, then Start or Advance",
+    "noTimerYetInline": "Press Start for 60s, or set a custom time below and Apply"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "ជ្រើសរើសប្រធានបទបន្តផ្ទាល់",
@@ -3357,7 +3360,10 @@
     "speakingSuspendedShort": "speaking suspended",
     "removedShort": "removed",
     "disciplineWarnings": "{count} warning(s)",
-    "disciplineStrikes": "{count} strike(s)"
+    "disciplineStrikes": "{count} strike(s)",
+    "pendingStatedOnFloor": "{count, plural, one {# stated motion is waiting on the floor — open it for voting in Session → Motions first.} other {# stated motions are waiting on the floor — open them for voting in Session → Motions first.}}",
+    "notOpenForVotingYet": "This motion is only stated on the floor. Begin voting in Session → Motions before recording ballots.",
+    "reopenBlockedOtherOpen": "Another motion is already open for voting. Close it before reopening this one."
   },
   "profile": {
     "fallbacks": {
@@ -4628,7 +4634,9 @@
       },
       "start": "Start",
       "pause": "Pause",
-      "speakerLockedToList": "Locked to the speaker list. Change Current on Speakers to update this."
+      "speakerLockedToList": "Locked to the speaker list. Change Current on Speakers to update this.",
+      "tabControls": "Timer controls",
+      "controlsSummary": "Set the time, label, and purpose below, then Start — or Save to publish without starting. Start with no time configured creates a 60s clock."
     }
   },
   "navFolders": {
