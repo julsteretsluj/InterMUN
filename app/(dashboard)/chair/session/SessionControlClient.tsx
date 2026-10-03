@@ -43,6 +43,12 @@ import { CommitteeAgendaVotesTab } from "@/components/chair/CommitteeAgendaVotes
 import { GuidedMotionWizard, type GuidedMotionDraftResult } from "@/components/chair/GuidedMotionWizard";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import {
+  intersectRefreshSlices,
+  slicesForRealtimeTable,
+  slicesForSessionSection,
+  type SessionRefreshSlice,
+} from "@/lib/chair-session-refresh-slices";
+import {
   isPressTimedProcedure,
   parseMotionProposedMinutes,
   parseMotionProposedSpeakerSeconds,
@@ -486,6 +492,17 @@ export function SessionControlClient({
     floorLabel: "",
   });
   const [openVotingMotions, setOpenVotingMotions] = useState<MotionRow[]>([]);
+  /** Stable fallbacks for partial refresh slices (avoid re-creating refresh every state tick). */
+  const allocationsRef = useRef<Alloc[]>([]);
+  const caucusPrecedenceRef = useRef<CaucusDisruptivenessPrecedence>("consultation_first");
+  const procedureProfileRef = useRef<"default" | "eu_parliament" | "press_corps">("default");
+  const openVotingMotionsRef = useRef<MotionRow[]>([]);
+  const openMotionRef = useRef<MotionRow | null>(null);
+  const recentMotionsRef = useRef<MotionRow[]>([]);
+  const agendaConferenceMetaRef = useRef<{
+    event_id: string;
+    committee: string;
+  } | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   type SessionBusy =
     | "timer"
@@ -560,6 +577,13 @@ export function SessionControlClient({
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
+
+  allocationsRef.current = allocations;
+  caucusPrecedenceRef.current = caucusPrecedence;
+  procedureProfileRef.current = procedureProfile;
+  openVotingMotionsRef.current = openVotingMotions;
+  openMotionRef.current = openMotion;
+  recentMotionsRef.current = recentMotions;
 
   // Persistent floor layout soft-navigates without remounting — sync deep-link tabs.
   useEffect(() => {
@@ -1135,9 +1159,12 @@ export function SessionControlClient({
     );
   }
 
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (sliceOverride?: SessionRefreshSlice[]) => {
     const motionSelect =
       "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, open_for_voting, created_at, closed_at";
+    const slices = new Set(sliceOverride ?? slicesForSessionSection(activeSection));
+    const want = (s: SessionRefreshSlice) => slices.has(s);
+    const skip = <T,>(data: T | null = null) => Promise.resolve({ data });
 
     try {
     const [
@@ -1158,383 +1185,525 @@ export function SessionControlClient({
       { data: disciplinaryRows },
     ] =
       await Promise.all([
-        supabase
-          .from("procedure_states")
-          .select("state, current_vote_item_id, debate_closed, motion_floor_open, eu_session_phase")
-          .eq("conference_id", floorConferenceId)
-          .maybeSingle(),
-        supabase
-          .from("conferences")
-          .select("id, consultation_before_moderated_caucus, event_id, committee, procedure_profile, eu_guided_workflow_enabled")
-          .in("id", Array.from(new Set([canonicalConferenceId, floorConferenceId])))
-          .limit(2),
-        supabase
-          .from("allocations")
-          .select("id, country, user_id, conference_id")
-          .in("conference_id", rosterConferenceIdList)
-          .order("country"),
-        supabase
-          .from("roll_call_entries")
-          .select("allocation_id, conference_id, present, attendance, allocations(country)")
-          .in("conference_id", rosterConferenceIdList)
-          .order("allocation_id"),
-        supabase
-          .from("dais_announcements")
-          .select("id, body, created_at, body_format, is_pinned, publish_at, resources")
-          .eq("conference_id", floorConferenceId)
-          .order("is_pinned", { ascending: false })
-          .order("created_at", { ascending: false })
-          .limit(24),
-        supabase.from("timers").select("*").eq("conference_id", floorConferenceId).maybeSingle(),
-        supabase.from("vote_items").select(motionSelect).eq("conference_id", floorConferenceId).is("closed_at", null),
-        supabase
-          .from("vote_items")
-          .select("title")
-          .eq("conference_id", floorConferenceId)
-          .eq("procedure_code", "set_agenda")
-          .not("closed_at", "is", null)
-          .order("created_at", { ascending: false })
-          .limit(50),
-        supabase
-          .from("vote_items")
-          .select(motionSelect)
-          .eq("conference_id", floorConferenceId)
-          .not("closed_at", "is", null)
-          .order("created_at", { ascending: false })
-          .limit(8),
-        supabase
-          .from("resolutions")
-          .select("id, google_docs_url, main_submitters, co_submitters, signatories")
-          .eq("conference_id", floorConferenceId)
-          .order("created_at", { ascending: false })
-          .limit(30),
-        supabase
-          .from("resolution_clauses")
-          .select("id, resolution_id, clause_number, clause_text")
-          .eq("conference_id", floorConferenceId)
-          .order("clause_number", { ascending: true })
-          .limit(500),
-        supabase
-          .from("timer_pause_events")
-          .select("id, reason, created_at")
-          .eq("conference_id", floorConferenceId)
-          .order("created_at", { ascending: false })
-          .limit(20),
-        supabase
-          .from("speaker_queue_entries")
-          .select("id, allocation_id, label, list_kind")
-          .eq("conference_id", floorConferenceId)
-          .eq("status", "current")
-          .limit(4),
-        supabase
-          .from("chair_session_points")
-          .select("id, conference_id, raised_by_allocation_id, point_code, detail, status, created_at")
-          .eq("conference_id", floorConferenceId)
-          .order("created_at", { ascending: false })
-          .limit(80),
-        supabase
-          .from("chair_delegate_discipline")
-          .select(
-            "allocation_id, voting_rights_lost, speaking_rights_suspended, removed_from_committee, warning_count, strike_count"
-          )
-          .eq("conference_id", floorConferenceId)
-          .limit(500),
+        want("core")
+          ? supabase
+              .from("procedure_states")
+              .select("state, current_vote_item_id, debate_closed, motion_floor_open, eu_session_phase")
+              .eq("conference_id", floorConferenceId)
+              .maybeSingle()
+          : skip(),
+        want("core")
+          ? supabase
+              .from("conferences")
+              .select(
+                "id, consultation_before_moderated_caucus, event_id, committee, procedure_profile, eu_guided_workflow_enabled"
+              )
+              .in("id", Array.from(new Set([canonicalConferenceId, floorConferenceId])))
+              .limit(2)
+          : skip(),
+        want("core")
+          ? supabase
+              .from("allocations")
+              .select("id, country, user_id, conference_id")
+              .in("conference_id", rosterConferenceIdList)
+              .order("country")
+          : skip(),
+        want("roll")
+          ? supabase
+              .from("roll_call_entries")
+              .select("allocation_id, conference_id, present, attendance, allocations(country)")
+              .in("conference_id", rosterConferenceIdList)
+              .order("allocation_id")
+          : skip(),
+        want("announcements")
+          ? supabase
+              .from("dais_announcements")
+              .select("id, body, created_at, body_format, is_pinned, publish_at, resources")
+              .eq("conference_id", floorConferenceId)
+              .order("is_pinned", { ascending: false })
+              .order("created_at", { ascending: false })
+              .limit(24)
+          : skip(),
+        want("core")
+          ? supabase.from("timers").select("*").eq("conference_id", floorConferenceId).maybeSingle()
+          : skip(),
+        want("voteItems")
+          ? supabase
+              .from("vote_items")
+              .select(motionSelect)
+              .eq("conference_id", floorConferenceId)
+              .is("closed_at", null)
+          : skip(),
+        want("voteItems")
+          ? supabase
+              .from("vote_items")
+              .select("title")
+              .eq("conference_id", floorConferenceId)
+              .eq("procedure_code", "set_agenda")
+              .not("closed_at", "is", null)
+              .order("created_at", { ascending: false })
+              .limit(50)
+          : skip(),
+        want("voteItems")
+          ? supabase
+              .from("vote_items")
+              .select(motionSelect)
+              .eq("conference_id", floorConferenceId)
+              .not("closed_at", "is", null)
+              .order("created_at", { ascending: false })
+              .limit(8)
+          : skip(),
+        want("resolutions")
+          ? supabase
+              .from("resolutions")
+              .select("id, google_docs_url, main_submitters, co_submitters, signatories")
+              .eq("conference_id", floorConferenceId)
+              .order("created_at", { ascending: false })
+              .limit(30)
+          : skip(),
+        want("resolutions")
+          ? supabase
+              .from("resolution_clauses")
+              .select("id, resolution_id, clause_number, clause_text")
+              .eq("conference_id", floorConferenceId)
+              .order("clause_number", { ascending: true })
+              .limit(500)
+          : skip(),
+        want("timerLog")
+          ? supabase
+              .from("timer_pause_events")
+              .select("id, reason, created_at")
+              .eq("conference_id", floorConferenceId)
+              .order("created_at", { ascending: false })
+              .limit(20)
+          : skip(),
+        want("core")
+          ? supabase
+              .from("speaker_queue_entries")
+              .select("id, allocation_id, label, list_kind")
+              .eq("conference_id", floorConferenceId)
+              .eq("status", "current")
+              .limit(4)
+          : skip(),
+        want("points")
+          ? supabase
+              .from("chair_session_points")
+              .select("id, conference_id, raised_by_allocation_id, point_code, detail, status, created_at")
+              .eq("conference_id", floorConferenceId)
+              .order("created_at", { ascending: false })
+              .limit(80)
+          : skip(),
+        want("discipline")
+          ? supabase
+              .from("chair_delegate_discipline")
+              .select(
+                "allocation_id, voting_rights_lost, speaking_rights_suspended, removed_from_committee, warning_count, strike_count"
+              )
+              .eq("conference_id", floorConferenceId)
+              .limit(500)
+          : skip(),
       ]);
 
-    const allocRows = (allocs as Alloc[]) ?? [];
-    const sortedByFloor = [...allocRows].sort((a, b) => {
-      const ap = a.conference_id === floorConferenceId ? 0 : 1;
-      const bp = b.conference_id === floorConferenceId ? 0 : 1;
-      if (ap !== bp) return ap - bp;
-      return (a.country ?? "").localeCompare(b.country ?? "");
-    });
-    const allocUserIds = [
-      ...new Set(sortedByFloor.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
-    ];
-    const { data: allocProfiles } =
-      allocUserIds.length > 0
-        ? await supabase.from("profiles").select("id, role").in("id", allocUserIds)
-        : { data: [] as { id: string; role: string | null }[] };
-    const roleByProfileId = new Map((allocProfiles ?? []).map((p) => [p.id, p.role ?? null]));
-    const allocationsWithRoles = sortedByFloor.map((a) => ({
-      ...a,
-      userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
-    }));
-    const mergedAllocs = sortAllocationsByDisplayCountry(
-      mergeAllocationsAcrossSiblingConferences(allocationsWithRoles, canonicalConferenceId)
-    );
-    const allowedAllocIds = new Set(
-      mergedAllocs.filter(isDelegateRollCallAllocation).map((a) => a.id)
-    );
-    setAllocations(mergedAllocs);
-    const rollMapped = (
-      (r as (Omit<RollRow, "attendance"> & { attendance?: string | null; conference_id?: string })[]) ?? []
-    ).map(
-      (row) =>
-        ({
-          ...row,
-          conference_id: row.conference_id ?? conferenceId,
-          attendance:
-            parseRollAttendance(row.attendance) ??
-            (row.present === true ? "present_voting" : "absent"),
-        }) satisfies RollRow
-    );
-    setRoll(rollMapped.filter((row) => allowedAllocIds.has(row.allocation_id)));
-    setAnnouncements((ann as Announcement[]) ?? []);
-    setPauseEvents((pauseRows as PauseEvent[]) ?? []);
-    {
-      const currents =
-        (sqCurrentRows as (CurrentSpeakerQueueRow & { list_kind?: string | null })[] | null) ?? [];
-      const activeKind = resolveSpeakerQueueListKind(
-        (timerRow as { floor_label?: string | null } | null)?.floor_label
-      );
-      const picked =
-        currents.find((r) => (r.list_kind ?? "gsl") === activeKind) ??
-        currents.find((r) => (r.list_kind ?? "gsl") === "gsl") ??
-        currents[0] ??
-        null;
-      setCurrentSpeakerQueueRow(picked);
-    }
-    setSessionPoints((pointRows as SessionPointRow[]) ?? []);
-    const dMap: Record<string, DisciplinaryRow> = {};
-    for (const row of (disciplinaryRows as DisciplinaryRow[] | null) ?? []) {
-      dMap[row.allocation_id] = row;
-    }
-    setDisciplineByAllocationId(dMap);
-    const ps = psRow as {
-      motion_floor_open?: boolean;
-      debate_closed?: boolean;
-      state?: string;
-      current_vote_item_id?: string | null;
-      eu_session_phase?: string | null;
-    } | null;
-    setMotionFloorOpen(!!ps?.motion_floor_open);
-    setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
-
-    const confList = (confRows as Array<{
+    let mergedAllocsForRoll = allocationsRef.current;
+    let precedence: CaucusDisruptivenessPrecedence = caucusPrecedenceRef.current;
+    let normalizedProcedureProfile = procedureProfileRef.current;
+    let openForVotingList = openVotingMotionsRef.current;
+    let open = openMotionRef.current;
+    let recentClosedForRights = recentMotionsRef.current;
+    let confForAgenda: {
       id?: string | null;
       consultation_before_moderated_caucus?: boolean;
       event_id?: string | null;
       committee?: string | null;
       procedure_profile?: string | null;
       eu_guided_workflow_enabled?: boolean | null;
-    }> | null) ?? [];
-    const confForAgenda = confList.find((row) => row.id === canonicalConferenceId)
-      ?? confList.find((row) => row.id === floorConferenceId)
-      ?? null;
-    const committeeLabel = confForAgenda?.committee?.toString().trim().toLowerCase() ?? "";
-    const looksLikeEuParliamentCommittee =
-      committeeLabel.includes("eu") &&
-      (committeeLabel.includes("parli") || committeeLabel.includes("parliament"));
-    const normalizedProcedureProfile = (() => {
-      if (
-        isPressCorpsProcedure(confForAgenda?.procedure_profile) ||
-        looksLikePressCorpsCommittee(confForAgenda?.committee)
-      ) {
-        return "press_corps" as const;
-      }
-      if (isEuParliamentProcedure(confForAgenda?.procedure_profile) || looksLikeEuParliamentCommittee) {
-        return "eu_parliament" as const;
-      }
-      return "default" as const;
-    })();
-    setProcedureProfile(normalizedProcedureProfile);
-    const precedence: CaucusDisruptivenessPrecedence =
-      confForAgenda?.consultation_before_moderated_caucus === false ? "moderated_first" : "consultation_first";
-    setCaucusPrecedence(precedence);
-    setIsCrisisCommitteeSession(isCrisisCommittee(confForAgenda?.committee ?? null));
-    setIsEuGuidedWorkflow(
-      normalizedProcedureProfile === "eu_parliament" &&
-        confForAgenda?.eu_guided_workflow_enabled === true
-    );
+    } | null = null;
 
-    const agendaTopicsAllResolved: AgendaTopic[] = [];
-    if (confForAgenda?.event_id && confForAgenda.committee) {
-      const { data: topicRows } = await supabase
-        .from("conferences")
-        .select("id, name")
-        .eq("event_id", confForAgenda.event_id)
-        .eq("committee", confForAgenda.committee)
-        .order("created_at", { ascending: true });
-      agendaTopicsAllResolved.push(...(((topicRows as AgendaTopic[]) ?? []).filter((t) => (t.name ?? "").trim().length > 0)));
-    }
-
-    const usedAgendaNames = new Set<string>();
-    const unclosed = ((unclosedRows as MotionRow[]) ?? []).filter(
-      (m) => m.procedure_code !== "agenda_floor"
-    );
-    for (const m of unclosed) {
-      if (m.procedure_code !== "set_agenda") continue;
-      const name = (m.title ?? "").trim();
-      if (name) usedAgendaNames.add(name);
-    }
-    for (const r of (setAgendaClosedRows as { title?: string | null }[] | null) ?? []) {
-      const name = (r.title ?? "").trim();
-      if (name) usedAgendaNames.add(name);
-    }
-
-    const remaining = agendaTopicsAllResolved.filter(
-      (t) => !usedAgendaNames.has((t.name ?? "").trim())
-    );
-    setAgendaTopicsRemaining(remaining);
-    setAgendaTopicsUsedNames(Array.from(usedAgendaNames));
-
-    const openForVotingList = unclosed.filter((row) => row.open_for_voting === true);
-    setOpenVotingMotions(openForVotingList);
-    const open = openForVotingList[0] ?? null;
-    const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
-    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw, precedence, normalizedProcedureProfile));
-    setOpenMotion(open);
-    setRecentMotions((recentClosedRows as MotionRow[]) ?? []);
-    setResolutions((resolutionRows as ResolutionRow[]) ?? []);
-    const rightsVoteIds = new Set<string>();
-    for (const row of openForVotingList) rightsVoteIds.add(row.id);
-    for (const row of (recentClosedRows as MotionRow[]) ?? []) rightsVoteIds.add(row.id);
-    if (rightsVoteIds.size > 0) {
-      const { data: rightsRows } = await supabase
-        .from("vote_rights_statements")
-        .select("vote_item_id, user_id, vote_value, statement")
-        .in("vote_item_id", Array.from(rightsVoteIds));
-      const rightsMap: Record<string, VoteRightsRow> = {};
-      for (const row of (rightsRows as VoteRightsRow[]) ?? []) {
-        rightsMap[`${row.vote_item_id}:${row.user_id}`] = row;
-      }
-      setVoteRightsByUserId(rightsMap);
-    } else {
-      setVoteRightsByUserId({});
-    }
-    setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
-    if (open) {
-      const parsedTiming = parseModeratedTiming(open.description);
-      const isMod = open.procedure_code === "moderated_caucus";
-      const isUnmod = open.procedure_code === "unmoderated_caucus";
-      const isConsult = open.procedure_code === "consultation";
-      setMotionDraft({
-        vote_type: open.vote_type,
-        procedure_code: open.procedure_code,
-        title: open.title ?? "",
-        description: open.description ?? "",
-        must_vote: open.must_vote,
-        procedure_resolution_id: open.procedure_resolution_id,
-        procedure_clause_ids: open.procedure_clause_ids ?? [],
-        motioner_allocation_id: open.motioner_allocation_id ?? null,
-        moderated_total_minutes: isMod ? parsedTiming.totalMinutes : "",
-        moderated_speaker_seconds: isMod ? parsedTiming.speakerSeconds : "",
-        unmoderated_total_minutes: isUnmod ? parsedTiming.totalMinutes : "",
-        consultation_total_minutes: isConsult ? parsedTiming.totalMinutes : "",
-        amendment_kind: "friendly",
-        amendment_debate_seconds: "45",
+    if (want("core")) {
+      const allocRows = (allocs as Alloc[]) ?? [];
+      const sortedByFloor = [...allocRows].sort((a, b) => {
+        const ap = a.conference_id === floorConferenceId ? 0 : 1;
+        const bp = b.conference_id === floorConferenceId ? 0 : 1;
+        if (ap !== bp) return ap - bp;
+        return (a.country ?? "").localeCompare(b.country ?? "");
       });
-    }
+      const allocUserIds = [
+        ...new Set(sortedByFloor.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+      ];
+      const { data: allocProfiles } =
+        allocUserIds.length > 0
+          ? await supabase.from("profiles").select("id, role").in("id", allocUserIds)
+          : { data: [] as { id: string; role: string | null }[] };
+      const roleByProfileId = new Map((allocProfiles ?? []).map((p) => [p.id, p.role ?? null]));
+      const allocationsWithRoles = sortedByFloor.map((a) => ({
+        ...a,
+        userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
+      }));
+      const mergedAllocs = sortAllocationsByDisplayCountry(
+        mergeAllocationsAcrossSiblingConferences(allocationsWithRoles, canonicalConferenceId)
+      );
+      mergedAllocsForRoll = mergedAllocs;
+      allocationsRef.current = mergedAllocs;
+      setAllocations(mergedAllocs);
 
-    const motionId = open?.id ?? null;
-    if (motionId) {
-      const [{ data: openVotes }, { data: auditRows }] = await Promise.all([
-        supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", motionId),
-        supabase
-          .from("motion_audit_events")
-          .select("id, event_type, created_at, actor_profile_id, metadata")
-          .eq("vote_item_id", motionId)
-          .order("created_at", { ascending: false })
-          .limit(20),
-      ]);
+      {
+        const currents =
+          (sqCurrentRows as (CurrentSpeakerQueueRow & { list_kind?: string | null })[] | null) ?? [];
+        const activeKind = resolveSpeakerQueueListKind(
+          (timerRow as { floor_label?: string | null } | null)?.floor_label
+        );
+        const picked =
+          currents.find((r) => (r.list_kind ?? "gsl") === activeKind) ??
+          currents.find((r) => (r.list_kind ?? "gsl") === "gsl") ??
+          currents[0] ??
+          null;
+        setCurrentSpeakerQueueRow(picked);
+      }
 
-      const rows = (openVotes ?? []) as VoteCountRow[];
-      const counted = rows.filter((v) => v.value === "yes" || v.value === "no");
-      const yes = counted.filter((v) => v.value === "yes").length;
-      const no = counted.filter((v) => v.value === "no").length;
-      setMotionTally({ yes, no, total: counted.length });
-      const vm: Record<string, "yes" | "no" | "abstain"> = {};
-      for (const r of rows) {
-        if (r.value === "yes" || r.value === "no" || r.value === "abstain") {
-          const voteKey = r.allocation_id ?? r.user_id;
-          if (voteKey) vm[voteKey] = r.value;
+      const ps = psRow as {
+        motion_floor_open?: boolean;
+        debate_closed?: boolean;
+        state?: string;
+        current_vote_item_id?: string | null;
+        eu_session_phase?: string | null;
+      } | null;
+      setMotionFloorOpen(!!ps?.motion_floor_open);
+      setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
+
+      const confList = (confRows as Array<{
+        id?: string | null;
+        consultation_before_moderated_caucus?: boolean;
+        event_id?: string | null;
+        committee?: string | null;
+        procedure_profile?: string | null;
+        eu_guided_workflow_enabled?: boolean | null;
+      }> | null) ?? [];
+      confForAgenda = confList.find((row) => row.id === canonicalConferenceId)
+        ?? confList.find((row) => row.id === floorConferenceId)
+        ?? null;
+      const committeeLabel = confForAgenda?.committee?.toString().trim().toLowerCase() ?? "";
+      const looksLikeEuParliamentCommittee =
+        committeeLabel.includes("eu") &&
+        (committeeLabel.includes("parli") || committeeLabel.includes("parliament"));
+      normalizedProcedureProfile = (() => {
+        if (
+          isPressCorpsProcedure(confForAgenda?.procedure_profile) ||
+          looksLikePressCorpsCommittee(confForAgenda?.committee)
+        ) {
+          return "press_corps" as const;
         }
+        if (isEuParliamentProcedure(confForAgenda?.procedure_profile) || looksLikeEuParliamentCommittee) {
+          return "eu_parliament" as const;
+        }
+        return "default" as const;
+      })();
+      procedureProfileRef.current = normalizedProcedureProfile;
+      setProcedureProfile(normalizedProcedureProfile);
+      precedence =
+        confForAgenda?.consultation_before_moderated_caucus === false
+          ? "moderated_first"
+          : "consultation_first";
+      caucusPrecedenceRef.current = precedence;
+      setCaucusPrecedence(precedence);
+      setIsCrisisCommitteeSession(isCrisisCommittee(confForAgenda?.committee ?? null));
+      setIsEuGuidedWorkflow(
+        normalizedProcedureProfile === "eu_parliament" &&
+          confForAgenda?.eu_guided_workflow_enabled === true
+      );
+      if (confForAgenda?.event_id && confForAgenda.committee) {
+        agendaConferenceMetaRef.current = {
+          event_id: confForAgenda.event_id,
+          committee: confForAgenda.committee,
+        };
       }
-      setMotionVoteByUser(vm);
-      setMotionAudit((auditRows as MotionAudit[]) ?? []);
-    } else {
-      setMotionTally({ yes: 0, no: 0, total: 0 });
-      setMotionVoteByUser({});
-      setMotionAudit([]);
     }
 
-    if (timerRow) {
-      const tl = timerRow.time_left_seconds ?? 0;
-      const tt = timerRow.total_time_seconds ?? 0;
-      const tr = timerRow as {
-        per_speaker_mode?: boolean | null;
-        is_running?: boolean | null;
-        vote_item_id?: string | null;
-        eu_timer_meta?: unknown;
-      };
-      // Timer may still point at a closed/previous motion. A stale bind must not
-      // hide Motions → Votes recording (activeMotionForRecordedVotes).
-      const vidRaw = tr.vote_item_id ?? null;
-      const vid =
-        vidRaw && openForVotingList.some((m) => m.id === vidRaw) ? vidRaw : null;
-      const floorLabel = (timerRow as { floor_label?: string | null }).floor_label ?? "";
-      setTimer({
-        current: timerRow.current_speaker ?? "",
-        next: timerRow.next_speaker ?? "",
-        leftM: String(Math.floor(tl / 60)),
-        leftS: String(tl % 60),
-        totalM: String(Math.floor(tt / 60)),
-        totalS: String(tt % 60),
-        perSpeakerMode: !!tr.per_speaker_mode,
-        // Seeded 0/0 rows default is_running=true in DB — treat as paused until configured.
-        isRunning: isSpeakerTimerActivelyRunning(timerRow),
-        purpose: vid ? "motion_vote" : "general_floor",
-        boundVoteItemId: vid ?? "",
-        floorLabel: floorLabel.trim(),
-      });
-      if (supportsEuTimerMeta) {
-        setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
+    if (want("roll")) {
+      const allowedAllocIds = new Set(
+        mergedAllocsForRoll.filter(isDelegateRollCallAllocation).map((a) => a.id)
+      );
+      const rollMapped = (
+        (r as (Omit<RollRow, "attendance"> & { attendance?: string | null; conference_id?: string })[]) ??
+        []
+      ).map(
+        (row) =>
+          ({
+            ...row,
+            conference_id: row.conference_id ?? conferenceId,
+            attendance:
+              parseRollAttendance(row.attendance) ??
+              (row.present === true ? "present_voting" : "absent"),
+          }) satisfies RollRow
+      );
+      setRoll(
+        allowedAllocIds.size > 0
+          ? rollMapped.filter((row) => allowedAllocIds.has(row.allocation_id))
+          : rollMapped
+      );
+    }
+    if (want("announcements")) setAnnouncements((ann as Announcement[]) ?? []);
+    if (want("timerLog")) setPauseEvents((pauseRows as PauseEvent[]) ?? []);
+    if (want("points")) setSessionPoints((pointRows as SessionPointRow[]) ?? []);
+    if (want("discipline")) {
+      const dMap: Record<string, DisciplinaryRow> = {};
+      for (const row of (disciplinaryRows as DisciplinaryRow[] | null) ?? []) {
+        dMap[row.allocation_id] = row;
       }
-    } else {
-      setEuTimerMeta(defaultEuTimerMeta());
+      setDisciplineByAllocationId(dMap);
+    }
+
+    if (want("voteItems")) {
+      const unclosed = ((unclosedRows as MotionRow[]) ?? []).filter(
+        (m) => m.procedure_code !== "agenda_floor"
+      );
+      openForVotingList = unclosed.filter((row) => row.open_for_voting === true);
+      open = openForVotingList[0] ?? null;
+      recentClosedForRights = (recentClosedRows as MotionRow[]) ?? [];
+      const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
+      openVotingMotionsRef.current = openForVotingList;
+      openMotionRef.current = open;
+      recentMotionsRef.current = recentClosedForRights;
+      setOpenVotingMotions(openForVotingList);
+      setPendingStatedMotions(
+        sortMotionsMostDisruptiveFirst(pendingRaw, precedence, normalizedProcedureProfile)
+      );
+      setOpenMotion(open);
+      setRecentMotions(recentClosedForRights);
+
+      if (open) {
+        const parsedTiming = parseModeratedTiming(open.description);
+        const isMod = open.procedure_code === "moderated_caucus";
+        const isUnmod = open.procedure_code === "unmoderated_caucus";
+        const isConsult = open.procedure_code === "consultation";
+        setMotionDraft({
+          vote_type: open.vote_type,
+          procedure_code: open.procedure_code,
+          title: open.title ?? "",
+          description: open.description ?? "",
+          must_vote: open.must_vote,
+          procedure_resolution_id: open.procedure_resolution_id,
+          procedure_clause_ids: open.procedure_clause_ids ?? [],
+          motioner_allocation_id: open.motioner_allocation_id ?? null,
+          moderated_total_minutes: isMod ? parsedTiming.totalMinutes : "",
+          moderated_speaker_seconds: isMod ? parsedTiming.speakerSeconds : "",
+          unmoderated_total_minutes: isUnmod ? parsedTiming.totalMinutes : "",
+          consultation_total_minutes: isConsult ? parsedTiming.totalMinutes : "",
+          amendment_kind: "friendly",
+          amendment_debate_seconds: "45",
+        });
+      }
+    }
+
+    if (want("resolutions")) {
+      setResolutions((resolutionRows as ResolutionRow[]) ?? []);
+      setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
+    }
+
+    // Wave-2: agenda topics, vote-rights, and open-motion ballots — in parallel.
+    const rightsVoteIds = new Set<string>();
+    if (want("voteBallots")) {
+      for (const row of openForVotingList) rightsVoteIds.add(row.id);
+      for (const row of recentClosedForRights) rightsVoteIds.add(row.id);
+    }
+    const motionId = want("voteBallots") ? open?.id ?? null : null;
+    const agendaMeta =
+      confForAgenda?.event_id && confForAgenda.committee
+        ? { event_id: confForAgenda.event_id, committee: confForAgenda.committee }
+        : agendaConferenceMetaRef.current;
+
+    const [agendaTopicResult, rightsResult, ballotResult] = await Promise.all([
+      want("voteItems") && agendaMeta
+        ? supabase
+            .from("conferences")
+            .select("id, name")
+            .eq("event_id", agendaMeta.event_id)
+            .eq("committee", agendaMeta.committee)
+            .order("created_at", { ascending: true })
+        : Promise.resolve({ data: null as AgendaTopic[] | null }),
+      want("voteBallots") && rightsVoteIds.size > 0
+        ? supabase
+            .from("vote_rights_statements")
+            .select("vote_item_id, user_id, vote_value, statement")
+            .in("vote_item_id", Array.from(rightsVoteIds))
+        : Promise.resolve({ data: null as VoteRightsRow[] | null }),
+      motionId
+        ? Promise.all([
+            supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", motionId),
+            supabase
+              .from("motion_audit_events")
+              .select("id, event_type, created_at, actor_profile_id, metadata")
+              .eq("vote_item_id", motionId)
+              .order("created_at", { ascending: false })
+              .limit(20),
+          ])
+        : Promise.resolve(null),
+    ]);
+
+    if (want("voteItems") && agendaMeta) {
+      const agendaTopicsAllResolved = (((agendaTopicResult.data as AgendaTopic[]) ?? []).filter(
+        (t) => (t.name ?? "").trim().length > 0
+      ));
+      const usedAgendaNames = new Set<string>();
+      const unclosed = ((unclosedRows as MotionRow[]) ?? []).filter(
+        (m) => m.procedure_code !== "agenda_floor"
+      );
+      for (const m of unclosed) {
+        if (m.procedure_code !== "set_agenda") continue;
+        const name = (m.title ?? "").trim();
+        if (name) usedAgendaNames.add(name);
+      }
+      for (const closed of (setAgendaClosedRows as { title?: string | null }[] | null) ?? []) {
+        const name = (closed.title ?? "").trim();
+        if (name) usedAgendaNames.add(name);
+      }
+      setAgendaTopicsRemaining(
+        agendaTopicsAllResolved.filter((t) => !usedAgendaNames.has((t.name ?? "").trim()))
+      );
+      setAgendaTopicsUsedNames(Array.from(usedAgendaNames));
+    }
+
+    if (want("voteBallots")) {
+      if (rightsVoteIds.size > 0) {
+        const rightsMap: Record<string, VoteRightsRow> = {};
+        for (const row of (rightsResult.data as VoteRightsRow[] | null) ?? []) {
+          rightsMap[`${row.vote_item_id}:${row.user_id}`] = row;
+        }
+        setVoteRightsByUserId(rightsMap);
+      } else {
+        setVoteRightsByUserId({});
+      }
+
+      if (ballotResult) {
+        const [{ data: openVotes }, { data: auditRows }] = ballotResult;
+        const rows = (openVotes ?? []) as VoteCountRow[];
+        const counted = rows.filter((v) => v.value === "yes" || v.value === "no");
+        const yes = counted.filter((v) => v.value === "yes").length;
+        const no = counted.filter((v) => v.value === "no").length;
+        setMotionTally({ yes, no, total: counted.length });
+        const vm: Record<string, "yes" | "no" | "abstain"> = {};
+        for (const voteRow of rows) {
+          if (voteRow.value === "yes" || voteRow.value === "no" || voteRow.value === "abstain") {
+            const voteKey = voteRow.allocation_id ?? voteRow.user_id;
+            if (voteKey) vm[voteKey] = voteRow.value;
+          }
+        }
+        setMotionVoteByUser(vm);
+        setMotionAudit((auditRows as MotionAudit[]) ?? []);
+      } else if (want("voteItems")) {
+        setMotionTally({ yes: 0, no: 0, total: 0 });
+        setMotionVoteByUser({});
+        setMotionAudit([]);
+      }
+    }
+
+    if (want("core")) {
+      if (timerRow) {
+        const tl = timerRow.time_left_seconds ?? 0;
+        const tt = timerRow.total_time_seconds ?? 0;
+        const tr = timerRow as {
+          per_speaker_mode?: boolean | null;
+          is_running?: boolean | null;
+          vote_item_id?: string | null;
+          eu_timer_meta?: unknown;
+        };
+        // Timer may still point at a closed/previous motion. A stale bind must not
+        // hide Motions → Votes recording (activeMotionForRecordedVotes).
+        const vidRaw = tr.vote_item_id ?? null;
+        const vid =
+          vidRaw && openForVotingList.some((m) => m.id === vidRaw) ? vidRaw : null;
+        const floorLabel = (timerRow as { floor_label?: string | null }).floor_label ?? "";
+        setTimer({
+          current: timerRow.current_speaker ?? "",
+          next: timerRow.next_speaker ?? "",
+          leftM: String(Math.floor(tl / 60)),
+          leftS: String(tl % 60),
+          totalM: String(Math.floor(tt / 60)),
+          totalS: String(tt % 60),
+          perSpeakerMode: !!tr.per_speaker_mode,
+          // Seeded 0/0 rows default is_running=true in DB — treat as paused until configured.
+          isRunning: isSpeakerTimerActivelyRunning(timerRow),
+          purpose: vid ? "motion_vote" : "general_floor",
+          boundVoteItemId: vid ?? "",
+          floorLabel: floorLabel.trim(),
+        });
+        if (supportsEuTimerMeta) {
+          setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
+        }
+      } else {
+        setEuTimerMeta(defaultEuTimerMeta());
+      }
     }
     } finally {
-      setAllocationsReady(true);
+      if (want("core")) setAllocationsReady(true);
     }
-  }, [supabase, floorConferenceId, rosterConferenceIdList, conferenceId, canonicalConferenceId, supportsEuTimerMeta]);
+  }, [
+    supabase,
+    floorConferenceId,
+    rosterConferenceIdList,
+    conferenceId,
+    canonicalConferenceId,
+    supportsEuTimerMeta,
+    activeSection,
+  ]);
 
-  const debouncedRefresh = useDebouncedCallback(() => {
-    void refresh();
+  const pendingRefreshSlicesRef = useRef<Set<SessionRefreshSlice> | null>(null);
+  const flushPendingRefresh = useDebouncedCallback(() => {
+    const pending = pendingRefreshSlicesRef.current;
+    pendingRefreshSlicesRef.current = null;
+    if (!pending || pending.size === 0) return;
+    void refresh([...pending]);
   }, 400);
+
+  const scheduleRefresh = useCallback(
+    (nextSlices: SessionRefreshSlice[]) => {
+      if (nextSlices.length === 0) return;
+      if (!pendingRefreshSlicesRef.current) pendingRefreshSlicesRef.current = new Set();
+      for (const s of nextSlices) pendingRefreshSlicesRef.current.add(s);
+      flushPendingRefresh();
+    },
+    [flushPendingRefresh]
+  );
+
+  const sectionSlices = useMemo(() => slicesForSessionSection(activeSection), [activeSection]);
 
   useEffect(() => {
     // Deferred to a microtask so state lands asynchronously (no sync cascade).
-    void Promise.resolve().then(refresh);
-  }, [refresh]);
+    void Promise.resolve().then(() => refresh([...sectionSlices]));
+  }, [refresh, sectionSlices]);
 
   useEffect(() => {
+    const onRealtime = (table: string) => {
+      const hit = intersectRefreshSlices(sectionSlices, slicesForRealtimeTable(table));
+      if (hit.length === 0) return;
+      scheduleRefresh(hit);
+    };
+
     const ch = supabase
       .channel(`chair-session-${floorConferenceId}-${rosterKey}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "roll_call_entries" },
-        () => debouncedRefresh()
+        () => onRealtime("roll_call_entries")
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "timers" },
-        () => debouncedRefresh()
+        () => onRealtime("timers")
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "vote_items" },
-        () => debouncedRefresh()
+        () => onRealtime("vote_items")
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "votes" },
-        () => debouncedRefresh()
+        () => onRealtime("votes")
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "motion_audit_events" },
-        () => debouncedRefresh()
+        () => onRealtime("motion_audit_events")
       )
       .on(
         "postgres_changes",
@@ -1544,7 +1713,7 @@ export function SessionControlClient({
           table: "procedure_states",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => debouncedRefresh()
+        () => onRealtime("procedure_states")
       )
       .on(
         "postgres_changes",
@@ -1554,7 +1723,7 @@ export function SessionControlClient({
           table: "dais_announcements",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => debouncedRefresh()
+        () => onRealtime("dais_announcements")
       )
       .on(
         "postgres_changes",
@@ -1564,12 +1733,12 @@ export function SessionControlClient({
           table: "speaker_queue_entries",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => debouncedRefresh()
+        () => onRealtime("speaker_queue_entries")
       )
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${floorConferenceId}` },
-        () => debouncedRefresh()
+        () => onRealtime("conferences")
       )
       .on(
         "postgres_changes",
@@ -1579,7 +1748,7 @@ export function SessionControlClient({
           table: "chair_session_points",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => debouncedRefresh()
+        () => onRealtime("chair_session_points")
       )
       .on(
         "postgres_changes",
@@ -1589,15 +1758,17 @@ export function SessionControlClient({
           table: "chair_delegate_discipline",
           filter: `conference_id=eq.${floorConferenceId}`,
         },
-        () => debouncedRefresh()
+        () => onRealtime("chair_delegate_discipline")
       )
       .subscribe();
 
     const onLocalSpeakerQueue = (event: Event) => {
-      if (speakerQueueUpdatedMatches(event, floorConferenceId)) debouncedRefresh();
+      if (speakerQueueUpdatedMatches(event, floorConferenceId)) {
+        scheduleRefresh(intersectRefreshSlices(sectionSlices, ["core"]));
+      }
     };
     const onVisible = () => {
-      if (document.visibilityState === "visible") debouncedRefresh();
+      if (document.visibilityState === "visible") scheduleRefresh([...sectionSlices]);
     };
     window.addEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
     document.addEventListener("visibilitychange", onVisible);
@@ -1607,7 +1778,7 @@ export function SessionControlClient({
       window.removeEventListener(SPEAKER_QUEUE_UPDATED_EVENT, onLocalSpeakerQueue);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [supabase, floorConferenceId, rosterKey, refresh, debouncedRefresh]);
+  }, [supabase, floorConferenceId, rosterKey, sectionSlices, scheduleRefresh]);
 
   const loadChairSpeechNotes = useCallback(async () => {
     if (!authUserId) {
