@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { OfficialLinksCategoryLibrary } from "@/components/OfficialLinksCategoryLibrary";
 import { SeamunConferenceLinksCta } from "@/components/SeamunConferenceLinksCta";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getConferenceForDashboardCached } from "@/lib/active-conference";
+import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
 import { resolveOfficialLinkCategory } from "@/lib/official-un-links";
 import { isSmtRole } from "@/lib/roles";
 import { resolveSeamunConferenceLinks } from "@/lib/seamun-conference-links";
@@ -22,26 +22,26 @@ export default async function OfficialLinksCategoryPage({
 }) {
   const { category: categoryId } = await params;
 
-  const t = await getTranslations("officialLinks");
-  const tTitles = await getTranslations("pageTitles");
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [t, tTitles, auth, smtSurfaceCookie] = await Promise.all([
+    getTranslations("officialLinks"),
+    getTranslations("pageTitles"),
+    getCachedDashboardAuth(),
+    getSmtDashboardSurface(),
+  ]);
+  const { user, profile } = auth;
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   const normalizedRole = profile?.role
     ? (profile.role.toString().trim().toLowerCase() as UserRole)
     : undefined;
-  const smtSurface = isSmtRole(normalizedRole) ? await getSmtDashboardSurface() : null;
+  const smtSurface = isSmtRole(normalizedRole) ? smtSurfaceCookie : null;
   const effectiveRole = effectiveDashboardRole(normalizedRole, smtSurface) ?? normalizedRole;
 
-  const activeConf = await getConferenceForDashboard({
-    role: normalizedRole,
-    userId: user.id,
-    smtDashboardSurface: isSmtRole(normalizedRole) ? smtSurface : null,
-  });
+  const activeConf = await getConferenceForDashboardCached(
+    normalizedRole,
+    user.id,
+    isSmtRole(normalizedRole) ? smtSurface : null
+  );
 
   const seamunLinks = resolveSeamunConferenceLinks({
     role: effectiveRole,

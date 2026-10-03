@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { OfficialLinksPanel } from "@/components/OfficialLinksPanel";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getConferenceForDashboardCached } from "@/lib/active-conference";
+import { getCachedDashboardAuth } from "@/lib/dashboard-auth";
 import { resolveSeamunConferenceLinks } from "@/lib/seamun-conference-links";
 import { isSmtRole } from "@/lib/roles";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
@@ -12,24 +12,23 @@ import { getTranslations } from "next-intl/server";
 
 export default async function OfficialLinksPage() {
   const t = await getTranslations("pageTitles");
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [{ user, profile }, smtSurfaceCookie] = await Promise.all([
+    getCachedDashboardAuth(),
+    getSmtDashboardSurface(),
+  ]);
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   const normalizedRole = profile?.role
     ? (profile.role.toString().trim().toLowerCase() as UserRole)
     : undefined;
-  const smtSurface = isSmtRole(normalizedRole) ? await getSmtDashboardSurface() : null;
+  const smtSurface = isSmtRole(normalizedRole) ? smtSurfaceCookie : null;
   const effectiveRole = effectiveDashboardRole(normalizedRole, smtSurface) ?? normalizedRole;
 
-  const activeConf = await getConferenceForDashboard({
-    role: normalizedRole,
-    userId: user.id,
-    smtDashboardSurface: isSmtRole(normalizedRole) ? smtSurface : null,
-  });
+  const activeConf = await getConferenceForDashboardCached(
+    normalizedRole,
+    user.id,
+    isSmtRole(normalizedRole) ? smtSurface : null
+  );
 
   const links = resolveSeamunConferenceLinks({
     role: effectiveRole,

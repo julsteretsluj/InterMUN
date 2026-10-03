@@ -4,7 +4,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
@@ -31,6 +31,22 @@ import { cn } from "@/lib/utils";
 import { useHeldNotesCount } from "@/lib/hooks/useHeldNotesCount";
 
 const LABELS_STORAGE_KEY = "intermun-chair-nav-hide-labels";
+
+const CHAIR_FLOOR_PREFETCH_HREFS = [
+  "/chair/session/speakers",
+  "/chair/session/timer",
+  "/chair/session/motions",
+  "/voting",
+] as const;
+
+function usePrefetchChairFloorRoutes() {
+  const router = useRouter();
+  useEffect(() => {
+    for (const href of CHAIR_FLOOR_PREFETCH_HREFS) {
+      router.prefetch(href);
+    }
+  }, [router]);
+}
 
 export type ChairNavItemKey =
   | "prepChecklist"
@@ -197,6 +213,7 @@ function ChairNavRow({
   return (
     <Link
       href={item.href}
+      prefetch
       title={labelsHidden ? label : undefined}
       aria-label={label}
       data-tour={`nav-${item.itemKey}`}
@@ -277,6 +294,7 @@ export function ChairDashboardSidebar({
   const heldNotesLive = useHeldNotesCount(siblingConferenceIds);
   const heldNotesCount =
     siblingConferenceIds != null ? heldNotesLive : (heldNotesCountProp ?? 0);
+  usePrefetchChairFloorRoutes();
 
   useEffect(() => {
     // Deferred a frame so hydration-safe defaults render first, without a sync cascade.
@@ -515,6 +533,7 @@ export function ChairMobileDock({
   const heldNotesLive = useHeldNotesCount(siblingConferenceIds);
   const heldNotesCount =
     siblingConferenceIds != null ? heldNotesLive : (heldNotesCountProp ?? 0);
+  usePrefetchChairFloorRoutes();
 
   useEffect(() => {
     // Deferred a frame so hydration-safe defaults render first, without a sync cascade.

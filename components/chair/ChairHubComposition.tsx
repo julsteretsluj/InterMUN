@@ -1,7 +1,10 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { HubTileLink } from "@/components/HubTileLink";
 import { cn } from "@/lib/utils";
 
@@ -40,9 +43,13 @@ function FeaturedToolLink({
   className?: string;
   emphasis?: "primary" | "secondary";
 }) {
+  const router = useRouter();
   return (
     <Link
       href={tool.href}
+      prefetch
+      onMouseEnter={() => router.prefetch(tool.href)}
+      onFocus={() => router.prefetch(tool.href)}
       className={cn(
         "group relative flex h-full flex-col justify-between overflow-hidden rounded-[16px] border px-5 py-5 transition-[border-color,box-shadow] duration-300 ease-[var(--ease-apple-out)]",
         emphasis === "primary"
@@ -141,6 +148,7 @@ export function ChairHubComposition({
           </div>
           <Link
             href={sessionHref}
+            prefetch
             className={cn(
               "inline-flex shrink-0 items-center justify-center rounded-[980px] px-5 py-2.5 text-sm font-semibold transition-colors",
               sessionLive

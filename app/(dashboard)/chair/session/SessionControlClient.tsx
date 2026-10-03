@@ -2002,8 +2002,9 @@ export function SessionControlClient({
           current_pause_reason: isRunning ? null : undefined,
         });
         refreshSharedConferenceTimer(floorConferenceId);
+        // Keep speaker-list_kind / current row in sync without reloading motions.
+        void refresh(["core"]);
       }
-      void refresh();
     });
   }
 
@@ -2056,9 +2057,10 @@ export function SessionControlClient({
         .eq("conference_id", floorConferenceId);
       if (error) {
         setMsg(error.message);
-        void refresh();
+        void refresh(["core"]);
       } else {
         refreshSharedConferenceTimer(floorConferenceId);
+        void refresh(["timerLog"]);
       }
     });
   }
@@ -2193,6 +2195,54 @@ export function SessionControlClient({
       }
       rightsStatement = drafted.trim();
     }
+
+    const previousValue =
+      motionVoteByUser[allocation.id] ?? (uid ? motionVoteByUser[uid] : undefined);
+    const previousTally = motionTally;
+    const previousRights = uid ? voteRightsByUserId[`${voteItemId}:${uid}`] : undefined;
+
+    setMotionVoteByUser((prev) => {
+      const next = { ...prev, [allocation.id]: value };
+      if (uid) next[uid] = value;
+      return next;
+    });
+    setMotionTally((prev) => {
+      let yes = prev.yes;
+      let no = prev.no;
+      let total = prev.total;
+      const oldCounted = previousValue === "yes" || previousValue === "no";
+      const newCounted = value === "yes" || value === "no";
+      if (oldCounted) {
+        if (previousValue === "yes") yes -= 1;
+        else no -= 1;
+        total -= 1;
+      }
+      if (newCounted) {
+        if (value === "yes") yes += 1;
+        else no += 1;
+        total += 1;
+      }
+      return { yes, no, total };
+    });
+    if (rightsStatement && uid && (value === "yes" || value === "no")) {
+      setVoteRightsByUserId((prev) => ({
+        ...prev,
+        [`${voteItemId}:${uid}`]: {
+          vote_item_id: voteItemId,
+          user_id: uid,
+          vote_value: value,
+          statement: rightsStatement!,
+        },
+      }));
+    } else if (uid) {
+      setVoteRightsByUserId((prev) => {
+        const next = { ...prev };
+        delete next[`${voteItemId}:${uid}`];
+        return next;
+      });
+    }
+    setMsg(null);
+
     runBusy("votes", async () => {
       // Votes RLS requires voting_procedure + current_vote_item_id. Heal drift
       // (e.g. motion opened but procedure_states upsert lost) before recording.
@@ -2214,6 +2264,18 @@ export function SessionControlClient({
           updated_at: new Date().toISOString(),
         });
         if (psErr) {
+          setMotionVoteByUser((prev) => {
+            const next = { ...prev };
+            if (previousValue) {
+              next[allocation.id] = previousValue;
+              if (uid) next[uid] = previousValue;
+            } else {
+              delete next[allocation.id];
+              if (uid) delete next[uid];
+            }
+            return next;
+          });
+          setMotionTally(previousTally);
           setMsg(psErr.message);
           return;
         }
@@ -2224,6 +2286,26 @@ export function SessionControlClient({
         { onConflict: "vote_item_id,allocation_id" }
       );
       if (error) {
+        setMotionVoteByUser((prev) => {
+          const next = { ...prev };
+          if (previousValue) {
+            next[allocation.id] = previousValue;
+            if (uid) next[uid] = previousValue;
+          } else {
+            delete next[allocation.id];
+            if (uid) delete next[uid];
+          }
+          return next;
+        });
+        setMotionTally(previousTally);
+        if (uid) {
+          setVoteRightsByUserId((prev) => {
+            const next = { ...prev };
+            if (previousRights) next[`${voteItemId}:${uid}`] = previousRights;
+            else delete next[`${voteItemId}:${uid}`];
+            return next;
+          });
+        }
         setMsg(error.message);
         return;
       }
@@ -2251,7 +2333,6 @@ export function SessionControlClient({
         }
       }
       setMsg(null);
-      void refresh();
     });
   }
 
@@ -2261,6 +2342,34 @@ export function SessionControlClient({
       return;
     }
     const voteItemId = activeMotionForRecordedVotes.id;
+    const uid = allocation.user_id;
+    const previousValue =
+      motionVoteByUser[allocation.id] ?? (uid ? motionVoteByUser[uid] : undefined);
+    const previousTally = motionTally;
+    const previousRights = uid ? voteRightsByUserId[`${voteItemId}:${uid}`] : undefined;
+
+    setMotionVoteByUser((prev) => {
+      const next = { ...prev };
+      delete next[allocation.id];
+      if (uid) delete next[uid];
+      return next;
+    });
+    if (previousValue === "yes" || previousValue === "no") {
+      setMotionTally((prev) => ({
+        yes: previousValue === "yes" ? Math.max(0, prev.yes - 1) : prev.yes,
+        no: previousValue === "no" ? Math.max(0, prev.no - 1) : prev.no,
+        total: Math.max(0, prev.total - 1),
+      }));
+    }
+    if (uid) {
+      setVoteRightsByUserId((prev) => {
+        const next = { ...prev };
+        delete next[`${voteItemId}:${uid}`];
+        return next;
+      });
+    }
+    setMsg(null);
+
     runBusy("votes", async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
@@ -2280,6 +2389,14 @@ export function SessionControlClient({
           updated_at: new Date().toISOString(),
         });
         if (psErr) {
+          if (previousValue) {
+            setMotionVoteByUser((prev) => {
+              const next = { ...prev, [allocation.id]: previousValue };
+              if (uid) next[uid] = previousValue;
+              return next;
+            });
+            setMotionTally(previousTally);
+          }
           setMsg(psErr.message);
           return;
         }
@@ -2290,6 +2407,20 @@ export function SessionControlClient({
         .eq("vote_item_id", voteItemId)
         .eq("allocation_id", allocation.id);
       if (error) {
+        if (previousValue) {
+          setMotionVoteByUser((prev) => {
+            const next = { ...prev, [allocation.id]: previousValue };
+            if (uid) next[uid] = previousValue;
+            return next;
+          });
+          setMotionTally(previousTally);
+        }
+        if (uid && previousRights) {
+          setVoteRightsByUserId((prev) => ({
+            ...prev,
+            [`${voteItemId}:${uid}`]: previousRights,
+          }));
+        }
         setMsg(error.message);
         return;
       }
@@ -2301,7 +2432,6 @@ export function SessionControlClient({
           .eq("user_id", allocation.user_id);
       }
       setMsg(null);
-      void refresh();
     });
   }
 

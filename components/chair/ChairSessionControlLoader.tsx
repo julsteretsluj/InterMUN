@@ -3,29 +3,13 @@
 
 "use client";
 
-import dynamic from "next/dynamic";
 import type { ComponentProps } from "react";
-import type { SessionControlClient } from "@/app/(dashboard)/chair/session/SessionControlClient";
+import { SessionControlClient } from "@/app/(dashboard)/chair/session/SessionControlClient";
 
-const SessionControlClientLazy = dynamic(
-  () =>
-    import("@/app/(dashboard)/chair/session/SessionControlClient").then(
-      (m) => m.SessionControlClient
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className="rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-6 text-sm text-brand-muted"
-        role="status"
-        aria-live="polite"
-      >
-        Loading session floor…
-      </div>
-    ),
-  }
-);
-
+/**
+ * Thin wrapper kept for call-site stability. Direct import avoids the
+ * `dynamic(..., { ssr: false })` waterfall that delayed first floor paint.
+ */
 export function ChairSessionControlLoader(props: ComponentProps<typeof SessionControlClient>) {
-  return <SessionControlClientLazy {...props} />;
+  return <SessionControlClient {...props} />;
 }
