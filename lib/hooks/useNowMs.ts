@@ -16,15 +16,20 @@ function emit() {
 
 function subscribe(onStoreChange: () => void) {
   listeners.add(onStoreChange);
+  // Always refresh on (re)subscribe. useSyncExternalStore may have already read a
+  // stale getSnapshot during render; notify so Start/resume don't anchor on an old ms.
+  cacheMs = Date.now();
   if (intervalId == null) {
-    cacheMs = Date.now();
     intervalId = setInterval(emit, 1000);
   }
+  onStoreChange();
   return () => {
     listeners.delete(onStoreChange);
     if (listeners.size === 0 && intervalId != null) {
       clearInterval(intervalId);
       intervalId = null;
+      // Drop the frozen tick so the next session cannot treat it as "fresh".
+      cacheMs = 0;
     }
   };
 }

@@ -32,7 +32,11 @@ function shouldApplyTimerRow(
   const curMs = Date.parse(current.updated_at);
   const nextMs = Date.parse(next.updated_at);
   if (Number.isNaN(curMs) || Number.isNaN(nextMs)) return true;
-  return nextMs >= curMs;
+  if (nextMs > curMs) return true;
+  if (nextMs < curMs) return false;
+  // Equal timestamps: never let a paused snapshot clobber an optimistic Start.
+  if (current.is_running === true && next.is_running === false) return false;
+  return true;
 }
 
 export type ProcedureLiveRow = {
@@ -306,10 +310,14 @@ export function applyOptimisticTimerPatch(
 }
 
 /** Re-read the timers row into the shared store after a local write (does not rely on realtime). */
-export function refreshSharedConferenceTimer(conferenceId: string) {
+export function refreshSharedConferenceTimer(
+  conferenceId: string,
+  opts?: { force?: boolean }
+) {
   const entry = timerById.get(conferenceId);
   if (!entry) return;
   const epochAtRequest = entry.epoch;
+  const force = opts?.force === true;
   const supabase = getBrowserClient();
   void supabase
     .from("timers")
@@ -319,10 +327,11 @@ export function refreshSharedConferenceTimer(conferenceId: string) {
     .then(({ data }) => {
       const current = timerById.get(conferenceId);
       if (!current) return;
-      // A newer optimistic Start/Pause won the race — keep it.
-      if (current.epoch !== epochAtRequest) return;
+      // A newer optimistic Start/Pause won the race — keep it (unless forcing a revert).
+      if (!force && current.epoch !== epochAtRequest) return;
       const next = (data as ConferenceTimerRow | null) ?? null;
-      if (!shouldApplyTimerRow(current.value, next)) return;
+      if (!force && !shouldApplyTimerRow(current.value, next)) return;
+      if (force) current.epoch += 1;
       current.value = next;
       current.loading = false;
       emit(current);

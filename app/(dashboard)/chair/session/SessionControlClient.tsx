@@ -1937,34 +1937,45 @@ export function SessionControlClient({
         : payloadBase;
       let firstAttempt = await supabase
         .from("timers")
-        .upsert(payload, { onConflict: "conference_id" });
+        .upsert(payload, { onConflict: "conference_id" })
+        .select("id");
       let error = firstAttempt.error;
+      let wroteRow = Boolean(firstAttempt.data?.length);
       let fallbackWithoutMeta = false;
       if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
         setSupportsEuTimerMeta(false);
         firstAttempt = await supabase
           .from("timers")
-          .upsert(payloadBase, { onConflict: "conference_id" });
+          .upsert(payloadBase, { onConflict: "conference_id" })
+          .select("id");
         error = firstAttempt.error;
-        fallbackWithoutMeta = !firstAttempt.error;
+        wroteRow = Boolean(firstAttempt.data?.length);
+        fallbackWithoutMeta = !firstAttempt.error && wroteRow;
       }
       // Sibling topic rows may lack a timers seed — insert then update like Speakers Start.
-      if (error) {
-        const inserted = await supabase.from("timers").insert(payloadBase);
-        if (!inserted.error) {
+      if (error || !wroteRow) {
+        const inserted = await supabase.from("timers").insert(payloadBase).select("id");
+        if (!inserted.error && inserted.data?.length) {
           error = null;
+          wroteRow = true;
         } else {
           const { conference_id: _omit, ...updateFields } = payloadBase;
           const updated = await supabase
             .from("timers")
             .update(updateFields)
-            .eq("conference_id", floorConferenceId);
-          error = updated.error;
+            .eq("conference_id", floorConferenceId)
+            .select("id");
+          error = updated.error ?? inserted.error ?? error;
+          wroteRow = Boolean(updated.data?.length);
+          if (!error && !wroteRow) {
+            error = inserted.error ?? error;
+          }
         }
       }
+      const saveFailed = Boolean(error) || !wroteRow;
       setMsg(
-        error
-          ? error.message
+        saveFailed
+          ? error?.message ?? "Could not create or update the floor timer for this committee."
           : opts?.successMessage
             ? opts.successMessage
             : fallbackWithoutMeta
@@ -1974,7 +1985,7 @@ export function SessionControlClient({
             : tTimer("saved")
       );
       if (
-        !error &&
+        !saveFailed &&
         !perSpeakerMode &&
         floorLabelLooksLikeGsl(floorLabel) &&
         !suppressGslSavePromptRef.current
@@ -1991,9 +2002,9 @@ export function SessionControlClient({
         totalS: String(total % 60),
         floorLabel,
         perSpeakerMode,
-        isRunning,
+        isRunning: saveFailed ? t.isRunning : isRunning,
       }));
-      if (!error) {
+      if (!saveFailed) {
         // Re-read into the shared live store so Speakers / widgets don't wait on realtime.
         applyOptimisticTimerPatch(floorConferenceId, {
           current_speaker: currentSpeaker,
@@ -2008,6 +2019,8 @@ export function SessionControlClient({
         refreshSharedConferenceTimer(floorConferenceId);
         // Keep speaker-list_kind / current row in sync without reloading motions.
         void refresh(["core"]);
+      } else {
+        refreshSharedConferenceTimer(floorConferenceId, { force: true });
       }
     });
   }
@@ -2071,6 +2084,12 @@ export function SessionControlClient({
 
   function startFloorTimer() {
     const remainingNow = Math.max(0, Math.round(liveRemaining));
+    const formLeft = parseTime(timer.leftM, timer.leftS);
+    const formTotal = parseTime(timer.totalM, timer.totalS);
+    // Speaker timer off hides remaining fields — total is the segment length.
+    const formSegment = timer.perSpeakerMode
+      ? formLeft || formTotal || 60
+      : formTotal || formLeft || 60;
     const liveRunning =
       Boolean(liveTimerRow) &&
       isSpeakerTimerActivelyRunning(liveTimerRow) &&
@@ -2123,15 +2142,9 @@ export function SessionControlClient({
     }
     publishFloorTimer({
       isRunning: true,
-      // Match Speakers Start: unconfigured / exhausted clocks get a fresh 60s floor.
-      timeLeftSeconds: Math.max(
-        1,
-        parseTime(timer.leftM, timer.leftS) || parseTime(timer.totalM, timer.totalS) || 60
-      ),
-      totalTimeSeconds: Math.max(
-        1,
-        parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60
-      ),
+      // Unconfigured / exhausted clocks: use form segment (total-only when speaker timer off).
+      timeLeftSeconds: Math.max(1, formSegment),
+      totalTimeSeconds: Math.max(1, formTotal || formLeft || formSegment),
       successMessage: tTimer("runningForCommittee"),
     });
   }

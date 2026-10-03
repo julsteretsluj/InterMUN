@@ -81,6 +81,11 @@ export function useConferenceTimer(
 
   // Tick only while a configured clock is running; paused clocks stay frozen.
   const nowMs = useNowMs(Boolean(timer && isRunning && leftSeconds > 0));
+  // Guard against a stale shared tick (e.g. after all subscribers unmounted):
+  // anchoring on an old nowMs makes remaining collapse to 0 on the next emit.
+  const wallNow = Date.now();
+  const tickNow =
+    nowMs > 0 && wallNow - nowMs < 2000 ? nowMs : wallNow;
 
   if (!timer || !isRunning || leftSeconds <= 0) {
     anchorRef.current = null;
@@ -88,7 +93,7 @@ export function useConferenceTimer(
     anchorRef.current = {
       key: timerIdentity,
       leftSeconds,
-      atMs: nowMs > 0 ? nowMs : Date.now(),
+      atMs: tickNow,
     };
   }
 
@@ -99,9 +104,7 @@ export function useConferenceTimer(
       : Math.max(
           0,
           (anchorRef.current?.leftSeconds ?? leftSeconds) -
-            Math.floor(
-              ((nowMs > 0 ? nowMs : Date.now()) - (anchorRef.current?.atMs ?? Date.now())) / 1000
-            )
+            Math.floor((tickNow - (anchorRef.current?.atMs ?? tickNow)) / 1000)
         );
 
   const perSpeakerMode = !!timer?.per_speaker_mode;

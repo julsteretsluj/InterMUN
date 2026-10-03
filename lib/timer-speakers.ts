@@ -68,7 +68,7 @@ export function speakerListOwnsFloor(
   return listKind === "opening" ? openingFloor : !openingFloor;
 }
 
-/** Running only when the clock has a real duration and is_running is not false. */
+/** Running only when the clock has time left and is_running is not false. */
 export function isSpeakerTimerActivelyRunning(
   timer: Pick<
     TimerSpeakerExisting,
@@ -76,6 +76,7 @@ export function isSpeakerTimerActivelyRunning(
   > | null | undefined
 ): boolean {
   if (!timer || isSpeakerTimerUnconfigured(timer)) return false;
+  if (Math.round(timer.time_left_seconds ?? 0) <= 0) return false;
   return timer.is_running !== false;
 }
 
@@ -164,14 +165,38 @@ export async function upsertAlignedSpeakerTimer(
 
   const upserted = await supabase
     .from("timers")
-    .upsert(payload, { onConflict: "conference_id" });
-  if (!upserted.error) return upserted;
+    .upsert(payload, { onConflict: "conference_id" })
+    .select("id");
+  if (!upserted.error && upserted.data?.length) return upserted;
 
   // Sibling topic rows (and some older committees) may lack a timers seed row;
   // fall back to plain insert, then update, so Speakers Start still works.
-  const inserted = await supabase.from("timers").insert(payload);
-  if (!inserted.error) return inserted;
+  const inserted = await supabase.from("timers").insert(payload).select("id");
+  if (!inserted.error && inserted.data?.length) return inserted;
 
   const { conference_id: _omit, ...updateFields } = payload;
-  return supabase.from("timers").update(updateFields).eq("conference_id", conferenceId);
+  const updated = await supabase
+    .from("timers")
+    .update(updateFields)
+    .eq("conference_id", conferenceId)
+    .select("id");
+  if (!updated.error && updated.data?.length) return updated;
+
+  // Supabase update/insert can return error=null with 0 rows — surface that so
+  // Speakers Start does not look successful while the shared store stays paused.
+  const silentMiss = !updated.error && !inserted.error && !upserted.error;
+  return {
+    data: null,
+    error: updated.error ??
+      inserted.error ??
+      upserted.error ??
+      (silentMiss
+        ? {
+            message: "Could not create or update the floor timer for this committee.",
+            details: "",
+            hint: "",
+            code: "TIMER_UPSERT_FAILED",
+          }
+        : null),
+  } as typeof updated;
 }

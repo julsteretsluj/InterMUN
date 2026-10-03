@@ -566,6 +566,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         });
         if (error) {
           notify(error.message);
+          // Drop optimistic Start so the UI matches the still-paused DB row.
+          refreshSharedConferenceTimer(conferenceId, { force: true });
           return;
         }
         refreshSharedConferenceTimer(conferenceId);
