@@ -19,7 +19,21 @@ export type ConferenceTimerRow = {
   is_running?: boolean | null;
   floor_label?: string | null;
   current_pause_reason?: string | null;
+  updated_at?: string | null;
 };
+
+/** Prefer the newer timers row when an in-flight fetch races an optimistic Start/Pause. */
+function shouldApplyTimerRow(
+  current: ConferenceTimerRow | null,
+  next: ConferenceTimerRow | null
+): boolean {
+  if (!next) return true;
+  if (!current?.updated_at || !next.updated_at) return true;
+  const curMs = Date.parse(current.updated_at);
+  const nextMs = Date.parse(next.updated_at);
+  if (Number.isNaN(curMs) || Number.isNaN(nextMs)) return true;
+  return nextMs >= curMs;
+}
 
 export type ProcedureLiveRow = {
   state?: string | null;
@@ -37,8 +51,13 @@ type StoreEntry<T> = {
   loading: boolean;
 };
 
+type TimerStoreEntry = StoreEntry<ConferenceTimerRow> & {
+  /** Bumped on optimistic patches so in-flight refreshes cannot clobber Start/Pause. */
+  epoch: number;
+};
+
 const procedureById = new Map<string, StoreEntry<ProcedureLiveRow>>();
-const timerById = new Map<string, StoreEntry<ConferenceTimerRow>>();
+const timerById = new Map<string, TimerStoreEntry>();
 
 function getBrowserClient(): SupabaseClient {
   return createBrowserClient() as unknown as SupabaseClient;
@@ -127,7 +146,7 @@ function releaseProcedure(conferenceId: string) {
   procedureById.delete(conferenceId);
 }
 
-function acquireTimer(conferenceId: string): StoreEntry<ConferenceTimerRow> {
+function acquireTimer(conferenceId: string): TimerStoreEntry {
   let entry = timerById.get(conferenceId);
   if (entry) {
     entry.refCount += 1;
@@ -140,6 +159,7 @@ function acquireTimer(conferenceId: string): StoreEntry<ConferenceTimerRow> {
     listeners: new Set(),
     channel: null,
     loading: true,
+    epoch: 0,
   };
   timerById.set(conferenceId, entry);
 
@@ -175,7 +195,9 @@ function acquireTimer(conferenceId: string): StoreEntry<ConferenceTimerRow> {
         if (payload.eventType === "DELETE") {
           current.value = null;
         } else {
-          current.value = (payload.new as ConferenceTimerRow | null) ?? null;
+          const next = (payload.new as ConferenceTimerRow | null) ?? null;
+          if (!shouldApplyTimerRow(current.value, next)) return;
+          current.value = next;
         }
         current.loading = false;
         emit(current);
@@ -271,7 +293,14 @@ export function applyOptimisticTimerPatch(
     is_running: false,
     per_speaker_mode: true,
   };
-  entry.value = { ...base, ...patch, conference_id: conferenceId };
+  entry.epoch += 1;
+  entry.value = {
+    ...base,
+    ...patch,
+    conference_id: conferenceId,
+    // Stamp so a slower realtime payload cannot clobber Start/Pause.
+    updated_at: patch.updated_at ?? new Date().toISOString(),
+  };
   entry.loading = false;
   emit(entry);
 }
@@ -280,6 +309,7 @@ export function applyOptimisticTimerPatch(
 export function refreshSharedConferenceTimer(conferenceId: string) {
   const entry = timerById.get(conferenceId);
   if (!entry) return;
+  const epochAtRequest = entry.epoch;
   const supabase = getBrowserClient();
   void supabase
     .from("timers")
@@ -289,7 +319,11 @@ export function refreshSharedConferenceTimer(conferenceId: string) {
     .then(({ data }) => {
       const current = timerById.get(conferenceId);
       if (!current) return;
-      current.value = (data as ConferenceTimerRow | null) ?? null;
+      // A newer optimistic Start/Pause won the race — keep it.
+      if (current.epoch !== epochAtRequest) return;
+      const next = (data as ConferenceTimerRow | null) ?? null;
+      if (!shouldApplyTimerRow(current.value, next)) return;
+      current.value = next;
       current.loading = false;
       emit(current);
     });

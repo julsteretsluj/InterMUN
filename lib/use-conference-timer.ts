@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { playTimerExpiryAlarm } from "@/lib/timer-expiry-alarm";
 import {
   useSharedConferenceTimerRow,
@@ -13,6 +13,7 @@ import {
   isSpeakerTimerActivelyRunning,
   isSpeakerTimerUnconfigured,
 } from "@/lib/timer-speakers";
+import { useNowMs } from "@/lib/hooks/useNowMs";
 
 export type { ConferenceTimerRow };
 
@@ -42,9 +43,18 @@ function timerVisibleForFloor(
   return false;
 }
 
+type CountdownAnchor = {
+  key: string;
+  leftSeconds: number;
+  atMs: number;
+};
+
 /**
  * Live committee floor timer (Supabase `timers` table).
  * Shares one realtime channel per conference via useCommitteeLiveStore.
+ * Countdown uses the shared wall-clock store (same pattern as session elapsed)
+ * so status-bar widgets keep ticking even when DB `time_left_seconds` is frozen
+ * until Pause/Save.
  */
 export function useConferenceTimer(
   conferenceId: string | null,
@@ -52,16 +62,9 @@ export function useConferenceTimer(
   chairSeesRawTimer = false
 ) {
   const rawTimer = useSharedConferenceTimerRow(conferenceId);
-  const [elapsed, setElapsed] = useState(0);
   const prevRemainingRef = useRef<number | null>(null);
   const canExpireAlarmRef = useRef(false);
-  const timerIdentity = rawTimer
-    ? `${rawTimer.id}:${rawTimer.time_left_seconds}:${rawTimer.is_running}:${rawTimer.total_time_seconds}`
-    : "";
-
-  useEffect(() => {
-    setElapsed(0);
-  }, [timerIdentity]);
+  const anchorRef = useRef<CountdownAnchor | null>(null);
 
   const timer = useMemo(() => {
     if (!rawTimer) return null;
@@ -70,18 +73,37 @@ export function useConferenceTimer(
   }, [rawTimer, activeVoteItemId, chairSeesRawTimer]);
 
   const isRunning = isSpeakerTimerActivelyRunning(timer);
+  const leftSeconds = Math.max(0, Math.round(timer?.time_left_seconds ?? 0));
+  const total = Math.max(0, Math.round(timer?.total_time_seconds ?? 0));
+  const timerIdentity = timer
+    ? `${timer.id}:${leftSeconds}:${timer.is_running === false ? 0 : 1}:${total}`
+    : "";
 
-  useEffect(() => {
-    if (!timer?.time_left_seconds) return;
-    if (!isRunning) return;
-    const interval = setInterval(() => {
-      setElapsed((e) => Math.min(e + 1, timer.total_time_seconds));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timer?.time_left_seconds, timer?.total_time_seconds, isRunning]);
+  // Tick only while a configured clock is running; paused clocks stay frozen.
+  const nowMs = useNowMs(Boolean(timer && isRunning && leftSeconds > 0));
 
-  const remaining = timer ? Math.max(0, timer.time_left_seconds - elapsed) : 0;
-  const total = timer?.total_time_seconds || 0;
+  if (!timer || !isRunning || leftSeconds <= 0) {
+    anchorRef.current = null;
+  } else if (!anchorRef.current || anchorRef.current.key !== timerIdentity) {
+    anchorRef.current = {
+      key: timerIdentity,
+      leftSeconds,
+      atMs: nowMs > 0 ? nowMs : Date.now(),
+    };
+  }
+
+  const remaining = !timer
+    ? 0
+    : !isRunning || leftSeconds <= 0
+      ? leftSeconds
+      : Math.max(
+          0,
+          (anchorRef.current?.leftSeconds ?? leftSeconds) -
+            Math.floor(
+              ((nowMs > 0 ? nowMs : Date.now()) - (anchorRef.current?.atMs ?? Date.now())) / 1000
+            )
+        );
+
   const perSpeakerMode = !!timer?.per_speaker_mode;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
