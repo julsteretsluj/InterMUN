@@ -486,6 +486,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           is_running: true,
           current_pause_reason: null,
           floor_label: floorLabel,
+          restartCountdown: true,
         });
         await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
@@ -551,6 +552,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         is_running: true,
         current_pause_reason: null,
         floor_label: floorLabel,
+        // Re-anchor even when DB already has is_running + the same left (spent UI clock).
+        restartCountdown: true,
       });
       notify(tTimer("runningForCommittee"));
       runBusy("clock", async () => {
@@ -638,6 +641,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         is_running: true,
         current_pause_reason: null,
         floor_label: floorLabel,
+        restartCountdown: true,
       });
       notify(tEuParty("advancedSpeakerResetClock"));
       notifySpeakerQueueUpdated(conferenceId);

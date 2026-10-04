@@ -68,7 +68,7 @@ export function speakerListOwnsFloor(
   return listKind === "opening" ? openingFloor : !openingFloor;
 }
 
-/** Running only when the clock has time left and is_running is not false. */
+/** Running only when the clock has time left and is_running is explicitly true. */
 export function isSpeakerTimerActivelyRunning(
   timer: Pick<
     TimerSpeakerExisting,
@@ -77,7 +77,9 @@ export function isSpeakerTimerActivelyRunning(
 ): boolean {
   if (!timer || isSpeakerTimerUnconfigured(timer)) return false;
   if (Math.round(timer.time_left_seconds ?? 0) <= 0) return false;
-  return timer.is_running !== false;
+  // Require explicit true — DB default is true on 0/0 seeds; null/undefined must not
+  // look "already running" and disable Start / spend the countdown anchor.
+  return timer.is_running === true;
 }
 
 /** Keep the floor timer's current/next speaker in lockstep with the speaker list. */

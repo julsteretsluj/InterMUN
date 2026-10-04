@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { playTimerExpiryAlarm } from "@/lib/timer-expiry-alarm";
 import {
   useSharedConferenceTimerRow,
+  useSharedConferenceTimerRunGeneration,
   type ConferenceTimerRow,
 } from "@/lib/hooks/useCommitteeLiveStore";
 import {
@@ -62,6 +63,7 @@ export function useConferenceTimer(
   chairSeesRawTimer = false
 ) {
   const rawTimer = useSharedConferenceTimerRow(conferenceId);
+  const runGeneration = useSharedConferenceTimerRunGeneration(conferenceId);
   const prevRemainingRef = useRef<number | null>(null);
   const canExpireAlarmRef = useRef(false);
   const anchorRef = useRef<CountdownAnchor | null>(null);
@@ -72,22 +74,24 @@ export function useConferenceTimer(
     return timerVisibleForFloor(rawTimer, activeVoteItemId) ? rawTimer : null;
   }, [rawTimer, activeVoteItemId, chairSeesRawTimer]);
 
-  const isRunning = isSpeakerTimerActivelyRunning(timer);
+  const dbRunning = isSpeakerTimerActivelyRunning(timer);
   const leftSeconds = Math.max(0, Math.round(timer?.time_left_seconds ?? 0));
   const total = Math.max(0, Math.round(timer?.total_time_seconds ?? 0));
+  // Include runGeneration so Start can re-anchor after the UI countdown hit 0 while
+  // DB still has the same is_running + time_left (identity would otherwise be stable).
   const timerIdentity = timer
-    ? `${timer.id}:${leftSeconds}:${timer.is_running === false ? 0 : 1}:${total}`
+    ? `${timer.id}:${leftSeconds}:${dbRunning ? 1 : 0}:${total}:${runGeneration}`
     : "";
 
   // Tick only while a configured clock is running; paused clocks stay frozen.
-  const nowMs = useNowMs(Boolean(timer && isRunning && leftSeconds > 0));
+  const nowMs = useNowMs(Boolean(timer && dbRunning && leftSeconds > 0));
   // Guard against a stale shared tick (e.g. after all subscribers unmounted):
   // anchoring on an old nowMs makes remaining collapse to 0 on the next emit.
   const wallNow = Date.now();
   const tickNow =
     nowMs > 0 && wallNow - nowMs < 2000 ? nowMs : wallNow;
 
-  if (!timer || !isRunning || leftSeconds <= 0) {
+  if (!timer || !dbRunning || leftSeconds <= 0) {
     anchorRef.current = null;
   } else if (!anchorRef.current || anchorRef.current.key !== timerIdentity) {
     anchorRef.current = {
@@ -99,7 +103,7 @@ export function useConferenceTimer(
 
   const remaining = !timer
     ? 0
-    : !isRunning || leftSeconds <= 0
+    : !dbRunning || leftSeconds <= 0
       ? leftSeconds
       : Math.max(
           0,
@@ -107,6 +111,8 @@ export function useConferenceTimer(
             Math.floor((tickNow - (anchorRef.current?.atMs ?? tickNow)) / 1000)
         );
 
+  // UI "running" requires visible time left — spent countdowns must enable Start again.
+  const isRunning = dbRunning && remaining > 0;
   const perSpeakerMode = !!timer?.per_speaker_mode;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
@@ -121,8 +127,9 @@ export function useConferenceTimer(
       canExpireAlarmRef.current = true;
     }
     const prev = prevRemainingRef.current;
+    // Use dbRunning: UI isRunning is false once remaining hits 0.
     if (
-      isRunning &&
+      dbRunning &&
       remaining === 0 &&
       prev !== null &&
       prev > 0 &&
@@ -132,7 +139,7 @@ export function useConferenceTimer(
       canExpireAlarmRef.current = false;
     }
     prevRemainingRef.current = remaining;
-  }, [timer, remaining, isRunning]);
+  }, [timer, remaining, dbRunning]);
 
   return { timer, remaining, total, mins, secs, perSpeakerMode, isRunning };
 }

@@ -16,13 +16,12 @@ function emit() {
 
 function subscribe(onStoreChange: () => void) {
   listeners.add(onStoreChange);
-  // Always refresh on (re)subscribe. useSyncExternalStore may have already read a
-  // stale getSnapshot during render; notify so Start/resume don't anchor on an old ms.
+  // Refresh on (re)subscribe so Start/resume don't anchor on an old ms.
+  // Do not call onStoreChange synchronously — React forbids that in subscribe.
   cacheMs = Date.now();
   if (intervalId == null) {
     intervalId = setInterval(emit, 1000);
   }
-  onStoreChange();
   return () => {
     listeners.delete(onStoreChange);
     if (listeners.size === 0 && intervalId != null) {

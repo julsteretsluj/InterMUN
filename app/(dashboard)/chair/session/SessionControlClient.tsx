@@ -1884,6 +1884,8 @@ export function SessionControlClient({
         is_running: isRunning,
         floor_label: floorLabel.trim() || null,
         current_pause_reason: isRunning ? null : undefined,
+        // Start/resume must re-anchor even when left/running match a spent countdown.
+        restartCountdown: isRunning === true,
       });
       setTimer((t) => ({
         ...t,
@@ -2006,6 +2008,7 @@ export function SessionControlClient({
       }));
       if (!saveFailed) {
         // Re-read into the shared live store so Speakers / widgets don't wait on realtime.
+        // Do not restartCountdown here — that would reset the wall clock after the network RTT.
         applyOptimisticTimerPatch(floorConferenceId, {
           current_speaker: currentSpeaker,
           next_speaker: nextSpeaker,
@@ -2104,6 +2107,7 @@ export function SessionControlClient({
         is_running: true,
         current_pause_reason: null,
         time_left_seconds: remainingNow,
+        restartCountdown: true,
       });
       setTimer((t) => ({
         ...t,
@@ -2140,9 +2144,10 @@ export function SessionControlClient({
       });
       return;
     }
+    // Unconfigured / UI-exhausted clocks (DB may still say running with the same left).
     publishFloorTimer({
       isRunning: true,
-      // Unconfigured / exhausted clocks: use form segment (total-only when speaker timer off).
+      // Total-only when speaker timer off; otherwise prefer remaining, then total.
       timeLeftSeconds: Math.max(1, formSegment),
       totalTimeSeconds: Math.max(1, formTotal || formLeft || formSegment),
       successMessage: tTimer("runningForCommittee"),
@@ -2565,6 +2570,7 @@ export function SessionControlClient({
         is_running: true,
         current_pause_reason: null,
         floor_label: floorLabel,
+        restartCountdown: true,
       });
       setTimer((prev) => ({
         ...prev,

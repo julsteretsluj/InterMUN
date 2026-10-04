@@ -58,6 +58,11 @@ type StoreEntry<T> = {
 type TimerStoreEntry = StoreEntry<ConferenceTimerRow> & {
   /** Bumped on optimistic patches so in-flight refreshes cannot clobber Start/Pause. */
   epoch: number;
+  /**
+   * Bumped when the chair starts/restarts the clock so countdown anchors reset even
+   * when DB `time_left_seconds` / `is_running` are unchanged (spent UI countdown).
+   */
+  runGeneration: number;
 };
 
 const procedureById = new Map<string, StoreEntry<ProcedureLiveRow>>();
@@ -164,6 +169,7 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
     channel: null,
     loading: true,
     epoch: 0,
+    runGeneration: 0,
   };
   timerById.set(conferenceId, entry);
 
@@ -280,13 +286,17 @@ export function refreshSharedProcedureState(conferenceId: string) {
 /**
  * Instant local timer update for chair start/pause/advance before the network round-trip.
  * No-op if nobody is subscribed yet (first paint will load from Supabase).
+ *
+ * Pass `restartCountdown: true` from Start/resume so the wall-clock anchor resets even
+ * when `time_left_seconds` and `is_running` are unchanged (UI had already counted to 0).
  */
 export function applyOptimisticTimerPatch(
   conferenceId: string,
-  patch: Partial<ConferenceTimerRow>
+  patch: Partial<ConferenceTimerRow> & { restartCountdown?: boolean }
 ) {
   const entry = timerById.get(conferenceId);
   if (!entry) return;
+  const { restartCountdown, ...rowPatch } = patch;
   const base: ConferenceTimerRow = entry.value ?? {
     id: `optimistic-${conferenceId}`,
     conference_id: conferenceId,
@@ -297,16 +307,43 @@ export function applyOptimisticTimerPatch(
     is_running: false,
     per_speaker_mode: true,
   };
+  const nextLeft =
+    rowPatch.time_left_seconds != null
+      ? Math.round(Number(rowPatch.time_left_seconds))
+      : Math.round(Number(base.time_left_seconds ?? 0));
+  const baseLeft = Math.round(Number(base.time_left_seconds ?? 0));
+  const starting = rowPatch.is_running === true && base.is_running !== true;
+  const rewritingLeft = rowPatch.is_running === true && nextLeft !== baseLeft;
+  if (restartCountdown || starting || rewritingLeft) {
+    entry.runGeneration += 1;
+  }
   entry.epoch += 1;
   entry.value = {
     ...base,
-    ...patch,
+    ...rowPatch,
     conference_id: conferenceId,
     // Stamp so a slower realtime payload cannot clobber Start/Pause.
-    updated_at: patch.updated_at ?? new Date().toISOString(),
+    updated_at: rowPatch.updated_at ?? new Date().toISOString(),
   };
   entry.loading = false;
   emit(entry);
+}
+
+/** Countdown generation — changes when Start/resume must re-anchor the wall clock. */
+export function useSharedConferenceTimerRunGeneration(conferenceId: string | null): number {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      if (!conferenceId) return () => {};
+      const entry = acquireTimer(conferenceId);
+      entry.listeners.add(onStoreChange);
+      return () => {
+        entry.listeners.delete(onStoreChange);
+        releaseTimer(conferenceId);
+      };
+    },
+    () => (conferenceId ? timerById.get(conferenceId)?.runGeneration ?? 0 : 0),
+    () => 0
+  );
 }
 
 /** Re-read the timers row into the shared store after a local write (does not rely on realtime). */
