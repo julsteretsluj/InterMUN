@@ -184,13 +184,18 @@ export function AuthEntryWizard({
     setConferenceError(null);
     setConferencePending(true);
     const fd = new FormData(e.currentTarget);
-    const res = await applyConferenceCodeForAuthWizard(fd);
-    setConferencePending(false);
-    if ("error" in res) {
-      setConferenceError(res.error);
-      return;
+    try {
+      const res = await applyConferenceCodeForAuthWizard(fd);
+      if ("error" in res) {
+        setConferenceError(res.error);
+        return;
+      }
+      setStep("role");
+    } catch (err) {
+      setConferenceError(formatAuthError(err, t("authConnectError")));
+    } finally {
+      setConferencePending(false);
     }
-    setStep("role");
   }
 
   async function handleLoginSubmit(e: React.FormEvent) {

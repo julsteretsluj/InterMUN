@@ -885,6 +885,7 @@
   "server": {
     "eventCodeMin": "Enter the conference code from your organisers (at least 4 characters).",
     "eventCodeMissing": "No conference matches that code. Check spelling with your organisers.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "You must be signed in.",
     "committeeCodeInvalid": "Enter the 6-character committee code (letters and digits only, e.g. ECO741). Ask your chair or check SMT -> Room codes.",
     "enterConferenceFirst": "Enter your conference code first (go back to the previous step).",

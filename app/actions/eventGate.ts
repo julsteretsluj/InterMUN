@@ -15,6 +15,11 @@ import { getTranslations } from "next-intl/server";
 
 export type AuthWizardConferenceResult = { ok: true } | { error: string };
 
+function isTimedOutError(error: { message?: string; code?: string } | null | undefined): boolean {
+  const raw = `${error?.message ?? ""} ${error?.code ?? ""}`;
+  return /timed? ?out|request_timeout|deadline exceeded|504/i.test(raw);
+}
+
 /** First step of login/signup wizard: set active event cookie from code (works before sign-in via RPC). */
 export async function applyConferenceCodeForAuthWizard(formData: FormData): Promise<AuthWizardConferenceResult> {
   const t = await getTranslations("server");
@@ -29,7 +34,10 @@ export async function applyConferenceCodeForAuthWizard(formData: FormData): Prom
   const { data: eventId, error } = await supabase.rpc("resolve_conference_event_id_by_code", {
     p_code: code,
   });
-  if (error || !eventId || typeof eventId !== "string") {
+  if (error) {
+    return { error: isTimedOutError(error) ? t("requestTimedOut") : t("eventCodeMissing") };
+  }
+  if (!eventId || typeof eventId !== "string") {
     return { error: t("eventCodeMissing") };
   }
 
@@ -57,7 +65,11 @@ export async function joinEventByCode(
   const supabase = await createClient();
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser();
+  if (userError && isTimedOutError(userError)) {
+    return { error: t("requestTimedOut") };
+  }
   if (!user) {
     return { error: t("mustBeSignedIn") };
   }
@@ -65,9 +77,15 @@ export async function joinEventByCode(
   // Table SELECT first; fall back to RPC if RLS/query misses a valid code.
   let eventId = await findEventIdByEventCode(supabase, code);
   if (!eventId) {
-    const { data: rpcId } = await supabase.rpc("resolve_conference_event_id_by_code", {
-      p_code: code,
-    });
+    const { data: rpcId, error: rpcError } = await supabase.rpc(
+      "resolve_conference_event_id_by_code",
+      {
+        p_code: code,
+      }
+    );
+    if (rpcError && isTimedOutError(rpcError)) {
+      return { error: t("requestTimedOut") };
+    }
     if (rpcId && typeof rpcId === "string") eventId = rpcId;
   }
   if (!eventId) {

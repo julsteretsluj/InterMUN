@@ -4,7 +4,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabasePublishableKey } from "./publishable-key";
-import { timedSupabaseFetch } from "./timed-fetch";
+import { timedMiddlewareSupabaseFetch } from "./timed-fetch";
 import { LOCALE_COOKIE_NAME, resolveLocale } from "@/lib/i18n/locales";
 
 function hasSupabaseSessionCookie(request: NextRequest) {
@@ -99,7 +99,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   const supabase = createServerClient(url, anonKey, {
-    global: { fetch: timedSupabaseFetch },
+    global: { fetch: timedMiddlewareSupabaseFetch },
     cookies: {
       getAll() {
         return request.cookies.getAll();
