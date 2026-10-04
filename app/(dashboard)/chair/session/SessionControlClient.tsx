@@ -1836,19 +1836,25 @@ export function SessionControlClient({
     perSpeakerMode?: boolean;
     isRunning?: boolean;
     successMessage?: string;
+    /** Start/resume must not hard-fail on a stale motion bind — fall back to general floor. */
+    allowGeneralFloorFallback?: boolean;
   }) {
     let voteItemIdToSave: string | null = null;
     if (timer.purpose === "motion_vote") {
       const id = timer.boundVoteItemId.trim();
       if (!id) {
-        setMsg("Select which open motion this timer applies to.");
-        return;
+        if (!opts?.allowGeneralFloorFallback) {
+          setMsg("Select which open motion this timer applies to.");
+          return;
+        }
+      } else if (!openVotingMotions.some((m) => m.id === id)) {
+        if (!opts?.allowGeneralFloorFallback) {
+          setMsg("That selection is not an open vote anymore. Choose again or use general floor.");
+          return;
+        }
+      } else {
+        voteItemIdToSave = id;
       }
-      if (!openVotingMotions.some((m) => m.id === id)) {
-        setMsg("That selection is not an open vote anymore. Choose again or use general floor.");
-        return;
-      }
-      voteItemIdToSave = id;
     }
 
     runBusy("timer", async () => {
@@ -2089,10 +2095,11 @@ export function SessionControlClient({
     const remainingNow = Math.max(0, Math.round(liveRemaining));
     const formLeft = parseTime(timer.leftM, timer.leftS);
     const formTotal = parseTime(timer.totalM, timer.totalS);
+    const liveTotal = Math.max(0, Math.round(liveTimerRow?.total_time_seconds ?? 0));
     // Speaker timer off hides remaining fields — total is the segment length.
     const formSegment = timer.perSpeakerMode
-      ? formLeft || formTotal || 60
-      : formTotal || formLeft || 60;
+      ? formLeft || formTotal || liveTotal || 60
+      : formTotal || formLeft || liveTotal || 60;
     const liveRunning =
       Boolean(liveTimerRow) &&
       isSpeakerTimerActivelyRunning(liveTimerRow) &&
@@ -2134,9 +2141,10 @@ export function SessionControlClient({
             timeLeftSeconds: remainingNow,
             totalTimeSeconds: Math.max(
               remainingNow,
-              Math.round(liveTimerRow.total_time_seconds ?? 0) || remainingNow
+              liveTotal || remainingNow
             ),
             successMessage: tTimer("runningForCommittee"),
+            allowGeneralFloorFallback: true,
           });
           return;
         }
@@ -2145,12 +2153,35 @@ export function SessionControlClient({
       return;
     }
     // Unconfigured / UI-exhausted clocks (DB may still say running with the same left).
+    // Seed the shared store synchronously (like Speakers Start) so Pause + mm:ss
+    // enable even if publishFloorTimer's network work is slow or motion-bind gated.
+    const restartLeft = Math.max(1, formSegment);
+    const restartTotal = Math.max(1, formTotal || formLeft || liveTotal || formSegment);
+    applyOptimisticTimerPatch(floorConferenceId, {
+      is_running: true,
+      current_pause_reason: null,
+      time_left_seconds: restartLeft,
+      total_time_seconds: restartTotal,
+      per_speaker_mode: timer.perSpeakerMode,
+      floor_label: timer.floorLabel.trim() || null,
+      restartCountdown: true,
+    });
+    setTimer((t) => ({
+      ...t,
+      isRunning: true,
+      leftM: String(Math.floor(restartLeft / 60)),
+      leftS: String(restartLeft % 60),
+      totalM: String(Math.floor(restartTotal / 60)),
+      totalS: String(restartTotal % 60),
+    }));
+    setMsg(tTimer("runningForCommittee"));
     publishFloorTimer({
       isRunning: true,
       // Total-only when speaker timer off; otherwise prefer remaining, then total.
-      timeLeftSeconds: Math.max(1, formSegment),
-      totalTimeSeconds: Math.max(1, formTotal || formLeft || formSegment),
+      timeLeftSeconds: restartLeft,
+      totalTimeSeconds: restartTotal,
       successMessage: tTimer("runningForCommittee"),
+      allowGeneralFloorFallback: true,
     });
   }
 

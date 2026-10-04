@@ -114,6 +114,24 @@ export function useConferenceTimer(
             Math.floor((tickNow - (anchorRef.current?.atMs ?? tickNow)) / 1000)
         );
 
+  // When the wall clock is spent but DB still looks running, pin a zero sentinel so the
+  // next render does not re-seed a full countdown from time_left_seconds until Start
+  // bumps runGeneration / timerIdentity.
+  if (
+    timer &&
+    dbRunning &&
+    leftSeconds > 0 &&
+    remaining <= 0 &&
+    anchorRef.current?.key === timerIdentity &&
+    anchorRef.current.leftSeconds !== 0
+  ) {
+    anchorRef.current = {
+      key: timerIdentity,
+      leftSeconds: 0,
+      atMs: tickNow,
+    };
+  }
+
   // UI "running" requires visible time left — spent countdowns must enable Start again.
   const isRunning = dbRunning && remaining > 0;
   const perSpeakerMode = !!timer?.per_speaker_mode;

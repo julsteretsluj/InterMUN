@@ -27,7 +27,9 @@ function shouldApplyTimerRow(
   current: ConferenceTimerRow | null,
   next: ConferenceTimerRow | null
 ): boolean {
-  if (!next) return true;
+  // Empty fetches must not wipe an optimistic Start (replica lag / 0-row race).
+  // Realtime DELETE clears the row explicitly before calling this helper.
+  if (!next) return current == null;
   if (!current?.updated_at || !next.updated_at) return true;
   const curMs = Date.parse(current.updated_at);
   const nextMs = Date.parse(next.updated_at);
