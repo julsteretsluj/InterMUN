@@ -4958,12 +4958,28 @@ export function SessionControlClient({
             ) : null}
           </div>
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--hairline)] bg-[var(--apple-bg-secondary)] px-3 py-2.5">
-            <p className="text-sm text-brand-navy">
-              <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
-              <span className="font-medium">
-                {liveClockRunning ? tTimer("running") : tTimer("paused")}
-              </span>
-            </p>
+            <div className="min-w-0">
+              <p className="text-sm text-brand-navy">
+                <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
+                <span className="font-medium">
+                  {liveClockRunning ? tTimer("running") : tTimer("paused")}
+                </span>
+              </p>
+              {liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow) ? (
+                <p
+                  className="mt-1 font-mono text-2xl font-semibold tabular-nums tracking-tight text-[#007AFF]"
+                  suppressHydrationWarning
+                >
+                  {`${Math.floor(Math.max(0, liveRemaining) / 60)}:${String(
+                    Math.max(0, Math.round(liveRemaining)) % 60
+                  ).padStart(2, "0")}`}
+                  <span className="mx-1.5 text-base font-normal text-brand-muted">/</span>
+                  {`${Math.floor(Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) / 60)}:${String(
+                    Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) % 60
+                  ).padStart(2, "0")}`}
+                </p>
+              ) : null}
+            </div>
             <FloorTimerRunButtons
               size="md"
               running={liveClockRunning}

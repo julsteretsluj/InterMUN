@@ -41,10 +41,11 @@ export function DeferredChairLiveFloor(props: {
     let idleId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
+    // Keep this short — chairs need the live timer chip visible right after Start.
     if (typeof requestIdleCallback === "function") {
-      idleId = requestIdleCallback(enable, { timeout: 1200 });
+      idleId = requestIdleCallback(enable, { timeout: 250 });
     } else {
-      timeoutId = setTimeout(enable, 200);
+      timeoutId = setTimeout(enable, 50);
     }
 
     return () => {

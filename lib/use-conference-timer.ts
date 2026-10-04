@@ -26,6 +26,9 @@ export function shouldShowLiveFloorTimerUI(
   // Seeded 0/0 rows are not a real clock — don't flash a live/running widget.
   if (isSpeakerTimerUnconfigured(timer)) return false;
   if (isRunning) return true;
+  // Paused but still armed — keep the countdown chip visible (not only when a
+  // pause reason / speaker name happens to be set).
+  if (Math.round(timer.time_left_seconds ?? 0) > 0) return true;
   if (timer.current_pause_reason?.trim()) return true;
   if (timer.current_speaker?.trim()) return true;
   if (timer.next_speaker?.trim()) return true;

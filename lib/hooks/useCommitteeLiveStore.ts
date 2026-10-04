@@ -285,7 +285,8 @@ export function refreshSharedProcedureState(conferenceId: string) {
 
 /**
  * Instant local timer update for chair start/pause/advance before the network round-trip.
- * No-op if nobody is subscribed yet (first paint will load from Supabase).
+ * Seeds the shared store when nothing has subscribed yet (deferred floor status bar),
+ * so Start still paints a countdown as soon as widgets mount.
  *
  * Pass `restartCountdown: true` from Start/resume so the wall-clock anchor resets even
  * when `time_left_seconds` and `is_running` are unchanged (UI had already counted to 0).
@@ -294,8 +295,12 @@ export function applyOptimisticTimerPatch(
   conferenceId: string,
   patch: Partial<ConferenceTimerRow> & { restartCountdown?: boolean }
 ) {
-  const entry = timerById.get(conferenceId);
-  if (!entry) return;
+  let entry = timerById.get(conferenceId);
+  if (!entry) {
+    // Start can race the deferred floor status bar. Seed the shared store so the
+    // countdown is ready the moment FloorStatusBar / Speakers subscribe.
+    entry = acquireTimer(conferenceId);
+  }
   const { restartCountdown, ...rowPatch } = patch;
   const base: ConferenceTimerRow = entry.value ?? {
     id: `optimistic-${conferenceId}`,

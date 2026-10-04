@@ -168,12 +168,18 @@ export function ActiveTimerWidgets({
   const nextSpeaker = queueNextLabel?.trim() || timer?.next_speaker?.trim() || null;
   const speakerHint = nextSpeaker ? t("nextSpeakerHint", { name: nextSpeaker }) : null;
 
-  const showFloor = showIdleFloorTimer || (timer != null && shouldShowLiveFloorTimerUI(timer, isRunning));
   const floorConfigured = Boolean(timer) && !isSpeakerTimerUnconfigured(timer);
+  const showFloor =
+    showIdleFloorTimer ||
+    (timer != null && shouldShowLiveFloorTimerUI(timer, isRunning)) ||
+    // After Start, keep the chip up even if pause-reason/speaker fields are empty.
+    (isRunning && remaining > 0);
   const floorLabel = timer?.floor_label?.trim() || (perSpeakerMode ? t("speakerClock") : t("timer"));
   const floorClock = floorConfigured
     ? `${formatMmSs(remaining)} / ${formatMmSs(total)}`
-    : t("dash");
+    : isRunning && remaining > 0
+      ? `${formatMmSs(remaining)} / ${formatMmSs(total > 0 ? total : remaining)}`
+      : t("dash");
   const floorHint = timer?.current_pause_reason?.trim()
     ? t("pauseReason", { reason: timer.current_pause_reason.trim() })
     : null;
@@ -203,8 +209,13 @@ export function ActiveTimerWidgets({
           label={floorLabel}
           clock={floorClock}
           hint={floorHint}
-          live={floorConfigured && isRunning}
-          paused={floorConfigured && !isRunning && shouldShowLiveFloorTimerUI(timer!, isRunning)}
+          live={(floorConfigured || remaining > 0) && isRunning}
+          paused={
+            floorConfigured &&
+            !isRunning &&
+            timer != null &&
+            shouldShowLiveFloorTimerUI(timer, isRunning)
+          }
         />
       ) : null}
     </div>

@@ -277,18 +277,20 @@ export default async function DashboardLayout({
         >
           <AppleLayoutWrapper appName={appName} mode="minimal" contentClassName="mx-auto w-full max-w-[var(--content-max-width,82.5rem)] space-y-8">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
-            <GlassPanel
-              className="overflow-hidden border-l-[3px] border-l-[color:var(--accent)]"
-              material="thin"
-              interactive={false}
-              dense
-            >
-              <DeferredChairLiveFloor
-                conferenceId={liveFloorConferenceId ?? activeConf.id}
-                canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
-                siblingConferenceIds={liveFloorSiblings}
-              />
-            </GlassPanel>
+            <div className="sticky top-0 z-20 -mx-1 px-1 pb-1 backdrop-blur-md bg-[color:color-mix(in_srgb,var(--clicky-paper)_92%,transparent)]">
+              <GlassPanel
+                className="overflow-hidden border-l-[3px] border-l-[color:var(--accent)]"
+                material="thin"
+                interactive={false}
+                dense
+              >
+                <DeferredChairLiveFloor
+                  conferenceId={liveFloorConferenceId ?? activeConf.id}
+                  canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
+                  siblingConferenceIds={liveFloorSiblings}
+                />
+              </GlassPanel>
+            </div>
           ) : null}
           {children}
         </AppleLayoutWrapper>
