@@ -25,8 +25,9 @@ export async function applyConferenceCodeForAuthWizard(formData: FormData): Prom
   }
 
   const supabase = await createClient();
+  // Prefer the SECURITY DEFINER RPC (works for anon before sign-in).
   const { data: eventId, error } = await supabase.rpc("resolve_conference_event_id_by_code", {
-    p_code: raw,
+    p_code: code,
   });
   if (error || !eventId || typeof eventId !== "string") {
     return { error: t("eventCodeMissing") };
@@ -61,7 +62,14 @@ export async function joinEventByCode(
     return { error: t("mustBeSignedIn") };
   }
 
-  const eventId = await findEventIdByEventCode(supabase, code);
+  // Table SELECT first; fall back to RPC if RLS/query misses a valid code.
+  let eventId = await findEventIdByEventCode(supabase, code);
+  if (!eventId) {
+    const { data: rpcId } = await supabase.rpc("resolve_conference_event_id_by_code", {
+      p_code: code,
+    });
+    if (rpcId && typeof rpcId === "string") eventId = rpcId;
+  }
   if (!eventId) {
     return { error: t("eventCodeMissing") };
   }

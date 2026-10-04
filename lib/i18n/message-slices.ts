@@ -4,6 +4,10 @@
 /**
  * Namespaces always needed for chrome (theme, language, a11y, errors).
  * Public/marketing routes only hydrate these + MARKETING_NAMESPACES.
+ *
+ * Include `server` here: event/room gate server actions call
+ * `getTranslations("server")` on public paths (/login, /event-gate, /room-gate).
+ * Omitting it surfaces raw keys like `server.eventCodeMissing` in error toasts.
  */
 export const CORE_MESSAGE_NAMESPACES = [
   "common",
@@ -15,6 +19,7 @@ export const CORE_MESSAGE_NAMESPACES = [
   "notFoundPage",
   "pageTitles",
   "appleColorPicker",
+  "server",
 ] as const;
 
 /**
