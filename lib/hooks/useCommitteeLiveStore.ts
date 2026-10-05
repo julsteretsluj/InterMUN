@@ -84,10 +84,73 @@ type CommitteeLiveStores = {
 };
 
 /**
+ * Plain window bus — the only SoT for the visible timer row.
+ * Webpack can evaluate this module twice; Maps on globalThis still diverged in practice
+ * (Start wrote DB + form state while Floor's Map stayed loading/null). A versioned
+ * record on `window` cannot fork across chunks in the same document.
+ */
+type TimerWindowBus = {
+  version: number;
+  rows: Record<string, ConferenceTimerRow | null>;
+  runGeneration: Record<string, number>;
+  epochs: Record<string, number>;
+  listeners: Set<() => void>;
+};
+
+const TIMER_BUS_KEY = "__intermunTimerBus_v1";
+
+function getTimerBus(): TimerWindowBus {
+  const root =
+    typeof window !== "undefined"
+      ? (window as unknown as Record<string, unknown>)
+      : (globalThis as unknown as Record<string, unknown>);
+  let bus = root[TIMER_BUS_KEY] as TimerWindowBus | undefined;
+  if (!bus) {
+    bus = {
+      version: 0,
+      rows: {},
+      runGeneration: {},
+      epochs: {},
+      listeners: new Set(),
+    };
+    root[TIMER_BUS_KEY] = bus;
+  }
+  return bus;
+}
+
+function emitTimerBus() {
+  const bus = getTimerBus();
+  bus.version += 1;
+  bus.listeners.forEach((listener) => listener());
+}
+
+function readTimerBusRow(conferenceId: string): ConferenceTimerRow | null {
+  const bus = getTimerBus();
+  return Object.prototype.hasOwnProperty.call(bus.rows, conferenceId)
+    ? bus.rows[conferenceId] ?? null
+    : null;
+}
+
+function writeTimerBusRow(
+  conferenceId: string,
+  row: ConferenceTimerRow | null,
+  opts?: { bumpRun?: boolean; bumpEpoch?: boolean }
+) {
+  const bus = getTimerBus();
+  bus.rows[conferenceId] = row;
+  if (opts?.bumpEpoch !== false) {
+    bus.epochs[conferenceId] = (bus.epochs[conferenceId] ?? 0) + 1;
+  }
+  if (opts?.bumpRun) {
+    bus.runGeneration[conferenceId] = (bus.runGeneration[conferenceId] ?? 0) + 1;
+  }
+  emitTimerBus();
+}
+
+/**
  * Webpack/Next can evaluate this module more than once in the browser. Module-local
- * Maps then diverge: Start patches one copy while useConferenceTimer reads another,
- * so the toast says "running" while Pause stays disabled and the chip shows "—".
- * Pin the Maps on globalThis so every copy shares one store.
+ * Maps then diverge. Keep Maps on globalThis as a secondary channel/realtime host,
+ * but always publish visible rows through the window timer bus above.
  */
 function getCommitteeLiveStores(): CommitteeLiveStores {
   const g = globalThis as typeof globalThis & {
@@ -199,6 +262,17 @@ function releaseProcedure(conferenceId: string) {
   map.delete(conferenceId);
 }
 
+function publishTimerEntry(conferenceId: string, entry: TimerStoreEntry, opts?: { bumpRun?: boolean }) {
+  writeTimerBusRow(conferenceId, entry.value, {
+    bumpRun: opts?.bumpRun,
+    bumpEpoch: false,
+  });
+  // Keep bus epoch in lockstep with Map epoch for refresh races.
+  getTimerBus().epochs[conferenceId] = entry.epoch;
+  emit(entry);
+  emitTimerBus();
+}
+
 function acquireTimer(conferenceId: string): TimerStoreEntry {
   const map = timerById();
   let entry = map.get(conferenceId);
@@ -209,13 +283,15 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
 
   entry = {
     refCount: 1,
-    value: null,
+    value: readTimerBusRow(conferenceId),
     listeners: new Set(),
     channel: null,
     loading: true,
-    epoch: 0,
-    runGeneration: 0,
+    epoch: getTimerBus().epochs[conferenceId] ?? 0,
+    runGeneration: getTimerBus().runGeneration[conferenceId] ?? 0,
   };
+  // Bus already has a Start/Pause row — do not look "unloaded".
+  if (entry.value) entry.loading = false;
   map.set(conferenceId, entry);
 
   const supabase = getBrowserClient();
@@ -225,24 +301,31 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
     .then(({ data, error }) => {
       const current = timerById().get(conferenceId);
       if (!current) return;
-      // Optimistic patches / realtime may finish before this fetch; never clobber them.
+      // Optimistic patches / bus writes may finish before this fetch; never clobber them.
       if (!current.loading) return;
       if (error) {
-        // Failed fetch must not leave the store stuck in loading forever —
-        // that blocks Start/Pause UI that waits on a configured live row.
         current.loading = false;
-        emit(current);
+        publishTimerEntry(conferenceId, current);
         return;
       }
-      current.value = (data as ConferenceTimerRow | null) ?? null;
+      const next = (data as ConferenceTimerRow | null) ?? null;
+      // Prefer an already-published bus row (Start) over a slow empty/paused fetch.
+      const busRow = readTimerBusRow(conferenceId);
+      if (busRow && !shouldApplyTimerRow(busRow, next)) {
+        current.value = busRow;
+        current.loading = false;
+        publishTimerEntry(conferenceId, current);
+        return;
+      }
+      current.value = next;
       current.loading = false;
-      emit(current);
+      publishTimerEntry(conferenceId, current);
     })
     .catch(() => {
       const current = timerById().get(conferenceId);
       if (!current || !current.loading) return;
       current.loading = false;
-      emit(current);
+      publishTimerEntry(conferenceId, current);
     });
 
   entry.channel = supabase
@@ -262,11 +345,13 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
           current.value = null;
         } else {
           const next = (payload.new as ConferenceTimerRow | null) ?? null;
-          if (!shouldApplyTimerRow(current.value, next)) return;
+          const busRow = readTimerBusRow(conferenceId);
+          const baseline = busRow ?? current.value;
+          if (!shouldApplyTimerRow(baseline, next)) return;
           current.value = next;
         }
         current.loading = false;
-        emit(current);
+        publishTimerEntry(conferenceId, current);
       }
     )
     .subscribe();
@@ -303,19 +388,29 @@ export function useSharedProcedureState(conferenceId: string | null): ProcedureL
   );
 }
 
-/** Shared timers row — one realtime channel per conference id. */
+/** Shared timers row — window bus first, Map/realtime as feeder. */
 export function useSharedConferenceTimerRow(conferenceId: string | null): ConferenceTimerRow | null {
   return useSyncExternalStore(
     (onStoreChange) => {
       if (!conferenceId) return () => {};
+      const bus = getTimerBus();
+      bus.listeners.add(onStoreChange);
       const entry = acquireTimer(conferenceId);
       entry.listeners.add(onStoreChange);
       return () => {
+        bus.listeners.delete(onStoreChange);
         entry.listeners.delete(onStoreChange);
         releaseTimer(conferenceId);
       };
     },
-    () => (conferenceId ? timerById().get(conferenceId)?.value ?? null : null),
+    () => {
+      if (!conferenceId) return null;
+      // Bus is authoritative for Start/Pause paint across duplicated module graphs.
+      if (Object.prototype.hasOwnProperty.call(getTimerBus().rows, conferenceId)) {
+        return readTimerBusRow(conferenceId);
+      }
+      return timerById().get(conferenceId)?.value ?? null;
+    },
     () => null
   );
 }
@@ -359,7 +454,8 @@ export function applyOptimisticTimerPatch(
     entry = acquireTimer(conferenceId);
   }
   const { restartCountdown, ...rowPatch } = patch;
-  const base: ConferenceTimerRow = entry.value ?? {
+  const busBase = readTimerBusRow(conferenceId);
+  const base: ConferenceTimerRow = entry.value ?? busBase ?? {
     id: `optimistic-${conferenceId}`,
     conference_id: conferenceId,
     current_speaker: null,
@@ -376,7 +472,8 @@ export function applyOptimisticTimerPatch(
   const baseLeft = Math.round(Number(base.time_left_seconds ?? 0));
   const starting = rowPatch.is_running === true && base.is_running !== true;
   const rewritingLeft = rowPatch.is_running === true && nextLeft !== baseLeft;
-  if (restartCountdown || starting || rewritingLeft) {
+  const bumpRun = Boolean(restartCountdown || starting || rewritingLeft);
+  if (bumpRun) {
     entry.runGeneration += 1;
   }
   entry.epoch += 1;
@@ -388,7 +485,11 @@ export function applyOptimisticTimerPatch(
     updated_at: rowPatch.updated_at ?? new Date().toISOString(),
   };
   entry.loading = false;
+  writeTimerBusRow(conferenceId, entry.value, { bumpRun, bumpEpoch: false });
+  getTimerBus().epochs[conferenceId] = entry.epoch;
+  getTimerBus().runGeneration[conferenceId] = entry.runGeneration;
   emit(entry);
+  emitTimerBus();
 }
 
 /**
@@ -412,14 +513,24 @@ export function useSharedConferenceTimerRunGeneration(conferenceId: string | nul
   return useSyncExternalStore(
     (onStoreChange) => {
       if (!conferenceId) return () => {};
+      const bus = getTimerBus();
+      bus.listeners.add(onStoreChange);
       const entry = acquireTimer(conferenceId);
       entry.listeners.add(onStoreChange);
       return () => {
+        bus.listeners.delete(onStoreChange);
         entry.listeners.delete(onStoreChange);
         releaseTimer(conferenceId);
       };
     },
-    () => (conferenceId ? timerById().get(conferenceId)?.runGeneration ?? 0 : 0),
+    () => {
+      if (!conferenceId) return 0;
+      return (
+        getTimerBus().runGeneration[conferenceId] ??
+        timerById().get(conferenceId)?.runGeneration ??
+        0
+      );
+    },
     () => 0
   );
 }
@@ -430,7 +541,11 @@ export function refreshSharedConferenceTimer(
   opts?: { force?: boolean }
 ) {
   const entry = timerById().get(conferenceId);
-  if (!entry) return;
+  if (!entry) {
+    // Still seed fetch into the bus even if no Map subscriber yet.
+    acquireTimer(conferenceId);
+    return;
+  }
   const epochAtRequest = entry.epoch;
   const force = opts?.force === true;
   const supabase = getBrowserClient();
@@ -448,13 +563,14 @@ export function refreshSharedConferenceTimer(
       // Never replace a known timer with null on a failed/empty read (RLS miss, lag).
       if (next == null && current.value != null) {
         if (error || !force) return;
-        // force + null only allowed when the row truly vanished (handled by DELETE realtime).
         return;
       }
-      if (!force && !shouldApplyTimerRow(current.value, next)) return;
+      const busRow = readTimerBusRow(conferenceId);
+      const baseline = busRow ?? current.value;
+      if (!force && !shouldApplyTimerRow(baseline, next)) return;
       if (force) current.epoch += 1;
       current.value = next;
       current.loading = false;
-      emit(current);
+      publishTimerEntry(conferenceId, current);
     });
 }

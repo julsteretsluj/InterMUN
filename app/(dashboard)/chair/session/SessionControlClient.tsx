@@ -648,6 +648,23 @@ export function SessionControlClient({
   const liveClockRunning =
     liveStoreClockRunning ||
     (timer.isRunning && (liveRemaining > 0 || formLeftSeconds > 0));
+  // Prefer shared-store remaining (ticks via countdown_ends_at + useNowMs). Fall back
+  // to form fields only while the bus/store has not painted yet after Start.
+  const clockRemainingSeconds = liveStoreClockRunning
+    ? liveRemaining
+    : liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow)
+      ? liveRemaining
+      : liveClockRunning
+        ? Math.max(liveRemaining, formLeftSeconds)
+        : Math.max(0, liveRemaining);
+  const clockTotalSeconds = Math.max(
+    0,
+    Math.round(
+      liveTimerRow?.total_time_seconds ??
+        parseTimerFields(timer.totalM, timer.totalS) ??
+        0
+    )
+  );
 
   useEffect(() => {
     let mounted = true;
@@ -5067,29 +5084,19 @@ export function SessionControlClient({
                   {liveClockRunning ? tTimer("running") : tTimer("paused")}
                 </span>
               </p>
-              {liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow) ? (
+              {liveClockRunning ||
+              (liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow)) ? (
                 <p
                   className="mt-1 font-mono text-2xl font-semibold tabular-nums tracking-tight text-[#007AFF]"
                   suppressHydrationWarning
                 >
-                  {`${Math.floor(Math.max(0, liveRemaining) / 60)}:${String(
-                    Math.max(0, Math.round(liveRemaining)) % 60
+                  {`${Math.floor(Math.max(0, clockRemainingSeconds) / 60)}:${String(
+                    Math.max(0, Math.round(clockRemainingSeconds)) % 60
                   ).padStart(2, "0")}`}
                   <span className="mx-1.5 text-base font-normal text-brand-muted">/</span>
-                  {`${Math.floor(Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) / 60)}:${String(
-                    Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) % 60
+                  {`${Math.floor(Math.max(0, clockTotalSeconds) / 60)}:${String(
+                    Math.max(0, Math.round(clockTotalSeconds)) % 60
                   ).padStart(2, "0")}`}
-                </p>
-              ) : liveClockRunning ? (
-                <p
-                  className="mt-1 font-mono text-2xl font-semibold tabular-nums tracking-tight text-[#007AFF]"
-                  suppressHydrationWarning
-                >
-                  {`${Math.floor(Math.max(0, formLeftSeconds) / 60)}:${String(
-                    Math.max(0, formLeftSeconds) % 60
-                  ).padStart(2, "0")}`}
-                  <span className="mx-1.5 text-base font-normal text-brand-muted">/</span>
-                  {`${timer.totalM || "0"}:${String(timer.totalS || "0").padStart(2, "0")}`}
                 </p>
               ) : null}
             </div>
