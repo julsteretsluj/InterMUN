@@ -508,6 +508,31 @@ export function applyServerTimerRow(
   });
 }
 
+/**
+ * Hydrate the shared store from a chair refresh fetch without clobbering a newer
+ * optimistic Start/Pause. Also clears a stuck `loading` flag when the row is older.
+ */
+export function hydrateSharedConferenceTimer(
+  conferenceId: string,
+  row: ConferenceTimerRow
+) {
+  const entry = timerById().get(conferenceId);
+  if (!entry) {
+    applyServerTimerRow(conferenceId, row);
+    return;
+  }
+  if (!shouldApplyTimerRow(entry.value, row)) {
+    if (entry.loading) {
+      entry.loading = false;
+      emit(entry);
+    }
+    return;
+  }
+  entry.value = { ...row, conference_id: conferenceId };
+  entry.loading = false;
+  emit(entry);
+}
+
 /** Countdown generation — changes when Start/resume must re-anchor the wall clock. */
 export function useSharedConferenceTimerRunGeneration(conferenceId: string | null): number {
   return useSyncExternalStore(

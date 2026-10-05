@@ -25,6 +25,7 @@ import { useActionBusy } from "@/lib/hooks/useActionBusy";
 import {
   applyOptimisticTimerPatch,
   applyServerTimerRow,
+  hydrateSharedConferenceTimer,
   refreshSharedConferenceTimer,
   type ConferenceTimerRow,
 } from "@/lib/hooks/useCommitteeLiveStore";
@@ -36,6 +37,7 @@ import {
   isSpeakerTimerUnconfigured,
   timerCountdownEndsAtIso,
 } from "@/lib/timer-speakers";
+import { useNowMs } from "@/lib/hooks/useNowMs";
 import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
@@ -637,34 +639,47 @@ export function SessionControlClient({
 
   const { timer: liveTimerRow, remaining: liveRemaining, isRunning: liveTimerIsRunning } =
     useConferenceTimer(floorConferenceId, openMotion?.id ?? null, true);
+  const storeConfigured =
+    Boolean(liveTimerRow) && !isSpeakerTimerUnconfigured(liveTimerRow);
   const liveStoreClockRunning =
-    Boolean(liveTimerRow) &&
-    !isSpeakerTimerUnconfigured(liveTimerRow) &&
-    liveTimerIsRunning &&
-    liveRemaining > 0;
-  // Chair Start sets local form `timer.isRunning` immediately. Never let a lagging /
-  // hung shared-store fetch keep Pause disabled after the chair already started.
+    storeConfigured && liveTimerIsRunning && liveRemaining > 0;
+  // Form-local Start only bridges the gap before the shared store mirrors the row.
+  // Never keep Start disabled / show "Running" when the store is configured but spent
+  // (expired countdown_ends_at) — that freezes Clock at 0:00 and desyncs the status bar.
   const formLeftSeconds = parseTimerFields(timer.leftM, timer.leftS);
-  const liveClockRunning =
-    liveStoreClockRunning ||
-    (timer.isRunning && (liveRemaining > 0 || formLeftSeconds > 0));
-  // Prefer shared-store remaining (ticks via countdown_ends_at + useNowMs). Fall back
-  // to form fields only while the bus/store has not painted yet after Start.
-  const clockRemainingSeconds = liveStoreClockRunning
-    ? liveRemaining
-    : liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow)
-      ? liveRemaining
-      : liveClockRunning
-        ? Math.max(liveRemaining, formLeftSeconds)
-        : Math.max(0, liveRemaining);
-  const clockTotalSeconds = Math.max(
-    0,
-    Math.round(
-      liveTimerRow?.total_time_seconds ??
-        parseTimerFields(timer.totalM, timer.totalS) ??
-        0
-    )
-  );
+  const formOnlyClockRunning =
+    !storeConfigured && timer.isRunning && formLeftSeconds > 0;
+  const liveClockRunning = liveStoreClockRunning || formOnlyClockRunning;
+  // Brief form-only window (store still loading): tick locally so Clock isn't frozen.
+  const formOnlyTickMs = useNowMs(formOnlyClockRunning);
+  const formOnlyAnchorRef = useRef<{ left: number; atMs: number } | null>(null);
+  if (!formOnlyClockRunning) {
+    formOnlyAnchorRef.current = null;
+  } else {
+    const tickNow =
+      formOnlyTickMs > 0 && Date.now() - formOnlyTickMs < 2000
+        ? formOnlyTickMs
+        : Date.now();
+    if (!formOnlyAnchorRef.current) {
+      formOnlyAnchorRef.current = { left: formLeftSeconds, atMs: tickNow };
+    }
+  }
+  const formOnlyRemaining =
+    formOnlyClockRunning && formOnlyAnchorRef.current
+      ? Math.max(
+          0,
+          formOnlyAnchorRef.current.left -
+            Math.floor(
+              ((formOnlyTickMs > 0 ? formOnlyTickMs : Date.now()) -
+                formOnlyAnchorRef.current.atMs) /
+                1000
+            )
+        )
+      : formLeftSeconds;
+  const displayRemaining = storeConfigured ? liveRemaining : formOnlyRemaining;
+  const displayTotalSeconds = storeConfigured
+    ? Math.max(0, Math.round(liveTimerRow?.total_time_seconds ?? 0))
+    : parseTimerFields(timer.totalM, timer.totalS);
 
   useEffect(() => {
     let mounted = true;
@@ -1663,6 +1678,9 @@ export function SessionControlClient({
           boundVoteItemId: vid ?? "",
           floorLabel: floorLabel.trim(),
         });
+        // Keep FloorStatusBar / useConferenceTimer on the same row as the form fields
+        // (avoids form-local "Running" while the shared store is still loading/null).
+        hydrateSharedConferenceTimer(floorConferenceId, timerRow as ConferenceTimerRow);
         if (supportsEuTimerMeta) {
           setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
         }
@@ -5084,18 +5102,17 @@ export function SessionControlClient({
                   {liveClockRunning ? tTimer("running") : tTimer("paused")}
                 </span>
               </p>
-              {liveClockRunning ||
-              (liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow)) ? (
+              {storeConfigured || formOnlyClockRunning ? (
                 <p
                   className="mt-1 font-mono text-2xl font-semibold tabular-nums tracking-tight text-[#007AFF]"
                   suppressHydrationWarning
                 >
-                  {`${Math.floor(Math.max(0, clockRemainingSeconds) / 60)}:${String(
-                    Math.max(0, Math.round(clockRemainingSeconds)) % 60
+                  {`${Math.floor(Math.max(0, displayRemaining) / 60)}:${String(
+                    Math.max(0, Math.round(displayRemaining)) % 60
                   ).padStart(2, "0")}`}
                   <span className="mx-1.5 text-base font-normal text-brand-muted">/</span>
-                  {`${Math.floor(Math.max(0, clockTotalSeconds) / 60)}:${String(
-                    Math.max(0, Math.round(clockTotalSeconds)) % 60
+                  {`${Math.floor(Math.max(0, displayTotalSeconds) / 60)}:${String(
+                    Math.max(0, Math.round(displayTotalSeconds)) % 60
                   ).padStart(2, "0")}`}
                 </p>
               ) : null}

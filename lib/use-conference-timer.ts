@@ -96,13 +96,19 @@ export function useConferenceTimer(
   const wallNow = Date.now();
   const tickNow =
     nowMs > 0 && wallNow - nowMs < 2000 ? nowMs : wallNow;
+  // Re-evaluate with the shared tick so spent ends_at flips off on the same second
+  // the Clock / status bar hit 0:00.
+  const activelyRunning = isSpeakerTimerActivelyRunning(timer, tickNow);
 
   let remaining = 0;
   if (!timer) {
     remaining = 0;
     anchorRef.current = null;
-  } else if (!dbRunning) {
-    remaining = leftSeconds;
+  } else if (!activelyRunning) {
+    // Paused, spent ends_at, or unconfigured — freeze at durable left (or 0 when spent).
+    remaining = hasEndsAt && timer.is_running === true
+      ? remainingSecondsFromTimerRow(timer, tickNow)
+      : leftSeconds;
     anchorRef.current = null;
   } else if (hasEndsAt) {
     remaining = remainingSecondsFromTimerRow(timer, tickNow);
@@ -142,7 +148,7 @@ export function useConferenceTimer(
   }
 
   // UI "running" requires visible time left — spent countdowns must enable Start again.
-  const isRunning = dbRunning && remaining > 0;
+  const isRunning = activelyRunning && remaining > 0;
   const perSpeakerMode = !!timer?.per_speaker_mode;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
@@ -157,9 +163,9 @@ export function useConferenceTimer(
       canExpireAlarmRef.current = true;
     }
     const prev = prevRemainingRef.current;
-    // Use dbRunning: UI isRunning is false once remaining hits 0.
+    // Fire on the last second even when activelyRunning flips false (spent ends_at).
     if (
-      dbRunning &&
+      timer.is_running === true &&
       remaining === 0 &&
       prev !== null &&
       prev > 0 &&
@@ -169,7 +175,7 @@ export function useConferenceTimer(
       canExpireAlarmRef.current = false;
     }
     prevRemainingRef.current = remaining;
-  }, [timer, remaining, dbRunning]);
+  }, [timer, remaining]);
 
   return { timer, remaining, total, mins, secs, perSpeakerMode, isRunning };
 }

@@ -101,14 +101,22 @@ export function speakerListOwnsFloor(
 export function isSpeakerTimerActivelyRunning(
   timer: Pick<
     TimerSpeakerExisting,
-    "total_time_seconds" | "time_left_seconds" | "is_running"
-  > | null | undefined
+    "total_time_seconds" | "time_left_seconds" | "is_running" | "countdown_ends_at"
+  > | null | undefined,
+  nowMs: number = Date.now()
 ): boolean {
   if (!timer || isSpeakerTimerUnconfigured(timer)) return false;
-  if (Math.round(timer.time_left_seconds ?? 0) <= 0) return false;
   // Require explicit true — DB default is true on 0/0 seeds; null/undefined must not
   // look "already running" and disable Start / spend the countdown anchor.
-  return timer.is_running === true;
+  if (timer.is_running !== true) return false;
+  // Durable ends_at is the live SoT: a spent countdown must not keep Start disabled
+  // or look "running" while remaining is already 0.
+  const endsAt = timer.countdown_ends_at ? Date.parse(timer.countdown_ends_at) : NaN;
+  if (!Number.isNaN(endsAt)) {
+    return endsAt > nowMs;
+  }
+  if (Math.round(timer.time_left_seconds ?? 0) <= 0) return false;
+  return true;
 }
 
 /** Keep the floor timer's current/next speaker in lockstep with the speaker list. */
