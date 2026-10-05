@@ -24,7 +24,9 @@ import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
 import {
   applyOptimisticTimerPatch,
+  applyServerTimerRow,
   refreshSharedConferenceTimer,
+  type ConferenceTimerRow,
 } from "@/lib/hooks/useCommitteeLiveStore";
 import { currentAndNextQueueRows, fetchSpeakerQueue, resolveSpeakerQueueListKind } from "@/lib/speaker-queue";
 import { notifySpeakerQueueUpdated, SPEAKER_QUEUE_UPDATED_EVENT, speakerQueueUpdatedMatches } from "@/lib/speaker-queue-sync";
@@ -296,6 +298,12 @@ function isEuTimerMetaCacheError(message: string | null | undefined): boolean {
 function isCountdownEndsAtCacheError(message: string | null | undefined): boolean {
   const m = String(message ?? "");
   return /countdown_ends_at/i.test(m) && (/schema cache/i.test(m) || /column/i.test(m));
+}
+
+function parseTimerFields(m: string, s: string) {
+  const mi = Math.max(0, parseInt(m, 10) || 0);
+  const se = Math.max(0, parseInt(s, 10) || 0);
+  return mi * 60 + se;
 }
 type DisciplinaryRow = {
   allocation_id: string;
@@ -629,11 +637,17 @@ export function SessionControlClient({
 
   const { timer: liveTimerRow, remaining: liveRemaining, isRunning: liveTimerIsRunning } =
     useConferenceTimer(floorConferenceId, openMotion?.id ?? null, true);
-  const liveClockRunning =
+  const liveStoreClockRunning =
     Boolean(liveTimerRow) &&
     !isSpeakerTimerUnconfigured(liveTimerRow) &&
     liveTimerIsRunning &&
     liveRemaining > 0;
+  // Chair Start sets local form `timer.isRunning` immediately. Never let a lagging /
+  // hung shared-store fetch keep Pause disabled after the chair already started.
+  const formLeftSeconds = parseTimerFields(timer.leftM, timer.leftS);
+  const liveClockRunning =
+    liveStoreClockRunning ||
+    (timer.isRunning && (liveRemaining > 0 || formLeftSeconds > 0));
 
   useEffect(() => {
     let mounted = true;
@@ -1825,12 +1839,6 @@ export function SessionControlClient({
     };
   }, [supabase, floorConferenceId, loadChairSpeechNotes]);
 
-  function parseTime(m: string, s: string) {
-    const mi = Math.max(0, parseInt(m, 10) || 0);
-    const se = Math.max(0, parseInt(s, 10) || 0);
-    return mi * 60 + se;
-  }
-
   function saveTimer() {
     publishFloorTimer();
   }
@@ -1864,8 +1872,8 @@ export function SessionControlClient({
     }
 
     runBusy("timer", async () => {
-      let left = opts?.timeLeftSeconds ?? parseTime(timer.leftM, timer.leftS);
-      let total = opts?.totalTimeSeconds ?? parseTime(timer.totalM, timer.totalS);
+      let left = opts?.timeLeftSeconds ?? parseTimerFields(timer.leftM, timer.leftS);
+      let total = opts?.totalTimeSeconds ?? parseTimerFields(timer.totalM, timer.totalS);
       const floorLabel = opts?.floorLabel ?? timer.floorLabel;
       const perSpeakerMode = opts?.perSpeakerMode ?? timer.perSpeakerMode;
       // Speaker remaining is hidden when speaker timer is off — treat total as the segment length.
@@ -1952,13 +1960,15 @@ export function SessionControlClient({
       const payload = supportsEuTimerMeta
         ? { ...payloadBase, eu_timer_meta: euTimerMeta }
         : payloadBase;
+      const timerRowSelect =
+        "id, conference_id, current_speaker, next_speaker, time_left_seconds, total_time_seconds, vote_item_id, per_speaker_mode, is_running, floor_label, current_pause_reason, countdown_ends_at, updated_at";
       let writePayload: Record<string, unknown> = { ...payload };
       let firstAttempt = await supabase
         .from("timers")
         .upsert(writePayload, { onConflict: "conference_id" })
-        .select("id");
+        .select(timerRowSelect);
       let error = firstAttempt.error;
-      let wroteRow = Boolean(firstAttempt.data?.length);
+      let savedRow = (firstAttempt.data?.[0] as ConferenceTimerRow | undefined) ?? null;
       let fallbackWithoutMeta = false;
       if (error && isCountdownEndsAtCacheError(error.message)) {
         const { countdown_ends_at: _omitEnds, ...withoutEnds } = writePayload;
@@ -1966,9 +1976,9 @@ export function SessionControlClient({
         firstAttempt = await supabase
           .from("timers")
           .upsert(writePayload, { onConflict: "conference_id" })
-          .select("id");
+          .select(timerRowSelect);
         error = firstAttempt.error;
-        wroteRow = Boolean(firstAttempt.data?.length);
+        savedRow = (firstAttempt.data?.[0] as ConferenceTimerRow | undefined) ?? null;
       }
       if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
         setSupportsEuTimerMeta(false);
@@ -1977,36 +1987,36 @@ export function SessionControlClient({
         firstAttempt = await supabase
           .from("timers")
           .upsert(writePayload, { onConflict: "conference_id" })
-          .select("id");
+          .select(timerRowSelect);
         error = firstAttempt.error;
-        wroteRow = Boolean(firstAttempt.data?.length);
-        fallbackWithoutMeta = !firstAttempt.error && wroteRow;
+        savedRow = (firstAttempt.data?.[0] as ConferenceTimerRow | undefined) ?? null;
+        fallbackWithoutMeta = !firstAttempt.error && Boolean(savedRow);
       }
       // Sibling topic rows may lack a timers seed — insert then update like Speakers Start.
-      if (error || !wroteRow) {
-        const inserted = await supabase.from("timers").insert(writePayload).select("id");
-        if (!inserted.error && inserted.data?.length) {
+      if (error || !savedRow) {
+        const inserted = await supabase.from("timers").insert(writePayload).select(timerRowSelect);
+        if (!inserted.error && inserted.data?.[0]) {
           error = null;
-          wroteRow = true;
+          savedRow = inserted.data[0] as ConferenceTimerRow;
         } else {
           const { conference_id: _omit, ...updateFields } = writePayload;
           const updated = await supabase
             .from("timers")
             .update(updateFields)
             .eq("conference_id", floorConferenceId)
-            .select("id");
+            .select(timerRowSelect);
           error = updated.error ?? inserted.error ?? error;
-          wroteRow = Boolean(updated.data?.length);
-          if (!error && !wroteRow) {
+          savedRow = (updated.data?.[0] as ConferenceTimerRow | undefined) ?? null;
+          if (!error && !savedRow) {
             error = inserted.error ?? error;
           }
         }
       }
       // Upsert/update can succeed with empty RETURNING — verify before treating as failure.
-      if ((!error && !wroteRow) || (error && !wroteRow)) {
+      if (!savedRow) {
         const verify = await supabase
           .from("timers")
-          .select("id, is_running, time_left_seconds")
+          .select(timerRowSelect)
           .eq("conference_id", floorConferenceId)
           .maybeSingle();
         if (verify.data?.id) {
@@ -2015,11 +2025,11 @@ export function SessionControlClient({
             Math.round(verify.data.time_left_seconds ?? 0) === left;
           if (matchesIntent || !error) {
             error = null;
-            wroteRow = true;
+            savedRow = verify.data as ConferenceTimerRow;
           }
         }
       }
-      const saveFailed = Boolean(error) || !wroteRow;
+      const saveFailed = Boolean(error) || !savedRow;
       setMsg(
         saveFailed
           ? error?.message ?? "Could not create or update the floor timer for this committee."
@@ -2039,33 +2049,28 @@ export function SessionControlClient({
       ) {
         setSpeakerListChairPrompt((prev) => (prev === "moderated_passed" ? prev : "gsl"));
       }
+      const appliedLeft = savedRow
+        ? Math.round(savedRow.time_left_seconds ?? left)
+        : left;
+      const appliedTotal = savedRow
+        ? Math.round(savedRow.total_time_seconds ?? total)
+        : total;
+      const appliedRunning = savedRow ? savedRow.is_running === true : isRunning;
       setTimer((t) => ({
         ...t,
-        current: currentSpeaker ?? "",
-        next: nextSpeaker ?? "",
-        leftM: String(Math.floor(left / 60)),
-        leftS: String(left % 60),
-        totalM: String(Math.floor(total / 60)),
-        totalS: String(total % 60),
-        floorLabel,
-        perSpeakerMode,
-        isRunning: saveFailed ? t.isRunning : isRunning,
+        current: (savedRow?.current_speaker ?? currentSpeaker) ?? "",
+        next: (savedRow?.next_speaker ?? nextSpeaker) ?? "",
+        leftM: String(Math.floor(appliedLeft / 60)),
+        leftS: String(appliedLeft % 60),
+        totalM: String(Math.floor(appliedTotal / 60)),
+        totalS: String(appliedTotal % 60),
+        floorLabel: savedRow?.floor_label?.trim() || floorLabel,
+        perSpeakerMode: savedRow?.per_speaker_mode ?? perSpeakerMode,
+        isRunning: saveFailed ? t.isRunning : appliedRunning,
       }));
-      if (!saveFailed) {
-        // Re-read into the shared live store so Speakers / widgets don't wait on realtime.
-        // Do not restartCountdown here — that would reset the wall clock after the network RTT.
-        applyOptimisticTimerPatch(floorConferenceId, {
-          current_speaker: currentSpeaker,
-          next_speaker: nextSpeaker,
-          time_left_seconds: left,
-          total_time_seconds: total,
-          per_speaker_mode: perSpeakerMode,
-          is_running: isRunning,
-          countdown_ends_at: countdownEndsAt,
-          floor_label: floorLabel.trim() || null,
-          current_pause_reason: isRunning ? null : undefined,
-        });
-        refreshSharedConferenceTimer(floorConferenceId);
+      if (!saveFailed && savedRow) {
+        // Apply the full DB row (includes countdown_ends_at) — do not re-anchor after RTT.
+        applyServerTimerRow(floorConferenceId, savedRow);
         // Keep speaker-list_kind / current row in sync without reloading motions.
         void refresh(["core"]);
       } else {
@@ -2076,23 +2081,30 @@ export function SessionControlClient({
   }
 
   function stopFloorTimer() {
-    if (!liveTimerRow || isSpeakerTimerUnconfigured(liveTimerRow)) {
+    const storeRunning =
+      Boolean(liveTimerRow) &&
+      !isSpeakerTimerUnconfigured(liveTimerRow) &&
+      isSpeakerTimerActivelyRunning(liveTimerRow) &&
+      liveRemaining > 0;
+    const formRunning = timer.isRunning && formLeftSeconds > 0;
+    if (!storeRunning && !formRunning) {
       setMsg(tTimer("alreadyPaused"));
-      return;
-    }
-    const liveRunning = isSpeakerTimerActivelyRunning(liveTimerRow) && liveRemaining > 0;
-    if (!liveRunning) {
-      setMsg(tTimer("alreadyPaused"));
-      // Keep form in sync when Speakers paused first.
       if (timer.isRunning) {
         setTimer((t) => ({ ...t, isRunning: false }));
       }
       return;
     }
-    const frozenLeft = Math.max(0, Math.round(liveRemaining));
+    const frozenLeft = Math.max(
+      0,
+      Math.round(storeRunning ? liveRemaining : formLeftSeconds)
+    );
     const reason = pauseReasonDraft.trim() || "Paused by chair";
     applyOptimisticTimerPatch(floorConferenceId, {
       time_left_seconds: frozenLeft,
+      total_time_seconds: Math.max(
+        frozenLeft,
+        Math.round(liveTimerRow?.total_time_seconds ?? parseTimerFields(timer.totalM, timer.totalS))
+      ),
       is_running: false,
       countdown_ends_at: null,
       current_pause_reason: reason,
@@ -2114,7 +2126,7 @@ export function SessionControlClient({
         setMsg(logErr.message);
         return;
       }
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("timers")
         .update({
           time_left_seconds: frozenLeft,
@@ -2123,10 +2135,16 @@ export function SessionControlClient({
           current_pause_reason: reason,
           updated_at: new Date().toISOString(),
         })
-        .eq("conference_id", floorConferenceId);
+        .eq("conference_id", floorConferenceId)
+        .select(
+          "id, conference_id, current_speaker, next_speaker, time_left_seconds, total_time_seconds, vote_item_id, per_speaker_mode, is_running, floor_label, current_pause_reason, countdown_ends_at, updated_at"
+        );
       if (error) {
         setMsg(error.message);
         void refresh(["core"]);
+      } else if (data?.[0]) {
+        applyServerTimerRow(floorConferenceId, data[0] as ConferenceTimerRow);
+        void refresh(["timerLog"]);
       } else {
         refreshSharedConferenceTimer(floorConferenceId);
         void refresh(["timerLog"]);
@@ -2136,8 +2154,8 @@ export function SessionControlClient({
 
   function startFloorTimer() {
     const remainingNow = Math.max(0, Math.round(liveRemaining));
-    const formLeft = parseTime(timer.leftM, timer.leftS);
-    const formTotal = parseTime(timer.totalM, timer.totalS);
+    const formLeft = parseTimerFields(timer.leftM, timer.leftS);
+    const formTotal = parseTimerFields(timer.totalM, timer.totalS);
     const liveTotal = Math.max(0, Math.round(liveTimerRow?.total_time_seconds ?? 0));
     // Speaker timer off hides remaining fields — total is the segment length.
     const formSegment = timer.perSpeakerMode
@@ -2179,7 +2197,9 @@ export function SessionControlClient({
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", floorConferenceId)
-          .select("id");
+          .select(
+            "id, conference_id, current_speaker, next_speaker, time_left_seconds, total_time_seconds, vote_item_id, per_speaker_mode, is_running, floor_label, current_pause_reason, countdown_ends_at, updated_at"
+          );
         if (error || !data?.length) {
           // Update missed the row (e.g. soft-nav topic without a seed) — create via publish.
           publishFloorTimer({
@@ -2194,7 +2214,7 @@ export function SessionControlClient({
           });
           return;
         }
-        refreshSharedConferenceTimer(floorConferenceId);
+        applyServerTimerRow(floorConferenceId, data[0] as ConferenceTimerRow);
       });
       return;
     }
@@ -2631,8 +2651,8 @@ export function SessionControlClient({
         1,
         (liveTotal > 0 ? liveTotal : 0) ||
           (liveLeft > 0 ? liveLeft : 0) ||
-          parseTime(timer.totalM, timer.totalS) ||
-          parseTime(timer.leftM, timer.leftS) ||
+          parseTimerFields(timer.totalM, timer.totalS) ||
+          parseTimerFields(timer.leftM, timer.leftS) ||
           60
       );
       const curLabel = labelFor(nextCurrent) || "—";
@@ -4899,7 +4919,7 @@ export function SessionControlClient({
                           inputMode="numeric"
                           value={String(slotMinutes)}
                           onChange={(e) =>
-                            setEuTimerSlotSeconds(slot, parseTime(e.target.value, String(slotRemainder)))
+                            setEuTimerSlotSeconds(slot, parseTimerFields(e.target.value, String(slotRemainder)))
                           }
                         />
                         <span className="text-xs text-brand-muted">
@@ -4912,7 +4932,7 @@ export function SessionControlClient({
                           inputMode="numeric"
                           value={String(slotRemainder)}
                           onChange={(e) =>
-                            setEuTimerSlotSeconds(slot, parseTime(String(slotMinutes), e.target.value))
+                            setEuTimerSlotSeconds(slot, parseTimerFields(String(slotMinutes), e.target.value))
                           }
                         />
                         <span className="text-xs text-brand-muted">
@@ -5059,6 +5079,17 @@ export function SessionControlClient({
                   {`${Math.floor(Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) / 60)}:${String(
                     Math.max(0, Math.round(liveTimerRow.total_time_seconds ?? 0)) % 60
                   ).padStart(2, "0")}`}
+                </p>
+              ) : liveClockRunning ? (
+                <p
+                  className="mt-1 font-mono text-2xl font-semibold tabular-nums tracking-tight text-[#007AFF]"
+                  suppressHydrationWarning
+                >
+                  {`${Math.floor(Math.max(0, formLeftSeconds) / 60)}:${String(
+                    Math.max(0, formLeftSeconds) % 60
+                  ).padStart(2, "0")}`}
+                  <span className="mx-1.5 text-base font-normal text-brand-muted">/</span>
+                  {`${timer.totalM || "0"}:${String(timer.totalS || "0").padStart(2, "0")}`}
                 </p>
               ) : null}
             </div>

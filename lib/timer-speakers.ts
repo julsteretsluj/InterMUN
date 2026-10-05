@@ -196,11 +196,13 @@ export async function upsertAlignedSpeakerTimer(
   };
   if (isRunning) payload.current_pause_reason = null;
 
+  const timerRowSelect =
+    "id, conference_id, current_speaker, next_speaker, time_left_seconds, total_time_seconds, vote_item_id, per_speaker_mode, is_running, floor_label, current_pause_reason, countdown_ends_at, updated_at";
   let writePayload: Record<string, unknown> = payload;
   let upserted = await supabase
     .from("timers")
     .upsert(writePayload, { onConflict: "conference_id" })
-    .select("id");
+    .select(timerRowSelect);
   if (
     upserted.error &&
     /countdown_ends_at/i.test(String(upserted.error.message ?? "")) &&
@@ -212,13 +214,13 @@ export async function upsertAlignedSpeakerTimer(
     upserted = await supabase
       .from("timers")
       .upsert(writePayload, { onConflict: "conference_id" })
-      .select("id");
+      .select(timerRowSelect);
   }
   if (!upserted.error && upserted.data?.length) return upserted;
 
   // Sibling topic rows (and some older committees) may lack a timers seed row;
   // fall back to plain insert, then update, so Speakers Start still works.
-  const inserted = await supabase.from("timers").insert(writePayload).select("id");
+  const inserted = await supabase.from("timers").insert(writePayload).select(timerRowSelect);
   if (!inserted.error && inserted.data?.length) return inserted;
 
   const { conference_id: _omit, ...updateFields } = writePayload;
@@ -226,18 +228,18 @@ export async function upsertAlignedSpeakerTimer(
     .from("timers")
     .update(updateFields)
     .eq("conference_id", conferenceId)
-    .select("id");
+    .select(timerRowSelect);
   if (!updated.error && updated.data?.length) return updated;
 
   // Empty RETURNING can still mean the write landed — verify before failing Start.
   if (!updated.error && !inserted.error && !upserted.error) {
     const verify = await supabase
       .from("timers")
-      .select("id")
+      .select(timerRowSelect)
       .eq("conference_id", conferenceId)
       .maybeSingle();
     if (verify.data?.id) {
-      return { data: [{ id: verify.data.id }], error: null } as typeof updated;
+      return { data: [verify.data], error: null } as typeof updated;
     }
   }
 

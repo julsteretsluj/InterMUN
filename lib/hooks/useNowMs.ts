@@ -5,30 +5,47 @@
 
 import { useSyncExternalStore } from "react";
 
-let cacheMs = 0;
-const listeners = new Set<() => void>();
-let intervalId: ReturnType<typeof setInterval> | null = null;
+type NowMsStore = {
+  cacheMs: number;
+  listeners: Set<() => void>;
+  intervalId: ReturnType<typeof setInterval> | null;
+};
+
+/** Shared across duplicate module evaluations (same Next/webpack pitfall as the timer store). */
+function getNowMsStore(): NowMsStore {
+  const g = globalThis as typeof globalThis & { __intermunNowMsStore?: NowMsStore };
+  if (!g.__intermunNowMsStore) {
+    g.__intermunNowMsStore = {
+      cacheMs: 0,
+      listeners: new Set(),
+      intervalId: null,
+    };
+  }
+  return g.__intermunNowMsStore;
+}
 
 function emit() {
-  cacheMs = Date.now();
-  listeners.forEach((listener) => listener());
+  const store = getNowMsStore();
+  store.cacheMs = Date.now();
+  store.listeners.forEach((listener) => listener());
 }
 
 function subscribe(onStoreChange: () => void) {
-  listeners.add(onStoreChange);
+  const store = getNowMsStore();
+  store.listeners.add(onStoreChange);
   // Refresh on (re)subscribe so Start/resume don't anchor on an old ms.
   // Do not call onStoreChange synchronously — React forbids that in subscribe.
-  cacheMs = Date.now();
-  if (intervalId == null) {
-    intervalId = setInterval(emit, 1000);
+  store.cacheMs = Date.now();
+  if (store.intervalId == null) {
+    store.intervalId = setInterval(emit, 1000);
   }
   return () => {
-    listeners.delete(onStoreChange);
-    if (listeners.size === 0 && intervalId != null) {
-      clearInterval(intervalId);
-      intervalId = null;
+    store.listeners.delete(onStoreChange);
+    if (store.listeners.size === 0 && store.intervalId != null) {
+      clearInterval(store.intervalId);
+      store.intervalId = null;
       // Drop the frozen tick so the next session cannot treat it as "fresh".
-      cacheMs = 0;
+      store.cacheMs = 0;
     }
   };
 }
@@ -38,7 +55,7 @@ function subscribeDisabled() {
 }
 
 function getSnapshot() {
-  return cacheMs;
+  return getNowMsStore().cacheMs;
 }
 
 function getServerSnapshot() {

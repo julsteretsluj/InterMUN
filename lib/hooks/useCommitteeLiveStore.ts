@@ -78,8 +78,37 @@ type TimerStoreEntry = StoreEntry<ConferenceTimerRow> & {
   runGeneration: number;
 };
 
-const procedureById = new Map<string, StoreEntry<ProcedureLiveRow>>();
-const timerById = new Map<string, TimerStoreEntry>();
+type CommitteeLiveStores = {
+  procedureById: Map<string, StoreEntry<ProcedureLiveRow>>;
+  timerById: Map<string, TimerStoreEntry>;
+};
+
+/**
+ * Webpack/Next can evaluate this module more than once in the browser. Module-local
+ * Maps then diverge: Start patches one copy while useConferenceTimer reads another,
+ * so the toast says "running" while Pause stays disabled and the chip shows "—".
+ * Pin the Maps on globalThis so every copy shares one store.
+ */
+function getCommitteeLiveStores(): CommitteeLiveStores {
+  const g = globalThis as typeof globalThis & {
+    __intermunCommitteeLiveStores?: CommitteeLiveStores;
+  };
+  if (!g.__intermunCommitteeLiveStores) {
+    g.__intermunCommitteeLiveStores = {
+      procedureById: new Map(),
+      timerById: new Map(),
+    };
+  }
+  return g.__intermunCommitteeLiveStores;
+}
+
+function procedureById() {
+  return getCommitteeLiveStores().procedureById;
+}
+
+function timerById() {
+  return getCommitteeLiveStores().timerById;
+}
 
 function getBrowserClient(): SupabaseClient {
   return createBrowserClient() as unknown as SupabaseClient;
@@ -90,7 +119,8 @@ function emit<T>(entry: StoreEntry<T>) {
 }
 
 function acquireProcedure(conferenceId: string): StoreEntry<ProcedureLiveRow> {
-  let entry = procedureById.get(conferenceId);
+  const map = procedureById();
+  let entry = map.get(conferenceId);
   if (entry) {
     entry.refCount += 1;
     return entry;
@@ -103,7 +133,7 @@ function acquireProcedure(conferenceId: string): StoreEntry<ProcedureLiveRow> {
     channel: null,
     loading: true,
   };
-  procedureById.set(conferenceId, entry);
+  map.set(conferenceId, entry);
 
   const supabase = getBrowserClient();
   void supabase
@@ -114,7 +144,7 @@ function acquireProcedure(conferenceId: string): StoreEntry<ProcedureLiveRow> {
     .eq("conference_id", conferenceId)
     .maybeSingle()
     .then(({ data, error }) => {
-      const current = procedureById.get(conferenceId);
+      const current = procedureById().get(conferenceId);
       if (!current) return;
       const errorMessage = String(error?.message ?? "");
       const missingSessionColumns =
@@ -145,7 +175,7 @@ function acquireProcedure(conferenceId: string): StoreEntry<ProcedureLiveRow> {
         filter: `conference_id=eq.${conferenceId}`,
       },
       (payload) => {
-        const current = procedureById.get(conferenceId);
+        const current = procedureById().get(conferenceId);
         if (!current) return;
         current.value = (payload.new as ProcedureLiveRow | null) ?? null;
         current.loading = false;
@@ -158,18 +188,20 @@ function acquireProcedure(conferenceId: string): StoreEntry<ProcedureLiveRow> {
 }
 
 function releaseProcedure(conferenceId: string) {
-  const entry = procedureById.get(conferenceId);
+  const map = procedureById();
+  const entry = map.get(conferenceId);
   if (!entry) return;
   entry.refCount -= 1;
   if (entry.refCount > 0) return;
   if (entry.channel) {
     void getBrowserClient().removeChannel(entry.channel);
   }
-  procedureById.delete(conferenceId);
+  map.delete(conferenceId);
 }
 
 function acquireTimer(conferenceId: string): TimerStoreEntry {
-  let entry = timerById.get(conferenceId);
+  const map = timerById();
+  let entry = map.get(conferenceId);
   if (entry) {
     entry.refCount += 1;
     return entry;
@@ -184,20 +216,31 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
     epoch: 0,
     runGeneration: 0,
   };
-  timerById.set(conferenceId, entry);
+  map.set(conferenceId, entry);
 
   const supabase = getBrowserClient();
-  void supabase
-    .from("timers")
-    .select("*")
-    .eq("conference_id", conferenceId)
-    .maybeSingle()
-    .then(({ data }) => {
-      const current = timerById.get(conferenceId);
+  void Promise.resolve(
+    supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle()
+  )
+    .then(({ data, error }) => {
+      const current = timerById().get(conferenceId);
       if (!current) return;
       // Optimistic patches / realtime may finish before this fetch; never clobber them.
       if (!current.loading) return;
+      if (error) {
+        // Failed fetch must not leave the store stuck in loading forever —
+        // that blocks Start/Pause UI that waits on a configured live row.
+        current.loading = false;
+        emit(current);
+        return;
+      }
       current.value = (data as ConferenceTimerRow | null) ?? null;
+      current.loading = false;
+      emit(current);
+    })
+    .catch(() => {
+      const current = timerById().get(conferenceId);
+      if (!current || !current.loading) return;
       current.loading = false;
       emit(current);
     });
@@ -213,7 +256,7 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
         filter: `conference_id=eq.${conferenceId}`,
       },
       (payload) => {
-        const current = timerById.get(conferenceId);
+        const current = timerById().get(conferenceId);
         if (!current) return;
         if (payload.eventType === "DELETE") {
           current.value = null;
@@ -232,14 +275,15 @@ function acquireTimer(conferenceId: string): TimerStoreEntry {
 }
 
 function releaseTimer(conferenceId: string) {
-  const entry = timerById.get(conferenceId);
+  const map = timerById();
+  const entry = map.get(conferenceId);
   if (!entry) return;
   entry.refCount -= 1;
   if (entry.refCount > 0) return;
   if (entry.channel) {
     void getBrowserClient().removeChannel(entry.channel);
   }
-  timerById.delete(conferenceId);
+  map.delete(conferenceId);
 }
 
 /** Shared procedure_states row — one realtime channel per conference id. */
@@ -254,7 +298,7 @@ export function useSharedProcedureState(conferenceId: string | null): ProcedureL
         releaseProcedure(conferenceId);
       };
     },
-    () => (conferenceId ? procedureById.get(conferenceId)?.value ?? null : null),
+    () => (conferenceId ? procedureById().get(conferenceId)?.value ?? null : null),
     () => null
   );
 }
@@ -271,14 +315,14 @@ export function useSharedConferenceTimerRow(conferenceId: string | null): Confer
         releaseTimer(conferenceId);
       };
     },
-    () => (conferenceId ? timerById.get(conferenceId)?.value ?? null : null),
+    () => (conferenceId ? timerById().get(conferenceId)?.value ?? null : null),
     () => null
   );
 }
 
 /** Refresh procedure snapshot after local chair actions (same channel stays open). */
 export function refreshSharedProcedureState(conferenceId: string) {
-  const entry = procedureById.get(conferenceId);
+  const entry = procedureById().get(conferenceId);
   if (!entry) return;
   const supabase = getBrowserClient();
   void supabase
@@ -289,7 +333,7 @@ export function refreshSharedProcedureState(conferenceId: string) {
     .eq("conference_id", conferenceId)
     .maybeSingle()
     .then(({ data }) => {
-      const current = procedureById.get(conferenceId);
+      const current = procedureById().get(conferenceId);
       if (!current) return;
       current.value = (data as ProcedureLiveRow | null) ?? null;
       emit(current);
@@ -308,7 +352,7 @@ export function applyOptimisticTimerPatch(
   conferenceId: string,
   patch: Partial<ConferenceTimerRow> & { restartCountdown?: boolean }
 ) {
-  let entry = timerById.get(conferenceId);
+  let entry = timerById().get(conferenceId);
   if (!entry) {
     // Start can race the deferred floor status bar. Seed the shared store so the
     // countdown is ready the moment FloorStatusBar / Speakers subscribe.
@@ -347,6 +391,22 @@ export function applyOptimisticTimerPatch(
   emit(entry);
 }
 
+/**
+ * Apply a full timers row from the server (upsert/select RETURNING).
+ * Prefer this after Start/Pause so UI derives remaining from countdown_ends_at.
+ */
+export function applyServerTimerRow(
+  conferenceId: string,
+  row: ConferenceTimerRow,
+  opts?: { restartCountdown?: boolean }
+) {
+  applyOptimisticTimerPatch(conferenceId, {
+    ...row,
+    conference_id: conferenceId,
+    restartCountdown: opts?.restartCountdown,
+  });
+}
+
 /** Countdown generation — changes when Start/resume must re-anchor the wall clock. */
 export function useSharedConferenceTimerRunGeneration(conferenceId: string | null): number {
   return useSyncExternalStore(
@@ -359,7 +419,7 @@ export function useSharedConferenceTimerRunGeneration(conferenceId: string | nul
         releaseTimer(conferenceId);
       };
     },
-    () => (conferenceId ? timerById.get(conferenceId)?.runGeneration ?? 0 : 0),
+    () => (conferenceId ? timerById().get(conferenceId)?.runGeneration ?? 0 : 0),
     () => 0
   );
 }
@@ -369,7 +429,7 @@ export function refreshSharedConferenceTimer(
   conferenceId: string,
   opts?: { force?: boolean }
 ) {
-  const entry = timerById.get(conferenceId);
+  const entry = timerById().get(conferenceId);
   if (!entry) return;
   const epochAtRequest = entry.epoch;
   const force = opts?.force === true;
@@ -380,7 +440,7 @@ export function refreshSharedConferenceTimer(
     .eq("conference_id", conferenceId)
     .maybeSingle()
     .then(({ data, error }) => {
-      const current = timerById.get(conferenceId);
+      const current = timerById().get(conferenceId);
       if (!current) return;
       // A newer optimistic Start/Pause won the race — keep it (unless forcing a revert).
       if (!force && current.epoch !== epochAtRequest) return;

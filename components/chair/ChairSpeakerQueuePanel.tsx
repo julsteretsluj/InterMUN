@@ -12,7 +12,9 @@ import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useActionBusy } from "@/lib/hooks/useActionBusy";
 import {
   applyOptimisticTimerPatch,
+  applyServerTimerRow,
   refreshSharedConferenceTimer,
+  type ConferenceTimerRow,
 } from "@/lib/hooks/useCommitteeLiveStore";
 import { isSpeakerListEligibleAllocation } from "@/lib/speaker-list-eligibility";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
@@ -195,6 +197,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     const pendingAdvance = isBusy("advance");
     const pendingQueue = isBusy("queue");
     const pending = pendingClock || pendingAdvance || pendingQueue;
+    /** Optimistic chair control state so Pause enables even if the shared live store lags. */
+    const [localClockRunning, setLocalClockRunning] = useState(false);
 
     const notify = useCallback(
       (text: string) => {
@@ -321,6 +325,12 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       setCapM(String(Math.floor(cap / 60)));
       setCapS(String(cap % 60));
     }, [liveTimer]);
+
+    useEffect(() => {
+      // Prefer live store when it has a definitive running/paused signal.
+      if (!liveTimer || isSpeakerTimerUnconfigured(liveTimer)) return;
+      setLocalClockRunning(Boolean(isRunning && remaining > 0));
+    }, [liveTimer, isRunning, remaining]);
 
     const alignedCurrentLabel = currentQueueRow
       ? queueLabelForRow(currentQueueRow)
@@ -506,11 +516,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function pauseSpeakerClock() {
-      if (!liveTimer || isSpeakerTimerUnconfigured(liveTimer) || remaining <= 0 || !isRunning) {
+      const clockIsLive = localClockRunning || (Boolean(liveTimer) && isRunning && remaining > 0);
+      if (!liveTimer || isSpeakerTimerUnconfigured(liveTimer) || remaining <= 0 || !clockIsLive) {
         notify(tTimer("alreadyPaused"));
+        setLocalClockRunning(false);
         return;
       }
       const frozen = Math.max(0, Math.round(remaining));
+      setLocalClockRunning(false);
       applyOptimisticTimerPatch(conferenceId, {
         time_left_seconds: frozen,
         is_running: false,
@@ -542,12 +555,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       );
       const resumeLeft =
         !unconfigured && liveTimer && remaining > 0 ? Math.max(1, Math.round(remaining)) : cap;
-      if (!unconfigured && liveTimer && isRunning && remaining > 0) {
+      if (!unconfigured && liveTimer && (isRunning || localClockRunning) && remaining > 0) {
         notify(tTimer("alreadyRunning"));
+        setLocalClockRunning(true);
         return;
       }
       const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
       const startEndsAt = timerCountdownEndsAtIso(resumeLeft);
+      setLocalClockRunning(true);
       applyOptimisticTimerPatch(conferenceId, {
         current_speaker: currentLabel,
         next_speaker: nextLabel,
@@ -563,7 +578,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       });
       notify(tTimer("runningForCommittee"));
       runBusy("clock", async () => {
-        const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
+        const { data, error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
           currentSpeaker: currentLabel,
           nextSpeaker: nextLabel,
           existing: liveTimer,
@@ -579,7 +594,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           refreshSharedConferenceTimer(conferenceId);
           return;
         }
-        refreshSharedConferenceTimer(conferenceId);
+        const row = (data?.[0] as ConferenceTimerRow | undefined) ?? null;
+        if (row?.id) applyServerTimerRow(conferenceId, row);
+        else refreshSharedConferenceTimer(conferenceId);
       });
     }
 
@@ -706,7 +723,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     const isSession = variant === "session";
     const timerConfigured = Boolean(liveTimer) && !isSpeakerTimerUnconfigured(liveTimer);
-    const clockRunning = timerConfigured && isRunning && remaining > 0;
+    const clockRunning =
+      localClockRunning || (timerConfigured && isRunning && remaining > 0);
     const headingClass = isSession
       ? "font-sans text-lg font-semibold text-brand-navy"
       : "font-sans text-lg font-semibold text-brand-navy";
