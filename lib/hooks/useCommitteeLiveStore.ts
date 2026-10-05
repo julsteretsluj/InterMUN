@@ -509,8 +509,8 @@ export function applyServerTimerRow(
 }
 
 /**
- * Hydrate the shared store from a chair refresh fetch without clobbering a newer
- * optimistic Start/Pause. Also clears a stuck `loading` flag when the row is older.
+ * Hydrate the shared store + window timer bus from a chair refresh fetch without
+ * clobbering a newer optimistic Start/Pause. Also clears a stuck `loading` flag.
  */
 export function hydrateSharedConferenceTimer(
   conferenceId: string,
@@ -521,7 +521,8 @@ export function hydrateSharedConferenceTimer(
     applyServerTimerRow(conferenceId, row);
     return;
   }
-  if (!shouldApplyTimerRow(entry.value, row)) {
+  const baseline = readTimerBusRow(conferenceId) ?? entry.value;
+  if (!shouldApplyTimerRow(baseline, row)) {
     if (entry.loading) {
       entry.loading = false;
       emit(entry);
@@ -530,7 +531,7 @@ export function hydrateSharedConferenceTimer(
   }
   entry.value = { ...row, conference_id: conferenceId };
   entry.loading = false;
-  emit(entry);
+  publishTimerEntry(conferenceId, entry);
 }
 
 /** Countdown generation — changes when Start/resume must re-anchor the wall clock. */
