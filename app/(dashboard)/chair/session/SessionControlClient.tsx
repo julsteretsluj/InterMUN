@@ -32,6 +32,7 @@ import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
   isSpeakerTimerActivelyRunning,
   isSpeakerTimerUnconfigured,
+  timerCountdownEndsAtIso,
 } from "@/lib/timer-speakers";
 import {
   ChairSpeakerQueuePanel,
@@ -290,6 +291,11 @@ function normalizeEuTimerMeta(
 function isEuTimerMetaCacheError(message: string | null | undefined): boolean {
   const m = String(message ?? "");
   return /schema cache/i.test(m) && /eu_timer_meta/i.test(m) && /timers/i.test(m);
+}
+
+function isCountdownEndsAtCacheError(message: string | null | undefined): boolean {
+  const m = String(message ?? "");
+  return /countdown_ends_at/i.test(m) && (/schema cache/i.test(m) || /column/i.test(m));
 }
 type DisciplinaryRow = {
   allocation_id: string;
@@ -1880,6 +1886,7 @@ export function SessionControlClient({
       let currentSpeaker = timer.current.trim() || null;
       let nextSpeaker = timer.next.trim() || null;
 
+      const countdownEndsAt = isRunning ? timerCountdownEndsAtIso(left) : null;
       // Instant feedback for start/save before queue alignment + upsert.
       applyOptimisticTimerPatch(floorConferenceId, {
         current_speaker: currentSpeaker,
@@ -1888,6 +1895,7 @@ export function SessionControlClient({
         total_time_seconds: total,
         per_speaker_mode: perSpeakerMode,
         is_running: isRunning,
+        countdown_ends_at: countdownEndsAt,
         floor_label: floorLabel.trim() || null,
         current_pause_reason: isRunning ? null : undefined,
         // Start/resume must re-anchor even when left/running match a spent countdown.
@@ -1937,24 +1945,38 @@ export function SessionControlClient({
         vote_item_id: voteItemIdToSave,
         per_speaker_mode: perSpeakerMode,
         is_running: isRunning,
+        countdown_ends_at: countdownEndsAt,
         floor_label: floorLabel.trim() || null,
         updated_at: new Date().toISOString(),
       };
       const payload = supportsEuTimerMeta
         ? { ...payloadBase, eu_timer_meta: euTimerMeta }
         : payloadBase;
+      let writePayload: Record<string, unknown> = { ...payload };
       let firstAttempt = await supabase
         .from("timers")
-        .upsert(payload, { onConflict: "conference_id" })
+        .upsert(writePayload, { onConflict: "conference_id" })
         .select("id");
       let error = firstAttempt.error;
       let wroteRow = Boolean(firstAttempt.data?.length);
       let fallbackWithoutMeta = false;
-      if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
-        setSupportsEuTimerMeta(false);
+      if (error && isCountdownEndsAtCacheError(error.message)) {
+        const { countdown_ends_at: _omitEnds, ...withoutEnds } = writePayload;
+        writePayload = withoutEnds;
         firstAttempt = await supabase
           .from("timers")
-          .upsert(payloadBase, { onConflict: "conference_id" })
+          .upsert(writePayload, { onConflict: "conference_id" })
+          .select("id");
+        error = firstAttempt.error;
+        wroteRow = Boolean(firstAttempt.data?.length);
+      }
+      if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
+        setSupportsEuTimerMeta(false);
+        const { eu_timer_meta: _omitMeta, ...withoutMeta } = writePayload;
+        writePayload = withoutMeta;
+        firstAttempt = await supabase
+          .from("timers")
+          .upsert(writePayload, { onConflict: "conference_id" })
           .select("id");
         error = firstAttempt.error;
         wroteRow = Boolean(firstAttempt.data?.length);
@@ -1962,12 +1984,12 @@ export function SessionControlClient({
       }
       // Sibling topic rows may lack a timers seed — insert then update like Speakers Start.
       if (error || !wroteRow) {
-        const inserted = await supabase.from("timers").insert(payloadBase).select("id");
+        const inserted = await supabase.from("timers").insert(writePayload).select("id");
         if (!inserted.error && inserted.data?.length) {
           error = null;
           wroteRow = true;
         } else {
-          const { conference_id: _omit, ...updateFields } = payloadBase;
+          const { conference_id: _omit, ...updateFields } = writePayload;
           const updated = await supabase
             .from("timers")
             .update(updateFields)
@@ -1977,6 +1999,23 @@ export function SessionControlClient({
           wroteRow = Boolean(updated.data?.length);
           if (!error && !wroteRow) {
             error = inserted.error ?? error;
+          }
+        }
+      }
+      // Upsert/update can succeed with empty RETURNING — verify before treating as failure.
+      if ((!error && !wroteRow) || (error && !wroteRow)) {
+        const verify = await supabase
+          .from("timers")
+          .select("id, is_running, time_left_seconds")
+          .eq("conference_id", floorConferenceId)
+          .maybeSingle();
+        if (verify.data?.id) {
+          const matchesIntent =
+            verify.data.is_running === isRunning &&
+            Math.round(verify.data.time_left_seconds ?? 0) === left;
+          if (matchesIntent || !error) {
+            error = null;
+            wroteRow = true;
           }
         }
       }
@@ -2022,6 +2061,7 @@ export function SessionControlClient({
           total_time_seconds: total,
           per_speaker_mode: perSpeakerMode,
           is_running: isRunning,
+          countdown_ends_at: countdownEndsAt,
           floor_label: floorLabel.trim() || null,
           current_pause_reason: isRunning ? null : undefined,
         });
@@ -2029,7 +2069,8 @@ export function SessionControlClient({
         // Keep speaker-list_kind / current row in sync without reloading motions.
         void refresh(["core"]);
       } else {
-        refreshSharedConferenceTimer(floorConferenceId, { force: true });
+        // Keep optimistic Start visible — a null/empty re-read must not blank the clock.
+        refreshSharedConferenceTimer(floorConferenceId);
       }
     });
   }
@@ -2053,6 +2094,7 @@ export function SessionControlClient({
     applyOptimisticTimerPatch(floorConferenceId, {
       time_left_seconds: frozenLeft,
       is_running: false,
+      countdown_ends_at: null,
       current_pause_reason: reason,
     });
     setTimer((t) => ({
@@ -2077,6 +2119,7 @@ export function SessionControlClient({
         .update({
           time_left_seconds: frozenLeft,
           is_running: false,
+          countdown_ends_at: null,
           current_pause_reason: reason,
           updated_at: new Date().toISOString(),
         })
@@ -2110,10 +2153,12 @@ export function SessionControlClient({
       return;
     }
     if (liveTimerRow && !isSpeakerTimerUnconfigured(liveTimerRow) && remainingNow > 0) {
+      const resumeEndsAt = timerCountdownEndsAtIso(remainingNow);
       applyOptimisticTimerPatch(floorConferenceId, {
         is_running: true,
         current_pause_reason: null,
         time_left_seconds: remainingNow,
+        countdown_ends_at: resumeEndsAt,
         restartCountdown: true,
       });
       setTimer((t) => ({
@@ -2130,6 +2175,7 @@ export function SessionControlClient({
             is_running: true,
             current_pause_reason: null,
             time_left_seconds: remainingNow,
+            countdown_ends_at: resumeEndsAt,
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", floorConferenceId)
@@ -2157,11 +2203,13 @@ export function SessionControlClient({
     // enable even if publishFloorTimer's network work is slow or motion-bind gated.
     const restartLeft = Math.max(1, formSegment);
     const restartTotal = Math.max(1, formTotal || formLeft || liveTotal || formSegment);
+    const restartEndsAt = timerCountdownEndsAtIso(restartLeft);
     applyOptimisticTimerPatch(floorConferenceId, {
       is_running: true,
       current_pause_reason: null,
       time_left_seconds: restartLeft,
       total_time_seconds: restartTotal,
+      countdown_ends_at: restartEndsAt,
       per_speaker_mode: timer.perSpeakerMode,
       floor_label: timer.floorLabel.trim() || null,
       restartCountdown: true,
@@ -2592,6 +2640,7 @@ export function SessionControlClient({
       const floorLabel =
         (liveTimerRow?.floor_label ?? timer.floorLabel).trim() || null;
 
+      const advanceEndsAt = timerCountdownEndsAtIso(cap);
       applyOptimisticTimerPatch(floorConferenceId, {
         current_speaker: curLabel,
         next_speaker: nextLabel || null,
@@ -2599,6 +2648,7 @@ export function SessionControlClient({
         total_time_seconds: cap,
         per_speaker_mode: true,
         is_running: true,
+        countdown_ends_at: advanceEndsAt,
         current_pause_reason: null,
         floor_label: floorLabel,
         restartCountdown: true,
@@ -2643,6 +2693,7 @@ export function SessionControlClient({
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: true,
           is_running: true,
+          countdown_ends_at: advanceEndsAt,
           current_pause_reason: null,
           floor_label: floorLabel,
           updated_at: new Date().toISOString(),

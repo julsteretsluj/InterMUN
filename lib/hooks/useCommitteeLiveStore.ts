@@ -19,6 +19,8 @@ export type ConferenceTimerRow = {
   is_running?: boolean | null;
   floor_label?: string | null;
   current_pause_reason?: string | null;
+  /** Wall-clock end while running — source of truth for remaining seconds. */
+  countdown_ends_at?: string | null;
   updated_at?: string | null;
 };
 
@@ -30,7 +32,11 @@ function shouldApplyTimerRow(
   // Empty fetches must not wipe an optimistic Start (replica lag / 0-row race).
   // Realtime DELETE clears the row explicitly before calling this helper.
   if (!next) return current == null;
-  if (!current?.updated_at || !next.updated_at) return true;
+  if (!current?.updated_at || !next.updated_at) {
+    // Missing timestamps: still protect an optimistic Start from a paused snapshot.
+    if (current?.is_running === true && next.is_running === false) return false;
+    return true;
+  }
   const curMs = Date.parse(current.updated_at);
   const nextMs = Date.parse(next.updated_at);
   if (Number.isNaN(curMs) || Number.isNaN(nextMs)) return true;
@@ -38,6 +44,11 @@ function shouldApplyTimerRow(
   if (nextMs < curMs) return false;
   // Equal timestamps: never let a paused snapshot clobber an optimistic Start.
   if (current.is_running === true && next.is_running === false) return false;
+  // Prefer a row that carries a durable countdown end when otherwise equal.
+  if (!current.countdown_ends_at && next.countdown_ends_at) return true;
+  if (current.countdown_ends_at && !next.countdown_ends_at && current.is_running === true) {
+    return false;
+  }
   return true;
 }
 
@@ -368,12 +379,18 @@ export function refreshSharedConferenceTimer(
     .select("*")
     .eq("conference_id", conferenceId)
     .maybeSingle()
-    .then(({ data }) => {
+    .then(({ data, error }) => {
       const current = timerById.get(conferenceId);
       if (!current) return;
       // A newer optimistic Start/Pause won the race — keep it (unless forcing a revert).
       if (!force && current.epoch !== epochAtRequest) return;
       const next = (data as ConferenceTimerRow | null) ?? null;
+      // Never replace a known timer with null on a failed/empty read (RLS miss, lag).
+      if (next == null && current.value != null) {
+        if (error || !force) return;
+        // force + null only allowed when the row truly vanished (handled by DELETE realtime).
+        return;
+      }
       if (!force && !shouldApplyTimerRow(current.value, next)) return;
       if (force) current.epoch += 1;
       current.value = next;

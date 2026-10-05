@@ -13,6 +13,7 @@ import {
 import {
   isSpeakerTimerActivelyRunning,
   isSpeakerTimerUnconfigured,
+  remainingSecondsFromTimerRow,
 } from "@/lib/timer-speakers";
 import { useNowMs } from "@/lib/hooks/useNowMs";
 
@@ -56,9 +57,9 @@ type CountdownAnchor = {
 /**
  * Live committee floor timer (Supabase `timers` table).
  * Shares one realtime channel per conference via useCommitteeLiveStore.
- * Countdown uses the shared wall-clock store (same pattern as session elapsed)
- * so status-bar widgets keep ticking even when DB `time_left_seconds` is frozen
- * until Pause/Save.
+ *
+ * Prefer durable `countdown_ends_at` (survives remount/refetch). Fall back to a
+ * client wall-clock anchor only for legacy rows that lack ends_at.
  */
 export function useConferenceTimer(
   conferenceId: string | null,
@@ -80,56 +81,64 @@ export function useConferenceTimer(
   const dbRunning = isSpeakerTimerActivelyRunning(timer);
   const leftSeconds = Math.max(0, Math.round(timer?.time_left_seconds ?? 0));
   const total = Math.max(0, Math.round(timer?.total_time_seconds ?? 0));
-  // Include runGeneration so Start can re-anchor after the UI countdown hit 0 while
-  // DB still has the same is_running + time_left (identity would otherwise be stable).
+  const endsAtMs = timer?.countdown_ends_at
+    ? Date.parse(timer.countdown_ends_at)
+    : NaN;
+  const hasEndsAt = Number.isFinite(endsAtMs);
+  // Include runGeneration so legacy (no ends_at) Start can re-anchor after a spent UI countdown.
   const timerIdentity = timer
-    ? `${timer.id}:${leftSeconds}:${dbRunning ? 1 : 0}:${total}:${runGeneration}`
+    ? `${timer.id}:${leftSeconds}:${dbRunning ? 1 : 0}:${total}:${runGeneration}:${timer.countdown_ends_at ?? ""}`
     : "";
 
-  // Tick only while a configured clock is running; paused clocks stay frozen.
-  const nowMs = useNowMs(Boolean(timer && dbRunning && leftSeconds > 0));
+  const nowMs = useNowMs(Boolean(timer && dbRunning && (hasEndsAt || leftSeconds > 0)));
   // Guard against a stale shared tick (e.g. after all subscribers unmounted):
   // anchoring on an old nowMs makes remaining collapse to 0 on the next emit.
   const wallNow = Date.now();
   const tickNow =
     nowMs > 0 && wallNow - nowMs < 2000 ? nowMs : wallNow;
 
-  if (!timer || !dbRunning || leftSeconds <= 0) {
+  let remaining = 0;
+  if (!timer) {
+    remaining = 0;
     anchorRef.current = null;
-  } else if (!anchorRef.current || anchorRef.current.key !== timerIdentity) {
-    anchorRef.current = {
-      key: timerIdentity,
-      leftSeconds,
-      atMs: tickNow,
-    };
-  }
-
-  const remaining = !timer
-    ? 0
-    : !dbRunning || leftSeconds <= 0
-      ? leftSeconds
-      : Math.max(
-          0,
-          (anchorRef.current?.leftSeconds ?? leftSeconds) -
-            Math.floor((tickNow - (anchorRef.current?.atMs ?? tickNow)) / 1000)
-        );
-
-  // When the wall clock is spent but DB still looks running, pin a zero sentinel so the
-  // next render does not re-seed a full countdown from time_left_seconds until Start
-  // bumps runGeneration / timerIdentity.
-  if (
-    timer &&
-    dbRunning &&
-    leftSeconds > 0 &&
-    remaining <= 0 &&
-    anchorRef.current?.key === timerIdentity &&
-    anchorRef.current.leftSeconds !== 0
-  ) {
-    anchorRef.current = {
-      key: timerIdentity,
-      leftSeconds: 0,
-      atMs: tickNow,
-    };
+  } else if (!dbRunning) {
+    remaining = leftSeconds;
+    anchorRef.current = null;
+  } else if (hasEndsAt) {
+    remaining = remainingSecondsFromTimerRow(timer, tickNow);
+    anchorRef.current = null;
+  } else {
+    // Legacy path: DB has is_running but no countdown_ends_at yet.
+    if (leftSeconds <= 0) {
+      anchorRef.current = null;
+      remaining = 0;
+    } else {
+      if (!anchorRef.current || anchorRef.current.key !== timerIdentity) {
+        anchorRef.current = {
+          key: timerIdentity,
+          leftSeconds,
+          atMs: tickNow,
+        };
+      }
+      remaining = Math.max(
+        0,
+        (anchorRef.current?.leftSeconds ?? leftSeconds) -
+          Math.floor((tickNow - (anchorRef.current?.atMs ?? tickNow)) / 1000)
+      );
+      // Spent legacy countdown: pin zero until Start bumps runGeneration / ends_at.
+      if (
+        remaining <= 0 &&
+        anchorRef.current?.key === timerIdentity &&
+        anchorRef.current.leftSeconds !== 0
+      ) {
+        anchorRef.current = {
+          key: timerIdentity,
+          leftSeconds: 0,
+          atMs: tickNow,
+        };
+        remaining = 0;
+      }
+    }
   }
 
   // UI "running" requires visible time left — spent countdowns must enable Start again.

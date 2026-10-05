@@ -12,9 +12,38 @@ export type TimerSpeakerExisting = {
   per_speaker_mode?: boolean | null;
   current_speaker?: string | null;
   next_speaker?: string | null;
+  countdown_ends_at?: string | null;
 };
 
 export const DEFAULT_SPEAKER_TIMER_SECONDS = 60;
+
+/** Wall-clock end for a running segment (ISO). Cleared when paused. */
+export function timerCountdownEndsAtIso(
+  leftSeconds: number,
+  fromMs: number = Date.now()
+): string {
+  return new Date(fromMs + Math.max(0, Math.round(leftSeconds)) * 1000).toISOString();
+}
+
+/** Remaining seconds from durable ends_at, or frozen time_left when paused / legacy. */
+export function remainingSecondsFromTimerRow(
+  timer:
+    | Pick<
+        TimerSpeakerExisting,
+        "time_left_seconds" | "is_running" | "countdown_ends_at"
+      >
+    | null
+    | undefined,
+  nowMs: number = Date.now()
+): number {
+  const left = Math.max(0, Math.round(timer?.time_left_seconds ?? 0));
+  if (!timer || timer.is_running !== true) return left;
+  const endsAt = timer.countdown_ends_at ? Date.parse(timer.countdown_ends_at) : NaN;
+  if (!Number.isNaN(endsAt)) {
+    return Math.max(0, Math.floor((endsAt - nowMs) / 1000));
+  }
+  return left;
+}
 
 /** True when there is no usable per-speaker / floor clock yet (missing row or 0/0 seed). */
 export function isSpeakerTimerUnconfigured(
@@ -161,28 +190,56 @@ export async function upsertAlignedSpeakerTimer(
     per_speaker_mode: input.perSpeakerMode ?? input.existing?.per_speaker_mode ?? true,
     is_running: isRunning,
     floor_label: floorLabel,
+    // Durable SoT for remaining while running — not touched by names-only sync.
+    countdown_ends_at: isRunning ? timerCountdownEndsAtIso(left) : null,
     updated_at: new Date().toISOString(),
   };
   if (isRunning) payload.current_pause_reason = null;
 
-  const upserted = await supabase
+  let writePayload: Record<string, unknown> = payload;
+  let upserted = await supabase
     .from("timers")
-    .upsert(payload, { onConflict: "conference_id" })
+    .upsert(writePayload, { onConflict: "conference_id" })
     .select("id");
+  if (
+    upserted.error &&
+    /countdown_ends_at/i.test(String(upserted.error.message ?? "")) &&
+    (/schema cache/i.test(String(upserted.error.message ?? "")) ||
+      /column/i.test(String(upserted.error.message ?? "")))
+  ) {
+    const { countdown_ends_at: _omitEnds, ...withoutEnds } = writePayload;
+    writePayload = withoutEnds;
+    upserted = await supabase
+      .from("timers")
+      .upsert(writePayload, { onConflict: "conference_id" })
+      .select("id");
+  }
   if (!upserted.error && upserted.data?.length) return upserted;
 
   // Sibling topic rows (and some older committees) may lack a timers seed row;
   // fall back to plain insert, then update, so Speakers Start still works.
-  const inserted = await supabase.from("timers").insert(payload).select("id");
+  const inserted = await supabase.from("timers").insert(writePayload).select("id");
   if (!inserted.error && inserted.data?.length) return inserted;
 
-  const { conference_id: _omit, ...updateFields } = payload;
+  const { conference_id: _omit, ...updateFields } = writePayload;
   const updated = await supabase
     .from("timers")
     .update(updateFields)
     .eq("conference_id", conferenceId)
     .select("id");
   if (!updated.error && updated.data?.length) return updated;
+
+  // Empty RETURNING can still mean the write landed — verify before failing Start.
+  if (!updated.error && !inserted.error && !upserted.error) {
+    const verify = await supabase
+      .from("timers")
+      .select("id")
+      .eq("conference_id", conferenceId)
+      .maybeSingle();
+    if (verify.data?.id) {
+      return { data: [{ id: verify.data.id }], error: null } as typeof updated;
+    }
+  }
 
   // Supabase update/insert can return error=null with 0 rows — surface that so
   // Speakers Start does not look successful while the shared store stays paused.

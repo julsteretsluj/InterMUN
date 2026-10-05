@@ -33,6 +33,7 @@ import {
   resolveFloorLabelForSpeakerList,
   resolveSpeakerTimerSeconds,
   speakerListOwnsFloor,
+  timerCountdownEndsAtIso,
   upsertAlignedSpeakerTimer,
 } from "@/lib/timer-speakers";
 import { logCommitteeSpeech } from "@/lib/committee-speech-log";
@@ -484,6 +485,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           total_time_seconds: cap,
           per_speaker_mode: true,
           is_running: true,
+          countdown_ends_at: timerCountdownEndsAtIso(cap),
           current_pause_reason: null,
           floor_label: floorLabel,
           restartCountdown: true,
@@ -512,6 +514,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       applyOptimisticTimerPatch(conferenceId, {
         time_left_seconds: frozen,
         is_running: false,
+        countdown_ends_at: null,
       });
       notify(tTimer("pausedForCommittee"));
       runBusy("clock", async () => {
@@ -520,6 +523,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           .update({
             time_left_seconds: frozen,
             is_running: false,
+            countdown_ends_at: null,
             updated_at: new Date().toISOString(),
           })
           .eq("conference_id", conferenceId);
@@ -543,6 +547,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         return;
       }
       const floorLabel = resolveFloorLabelForSpeakerList(listKind, liveTimer?.floor_label);
+      const startEndsAt = timerCountdownEndsAtIso(resumeLeft);
       applyOptimisticTimerPatch(conferenceId, {
         current_speaker: currentLabel,
         next_speaker: nextLabel,
@@ -550,6 +555,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         total_time_seconds: cap,
         per_speaker_mode: true,
         is_running: true,
+        countdown_ends_at: startEndsAt,
         current_pause_reason: null,
         floor_label: floorLabel,
         // Re-anchor even when DB already has is_running + the same left (spent UI clock).
@@ -569,8 +575,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         });
         if (error) {
           notify(error.message);
-          // Drop optimistic Start so the UI matches the still-paused DB row.
-          refreshSharedConferenceTimer(conferenceId, { force: true });
+          // Re-read without wiping — null fetches must not blank an optimistic Start.
+          refreshSharedConferenceTimer(conferenceId);
           return;
         }
         refreshSharedConferenceTimer(conferenceId);
@@ -590,7 +596,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         total_time_seconds: cap,
         per_speaker_mode: true,
         is_running: keepRunning,
+        countdown_ends_at: keepRunning ? timerCountdownEndsAtIso(cap) : null,
         floor_label: floorLabel,
+        restartCountdown: keepRunning,
       });
       runBusy("clock", async () => {
         const { error } = await upsertAlignedSpeakerTimer(supabase, conferenceId, {
@@ -639,6 +647,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         total_time_seconds: cap,
         per_speaker_mode: true,
         is_running: true,
+        countdown_ends_at: timerCountdownEndsAtIso(cap),
         current_pause_reason: null,
         floor_label: floorLabel,
         restartCountdown: true,
