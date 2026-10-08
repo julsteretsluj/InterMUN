@@ -4,7 +4,7 @@
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { getAppName } from "@/lib/branding";
 import { isRetryableAuthError, withAuthRetry } from "@/lib/auth-retry";
-import { buildAppInviteAcceptUrl, withRedirectTo } from "@/lib/invite-accept-url";
+import { buildAppInviteAcceptUrl } from "@/lib/invite-accept-url";
 import { buildSeamunIntermunInviteEmail } from "@/lib/invite-email";
 import { getSmtpConfig, sendTransactionalEmail } from "@/lib/smtp";
 
@@ -69,47 +69,54 @@ async function generateInviteLink(
   redirectTo: string,
   data?: Record<string, unknown>
 ) {
-  return withAuthRetry(async () => {
-    const { data: linkData, error } = await admin.auth.admin.generateLink({
-      type: "invite",
-      email,
-      options: {
-        redirectTo,
-        data,
-      },
-    });
-    if (error) {
-      const err = Object.assign(new Error(error.message || "generateLink failed"), {
-        name: (error as { name?: string }).name || "AuthError",
-        status: (error as { status?: number }).status,
+  return withAuthRetry(
+    async () => {
+      const { data: linkData, error } = await admin.auth.admin.generateLink({
+        type: "invite",
+        email,
+        options: {
+          redirectTo,
+          data,
+        },
       });
-      throw err;
-    }
-    return linkData;
-  });
+      if (error) {
+        const err = Object.assign(new Error(error.message || "generateLink failed"), {
+          name: (error as { name?: string }).name || "AuthError",
+          status: (error as { status?: number }).status,
+        });
+        throw err;
+      }
+      if (!linkData?.properties?.hashed_token) {
+        throw Object.assign(new Error("Invite link missing hashed_token."), {
+          name: "AuthRetryableFetchError",
+          status: 504,
+        });
+      }
+      return linkData;
+    },
+    { attempts: 8, baseDelayMs: 2000 }
+  );
 }
 
 /**
- * Prefer an app-hosted accept URL (token_hash → /auth/confirm) so invite clicks
- * never depend on Supabase's browser /auth/v1/verify redirect (frequent 504 JSON).
- * Falls back to a redirect_to-patched action_link when hashed_token is missing.
+ * App-hosted accept URL only (token_hash → /auth/confirm).
+ * Never returns a Supabase /auth/v1/verify URL (those show Gateway Timeout JSON).
  */
 export function resolveInviteEmailActionLink(args: {
   redirectTo: string;
-  actionLink: string;
   hashedToken?: string | null;
   verificationType?: string | null;
 }): string {
   const origin = appOriginFromRedirect(args.redirectTo);
   const hashed = args.hashedToken?.trim();
-  if (origin && hashed) {
-    return buildAppInviteAcceptUrl({
-      appOrigin: origin,
-      hashedToken: hashed,
-      type: args.verificationType || "invite",
-    });
+  if (!origin || !hashed) {
+    throw new Error("Cannot build app-hosted invite URL (missing origin or hashed_token).");
   }
-  return withRedirectTo(args.actionLink, args.redirectTo);
+  return buildAppInviteAcceptUrl({
+    appOrigin: origin,
+    hashedToken: hashed,
+    type: args.verificationType || "invite",
+  });
 }
 
 export async function inviteUserByEmailWithArchive(
@@ -148,19 +155,28 @@ export async function inviteUserByEmailWithArchive(
       return { user: null, error: { message } };
     }
 
-    const rawLink = linkData?.properties?.action_link;
     const hashedToken = linkData?.properties?.hashed_token;
     const verificationType = linkData?.properties?.verification_type;
     const user = linkData?.user ?? null;
-    if (!rawLink && !hashedToken) {
-      return { user, error: { message: "Invite link was not created." } };
+    let actionLink: string;
+    try {
+      actionLink = resolveInviteEmailActionLink({
+        redirectTo: args.redirectTo,
+        hashedToken,
+        verificationType,
+      });
+    } catch (e) {
+      return {
+        user,
+        error: { message: e instanceof Error ? e.message : String(e) },
+      };
     }
-    const actionLink = resolveInviteEmailActionLink({
-      redirectTo: args.redirectTo,
-      actionLink: rawLink || "",
-      hashedToken,
-      verificationType,
-    });
+    if (/supabase\.co$/i.test(new URL(actionLink).host) || actionLink.includes("/auth/v1/verify")) {
+      return {
+        user,
+        error: { message: "Refusing to send invite with Supabase /verify CTA." },
+      };
+    }
 
     const mail = buildSeamunIntermunInviteEmail({ actionLink, appName, recipient });
     const sent = await sendTransactionalEmail({
@@ -187,11 +203,12 @@ export async function inviteUserByEmailWithArchive(
     return { user, error: null };
   }
 
-  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
-    redirectTo: args.redirectTo,
-    data: args.data,
-  });
-  if (error) return { user: null, error };
-
-  return { user: data?.user ?? null, error: null };
+  // SMTP required for SEAMUN announcement template — never fall back to stock GoTrue mail.
+  return {
+    user: null,
+    error: {
+      message:
+        "Invite email is not configured (SMTP). Refusing stock Supabase invite mail so the SEAMUN template is preserved.",
+    },
+  };
 }
