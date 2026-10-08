@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { EmailOtpType } from "@supabase/supabase-js";
@@ -25,6 +25,10 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/**
+ * Do NOT verify on mount — mail scanners prefetch invite URLs and would burn
+ * one-time token_hash before the real recipient clicks.
+ */
 export function AuthConfirmClient({
   tokenHash,
   type,
@@ -36,30 +40,28 @@ export function AuthConfirmClient({
 }) {
   const router = useRouter();
   const startedRef = useRef(false);
-  const [status, setStatus] = useState<"working" | "error">(
-    tokenHash ? "working" : "error"
+  const [status, setStatus] = useState<"ready" | "working" | "error">(
+    tokenHash ? "ready" : "error"
   );
   const [message, setMessage] = useState(
     tokenHash
-      ? "Accepting your invite…"
+      ? "Your InterMUN account is ready. Continue to set your password, then join your conference with the organiser codes."
       : "This invite link is missing its security token. Ask your organisers for a fresh invite."
   );
   const [attempt, setAttempt] = useState(0);
 
-  useEffect(() => {
-    if (!tokenHash) return;
-    // One-time tokens: never run verifyOtp twice (Strict Mode / remount).
-    if (startedRef.current) return;
+  async function acceptInvite() {
+    if (!tokenHash || startedRef.current) return;
     startedRef.current = true;
+    setStatus("working");
+    setMessage("Accepting your invite…");
 
-    let cancelled = false;
     const otpType = (OTP_TYPES.has(type) ? type : "invite") as EmailOtpType;
 
-    (async () => {
+    try {
       const supabase = createClient();
       const maxAttempts = 4;
       for (let i = 0; i < maxAttempts; i++) {
-        if (cancelled) return;
         setAttempt(i + 1);
         setMessage(
           i === 0
@@ -70,15 +72,14 @@ export function AuthConfirmClient({
           type: otpType,
           token_hash: tokenHash,
         });
-        if (cancelled) return;
         if (!error) {
           markNavigationLoading();
           router.replace(nextPath);
           return;
         }
-        // Invalid/expired is final — do not retry (would burn nothing; confuses UX).
         const final = !isRetryableAuthError(error);
         if (final || i >= maxAttempts - 1) {
+          startedRef.current = false;
           setStatus("error");
           setMessage(
             formatAuthError(
@@ -90,8 +91,8 @@ export function AuthConfirmClient({
         }
         await sleep(1200 * (i + 1));
       }
-    })().catch((err) => {
-      if (cancelled) return;
+    } catch (err) {
+      startedRef.current = false;
       setStatus("error");
       setMessage(
         formatAuthError(
@@ -99,18 +100,18 @@ export function AuthConfirmClient({
           "We couldn’t reach authentication just now. Wait a moment and try again."
         )
       );
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [tokenHash, type, nextPath, router]);
+    }
+  }
 
   return (
     <div className="mx-auto w-full max-w-md space-y-5">
       <div>
         <h1 className="text-2xl font-bold tracking-[-0.02em] text-[#1D1D1F]">
-          {status === "working" ? "Opening InterMUN" : "Invite needs a retry"}
+          {status === "working"
+            ? "Opening InterMUN"
+            : status === "error"
+              ? "Invite needs a retry"
+              : "Set your password"}
         </h1>
         <p className="mt-2 text-[15px] leading-relaxed text-[#6E6E73]">{message}</p>
         {status === "working" && attempt > 0 ? (
@@ -118,13 +119,26 @@ export function AuthConfirmClient({
         ) : null}
       </div>
 
+      {status === "ready" ? (
+        <button
+          type="button"
+          className="inline-flex items-center justify-center rounded-[980px] bg-[#007AFF] px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#0077ED]"
+          onClick={() => {
+            void acceptInvite();
+          }}
+        >
+          Continue to set password
+        </button>
+      ) : null}
+
       {status === "error" ? (
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-[980px] bg-[#007AFF] px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#0077ED]"
             onClick={() => {
-              if (typeof window !== "undefined") window.location.reload();
+              startedRef.current = false;
+              void acceptInvite();
             }}
           >
             Try again
