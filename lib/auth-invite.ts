@@ -89,45 +89,51 @@ async function generateInviteLink(
   redirectTo: string,
   data?: Record<string, unknown>
 ) {
-  const tryType = async (type: "invite" | "recovery") => {
-    return withAuthRetry(
-      async () => {
-        const { data: linkData, error } = await admin.auth.admin.generateLink({
-          type,
-          email,
-          options: {
-            redirectTo,
-            data: type === "invite" ? data : undefined,
-          },
-        });
-        if (error) {
-          const err = Object.assign(new Error(error.message || "generateLink failed"), {
-            name: (error as { name?: string }).name || "AuthError",
-            status: (error as { status?: number }).status,
-          });
-          throw err;
-        }
-        if (!linkData?.properties?.hashed_token) {
-          throw Object.assign(new Error("Invite link missing hashed_token."), {
-            name: "AuthRetryableFetchError",
-            status: 504,
-          });
-        }
-        return linkData;
-      },
-      {
-        attempts: 6,
-        baseDelayMs: 2000,
-        isRetryable: (error) => isRetryableAuthError(error) && !isAlreadyRegisteredError(error),
-      }
-    );
+  const withLinkRetry = <T,>(run: () => Promise<T>) =>
+    withAuthRetry(run, {
+      attempts: 6,
+      baseDelayMs: 2000,
+      isRetryable: (error) => isRetryableAuthError(error) && !isAlreadyRegisteredError(error),
+    });
+
+  const requireHashed = <T extends { properties?: { hashed_token?: string | null } | null }>(
+    linkData: T | null,
+    error: { message?: string; name?: string; status?: number } | null
+  ) => {
+    if (error) {
+      throw Object.assign(new Error(error.message || "generateLink failed"), {
+        name: error.name || "AuthError",
+        status: error.status,
+      });
+    }
+    if (!linkData?.properties?.hashed_token) {
+      throw Object.assign(new Error("Invite link missing hashed_token."), {
+        name: "AuthRetryableFetchError",
+        status: 504,
+      });
+    }
+    return linkData;
   };
 
   try {
-    return await tryType("invite");
+    return await withLinkRetry(async () => {
+      const { data: linkData, error } = await admin.auth.admin.generateLink({
+        type: "invite",
+        email,
+        options: { redirectTo, data },
+      });
+      return requireHashed(linkData, error);
+    });
   } catch (error) {
     if (!isAlreadyRegisteredError(error)) throw error;
-    return await tryType("recovery");
+    return await withLinkRetry(async () => {
+      const { data: linkData, error: recoveryError } = await admin.auth.admin.generateLink({
+        type: "recovery",
+        email,
+        options: { redirectTo },
+      });
+      return requireHashed(linkData, recoveryError);
+    });
   }
 }
 
