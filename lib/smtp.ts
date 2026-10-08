@@ -32,12 +32,16 @@ export async function sendTransactionalEmail(args: {
   to: string;
   subject: string;
   text: string;
+  html?: string;
   replyTo?: string;
   cc?: string | string[];
   bcc?: string | string[];
   /** Overrides SMTP_FROM / MATERIALS_EXPORT_FROM for this message. */
   from?: string;
-}): Promise<{ ok: true } | { ok: false; reason: "not_configured" | "send_failed" }> {
+}): Promise<
+  | { ok: true; messageId?: string; response?: string; accepted?: string[]; rejected?: string[] }
+  | { ok: false; reason: "not_configured" | "send_failed"; error?: string }
+> {
   const cfg = getSmtpConfig();
   if (!cfg) return { ok: false, reason: "not_configured" };
 
@@ -49,17 +53,32 @@ export async function sendTransactionalEmail(args: {
   });
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: args.from?.trim() || cfg.from,
       to: args.to,
       cc: args.cc,
       bcc: args.bcc,
       subject: args.subject,
       text: args.text,
+      html: args.html,
       replyTo: args.replyTo,
     });
-    return { ok: true };
-  } catch {
-    return { ok: false, reason: "send_failed" };
+    return {
+      ok: true,
+      messageId: typeof info.messageId === "string" ? info.messageId : undefined,
+      response: typeof info.response === "string" ? info.response : undefined,
+      accepted: Array.isArray(info.accepted)
+        ? info.accepted.map(String)
+        : undefined,
+      rejected: Array.isArray(info.rejected)
+        ? info.rejected.map(String)
+        : undefined,
+    };
+  } catch (e) {
+    return {
+      ok: false,
+      reason: "send_failed",
+      error: e instanceof Error ? e.message : String(e),
+    };
   }
 }

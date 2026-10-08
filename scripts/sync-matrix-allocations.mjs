@@ -396,7 +396,7 @@ async function syncChairs(admin, chairs, origin, dryRun, noInvite) {
         }
         const { user: invited, error } = await inviteUserByEmailWithArchive(admin, {
           email: chair.email,
-          redirectTo: `${origin}/login`,
+          redirectTo: `${origin}/auth/set-password`,
           data: { full_name: chair.name },
         });
         if (error) {

@@ -66,7 +66,7 @@ export async function smtInviteAdvisorAction(
 
   const { user, error } = await inviteUserByEmailWithArchive(admin, {
     email,
-    redirectTo: `${origin}/login`,
+    redirectTo: `${origin}/auth/set-password`,
   });
 
   if (error) {

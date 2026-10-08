@@ -65,7 +65,8 @@ export async function adminInviteSmtAction(
     };
   }
 
-  const redirectTo = `${origin}/login`;
+  // Origin drives the app-hosted /auth/confirm accept URL in invite emails.
+  const redirectTo = `${origin}/auth/set-password`;
   const { user, error } = await inviteUserByEmailWithArchive(admin, { email, redirectTo });
 
   if (error) {

@@ -179,7 +179,7 @@ export async function smtInviteChairAction(
     };
   }
 
-  const redirectTo = `${origin}/login`;
+  const redirectTo = `${origin}/auth/set-password`;
 
   const { user: invitedUser, error } = await inviteUserByEmailWithArchive(admin, {
     email,

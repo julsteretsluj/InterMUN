@@ -86,7 +86,7 @@ async function main() {
     }
     const { user, error } = await inviteUserByEmailWithArchive(admin, {
       email,
-      redirectTo: `${origin}/login`,
+      redirectTo: `${origin}/auth/set-password`,
       data: { full_name: displayName },
     });
     if (error) {

@@ -89,7 +89,7 @@ function parseDelegates(xlsxPath) {
 async function createDelegateUser(admin, origin, email, name) {
   const { user, error } = await inviteUserByEmailWithArchive(admin, {
     email,
-    redirectTo: `${origin}/login`,
+    redirectTo: `${origin}/auth/set-password`,
     data: { full_name: name },
   });
   if (!error) {
