@@ -63,39 +63,72 @@ function appOriginFromRedirect(redirectTo: string): string | null {
   }
 }
 
+function isAlreadyRegisteredError(error: unknown): boolean {
+  const message = String(
+    error && typeof error === "object" && "message" in error
+      ? (error as { message?: unknown }).message ?? ""
+      : error instanceof Error
+        ? error.message
+        : ""
+  ).toLowerCase();
+  return (
+    message.includes("already been registered") ||
+    message.includes("already registered") ||
+    message.includes("user already exists")
+  );
+}
+
+/**
+ * Prefer invite for brand-new pre-provisioned emails.
+ * If Auth says the user is already registered (common after a prior invite),
+ * fall back to recovery so they can still set/reset their password via the same accept UI.
+ */
 async function generateInviteLink(
   admin: SupabaseClient,
   email: string,
   redirectTo: string,
   data?: Record<string, unknown>
 ) {
-  return withAuthRetry(
-    async () => {
-      const { data: linkData, error } = await admin.auth.admin.generateLink({
-        type: "invite",
-        email,
-        options: {
-          redirectTo,
-          data,
-        },
-      });
-      if (error) {
-        const err = Object.assign(new Error(error.message || "generateLink failed"), {
-          name: (error as { name?: string }).name || "AuthError",
-          status: (error as { status?: number }).status,
+  const tryType = async (type: "invite" | "recovery") => {
+    return withAuthRetry(
+      async () => {
+        const { data: linkData, error } = await admin.auth.admin.generateLink({
+          type,
+          email,
+          options: {
+            redirectTo,
+            data: type === "invite" ? data : undefined,
+          },
         });
-        throw err;
+        if (error) {
+          const err = Object.assign(new Error(error.message || "generateLink failed"), {
+            name: (error as { name?: string }).name || "AuthError",
+            status: (error as { status?: number }).status,
+          });
+          throw err;
+        }
+        if (!linkData?.properties?.hashed_token) {
+          throw Object.assign(new Error("Invite link missing hashed_token."), {
+            name: "AuthRetryableFetchError",
+            status: 504,
+          });
+        }
+        return linkData;
+      },
+      {
+        attempts: 6,
+        baseDelayMs: 2000,
+        isRetryable: (error) => isRetryableAuthError(error) && !isAlreadyRegisteredError(error),
       }
-      if (!linkData?.properties?.hashed_token) {
-        throw Object.assign(new Error("Invite link missing hashed_token."), {
-          name: "AuthRetryableFetchError",
-          status: 504,
-        });
-      }
-      return linkData;
-    },
-    { attempts: 8, baseDelayMs: 2000 }
-  );
+    );
+  };
+
+  try {
+    return await tryType("invite");
+  } catch (error) {
+    if (!isAlreadyRegisteredError(error)) throw error;
+    return await tryType("recovery");
+  }
 }
 
 /**

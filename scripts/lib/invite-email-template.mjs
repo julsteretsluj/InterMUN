@@ -1,7 +1,7 @@
-/** SEAMUN I 2027 InterMUN announcement + invite CTA (script-side mirror of lib/invite-email.ts). */
+/** SEAMUN I 2027 InterMUN announcement + set-password CTA (script-side mirror of lib/invite-email.ts). */
 
 export const SEAMUN_INTERMUN_INVITE_SUBJECT =
-  "SEAMUN I 2027 will use InterMUN — accept your invite";
+  "SEAMUN I 2027 InterMUN — set your password and join";
 
 function escapeHtml(value) {
   return String(value)
@@ -18,8 +18,7 @@ function formatAllocationLine(recipient) {
 }
 
 /**
- * Announcement body for SEAMUN I 2027 InterMUN rollout.
- * Includes clear recipient identity fields and a CTA when `actionLink` is provided.
+ * Announcement + clear set-password CTA for pre-registered SEAMUN I 2027 accounts.
  */
 export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient }) {
   const name = String(appName ?? "").trim() || "InterMUN";
@@ -47,18 +46,14 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
     "",
     `${name} will streamline our committee sessions—handling everything from roll call, speaker lists, and timer tracking to motions, caucuses, and resolution writing.`,
     "",
-    "What to Expect Next",
+    "Your account is already registered with the email above. What you need to do now:",
     "",
-    "In the coming days, you will receive follow-up emails containing your personalized access details:",
+    "1. Set your password — use the secure link below (one-time).",
+    "2. Join your conference / committee — enter the conference and room codes from your organisers.",
     "",
-    "* Login Credentials: Unique account details to log into your customized dashboard (tailored for Delegates, Chairs, Advisors, or SMT/Admin).",
-    "* Role-Specific Guides: Detailed documentation and step-by-step walkthroughs explaining how to navigate and utilize InterMUN for your specific role during the conference.",
+    "Role-specific guides will follow separately. For now, set your password so you can get into the platform.",
     "",
-    "Please keep an eye on your inbox for these emails. Once you receive your credentials, we recommend logging in early to familiarize yourself with the interface before committee sessions begin.",
-    "",
-    "Your InterMUN invite is ready now — use the link below to accept it, set your password, and open the platform. Role-specific guides and further access details will follow as announced above.",
-    "",
-    "Accept your InterMUN invite:",
+    "Set your InterMUN password:",
     link,
     "",
     "If you have any questions or experience any issues, please do not hesitate to reach out to the Secretariat team.",
@@ -84,7 +79,7 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
           <tr>
             <td style="padding:28px 28px 12px;background:#1D1D1F;color:#FFFFFF;">
               <div style="font-size:13px;letter-spacing:0.02em;color:#AEAEB2;margin-bottom:8px;">SEAMUN I 2027 · InterMUN</div>
-              <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em;line-height:1.25;">Official digital conference platform</div>
+              <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em;line-height:1.25;">Set your password and join</div>
             </td>
           </tr>
           <tr>
@@ -105,20 +100,18 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
               <p style="margin:0 0 16px;">We are excited to announce that SEAMUN I 2027 will be using <strong>${escapeHtml(name)}</strong> as our official digital conference platform!</p>
               <p style="margin:0 0 24px;">${escapeHtml(name)} will streamline our committee sessions—handling everything from roll call, speaker lists, and timer tracking to motions, caucuses, and resolution writing.</p>
 
-              <h2 style="margin:0 0 12px;font-size:18px;font-weight:700;letter-spacing:-0.01em;">What to Expect Next</h2>
-              <p style="margin:0 0 12px;">In the coming days, you will receive follow-up emails containing your personalized access details:</p>
-              <ul style="margin:0 0 16px;padding-left:20px;color:#1D1D1F;">
-                <li style="margin-bottom:10px;"><strong>Login Credentials:</strong> Unique account details to log into your customized dashboard (tailored for Delegates, Chairs, Advisors, or SMT/Admin).</li>
-                <li style="margin-bottom:10px;"><strong>Role-Specific Guides:</strong> Detailed documentation and step-by-step walkthroughs explaining how to navigate and utilize InterMUN for your specific role during the conference.</li>
-              </ul>
-              <p style="margin:0 0 20px;">Please keep an eye on your inbox for these emails. Once you receive your credentials, we recommend logging in early to familiarize yourself with the interface before committee sessions begin.</p>
-
-              <p style="margin:0 0 16px;color:#6E6E73;">Your InterMUN invite is ready now — accept it below to set your password and open the platform. Role-specific guides and further access details will follow as announced above.</p>
+              <h2 style="margin:0 0 12px;font-size:18px;font-weight:700;letter-spacing:-0.01em;">What to do now</h2>
+              <p style="margin:0 0 12px;">Your account is already registered with the email above. Complete these two steps:</p>
+              <ol style="margin:0 0 20px;padding-left:20px;color:#1D1D1F;">
+                <li style="margin-bottom:10px;"><strong>Set your password</strong> using the secure one-time link below.</li>
+                <li style="margin-bottom:10px;"><strong>Join your conference / committee</strong> by entering the conference and room codes from your organisers.</li>
+              </ol>
+              <p style="margin:0 0 20px;color:#6E6E73;">Role-specific guides will follow separately. Start by setting your password so you can get into the platform.</p>
 
               <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
                 <tr>
                   <td style="border-radius:980px;background:#007AFF;">
-                    <a href="${safeLink}" style="display:inline-block;padding:12px 22px;font-size:16px;font-weight:600;color:#FFFFFF;text-decoration:none;">Accept your InterMUN invite</a>
+                    <a href="${safeLink}" style="display:inline-block;padding:12px 22px;font-size:16px;font-weight:600;color:#FFFFFF;text-decoration:none;">Set your InterMUN password</a>
                   </td>
                 </tr>
               </table>

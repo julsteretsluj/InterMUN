@@ -72,25 +72,48 @@ function isRetryableAuthError(error) {
   );
 }
 
-async function generateInviteLink(admin, email, redirectTo, data) {
+function isAlreadyRegisteredError(error) {
+  const message = String(error?.message ?? "").toLowerCase();
+  return (
+    message.includes("already been registered") ||
+    message.includes("already registered") ||
+    message.includes("user already exists")
+  );
+}
+
+async function generateLinkOfType(admin, type, email, redirectTo, data) {
   // Auth is intermittently 504ing; keep trying so we never ship a stock GoTrue email.
-  const attempts = 8;
+  const attempts = 6;
   let lastError = null;
   for (let i = 0; i < attempts; i++) {
     const { data: linkData, error } = await admin.auth.admin.generateLink({
-      type: "invite",
+      type,
       email,
-      options: { redirectTo, data },
+      options: { redirectTo, data: type === "invite" ? data : undefined },
     });
     if (!error && linkData?.properties?.hashed_token) return linkData;
     lastError = error || { message: "Invite link was not created." };
     if (!linkData?.properties?.hashed_token && !error) {
       lastError = { message: "Invite link missing hashed_token." };
     }
+    if (isAlreadyRegisteredError(lastError)) throw lastError;
     if (i >= attempts - 1 || !isRetryableAuthError(lastError)) break;
     await sleep(2000 * (i + 1));
   }
   throw lastError;
+}
+
+/**
+ * Prefer invite for new pre-provisioned emails; if already registered, recovery
+ * still lets them set/reset password through /auth/confirm → /auth/set-password.
+ */
+async function generateInviteLink(admin, email, redirectTo, data) {
+  try {
+    return await generateLinkOfType(admin, "invite", email, redirectTo, data);
+  } catch (error) {
+    if (!isAlreadyRegisteredError(error)) throw error;
+    return await generateLinkOfType(admin, "recovery", email, redirectTo, data);
+  }
 }
 
 /**

@@ -9,7 +9,9 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { formatAuthError } from "@/lib/auth-error-message";
 import { markNavigationLoading } from "@/lib/navigation-loading";
-import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
+
+/** After password is set, send invitees into the existing conference-code gate. */
+const AFTER_PASSWORD_PATH = "/event-gate";
 
 export function AuthSetPasswordClient() {
   const router = useRouter();
@@ -80,8 +82,8 @@ export function AuthSetPasswordClient() {
         return;
       }
       markNavigationLoading();
-      const dest = await resolveDashboardPathAfterAuth(supabase, userData.user.id);
-      router.replace(dest || "/");
+      // Join conference / committee next (codes), not a deep dashboard jump.
+      router.replace(AFTER_PASSWORD_PATH);
       router.refresh();
     } catch (err) {
       setError(
@@ -133,7 +135,7 @@ export function AuthSetPasswordClient() {
         </h1>
         <p className="mt-2 text-[15px] leading-relaxed text-[#6E6E73]">
           Choose a password for <span className="text-[#1D1D1F]">{email}</span>, then
-          continue into InterMUN.
+          join your conference with the codes from your organisers.
         </p>
       </div>
 
@@ -172,7 +174,7 @@ export function AuthSetPasswordClient() {
           disabled={loading}
           className="inline-flex w-full items-center justify-center rounded-[980px] bg-[#007AFF] px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#0077ED] disabled:opacity-60"
         >
-          {loading ? "Saving…" : "Save password and continue"}
+          {loading ? "Saving…" : "Save password and join conference"}
         </button>
       </form>
     </div>

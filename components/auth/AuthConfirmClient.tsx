@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { EmailOtpType } from "@supabase/supabase-js";
@@ -35,6 +35,7 @@ export function AuthConfirmClient({
   nextPath: string;
 }) {
   const router = useRouter();
+  const startedRef = useRef(false);
   const [status, setStatus] = useState<"working" | "error">(
     tokenHash ? "working" : "error"
   );
@@ -47,6 +48,9 @@ export function AuthConfirmClient({
 
   useEffect(() => {
     if (!tokenHash) return;
+    // One-time tokens: never run verifyOtp twice (Strict Mode / remount).
+    if (startedRef.current) return;
+    startedRef.current = true;
 
     let cancelled = false;
     const otpType = (OTP_TYPES.has(type) ? type : "invite") as EmailOtpType;
@@ -72,7 +76,9 @@ export function AuthConfirmClient({
           router.replace(nextPath);
           return;
         }
-        if (!isRetryableAuthError(error) || i >= maxAttempts - 1) {
+        // Invalid/expired is final — do not retry (would burn nothing; confuses UX).
+        const final = !isRetryableAuthError(error);
+        if (final || i >= maxAttempts - 1) {
           setStatus("error");
           setMessage(
             formatAuthError(
