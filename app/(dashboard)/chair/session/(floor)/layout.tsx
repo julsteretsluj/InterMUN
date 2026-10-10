@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import { ChairSessionFloorShell } from "@/components/chair/ChairSessionFloorShell";
+import { HawkinsClockSlot } from "@/components/fwc/HawkinsClockSlot";
 import { loadChairSessionConferenceCached } from "@/app/(dashboard)/chair/session/loadChairSession";
 
 /**
@@ -16,6 +17,7 @@ export default async function ChairSessionFloorLayout({
   const conference = await loadChairSessionConferenceCached();
   return (
     <>
+      <HawkinsClockSlot />
       <ChairSessionFloorShell conference={conference} />
       {children}
     </>

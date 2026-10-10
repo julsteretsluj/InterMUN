@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { HawkinsClockSlot } from "@/components/fwc/HawkinsClockSlot";
 import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { loadChairSessionConferenceCached } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
@@ -87,6 +88,7 @@ export default async function ChairSessionPage() {
       title={t("committeeSession")}
       titleAside={<PageFeatureGuideLink featureId="session" role="chair" />}
     >
+      <HawkinsClockSlot />
       <SessionFloorOverview
         conferenceId={data.conferenceId}
         conferenceTitle={data.conferenceTitle}
