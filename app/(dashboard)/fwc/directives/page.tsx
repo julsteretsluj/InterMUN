@@ -2,9 +2,9 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import { redirect } from "next/navigation";
-import { listFwcDirectives } from "@/app/actions/fwcCrisis";
-import { FwcDirectiveForm } from "@/components/fwc/FwcDirectiveForm";
-import { FwcDirectiveList } from "@/components/fwc/FwcDirectiveList";
+import { getTranslations } from "next-intl/server";
+import { listFwcDirectiveWorkspace } from "@/app/actions/fwcDirectives";
+import { FwcDirectiveWorkspace } from "@/components/fwc/FwcDirectiveWorkspace";
 import { FwcMetersStrip } from "@/components/fwc/FwcMetersStrip";
 import { MunPageShell } from "@/components/MunPageShell";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
@@ -13,6 +13,12 @@ import {
   loadFwcChamberSnapshot,
   loadViewerFwcCharacterSeat,
 } from "@/lib/fwc/load-page-context";
+import {
+  fwcReadDb,
+  loadFwcCitationContext,
+  loadFwcDelegateDirectiveGate,
+  loadFwcRopBase,
+} from "@/lib/fwc/rop-page-data";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import { getSmtActingSeat } from "@/lib/smt-acting-seat";
@@ -47,6 +53,7 @@ export default async function FwcDirectivesPage() {
     redirect("/delegate");
   }
 
+  const t = await getTranslations("fwcRop");
   const actingSeat = await getSmtActingSeat();
   const snapshot = await loadFwcChamberSnapshot(supabase, activeConf.id);
   const viewer = await loadViewerFwcCharacterSeat(
@@ -58,19 +65,26 @@ export default async function FwcDirectivesPage() {
     actingSeat?.allocationId
   );
 
-  const listed = await listFwcDirectives(activeConf.id);
-  const directives = listed.ok ? listed.data.directives : [];
+  const actingAllocationId = actingSeat && viewer.seat ? viewer.seat.id : null;
+  const listed = await listFwcDirectiveWorkspace({ conferenceId: activeConf.id, actingAllocationId });
 
-  const coSubmitterOptions = snapshot.seats
+  const db = fwcReadDb(supabase);
+  const base = await loadFwcRopBase(db, snapshot.canonicalConferenceId, snapshot.siblingConferenceIds);
+  const viewerSeatRow = viewer.seat ? base.seats.find((s) => s.id === viewer.seat!.id) ?? null : null;
+  const [citations, gate] = await Promise.all([
+    loadFwcCitationContext(db, snapshot.canonicalConferenceId, base.seats, base.state),
+    viewerSeatRow
+      ? loadFwcDelegateDirectiveGate(db, snapshot.canonicalConferenceId, viewerSeatRow, base.state)
+      : { activeCrisis: false, blockedByStatus: null, anonymityUsedThisSession: false },
+  ]);
+
+  const coAuthorOptions = snapshot.seats
     .filter((seat) => seat.id !== viewer.seat?.id)
     .map((seat) => ({ id: seat.id, label: seat.displayName }));
 
   return (
-    <MunPageShell title="FWC directives" variant="offset">
-      <p className="max-w-3xl text-sm leading-relaxed text-[#6E6E73]">
-        Submit cabinet and personal actions for Backroom review. Anonymized personal, joint, and
-        press rows hide submitter details from other delegates.
-      </p>
+    <MunPageShell title={t("directivesTitle")} variant="offset">
+      <p className="max-w-3xl text-sm leading-relaxed text-[#6E6E73]">{t("directivesIntro")}</p>
 
       {snapshot.ensureError ? (
         <p className="rounded-[16px] border border-[#D1D1D6] bg-white px-5 py-4 text-sm text-[#B71C1C]">
@@ -86,36 +100,37 @@ export default async function FwcDirectivesPage() {
       <FwcMetersStrip meters={snapshot.meters} />
 
       {viewer.seat && viewer.state ? (
-        <div className="space-y-2">
-          <p className="text-sm text-[#6E6E73]">
-            Seated as{" "}
-            <span className="font-semibold text-[#1D1D1F]">{viewer.seat.displayName}</span>
-            {" · "}
-            Grid {viewer.state.currentGrid}
-          </p>
-          <FwcDirectiveForm
-            conferenceId={activeConf.id}
-            anonymityEligible={viewer.seat.anonymityEligible}
-            anonymityUsedSession={viewer.state.anonymityUsedSession}
-            coSubmitterOptions={coSubmitterOptions}
-            actingAllocationId={actingSeat ? viewer.seat.id : null}
-          />
-        </div>
-      ) : (
-        <p className="rounded-[16px] border border-dashed border-[#D1D1D6] bg-white px-5 py-6 text-sm text-[#6E6E73]">
-          You need an FWC character seat to submit directives. Chairs can review the queue in
-          Backroom.
+        <p className="text-sm text-[#6E6E73]">
+          {t("seatedAs")} <span className="font-semibold text-[#1D1D1F]">{viewer.seat.displayName}</span>
+          {" · "}
+          {t("gridX", { grid: viewer.state.currentGrid })}
+          {" · "}
+          {t("dayN", { n: base.state.crisis_day })} · {t("sessionN", { n: base.state.crisis_session })}
+          {actingAllocationId ? ` · ${t("actingForSeat")}` : ""}
         </p>
-      )}
+      ) : null}
 
-      <section className="space-y-3">
-        <h3 className="text-base font-semibold tracking-[-0.01em] text-[#1D1D1F]">Directive queue</h3>
-        <FwcDirectiveList
-          directives={directives}
-          nameByAllocationId={snapshot.nameByAllocationId}
-          viewerAllocationIds={viewer.viewerAllocationIds}
-        />
-      </section>
+      <FwcDirectiveWorkspace
+        conferenceId={activeConf.id}
+        canonicalConferenceId={snapshot.canonicalConferenceId}
+        actingAllocationId={actingAllocationId}
+        viewer={
+          viewer.seat
+            ? {
+                allocationId: viewer.seat.id,
+                displayName: viewer.seat.displayName,
+                anonymityEligible: viewer.seat.anonymityEligible,
+              }
+            : null
+        }
+        citations={citations}
+        coAuthorOptions={coAuthorOptions}
+        directives={listed.ok ? listed.data.directives : []}
+        nameByAllocationId={listed.ok ? listed.data.nameByAllocationId : snapshot.nameByAllocationId}
+        activeCrisis={gate.activeCrisis}
+        blockedByStatus={gate.blockedByStatus}
+        anonymityUsedThisSession={gate.anonymityUsedThisSession}
+      />
     </MunPageShell>
   );
 }

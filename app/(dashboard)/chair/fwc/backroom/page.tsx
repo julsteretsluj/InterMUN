@@ -3,6 +3,8 @@
 
 import { redirect } from "next/navigation";
 import { listFwcDirectives } from "@/app/actions/fwcCrisis";
+import { listFwcDirectiveWorkspace } from "@/app/actions/fwcDirectives";
+import { FwcDirectiveReviewQueue } from "@/components/fwc/FwcDirectiveReviewQueue";
 import { FwcBackroomClient } from "@/components/fwc/FwcBackroomClient";
 import { MunPageShell } from "@/components/MunPageShell";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
@@ -35,7 +37,10 @@ export default async function ChairFwcBackroomPage() {
   const snapshot = await loadFwcChamberSnapshot(supabase, activeConf.id, {
     movementStatuses: ["queued"],
   });
-  const listed = await listFwcDirectives(activeConf.id);
+  const [listed, workspace] = await Promise.all([
+    listFwcDirectives(activeConf.id),
+    listFwcDirectiveWorkspace({ conferenceId: activeConf.id }),
+  ]);
 
   if (!listed.ok) {
     return (
@@ -58,6 +63,17 @@ export default async function ChairFwcBackroomPage() {
         <p className="rounded-[16px] border border-[#D1D1D6] bg-white px-5 py-4 text-sm text-[#B71C1C]">
           {snapshot.ensureError}
         </p>
+      ) : null}
+
+      {workspace.ok ? (
+        <FwcDirectiveReviewQueue
+          conferenceId={activeConf.id}
+          canonicalConferenceId={workspace.data.canonicalConferenceId}
+          voteConferenceId={activeConf.id}
+          directives={workspace.data.directives}
+          nameByAllocationId={workspace.data.nameByAllocationId}
+          countryByAllocationId={workspace.data.countryByAllocationId}
+        />
       ) : null}
 
       <FwcBackroomClient
