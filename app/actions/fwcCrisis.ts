@@ -51,6 +51,11 @@ import type {
   FwcEvidenceSourceMeta,
 } from "@/lib/fwc/evidence-types";
 import { GUIDE_FILES_BUCKET } from "@/lib/guide-resources";
+import { FWC_ROP } from "@/lib/rop";
+import { findDirectiveType } from "@/lib/rop/directives";
+import { movementCheck } from "@/lib/rop/crisis";
+import { FWC_TERRAIN_MP_COST } from "@/lib/fwc/terrain";
+import { extractFwcGridFromLocation } from "@/lib/fwc/evidence-location";
 import { readFile } from "node:fs/promises";
 import nodePath from "node:path";
 
@@ -586,6 +591,63 @@ async function applyMeterDeltas(
   return { ok: true, data: metersFromRow(updated) };
 }
 
+/** Returns an error message when the move exceeds this cycle's MP budget. */
+async function checkMovementMp(
+  db: SupabaseClient,
+  canonicalConferenceId: string,
+  allocationId: string,
+  state: CharacterStateRow,
+  terrainType: FwcTerrainType
+): Promise<string | null> {
+  const { data } = await db
+    .from("fwc_character_states")
+    .select("mp_spent")
+    .eq("conference_id", canonicalConferenceId)
+    .eq("allocation_id", allocationId)
+    .maybeSingle();
+  const check = movementCheck({
+    terrainCosts: FWC_TERRAIN_MP_COST,
+    terrain: terrainType,
+    baseMp: state.base_mp,
+    bonusMp: state.bonus_mp,
+    spentMp: Number(data?.mp_spent ?? 0),
+    vehicleBonusTerrain: FWC_ROP.crisis?.movement.vehicleBonusTerrain ?? [],
+  });
+  return check.ok ? null : check.reason;
+}
+
+/** "Search for evidence" after an approved move reveals one unfound item at the destination grid. */
+async function revealEvidenceAtGrid(
+  db: SupabaseClient,
+  canonicalConferenceId: string,
+  grid: string,
+  allocationId: string
+): Promise<void> {
+  const { data } = await db
+    .from("fwc_evidence_items")
+    .select("id, starting_location, current_location")
+    .eq("conference_id", canonicalConferenceId)
+    .eq("found", false);
+  const target = grid.trim().toUpperCase();
+  const hit = (data ?? []).find(
+    (row) =>
+      (extractFwcGridFromLocation(String(row.current_location ?? row.starting_location ?? "")) ?? "").toUpperCase() ===
+      target
+  );
+  if (!hit) return;
+  await db
+    .from("fwc_evidence_items")
+    .update({
+      found: true,
+      found_at: new Date().toISOString(),
+      found_by_allocation_id: allocationId,
+      held_by_allocation_id: allocationId,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", hit.id)
+    .eq("found", false);
+}
+
 /**
  * If missing, insert `fwc_meters` defaults and upsert `fwc_character_states`
  * for seated character allocations (not dais) from `lookupFwcCharacter`.
@@ -708,8 +770,13 @@ export async function submitFwcDirective(input: {
 
   const coSubmitterIds = uniqueUuids(input.coSubmitterAllocationIds ?? []).filter((id) => id !== submitter!.id);
   if (input.directiveType === "joint") {
-    if (coSubmitterIds.length < 2 || coSubmitterIds.length > 5) {
-      return { ok: false, error: "Joint directives need 2–5 co-submitters besides the submitter." };
+    const joint = findDirectiveType(FWC_ROP, "joint");
+    const authors = coSubmitterIds.length + 1;
+    if (joint && (authors < joint.minAuthors || (joint.maxAuthors != null && authors > joint.maxAuthors))) {
+      return {
+        ok: false,
+        error: `Joint directives need ${joint.minAuthors}–${joint.maxAuthors} delegates in total, including you.`,
+      };
     }
     const chamberAllocs = await loadChamberAllocations(
       write.data,
@@ -1022,6 +1089,9 @@ export async function queueFwcMovement(input: {
     .maybeSingle();
   if (queued?.id) return { ok: false, error: "You already have a movement queued." };
 
+  const mpCheck = await checkMovementMp(write.data, scope.data.canonicalConferenceId, seat.id, state.data, input.terrainType);
+  if (mpCheck) return { ok: false, error: mpCheck };
+
   const { data: created, error } = await write.data
     .from("fwc_movements")
     .insert({
@@ -1077,7 +1147,7 @@ export async function resolveFwcMovement(input: {
 
   const { data: movement, error: readErr } = await write.data
     .from("fwc_movements")
-    .select("id, delegate_allocation_id, target_grid, status")
+    .select("id, delegate_allocation_id, target_grid, terrain_type, post_movement_action, status")
     .eq("id", input.movementId)
     .eq("conference_id", scope.data.canonicalConferenceId)
     .maybeSingle();
@@ -1088,15 +1158,32 @@ export async function resolveFwcMovement(input: {
   }
 
   if (input.decision === "approved") {
+    const { data: mover } = await write.data
+      .from("fwc_character_states")
+      .select("mp_spent")
+      .eq("conference_id", scope.data.canonicalConferenceId)
+      .eq("allocation_id", movement.delegate_allocation_id)
+      .maybeSingle();
+    const cost = FWC_TERRAIN_MP_COST[movement.terrain_type as FwcTerrainType] ?? 0;
     const { error: gridErr } = await write.data
       .from("fwc_character_states")
       .update({
         current_grid: movement.target_grid,
+        mp_spent: Number(mover?.mp_spent ?? 0) + cost,
         updated_at: new Date().toISOString(),
       })
       .eq("conference_id", scope.data.canonicalConferenceId)
       .eq("allocation_id", movement.delegate_allocation_id);
     if (gridErr) return { ok: false, error: gridErr.message };
+
+    if (movement.post_movement_action === "search_for_evidence") {
+      await revealEvidenceAtGrid(
+        write.data,
+        scope.data.canonicalConferenceId,
+        String(movement.target_grid),
+        String(movement.delegate_allocation_id)
+      );
+    }
   }
 
   const { data: updated, error: statusErr } = await write.data
@@ -1111,6 +1198,79 @@ export async function resolveFwcMovement(input: {
 
   revalidateFwcPaths();
   return { ok: true, data: { movementId: updated.id, status: updated.status as FwcMovementStatus } };
+}
+
+/** Delegates may edit or delete their own movement while it is still queued. */
+export async function editQueuedFwcMovement(input: {
+  conferenceId: string;
+  movementId: string;
+  remove?: boolean;
+  targetGrid?: string;
+  terrainType?: FwcTerrainType;
+  postMovementAction?: FwcPostMovementAction;
+}): Promise<ActionResult<{ movementId: string }>> {
+  const auth = await getAuthContext();
+  if (!auth.user) return { ok: false, error: "Sign in required." };
+  const scope = await resolveFwcScope(auth.supabase, input.conferenceId);
+  if (!scope.ok) return scope;
+  const access = await userMayAccessFwc({
+    supabase: auth.supabase,
+    userId: auth.user.id,
+    role: auth.role,
+    canonicalConferenceId: scope.data.canonicalConferenceId,
+    siblingConferenceIds: scope.data.siblingConferenceIds,
+  });
+  if (!access.ok) return access;
+  if (!isUuid(input.movementId)) return { ok: false, error: "Invalid movement id." };
+  const write = requireWriteDb(auth.role, auth.supabase);
+  if (!write.ok) return write;
+
+  const { data: movement } = await write.data
+    .from("fwc_movements")
+    .select("id, delegate_allocation_id, status")
+    .eq("id", input.movementId)
+    .eq("conference_id", scope.data.canonicalConferenceId)
+    .maybeSingle();
+  if (!movement || movement.status !== "queued") return { ok: false, error: "This movement is no longer queued." };
+  const ownSeatIds = new Set(access.data.seats.map((s) => s.id));
+  if (!ownSeatIds.has(String(movement.delegate_allocation_id)) && !isStaff(auth.role)) {
+    return { ok: false, error: "You can only change your own movement." };
+  }
+
+  if (input.remove) {
+    const { error } = await write.data.from("fwc_movements").delete().eq("id", movement.id).eq("status", "queued");
+    if (error) return { ok: false, error: error.message };
+    revalidateFwcPaths();
+    return { ok: true, data: { movementId: String(movement.id) } };
+  }
+
+  const patch: Record<string, unknown> = {};
+  if (input.targetGrid?.trim()) patch.target_grid = input.targetGrid.trim();
+  if (input.terrainType) {
+    if (!isFwcTerrainType(input.terrainType) || input.terrainType === "impassable") {
+      return { ok: false, error: "Invalid terrain type." };
+    }
+    const state = await loadCharacterState(write.data, scope.data.canonicalConferenceId, String(movement.delegate_allocation_id));
+    if (!state.ok) return state;
+    const mpCheck = await checkMovementMp(
+      write.data,
+      scope.data.canonicalConferenceId,
+      String(movement.delegate_allocation_id),
+      state.data,
+      input.terrainType
+    );
+    if (mpCheck) return { ok: false, error: mpCheck };
+    patch.terrain_type = input.terrainType;
+  }
+  if (input.postMovementAction) {
+    if (!isFwcPostMovementAction(input.postMovementAction)) return { ok: false, error: "Invalid post-movement action." };
+    patch.post_movement_action = input.postMovementAction;
+  }
+  if (Object.keys(patch).length === 0) return { ok: false, error: "Nothing to change." };
+  const { error } = await write.data.from("fwc_movements").update(patch).eq("id", movement.id).eq("status", "queued");
+  if (error) return { ok: false, error: error.message };
+  revalidateFwcPaths();
+  return { ok: true, data: { movementId: String(movement.id) } };
 }
 
 export async function updateFwcMeters(input: {

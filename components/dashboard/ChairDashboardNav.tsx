@@ -75,6 +75,8 @@ export type ChairNavItemKey =
   | "fwcDirectives"
   | "fwcMovement"
   | "fwcMap"
+  | "fwcCrisis"
+  | "fwcControl"
   | "fwcBackroom"
   | "fwcEvidence"
   | "archive"
@@ -170,6 +172,8 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/fwc/directives", itemKey: "fwcDirectives", emoji: "✉️", fwcOnly: true },
   { href: "/fwc/movement", itemKey: "fwcMovement", emoji: "🗺️", fwcOnly: true },
   { href: "/fwc/map", itemKey: "fwcMap", emoji: "📍", fwcOnly: true },
+  { href: "/fwc/crisis", itemKey: "fwcCrisis", emoji: "⏱️", fwcOnly: true },
+  { href: "/chair/fwc/control", itemKey: "fwcControl", emoji: "🧭", fwcOnly: true },
   { href: "/chair/fwc/backroom", itemKey: "fwcBackroom", emoji: "🎛️", fwcOnly: true },
   { href: "/chair/fwc/evidence", itemKey: "fwcEvidence", emoji: "📦", fwcOnly: true },
   { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },

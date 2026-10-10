@@ -51,6 +51,8 @@ const NAV_EMOJIS: Record<string, string> = {
   "/fwc/directives": "✉️",
   "/fwc/movement": "🗺️",
   "/fwc/map": "📍",
+  "/fwc/crisis": "⏱️",
+  "/chair/fwc/control": "🧭",
   "/chair/fwc/backroom": "🎛️",
   "/chair/fwc/evidence": "📦",
   "/advisor": "🎓",
@@ -92,6 +94,7 @@ const FWC_ONLY_TABS = [
   { href: "/fwc/directives", labelKey: "fwcDirectives", fwcOnly: true },
   { href: "/fwc/movement", labelKey: "fwcMovement", fwcOnly: true },
   { href: "/fwc/map", labelKey: "fwcMap", fwcOnly: true },
+  { href: "/fwc/crisis", labelKey: "fwcCrisis", fwcOnly: true },
 ] as const;
 
 const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
@@ -151,6 +154,7 @@ function useNavTabs(
           : []),
         ...(role === "chair" && fwcCrisisEnabled
           ? ([
+              { href: "/chair/fwc/control", labelKey: "fwcControl", fwcOnly: true },
               { href: "/chair/fwc/backroom", labelKey: "fwcBackroom", fwcOnly: true },
               { href: "/chair/fwc/evidence", labelKey: "fwcEvidence", fwcOnly: true },
             ] as const)

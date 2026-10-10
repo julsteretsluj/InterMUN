@@ -30,6 +30,7 @@ export const DELEGATE_TAB_NAV_HREF_ORDER = [
   "/fwc/directives",
   "/fwc/movement",
   "/fwc/map",
+  "/fwc/crisis",
   "/delegate/schedule",
 ] as const;
 
@@ -67,6 +68,8 @@ export const CHAIR_STAFF_TAB_NAV_HREF_ORDER = [
   "/fwc/directives",
   "/fwc/movement",
   "/fwc/map",
+  "/fwc/crisis",
+  "/chair/fwc/control",
   "/chair/fwc/backroom",
   "/chair/fwc/evidence",
   "/guides",
