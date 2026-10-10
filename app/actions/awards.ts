@@ -403,11 +403,11 @@ export async function submitCommitteeAwardDraftsToSmtAction(
     .maybeSingle();
   const role = profile?.role?.toString().trim().toLowerCase();
 
-  if (role === "admin") {
-    // ok
+  if (role === "admin" || role === "smt") {
+    // ok — SMT acting from the chair view; RLS scopes SMT to their own event.
   } else {
     if (role !== "chair") {
-      return { ok: false, error: "Only committee chairs (or admins) can submit nominations to SMT." };
+      return { ok: false, error: "Only committee chairs, SMT, or admins can submit nominations to SMT." };
     }
     const { data: canManage } = await auth.supabase
       .from("allocations")

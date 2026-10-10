@@ -123,6 +123,7 @@ export function DelegationNotesView({
   onNoteCreated,
   initialOpenThreadId = null,
   initialProgressToSmt = false,
+  actingForAllocation = false,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -154,6 +155,8 @@ export function DelegationNotesView({
   initialOpenThreadId?: string | null;
   /** Prefill an end-of-session progress note addressed to SMT. */
   initialProgressToSmt?: boolean;
+  /** SMT acting for `myAllocationId`: the seat is the sender, the SMT account is recorded as actor. */
+  actingForAllocation?: boolean;
 }) {
   const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
@@ -560,7 +563,7 @@ export function DelegationNotesView({
     }
 
     const senderAllo = myAllocationId;
-    const senderProfile = senderAllo ? null : isStaffLike ? myUserId : null;
+    const senderProfile = isStaffLike && (actingForAllocation || !senderAllo) ? myUserId : null;
     if (!senderAllo && !senderProfile) {
       return setError(t("errors.needAllocation"));
     }
@@ -799,7 +802,7 @@ export function DelegationNotesView({
     if (!trimmed) return setError(t("errors.emptyContent"));
 
     const senderAllo = myAllocationId;
-    const senderProfile = senderAllo ? null : isStaffLike ? myUserId : null;
+    const senderProfile = isStaffLike && (actingForAllocation || !senderAllo) ? myUserId : null;
     if (!senderAllo && !senderProfile) {
       return setError(t("errors.needAllocation"));
     }

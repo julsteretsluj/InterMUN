@@ -51,7 +51,7 @@ export default async function DelegateChairFeedbackPage() {
 
   const { data: allocData } = await supabase
     .from("allocations")
-    .select("conference_id, user_id, profiles(role, name)")
+    .select("conference_id, user_id, profiles!allocations_user_id_fkey(role, name)")
     .in("conference_id", committeeConferenceIds)
     .not("user_id", "is", null);
 

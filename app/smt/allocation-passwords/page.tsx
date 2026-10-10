@@ -164,7 +164,7 @@ export default async function SmtAllocationPasswordsPage({
 
   const { data: allocData } = await supabase
     .from("allocations")
-    .select("id, country, user_id, conference_id, profiles(name)")
+    .select("id, country, user_id, conference_id, profiles!allocations_user_id_fkey(name)")
     .in("conference_id", siblingConferenceIds)
     .order("country");
 

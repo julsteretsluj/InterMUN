@@ -120,7 +120,7 @@ export function VotingPanel({
         const [{ data: allocations }, { data: rollRows }] = await Promise.all([
           supabase
             .from("allocations")
-            .select("id, country, user_id, profiles(role)")
+            .select("id, country, user_id, profiles!allocations_user_id_fkey(role)")
             .eq("conference_id", conferenceId)
             .order("country", { ascending: true }),
           supabase

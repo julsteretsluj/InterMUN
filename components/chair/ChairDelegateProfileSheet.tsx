@@ -17,7 +17,8 @@ import { AppleSheet } from "@/components/ui/AppleSheet";
 import { ChairDelegateAvatar } from "@/components/chair/ChairDelegateAvatar";
 
 export type ChairDelegateProfileInfo = {
-  userId: string;
+  /** Null when nobody has claimed the seat yet. */
+  userId: string | null;
   country: string;
   countryDisplay?: string | null;
   partyLabel?: string | null;
@@ -31,6 +32,10 @@ export type ChairDelegateProfileInfo = {
   notes: string | null;
   profilePictureUrl: string | null;
   linkedRole: string | null;
+  /** Override the "Open full profile" target; `null` hides the button. */
+  fullProfileHref?: string | null;
+  /** Override the chat target; `null` hides the button. */
+  chatHref?: string | null;
 };
 
 type SheetContextValue = {
@@ -65,6 +70,18 @@ export function ChairDelegateProfileSheetProvider({ children }: { children: Reac
   const value = useMemo(() => ({ openDelegate }), [openDelegate]);
 
   const displayName = dash(selected?.name, t("unnamed"));
+  const fullProfileHref =
+    selected?.fullProfileHref !== undefined
+      ? selected.fullProfileHref
+      : selected?.userId
+        ? `/committee-room/person/${selected.userId}`
+        : null;
+  const chatHref =
+    selected?.chatHref !== undefined
+      ? selected.chatHref
+      : selected?.userId
+        ? `/chats-notes?forProfile=${encodeURIComponent(selected.userId)}`
+        : null;
   const seatLabel = dash(selected?.countryDisplay || selected?.country, t("dash"));
 
   return (
@@ -113,18 +130,22 @@ export function ChairDelegateProfileSheetProvider({ children }: { children: Reac
             </dl>
 
             <div className="flex flex-wrap gap-2 pt-1">
-              <Link
-                href={`/committee-room/person/${selected.userId}`}
-                className="inline-flex items-center justify-center rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-medium text-white hover:opacity-95"
-              >
-                {t("openFullProfile")}
-              </Link>
-              <Link
-                href={`/chats-notes?forProfile=${encodeURIComponent(selected.userId)}`}
-                className="inline-flex items-center justify-center rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[#F2F2F7]/60 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
-              >
-                {t("openChat")}
-              </Link>
+              {fullProfileHref ? (
+                <Link
+                  href={fullProfileHref}
+                  className="inline-flex items-center justify-center rounded-lg bg-[#007AFF] px-3 py-2 text-sm font-medium text-white hover:opacity-95"
+                >
+                  {t("openFullProfile")}
+                </Link>
+              ) : null}
+              {chatHref ? (
+                <Link
+                  href={chatHref}
+                  className="inline-flex items-center justify-center rounded-lg border border-[#D1D1D6] bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-[#F2F2F7]/60 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+                >
+                  {t("openChat")}
+                </Link>
+              ) : null}
             </div>
           </div>
         ) : null}

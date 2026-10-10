@@ -31,6 +31,7 @@ export function FwcMapClient({
     baseMp: number;
     bonusMp: number;
     hasQueuedMovement: boolean;
+    actingAllocationId?: string | null;
   } | null;
 }) {
   const [targetHint, setTargetHint] = useState<string | null>(null);
@@ -102,6 +103,7 @@ export function FwcMapClient({
           baseMp={movementForm.baseMp}
           bonusMp={movementForm.bonusMp}
           hasQueuedMovement={movementForm.hasQueuedMovement}
+          actingAllocationId={movementForm.actingAllocationId ?? null}
           targetGridHint={targetHint}
         />
       ) : null}

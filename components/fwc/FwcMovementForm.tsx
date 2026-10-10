@@ -22,6 +22,7 @@ export function FwcMovementForm({
   bonusMp,
   hasQueuedMovement,
   targetGridHint = null,
+  actingAllocationId = null,
 }: {
   conferenceId: string;
   currentGrid: string;
@@ -30,6 +31,8 @@ export function FwcMovementForm({
   hasQueuedMovement: boolean;
   /** When set (e.g. from map cell click), fills the target grid field. */
   targetGridHint?: string | null;
+  /** SMT acting for a delegation: queue movement for this seat. */
+  actingAllocationId?: string | null;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -62,6 +65,7 @@ export function FwcMovementForm({
         targetGrid,
         terrainType,
         postMovementAction,
+        allocationId: actingAllocationId ?? undefined,
       });
       if (!result.ok) {
         setError(result.error);

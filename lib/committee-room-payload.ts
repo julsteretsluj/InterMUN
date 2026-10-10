@@ -108,6 +108,7 @@ function daisFromChairAllocations(
         name: nameFromRow(row),
         showGavel: true,
         profileId: row?.user_id ?? null,
+        allocationId: row?.id ?? null,
       };
     });
   }
@@ -115,6 +116,7 @@ function daisFromChairAllocations(
   const byLabel = new Map<
     string,
     {
+      id: string;
       country: string | null;
       user_id: string | null;
       display_name_override: string | null;
@@ -136,6 +138,7 @@ function daisFromChairAllocations(
       name: nameFromRow(row),
       showGavel: true,
       profileId: row?.user_id ?? null,
+      allocationId: row?.id ?? null,
     };
   });
 }
@@ -193,7 +196,7 @@ export async function loadCommitteeRoomPayload(
   const { data: allocationRows } = await supabase
     .from("allocations")
     .select(
-      "id, conference_id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
+      "id, conference_id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles!allocations_user_id_fkey(name, pronouns, school)"
     )
     .in("conference_id", scope.siblingConferenceIds)
     .order("country");

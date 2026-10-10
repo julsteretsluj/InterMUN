@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import { SeatProfileCard } from "@/components/smt/SeatProfileCard";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
@@ -387,7 +389,9 @@ export default async function ProfilePage({
         .filter((value): value is string => Boolean(value))
     ),
   ]);
-  const welcomeCountry = myAllocation?.country?.trim() || tp("fallbacks.yourCountry");
+  const actingSeat = await getSmtActingSeat();
+  const welcomeCountry =
+    actingSeat?.country || myAllocation?.country?.trim() || tp("fallbacks.yourCountry");
   const welcomeFlag = flagEmojiForCountryName(welcomeCountry);
 
   const delegateWelcome = isDelegate ? (
@@ -495,6 +499,11 @@ export default async function ProfilePage({
                     : tp("tabs.settings")}
             </Link>
           ))}
+        </div>
+      ) : null}
+      {showOverview && actingSeat ? (
+        <div className="mb-6">
+          <SeatProfileCard seat={actingSeat} heading="Viewing this delegation as SMT" showContact />
         </div>
       ) : null}
       {showOverview ? delegateWelcome : null}

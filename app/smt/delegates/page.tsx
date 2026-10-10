@@ -7,6 +7,8 @@ import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
 import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
+import { loadSeatRosterInfo } from "@/lib/smt-acting-seat";
 import { SmtDelegatesSearchClient, type SmtDelegateSearchRow } from "./SmtDelegatesSearchClient";
 
 type LinkedProfile = {
@@ -52,7 +54,7 @@ export default async function SmtDelegatesPage() {
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee")
+    .select("id, name, committee, committee_code")
     .eq("event_id", eventId)
     .order("committee");
 
@@ -70,18 +72,36 @@ export default async function SmtDelegatesPage() {
             "id, country, conference_id, user_id, display_name_override, profiles:user_id ( name, role, username, pronouns, school, grade, notes, profile_picture_url )"
           )
           .in("conference_id", activeConferenceIds)
-          .not("user_id", "is", null)
       : { data: [] as never[] };
+
+  const secretariatConferenceIds = new Set(
+    activeConferences.filter((c) => isSmtSecretariatConferenceRow(c)).map((c) => c.id)
+  );
+  const seatRows = (allocations ?? []).filter(
+    (a) => !isDaisSeatAllocationCountry(a.country) && !secretariatConferenceIds.has(a.conference_id)
+  );
 
   // Sibling topic conferences each carry a copy of the roster — one card per linked user.
   const delegateAllocations = dedupeAllocationsByUserId(
     sortRowsByAllocationCountry(
-      (allocations ?? []).filter((a) => {
-        if (isDaisSeatAllocationCountry(a.country)) return false;
+      seatRows.filter((a) => {
+        if (!a.user_id) return false;
         const profile = unwrapProfile(a.profiles as LinkedProfile | LinkedProfile[] | null);
         return isDelegateProfileRole(profile?.role);
       })
     )
+  );
+
+  // Seats nobody has claimed yet: one card per committee + allocation label.
+  const unclaimedByKey = new Map<string, (typeof seatRows)[number]>();
+  for (const a of sortRowsByAllocationCountry(seatRows.filter((row) => !row.user_id))) {
+    const key = `${committeeByConferenceId.get(a.conference_id) ?? ""}|${(a.country ?? "").trim().toLowerCase()}`;
+    if (!unclaimedByKey.has(key)) unclaimedByKey.set(key, a);
+  }
+  const unclaimedAllocations = [...unclaimedByKey.values()];
+  const rosterBySeat = await loadSeatRosterInfo(
+    supabase,
+    unclaimedAllocations.map((a) => a.id)
   );
 
   const userIds = [
@@ -89,7 +109,7 @@ export default async function SmtDelegatesPage() {
   ];
   const emailByUserId = await getAuthEmailsByUserIds(userIds);
 
-  const rows: SmtDelegateSearchRow[] = delegateAllocations.map((a) => {
+  const claimedRows: SmtDelegateSearchRow[] = delegateAllocations.map((a) => {
     const profile = unwrapProfile(a.profiles as LinkedProfile | LinkedProfile[] | null);
     const overrideName = String(a.display_name_override ?? "").trim() || null;
     return {
@@ -107,8 +127,36 @@ export default async function SmtDelegatesPage() {
       notes: profile?.notes ?? null,
       profilePictureUrl: profile?.profile_picture_url ?? null,
       linkedRole: profile?.role ?? "delegate",
+      signedUp: true,
+      fullProfileHref: `/smt/committees/${a.conference_id}/person/${a.user_id}`,
+      chatHref: null,
     };
   });
+
+  const unclaimedRows: SmtDelegateSearchRow[] = unclaimedAllocations.map((a) => {
+    const seat = rosterBySeat.get(a.id);
+    return {
+      allocationId: a.id,
+      userId: null,
+      country: a.country,
+      countryDisplay: a.country,
+      committee: committeeByConferenceId.get(a.conference_id) ?? null,
+      email: seat?.email ?? null,
+      name: seat?.name ?? null,
+      username: null,
+      pronouns: seat?.pronouns ?? null,
+      school: seat?.school ?? null,
+      grade: seat?.grade ?? null,
+      notes: null,
+      profilePictureUrl: null,
+      linkedRole: "Not signed up yet",
+      signedUp: false,
+      fullProfileHref: `/smt/committees/${a.conference_id}/person/${a.id}`,
+      chatHref: null,
+    };
+  });
+
+  const rows = [...claimedRows, ...unclaimedRows];
 
   return (
     <div className="space-y-4">

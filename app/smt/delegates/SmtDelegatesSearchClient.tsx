@@ -12,7 +12,8 @@ import {
 
 export type SmtDelegateSearchRow = ChairDelegateProfileInfo & {
   allocationId: string;
-  committee: string;
+  committee: string | null;
+  signedUp: boolean;
 };
 
 function haystack(row: SmtDelegateSearchRow): string {
@@ -101,6 +102,11 @@ export function SmtDelegatesSearchClient({ rows }: { rows: SmtDelegateSearchRow[
                     {row.email ? (
                       <span className="mt-0.5 block truncate text-[0.7rem] text-[#6E6E73] dark:text-zinc-500">
                         {row.email}
+                      </span>
+                    ) : null}
+                    {!row.signedUp ? (
+                      <span className="mt-1 inline-block rounded-[980px] border border-[#D1D1D6] bg-[#F2F2F7] px-2 py-0.5 text-[0.65rem] font-semibold text-[#6E6E73]">
+                        Not signed up yet
                       </span>
                     ) : null}
                   </span>

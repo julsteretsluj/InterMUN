@@ -5,6 +5,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 
 type ActionResult<T> = { ok: true; data: T } | { ok: false; error: string };
 
@@ -52,14 +53,21 @@ export async function submitAmendmentAction(input: {
   }
 
   // Resolve the submitter's allocation (country/placard) for this committee.
-  const { data: alloc } = await supabase
-    .from("allocations")
-    .select("id, country")
-    .eq("conference_id", input.conferenceId)
-    .eq("user_id", user.id)
-    .maybeSingle();
+  // SMT acting for a delegation attributes the amendment to that seat; submitted_by stays the actor.
+  const actingSeat = await getSmtActingSeat();
+  const { data: ownAlloc } = actingSeat
+    ? { data: null }
+    : await supabase
+        .from("allocations")
+        .select("id, country")
+        .eq("conference_id", input.conferenceId)
+        .eq("user_id", user.id)
+        .maybeSingle();
+  const alloc = actingSeat
+    ? { id: actingSeat.allocationId, country: actingSeat.country }
+    : ownAlloc;
 
-  const email = (input.delegateEmail ?? user.email ?? "").trim().toLowerCase();
+  const email = (input.delegateEmail ?? actingSeat?.email ?? user.email ?? "").trim().toLowerCase();
 
   const { data, error } = await supabase
     .from("amendments")

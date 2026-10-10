@@ -29,6 +29,7 @@ export function StancesView({
   countryStanceMapByUser,
   currentUserId,
   canEdit,
+  actingAllocationId = null,
 }: {
   allocations: Allocation[];
   committeeCountries: string[];
@@ -36,6 +37,8 @@ export function StancesView({
   countryStanceMapByUser: Record<string, CountryStanceMap>;
   currentUserId: string;
   canEdit: boolean;
+  /** SMT acting for this seat: stance writes go through `smt_set_seat_stance`. */
+  actingAllocationId?: string | null;
 }) {
   const t = useTranslations("stances");
   const tc = useTranslations("common");
@@ -108,13 +111,18 @@ export function StancesView({
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        country_stance_map: next,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", user.id);
+    const { error } = actingAllocationId
+      ? await supabase.rpc("smt_set_seat_stance", {
+          p_allocation_id: actingAllocationId,
+          p_country_stance_map: next,
+        })
+      : await supabase
+          .from("profiles")
+          .update({
+            country_stance_map: next,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", user.id);
     if (error) {
       setMutationError(error.message);
       return;
@@ -154,19 +162,17 @@ export function StancesView({
         return;
       }
     }
-    const { data, error: listErr } = await supabase
-      .from("allocations")
-      .select("*, notes(*)")
-      .eq("user_id", user.id);
+    const { data: savedNotes, error: listErr } = await supabase
+      .from("notes")
+      .select("id, content")
+      .eq("allocation_id", selectedAllocation.id)
+      .eq("note_type", "stance");
     if (listErr) {
       setMutationError(listErr.message);
       router.refresh();
       return;
     }
-    if (data) {
-      const a = data.find((x) => x.id === selectedAllocation.id);
-      if (a) setSelectedAllocation(a);
-    }
+    setSelectedAllocation({ ...selectedAllocation, notes: savedNotes ?? [] });
     router.refresh();
   }
 
@@ -182,13 +188,18 @@ export function StancesView({
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        stance_overview: updated,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", user.id);
+    const { error } = actingAllocationId
+      ? await supabase.rpc("smt_set_seat_stance", {
+          p_allocation_id: actingAllocationId,
+          p_stance_overview: updated,
+        })
+      : await supabase
+          .from("profiles")
+          .update({
+            stance_overview: updated,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", user.id);
     if (error) {
       setMutationError(error.message);
       return;
@@ -285,7 +296,11 @@ export function StancesView({
                   key={a.id}
                   onClick={() => {
                     setSelectedAllocation(a);
-                    if (a.user_id) {
+                    if (actingAllocationId && a.id === actingAllocationId) {
+                      setCountryMapUserId(currentUserId);
+                      setStanceData(stanceOverviewByUser[currentUserId] ?? {});
+                      setCountryStanceMap(countryStanceMapByUser[currentUserId] ?? {});
+                    } else if (a.user_id) {
                       setCountryMapUserId(a.user_id);
                       if (stanceOverviewByUser[a.user_id]) {
                         setStanceData(stanceOverviewByUser[a.user_id]);

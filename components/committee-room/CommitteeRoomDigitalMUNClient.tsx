@@ -90,6 +90,7 @@ export function CommitteeRoomDigitalMUNClient({
   staffAllocations,
   delegates,
   chairs,
+  actAsDelegate = false,
 }: {
   conferenceId: string;
   /** Live floor: motions, procedure, timers, speaker queue. */
@@ -107,14 +108,16 @@ export function CommitteeRoomDigitalMUNClient({
   staffAllocations: StaffAllocationRow[];
   delegates: { id: string; name: string | null }[];
   chairs: { id: string; name: string | null }[];
+  /** SMT acting for a delegation: show the delegate floor widgets for `myAllocationId`. */
+  actAsDelegate?: boolean;
 }) {
   const t = useTranslations("committeeRoom");
   const ts = useTranslations("session.requestToSpeak");
   const role = myRole.toLowerCase();
-  const isDelegate = role === "delegate";
+  const isDelegate = role === "delegate" || actAsDelegate;
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
   const showDelegateFloorPanel =
-    role !== "chair" && role !== "smt" && role !== "admin";
+    actAsDelegate || (role !== "chair" && role !== "smt" && role !== "admin");
   /** Same two-column shell as chairs (sidebar + digital display); floor widgets render below so the matrix matches chair width. */
   const layoutColumns = "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]";
 
@@ -518,6 +521,7 @@ export function CommitteeRoomDigitalMUNClient({
             helperText={null}
             delegationSearchQuery={delegationSearch}
             scrollToDelegationMatchNonce={scrollMatchNonce}
+            linkUnclaimedSeats={canManageSeats}
           />
         </section>
       </div>

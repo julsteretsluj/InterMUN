@@ -318,6 +318,8 @@ export default async function SmtCommitteeLivePage({
           placards={roomPayload.placards}
           dais={roomPayload.dais}
           helperText={t("helperTextSmtPreview")}
+          personHrefBase={`/smt/committees/${conf.id}/person`}
+          linkUnclaimedSeats
         />
         <CommitteeRoomStaffControls
           allocations={roomPayload.staffAllocations}

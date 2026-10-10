@@ -5,7 +5,8 @@ import { PageFeatureGuideLink } from "@/components/guides/PageFeatureGuideLink";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
-import { parseCountryStanceMap } from "@/lib/country-stance";
+import { parseCountryStanceMap, type CountryStanceMap } from "@/lib/country-stance";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 import { getTranslations } from "next-intl/server";
 
 export default async function StancesPage() {
@@ -70,8 +71,19 @@ export default async function StancesPage() {
     ).map((country) => ({ country }))
   ).map((row) => row.country);
 
+  const actingSeat = await getSmtActingSeat();
+  const seatStanceIds = actingSeat
+    ? [actingSeat.allocationId]
+    : (allocations ?? []).filter((a) => a.user_id === user.id).map((a) => a.id as string);
+  const { data: seatStanceRows } = seatStanceIds.length
+    ? await supabase
+        .from("allocation_stances")
+        .select("allocation_id, stance_overview, country_stance_map")
+        .in("allocation_id", seatStanceIds)
+    : { data: [] as { allocation_id: string; stance_overview: unknown; country_stance_map: unknown }[] };
+
   let stanceOverviewByUser: Record<string, Record<string, number>> = {};
-  let countryStanceMapByUser: Record<string, import("@/lib/country-stance").CountryStanceMap> = {};
+  let countryStanceMapByUser: Record<string, CountryStanceMap> = {};
   if (canViewAll) {
     const { data: delegates } =
       delegateIds.length > 0
@@ -92,8 +104,35 @@ export default async function StancesPage() {
       .select("stance_overview, country_stance_map")
       .eq("id", user.id)
       .single();
-    stanceOverviewByUser = { [user.id]: (myStance?.stance_overview as Record<string, number>) || {} };
-    countryStanceMapByUser = { [user.id]: parseCountryStanceMap(myStance?.country_stance_map) };
+    const seatRow = seatStanceRows?.[0];
+    const ownOverview = (myStance?.stance_overview as Record<string, number> | null) ?? {};
+    const ownMap = parseCountryStanceMap(myStance?.country_stance_map);
+    stanceOverviewByUser = {
+      [user.id]:
+        Object.keys(ownOverview).length > 0
+          ? ownOverview
+          : ((seatRow?.stance_overview as Record<string, number> | null) ?? {}),
+    };
+    countryStanceMapByUser = {
+      [user.id]: Object.keys(ownMap).length > 0 ? ownMap : parseCountryStanceMap(seatRow?.country_stance_map),
+    };
+  }
+
+  // SMT acting for a delegation edits that seat's stance (owner profile when claimed, else per-seat row).
+  const editorKey = actingSeat ? `seat:${actingSeat.allocationId}` : user.id;
+  if (actingSeat) {
+    const seatRow = seatStanceRows?.find((r) => r.allocation_id === actingSeat.allocationId);
+    const owner = actingSeat.ownerUserId;
+    const ownerOverview = owner ? stanceOverviewByUser[owner] : undefined;
+    const ownerMap = owner ? countryStanceMapByUser[owner] : undefined;
+    stanceOverviewByUser[editorKey] =
+      ownerOverview && Object.keys(ownerOverview).length > 0
+        ? ownerOverview
+        : ((seatRow?.stance_overview as Record<string, number> | null) ?? {});
+    countryStanceMapByUser[editorKey] =
+      ownerMap && Object.keys(ownerMap).length > 0
+        ? ownerMap
+        : parseCountryStanceMap(seatRow?.country_stance_map);
   }
 
   return (
@@ -107,8 +146,9 @@ export default async function StancesPage() {
         committeeCountries={committeeCountries}
         stanceOverviewByUser={stanceOverviewByUser}
         countryStanceMapByUser={countryStanceMapByUser}
-        currentUserId={user.id}
-        canEdit={myRole === "delegate"}
+        currentUserId={editorKey}
+        canEdit={myRole === "delegate" || Boolean(actingSeat)}
+        actingAllocationId={actingSeat?.allocationId ?? null}
       />
     </MunPageShell>
   );

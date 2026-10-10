@@ -113,14 +113,14 @@ export default async function ChairAwardsPage() {
   const [{ data: delegates }, { data: nominations }, { data: participationDelegate }] = await Promise.all([
     supabase
       .from("allocations")
-      .select("id, conference_id, user_id, country, profiles(name, role)")
+      .select("id, conference_id, user_id, country, profiles!allocations_user_id_fkey(name, role)")
       .in("conference_id", awardScope.siblingConferenceIds)
       .not("user_id", "is", null)
       .order("country", { ascending: true }),
     supabase
       .from("award_nominations")
       .select(
-        "id, nomination_type, rank, evidence_note, rubric_scores, status, submitted_to_smt_at, nominee_profile_id, committee_conference_id, profiles(name)"
+        "id, nomination_type, rank, evidence_note, rubric_scores, status, submitted_to_smt_at, nominee_profile_id, committee_conference_id, profiles!award_nominations_nominee_profile_id_fkey(name)"
       )
       .in("committee_conference_id", awardScope.siblingConferenceIds)
       .in("status", ["draft", "pending"])

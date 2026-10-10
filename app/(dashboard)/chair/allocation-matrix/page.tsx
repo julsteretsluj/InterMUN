@@ -431,7 +431,7 @@ export default async function ChairAllocationMatrixPage() {
   );
   const { data: rawRequests } = await supabase
     .from("allocation_signup_requests")
-    .select("id, requested_by, status, allocations(country), profiles(name, username)")
+    .select("id, requested_by, status, allocations(country), profiles!allocation_signup_requests_requested_by_fkey(name, username)")
     .eq("conference_id", allocationsConferenceId)
     .eq("status", "pending")
     .order("created_at", { ascending: true });

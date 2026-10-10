@@ -5,6 +5,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { smtCanActForConference } from "@/lib/smt-acting-seat";
 import {
   type ParticipationScope,
   rubricKeysForParticipationScope,
@@ -106,7 +107,9 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
   const role = profile?.role?.toString().trim().toLowerCase();
 
   if (scope === "delegate_by_chair") {
-    if (role !== "chair") return { error: "Only chairs can save delegate evaluations." };
+    if (role !== "chair" && role !== "smt" && role !== "admin") {
+      return { error: "Only chairs and SMT can save delegate evaluations." };
+    }
     const awardScope = await getCommitteeAwardScope(supabase, committeeConferenceId);
     const checkClient = createAdminClient() ?? supabase;
     const seated = await isSubjectScorableDelegateInCommittee(
@@ -117,7 +120,10 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
     if (!seated) {
       return { error: "That delegate is not seated in your committee." };
     }
-    const allowed = await chairCanScoreCommittee(supabase, user.id, committeeConferenceId);
+    const allowed =
+      role === "chair"
+        ? await chairCanScoreCommittee(supabase, user.id, committeeConferenceId)
+        : await smtCanActForConference(supabase, user.id, committeeConferenceId);
     if (!allowed) {
       return { error: "Your chair account is not linked to this committee. Open the room gate for your committee first." };
     }

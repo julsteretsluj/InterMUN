@@ -16,6 +16,7 @@ import { labelFwcTerrain } from "@/lib/fwc/terrain";
 import { FWC_POST_MOVEMENT_ACTION_LABELS } from "@/lib/fwc/ui-labels";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -47,6 +48,7 @@ export default async function FwcMovementPage() {
     redirect("/delegate");
   }
 
+  const actingSeat = await getSmtActingSeat();
   const snapshot = await loadFwcChamberSnapshot(supabase, activeConf.id, {
     movementStatuses: ["queued", "approved", "rejected"],
   });
@@ -55,7 +57,8 @@ export default async function FwcMovementPage() {
     user.id,
     snapshot.siblingConferenceIds,
     snapshot.canonicalConferenceId,
-    snapshot.characterStatesByAllocationId
+    snapshot.characterStatesByAllocationId,
+    actingSeat?.allocationId
   );
 
   const myMovements = viewer.seat
@@ -103,6 +106,7 @@ export default async function FwcMovementPage() {
                 baseMp: viewer.state.baseMp,
                 bonusMp: viewer.state.bonusMp,
                 hasQueuedMovement: hasQueued,
+                actingAllocationId: actingSeat ? viewer.seat.id : null,
               }
             : null
         }

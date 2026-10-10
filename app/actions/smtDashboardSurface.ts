@@ -398,11 +398,12 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     country: string | null;
     conference_id: string;
     user_id: string | null;
+    display_name_override: string | null;
   };
   const allocRows = await fetchAllAllocationRows<AllocRow>(
     supabase,
     filteredIds,
-    "id, country, conference_id, user_id"
+    "id, country, conference_id, user_id, display_name_override"
   );
 
   const linkedUserIds = [
@@ -445,8 +446,13 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     const merged = mergeAllocationsAcrossSiblingConferences(groupRows, canonicalId);
     for (const row of merged) {
       const displayCountry = row.country?.trim() || "—";
-      const displayName = row.user_id ? profileNameById.get(row.user_id) ?? null : null;
-      const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
+      const displayName =
+        (row.user_id ? profileNameById.get(row.user_id) ?? null : null) ||
+        row.display_name_override?.trim() ||
+        null;
+      const seatLabel = displayName
+        ? `${displayCountry} — ${displayName}${row.user_id ? "" : " (not signed up)"}`
+        : displayCountry;
 
       // Chair preview uses dais placards only. Country / character seats stay in the delegate list
       // even if a chair-role profile is linked — otherwise SMT can't preview that placard.

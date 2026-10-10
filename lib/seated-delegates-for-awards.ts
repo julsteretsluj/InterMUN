@@ -83,7 +83,7 @@ export async function fetchScorableDelegatesForCommittee(
   if (siblingConferenceIds.length === 0) return [];
   const { data: delegates } = await supabase
     .from("allocations")
-    .select("id, user_id, country, profiles(name, role)")
+    .select("id, user_id, country, profiles!allocations_user_id_fkey(name, role)")
     .in("conference_id", siblingConferenceIds)
     .not("user_id", "is", null)
     .order("country", { ascending: true });

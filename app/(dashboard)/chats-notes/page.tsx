@@ -12,6 +12,7 @@ import {
 import { getTranslations } from "next-intl/server";
 import { getChamberScope } from "@/lib/chamber-scope";
 import { createClient } from "@/lib/supabase/server";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -188,7 +189,9 @@ export default async function ChatsNotesPage({
     .in("conference_id", scope.siblingConferenceIds)
     .eq("user_id", user.id);
 
-  const myAllocationId = (myAllocations?.[0]?.id as string | undefined) ?? null;
+  const actingSeat = await getSmtActingSeat();
+  const myAllocationId =
+    actingSeat?.allocationId ?? (myAllocations?.[0]?.id as string | undefined) ?? null;
 
   const { data: chairProfiles } = await supabase
     .from("profiles")
@@ -375,6 +378,7 @@ export default async function ChatsNotesPage({
         myRole={myRole}
         smtVerified={smtVerified}
         myAllocationId={myAllocationId}
+        actingForAllocation={Boolean(actingSeat)}
         myProfileName={myProfileName}
         allocationOptions={allocationOptions}
         chairOptions={chairOptions}

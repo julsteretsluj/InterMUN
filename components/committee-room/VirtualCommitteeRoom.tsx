@@ -21,6 +21,7 @@ export interface DaisSeat {
   name: string | null;
   showGavel: boolean;
   profileId: string | null;
+  allocationId?: string | null;
 }
 
 export interface DelegatePlacard {
@@ -49,6 +50,8 @@ interface VirtualCommitteeRoomProps {
   scrollToDelegationMatchNonce?: number;
   /** Delegate matrix mode: show only allocation + flag on placards. */
   compactPlacardDetails?: boolean;
+  /** Staff: seats without an account link to the seat page (by allocation id). */
+  linkUnclaimedSeats?: boolean;
 }
 
 function dash(v: string | null | undefined) {
@@ -262,6 +265,7 @@ export function VirtualCommitteeRoom({
   delegationSearchQuery = "",
   scrollToDelegationMatchNonce = 0,
   compactPlacardDetails = false,
+  linkUnclaimedSeats = false,
 }: VirtualCommitteeRoomProps) {
   const t = useTranslations("committeeRoom");
   const supabase = useMemo(() => createClient(), []);
@@ -297,7 +301,7 @@ export function VirtualCommitteeRoom({
       const { data: allocationRows, error } = await supabase
         .from("allocations")
         .select(
-          "id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
+          "id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles!allocations_user_id_fkey(name, pronouns, school)"
         )
         .eq("conference_id", conferenceId)
         .order("country");
@@ -405,9 +409,9 @@ export function VirtualCommitteeRoom({
 
           <div className="absolute top-[2%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
             {dais.map((seat, i) => {
-              const href = seat.profileId
-                ? `${personHrefBase.replace(/\/$/, "")}/${seat.profileId}`
-                : null;
+              const targetId =
+                seat.profileId ?? (linkUnclaimedSeats ? seat.allocationId ?? null : null);
+              const href = targetId ? `${personHrefBase.replace(/\/$/, "")}/${targetId}` : null;
               return (
                 <DaisStation
                   key={`${seat.title}-${i}`}
@@ -433,10 +437,13 @@ export function VirtualCommitteeRoom({
               className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
             >
               {ringSeats.map((p, i) => {
-                const href =
+                const targetId =
                   !p.vacant && p.profileId
-                    ? `${personHrefBase.replace(/\/$/, "")}/${p.profileId}`
-                    : null;
+                    ? p.profileId
+                    : linkUnclaimedSeats && p.allocationId !== VACANT_SEAT.allocationId
+                      ? p.allocationId
+                      : null;
+                const href = targetId ? `${personHrefBase.replace(/\/$/, "")}/${targetId}` : null;
                 const matchesSearch = delegatePlacardMatchesSearch(p, qNorm);
                 return (
                   <Placard

@@ -199,17 +199,21 @@ export async function loadViewerFwcCharacterSeat(
   userId: string,
   siblingConferenceIds: string[],
   canonicalConferenceId: string,
-  characterStatesByAllocationId: Record<string, FwcLoadedCharacterState>
+  characterStatesByAllocationId: Record<string, FwcLoadedCharacterState>,
+  /** SMT acting for a delegation: resolve that seat instead of the signed-in user's own. */
+  actingAllocationId?: string | null
 ): Promise<{
   seat: FwcLoadedSeat | null;
   state: FwcLoadedCharacterState | null;
   viewerAllocationIds: string[];
 }> {
-  const { data: seats } = await supabase
+  const seatsQuery = supabase
     .from("allocations")
     .select("id, country, user_id, conference_id")
-    .in("conference_id", siblingConferenceIds)
-    .eq("user_id", userId);
+    .in("conference_id", siblingConferenceIds);
+  const { data: seats } = actingAllocationId
+    ? await seatsQuery.eq("id", actingAllocationId)
+    : await seatsQuery.eq("user_id", userId);
 
   const viewerAllocationIds = (seats ?? []).map((row) => String(row.id));
   const characterSeats = (seats ?? []).filter((row) => isCharacterSeat(row.country));

@@ -15,6 +15,7 @@ import {
 } from "@/lib/fwc/load-page-context";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -46,13 +47,15 @@ export default async function FwcDirectivesPage() {
     redirect("/delegate");
   }
 
+  const actingSeat = await getSmtActingSeat();
   const snapshot = await loadFwcChamberSnapshot(supabase, activeConf.id);
   const viewer = await loadViewerFwcCharacterSeat(
     supabase,
     user.id,
     snapshot.siblingConferenceIds,
     snapshot.canonicalConferenceId,
-    snapshot.characterStatesByAllocationId
+    snapshot.characterStatesByAllocationId,
+    actingSeat?.allocationId
   );
 
   const listed = await listFwcDirectives(activeConf.id);
@@ -95,6 +98,7 @@ export default async function FwcDirectivesPage() {
             anonymityEligible={viewer.seat.anonymityEligible}
             anonymityUsedSession={viewer.state.anonymityUsedSession}
             coSubmitterOptions={coSubmitterOptions}
+            actingAllocationId={actingSeat ? viewer.seat.id : null}
           />
         </div>
       ) : (

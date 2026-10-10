@@ -23,11 +23,14 @@ export function FwcDirectiveForm({
   anonymityEligible,
   anonymityUsedSession,
   coSubmitterOptions,
+  actingAllocationId = null,
 }: {
   conferenceId: string;
   anonymityEligible: boolean;
   anonymityUsedSession: boolean;
   coSubmitterOptions: FwcCoSubmitterOption[];
+  /** SMT acting for a delegation: submit as this seat. */
+  actingAllocationId?: string | null;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -70,6 +73,7 @@ export function FwcDirectiveForm({
         assetsAndPowers: assetsAndPowers || null,
         anonymity: anonymityAllowed && anonymity,
         coSubmitterAllocationIds: directiveType === "joint" ? coSubmitters : [],
+        submitterAllocationId: actingAllocationId ?? undefined,
       });
       if (!result.ok) {
         setError(result.error);

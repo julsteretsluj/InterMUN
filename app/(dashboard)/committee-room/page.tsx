@@ -5,6 +5,7 @@ import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { getSmtActingSeat } from "@/lib/smt-acting-seat";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
@@ -45,11 +46,18 @@ export default async function CommitteeRoomPage() {
       .map((a) => ({ id: a.id, country: a.country ?? "—" }))
   );
 
-  const myAllocationId =
-    payload.staffAllocations.find((a) => a.user_id === user.id)?.id ?? null;
+  const actingSeat = await getSmtActingSeat();
+  const actingAllocation = actingSeat
+    ? { id: actingSeat.allocationId, country: actingSeat.country }
+    : null;
 
-  const myAllocationCountry =
-    allocationOptions.find((a) => a.id === myAllocationId)?.country ?? null;
+  const myAllocationId = actingAllocation
+    ? actingAllocation.id
+    : payload.staffAllocations.find((a) => a.user_id === user.id)?.id ?? null;
+
+  const myAllocationCountry = actingAllocation
+    ? actingAllocation.country ?? null
+    : allocationOptions.find((a) => a.id === myAllocationId)?.country ?? null;
 
   const { data: chairProfiles } = await supabase
     .from("profiles")
@@ -83,6 +91,7 @@ export default async function CommitteeRoomPage() {
         staffAllocations={payload.staffAllocations}
         delegates={payload.delegates}
         chairs={(chairProfiles ?? []).map((c) => ({ id: c.id, name: c.name ?? "Chair" }))}
+        actAsDelegate={Boolean(actingAllocation)}
       />
     </MunPageShell>
   );
