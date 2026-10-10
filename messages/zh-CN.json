@@ -4852,6 +4852,11 @@
       "privacy": "隐私",
       "terms": "条款"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "点名",
       "rollCallHint": "点击代表团即可循环出席。",

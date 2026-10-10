@@ -5253,6 +5253,11 @@
       "privacy": "Privacy",
       "terms": "Terms"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "Roll call",
       "rollCallHint": "Tap a delegation to cycle attendance.",
@@ -5685,7 +5690,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "intro": "This policy explains how {app} handles personal information when you use our website, applications, and conference services.",
-      "updated": "25 July 2026",
+      "updated": "8 October 2026",
       "contactFormFallback": "the contact form on our website",
       "collectTitle": "Information we collect",
       "collectIntro": "Depending on how you use the service, we may collect:",
@@ -5693,7 +5698,7 @@
       "collectL2": "Conference information, committee assignments, and participation records.",
       "collectL3": "Content you create, including documents, notes, messages, votes, and submissions.",
       "collectL4": "Files you upload and communications you send to conference teams or to us.",
-      "collectL5": "Technical and usage data needed to operate, secure, and improve the service.",
+      "collectL5": "Technical data needed to operate and secure the service. Optional product-research tools load only after you allow them.",
       "useTitle": "How we use information",
       "useL1": "Provide accounts, conference workspaces, and role-based features.",
       "useL2": "Deliver content to the participants and staff authorised to access it.",
@@ -5710,7 +5715,7 @@
       "rightsP1": "You may update certain account information within the service. Depending on your location, you may also have rights to access, correct, delete, restrict, or receive a copy of your personal information.",
       "rightsP2": "Conference records may be controlled jointly with or on behalf of your conference organiser. We may direct a request to that organiser where appropriate.",
       "childrenTitle": "Children and student participants",
-      "childrenP1": "Conferences and schools are responsible for ensuring that participants are authorised to use the service and that any required parent or guardian consent has been obtained. Please contact us if you believe a participant’s information was provided without appropriate authorisation.",
+      "childrenP1": "The service is not directed at children under 13. Conferences and schools are responsible for authorising participants and for obtaining any required parent or guardian consent. Contact us if you believe a participant’s information was provided without that authorisation.",
       "changesTitle": "Changes and contact",
       "changesP1": "We may update this policy as the service or applicable requirements change. The date above shows the latest revision.",
       "contact": "For privacy questions or requests, contact <contact></contact>."

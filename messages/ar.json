@@ -4852,6 +4852,11 @@
       "privacy": "الخصوصية",
       "terms": "الشروط"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "نداء رول",
       "rollCallHint": "اضغط على تفويض لدورة الحضور.",

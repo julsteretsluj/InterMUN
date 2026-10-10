@@ -4852,6 +4852,11 @@
       "privacy": "Mahremiyet",
       "terms": "Şartlar"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "Yoklama",
       "rollCallHint": "Katılımı döngüsel olarak değiştirmek için bir delegasyona dokunun.",

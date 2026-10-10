@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { PublicPageControls } from "@/components/PublicPageControls";
+import { AnalyticsConsentBanner } from "@/components/marketing/AnalyticsConsentBanner";
 import { MarketingMazeScript } from "@/components/marketing/MarketingMazeScript";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
 import { MarketingPrimaryNav } from "@/components/marketing/MarketingPrimaryNav";
@@ -18,6 +19,7 @@ export default async function MarketingLayout({
   return (
     <div className="marketing-shell mun-apple-site relative min-h-screen">
       <MarketingMazeScript />
+      <AnalyticsConsentBanner />
       <header className="marketing-header sticky top-0 z-30">
         <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_auto] items-center gap-2 px-4 py-3 md:grid-cols-[auto_1fr_auto] md:gap-4 md:px-8">
           <div className="flex min-w-0 items-center gap-1.5 md:gap-2">

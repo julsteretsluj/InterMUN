@@ -4852,6 +4852,11 @@
       "privacy": "ကိုယ်ရေးကိုယ်တာ",
       "terms": "စည်းမျဥ်း"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "Roll call",
       "rollCallHint": "စက်ဘီးစီးတက်ရောက်ရန် ကိုယ်စားလှယ်အဖွဲ့ကို တို့ပါ။",

@@ -4852,6 +4852,11 @@
       "privacy": "গোপনীয়তা",
       "terms": "শর্তাবলী"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "রোল কল",
       "rollCallHint": "সাইকেল উপস্থিতির জন্য একটি প্রতিনিধি দলে ট্যাপ করুন।",

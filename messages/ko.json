@@ -4852,6 +4852,11 @@
       "privacy": "개인정보",
       "terms": "약관"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "점호",
       "rollCallHint": "출석을 순환하려면 위임을 탭하세요.",

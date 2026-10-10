@@ -3,7 +3,12 @@
 
 "use client";
 
+import { useEffect, useState } from "react";
 import Script from "next/script";
+import {
+  ANALYTICS_CONSENT_EVENT,
+  readAnalyticsConsent,
+} from "@/lib/analytics-consent";
 
 const MAZE_INIT = `(function (m, a, z, e) {
   var s, t, u, v;
@@ -32,8 +37,19 @@ const MAZE_INIT = `(function (m, a, z, e) {
   m.mazeUniversalSnippetApiKey = e;
 })(window, document, "https://snippet.maze.co/maze-universal-loader.js", "0fe5ce1b-25bb-4e97-8a3a-9bf0a1c1405e");`;
 
-/** Maze analytics — marketing surfaces only (not dashboard chrome). */
+/** Maze analytics — marketing surfaces only, and only after the visitor allows it. */
 export function MarketingMazeScript() {
+  const [allowed, setAllowed] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setAllowed(readAnalyticsConsent() === "granted");
+    sync();
+    window.addEventListener(ANALYTICS_CONSENT_EVENT, sync);
+    return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, sync);
+  }, []);
+
+  if (!allowed) return null;
+
   return (
     <Script id="maze-universal-loader" strategy="lazyOnload">
       {MAZE_INIT}

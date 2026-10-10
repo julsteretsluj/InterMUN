@@ -4852,6 +4852,11 @@
       "privacy": "गोपनीयता",
       "terms": "शर्तें"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "उपस्थिति",
       "rollCallHint": "चक्रीय उपस्थिति के लिए एक प्रतिनिधिमंडल को टैप करें।",

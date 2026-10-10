@@ -4852,6 +4852,11 @@
       "privacy": "隱私權",
       "terms": "條款"
     },
+    "analyticsConsent": {
+      "body": "We use a signed-in session to run the conference. Optional product research stays off unless you allow it. See our <privacy>Privacy Policy</privacy>.",
+      "accept": "Allow",
+      "decline": "No thanks"
+    },
     "preview": {
       "rollCallLabel": "點名",
       "rollCallHint": "點擊代表團即可循環出席。",
