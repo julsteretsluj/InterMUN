@@ -17,13 +17,76 @@ function formatAllocationLine(recipient) {
   return "Pending / not yet assigned";
 }
 
+export function formatArchiveSentAt(date) {
+  return date.toISOString().replace("T", " ").replace(/\.\d+Z$/, " UTC");
+}
+
+export function archiveRedactedCtaText(sentTo) {
+  return `Set-password link sent to ${sentTo} — removed from this archive copy.`;
+}
+
 /**
  * Announcement + clear set-password CTA for pre-registered SEAMUN I 2027 accounts.
  */
 export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient }) {
+  return renderInviteEmail({
+    appName,
+    recipient,
+    cta: { kind: "link", link: String(actionLink ?? "").trim() },
+  });
+}
+
+/**
+ * Archive copy for information@: same body, but no links at all. The one-time
+ * set-password URL is replaced with plain text so the archive inbox can never
+ * consume the recipient's token.
+ */
+export function buildSeamunIntermunInviteArchiveEmail({ sentTo, sentAt, appName, recipient }) {
+  const to = String(sentTo ?? "").trim();
+  const mail = renderInviteEmail({
+    appName,
+    recipient,
+    cta: { kind: "archive", sentTo: to, sentAt },
+  });
+  return { ...mail, subject: `[Archive] ${mail.subject} — to ${to}` };
+}
+
+/**
+ * Returns every reason an archive copy is unsafe to send. Archive copies must
+ * carry no URLs, no auth confirm/verify paths, and none of the given secrets
+ * (action link, hashed token).
+ */
+export function findArchiveEmailLeaks(mail, secrets = []) {
+  const leaks = [];
+  const parts = [
+    ["subject", mail.subject],
+    ["text", mail.text],
+    ["html", mail.html],
+  ];
+  const patterns = [
+    ["token_hash", /token_hash/i],
+    ["/auth/confirm", /\/auth\/confirm/i],
+    ["/auth/v1/verify", /\/auth\/v1\/verify/i],
+    ["supabase.co", /supabase\.co/i],
+    ["token query param", /[?&](token|access_token|refresh_token|code|type)=/i],
+    ["URL", /\b(?:https?:)?\/\/[^\s"'<>]+/i],
+    ["anchor tag", /<a\s/i],
+    ["href", /\bhref\s*=/i],
+  ];
+  for (const [part, value] of parts) {
+    for (const [label, re] of patterns) {
+      if (re.test(value)) leaks.push(`${part}: ${label}`);
+    }
+    for (const secret of secrets) {
+      const s = String(secret ?? "").trim();
+      if (s && value.includes(s)) leaks.push(`${part}: secret`);
+    }
+  }
+  return leaks;
+}
+
+function renderInviteEmail({ appName, recipient, cta }) {
   const name = String(appName ?? "").trim() || "InterMUN";
-  const link = String(actionLink ?? "").trim();
-  const safeLink = escapeHtml(link);
   const subject = SEAMUN_INTERMUN_INVITE_SUBJECT;
 
   const recipientName = String(recipient?.name ?? "").trim() || "SEAMUN I 2027 participant";
@@ -37,7 +100,14 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
     `* Allocation: ${allocationLine}`,
   ].join("\n");
 
+  const archiveNotice =
+    cta.kind === "archive"
+      ? `Archive copy — the original was sent to ${cta.sentTo} on ${formatArchiveSentAt(cta.sentAt)}. Set-password links have been removed.`
+      : null;
+  const ctaText = cta.kind === "link" ? cta.link : archiveRedactedCtaText(cta.sentTo);
+
   const text = [
+    ...(archiveNotice ? [archiveNotice, "", "---", ""] : []),
     "Dear SEAMUN I 2027 Delegates, Chairs, Advisors, and Secretariat Members,",
     "",
     identityText,
@@ -54,7 +124,7 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
     "Role-specific guides will follow separately. For now, set your password so you can get into the platform.",
     "",
     "Set your InterMUN password:",
-    link,
+    ctaText,
     "",
     "If you have any questions or experience any issues, please do not hesitate to reach out to the Secretariat team.",
     "",
@@ -63,6 +133,32 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
     "Jules Kitto-Astrop",
     "Secretary-General, SEAMUN I 2027",
   ].join("\n");
+
+  const archiveBannerHtml = archiveNotice
+    ? `
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 0 12px;">
+          <tr>
+            <td style="padding:10px 14px;background:#FFFFFF;border:1px solid #D1D1D6;border-radius:10px;font-size:13px;line-height:1.45;color:#6E6E73;">${escapeHtml(archiveNotice)}</td>
+          </tr>
+        </table>`
+    : "";
+
+  const ctaHtml =
+    cta.kind === "link"
+      ? `
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+                <tr>
+                  <td style="border-radius:980px;background:#007AFF;">
+                    <a href="${escapeHtml(cta.link)}" style="display:inline-block;padding:12px 22px;font-size:16px;font-weight:600;color:#FFFFFF;text-decoration:none;">Set your InterMUN password</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:13px;line-height:1.45;color:#6E6E73;word-break:break-all;">
+                Or open this link:<br />
+                <a href="${escapeHtml(cta.link)}" style="color:#007AFF;">${escapeHtml(cta.link)}</a>
+              </p>`
+      : `
+              <p style="margin:0 0 24px;padding:12px 16px;background:#F2F2F7;border:1px dashed #D1D1D6;border-radius:12px;font-size:14px;line-height:1.45;color:#6E6E73;">${escapeHtml(archiveRedactedCtaText(cta.sentTo))}</p>`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -74,7 +170,7 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
 <body style="margin:0;padding:0;background:#F2F2F7;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Inter,Helvetica,Arial,sans-serif;color:#1D1D1F;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F2F2F7;padding:32px 16px;">
     <tr>
-      <td align="center">
+      <td align="center">${archiveBannerHtml}
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#FFFFFF;border-radius:16px;border:1px solid #D1D1D6;box-shadow:0 2px 8px rgba(0,0,0,0.08);overflow:hidden;">
           <tr>
             <td style="padding:28px 28px 12px;background:#1D1D1F;color:#FFFFFF;">
@@ -107,18 +203,7 @@ export function buildSeamunIntermunInviteEmail({ actionLink, appName, recipient 
                 <li style="margin-bottom:10px;"><strong>Join your conference / committee</strong> by entering the conference and room codes from your organisers.</li>
               </ol>
               <p style="margin:0 0 20px;color:#6E6E73;">Role-specific guides will follow separately. Start by setting your password so you can get into the platform.</p>
-
-              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
-                <tr>
-                  <td style="border-radius:980px;background:#007AFF;">
-                    <a href="${safeLink}" style="display:inline-block;padding:12px 22px;font-size:16px;font-weight:600;color:#FFFFFF;text-decoration:none;">Set your InterMUN password</a>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin:0 0 20px;font-size:13px;line-height:1.45;color:#6E6E73;word-break:break-all;">
-                Or open this link:<br />
-                <a href="${safeLink}" style="color:#007AFF;">${safeLink}</a>
-              </p>
+${ctaHtml}
 
               <p style="margin:0 0 24px;">If you have any questions or experience any issues, please do not hesitate to reach out to the Secretariat team.</p>
 

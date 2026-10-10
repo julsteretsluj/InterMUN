@@ -5,12 +5,21 @@ import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { getAppName } from "@/lib/branding";
 import { isRetryableAuthError, withAuthRetry } from "@/lib/auth-retry";
 import { buildAppInviteAcceptUrl } from "@/lib/invite-accept-url";
-import { buildSeamunIntermunInviteEmail } from "@/lib/invite-email";
+import {
+  buildSeamunIntermunInviteArchiveEmail,
+  buildSeamunIntermunInviteEmail,
+  findArchiveEmailLeaks,
+  type InviteEmailRecipient,
+} from "@/lib/invite-email";
 import { getSmtpConfig, sendTransactionalEmail } from "@/lib/smtp";
 
 // getAppName is used for invite email body branding (not From display name).
 
-/** Blind-copied on every invite so SEAMUN has a record. Override with INVITE_ARCHIVE_BCC. */
+/**
+ * Receives a separate, link-free archive copy of every invite so SEAMUN has a
+ * record. Never a BCC: the recipient's message carries a live one-time token.
+ * Override with INVITE_ARCHIVE_BCC.
+ */
 export const INVITE_ARCHIVE_BCC = "information@seamun.com";
 
 /** Default From display name for SEAMUN I 2027 archive invites. Override with INVITE_FROM_NAME. */
@@ -48,11 +57,79 @@ export function getInviteFromAddress(): string {
   return `${displayName} <${mailbox}>`;
 }
 
-function inviteBccFor(toEmail: string): string | undefined {
-  const archive = getInviteArchiveBcc().toLowerCase();
+function archiveAddressFor(toEmail: string): string | undefined {
+  const archive = getInviteArchiveBcc();
   if (!archive) return undefined;
-  if (toEmail.trim().toLowerCase() === archive) return undefined;
-  return getInviteArchiveBcc();
+  if (toEmail.trim().toLowerCase() === archive.toLowerCase()) return undefined;
+  return archive;
+}
+
+/**
+ * Sends the recipient's invite, then (only if that succeeded) a separate
+ * redacted archive copy. Archive failures are logged and never affect the
+ * returned recipient result.
+ */
+async function sendInviteWithArchiveCopy(args: {
+  to: string;
+  actionLink: string;
+  hashedToken: string | null | undefined;
+  appName: string;
+  recipient: InviteEmailRecipient;
+}): Promise<Awaited<ReturnType<typeof sendTransactionalEmail>>> {
+  const from = getInviteFromAddress();
+  const mail = buildSeamunIntermunInviteEmail({
+    actionLink: args.actionLink,
+    appName: args.appName,
+    recipient: args.recipient,
+  });
+  const sent = await sendTransactionalEmail({
+    to: args.to,
+    from,
+    subject: mail.subject,
+    text: mail.text,
+    html: mail.html,
+  });
+  if (!sent.ok) return sent;
+
+  const archiveTo = archiveAddressFor(args.to);
+  if (!archiveTo) return sent;
+
+  try {
+    const archive = buildSeamunIntermunInviteArchiveEmail({
+      sentTo: args.to,
+      sentAt: new Date(),
+      appName: args.appName,
+      recipient: args.recipient,
+    });
+    const leaks = findArchiveEmailLeaks(archive, [args.actionLink, args.hashedToken]);
+    if (leaks.length) {
+      console.error("[invite-archive] refusing to send archive copy with link/token content", {
+        to: args.to,
+        leaks,
+      });
+      return sent;
+    }
+    const archived = await sendTransactionalEmail({
+      to: archiveTo,
+      from,
+      subject: archive.subject,
+      text: archive.text,
+      html: archive.html,
+    });
+    if (!archived.ok) {
+      console.error("[invite-archive] archive copy failed", {
+        to: args.to,
+        reason: archived.reason,
+        error: archived.error,
+      });
+    }
+  } catch (error) {
+    console.error("[invite-archive] archive copy threw", {
+      to: args.to,
+      error: error instanceof Error ? error.message : String(error),
+    });
+  }
+  return sent;
 }
 
 function appOriginFromRedirect(redirectTo: string): string | null {
@@ -194,7 +271,6 @@ export async function inviteUserByEmailWithArchive(
   }
 ): Promise<{ user: User | null; error: { message: string } | null }> {
   const email = args.email.trim();
-  const bcc = inviteBccFor(email);
   const appName = getAppName();
   const recipient = {
     name: args.recipient?.name?.trim() || "",
@@ -238,14 +314,12 @@ export async function inviteUserByEmailWithArchive(
       };
     }
 
-    const mail = buildSeamunIntermunInviteEmail({ actionLink, appName, recipient });
-    const sent = await sendTransactionalEmail({
+    const sent = await sendInviteWithArchiveCopy({
       to: email,
-      bcc,
-      from: getInviteFromAddress(),
-      subject: mail.subject,
-      text: mail.text,
-      html: mail.html,
+      actionLink,
+      hashedToken,
+      appName,
+      recipient,
     });
 
     if (!sent.ok) {
@@ -275,7 +349,7 @@ export async function inviteUserByEmailWithArchive(
 
 /**
  * Public /auth/confirm escape hatch: recovery link only (no invite / no new Auth user).
- * Same SEAMUN SMTP template + archive BCC as invites.
+ * Same SEAMUN SMTP template + redacted archive copy as invites.
  */
 export async function sendRecoverySetPasswordEmailWithArchive(
   admin: SupabaseClient,
@@ -290,7 +364,6 @@ export async function sendRecoverySetPasswordEmailWithArchive(
   }
 ): Promise<{ user: User | null; error: { message: string } | null }> {
   const email = args.email.trim();
-  const bcc = inviteBccFor(email);
   const appName = getAppName();
   const recipient = {
     name: args.recipient?.name?.trim() || "",
@@ -343,14 +416,12 @@ export async function sendRecoverySetPasswordEmailWithArchive(
     };
   }
 
-  const mail = buildSeamunIntermunInviteEmail({ actionLink, appName, recipient });
-  const sent = await sendTransactionalEmail({
+  const sent = await sendInviteWithArchiveCopy({
     to: email,
-    bcc,
-    from: getInviteFromAddress(),
-    subject: mail.subject,
-    text: mail.text,
-    html: mail.html,
+    actionLink,
+    hashedToken,
+    appName,
+    recipient,
   });
 
   if (!sent.ok) {

@@ -10,4 +10,4 @@ Do **not** send emails, auth invites, password resets, or magic links unless the
 - Do not call `inviteUserByEmail`, `resetPasswordForEmail`, or similar
 - Creating a seat, linking a name, or syncing the allocation matrix is **not** permission to provision a login
 - If an account is needed later, wait for an explicit ask
-- When invites **are** sent, use `inviteUserByEmailWithArchive` so `information@seamun.com` is BCC’d. Do not call `inviteUserByEmail` directly.
+- When invites **are** sent, use `inviteUserByEmailWithArchive`, which sends `information@seamun.com` a separate archive copy with the set-password links removed (never a BCC). Do not call `inviteUserByEmail` directly.

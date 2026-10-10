@@ -1,6 +1,11 @@
 import nodemailer from "nodemailer";
-import { buildSeamunIntermunInviteEmail } from "./invite-email-template.mjs";
+import {
+  buildSeamunIntermunInviteArchiveEmail,
+  buildSeamunIntermunInviteEmail,
+  findArchiveEmailLeaks,
+} from "./invite-email-template.mjs";
 
+/** Receives a separate, link-free archive copy of every invite (never a BCC). */
 export const INVITE_ARCHIVE_BCC = "information@seamun.com";
 
 /** Default From display name for SEAMUN I 2027 archive invites. Override with INVITE_FROM_NAME. */
@@ -135,7 +140,42 @@ function resolveInviteEmailActionLink(redirectTo, hashedToken, verificationType)
   return u.toString();
 }
 
-async function sendInviteMail({ to, actionLink, bcc, recipient }) {
+/**
+ * Best-effort, link-free archive copy sent as its own message (never a BCC).
+ * Never throws; failures are logged and reported in the returned meta only.
+ */
+async function sendArchiveCopy({ transporter, from, archiveTo, sentTo, recipient, secrets }) {
+  try {
+    const archive = buildSeamunIntermunInviteArchiveEmail({
+      sentTo,
+      sentAt: new Date(),
+      appName: appName(),
+      recipient,
+    });
+    const leaks = findArchiveEmailLeaks(archive, secrets);
+    if (leaks.length) {
+      console.error("[invite-archive] refusing to send archive copy with link/token content", {
+        to: sentTo,
+        leaks,
+      });
+      return { ok: false, reason: "leak_detected", leaks };
+    }
+    const info = await transporter.sendMail({
+      from,
+      to: archiveTo,
+      subject: archive.subject,
+      text: archive.text,
+      html: archive.html,
+    });
+    return { ok: true, to: archiveTo, subject: archive.subject, messageId: info.messageId ?? null };
+  } catch (e) {
+    const error = e instanceof Error ? e.message : String(e);
+    console.error("[invite-archive] archive copy failed", { to: sentTo, error });
+    return { ok: false, reason: "send_failed", error };
+  }
+}
+
+async function sendInviteMail({ to, actionLink, hashedToken, archiveTo, recipient }) {
   const cfg = getSmtpConfig();
   if (!cfg) return { ok: false, reason: "not_configured" };
   const transporter = nodemailer.createTransport({
@@ -145,30 +185,21 @@ async function sendInviteMail({ to, actionLink, bcc, recipient }) {
     auth: { user: cfg.user, pass: cfg.pass },
   });
   const from = getInviteFromAddress();
+  const recipientPayload = recipient ?? { name: "", email: to, allocation: "" };
   const mail = buildSeamunIntermunInviteEmail({
     actionLink,
     appName: appName(),
-    recipient: recipient ?? { name: "", email: to, allocation: "" },
+    recipient: recipientPayload,
   });
+  let info;
   try {
-    const info = await transporter.sendMail({
+    info = await transporter.sendMail({
       from,
       to,
-      bcc,
       subject: mail.subject,
       text: mail.text,
       html: mail.html,
     });
-    return {
-      ok: true,
-      from,
-      subject: mail.subject,
-      messageId: info.messageId ?? null,
-      response: info.response ?? null,
-      accepted: info.accepted ?? null,
-      rejected: info.rejected ?? null,
-      recipient: recipient ?? null,
-    };
   } catch (e) {
     return {
       ok: false,
@@ -177,6 +208,27 @@ async function sendInviteMail({ to, actionLink, bcc, recipient }) {
       error: e instanceof Error ? e.message : String(e),
     };
   }
+  const archive = archiveTo
+    ? await sendArchiveCopy({
+        transporter,
+        from,
+        archiveTo,
+        sentTo: to,
+        recipient: recipientPayload,
+        secrets: [actionLink, hashedToken],
+      })
+    : null;
+  return {
+    ok: true,
+    from,
+    subject: mail.subject,
+    messageId: info.messageId ?? null,
+    response: info.response ?? null,
+    accepted: info.accepted ?? null,
+    rejected: info.rejected ?? null,
+    recipient: recipient ?? null,
+    archive,
+  };
 }
 
 export async function inviteUserByEmailWithArchive(
@@ -185,7 +237,7 @@ export async function inviteUserByEmailWithArchive(
 ) {
   const to = String(email ?? "").trim();
   const archive = getInviteArchiveBcc();
-  const bcc = archive && to.toLowerCase() !== archive.toLowerCase() ? archive : undefined;
+  const archiveTo = archive && to.toLowerCase() !== archive.toLowerCase() ? archive : undefined;
   const recipientPayload = recipient
     ? {
         name: String(recipient.name ?? "").trim(),
@@ -235,7 +287,8 @@ export async function inviteUserByEmailWithArchive(
     const sent = await sendInviteMail({
       to,
       actionLink,
-      bcc,
+      hashedToken,
+      archiveTo,
       recipient: recipientPayload,
     });
     if (!sent.ok) {
@@ -250,7 +303,7 @@ export async function inviteUserByEmailWithArchive(
         mailMeta: sent,
       };
     }
-    return { user, error: null, mailMeta: sent, actionLink, bcc };
+    return { user, error: null, mailMeta: sent };
   }
 
   // SMTP required for SEAMUN announcement template — never fall back to stock GoTrue mail.
