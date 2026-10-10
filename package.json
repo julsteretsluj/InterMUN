@@ -9,6 +9,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test --experimental-strip-types --no-warnings \"tests/**/*.test.mjs\"",
     "seed:allocations": "python3 scripts/parse-allocation-matrix.py",
     "i18n:audit": "node scripts/i18n-audit.mjs",
     "i18n:seed": "node scripts/seed-locales.mjs",
