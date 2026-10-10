@@ -4,7 +4,13 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  FWC_DEFAULT_MARKER_EXTENT,
+  fwcMarkerExtentFromSize,
+  fwcMarkerPositionStyle,
+  type FwcMarkerExtent,
+} from "@/lib/fwc/board-clamp";
 import {
   FWC_GRID_BOUNDS,
   FWC_GRID_COLUMNS,
@@ -77,6 +83,40 @@ function stackPlacedMarkers<T extends { leftPct: number; topPct: number; offGrid
   return stacked;
 }
 
+function stackOffsets(stackIndex: number, stackTotal: number, stepPx: number) {
+  const mid = (stackTotal - 1) / 2;
+  return { offsetPx: (stackIndex - mid) * stepPx, spreadPx: mid * stepPx };
+}
+
+function sameExtents(a: Record<string, FwcMarkerExtent>, b: Record<string, FwcMarkerExtent>) {
+  const keys = Object.keys(b);
+  if (keys.length !== Object.keys(a).length) return false;
+  return keys.every(
+    (k) => a[k]?.halfWidth === b[k]!.halfWidth && a[k]?.halfHeight === b[k]!.halfHeight
+  );
+}
+
+/** Dev-only: warn if any marker box pokes outside the board. */
+function warnIfMarkersEscape(board: HTMLElement) {
+  const bounds = board.getBoundingClientRect();
+  if (bounds.width === 0 || bounds.height === 0) return;
+  board.querySelectorAll<HTMLElement>("[data-fwc-key]").forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const tol = 0.5;
+    if (
+      r.left < bounds.left - tol ||
+      r.top < bounds.top - tol ||
+      r.right > bounds.right + tol ||
+      r.bottom > bounds.bottom + tol
+    ) {
+      console.warn(`[FwcHawkinsBoard] marker ${el.dataset.fwcKey} is outside the board`, {
+        board: bounds,
+        marker: r,
+      });
+    }
+  });
+}
+
 export function FwcHawkinsBoard({
   characters,
   evidenceMarkers = [],
@@ -128,6 +168,36 @@ export function FwcHawkinsBoard({
     }
     return stackPlacedMarkers(placed);
   }, [evidenceMarkers]);
+
+  const boardRef = useRef<HTMLDivElement>(null);
+  const [extents, setExtents] = useState<Record<string, FwcMarkerExtent>>({});
+
+  useEffect(() => {
+    const board = boardRef.current;
+    if (!board || typeof ResizeObserver === "undefined") return;
+    let frame = 0;
+    const measure = () => {
+      const next: Record<string, FwcMarkerExtent> = {};
+      board.querySelectorAll<HTMLElement>("[data-fwc-key]").forEach((el) => {
+        next[el.dataset.fwcKey!] = fwcMarkerExtentFromSize(el.offsetWidth, el.offsetHeight);
+      });
+      setExtents((prev) => (sameExtents(prev, next) ? prev : next));
+      if (process.env.NODE_ENV !== "production") {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          frame = requestAnimationFrame(() => warnIfMarkersEscape(board));
+        });
+      }
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(board);
+    board.querySelectorAll("[data-fwc-key]").forEach((el) => observer.observe(el));
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [markers, evidencePins]);
 
   const active = markers.find((m) => m.allocationId === activeId) ?? null;
   const activeEvidence = evidencePins.find((m) => m.id === activeEvidenceId) ?? null;
@@ -203,6 +273,7 @@ export function FwcHawkinsBoard({
           }}
         >
           <div
+            ref={boardRef}
             className={`relative aspect-square w-full overflow-hidden rounded-[12px] bg-[#1D1D1F] ${
               onSelectCell ? "cursor-crosshair" : ""
             }`}
@@ -224,13 +295,20 @@ export function FwcHawkinsBoard({
               const highlighted =
                 marker.allocationId === highlightAllocationId ||
                 marker.allocationId === activeId;
-              const offset = marker.stackTotal > 1 ? (marker.stackIndex - (marker.stackTotal - 1) / 2) * 10 : 0;
+              const key = `c:${marker.allocationId}`;
+              const position = fwcMarkerPositionStyle({
+                leftPct: marker.leftPct,
+                topPct: marker.topPct,
+                ...stackOffsets(marker.stackIndex, marker.stackTotal, 10),
+                extent: extents[key] ?? FWC_DEFAULT_MARKER_EXTENT,
+              });
 
               return (
                 <button
                   key={marker.allocationId}
                   type="button"
                   data-fwc-marker
+                  data-fwc-key={key}
                   title={`${marker.displayName} · ${marker.gridLabel}`}
                   aria-label={`${marker.displayName} at ${marker.gridLabel}`}
                   onClick={(e) => {
@@ -241,10 +319,7 @@ export function FwcHawkinsBoard({
                     );
                   }}
                   className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5 focus:outline-none"
-                  style={{
-                    left: `calc(${marker.leftPct}% + ${offset}px)`,
-                    top: `${marker.topPct}%`,
-                  }}
+                  style={position}
                 >
                   {iconSrc ? (
                     <span
@@ -283,13 +358,20 @@ export function FwcHawkinsBoard({
               const iconSrc = fwcEvidenceIconSrc(pin.slug);
               const short = pin.slug.replace(/^EVD-?/i, "") || "?";
               const highlighted = pin.id === activeEvidenceId;
-              const offset = pin.stackTotal > 1 ? (pin.stackIndex - (pin.stackTotal - 1) / 2) * 9 : 0;
+              const key = `e:${pin.id}`;
+              const position = fwcMarkerPositionStyle({
+                leftPct: pin.leftPct,
+                topPct: pin.topPct,
+                ...stackOffsets(pin.stackIndex, pin.stackTotal, 9),
+                extent: extents[key] ?? FWC_DEFAULT_MARKER_EXTENT,
+              });
 
               return (
                 <button
                   key={pin.id}
                   type="button"
                   data-fwc-evidence
+                  data-fwc-key={key}
                   title={`${pin.slug} · ${pin.title} · ${pin.gridLabel}`}
                   aria-label={`Evidence ${pin.slug} ${pin.title} at ${pin.gridLabel}`}
                   onClick={(e) => {
@@ -298,10 +380,7 @@ export function FwcHawkinsBoard({
                     setActiveEvidenceId((id) => (id === pin.id ? null : pin.id));
                   }}
                   className="absolute z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5 focus:outline-none"
-                  style={{
-                    left: `calc(${pin.leftPct}% + ${offset}px)`,
-                    top: `${pin.topPct}%`,
-                  }}
+                  style={position}
                 >
                   {iconSrc ? (
                     <span
