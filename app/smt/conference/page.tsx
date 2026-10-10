@@ -55,7 +55,7 @@ export default async function SmtConferencePage() {
     room_code: string | null;
     rop_document_url: string | null;
     consultation_before_moderated_caucus: boolean | null;
-    procedure_profile: "default" | "eu_parliament" | "press_corps" | null;
+    procedure_profile: "default" | "eu_parliament" | "press_corps" | "fwc_crisis" | null;
     eu_guided_workflow_enabled: boolean | null;
   };
 

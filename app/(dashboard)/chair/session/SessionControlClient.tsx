@@ -101,7 +101,15 @@ import {
   parseEuSessionPhase,
   type EuSessionPhase,
 } from "@/lib/eu-session-phase";
-import { isEuParliamentProcedure, isPressCorpsProcedure, looksLikePressCorpsCommittee } from "@/lib/procedure-profiles";
+import {
+  isEuParliamentProcedure,
+  isFwcCrisisProcedure,
+  isPressCorpsProcedure,
+  looksLikeFwcCommittee,
+  looksLikePressCorpsCommittee,
+} from "@/lib/procedure-profiles";
+import { FWC_ROP } from "@/lib/rop";
+import { didRopMotionPass } from "@/lib/rop/procedure";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
@@ -512,7 +520,7 @@ export function SessionControlClient({
   const allocationsRef = useRef<Alloc[]>([]);
   const timerFloorLabelRef = useRef("");
   const caucusPrecedenceRef = useRef<CaucusDisruptivenessPrecedence>("consultation_first");
-  const procedureProfileRef = useRef<"default" | "eu_parliament" | "press_corps">("default");
+  const procedureProfileRef = useRef<"default" | "eu_parliament" | "press_corps" | "fwc_crisis">("default");
   const openVotingMotionsRef = useRef<MotionRow[]>([]);
   const openMotionRef = useRef<MotionRow | null>(null);
   const recentMotionsRef = useRef<MotionRow[]>([]);
@@ -586,10 +594,11 @@ export function SessionControlClient({
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
-  const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament" | "press_corps">("default");
+  const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament" | "press_corps" | "fwc_crisis">("default");
   const [isEuGuidedWorkflow, setIsEuGuidedWorkflow] = useState(false);
   const isEuParliamentProfile = procedureProfile === "eu_parliament";
   const isPressCorpsProfile = procedureProfile === "press_corps";
+  const isFwcCrisisProfile = procedureProfile === "fwc_crisis";
   const [guidedMotionOpen, setGuidedMotionOpen] = useState(false);
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
@@ -822,13 +831,24 @@ export function SessionControlClient({
       { code: "amendment", label: tSessionControl("presetAmendments"), title: tSessionControl("presetAmendmentTitle") },
     ];
 
+    if (isFwcCrisisProfile) {
+      const known = new Map(base.map((p) => [p.code, p]));
+      return [
+        base[0],
+        ...[...FWC_ROP.motions]
+          .filter((m) => m.delegateRaisable && (m.code !== "set_agenda" || agendaTopicsRemaining.length > 1 || motionDraft.procedure_code === "set_agenda"))
+          .sort((a, b) => b.precedence - a.precedence)
+          .map((m) => known.get(m.code) ?? { code: m.code, label: m.label, title: m.label }),
+      ];
+    }
+
     // Hide set-agenda when there isn't at least 2 agenda topics left to choose from.
     // But keep it visible if the chair is currently editing a set-agenda motion.
     if (agendaTopicsRemaining.length > 1 || motionDraft.procedure_code === "set_agenda") {
       base.splice(1, 0, { code: "set_agenda", label: tSessionControl("presetSetAgenda"), title: "" });
     }
     return base;
-  }, [agendaTopicsRemaining.length, isPressCorpsProfile, motionDraft.procedure_code, tSessionControl]);
+  }, [agendaTopicsRemaining.length, isFwcCrisisProfile, isPressCorpsProfile, motionDraft.procedure_code, tSessionControl]);
 
   const ropMajorityForDraft = useMemo(
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code, procedureProfile),
@@ -882,6 +902,15 @@ export function SessionControlClient({
       if (isPressCorpsProfile && draft.procedure_code === "roll_call_vote") {
         if (!draft.title.trim()) {
           return tSessionControl("guidedPressRollCallRequiresSubject");
+        }
+      }
+      if (isFwcCrisisProfile && draft.procedure_code === "interrogation") {
+        if (!draft.title.trim()) {
+          return tSessionControl("guidedInterrogationRequiresTarget");
+        }
+        const total = Number(draft.unmoderated_total_minutes);
+        if (!Number.isFinite(total) || total <= 0) {
+          return tSessionControl("guidedInterrogationRequiresMinutes");
         }
       }
       if (draft.procedure_code === "interview") {
@@ -962,6 +991,7 @@ export function SessionControlClient({
     [
       agendaTopicsRemaining.length,
       agendaUsedNameSet,
+      isFwcCrisisProfile,
       isPressCorpsProfile,
       resolutions,
       tSessionControl,
@@ -1130,7 +1160,7 @@ export function SessionControlClient({
       const timing = `Timing: total ${draft.moderated_total_minutes} min, speaker ${draft.moderated_speaker_seconds}s`;
       return base ? `${base}\n${timing}` : timing;
     }
-    if (draft.procedure_code === "unmoderated_caucus") {
+    if (draft.procedure_code === "unmoderated_caucus" || draft.procedure_code === "interrogation") {
       const base = stripTimingLineFromDescription(draft.description);
       const timing = `Timing: total ${draft.unmoderated_total_minutes} min`;
       return base ? `${base}\n${timing}` : timing;
@@ -1432,6 +1462,12 @@ export function SessionControlClient({
         committeeLabel.includes("eu") &&
         (committeeLabel.includes("parli") || committeeLabel.includes("parliament"));
       normalizedProcedureProfile = (() => {
+        if (
+          isFwcCrisisProcedure(confForAgenda?.procedure_profile) ||
+          looksLikeFwcCommittee(confForAgenda?.committee)
+        ) {
+          return "fwc_crisis" as const;
+        }
         if (
           isPressCorpsProcedure(confForAgenda?.procedure_profile) ||
           looksLikePressCorpsCommittee(confForAgenda?.committee)
@@ -3036,7 +3072,9 @@ export function SessionControlClient({
           procedure_clause_ids: draft.procedure_clause_ids,
         title: draft.title.trim() || null,
         description: withModeratedTimingInDescription(draft),
-        must_vote: draft.must_vote,
+        must_vote:
+          draft.must_vote ||
+          (isFwcCrisisProfile && draft.vote_type === "motion" && !FWC_ROP.motionRules.motionsAllowAbstain),
         required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code, procedureProfile),
         motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: true,
@@ -3125,7 +3163,14 @@ export function SessionControlClient({
           votingCallOrder.map((a) => a.id)
         );
         const passes =
-          openMotion.vote_type === "motion"
+          isFwcCrisisProfile && openMotion.vote_type === "motion"
+            ? didRopMotionPass(FWC_ROP, openMotion.procedure_code, openMotion.required_majority, {
+                yes: motionTally.yes,
+                no: motionTally.no,
+                present: membersPresent,
+                members: votingCallOrder.length,
+              })
+            : openMotion.vote_type === "motion"
             ? didProceduralMotionPassAgainstRollPresent(
                 openMotion.required_majority,
                 motionTally.yes,
@@ -3417,7 +3462,9 @@ export function SessionControlClient({
         procedure_clause_ids: draft.procedure_clause_ids,
         title: draft.title.trim() || null,
         description: withModeratedTimingInDescription(draft),
-        must_vote: draft.must_vote,
+        must_vote:
+          draft.must_vote ||
+          (isFwcCrisisProfile && draft.vote_type === "motion" && !FWC_ROP.motionRules.motionsAllowAbstain),
         required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code, procedureProfile),
         motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: false,
@@ -4040,6 +4087,7 @@ export function SessionControlClient({
                       : "",
                   unmoderated_total_minutes:
                     code === "unmoderated_caucus" ||
+                    code === "interrogation" ||
                     code === "interview" ||
                     code === "press_conference" ||
                     code === "writing_time"
@@ -4178,6 +4226,8 @@ export function SessionControlClient({
                     ? tSessionControl("topic")
                     : motionDraft.procedure_code === "unmoderated_caucus"
                       ? tSessionControl("topicOptional")
+                      : motionDraft.procedure_code === "interrogation"
+                      ? tSessionControl("interrogationTarget")
                       : motionDraft.procedure_code === "interview"
                         ? tSessionControl("pressRelatedAssignment")
                         : motionDraft.procedure_code === "press_conference"
@@ -4267,7 +4317,7 @@ export function SessionControlClient({
                 placeholder={tSessionControl("minutesPlaceholder")}
               />
             </label>
-          ) : motionDraft.procedure_code === "unmoderated_caucus" ? (
+          ) : motionDraft.procedure_code === "unmoderated_caucus" || motionDraft.procedure_code === "interrogation" ? (
             <label className="text-sm block text-brand-navy">
               <span className={surfaceLabel}>{tSessionControl("totalTimeMinutes")}</span>
               <input

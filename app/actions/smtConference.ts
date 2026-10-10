@@ -74,7 +74,9 @@ export async function updateCommitteeSessionAction(
       ? "eu_parliament"
       : procedureProfileRaw === "press_corps"
         ? "press_corps"
-        : "default";
+        : procedureProfileRaw === "fwc_crisis"
+          ? "fwc_crisis"
+          : "default";
   const euGuidedWorkflowEnabled = formData.get("eu_guided_workflow_enabled") === "on";
 
   if (!id || name.length < 2 || !isValidCommitteeJoinCode(committeeCode)) {
@@ -140,7 +142,9 @@ export async function updateChamberCommitteeProfileAction(
       ? "eu_parliament"
       : procedureProfileRaw === "press_corps"
         ? "press_corps"
-        : "default";
+        : procedureProfileRaw === "fwc_crisis"
+          ? "fwc_crisis"
+          : "default";
 
   if (!anchorId || !isValidCommitteeJoinCode(committeeCode)) {
     return { error: "Committee label and a valid 6-character room code (letters/digits) are required." };

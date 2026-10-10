@@ -4,6 +4,8 @@
 import type { VoteType } from "@/types/database";
 import { normalizeProcedureProfile, type ProcedureProfile } from "@/lib/procedure-profiles";
 import { parseMotionProposedMinutes } from "@/lib/press-motion-timing";
+import { getRopConfig } from "@/lib/rop";
+import { ropMotionPrecedence } from "@/lib/rop/procedure";
 
 /** How consultation vs moderated caucus rank when both are pending (handbook vs alternate RoP). */
 export type CaucusDisruptivenessPrecedence = "consultation_first" | "moderated_first";
@@ -32,6 +34,8 @@ export function motionDisruptivenessScore(
   procedureProfile?: ProcedureProfile | string | null
 ): number {
   const profile = normalizeProcedureProfile(procedureProfile);
+  const ropConfig = getRopConfig(profile);
+  if (ropConfig && voteType === "motion") return ropMotionPrecedence(ropConfig, procedureCode);
   if (voteType === "resolution") return 78;
   if (voteType === "amendment") return 72;
 

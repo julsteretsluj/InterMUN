@@ -40,7 +40,7 @@ type CommitteeRow = {
   room_code: string | null;
   rop_document_url: string | null;
   consultation_before_moderated_caucus?: boolean | null;
-  procedure_profile?: "default" | "eu_parliament" | "press_corps" | null;
+  procedure_profile?: "default" | "eu_parliament" | "press_corps" | "fwc_crisis" | null;
   eu_guided_workflow_enabled?: boolean | null;
 };
 
@@ -398,6 +398,7 @@ function ChamberCommitteeCard({
           <option value="default">{t("procedureDefault")}</option>
           <option value="eu_parliament">{t("procedureEuParliament")}</option>
           <option value="press_corps">{t("procedurePressCorps")}</option>
+          <option value="fwc_crisis">{t("procedureFwcCrisis")}</option>
         </select>
       </div>
 

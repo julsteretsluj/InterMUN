@@ -3,6 +3,8 @@
 
 import type { VoteType } from "@/types/database";
 import { normalizeProcedureProfile, type ProcedureProfile } from "@/lib/procedure-profiles";
+import { getRopConfig } from "@/lib/rop";
+import { ropMotionMajority } from "@/lib/rop/procedure";
 
 /** Values persisted on `vote_items.required_majority`. */
 export type StoredVoteMajority = "simple" | "2/3";
@@ -23,6 +25,8 @@ export function ropRequiredMajority(
   procedureProfile?: ProcedureProfile | string | null
 ): StoredVoteMajority {
   const profile = normalizeProcedureProfile(procedureProfile);
+  const ropConfig = getRopConfig(profile);
+  if (ropConfig && voteType === "motion") return ropMotionMajority(ropConfig, procedureCode);
   if (profile === "eu_parliament") {
     const euTwoThirdsCodes = new Set([
       "open_debate",
