@@ -187,7 +187,7 @@
     "rollPresentVoting": "Présent et votant",
     "rollPresentVotingTitle": "Présent et votant – doit voter, ne peut pas s’abstenir",
     "rollAbsent": "Absente",
-    "rollCallForCountry": "Appel nominal pour {pays}",
+    "rollCallForCountry": "Appel nominal pour {country}",
     "presetCustom": "Coutume",
     "presetSetAgenda": "Motion pour établir l’ordre du jour",
     "presetExtendOpeningSpeech": "Motion visant à prolonger la durée du discours d’ouverture",
@@ -407,7 +407,7 @@
     "saveEdits": "Enregistrer les modifications",
     "deleteMotionConfirm": "Supprimer définitivement cette motion ? Tous les votes enregistrés en faveur de cette motion seront supprimés et la motion disparaîtra du compte rendu.",
     "deleteMotion": "Supprimer le mouvement",
-    "tallyLine": "Compte : Oui {oui} | Non {non} | Bulletins de vote {total}",
+    "tallyLine": "Compte : Oui {yes} | Non {no} | Bulletins de vote {total}",
     "ballotsHelp": "Bulletins de vote = pancartes avec un Oui ou un Non enregistré (l'abstention est enregistrée séparément et n'est pas comptée dans ce dénominateur). Clear supprime un vote enregistré. Pour les motions de procédure, le résultat compare le Oui aux membres présents sur la liste (voir la section appel nominal).",
     "recordVotesLabel": "Enregistrer les votes",
     "currentMotion": "mouvement actuel",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "Les présidents enregistrent chaque emplacement en tant que brouillon sur la page Score. Ces brouillons ne sont pas présentés ici. Une fois que chaque créneau requis est terminé, le président doit cliquer sur Soumettre les candidatures à SMT — les lignes apparaissent alors dans ce tableau comme étant en attente d'examen.",
     "noRowsForCommittee": "Aucune ligne en attente pour ce comité. Choisir",
     "orAnotherTab": "ou un autre onglet.",
-    "topRank": "Premier {classement}",
+    "topRank": "Premier {rank}",
     "bandInitialsTitle": "Initiales du groupe : B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Meilleur délégué (comité)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Saisissez le code de la conférence de vos organisateurs (au moins 4 caractères).",
     "eventCodeMissing": "Aucune conférence ne correspond à ce code. Vérifiez l’orthographe auprès de vos organisateurs.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Vous devez être connecté.",
     "committeeCodeInvalid": "Saisissez le code du comité à 6 caractères (lettres et chiffres uniquement, par exemple ECO741). Demandez à votre chaise ou vérifiez SMT -> Codes de chambre.",
     "enterConferenceFirst": "Entrez d'abord votre code de conférence (revenez à l'étape précédente).",
@@ -1115,7 +1116,7 @@
   },
   "delegateDashboard": {
     "welcome": "Bienvenue, Délégué de {flag} {country}",
-    "activeCommitteeIntro": "Comité actif : {ligne}.",
+    "activeCommitteeIntro": "Comité actif : {line}.",
     "activeCommitteeBody": "Les dates du compte à rebours sont partagées avec tous les membres de ce comité. Votre préparation, vos positions et vos documents restent sur votre compte.",
     "tabs": {
       "ariaLabel": "Sections du tableau de bord",
@@ -1331,13 +1332,13 @@
     "noCommittees": "Aucun comité trouvé pour cet événement. Ajoutez-les",
     "eventSessionsLink": "Événements et séances de comités",
     "orSupabase": "ou dans Supabase.",
-    "sessionFloorBanner": "L'<étage>étage de session</étage> (minuteries, haut-parleurs, appel nominal) est réservé aux <chaises>chaises d'estrade</chaises> uniquement. Utilisez les <live>Comités en direct</live> ci-dessous pour la surveillance, ou saisissez les codes de comité, comme les délégués, lorsque vous avez besoin d'une session spécifique.",
+    "sessionFloorBanner": "L’<floor>étage de session</floor> (minuteries, haut-parleurs, appel nominal) est réservé aux <chairs>présidents de séance</chairs> uniquement. Utilisez les <live>Comités en direct</live> ci-dessous pour la surveillance, ou saisissez les codes de comité, comme les délégués, lorsque vous avez besoin d'une session spécifique.",
     "welcomeSg": "Bienvenue Secrétaire Général !",
     "whichCommittee": "Dans quelle commission souhaiteriez-vous participer ?",
     "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
     "topicLabel": "Sujette:",
     "chairsLabel": "Chaises :",
-    "committeeLogoAlt": "logo {nom}",
+    "committeeLogoAlt": "logo {name}",
     "eslFriendly": "Compatible ESL",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Temps de parole (gauche / total)",
     "perSpeaker": "(par enceinte)",
     "paused": "(en pause)",
-    "pauseReason": "Pause : {raison}",
+    "pauseReason": "Pause : {reason}",
     "dash": "—",
     "activeTimers": "Minuteurs actifs",
     "activeTimersAria": "Minuteurs de séance et de tribune",
@@ -1605,7 +1606,7 @@
     "daisListed": "Estrade (répertoriée)",
     "committeeCodeSecondGate": "Code comité/salle (deuxième porte)",
     "seats": "Sièges",
-    "seatsFilledAllocated": "{rempli} rempli · {total} alloué",
+    "seatsFilledAllocated": "{filled} rempli · {total} alloué",
     "resolutions": "Résolutions",
     "openVotes": "Votes ouverts",
     "editMetadataIntro": "Modifiez les métadonnées des sessions de comité et les noms des présidents sous",
@@ -1692,12 +1693,12 @@
     "delegatesMatrix": "Matrice des délégués",
     "clearAllChairNotes": "Effacer toutes les notes de chaise",
     "clearAllConfirm": "Des notes claires de compliments, de préoccupations et de rappel pour chaque pancarte ? Cela met à jour la copie partagée du comité.",
-    "addedToSpeakerList": "{pays} ajouté à la liste des intervenants.",
+    "addedToSpeakerList": "{country} ajouté à la liste des intervenants.",
     "searchCountry": "Rechercher un pays...",
-    "roomStats": "{placards} pancartes · {drapeau} avec des notes de chaise · Rouleau enregistré pour {count}",
+    "roomStats": "{placards} pancartes · {flagged} avec des notes de chaise · Rouleau enregistré pour {count}",
     "loading": "Chargement...",
     "noDelegationsMatch": "Aucune délégation ne correspond à votre recherche.",
-    "rollPrefix": "Rouleau {étiquette}",
+    "rollPrefix": "Rouleau {label}",
     "linkedAccount": "Compte lié",
     "vacantPlacard": "Pancarte vacante",
     "delegateProfile": "Profil du délégué ->",
@@ -2110,7 +2111,7 @@
       "missingServiceRoleKey": "Il manque SUPABASE_SERVICE_ROLE_KEY sur le serveur. Ajoutez-le à l'environnement de déploiement (ne l'exposez jamais au navigateur).",
       "missingPublicAppUrl": "Définissez NEXT_PUBLIC_APP_URL sur l'URL de votre site public (par exemple https://your-app.vercel.app) afin que les liens d'invitation soient redirigés correctement.",
       "emailAlreadyHasAccount": "Cet e-mail a déjà un compte. Utilisez « Accorder le rôle de président » ci-dessous au lieu d'envoyer une autre invitation.",
-      "inviteSentButRoleSetFailed": "Invitation envoyée, mais impossible de définir le rôle de président sur le profil : {erreur}. Utilisez « Accorder le rôle de président » après avoir accepté.",
+      "inviteSentButRoleSetFailed": "Invitation envoyée, mais impossible de définir le rôle de président sur le profil : {error}. Utilisez « Accorder le rôle de président » après avoir accepté.",
       "inviteSentButAllocationFailed": "Invitation envoyée et rôle de président défini, mais le siège de l'estrade n'a pas pu être lié : {error}. Corrigez la matrice d’allocation ou contactez le support.",
       "inviteSentSuccess": "E-mail d'invitation envoyé à {email}. Ils occuperont une chaise après avoir défini leur mot de passe.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
@@ -2166,10 +2167,10 @@
       "welcomeLine3": "On se voit sur le terrain.",
       "chairReminderSubject": "Demande d'attribution de délégués en attente d'approbation",
       "chairReminderLine1": "Un délégué a demandé une allocation et nécessite un examen par le président.",
-      "chairReminderConference": "Conférence : {conférence}",
-      "chairReminderAllocation": "Allocation demandée : {pays}",
-      "chairReminderDelegate": "Délégué : {nom}",
-      "chairReminderEmail": "Adresse e-mail du compte : {e-mail}",
+      "chairReminderConference": "Conférence : {conference}",
+      "chairReminderAllocation": "Allocation demandée : {country}",
+      "chairReminderDelegate": "Délégué : {name}",
+      "chairReminderEmail": "Adresse e-mail du compte : {email}",
       "chairReminderLine2": "Veuillez approuver ou rejeter cette demande dans la matrice d'attribution des chaires :"
     }
   },
@@ -2369,7 +2370,7 @@
     "committeeFallback": "Comité",
     "showingOneCommitteeAtATime": "Afficher un comité à la fois. Changez de comité en utilisant les onglets du bas.",
     "editPlacardCodesSheet": "Modifier la feuille de codes des pancartes ->",
-    "rosterHeading": "Liste · {titre}",
+    "rosterHeading": "Liste · {heading}",
     "seatsSummary": "{count} siège(s).",
     "linkedDelegatesCannotBeDeleted": "Les délégués liés ne peuvent pas être supprimés ici.",
     "secretariatParliamentarianSeat": "Parlementaire · Siège {seat}",
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "Enregistrer ce délégué",
     "autosaved": "Enregistré automatiquement",
     "autosaveFailed": "Échec de l'enregistrement automatique",
-    "autosavedWithCountry": "Enregistré automatiquement — {pays}",
+    "autosavedWithCountry": "Enregistré automatiquement — {country}",
     "delegateFallback": "déléguer",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "votre comité",
     "fallbackCommittee": "Comité",
-    "welcome": "Bienvenue, président du {comité}",
+    "welcome": "Bienvenue, président du {committee}",
     "featureStrip": "Salle numérique · Motions · Vote · Intervenants",
     "activeCommitteeLine": "Comité actif : <line></line>. Les données de session sont synchronisées via votre compte ; Les listes de contrôle de préparation/flux, les motions et les points sont enregistrés dans ce navigateur pour ce comité - même idée que la <seamuns>Salle des présidents du SEAMUN</seamuns>.",
     "tiles": {
@@ -2802,7 +2803,7 @@
     "tierLow": "Faible",
     "tierHigh": "Haut",
     "tierPromptLocked": "Verrouillé : {band} - {tier} ({score})",
-    "tierPromptPick": "Choisissez bas ou haut dans {bande} (points sur l'échelle de 1 à 8).",
+    "tierPromptPick": "Choisissez bas ou haut dans {band} (points sur l'échelle de 1 à 8).",
     "criteria": {
       "creativity": {
         "label": "Créativité",
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Pas de lien Google Doc",
     "clauseEditor": "Éditeur de clauses",
     "noClausesYet": "Aucune clause pour l'instant.",
-    "clauseNumber": "Clause {numéro}",
+    "clauseNumber": "Clause {number}",
     "saveClause": "Clause de sauvegarde",
     "delete": "Supprimer",
     "addClausePlaceholder": "Ajouter une nouvelle clause...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Récompenses sur votre profil",
-      "rank": "rang {rang}",
+      "rank": "rang {rank}",
       "pending": {
         "tab": "Candidatures en attente",
         "title": "Nominations à la présidence en attente",
@@ -3433,18 +3434,18 @@
     },
     "discipline": {
       "title": "Statut disciplinaire (privé)",
-      "statusLine": "Avertissements : {warnings} · Grèves : {strikes}{votingDisabled}{ SpeakingSuspended}{removedFromCommittee}",
+      "statusLine": "Avertissements : {warnings} · Grèves : {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "vote désactivé",
       "speakingSuspended": "parler suspendu",
       "removedFromCommittee": "retiré du comité",
-      "updated": "Mise à jour : {valeur}"
+      "updated": "Mise à jour : {value}"
     },
     "preview": {
       "ariaLabel": "Aperçu du profil",
       "title": "Aperçu",
       "yourName": "Votre nom",
       "usernameNotSet": "Nom d'utilisateur non défini",
-      "gradeValue": "Catégorie {catégorie}",
+      "gradeValue": "Catégorie {grade}",
       "awards": "Récompenses"
     },
     "profilePicture": "Photo de profil",
@@ -3751,7 +3752,7 @@
           "definition": "Capacité des communautés et des institutions à absorber les chocs et à se relever efficacement."
         }
       },
-      "topicLine": "Sujet : {sujet}"
+      "topicLine": "Sujet : {topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,7 +4282,7 @@
     "add": "Ajouter",
     "noIdeasYet": "Aucune idée pour l'instant.",
     "ideaLabel": "Idée",
-    "ideaFallback": "Idée {numéro}",
+    "ideaFallback": "Idée {number}",
     "linkedDoc": "Document lié",
     "addedOn": "Ajouté le {date}",
     "edit": "Modifier",
@@ -4372,11 +4373,11 @@
     "staffSeatsHeading": "Personnel - sièges",
     "searchAria": "Rechercher des délégations",
     "virtualRoomVacant": "Vacante",
-    "profileAria": "Voir le profil : {pays}",
+    "profileAria": "Voir le profil : {country}",
     "vacantSeatAria": "Siège vacant",
-    "placardAria": "Pancarte {pays}",
+    "placardAria": "Pancarte {country}",
     "gavelAria": "Marteau",
-    "viewProfileAria": "Voir le profil : {titre}",
+    "viewProfileAria": "Voir le profil : {title}",
     "noProfileLinkAria": "{title} (pas de lien de profil)",
     "committeeFloor": "Salle des commissions",
     "virtualRoomFigureAria": "Salle de commission virtuelle – {committeeName} ({conferenceName})",
@@ -4416,7 +4417,7 @@
       "motioner": "Motioneur",
       "majority": "Majorité",
       "majoritySimple": "Simple",
-      "tally": "Oui {oui} - Non {non} - Total {total}",
+      "tally": "Oui {yes} - Non {no} - Total {total}",
       "help": "L'estrade enregistre le vote de chaque délégation en séance. Les votes sur les motions utilisent uniquement Oui ou Non (pas d'abstention). Les totaux ne comptent que les pancartes sur lesquelles un oui ou un non a été enregistré ; les délégations absentes sont ignorées."
     },
     "activeMotion": {
@@ -4433,13 +4434,13 @@
       "speakerTimeLeftTotal": "Temps de parole (gauche / total)",
       "perSpeaker": "(par enceinte)",
       "paused": "(en pause)",
-      "pauseReason": "Pause : {raison}"
+      "pauseReason": "Pause : {reason}"
     },
     "floorStatus": {
       "sessionTime": "Durée de la séance",
       "sessionNotStarted": "Session non démarrée",
       "limit": "Limite",
-      "limitRemaining": "{valeur} restant",
+      "limitRemaining": "{value} restant",
       "limitOverBy": "plus de {value}",
       "quickLinkSession": "Session",
       "quickLinkRoll": "Rouler",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(minimum 1 minute)",
       "endAtLocalTime": "Fin à (heure locale)",
       "stopSession": "Arrêter la séance",
+      "smtProgressReminderTitle": "Mettre à jour SMT sur cette session",
+      "smtProgressReminderBody": "Envoyez une courte note d'étape afin que le secrétariat sache comment s'est déroulé le comité et sur quoi faire le suivi.",
+      "smtProgressReminderWrite": "Écrivez une note",
+      "smtProgressReminderDismiss": "Plus tard",
       "saveLimit": "Enregistrer la limite",
       "saveLimitHelp": "Applique les paramètres de limite mis à jour pendant que la session est déjà en cours d'exécution, sans arrêter la session.",
       "startSession": "Démarrer la session",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Utilisez la barre latérale pour",
       "rollCall": "Appel",
       "agenda": "Ordre du jour",
@@ -4509,11 +4518,7 @@
       "timer": "Minuteur",
       "sidebarAnd": "et",
       "announcements": "Annonces",
-      "sidebarUseSuffix": "— un outil par onglet.",
-      "smtProgressReminderTitle": "Mettre à jour SMT sur cette session",
-      "smtProgressReminderBody": "Envoyez une courte note d'étape afin que le secrétariat sache comment s'est déroulé le comité et sur quoi faire le suivi.",
-      "smtProgressReminderWrite": "Écrivez une note",
-      "smtProgressReminderDismiss": "Plus tard"
+      "sidebarUseSuffix": "— un outil par onglet."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "Supprimer",
       "deleteConfirm": "Supprimer cette session de l'historique ?",
       "sessionNamePrompt": "Nom de la séance",
-      "rangeClosed": "{gamme}",
-      "rangeOngoing": "{plage} -> En cours"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> En cours"
     },
     "timerPage": {
       "title": "Minuteur",

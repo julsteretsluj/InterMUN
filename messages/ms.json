@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Masukkan kod persidangan daripada penganjur anda (sekurang-kurangnya 4 aksara).",
     "eventCodeMissing": "Tiada persidangan yang sepadan dengan kod itu. Semak ejaan dengan penganjur anda.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Anda mesti log masuk.",
     "committeeCodeInvalid": "Masukkan kod jawatankuasa 6 aksara (huruf dan digit sahaja, cth. ECO741). Tanya kerusi anda atau semak SMT -> Kod bilik.",
     "enterConferenceFirst": "Masukkan kod persidangan anda dahulu (kembali ke langkah sebelumnya).",
@@ -1331,7 +1332,7 @@
     "noCommittees": "Tiada jawatankuasa ditemui untuk acara ini. Tambah mereka",
     "eventSessionsLink": "Sesi acara & panitia",
     "orSupabase": "atau di Supabase.",
-    "sessionFloorBanner": "<floor>Lantai sesi</floor> (pemasa, pembesar suara, panggilan gulung) adalah untuk <kerusi>kerusi pelamin</kerusi> sahaja. Gunakan <live>Jawatankuasa langsung</live> di bawah untuk pengawasan, atau masukkan kod jawatankuasa seperti perwakilan apabila anda memerlukan sesi tertentu.",
+    "sessionFloorBanner": "<floor>Lantai sesi</floor> (pemasa, pembesar suara, panggilan gulung) adalah untuk <chairs>kerusi pelamin</chairs> sahaja. Gunakan <live>Jawatankuasa langsung</live> di bawah untuk pengawasan, atau masukkan kod jawatankuasa seperti perwakilan apabila anda memerlukan sesi tertentu.",
     "welcomeSg": "Selamat datang Setiausaha Agung!",
     "whichCommittee": "Jawatankuasa mana yang anda ingin daftar masuk?",
     "sessionsCount": "{count, plural, one {# sesi} other {# sesi}}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "Jawatankuasa",
     "intro": {
-      "scoringMatches": "Pemarkahan sepadan dengan <papan pemuka>papan pemuka SEAMUNs</papan pemuka>: untuk setiap kriteria pilih <permulaan>Permulaan</permulaan>, <membangun>Membangun</membangunkan>, <mahir>Mahir</mahir> atau <teladan>Teladan</exemplary>. Hantar Top 2 dengan bukti; SMT mengesahkan anugerah akhir.",
+      "scoringMatches": "Pemarkahan sepadan dengan <dashboard>papan pemuka SEAMUNs</dashboard>: untuk setiap kriteria pilih <beginning>Permulaan</beginning>, <developing>Membangun</developing>, <proficient>Mahir</proficient> atau <exemplary>Teladan</exemplary>. Hantar Top 2 dengan bukti; SMT mengesahkan anugerah akhir.",
       "submissionRulePrefix": "Penyerahan kepada SMT adalah manual (butang di bawah) atau automatik selepas",
       "submissionRuleSuffix": "UTC apabila anda membuka halaman ini seterusnya (jika semua slot yang diperlukan telah lengkap).",
       "steps": {
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(minimum 1 minit)",
       "endAtLocalTime": "Tamat pada (waktu tempatan)",
       "stopSession": "Hentikan sesi",
+      "smtProgressReminderTitle": "Kemas kini SMT pada sesi ini",
+      "smtProgressReminderBody": "Hantar nota kemajuan pendek supaya urusetia tahu bagaimana jawatankuasa berjalan dan tindakan susulan.",
+      "smtProgressReminderWrite": "Tulis nota",
+      "smtProgressReminderDismiss": "Nanti",
       "saveLimit": "Jimat had",
       "saveLimitHelp": "Menggunakan tetapan had yang dikemas kini semasa sesi sedang berjalan, tanpa menghentikan sesi.",
       "startSession": "Mulakan sesi",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Gunakan bar sisi untuk",
       "rollCall": "Roll call",
       "agenda": "Agenda",
@@ -4509,11 +4518,7 @@
       "timer": "Pemasa",
       "sidebarAnd": "dan",
       "announcements": "Pengumuman",
-      "sidebarUseSuffix": "— satu alat setiap tab.",
-      "smtProgressReminderTitle": "Kemas kini SMT pada sesi ini",
-      "smtProgressReminderBody": "Hantar nota kemajuan pendek supaya urusetia tahu bagaimana jawatankuasa berjalan dan tindakan susulan.",
-      "smtProgressReminderWrite": "Tulis nota",
-      "smtProgressReminderDismiss": "Nanti"
+      "sidebarUseSuffix": "— satu alat setiap tab."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

@@ -187,7 +187,7 @@
     "rollPresentVoting": "Anwesend und abstimmend",
     "rollPresentVotingTitle": "Anwesend und abstimmend – muss abstimmen, darf sich nicht enthalten",
     "rollAbsent": "Abwesend",
-    "rollCallForCountry": "Anwesenheit für {Land}",
+    "rollCallForCountry": "Anwesenheit für {country}",
     "presetCustom": "Brauch",
     "presetSetAgenda": "Antrag zur Festlegung der Tagesordnung",
     "presetExtendOpeningSpeech": "Antrag auf Verlängerung der Eröffnungsrede",
@@ -407,7 +407,7 @@
     "saveEdits": "Änderungen speichern",
     "deleteMotionConfirm": "Diesen Antrag endgültig löschen? Alle aufgezeichneten Stimmen dafür werden entfernt und der Antrag wird aus dem Protokoll gelöscht.",
     "deleteMotion": "Antrag löschen",
-    "tallyLine": "Tally: Ja {ja} | Nein {nein} | Stimmzettel {total}",
+    "tallyLine": "Tally: Ja {yes} | Nein {no} | Stimmzettel {total}",
     "ballotsHelp": "Stimmzettel = Plakate mit einem eingetragenen Ja oder Nein (Enthaltung wird separat erfasst und in diesem Nenner nicht gezählt). Mit „Löschen“ wird eine aufgezeichnete Abstimmung entfernt. Bei Verfahrensanträgen entspricht das Ergebnis dem Ergebnis „Ja“ im Vergleich zu den in der Liste anwesenden Mitgliedern (siehe Abschnitt „Namensaufruf“).",
     "recordVotesLabel": "Stimmen aufzeichnen",
     "currentMotion": "aktuelle Bewegung",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "Lehrstühle speichern jeden Slot als Entwurf auf der Seite „Score“. Diese Entwürfe werden hier nicht gezeigt. Sobald alle erforderlichen Plätze belegt sind, muss der Vorsitzende auf „Nominierungen an SMT übermitteln“ klicken – dann werden in dieser Tabelle die Zeilen als zur Überprüfung ausstehend angezeigt.",
     "noRowsForCommittee": "Keine ausstehenden Zeilen für diesen Ausschuss. Wählen",
     "orAnotherTab": "oder eine andere Registerkarte.",
-    "topRank": "Top {Rang}",
+    "topRank": "Top {rank}",
     "bandInitialsTitle": "Bandinitialen: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Bester Delegierter (Komitee)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Geben Sie den Konferenzcode Ihres Veranstalters ein (mindestens 4 Zeichen).",
     "eventCodeMissing": "Keine Konferenz entspricht diesem Code. Überprüfen Sie die Rechtschreibung mit Ihren Organisatoren.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Sie müssen angemeldet sein.",
     "committeeCodeInvalid": "Geben Sie den 6-stelligen Ausschusscode ein (nur Buchstaben und Ziffern, z. B. ECO741). Fragen Sie Ihren Lehrstuhl oder überprüfen Sie SMT -> Raumcodes.",
     "enterConferenceFirst": "Geben Sie zuerst Ihren Konferenzcode ein (gehen Sie zurück zum vorherigen Schritt).",
@@ -1337,7 +1338,7 @@
     "sessionsCount": "{count, plural, one {# Sitzung} other {# Sitzungen}}",
     "topicLabel": "Thema:",
     "chairsLabel": "Vorsitz:",
-    "committeeLogoAlt": "{Name}-Logo",
+    "committeeLogoAlt": "{name}-Logo",
     "eslFriendly": "ESL-freundlich",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Sprecherzeit (links / gesamt)",
     "perSpeaker": "(pro Sprecher)",
     "paused": "(pausiert)",
-    "pauseReason": "Pause: {Grund}",
+    "pauseReason": "Pause: {reason}",
     "dash": "—",
     "activeTimers": "Aktive Timer",
     "activeTimersAria": "Aktive Sitzungs- und Saaltimer",
@@ -1694,7 +1695,7 @@
     "clearAllConfirm": "Klare Kompliment-, Bedenken- und Erinnerungsnotizen für jedes Plakat? Dadurch wird die gemeinsame Ausschusskopie aktualisiert.",
     "addedToSpeakerList": "{country} zur Rednerliste hinzugefügt.",
     "searchCountry": "Land suchen...",
-    "roomStats": "{placards} Plakate · {markiert} mit Notizen des Vorsitzenden · Liste aufgezeichnet für {count}",
+    "roomStats": "{placards} Plakate · {flagged} mit Notizen des Vorsitzenden · Liste aufgezeichnet für {count}",
     "loading": "Laden...",
     "noDelegationsMatch": "Keine Delegationen entsprechen Ihrer Suche.",
     "rollPrefix": "Rolle {label}",
@@ -1721,7 +1722,7 @@
     "speakerList": "Rednerliste",
     "addedToSpeakerList": "Zur Rednerliste hinzugefügt.",
     "chooseDelegationsNotAlreadyQueued": "Wählen Sie Delegationen aus, die nicht bereits auf der Liste warten oder aktuell sind.",
-    "addedSpeakersInOrder": "{Anzahl} Redner in der Reihenfolge der Ausschussliste hinzugefügt.",
+    "addedSpeakersInOrder": "{count} Redner in der Reihenfolge der Ausschussliste hinzugefügt.",
     "introPrefix": "Fügen Sie Delegationen in der Reihenfolge ihrer Reden hinzu. Delegierte können weiterhin nutzen",
     "requestToSpeak": "Bitte um Wortmeldung",
     "introMiddle": "im Ausschussraum. Verwenden",
@@ -2166,8 +2167,8 @@
       "welcomeLine3": "Wir sehen uns auf dem Boden.",
       "chairReminderSubject": "Zuteilungsanfrage bis zur Genehmigung delegieren",
       "chairReminderLine1": "Ein Delegierter hat eine Zuteilung beantragt und benötigt eine Überprüfung durch den Vorsitzenden.",
-      "chairReminderConference": "Konferenz: {Konferenz}",
-      "chairReminderAllocation": "Angeforderte Zuteilung: {Land}",
+      "chairReminderConference": "Konferenz: {conference}",
+      "chairReminderAllocation": "Angeforderte Zuteilung: {country}",
       "chairReminderDelegate": "Delegierter: {name}",
       "chairReminderEmail": "Konto-E-Mail: {email}",
       "chairReminderLine2": "Bitte genehmigen oder lehnen Sie diesen Antrag in der Stuhlvergabematrix ab:"
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "Speichern Sie diesen Delegaten",
     "autosaved": "Automatisch gespeichert",
     "autosaveFailed": "Die automatische Speicherung ist fehlgeschlagen",
-    "autosavedWithCountry": "Automatisch gespeichert – {Land}",
+    "autosavedWithCountry": "Automatisch gespeichert – {country}",
     "delegateFallback": "delegieren",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "Ihr Ausschuss",
     "fallbackCommittee": "Ausschuss",
-    "welcome": "Willkommen, Vorsitzender des {Komitees}",
+    "welcome": "Willkommen, Vorsitzender des {committee}",
     "featureStrip": "Digitaler Raum · Anträge · Abstimmung · Redner",
     "activeCommitteeLine": "Aktiver Ausschuss: <line></line>. Sitzungsdaten werden über Ihr Konto synchronisiert. Vorbereitungs-/Ablauf-Checklisten sowie Anträge und Punkte werden in diesem Browser für diesen Ausschuss gespeichert – gleiche Idee wie <seamuns>SEAMUNs Chair Room</seamuns>.",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "Max. {Punkte} Punkte",
+    "maxPoints": "Max. {points} Punkte",
     "reference": {
       "title": "Offizielle Auszeichnungsrubrik von SEAMUN I",
       "description": "Referenzexemplar: Auszeichnungsarten, Bewertungsprozess und vollständige 1-8-Band-Matrizen (aus der Konferenzrubrik). Bei der Bewertung in InterMUN werden dieselben Kriterienschlüssel verwendet, bei denen Nominierungen eingereicht werden."
@@ -2802,7 +2803,7 @@
     "tierLow": "Niedrig",
     "tierHigh": "Hoch",
     "tierPromptLocked": "Gesperrt in: {band} – {tier} ({score})",
-    "tierPromptPick": "Wählen Sie einen niedrigen oder hohen Wert innerhalb von {Band} (Punkte auf der Skala von 1 bis 8).",
+    "tierPromptPick": "Wählen Sie einen niedrigen oder hohen Wert innerhalb von {band} (Punkte auf der Skala von 1 bis 8).",
     "criteria": {
       "creativity": {
         "label": "Kreativität",
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Kein Google Doc-Link",
     "clauseEditor": "Klauseleditor",
     "noClausesYet": "Noch keine Klauseln.",
-    "clauseNumber": "Klausel {Nummer}",
+    "clauseNumber": "Klausel {number}",
     "saveClause": "Save-Klausel",
     "delete": "Löschen",
     "addClausePlaceholder": "Eine neue Klausel hinzufügen...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Auszeichnungen auf Ihrem Profil",
-      "rank": "Rang {Rang}",
+      "rank": "Rang {rank}",
       "pending": {
         "tab": "Ausstehende Nominierungen",
         "title": "Ausstehende Nominierungen für Vorsitzende",
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "Disziplinarstatus (privat)",
-      "statusLine": "Warnungen: {warnings} · Streiks: {strikes}{votingDisabled}{lookingSuspended}{removedFromCommittee}",
+      "statusLine": "Warnungen: {warnings} · Streiks: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "Stimmabgabe deaktiviert",
       "speakingSuspended": "Rede unterbrochen",
       "removedFromCommittee": "aus dem Ausschuss entfernt",
@@ -4281,9 +4282,9 @@
     "add": "Hinzufügen",
     "noIdeasYet": "Noch keine Ideen.",
     "ideaLabel": "Idee",
-    "ideaFallback": "Idee {Nummer}",
+    "ideaFallback": "Idee {number}",
     "linkedDoc": "Verlinktes Dokument",
-    "addedOn": "Hinzugefügt am {Datum}",
+    "addedOn": "Hinzugefügt am {date}",
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "ideaDocument": "Ideendokument",
@@ -4372,9 +4373,9 @@
     "staffSeatsHeading": "Personal - Sitzplätze",
     "searchAria": "Suchdelegationen",
     "virtualRoomVacant": "Frei",
-    "profileAria": "Profil anzeigen: {Land}",
+    "profileAria": "Profil anzeigen: {country}",
     "vacantSeatAria": "Freier Sitzplatz",
-    "placardAria": "Plakat {Land}",
+    "placardAria": "Plakat {country}",
     "gavelAria": "Hammer",
     "viewProfileAria": "Profil ansehen: {title}",
     "noProfileLinkAria": "{title} (kein Profillink)",
@@ -4416,7 +4417,7 @@
       "motioner": "Motioner",
       "majority": "Mehrheitlich",
       "majoritySimple": "Einfach",
-      "tally": "Ja {ja} – Nein {nein} – Gesamt {total}",
+      "tally": "Ja {yes} – Nein {no} – Gesamt {total}",
       "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Antragsabstimmung wird nur Ja oder Nein verwendet (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
     },
     "activeMotion": {
@@ -4433,7 +4434,7 @@
       "speakerTimeLeftTotal": "Sprecherzeit (links / gesamt)",
       "perSpeaker": "(pro Sprecher)",
       "paused": "(pausiert)",
-      "pauseReason": "Pause: {Grund}"
+      "pauseReason": "Pause: {reason}"
     },
     "floorStatus": {
       "sessionTime": "Sitzungszeit",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(mindestens 1 Minute)",
       "endAtLocalTime": "Ende um (Ortszeit)",
       "stopSession": "Sitzung beenden",
+      "smtProgressReminderTitle": "Aktualisieren Sie SMT für diese Sitzung",
+      "smtProgressReminderBody": "Senden Sie eine kurze Fortschrittsmitteilung, damit das Sekretariat weiß, wie der Ausschuss gelaufen ist und was weiterverfolgt werden muss.",
+      "smtProgressReminderWrite": "Schreiben Sie eine Notiz",
+      "smtProgressReminderDismiss": "Später",
       "saveLimit": "Limit speichern",
       "saveLimitHelp": "Wendet aktualisierte Grenzwerteinstellungen an, während die Sitzung bereits ausgeführt wird, ohne die Sitzung zu stoppen.",
       "startSession": "Sitzung starten",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Verwenden Sie die Seitenleiste für",
       "rollCall": "Anwesenheit",
       "agenda": "Agenda",
@@ -4509,11 +4518,7 @@
       "timer": "Timer",
       "sidebarAnd": "Und",
       "announcements": "Ankündigungen",
-      "sidebarUseSuffix": "— ein Werkzeug pro Registerkarte.",
-      "smtProgressReminderTitle": "Aktualisieren Sie SMT für diese Sitzung",
-      "smtProgressReminderBody": "Senden Sie eine kurze Fortschrittsmitteilung, damit das Sekretariat weiß, wie der Ausschuss gelaufen ist und was weiterverfolgt werden muss.",
-      "smtProgressReminderWrite": "Schreiben Sie eine Notiz",
-      "smtProgressReminderDismiss": "Später"
+      "sidebarUseSuffix": "— ein Werkzeug pro Registerkarte."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,7 +4564,7 @@
       "delete": "Löschen",
       "deleteConfirm": "Diese Sitzung aus dem Verlauf löschen?",
       "sessionNamePrompt": "Sitzungsname",
-      "rangeClosed": "{Reichweite}",
+      "rangeClosed": "{range}",
       "rangeOngoing": "{range} -> Laufend"
     },
     "timerPage": {

@@ -1,12 +1,7 @@
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { getRequestConfig } from "next-intl/server";
 import { deepMergeMessages } from "@/lib/i18n/deep-merge-messages";
-import {
-  isPublicMarketingPath,
-  omitDeferredAppNamespaces,
-  pickMessageNamespaces,
-  publicMessageNamespaces,
-} from "@/lib/i18n/message-slices";
+import { getIntlMessageFallback, onIntlError } from "@/lib/i18n/intl-error-handling";
 import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME, resolveLocale } from "@/lib/i18n/locales";
 
 const mergedLocaleCache = new Map<string, Record<string, unknown>>();
@@ -35,18 +30,19 @@ async function loadMergedMessages(locale: string): Promise<Record<string, unknow
   return merged;
 }
 
+/**
+ * Server components get the full merged catalog: shared server UI (e.g.
+ * `AppleGateLayout` on a 404 under /chair) must resolve any namespace on any
+ * route. Only the client payload is sliced, via `clientMessagesForPath`.
+ */
 export default getRequestConfig(async () => {
-  const [cookieStore, hdrs] = await Promise.all([cookies(), headers()]);
+  const cookieStore = await cookies();
   const locale = resolveLocale(cookieStore.get(LOCALE_COOKIE_NAME)?.value ?? DEFAULT_LOCALE);
-  const allMessages = await loadMergedMessages(locale);
-  const pathname = hdrs.get("x-pathname");
-
-  const messages = isPublicMarketingPath(pathname)
-    ? pickMessageNamespaces(allMessages, publicMessageNamespaces())
-    : omitDeferredAppNamespaces(allMessages);
 
   return {
     locale,
-    messages,
+    messages: await loadMergedMessages(locale),
+    onError: onIntlError,
+    getMessageFallback: getIntlMessageFallback,
   };
 });

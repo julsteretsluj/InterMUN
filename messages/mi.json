@@ -490,7 +490,7 @@
   },
   "chairChecklists": {
     "common": {
-      "progressSynced": "__OTI__ / {total} kua oti - kua tukutahia mo tenei komiti",
+      "progressSynced": "{done} / {total} kua oti - kua tukutahia mo tenei komiti",
       "loading": "Uta ana...",
       "resetChecklist": "Tautuhihia te rarangi arowhai"
     },
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Whakauruhia te waehere huihuinga mai i o kaiwhakariterite (kia 4 nga tohu).",
     "eventCodeMissing": "Karekau he huihuinga e rite ana ki tera waehere. Tirohia te takikupu me o kaiwhakarite.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Me haina koe.",
     "committeeCodeInvalid": "Whakauruhia te waehere komiti tohu-6 (nga reta me nga mati anake, hei tauira, ECO741). Patai atu ki to tuuru, tirohia ranei SMT -> Waehere ruma.",
     "enterConferenceFirst": "Whakauruhia to waehere huihuinga tuatahi (hoki ki te taahiraa o mua).",
@@ -1331,7 +1332,7 @@
     "noCommittees": "Karekau he komiti i kitea mo tenei huihuinga. Tāpirihia ki roto",
     "eventSessionsLink": "Huihuinga me nga huihuinga komiti",
     "orSupabase": "i Supabase ranei.",
-    "sessionFloorBanner": "<papa>Papa hui</floor> (nga taima, kaikorero, karanga pukapuka) mo nga <tuara>tuuru ra</chair> anake. Whakamahia <live>Komiti ora</live> i raro nei mo te tirotiro, whakauruhia ranei nga waehere komiti penei i nga kaikawe ka hiahia koe ki tetahi huihuinga motuhake.",
+    "sessionFloorBanner": "<floor>Papa hui</floor> (nga taima, kaikorero, karanga pukapuka) mo nga <chairs>tuuru ra</chairs> anake. Whakamahia <live>Komiti ora</live> i raro nei mo te tirotiro, whakauruhia ranei nga waehere komiti penei i nga kaikawe ka hiahia koe ki tetahi huihuinga motuhake.",
     "welcomeSg": "Nau mai te Hekeretari Tianara!",
     "whichCommittee": "Ko tehea komiti e hiahia ana koe ki te tirotiro?",
     "sessionsCount": "{count, plural, one {# hui} other {# hui}}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "Komiti",
     "intro": {
-      "scoringMatches": "Ka rite te tohu ki te <dashboard>SEAMUNs dashboard</dashboard>: mo ia paearu whiriwhiri <te timatanga>Timatanga</timata>, <whakawhanaketanga>Whakawhanaketanga>, <proficient>Kaitau</proficient>, he <tauira>Whakatauira</exemplary>. Tukuna te Runga 2 me nga taunakitanga; Ka whakamanahia e SMT nga tohu whakamutunga.",
+      "scoringMatches": "Scoring matches the <dashboard>SEAMUNs dashboard</dashboard>: for each criterion choose <beginning>Beginning</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, or <exemplary>Exemplary</exemplary>. Submit Top 2 with evidence; SMT confirms final awards.",
       "submissionRulePrefix": "Ko te tukunga ki te SMT he pukapuka-a-ringa (patene kei raro nei) he aunoa ranei i muri mai",
       "submissionRuleSuffix": "UTC ina whakatuwhera koe i tenei wharangi (mehemea kua oti katoa nga waahi e hiahiatia ana).",
       "steps": {
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "Te mana whakahaere (takitahi)",
-      "statusLine": "Whakatupato: {whakatupato} · Patua: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "statusLine": "Whakatupato: {warnings} · Patua: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "kua haua te pooti",
       "speakingSuspended": "kua whakatarewahia te korero",
       "removedFromCommittee": "tangohia mai i te komiti",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(miniti 1 meneti)",
       "endAtLocalTime": "Mutu i te (waa rohe)",
       "stopSession": "Kati te wahanga",
+      "smtProgressReminderTitle": "Whakahoutia te SMT i tenei wahanga",
+      "smtProgressReminderBody": "Tukuna he tuhipoka poto mo te ahunga whakamua kia mohio ai te hekeretari i te haere o te komiti me nga mahi hei whai atu.",
+      "smtProgressReminderWrite": "Tuhia he tuhipoka",
+      "smtProgressReminderDismiss": "I muri mai",
       "saveLimit": "Tiaki tepe",
       "saveLimitHelp": "Ka hoatu i nga tautuhinga tepe kua whakahouhia i te wa e haere ana te waahi, me te kore e mutu te waahi.",
       "startSession": "Tīmata wātū",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Whakamahia te paetaha mo",
       "rollCall": "Huri waea",
       "agenda": "Kaupapa",
@@ -4509,11 +4518,7 @@
       "timer": "Matawā",
       "sidebarAnd": "a",
       "announcements": "Panuitanga",
-      "sidebarUseSuffix": "— kotahi taputapu mo ia ripa.",
-      "smtProgressReminderTitle": "Whakahoutia te SMT i tenei wahanga",
-      "smtProgressReminderBody": "Tukuna he tuhipoka poto mo te ahunga whakamua kia mohio ai te hekeretari i te haere o te komiti me nga mahi hei whai atu.",
-      "smtProgressReminderWrite": "Tuhia he tuhipoka",
-      "smtProgressReminderDismiss": "I muri mai"
+      "sidebarUseSuffix": "— kotahi taputapu mo ia ripa."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

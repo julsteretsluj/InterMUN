@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "បញ្ចូលកូដសន្និសីទពីអ្នករៀបចំរបស់អ្នក (យ៉ាងហោចណាស់ 4 តួអក្សរ)។",
     "eventCodeMissing": "គ្មាន​សន្និសីទ​ត្រូវ​នឹង​កូដ​នោះ​ទេ។ ពិនិត្យអក្ខរាវិរុទ្ធជាមួយអ្នករៀបចំរបស់អ្នក។",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "អ្នកត្រូវតែចូល។",
     "committeeCodeInvalid": "បញ្ចូលកូដគណៈកម្មាធិការ 6 តួអក្សរ (តែអក្សរ និងខ្ទង់ ឧ. ECO741)។ សួរកៅអីរបស់អ្នក ឬពិនិត្យមើល SMT -> លេខកូដបន្ទប់។",
     "enterConferenceFirst": "បញ្ចូលលេខកូដសន្និសីទរបស់អ្នកជាមុន (ត្រឡប់ទៅជំហានមុន)។",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "គណៈកម្មាធិការ",
     "intro": {
-      "scoringMatches": "ពិន្ទុត្រូវគ្នានឹង <dashboard>SEAMUNs dashboard</dashboard>៖ សម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗជ្រើសរើស <beginning>Beginning</beginning> <developing>Developing</developing> <proficient>Proficient</proficient> ឬ <exemplary>Exemplary>Exemplary>។ បញ្ជូនកំពូល 2 ជាមួយនឹងភស្តុតាង; SMT បញ្ជាក់ពីពានរង្វាន់ចុងក្រោយ។",
+      "scoringMatches": "ពិន្ទុត្រូវគ្នានឹង <dashboard>SEAMUNs dashboard</dashboard>៖ សម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗជ្រើសរើស <beginning>Beginning</beginning> <developing>Developing</developing> <proficient>Proficient</proficient> ឬ <exemplary>Exemplary</exemplary>។ បញ្ជូនកំពូល 2 ជាមួយនឹងភស្តុតាង; SMT បញ្ជាក់ពីពានរង្វាន់ចុងក្រោយ។",
       "submissionRulePrefix": "ការបញ្ជូនទៅកាន់ SMT គឺដោយដៃ (ប៊ូតុងខាងក្រោម) ឬដោយស្វ័យប្រវត្តិបន្ទាប់ពី",
       "submissionRuleSuffix": "UTC នៅពេលអ្នកបើកទំព័រនេះបន្ទាប់ (ប្រសិនបើរន្ធដែលត្រូវការទាំងអស់ត្រូវបានបញ្ចប់)។",
       "steps": {
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(អប្បបរមា 1 នាទី)",
       "endAtLocalTime": "បញ្ចប់នៅម៉ោង (ម៉ោងក្នុងស្រុក)",
       "stopSession": "បញ្ឈប់វគ្គ",
+      "smtProgressReminderTitle": "ធ្វើបច្ចុប្បន្នភាព SMT នៅលើវគ្គនេះ។",
+      "smtProgressReminderBody": "ផ្ញើ​កំណត់​ត្រា​ដំណើរ​ការ​ខ្លី​មួយ ដើម្បី​ឱ្យ​លេខាធិការដ្ឋាន​ដឹង​ពី​របៀប​ដែល​គណៈកម្មាធិការ​បាន​ទៅ និង​អ្វី​ដែល​ត្រូវ​តាម​ដាន។",
+      "smtProgressReminderWrite": "សរសេរកំណត់ចំណាំ",
+      "smtProgressReminderDismiss": "ពេលក្រោយ",
       "saveLimit": "រក្សាទុកដែនកំណត់",
       "saveLimitHelp": "អនុវត្តការកំណត់ដែនកំណត់ដែលបានធ្វើបច្ចុប្បន្នភាព ខណៈពេលដែលវគ្គកំពុងដំណើរការរួចហើយ ដោយមិនបញ្ឈប់វគ្គនោះទេ។",
       "startSession": "ចាប់ផ្តើមវគ្គ",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "ប្រើរបារចំហៀងសម្រាប់",
       "rollCall": "ការហៅទូរស័ព្ទ",
       "agenda": "របៀបវារៈ",
@@ -4509,11 +4518,7 @@
       "timer": "កម្មវិធីកំណត់ម៉ោង",
       "sidebarAnd": "និង",
       "announcements": "សេចក្តីប្រកាស",
-      "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។",
-      "smtProgressReminderTitle": "ធ្វើបច្ចុប្បន្នភាព SMT នៅលើវគ្គនេះ។",
-      "smtProgressReminderBody": "ផ្ញើ​កំណត់​ត្រា​ដំណើរ​ការ​ខ្លី​មួយ ដើម្បី​ឱ្យ​លេខាធិការដ្ឋាន​ដឹង​ពី​របៀប​ដែល​គណៈកម្មាធិការ​បាន​ទៅ និង​អ្វី​ដែល​ត្រូវ​តាម​ដាន។",
-      "smtProgressReminderWrite": "សរសេរកំណត់ចំណាំ",
-      "smtProgressReminderDismiss": "ពេលក្រោយ"
+      "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

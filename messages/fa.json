@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "کد کنفرانس را از سازمان دهندگان خود وارد کنید (حداقل 4 کاراکتر).",
     "eventCodeMissing": "هیچ کنفرانسی با آن کد مطابقت ندارد. املا را با سازمان دهندگان خود چک کنید.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "شما باید وارد سیستم شوید",
     "committeeCodeInvalid": "کد کمیته 6 کاراکتری (فقط حروف و ارقام، به عنوان مثال ECO741) را وارد کنید. از صندلی خود بپرسید یا SMT -> کدهای اتاق را بررسی کنید.",
     "enterConferenceFirst": "ابتدا کد کنفرانس خود را وارد کنید (به مرحله قبل برگردید).",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "کمیته",
     "intro": {
-      "scoringMatches": "امتیازدهی با <dashboard>داشبورد SEAMUNs</dashboard> مطابقت دارد: برای هر معیار <beginning>شروع</beginning>، <توسعه>در حال توسعه</developing>، <proficient>مسلط</proficient>، یا <exmplary>Exemplary</exemplary> را انتخاب کنید. ارسال 2 برتر با شواهد. SMT جوایز نهایی را تایید می کند.",
+      "scoringMatches": "امتیازدهی با <dashboard>داشبورد SEAMUNs</dashboard> مطابقت دارد: برای هر معیار <beginning>شروع</beginning>، <developing>در حال توسعه</developing>، <proficient>مسلط</proficient>، یا <exemplary>Exemplary</exemplary> را انتخاب کنید. ارسال 2 برتر با شواهد. SMT جوایز نهایی را تایید می کند.",
       "submissionRulePrefix": "ارسال به SMT به صورت دستی (دکمه زیر) یا پس از آن خودکار است",
       "submissionRuleSuffix": "زمانی که بعداً این صفحه را باز می‌کنید، UTC (اگر تمام اسلات‌های مورد نیاز کامل شده باشند).",
       "steps": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "حداکثر {امتیاز} امتیاز",
+    "maxPoints": "حداکثر {points} امتیاز",
     "reference": {
       "title": "روبریک های رسمی جایزه SEAMUN I",
       "description": "نسخه مرجع: انواع جوایز، فرآیند ارزیابی، و ماتریس‌های باند 1-8 کامل (از عنوان کنفرانس). امتیازدهی در InterMUN از همان کلیدهای معیاری که در آن نامزدها ارسال می شود استفاده می کند."
@@ -2802,7 +2803,7 @@
     "tierLow": "کم",
     "tierHigh": "بالا",
     "tierPromptLocked": "قفل شده: {band} - {tier} ({score})",
-    "tierPromptPick": "کم یا زیاد را در {باند} (نقاط در مقیاس 1-8) انتخاب کنید.",
+    "tierPromptPick": "کم یا زیاد را در {band} (نقاط در مقیاس 1-8) انتخاب کنید.",
     "criteria": {
       "creativity": {
         "label": "خلاقیت",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "جوایز در پروفایل شما",
-      "rank": "رتبه {رتبه}",
+      "rank": "رتبه {rank}",
       "pending": {
         "tab": "نامزدهای معلق",
         "title": "نامزدهای صندلی معلق",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(حداقل 1 دقیقه)",
       "endAtLocalTime": "پایان در (به وقت محلی)",
       "stopSession": "جلسه را متوقف کنید",
+      "smtProgressReminderTitle": "SMT را در این جلسه به روز کنید",
+      "smtProgressReminderBody": "یک یادداشت پیشرفت کوتاه ارسال کنید تا دبیرخانه بداند کمیته چگونه کار کرد و چه مواردی را پیگیری کرد.",
+      "smtProgressReminderWrite": "یادداشت بنویسید",
+      "smtProgressReminderDismiss": "بعدا",
       "saveLimit": "محدودیت ذخیره",
       "saveLimitHelp": "تنظیمات محدودیت به روز شده را در حالی که جلسه در حال اجرا است، بدون توقف جلسه اعمال می کند.",
       "startSession": "شروع جلسه",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "از نوار کناری برای",
       "rollCall": "تماس تلفنی",
       "agenda": "دستور کار",
@@ -4509,11 +4518,7 @@
       "timer": "تایمر",
       "sidebarAnd": "و",
       "announcements": "اطلاعیه ها",
-      "sidebarUseSuffix": "- یک ابزار در هر برگه",
-      "smtProgressReminderTitle": "SMT را در این جلسه به روز کنید",
-      "smtProgressReminderBody": "یک یادداشت پیشرفت کوتاه ارسال کنید تا دبیرخانه بداند کمیته چگونه کار کرد و چه مواردی را پیگیری کرد.",
-      "smtProgressReminderWrite": "یادداشت بنویسید",
-      "smtProgressReminderDismiss": "بعدا"
+      "sidebarUseSuffix": "- یک ابزار در هر برگه"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -5161,7 +5166,7 @@
         "moveDown": "حرکت را به پایین حرکت دهید",
         "voteLabel": "به پیشنهادات رای دهید",
         "voteTitle": "ختم بحث",
-        "voteMeta": "{yes} موافق · {no} مخالف · نیازها {needed} از 3⟦3",
+        "voteMeta": "{yes} موافق · {no} مخالف · نیاز به {needed} از {total}",
         "inFavor": "به نفع",
         "against": "در مقابل",
         "timerLabel": "تایمر جلسه",

@@ -187,7 +187,7 @@
     "rollPresentVoting": "นำเสนอและลงคะแนนเสียง",
     "rollPresentVotingTitle": "อยู่และลงคะแนนเสียง — ต้องลงคะแนนเสียง งดออกเสียงไม่ได้",
     "rollAbsent": "ไม่มา",
-    "rollCallForCountry": "โทรออกสำหรับ {ประเทศ}",
+    "rollCallForCountry": "โทรออกสำหรับ {country}",
     "presetCustom": "กำหนดเอง",
     "presetSetAgenda": "ญัตติให้กำหนดวาระการประชุม",
     "presetExtendOpeningSpeech": "การเคลื่อนไหวเพื่อขยายเวลาการพูดเปิด",
@@ -407,7 +407,7 @@
     "saveEdits": "บันทึกการแก้ไข",
     "deleteMotionConfirm": "ลบการเคลื่อนไหวนี้อย่างถาวรใช่ไหม คะแนนโหวตที่บันทึกไว้ทั้งหมดจะถูกลบออก และญัตติจะหายไปจากบันทึก",
     "deleteMotion": "ลบการเคลื่อนไหว",
-    "tallyLine": "นับ: ใช่ {ใช่} | ไม่ {no} | บัตรลงคะแนน {ทั้งหมด}",
+    "tallyLine": "นับ: ใช่ {yes} | ไม่ {no} | บัตรลงคะแนน {total}",
     "ballotsHelp": "บัตรลงคะแนน = ป้ายที่มีการบันทึกว่าใช่หรือไม่ใช่ (ผู้งดออกเสียงจะถูกติดตามแยกกันและไม่นับในตัวส่วนนี้) Clear จะลบการลงคะแนนเสียงที่บันทึกไว้ สำหรับการดำเนินการตามขั้นตอน ผลลัพธ์จะเปรียบเทียบใช่กับสมาชิกที่อยู่ในรายชื่อ (ดูหัวข้อการเรียกชื่อ)",
     "recordVotesLabel": "บันทึกการลงคะแนนเสียง",
     "currentMotion": "การเคลื่อนไหวในปัจจุบัน",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "เก้าอี้จะบันทึกแต่ละช่องเป็นแบบร่างในหน้าคะแนน แบบร่างเหล่านั้นจะไม่แสดงที่นี่ เมื่อช่องที่จำเป็นครบทุกช่อง ประธานจะต้องคลิกส่งการเสนอชื่อไปยัง SMT จากนั้นแถวจะปรากฏในตารางนี้ว่ารอการตรวจสอบ",
     "noRowsForCommittee": "ไม่มีแถวที่ค้างอยู่สำหรับคณะกรรมการชุดนี้ เลือก",
     "orAnotherTab": "หรือแท็บอื่น",
-    "topRank": "อันดับสูงสุด {อันดับ}",
+    "topRank": "อันดับสูงสุด {rank}",
     "bandInitialsTitle": "ชื่อย่อวงดนตรี: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "ผู้แทนที่ดีที่สุด (คณะกรรมการ)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "ป้อนรหัสการประชุมจากผู้จัดงานของคุณ (อย่างน้อย 4 ตัวอักษร)",
     "eventCodeMissing": "ไม่มีการประชุมที่ตรงกับรหัสนั้น ตรวจสอบการสะกดกับผู้จัดงานของคุณ",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "คุณต้องลงชื่อเข้าใช้",
     "committeeCodeInvalid": "กรอกรหัสคณะกรรมการ 6 ตัวอักษร (เฉพาะตัวอักษรและตัวเลข เช่น ECO741) สอบถามเก้าอี้ของคุณหรือตรวจสอบ SMT -> รหัสห้อง",
     "enterConferenceFirst": "ป้อนรหัสการประชุมของคุณก่อน (กลับไปที่ขั้นตอนก่อนหน้า)",
@@ -1266,7 +1267,7 @@
   },
   "allocationCodeGate": {
     "title": "รหัสลงชื่อเข้าใช้ที่นั่ง",
-    "description": "ขั้นตอนที่สามหลังจากประตูการประชุมและคณะกรรมการ: ป้อน<ที่นั่ง>รหัสป้าย</seat>สำหรับที่นั่งของคุณ (เก้าอี้รายการเดียวกันใช้สำหรับวัสดุ)",
+    "description": "ขั้นตอนที่สามหลังจากประตูการประชุมและคณะกรรมการ: ป้อน<seat>รหัสป้าย</seat>สำหรับที่นั่งของคุณ (เก้าอี้รายการเดียวกันใช้สำหรับวัสดุ)",
     "noAllocation": "คุณยังไม่มีการจัดสรรสำหรับคณะกรรมการชุดนี้ ขอให้ SMT กำหนดที่นั่งของคุณก่อน",
     "changeRoomCode": "เปลี่ยนรหัสห้อง"
   },
@@ -1337,7 +1338,7 @@
     "sessionsCount": "{count, plural, other {# เซสชัน}}",
     "topicLabel": "หัวข้อ:",
     "chairsLabel": "เก้าอี้:",
-    "committeeLogoAlt": "โลโก้ {ชื่อ}",
+    "committeeLogoAlt": "โลโก้ {name}",
     "eslFriendly": "เป็นมิตรกับ ESL",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
     "perSpeaker": "(ต่อผู้พูด)",
     "paused": "(หยุดชั่วคราว)",
-    "pauseReason": "หยุดชั่วคราว: {เหตุผล}",
+    "pauseReason": "หยุดชั่วคราว: {reason}",
     "dash": "—",
     "activeTimers": "ตัวจับเวลาที่ใช้งาน",
     "activeTimersAria": "ตัวจับเวลาของสมัยประชุมและห้องประชุม",
@@ -1694,10 +1695,10 @@
     "clearAllConfirm": "คำชมเชย ข้อกังวล และบันทึกเตือนความจำที่ชัดเจนสำหรับทุกป้าย? นี่เป็นการอัพเดตสำเนาของคณะกรรมการที่ใช้ร่วมกัน",
     "addedToSpeakerList": "เพิ่ม {country} ลงในรายชื่อวิทยากรแล้ว",
     "searchCountry": "ค้นหาประเทศ...",
-    "roomStats": "{placards} ป้าย · {ธง} พร้อมบันทึกของเก้าอี้ · บันทึกม้วนสำหรับ {count}",
+    "roomStats": "{placards} ป้าย · {flagged} พร้อมบันทึกของเก้าอี้ · บันทึกม้วนสำหรับ {count}",
     "loading": "กำลังโหลด...",
     "noDelegationsMatch": "ไม่มีการมอบหมายที่ตรงกับการค้นหาของคุณ",
-    "rollPrefix": "ม้วน {ฉลาก}",
+    "rollPrefix": "ม้วน {label}",
     "linkedAccount": "บัญชีที่เชื่อมโยง",
     "vacantPlacard": "ป้ายว่าง",
     "delegateProfile": "โปรไฟล์การมอบหมาย ->",
@@ -2166,10 +2167,10 @@
       "welcomeLine3": "เจอกันบนพื้นนะ",
       "chairReminderSubject": "คำขอจัดสรรมอบสิทธิ์ที่รอการอนุมัติ",
       "chairReminderLine1": "ผู้รับมอบสิทธิ์ได้ร้องขอการจัดสรรและจำเป็นต้องตรวจสอบเก้าอี้",
-      "chairReminderConference": "การประชุม: {การประชุม}",
+      "chairReminderConference": "การประชุม: {conference}",
       "chairReminderAllocation": "การจัดสรรที่ร้องขอ: {country}",
-      "chairReminderDelegate": "ผู้รับมอบสิทธิ์: {ชื่อ}",
-      "chairReminderEmail": "อีเมลบัญชี: {อีเมล}",
+      "chairReminderDelegate": "ผู้รับมอบสิทธิ์: {name}",
+      "chairReminderEmail": "อีเมลบัญชี: {email}",
       "chairReminderLine2": "โปรดอนุมัติหรือปฏิเสธคำขอนี้ในตารางการจัดสรรเก้าอี้:"
     }
   },
@@ -2369,7 +2370,7 @@
     "committeeFallback": "คณะกรรมการ",
     "showingOneCommitteeAtATime": "แสดงทีละคณะ สลับคณะกรรมการโดยใช้แท็บด้านล่าง",
     "editPlacardCodesSheet": "แก้ไขแผ่นรหัสป้ายประกาศ ->",
-    "rosterHeading": "บัญชีรายชื่อ · {หัวเรื่อง}",
+    "rosterHeading": "บัญชีรายชื่อ · {heading}",
     "seatsSummary": "{count} ที่นั่ง",
     "linkedDelegatesCannotBeDeleted": "ไม่สามารถลบผู้รับมอบสิทธิ์ที่เชื่อมโยงได้ที่นี่",
     "secretariatParliamentarianSeat": "สมาชิกรัฐสภา · ที่นั่ง {seat}",
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "บันทึกผู้รับมอบสิทธิ์นี้",
     "autosaved": "บันทึกอัตโนมัติ",
     "autosaveFailed": "บันทึกอัตโนมัติล้มเหลว",
-    "autosavedWithCountry": "บันทึกอัตโนมัติ — {ประเทศ}",
+    "autosavedWithCountry": "บันทึกอัตโนมัติ — {country}",
     "delegateFallback": "ผู้รับมอบสิทธิ์",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "คณะกรรมการของคุณ",
     "fallbackCommittee": "คณะกรรมการ",
-    "welcome": "ยินดีต้อนรับประธาน {คณะกรรมการ}",
+    "welcome": "ยินดีต้อนรับประธาน {committee}",
     "featureStrip": "ห้องดิจิทัล · การเคลื่อนไหว · การลงคะแนนเสียง · วิทยากร",
     "activeCommitteeLine": "คณะกรรมการที่ทำงานอยู่: <line></line>. ข้อมูลเซสชันจะซิงค์ผ่านบัญชีของคุณ รายการตรวจสอบการเตรียมการ/การไหล และการเคลื่อนไหวและคะแนนจะถูกบันทึกไว้ในเบราว์เซอร์นี้สำหรับคณะกรรมการชุดนี้ - แนวคิดเดียวกับ <seamuns>ห้องเก้าอี้ของ SEAMUNs</seamuns>",
     "tiles": {
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "ไม่มีลิงก์ Google เอกสาร",
     "clauseEditor": "บรรณาธิการข้อ",
     "noClausesYet": "ยังไม่มีข้อ.",
-    "clauseNumber": "ข้อ {หมายเลข}",
+    "clauseNumber": "ข้อ {number}",
     "saveClause": "บันทึกข้อ",
     "delete": "ลบ",
     "addClausePlaceholder": "เพิ่มมาตราใหม่...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "รางวัลในโปรไฟล์ของคุณ",
-      "rank": "อันดับ {อันดับ}",
+      "rank": "อันดับ {rank}",
       "pending": {
         "tab": "อยู่ระหว่างการพิจารณาเสนอชื่อ",
         "title": "อยู่ระหว่างการเสนอชื่อเก้าอี้",
@@ -3444,7 +3445,7 @@
       "title": "ดูตัวอย่าง",
       "yourName": "ชื่อของคุณ",
       "usernameNotSet": "ชื่อผู้ใช้ไม่ได้ตั้งค่า",
-      "gradeValue": "เกรด {เกรด}",
+      "gradeValue": "เกรด {grade}",
       "awards": "รางวัล"
     },
     "profilePicture": "รูปโปรไฟล์",
@@ -3751,7 +3752,7 @@
           "definition": "ความสามารถของชุมชนและสถาบันในการดูดซับแรงกระแทกและฟื้นตัวอย่างมีประสิทธิภาพ"
         }
       },
-      "topicLine": "หัวข้อ: {หัวข้อ}"
+      "topicLine": "หัวข้อ: {topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,9 +4282,9 @@
     "add": "เพิ่ม",
     "noIdeasYet": "ยังไม่มีไอเดีย",
     "ideaLabel": "ความคิด",
-    "ideaFallback": "ไอเดีย {จำนวน}",
+    "ideaFallback": "ไอเดีย {number}",
     "linkedDoc": "เอกสารที่เชื่อมโยง",
-    "addedOn": "เพิ่มแล้ว {วันที่}",
+    "addedOn": "เพิ่มแล้ว {date}",
     "edit": "แก้ไข",
     "delete": "ลบ",
     "ideaDocument": "เอกสารไอเดีย",
@@ -4372,9 +4373,9 @@
     "staffSeatsHeading": "พนักงาน-ที่นั่ง",
     "searchAria": "ค้นหาการมอบหมาย",
     "virtualRoomVacant": "ว่าง",
-    "profileAria": "ดูโปรไฟล์: {ประเทศ}",
+    "profileAria": "ดูโปรไฟล์: {country}",
     "vacantSeatAria": "ที่นั่งว่าง",
-    "placardAria": "ป้ายประกาศ {ประเทศ}",
+    "placardAria": "ป้ายประกาศ {country}",
     "gavelAria": "ตะลุมพุก",
     "viewProfileAria": "ดูโปรไฟล์: {title}",
     "noProfileLinkAria": "{title} (ไม่มีลิงก์โปรไฟล์)",
@@ -4416,7 +4417,7 @@
       "motioner": "โมชั่นเนอร์",
       "majority": "ส่วนใหญ่",
       "majoritySimple": "เรียบง่าย",
-      "tally": "ใช่ {ใช่} - ไม่ใช่ {no} - รวม {total}",
+      "tally": "ใช่ {yes} - ไม่ใช่ {no} - รวม {total}",
       "help": "เวทีจะบันทึกการลงคะแนนเสียงของคณะผู้แทนแต่ละคนในเซสชั่น การลงมติให้ใช้ใช่หรือไม่ใช่เท่านั้น (ไม่งดออกเสียง) ผลรวมจะนับเฉพาะป้ายที่มีการบันทึกว่าใช่หรือไม่ใช่ การมอบหมายที่ขาดหายไปจะถูกข้ามไป"
     },
     "activeMotion": {
@@ -4433,7 +4434,7 @@
       "speakerTimeLeftTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
       "perSpeaker": "(ต่อผู้พูด)",
       "paused": "(หยุดชั่วคราว)",
-      "pauseReason": "หยุดชั่วคราว: {เหตุผล}"
+      "pauseReason": "หยุดชั่วคราว: {reason}"
     },
     "floorStatus": {
       "sessionTime": "เวลาเซสชัน",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(ขั้นต่ำ 1 นาที)",
       "endAtLocalTime": "สิ้นสุดเวลา (เวลาท้องถิ่น)",
       "stopSession": "หยุดเซสชัน",
+      "smtProgressReminderTitle": "อัปเดต SMT ในเซสชันนี้",
+      "smtProgressReminderBody": "ส่งข้อความความคืบหน้าสั้นๆ เพื่อให้สำนักเลขาธิการทราบว่าคณะกรรมการดำเนินการอย่างไรและต้องติดตามอะไร",
+      "smtProgressReminderWrite": "เขียนบันทึก",
+      "smtProgressReminderDismiss": "ภายหลัง",
       "saveLimit": "บันทึกขีดจำกัด",
       "saveLimitHelp": "ใช้การตั้งค่าขีดจำกัดที่อัปเดตในขณะที่เซสชันกำลังทำงานอยู่ โดยไม่หยุดเซสชัน",
       "startSession": "เริ่มเซสชัน",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "ใช้แถบด้านข้างสำหรับ",
       "rollCall": "ม้วนสาย",
       "agenda": "กำหนดการ",
@@ -4509,11 +4518,7 @@
       "timer": "ตัวจับเวลา",
       "sidebarAnd": "และ",
       "announcements": "ประกาศ",
-      "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ",
-      "smtProgressReminderTitle": "อัปเดต SMT ในเซสชันนี้",
-      "smtProgressReminderBody": "ส่งข้อความความคืบหน้าสั้นๆ เพื่อให้สำนักเลขาธิการทราบว่าคณะกรรมการดำเนินการอย่างไรและต้องติดตามอะไร",
-      "smtProgressReminderWrite": "เขียนบันทึก",
-      "smtProgressReminderDismiss": "ภายหลัง"
+      "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,7 +4564,7 @@
       "delete": "ลบ",
       "deleteConfirm": "ลบเซสชันนี้ออกจากประวัติใช่ไหม",
       "sessionNamePrompt": "ชื่อเซสชัน",
-      "rangeClosed": "{พิสัย}",
+      "rangeClosed": "{range}",
       "rangeOngoing": "{range} -> กำลังดำเนินอยู่"
     },
     "timerPage": {

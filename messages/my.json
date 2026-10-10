@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "သင်၏စီစဉ်သူများထံမှ ကွန်ဖရင့်ကုဒ်ကို ထည့်ပါ (အနည်းဆုံး စာလုံး 4 လုံး)။",
     "eventCodeMissing": "ထိုကုဒ်နှင့် ကိုက်ညီသော ကွန်ဖရင့်မရှိပါ။ သင်၏စီစဉ်သူများနှင့် စာလုံးပေါင်းစစ်ပါ။",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "သင်သည် လက်မှတ်ထိုးဝင်ရပါမည်။",
     "committeeCodeInvalid": "စာလုံး 6 လုံး ကော်မတီကုဒ် (အက္ခရာများနှင့် ဂဏန်းများသာ၊ ဥပမာ ECO741) ကို ထည့်ပါ။ သင့်ထိုင်ခုံကို မေးပါ သို့မဟုတ် SMT -> အခန်းကုဒ်များကို စစ်ဆေးပါ။",
     "enterConferenceFirst": "သင်၏ညီလာခံကုဒ်ကို ဦးစွာထည့်ပါ (ယခင်အဆင့်သို့ ပြန်သွားပါ)။",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(အနည်းဆုံး 1 မိနစ်)",
       "endAtLocalTime": "(ဒေသစံတော်ချိန်) တွင်အဆုံးသတ်",
       "stopSession": "သတ်မှတ်ချိန်ကို ရပ်ပါ။",
+      "smtProgressReminderTitle": "ဤစက်ရှင်တွင် SMT ကို အပ်ဒိတ်လုပ်ပါ။",
+      "smtProgressReminderBody": "ကော်မတီသည် မည်သို့ဆောင်ရွက်သွားသည်ကို သိရှိစေရန်အတွက် တိုးတက်မှုမှတ်စုတိုကို ပေးပို့ပါ။",
+      "smtProgressReminderWrite": "မှတ်စုရေးပါ။",
+      "smtProgressReminderDismiss": "နောက်တော့",
       "saveLimit": "ကန့်သတ်ချက်ကို သိမ်းဆည်းပါ။",
       "saveLimitHelp": "စက်ရှင်ကို မရပ်ဘဲ ဆက်ရှင်လည်ပတ်နေချိန်တွင် အပ်ဒိတ်လုပ်ထားသော ကန့်သတ်ဆက်တင်များကို အသုံးချပါ။",
       "startSession": "စက်ရှင် စတင်ပါ။",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "sidebar ကိုအသုံးပြုပါ။",
       "rollCall": "Roll call",
       "agenda": "အစီအစဉ်",
@@ -4509,11 +4518,7 @@
       "timer": "အချိန်တိုင်း",
       "sidebarAnd": "နှင့်",
       "announcements": "ကြေငြာချက်များ",
-      "sidebarUseSuffix": "- တက်ဘ်တစ်ခုလျှင် ကိရိယာတစ်ခု။",
-      "smtProgressReminderTitle": "ဤစက်ရှင်တွင် SMT ကို အပ်ဒိတ်လုပ်ပါ။",
-      "smtProgressReminderBody": "ကော်မတီသည် မည်သို့ဆောင်ရွက်သွားသည်ကို သိရှိစေရန်အတွက် တိုးတက်မှုမှတ်စုတိုကို ပေးပို့ပါ။",
-      "smtProgressReminderWrite": "မှတ်စုရေးပါ။",
-      "smtProgressReminderDismiss": "နောက်တော့"
+      "sidebarUseSuffix": "- တက်ဘ်တစ်ခုလျှင် ကိရိယာတစ်ခု။"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

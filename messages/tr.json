@@ -407,7 +407,7 @@
     "saveEdits": "Düzenlemeleri kaydet",
     "deleteMotionConfirm": "Bu hareket kalıcı olarak silinsin mi? Bunun için kaydedilen tüm oylar kaldırılacak ve önerge kayıtlardan kaybolacaktır.",
     "deleteMotion": "Hareketi sil",
-    "tallyLine": "Tally: Evet {evet} | Hayır {hayır} | Oy pusulaları {toplam}",
+    "tallyLine": "Tally: Evet {yes} | Hayır {no} | Oy pusulaları {total}",
     "ballotsHelp": "Oy pusulaları = Evet veya Hayır yazılı pankartlar (çekimserlik ayrı olarak izlenir ve bu paydada sayılmaz). Temizle kayıtlı bir oyu kaldırır. Usule ilişkin önergeler için sonuç, Evet'i yoklamada bulunan üyelerle karşılaştırır (yoklama bölümüne bakın).",
     "recordVotesLabel": "Oyları kaydedin",
     "currentMotion": "mevcut hareket",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "Sandalyeler her slotu Puan sayfasında taslak olarak kaydeder. Bu taslaklar burada gösterilmiyor. Gerekli her slot tamamlandığında, başkanın Adayları SMT'ye gönder'e tıklaması gerekir; ardından bu tabloda satırlar incelenmeyi bekliyor olarak görünür.",
     "noRowsForCommittee": "Bu komite için bekleyen sıra yok. Seçmek",
     "orAnotherTab": "veya başka bir sekme.",
-    "topRank": "Üst {sıra}",
+    "topRank": "Üst {rank}",
     "bandInitialsTitle": "Grubun baş harfleri: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "En İyi Delege (komite)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Düzenleyicilerinizden aldığınız konferans kodunu girin (en az 4 karakter).",
     "eventCodeMissing": "Bu kodla eşleşen konferans yok. Yazımı düzenleyicilerinizle kontrol edin.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Oturum açmalısınız.",
     "committeeCodeInvalid": "6 karakterli komite kodunu girin (yalnızca harfler ve rakamlar, örneğin ECO741). Koltuğunuza sorun veya SMT -> Oda kodlarını kontrol edin.",
     "enterConferenceFirst": "Önce konferans kodunuzu girin (önceki adıma dönün).",
@@ -1266,7 +1267,7 @@
   },
   "allocationCodeGate": {
     "title": "Koltuk oturum açma kodu",
-    "description": "Konferans ve komite kapılarından sonraki üçüncü adım: Koltuğunuzun <koltuk>fiş kodunu</koltuk> girin (başkanların materyaller için kullandığı listenin aynısı).",
+    "description": "Konferans ve komite kapılarından sonraki üçüncü adım: Koltuğunuzun <seat>fiş kodunu</seat> girin (başkanların materyaller için kullandığı listenin aynısı).",
     "noAllocation": "Bu komite için henüz bir tahsisiniz yok. Önce SMT'den koltuğunuzu tahsis etmesini isteyin.",
     "changeRoomCode": "Oda kodunu değiştir"
   },
@@ -1331,13 +1332,13 @@
     "noCommittees": "Bu etkinlik için komite bulunamadı. Onları ekle",
     "eventSessionsLink": "Etkinlik ve komite oturumları",
     "orSupabase": "veya Supabase'de.",
-    "sessionFloorBanner": "<floor>Oturum katı</floor> (zamanlayıcılar, hoparlörler, yoklama) yalnızca <sandalyeler>dais sandalyeleri</chairs> içindir. Gözetim için aşağıdaki <live>Canlı komiteleri</live> kullanın veya belirli bir oturuma ihtiyacınız olduğunda delegeler gibi komite kodlarını girin.",
+    "sessionFloorBanner": "<floor>Oturum katı</floor> (zamanlayıcılar, hoparlörler, yoklama) yalnızca <chairs>dais sandalyeleri</chairs> içindir. Gözetim için aşağıdaki <live>Canlı komiteleri</live> kullanın veya belirli bir oturuma ihtiyacınız olduğunda delegeler gibi komite kodlarını girin.",
     "welcomeSg": "Hoş geldiniz Genel Sekreter!",
     "whichCommittee": "Hangi komiteye başvurmak istiyorsunuz?",
     "sessionsCount": "{count, plural, one {# oturum} other {# oturum}}",
     "topicLabel": "Başlık:",
     "chairsLabel": "Sandalyeler:",
-    "committeeLogoAlt": "{isim} logosu",
+    "committeeLogoAlt": "{name} logosu",
     "eslFriendly": "ESL dostu",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Konuşmacı süresi (sol / toplam)",
     "perSpeaker": "(konuşmacı başına)",
     "paused": "(duraklatıldı)",
-    "pauseReason": "Duraklat: {neden}",
+    "pauseReason": "Duraklat: {reason}",
     "dash": "—",
     "activeTimers": "Aktif zamanlayıcılar",
     "activeTimersAria": "Aktif oturum ve salon zamanlayıcıları",
@@ -1605,7 +1606,7 @@
     "daisListed": "Dais (listelenmiştir)",
     "committeeCodeSecondGate": "Komite / oda kodu (ikinci kapı)",
     "seats": "Koltuklar",
-    "seatsFilledAllocated": "{dolduruldu} dolduruldu · {toplam} tahsis edildi",
+    "seatsFilledAllocated": "{filled} dolduruldu · {total} tahsis edildi",
     "resolutions": "Çözünürlükler",
     "openVotes": "Açık oylar",
     "editMetadataIntro": "Komite oturumu meta verilerini ve başkan adlarını altında düzenleyin",
@@ -1694,10 +1695,10 @@
     "clearAllConfirm": "Her pankart için iltifat, endişe ve hatırlatma notlarını net bir şekilde açıkladınız mı? Bu, paylaşılan komite kopyasını günceller.",
     "addedToSpeakerList": "{country} konuşmacı listesine eklendi.",
     "searchCountry": "Ülkeyi ara...",
-    "roomStats": "{pankart} pankart · sandalye notları içeren {işaretli} · {count} için rulo kaydedildi",
+    "roomStats": "{placards} pankart · sandalye notları içeren {flagged} · {count} için rulo kaydedildi",
     "loading": "Yükleniyor...",
     "noDelegationsMatch": "Aramanızla eşleşen heyet yok.",
-    "rollPrefix": "Rulo {etiket}",
+    "rollPrefix": "Rulo {label}",
     "linkedAccount": "Bağlı hesap",
     "vacantPlacard": "Boş pankart",
     "delegateProfile": "Temsilci profili ->",
@@ -2086,7 +2087,7 @@
       "couldNotParseCsv": "CSV ayrıştırılamadı.",
       "noDataRowsFound": "Hiçbir veri satırı bulunamadı (satır başına en az bir ülke/pozisyon gereklidir).",
       "importLimitedRows": "İçe aktarma {max} satırla sınırlıdır. Dosyanızı bölün.",
-      "rowTooLong": "Satır çok uzun: {satır}…",
+      "rowTooLong": "Satır çok uzun: {row}…",
       "codeTooLongOnRow": "Satırdaki kod çok uzun: {row}",
       "chairSeatsCannotBeDeleted": "Başkan ve Eşbaşkan koltukları her komitede kalır."
     },
@@ -2166,9 +2167,9 @@
       "welcomeLine3": "Yerde görüşürüz.",
       "chairReminderSubject": "Delege tahsis talebi onay bekliyor",
       "chairReminderLine1": "Bir delege tahsis talebinde bulundu ve başkanın incelemesine ihtiyacı var.",
-      "chairReminderConference": "Konferans: {konferans}",
+      "chairReminderConference": "Konferans: {conference}",
       "chairReminderAllocation": "Talep edilen tahsis: {country}",
-      "chairReminderDelegate": "Temsilci: {isim}",
+      "chairReminderDelegate": "Temsilci: {name}",
       "chairReminderEmail": "Hesap e-postası: {email}",
       "chairReminderLine2": "Lütfen bu talebi sandalye tahsis matrisinde onaylayın veya reddedin:"
     }
@@ -2369,7 +2370,7 @@
     "committeeFallback": "Komite",
     "showingOneCommitteeAtATime": "Her seferinde bir komite gösteriliyor. Alt sekmeleri kullanarak komiteyi değiştirin.",
     "editPlacardCodesSheet": "Afiş kodları sayfasını düzenle ->",
-    "rosterHeading": "Kadro · {başlık}",
+    "rosterHeading": "Kadro · {heading}",
     "seatsSummary": "{count} koltuk.",
     "linkedDelegatesCannotBeDeleted": "Bağlantılı delegeler burada silinemez.",
     "secretariatParliamentarianSeat": "Milletvekili · Koltuk {seat}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "Komite",
     "intro": {
-      "scoringMatches": "Puanlama <dashboard>SEAMUNs kontrol paneli</dashboard> ile eşleşir: her kriter için <beginning>Başlangıç</begin>, <developing>Gelişiyor</developing>, <proficient>Yeterli</proficient> veya <exemplary>Örnek</examplary> seçeneğini seçin. İlk 2'yi kanıtla birlikte gönderin; SMT nihai ödülleri onayladı.",
+      "scoringMatches": "Puanlama <dashboard>SEAMUNs kontrol paneli</dashboard> ile eşleşir: her kriter için <beginning>Başlangıç</beginning>, <developing>Gelişiyor</developing>, <proficient>Yeterli</proficient> veya <exemplary>Örnek</exemplary> seçeneğini seçin. İlk 2'yi kanıtla birlikte gönderin; SMT nihai ödülleri onayladı.",
       "submissionRulePrefix": "SMT'ye gönderim manuel (aşağıdaki düğme) veya otomatiktir.",
       "submissionRuleSuffix": "Bu sayfayı bir sonraki açışınızda UTC (gerekli tüm alanlar tamamlanmışsa).",
       "steps": {
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "Bu temsilciyi kaydet",
     "autosaved": "Otomatik kaydedildi",
     "autosaveFailed": "Otomatik kaydetme başarısız oldu",
-    "autosavedWithCountry": "Otomatik kaydedildi — {ülke}",
+    "autosavedWithCountry": "Otomatik kaydedildi — {country}",
     "delegateFallback": "temsilci",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "senin komiten",
     "fallbackCommittee": "Komite",
-    "welcome": "Hoş geldiniz, {komite} Başkanı",
+    "welcome": "Hoş geldiniz, {committee} Başkanı",
     "featureStrip": "Dijital Oda · Hareketler · Oylama · Konuşmacılar",
     "activeCommitteeLine": "Aktif komite: <line></line>. Oturum verileri hesabınız aracılığıyla senkronize edilir; hazırlık/akış kontrol listeleri ve Hareketler ve Noktalar bu komite için bu tarayıcıya kaydedilir - <seamuns>SEAMUNs Başkanlık Odası</seamuns> ile aynı fikir.",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "Maksimum {puan} puan",
+    "maxPoints": "Maksimum {points} puan",
     "reference": {
       "title": "SEAMUN I resmi ödül değerlendirme listeleri",
       "description": "Referans kopyası: ödül türleri, değerlendirme süreci ve tam 1-8 bant matrisleri (konferans değerlendirme tablosundan). InterMUN'daki puanlama, adaylıkların sunulduğu aynı kriter anahtarlarını kullanır."
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Google Dokümanı bağlantısı yok",
     "clauseEditor": "Madde düzenleyici",
     "noClausesYet": "Henüz hüküm yok.",
-    "clauseNumber": "Madde {sayı}",
+    "clauseNumber": "Madde {number}",
     "saveClause": "Maddeyi kaydet",
     "delete": "Silmek",
     "addClausePlaceholder": "Yeni bir madde ekle...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Profilinizdeki ödüller",
-      "rank": "rütbe",
+      "rank": "sıra {rank}",
       "pending": {
         "tab": "Bekleyen adaylıklar",
         "title": "Başkanlık adaylıkları bekleniyor",
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "Disiplin durumu (özel)",
-      "statusLine": "Uyarılar: {warnings} · İhtarlar: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
+      "statusLine": "Uyarılar: {warnings} · İhtarlar: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "oylama devre dışı bırakıldı",
       "speakingSuspended": "konuşma askıya alındı",
       "removedFromCommittee": "komiteden çıkarıldı",
@@ -3444,7 +3445,7 @@
       "title": "Önizleme",
       "yourName": "Adınız",
       "usernameNotSet": "Kullanıcı adı ayarlanmadı",
-      "gradeValue": "Sınıf {derece}",
+      "gradeValue": "Sınıf {grade}",
       "awards": "Ödüller"
     },
     "profilePicture": "Profil resmi",
@@ -3751,7 +3752,7 @@
           "definition": "Toplulukların ve kurumların şokları absorbe etme ve etkili bir şekilde toparlanma kapasitesi."
         }
       },
-      "topicLine": "Konu: {konu}"
+      "topicLine": "Konu: {topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,9 +4282,9 @@
     "add": "Eklemek",
     "noIdeasYet": "Henüz fikir yok.",
     "ideaLabel": "Fikir",
-    "ideaFallback": "Fikir {sayı}",
+    "ideaFallback": "Fikir {number}",
     "linkedDoc": "Bağlantılı doküman",
-    "addedOn": "{tarih} eklendi",
+    "addedOn": "{date} eklendi",
     "edit": "Düzenlemek",
     "delete": "Silmek",
     "ideaDocument": "Fikir belgesi",
@@ -4363,7 +4364,7 @@
     "searchHint": "Odadaki eşleşmeleri vurgulamak için bir ülke, temsilci adı, okul, zamir veya \"boş\" yazın. İlk maça atlamak için Enter'a basın; Esc temizlenir. Boş koltuklara atlamak için Boş'a tıklayın.",
     "findLabel": "Bir delegasyon veya dais üyesi bulun",
     "searchPlaceholder": "Ülke, isim, okul...",
-    "matchesCount": "{toplam} koltuktan {matches} tanesi eşleşiyor",
+    "matchesCount": "{total} koltuktan {matches} tanesi eşleşiyor",
     "enterScrolls": "Parşömenleri girin",
     "typeToFilterHint": "Filtrelemek için yazın - İlk eşleşme için kaydırmaları girin",
     "noMatches": "Eşleşen delegasyon veya kürsü koltuğu yok.",
@@ -4372,9 +4373,9 @@
     "staffSeatsHeading": "Personel - koltuklar",
     "searchAria": "Heyetleri arayın",
     "virtualRoomVacant": "Boş",
-    "profileAria": "Profili görüntüle: {ülke}",
+    "profileAria": "Profili görüntüle: {country}",
     "vacantSeatAria": "Boş koltuk",
-    "placardAria": "Afiş {ülke}",
+    "placardAria": "Afiş {country}",
     "gavelAria": "Tokmak",
     "viewProfileAria": "Profili görüntüle: {title}",
     "noProfileLinkAria": "{title} (profil bağlantısı yok)",
@@ -4416,7 +4417,7 @@
       "motioner": "Hareket ettirici",
       "majority": "Çoğunluk",
       "majoritySimple": "Basit",
-      "tally": "Evet {evet} - Hayır {hayır} - Toplam {toplam}",
+      "tally": "Evet {yes} - Hayır {no} - Toplam {total}",
       "help": "Kürsü her delegasyonun oturumdaki oylarını kaydeder. Önerge oylarında yalnızca Evet veya Hayır kullanılır (çekimser yok). Toplamlar yalnızca Evet veya Hayır'ın kaydedildiği pankartları sayar; bulunmayan delegasyonlar atlanır."
     },
     "activeMotion": {
@@ -4433,7 +4434,7 @@
       "speakerTimeLeftTotal": "Konuşmacı süresi (sol / toplam)",
       "perSpeaker": "(konuşmacı başına)",
       "paused": "(duraklatıldı)",
-      "pauseReason": "Duraklat: {neden}"
+      "pauseReason": "Duraklat: {reason}"
     },
     "floorStatus": {
       "sessionTime": "Oturum süresi",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(en az 1 dakika)",
       "endAtLocalTime": "Bitiş tarihi (yerel saat)",
       "stopSession": "Oturumu durdur",
+      "smtProgressReminderTitle": "Bu oturumda SMT'yi güncelleyin",
+      "smtProgressReminderBody": "Sekretaryanın komitenin nasıl gittiğini ve neleri takip etmesi gerektiğini bilmesi için kısa bir ilerleme notu gönderin.",
+      "smtProgressReminderWrite": "Bir not yaz",
+      "smtProgressReminderDismiss": "Daha sonra",
       "saveLimit": "Sınırı kaydet",
       "saveLimitHelp": "Oturum zaten çalışırken, oturumu durdurmadan güncellenen sınır ayarlarını uygular.",
       "startSession": "Oturumu başlat",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Kenar çubuğunu şunun için kullanın:",
       "rollCall": "Yoklama",
       "agenda": "Gündem",
@@ -4509,11 +4518,7 @@
       "timer": "Zamanlayıcı",
       "sidebarAnd": "Ve",
       "announcements": "Duyurular",
-      "sidebarUseSuffix": "— sekme başına bir araç.",
-      "smtProgressReminderTitle": "Bu oturumda SMT'yi güncelleyin",
-      "smtProgressReminderBody": "Sekretaryanın komitenin nasıl gittiğini ve neleri takip etmesi gerektiğini bilmesi için kısa bir ilerleme notu gönderin.",
-      "smtProgressReminderWrite": "Bir not yaz",
-      "smtProgressReminderDismiss": "Daha sonra"
+      "sidebarUseSuffix": "— sekme başına bir araç."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "Silmek",
       "deleteConfirm": "Bu oturum geçmişten silinsin mi?",
       "sessionNamePrompt": "Oturum adı",
-      "rangeClosed": "{menzil}",
-      "rangeOngoing": "{aralık} -> Devam Ediyor"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Devam Ediyor"
     },
     "timerPage": {
       "title": "Zamanlayıcı",

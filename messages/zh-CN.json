@@ -187,7 +187,7 @@
     "rollPresentVoting": "出席并投票",
     "rollPresentVotingTitle": "出席并投票——必须投票，不能弃权",
     "rollAbsent": "缺席的",
-    "rollCallForCountry": "{国家}点名",
+    "rollCallForCountry": "{country}点名",
     "presetCustom": "风俗",
     "presetSetAgenda": "设定议程的动议",
     "presetExtendOpeningSpeech": "延长开幕致辞时间的动议",
@@ -407,7 +407,7 @@
     "saveEdits": "保存编辑",
     "deleteMotionConfirm": "永久删除此动议吗？ 所有记录的投票都将被删除，该动议将从记录中消失。",
     "deleteMotion": "删除动作",
-    "tallyLine": "计数：是{是} | 没有{没有}| 选票{总计}",
+    "tallyLine": "计数：是{yes} | 没有{no}| 选票{total}",
     "ballotsHelp": "选票 = 标有“是”或“否”的标语牌（弃权票单独记录，不计入此分母）。 清除删除记录投票。 对于程序性动议，结果将“是”与登记在册的成员进行比较（请参阅点名部分）。",
     "recordVotesLabel": "记录投票",
     "currentMotion": "当前运动",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "主席将每个位置保存为乐谱页面上的草稿。 这些草稿未在此处显示。 每个所需的位置完成后，主席必须单击“向 SMT 提交提名”，然后该表中的行将显示为等待审核。",
     "noRowsForCommittee": "该委员会没有待处理的行。 选择",
     "orAnotherTab": "或另一个选项卡。",
-    "topRank": "最高{排名}",
+    "topRank": "最高{rank}",
     "bandInitialsTitle": "乐队缩写：B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "最佳代表（委员会）",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "输入组织者提供的会议代码（至少 4 个字符）。",
     "eventCodeMissing": "没有会议与该代码匹配。 与组织者检查拼写。",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "您必须登录。",
     "committeeCodeInvalid": "输入 6 个字符的委员会代码（仅限字母和数字，例如 ECO741）。 询问您的主席或检查 SMT -> 房间代码。",
     "enterConferenceFirst": "首先输入您的会议代码（返回上一步）。",
@@ -1337,7 +1338,7 @@
     "sessionsCount": "{count, plural, other {# 场会议}}",
     "topicLabel": "话题：",
     "chairsLabel": "椅子：",
-    "committeeLogoAlt": "{名称}标志",
+    "committeeLogoAlt": "{name}标志",
     "eslFriendly": "ESL 友好",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "发言时间（左/总）",
     "perSpeaker": "（每个发言者）",
     "paused": "（停顿）",
-    "pauseReason": "暂停：{原因}",
+    "pauseReason": "暂停：{reason}",
     "dash": "—",
     "activeTimers": "进行中的计时器",
     "activeTimersAria": "会期与会场计时器",
@@ -1605,7 +1606,7 @@
     "daisListed": "讲台（已列出）",
     "committeeCodeSecondGate": "委员会/房间代码（第二门）",
     "seats": "座位数",
-    "seatsFilledAllocated": "{已填充}已填充·已分配的{总计}",
+    "seatsFilledAllocated": "{filled}已填充·已分配的{total}",
     "resolutions": "决议",
     "openVotes": "公开投票",
     "editMetadataIntro": "编辑委员会会议元数据和主席姓名",
@@ -1694,10 +1695,10 @@
     "clearAllConfirm": "每张标语牌都有清晰的赞美、关心和提醒注释？这会更新共享委员会副本。",
     "addedToSpeakerList": "{country} 已添加到演讲者列表。",
     "searchCountry": "搜索国家...",
-    "roomStats": "{标语牌} 标语牌 · {已标记} 带有主席注释 · 已记录 {count} 个点名",
+    "roomStats": "{placards} 标语牌 · {flagged} 带有主席注释 · 已记录 {count} 个点名",
     "loading": "加载中...",
     "noDelegationsMatch": "没有与您的搜索匹配的代表团。",
-    "rollPrefix": "卷{标签}",
+    "rollPrefix": "卷{label}",
     "linkedAccount": "关联账户",
     "vacantPlacard": "空置标语牌",
     "delegateProfile": "代表简介 ->",
@@ -2086,7 +2087,7 @@
       "couldNotParseCsv": "无法解析 CSV。",
       "noDataRowsFound": "未找到数据行（每行至少需要一个国家/地区/位置）。",
       "importLimitedRows": "导入限制为 {max} 行。 分割你的文件。",
-      "rowTooLong": "行太长：{行}...",
+      "rowTooLong": "行太长：{row}...",
       "codeTooLongOnRow": "行中的代码太长：{row}",
       "chairSeatsCannotBeDeleted": "每个委员会均保留主席和联合主席席位。"
     },
@@ -2110,7 +2111,7 @@
       "missingServiceRoleKey": "服务器缺少 SUPABASE_SERVICE_ROLE_KEY。 将其添加到部署环境中（切勿暴露给浏览器）。",
       "missingPublicAppUrl": "将 NEXT_PUBLIC_APP_URL 设置为您的公共站点 URL（例如 https://your-app.vercel.app），以便邀请链接正确重定向。",
       "emailAlreadyHasAccount": "该电子邮件已经有一个帐户。 使用下面的“授予主席角色”，而不是发送另一个邀请。",
-      "inviteSentButRoleSetFailed": "邀请已发送，但无法在个人资料上设置主席角色：{错误}。 在他们接受后使用“授予主席角色”。",
+      "inviteSentButRoleSetFailed": "邀请已发送，但无法在个人资料上设置主席角色：{error}。 在他们接受后使用“授予主席角色”。",
       "inviteSentButAllocationFailed": "已发送邀请并设置主席角色，但讲台座位无法链接：{error}。 Fix the allocation matrix or contact support.",
       "inviteSentSuccess": "邀请电子邮件已发送至 {email}。 设置密码后，他们将成为一把椅子。",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
@@ -2166,9 +2167,9 @@
       "welcomeLine3": "地板上见。",
       "chairReminderSubject": "代表分配请求等待批准",
       "chairReminderLine1": "一位代表请求分配并需要主席审查。",
-      "chairReminderConference": "会议：{会议}",
-      "chairReminderAllocation": "请求的分配：{国家}",
-      "chairReminderDelegate": "代表：{姓名}",
+      "chairReminderConference": "会议：{conference}",
+      "chairReminderAllocation": "请求的分配：{country}",
+      "chairReminderDelegate": "代表：{name}",
       "chairReminderEmail": "帐户电子邮件：{email}",
       "chairReminderLine2": "请在主席分配矩阵中批准或拒绝此请求："
     }
@@ -2369,7 +2370,7 @@
     "committeeFallback": "委员会",
     "showingOneCommitteeAtATime": "一次显示一个委员会。 使用底部选项卡切换委员会。",
     "editPlacardCodesSheet": "编辑标语牌代码表 ->",
-    "rosterHeading": "名册·{标题}",
+    "rosterHeading": "名册·{heading}",
     "seatsSummary": "{count} 个座位。",
     "linkedDelegatesCannotBeDeleted": "此处无法删除链接的代表。",
     "secretariatParliamentarianSeat": "议员 · 席位 {seat}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "委员会",
     "intro": {
-      "scoringMatches": "评分与 <dashboard>SEAMUNs 仪表板</dashboard> 相匹配：对于每个标准，选择 <beginning>Beginning</beginning>、<development>Developing</developing>、<proficient>Proficient</proficient> 或 <exemplary>Exemplary</exemplary>。 提交前 2 名并提供证据； SMT 确认最终奖项。",
+      "scoringMatches": "评分与 <dashboard>SEAMUNs 仪表板</dashboard> 相匹配：对于每个标准，选择 <beginning>Beginning</beginning>、<developing>Developing</developing>、<proficient>Proficient</proficient> 或 <exemplary>Exemplary</exemplary>。 提交前 2 名并提供证据； SMT 确认最终奖项。",
       "submissionRulePrefix": "提交到 SMT 是手动（下面的按钮）或之后自动提交",
       "submissionRuleSuffix": "您下次打开此页面时的 UTC（如果所有必需的槽位均已完成）。",
       "steps": {
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "保存该代表",
     "autosaved": "自动保存",
     "autosaveFailed": "自动保存失败",
-    "autosavedWithCountry": "自动保存 - {国家/地区}",
+    "autosavedWithCountry": "自动保存 - {country}",
     "delegateFallback": "代表",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "你的委员会",
     "fallbackCommittee": "委员会",
-    "welcome": "欢迎，{委员会}主席",
+    "welcome": "欢迎，{committee}主席",
     "featureStrip": "数字室·动议·投票·发言",
     "activeCommitteeLine": "活跃委员会：<line></line>。 会话数据通过您的帐户同步； 该委员会的准备/流程清单以及动议和要点均保存在该浏览器中 - 与 <seamuns>SEAMUN 主席室</seamuns> 的想法相同。",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "最大{点}分",
+    "maxPoints": "最大{points}分",
     "reference": {
       "title": "SEAMUN I 官方奖励细则",
       "description": "参考文案：奖项类型、评估流程以及完整的 1-8 级矩阵（来自会议标题）。 InterMUN 的评分使用与提交提名相同的标准。"
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "没有 Google 文档链接",
     "clauseEditor": "条款编辑",
     "noClausesYet": "还没有条款。",
-    "clauseNumber": "条款{编号}",
+    "clauseNumber": "条款{number}",
     "saveClause": "保存条款",
     "delete": "删除",
     "addClausePlaceholder": "添加新条款...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "您的个人资料中的奖项",
-      "rank": "排名{排名}",
+      "rank": "排名{rank}",
       "pending": {
         "tab": "待定提名",
         "title": "待定主席提名",
@@ -3433,18 +3434,18 @@
     },
     "discipline": {
       "title": "纪律状况（私人）",
-      "statusLine": "警告：{警告} · 罢工：{strikes}{votingDisabled}{speakingSuspished}{removedFromCommittee}",
+      "statusLine": "警告：{warnings} · 罢工：{strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "禁用投票",
       "speakingSuspended": "发言暂停",
       "removedFromCommittee": "从委员会中除名",
-      "updated": "更新：{值}"
+      "updated": "更新：{value}"
     },
     "preview": {
       "ariaLabel": "个人资料预览",
       "title": "预览",
       "yourName": "你的名字",
       "usernameNotSet": "用户名未设置",
-      "gradeValue": "年级{年级}",
+      "gradeValue": "年级{grade}",
       "awards": "奖项"
     },
     "profilePicture": "个人资料图片",
@@ -3751,7 +3752,7 @@
           "definition": "社区和机构吸收冲击和有效恢复的能力。"
         }
       },
-      "topicLine": "主题：{主题}"
+      "topicLine": "主题：{topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,9 +4282,9 @@
     "add": "添加",
     "noIdeasYet": "还没有想法。",
     "ideaLabel": "主意",
-    "ideaFallback": "想法{编号}",
+    "ideaFallback": "想法{number}",
     "linkedDoc": "链接文档",
-    "addedOn": "添加了{日期}",
+    "addedOn": "添加了{date}",
     "edit": "编辑",
     "delete": "删除",
     "ideaDocument": "想法文件",
@@ -4372,9 +4373,9 @@
     "staffSeatsHeading": "工作人员-座位",
     "searchAria": "搜索代表团",
     "virtualRoomVacant": "空缺",
-    "profileAria": "查看个人资料：{国家}",
+    "profileAria": "查看个人资料：{country}",
     "vacantSeatAria": "空座",
-    "placardAria": "标语牌{国家}",
+    "placardAria": "标语牌{country}",
     "gavelAria": "木槌",
     "viewProfileAria": "查看个人资料：{title}",
     "noProfileLinkAria": "{title}（无个人资料链接）",
@@ -4433,13 +4434,13 @@
       "speakerTimeLeftTotal": "发言时间（左/总）",
       "perSpeaker": "（每个发言者）",
       "paused": "（停顿）",
-      "pauseReason": "暂停：{原因}"
+      "pauseReason": "暂停：{reason}"
     },
     "floorStatus": {
       "sessionTime": "会议时间",
       "sessionNotStarted": "会话未开始",
       "limit": "限制",
-      "limitRemaining": "还剩 {值}",
+      "limitRemaining": "还剩 {value}",
       "limitOverBy": "超过 {value}",
       "quickLinkSession": "会议",
       "quickLinkRoll": "卷",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "（最少 1 分钟）",
       "endAtLocalTime": "结束于（当地时间）",
       "stopSession": "停止会话",
+      "smtProgressReminderTitle": "更新此会话的 SMT",
+      "smtProgressReminderBody": "发送简短的进度说明，以便秘书处了解委员会的进展情况以及后续工作。",
+      "smtProgressReminderWrite": "写一个注释",
+      "smtProgressReminderDismiss": "之后",
       "saveLimit": "保存限额",
       "saveLimitHelp": "在会话已运行时应用更新的限制设置，而不停止会话。",
       "startSession": "开始会话",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "使用侧边栏",
       "rollCall": "点名",
       "agenda": "议程",
@@ -4509,11 +4518,7 @@
       "timer": "定时器",
       "sidebarAnd": "和",
       "announcements": "公告",
-      "sidebarUseSuffix": "— 每个选项卡一个工具。",
-      "smtProgressReminderTitle": "更新此会话的 SMT",
-      "smtProgressReminderBody": "发送简短的进度说明，以便秘书处了解委员会的进展情况以及后续工作。",
-      "smtProgressReminderWrite": "写一个注释",
-      "smtProgressReminderDismiss": "之后"
+      "sidebarUseSuffix": "— 每个选项卡一个工具。"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "删除",
       "deleteConfirm": "从历史记录中删除此会话吗？",
       "sessionNamePrompt": "会话名称",
-      "rangeClosed": "{范围}",
-      "rangeOngoing": "{范围} -> 正在进行"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> 正在进行"
     },
     "timerPage": {
       "title": "定时器",

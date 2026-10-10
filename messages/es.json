@@ -187,7 +187,7 @@
     "rollPresentVoting": "Presente y votando",
     "rollPresentVotingTitle": "Presente y votante: debe votar, no puede abstenerse",
     "rollAbsent": "Ausente",
-    "rollCallForCountry": "Pase de lista para {país}",
+    "rollCallForCountry": "Pase de lista para {country}",
     "presetCustom": "Costumbre",
     "presetSetAgenda": "Moción para establecer la agenda",
     "presetExtendOpeningSpeech": "Moción para ampliar el tiempo del discurso de apertura",
@@ -407,7 +407,7 @@
     "saveEdits": "Guardar ediciones",
     "deleteMotionConfirm": "¿Eliminar esta moción permanentemente? Todos los votos registrados serán eliminados y la moción desaparecerá del expediente.",
     "deleteMotion": "Eliminar movimiento",
-    "tallyLine": "Conteo: Sí {sí} | No {no} | Boletas {total}",
+    "tallyLine": "Conteo: Sí {yes} | No {no} | Boletas {total}",
     "ballotsHelp": "Boletas = carteles con un Sí o No registrado (la abstención se rastrea por separado y no se cuenta en este denominador). Borrar elimina una votación registrada. Para las mociones procesales, el resultado se compara Sí con los miembros presentes en la lista (consulte la sección pasar lista).",
     "recordVotesLabel": "Votos récord",
     "currentMotion": "movimiento actual",
@@ -636,7 +636,7 @@
     "welcomeSignup": "Primero ingrese su código de conferencia, elija cómo participar y luego cree su cuenta.",
     "welcomeLogin": "Primero ingrese su código de conferencia, elija cómo participar y luego inicie sesión.",
     "conferenceTitle": "Únase a su conferencia",
-    "conferenceDescription": "Introduzca el código de conferencia de sus organizadores. A continuación elegirás tu rol y luego {modo}.",
+    "conferenceDescription": "Introduzca el código de conferencia de sus organizadores. A continuación elegirás tu rol y luego {mode}.",
     "conferenceCode": "código de conferencia",
     "conferenceCodeHelp": "Código de toda la conferencia (todos los comités). Espacios ignorados; la coincidencia no distingue entre mayúsculas y minúsculas.",
     "checking": "De cheques…",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "Los presidentes guardan cada espacio como borrador en la página Puntuación. Esos borradores no se muestran aquí. Una vez que se completen todos los espacios requeridos, el presidente debe hacer clic en Enviar nominaciones a SMT; luego, las filas aparecerán en esta tabla como pendientes de revisión.",
     "noRowsForCommittee": "No hay filas pendientes para este comité. Elegir",
     "orAnotherTab": "u otra pestaña.",
-    "topRank": "Top {clasificación}",
+    "topRank": "Top {rank}",
     "bandInitialsTitle": "Iniciales de la banda: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Mejor delegado (comité)",
@@ -820,7 +820,7 @@
     "joinCommitteeDescription": "Ingrese el código de su comité para esta conferencia. Ya deberías haber ingresado el código de la conferencia en la pantalla anterior.",
     "wrongConference": "¿Conferencia equivocada? Ingrese un código de conferencia diferente",
     "openLatestCommittee": "SMT: abrir el último comité (omitir códigos)",
-    "openLatestCommitteeHelp": "Abre la sesión {código} cuando existe (después del código de conferencia SEAMUNI2027). Los presidentes de la tribuna deben ingresar sus códigos de comité arriba.",
+    "openLatestCommitteeHelp": "Abre la sesión {code} cuando existe (después del código de conferencia SEAMUNI2027). Los presidentes de la tribuna deben ingresar sus códigos de comité arriba.",
     "setupConferenceSmtOnly": "Configurar una nueva conferencia (solo SMT)",
     "setupConferenceHelp": "Crea el código de conferencia y el código del primer comité. Los presidentes administran los códigos de comité desde Presidente -> Código de comité después de que SMT crea el evento.",
     "staffErrNoConferences": "Aún no hay conferencias. SMT puede configurar una nueva conferencia a continuación o agregar filas en Supabase/ejecutar seed.sql.",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Ingrese el código de conferencia de sus organizadores (al menos 4 caracteres).",
     "eventCodeMissing": "Ninguna conferencia coincide con ese código. Revisa la ortografía con tus organizadores.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Debes estar registrado.",
     "committeeCodeInvalid": "Ingrese el código del comité de 6 caracteres (solo letras y dígitos, por ejemplo, ECO741). Pregunte a su presidente o consulte SMT -> Códigos de habitación.",
     "enterConferenceFirst": "Primero ingrese su código de conferencia (regrese al paso anterior).",
@@ -913,7 +914,7 @@
     "allocationTakenBody": "{country} ya ha sido reclamado por otra cuenta. Elija una asignación diferente.",
     "submitFailedTitle": "No se pudo enviar la solicitud",
     "requestSubmittedTitle": "Solicitud de registro enviada",
-    "requestSubmittedBody": "Su solicitud para {país} se envió al presidente del comité para su aprobación.",
+    "requestSubmittedBody": "Su solicitud para {country} se envió al presidente del comité para su aprobación.",
     "requestSubmittedHint": "Una vez aprobado, vuelva a abrir este enlace o continúe con el inicio de sesión del comité para continuar.",
     "continueCommitteeSignIn": "Continuar con el inicio de sesión del comité"
   },
@@ -1337,7 +1338,7 @@
     "sessionsCount": "{count, plural, one {# sesión} other {# sesiones}}",
     "topicLabel": "Tema:",
     "chairsLabel": "Sillas:",
-    "committeeLogoAlt": "logotipo de {nombre}",
+    "committeeLogoAlt": "logotipo de {name}",
     "eslFriendly": "Compatible con ESL",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Tiempo del orador (izquierda/total)",
     "perSpeaker": "(por hablante)",
     "paused": "(en pausa)",
-    "pauseReason": "Pausa: {motivo}",
+    "pauseReason": "Pausa: {reason}",
     "dash": "—",
     "activeTimers": "Temporizadores activos",
     "activeTimersAria": "Temporizadores de sesión y de sala",
@@ -1605,7 +1606,7 @@
     "daisListed": "Estrado (listado)",
     "committeeCodeSecondGate": "Código de comité/sala (segunda puerta)",
     "seats": "Asientos",
-    "seatsFilledAllocated": "{llenado} lleno · {total} asignado",
+    "seatsFilledAllocated": "{filled} lleno · {total} asignado",
     "resolutions": "Resoluciones",
     "openVotes": "Votaciones abiertas",
     "editMetadataIntro": "Edite los metadatos de las sesiones del comité y los nombres de los presidentes en",
@@ -1692,12 +1693,12 @@
     "delegatesMatrix": "Matriz de delegados",
     "clearAllChairNotes": "Borrar todas las notas de la silla",
     "clearAllConfirm": "¿Notas claras de elogios, preocupaciones y recordatorios para cada cartel? Esto actualiza la copia compartida del comité.",
-    "addedToSpeakerList": "{país} agregado a la lista de oradores.",
+    "addedToSpeakerList": "{country} agregado a la lista de oradores.",
     "searchCountry": "Buscar país...",
     "roomStats": "{placards} carteles · {flagged} con notas de la presidencia · Rollo registrado para {count}",
     "loading": "Cargando...",
     "noDelegationsMatch": "Ninguna delegación coincide con su búsqueda.",
-    "rollPrefix": "Rollo {etiqueta}",
+    "rollPrefix": "Rollo {label}",
     "linkedAccount": "cuenta vinculada",
     "vacantPlacard": "cartel vacante",
     "delegateProfile": "Perfil del delegado ->",
@@ -2086,8 +2087,8 @@
       "couldNotParseCsv": "No se pudo analizar CSV.",
       "noDataRowsFound": "No se encontraron filas de datos (se necesita al menos un país/posición por línea).",
       "importLimitedRows": "Importación limitada a {max} filas. Divide tu archivo.",
-      "rowTooLong": "Fila demasiado larga: {fila}…",
-      "codeTooLongOnRow": "Código demasiado largo en la fila: {fila}",
+      "rowTooLong": "Fila demasiado larga: {row}…",
+      "codeTooLongOnRow": "Código demasiado largo en la fila: {row}",
       "chairSeatsCannotBeDeleted": "Los puestos de presidente y copresidente permanecen en todos los comités."
     },
     "smtStaffAccess": {
@@ -2151,7 +2152,7 @@
       "accountHasNoEmail": "Su cuenta no tiene ninguna dirección de correo electrónico establecida.",
       "rangeTodayUtc": "Hoy (UTC)",
       "rangeAllTime": "Todo el tiempo",
-      "emailSubject": "Exportación de materiales InterMUN ({rango})",
+      "emailSubject": "Exportación de materiales InterMUN ({range})",
       "emailSendConfigHint": "Configure SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS y, opcionalmente, MATERIALS_EXPORT_FROM en el servidor.",
       "exportEmailedTo": "Exportación enviada por correo electrónico a {email}. Si no lo ves, revisa spam/basura."
     }
@@ -2161,15 +2162,15 @@
       "signature": "InterMUN",
       "welcomeSubject": "Bienvenidos a InterMUN",
       "welcomeLine1": "Bienvenidos a InterMUN.",
-      "welcomeConfirmedFor": "Su cuenta de delegado ha sido confirmada para: {país}.",
+      "welcomeConfirmedFor": "Su cuenta de delegado ha sido confirmada para: {country}.",
       "welcomeLine2": "Ahora puede iniciar sesión en el comité y unirse a la sesión en vivo.",
       "welcomeLine3": "Nos vemos en el suelo.",
       "chairReminderSubject": "Solicitud de asignación de delegados pendiente de aprobación",
       "chairReminderLine1": "Un delegado ha solicitado una asignación y necesita una revisión del presidente.",
-      "chairReminderConference": "Conferencia: {conferencia}",
-      "chairReminderAllocation": "Asignación solicitada: {país}",
-      "chairReminderDelegate": "Delegada: {nombre}",
-      "chairReminderEmail": "Correo electrónico de la cuenta: {correo electrónico}",
+      "chairReminderConference": "Conferencia: {conference}",
+      "chairReminderAllocation": "Asignación solicitada: {country}",
+      "chairReminderDelegate": "Delegada: {name}",
+      "chairReminderEmail": "Correo electrónico de la cuenta: {email}",
       "chairReminderLine2": "Apruebe o rechace esta solicitud en la matriz de asignación de presidentes:"
     }
   },
@@ -2369,7 +2370,7 @@
     "committeeFallback": "Comité",
     "showingOneCommitteeAtATime": "Mostrando un comité a la vez. Cambie de comité utilizando las pestañas inferiores.",
     "editPlacardCodesSheet": "Editar hoja de códigos de carteles ->",
-    "rosterHeading": "Lista · {encabezado}",
+    "rosterHeading": "Lista · {heading}",
     "seatsSummary": "{count} asiento(s).",
     "linkedDelegatesCannotBeDeleted": "Las delegadas vinculadas no se pueden eliminar aquí.",
     "secretariatParliamentarianSeat": "Parlamentario · Escaño {seat}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "Comité",
     "intro": {
-      "scoringMatches": "La puntuación coincide con el <dashboard>panel de SEAMUNs</dashboard>: para cada criterio, elija <beginning>Principiante</beginning>, <developing>En desarrollo</developing>, <proficient>Competente</proficient> o <ejemplar>Ejemplar</ejemplar>. Enviar Top 2 con evidencia; SMT confirma las adjudicaciones finales.",
+      "scoringMatches": "La puntuación coincide con el <dashboard>panel de SEAMUNs</dashboard>: para cada criterio, elija <beginning>Principiante</beginning>, <developing>En desarrollo</developing>, <proficient>Competente</proficient> o <exemplary>Ejemplar</exemplary>. Enviar Top 2 con evidencia; SMT confirma las adjudicaciones finales.",
       "submissionRulePrefix": "El envío a SMT es manual (botón a continuación) o automático después",
       "submissionRuleSuffix": "UTC la próxima vez que abra esta página (si todos los espacios requeridos están completos).",
       "steps": {
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "Guardar este delegado",
     "autosaved": "Autoguardado",
     "autosaveFailed": "Error al guardar automáticamente",
-    "autosavedWithCountry": "Guardado automáticamente: {país}",
+    "autosavedWithCountry": "Guardado automáticamente: {country}",
     "delegateFallback": "delegar",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "su comité",
     "fallbackCommittee": "Comité",
-    "welcome": "Bienvenido, Presidente del {comité}",
+    "welcome": "Bienvenido, Presidente del {committee}",
     "featureStrip": "Sala Digital · Mociones · Votaciones · Ponentes",
     "activeCommitteeLine": "Comité activo: <line></line>. Los datos de la sesión se sincronizan a través de su cuenta; Las listas de verificación de preparación/flujo y las mociones y puntos se guardan en este navegador para este comité; la misma idea que <seamuns>Sala de presidencia de SEAMUN</seamuns>.",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "Máximo {puntos} puntos",
+    "maxPoints": "Máximo {points} puntos",
     "reference": {
       "title": "Rúbricas oficiales de premios SEAMUN I",
       "description": "Copia de referencia: tipos de premios, proceso de evaluación y matrices completas de 1 a 8 bandas (de la rúbrica de la conferencia). La puntuación en InterMUN utiliza las mismas claves de criterios donde se envían las nominaciones."
@@ -2802,7 +2803,7 @@
     "tierLow": "Bajo",
     "tierHigh": "Alta",
     "tierPromptLocked": "Bloqueado en: {band} - {tier} ({score})",
-    "tierPromptPick": "Elija bajo o alto dentro de {banda} (puntos en la escala del 1 al 8).",
+    "tierPromptPick": "Elija bajo o alto dentro de {band} (puntos en la escala del 1 al 8).",
     "criteria": {
       "creativity": {
         "label": "Creatividad",
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Sin enlace a Google Doc",
     "clauseEditor": "editor de cláusulas",
     "noClausesYet": "Aún no hay cláusulas.",
-    "clauseNumber": "Cláusula {número}",
+    "clauseNumber": "Cláusula {number}",
     "saveClause": "Cláusula de salvación",
     "delete": "Borrar",
     "addClausePlaceholder": "Añadir una nueva cláusula...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Premios en tu perfil",
-      "rank": "rango {rango}",
+      "rank": "rango {rank}",
       "pending": {
         "tab": "Nominaciones pendientes",
         "title": "Nominaciones pendientes para presidentes",
@@ -3433,18 +3434,18 @@
     },
     "discipline": {
       "title": "Estatus disciplinario (privado)",
-      "statusLine": "Advertencias: {advertencias} · Huelgas: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "statusLine": "Advertencias: {warnings} · Huelgas: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "votación discapacitada",
       "speakingSuspended": "hablando suspendido",
       "removedFromCommittee": "removido del comité",
-      "updated": "Actualizado: {valor}"
+      "updated": "Actualizado: {value}"
     },
     "preview": {
       "ariaLabel": "Vista previa del perfil",
       "title": "Avance",
       "yourName": "Su nombre",
       "usernameNotSet": "Nombre de usuario no establecido",
-      "gradeValue": "Grado {grado}",
+      "gradeValue": "Grado {grade}",
       "awards": "Premios"
     },
     "profilePicture": "Foto de perfil",
@@ -3529,7 +3530,7 @@
     "glossary": {
       "title": "Glosario de la Agenda MUN",
       "subtitle": "Terminología única que coincide con el código de su comité y los temas actuales de la agenda.",
-      "committeeCode": "Código del comité: {código}",
+      "committeeCode": "Código del comité: {code}",
       "sources": {
         "core": "centro",
         "committee": "comité",
@@ -3751,7 +3752,7 @@
           "definition": "Capacidad de las comunidades e instituciones para absorber las crisis y recuperarse eficazmente."
         }
       },
-      "topicLine": "Tema: {tema}"
+      "topicLine": "Tema: {topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,9 +4282,9 @@
     "add": "Agregar",
     "noIdeasYet": "Aún no hay ideas.",
     "ideaLabel": "Idea",
-    "ideaFallback": "Idea {número}",
+    "ideaFallback": "Idea {number}",
     "linkedDoc": "Doc vinculada",
-    "addedOn": "Añadido {fecha}",
+    "addedOn": "Añadido {date}",
     "edit": "Editar",
     "delete": "Borrar",
     "ideaDocument": "documento de ideas",
@@ -4363,7 +4364,7 @@
     "searchHint": "Escriba un país, nombre del delegado, escuela, pronombre o \"vacante\" para resaltar coincidencias en la sala. Presione Enter para saltar al primer partido; Esc se borra. Haga clic en Vacante para saltar a los asientos vacíos.",
     "findLabel": "Encuentre una delegación o miembro del estrado",
     "searchPlaceholder": "País, nombre, escuela...",
-    "matchesCount": "{partidos} de {total} asientos coinciden",
+    "matchesCount": "{matches} de {total} asientos coinciden",
     "enterScrolls": "Introduzca pergaminos",
     "typeToFilterHint": "Escribe para filtrar: ingresa los desplazamientos hasta la primera coincidencia",
     "noMatches": "No hay delegaciones ni asientos en el estrado que coincidan.",
@@ -4372,12 +4373,12 @@
     "staffSeatsHeading": "Personal - asientos",
     "searchAria": "Buscar delegaciones",
     "virtualRoomVacant": "Vacante",
-    "profileAria": "Ver perfil: {país}",
+    "profileAria": "Ver perfil: {country}",
     "vacantSeatAria": "asiento vacante",
-    "placardAria": "Cartel {país}",
+    "placardAria": "Cartel {country}",
     "gavelAria": "Mazo",
-    "viewProfileAria": "Ver perfil: {título}",
-    "noProfileLinkAria": "{título} (sin enlace de perfil)",
+    "viewProfileAria": "Ver perfil: {title}",
+    "noProfileLinkAria": "{title} (sin enlace de perfil)",
     "committeeFloor": "piso del comité",
     "virtualRoomFigureAria": "Sala de comité virtual: {committeeName} ({conferenceName})",
     "filteringLiveRegion": "Filtrado de delegaciones. El primer asiento resaltado es el primer combate en el ring.",
@@ -4416,7 +4417,7 @@
       "motioner": "Motioner",
       "majority": "Mayoría",
       "majoritySimple": "Sencilla",
-      "tally": "Sí {sí} - No {no} - Total {total}",
+      "tally": "Sí {yes} - No {no} - Total {total}",
       "help": "El estrado registra el voto de cada delegación en la sesión. Los votos de moción usan Sí o No únicamente (los no se abstienen). Los totales cuentan sólo los carteles donde se registró Sí o No; Se omiten las delegaciones ausentes."
     },
     "activeMotion": {
@@ -4433,14 +4434,14 @@
       "speakerTimeLeftTotal": "Tiempo del orador (izquierda/total)",
       "perSpeaker": "(Por oradora)",
       "paused": "(en pausa)",
-      "pauseReason": "Pausa: {motivo}"
+      "pauseReason": "Pausa: {reason}"
     },
     "floorStatus": {
       "sessionTime": "tiempo de sesión",
       "sessionNotStarted": "Sesión no iniciada",
       "limit": "Límite",
-      "limitRemaining": "{valor} restante",
-      "limitOverBy": "más de {valor}",
+      "limitRemaining": "{value} restante",
+      "limitOverBy": "más de {value}",
       "quickLinkSession": "Sesión",
       "quickLinkRoll": "Rollo",
       "quickLinkAgenda": "Orden del día",
@@ -4476,7 +4477,7 @@
       "startedLabel": "Comenzó:",
       "timeInLabel": "Hora en:",
       "timeUntilEndLabel": "Tiempo hasta el final:",
-      "overByValue": "más de {valor}",
+      "overByValue": "más de {value}",
       "modeLabel": "Modo:",
       "modeStopwatchNoLimit": "Cronómetro (sin límite de tiempo)",
       "sessionNotRunning": "La sesión no se está ejecutando.",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(mínimo 1 minuto)",
       "endAtLocalTime": "Finaliza a las (hora local)",
       "stopSession": "Detener sesión",
+      "smtProgressReminderTitle": "Actualizar SMT en esta sesión",
+      "smtProgressReminderBody": "Envíe una breve nota de progreso para que la secretaría sepa cómo le fue al comité y a qué dar seguimiento.",
+      "smtProgressReminderWrite": "escribe una nota",
+      "smtProgressReminderDismiss": "Más tarde",
       "saveLimit": "Límite de ahorro",
       "saveLimitHelp": "Aplica configuraciones de límites actualizadas mientras la sesión ya se está ejecutando, sin detener la sesión.",
       "startSession": "Iniciar sesión",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Utilice la barra lateral para",
       "rollCall": "pasar lista",
       "agenda": "Orden del día",
@@ -4509,11 +4518,7 @@
       "timer": "Minutero",
       "sidebarAnd": "y",
       "announcements": "Anuncios",
-      "sidebarUseSuffix": "— una herramienta por pestaña.",
-      "smtProgressReminderTitle": "Actualizar SMT en esta sesión",
-      "smtProgressReminderBody": "Envíe una breve nota de progreso para que la secretaría sepa cómo le fue al comité y a qué dar seguimiento.",
-      "smtProgressReminderWrite": "escribe una nota",
-      "smtProgressReminderDismiss": "Más tarde"
+      "sidebarUseSuffix": "— una herramienta por pestaña."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "Borrar",
       "deleteConfirm": "¿Eliminar esta sesión del historial?",
       "sessionNamePrompt": "Nombre de la sesión",
-      "rangeClosed": "{rango}",
-      "rangeOngoing": "{rango} -> En curso"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> En curso"
     },
     "timerPage": {
       "title": "Minutero",

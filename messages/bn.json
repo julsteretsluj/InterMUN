@@ -407,7 +407,7 @@
     "saveEdits": "সম্পাদনা সংরক্ষণ করুন",
     "deleteMotionConfirm": "এই গতি স্থায়ীভাবে মুছে ফেলবেন? এর জন্য রেকর্ড করা সমস্ত ভোট মুছে ফেলা হবে এবং গতি রেকর্ড থেকে অদৃশ্য হয়ে যাবে।",
     "deleteMotion": "গতি মুছুন",
-    "tallyLine": "ট্যালি: হ্যাঁ {হ্যাঁ} | না {না} | ব্যালট {মোট}",
+    "tallyLine": "ট্যালি: হ্যাঁ {yes} | না {no} | ব্যালট {total}",
     "ballotsHelp": "ব্যালট = প্ল্যাকার্ড একটি রেকর্ড করা হ্যাঁ বা না সহ (এবস্টেন আলাদাভাবে ট্র্যাক করা হয় এবং এই ডিনোমিনেটরে গণনা করা হয় না)। সাফ একটি রেকর্ড করা ভোট সরিয়ে দেয়। পদ্ধতিগত গতির জন্য, ফলাফল রোলে উপস্থিত সদস্যদের সাথে হ্যাঁ তুলনা করে (রোল কল বিভাগ দেখুন)।",
     "recordVotesLabel": "রেকর্ড ভোট",
     "currentMotion": "বর্তমান গতি",
@@ -636,7 +636,7 @@
     "welcomeSignup": "প্রথমে আপনার কনফারেন্স কোড লিখুন, আপনি কীভাবে অংশগ্রহণ করবেন তা চয়ন করুন, তারপর আপনার অ্যাকাউন্ট তৈরি করুন।",
     "welcomeLogin": "প্রথমে আপনার কনফারেন্স কোড লিখুন, আপনি কিভাবে অংশগ্রহণ করবেন তা বেছে নিন, তারপর সাইন ইন করুন।",
     "conferenceTitle": "আপনার সম্মেলনে যোগদান করুন",
-    "conferenceDescription": "আপনার আয়োজকদের থেকে কনফারেন্স কোড লিখুন. এরপর আপনি আপনার ভূমিকা বেছে নেবেন, তারপর {মোড}।",
+    "conferenceDescription": "আপনার আয়োজকদের থেকে কনফারেন্স কোড লিখুন. এরপর আপনি আপনার ভূমিকা বেছে নেবেন, তারপর {mode}।",
     "conferenceCode": "কনফারেন্স কোড",
     "conferenceCodeHelp": "পুরো-কনফারেন্স কোড (সমস্ত কমিটি)। স্থান উপেক্ষা করা; ম্যাচিং কেস-সংবেদনশীল।",
     "checking": "পরীক্ষা করা হচ্ছে...",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "চেয়ারগুলি প্রতিটি স্লট স্কোর পৃষ্ঠায় একটি খসড়া হিসাবে সংরক্ষণ করে। এই খসড়া এখানে দেখানো হয় না. একবার প্রতিটি প্রয়োজনীয় স্লট সম্পূর্ণ হয়ে গেলে, চেয়ারটিকে অবশ্যই SMT-এ মনোনয়ন জমা দিন-এ ক্লিক করতে হবে — তারপর পর্যালোচনার জন্য মুলতুবি হিসাবে এই টেবিলে সারিগুলি উপস্থিত হবে৷",
     "noRowsForCommittee": "এই কমিটির জন্য কোন মুলতুবি সারি নেই. বেছে নিন",
     "orAnotherTab": "বা অন্য ট্যাব।",
-    "topRank": "শীর্ষ {র্যাঙ্ক}",
+    "topRank": "শীর্ষ {rank}",
     "bandInitialsTitle": "ব্যান্ড আদ্যক্ষর: B/D/P/E",
     "dash": "-",
     "bestDelegateCommittee": "সেরা প্রতিনিধি (কমিটি)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "আপনার আয়োজকদের থেকে কনফারেন্স কোড লিখুন (কমপক্ষে 4 অক্ষর)।",
     "eventCodeMissing": "কোন কনফারেন্স সেই কোডের সাথে মেলে না। আপনার সংগঠকদের সাথে বানান পরীক্ষা করুন।",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "আপনাকে অবশ্যই সাইন ইন করতে হবে।",
     "committeeCodeInvalid": "6-অক্ষরের কমিটির কোড লিখুন (শুধুমাত্র অক্ষর এবং সংখ্যা, যেমন ECO741)। আপনার চেয়ার জিজ্ঞাসা করুন বা SMT -> রুম কোড চেক করুন.",
     "enterConferenceFirst": "প্রথমে আপনার কনফারেন্স কোড লিখুন (পূর্ববর্তী ধাপে ফিরে যান)।",
@@ -1114,7 +1115,7 @@
     "advisorFallback": "উপদেষ্টা"
   },
   "delegateDashboard": {
-    "welcome": "স্বাগতম, {পতাকা} {দেশের} প্রতিনিধি",
+    "welcome": "স্বাগতম, {flag} {country} প্রতিনিধি",
     "activeCommitteeIntro": "সক্রিয় কমিটি: {line}।",
     "activeCommitteeBody": "এই কমিটির সবার সাথে কাউন্টডাউন তারিখ শেয়ার করা হয়। আপনার প্রস্তুতি, অবস্থান এবং নথিগুলি আপনার অ্যাকাউন্টের সাথে থাকে।",
     "tabs": {
@@ -1331,7 +1332,7 @@
     "noCommittees": "এই ইভেন্টের জন্য কোন কমিটি পাওয়া যায়নি। তাদের যোগ করুন",
     "eventSessionsLink": "ইভেন্ট এবং কমিটির অধিবেশন",
     "orSupabase": "অথবা সুপাবেসে।",
-    "sessionFloorBanner": "<floor>সেশন ফ্লোর</floor> (টাইমার, স্পিকার, রোল কল) শুধুমাত্র <চেয়ার>ডেইস চেয়ার</চেয়ার> এর জন্য। তত্ত্বাবধানের জন্য নীচে <লাইভ>লাইভ কমিটি</ লাইভ> ব্যবহার করুন, অথবা যখন আপনার একটি নির্দিষ্ট সেশনের প্রয়োজন হয় তখন প্রতিনিধিদের মতো কমিটির কোড লিখুন।",
+    "sessionFloorBanner": "<floor>সেশন ফ্লোর</floor> (টাইমার, স্পিকার, রোল কল) শুধুমাত্র <chairs>ডেইস চেয়ার</chairs> এর জন্য। তত্ত্বাবধানের জন্য নীচে <live>লাইভ কমিটি</live> ব্যবহার করুন, অথবা যখন আপনার একটি নির্দিষ্ট সেশনের প্রয়োজন হয় তখন প্রতিনিধিদের মতো কমিটির কোড লিখুন।",
     "welcomeSg": "স্বাগত মহাসচিব!",
     "whichCommittee": "আপনি কোন কমিটিতে চেক ইন করতে চান?",
     "sessionsCount": "{count, plural, one {# সেশন} other {# সেশন}}",
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "স্পিকারের সময় (বাম / মোট)",
     "perSpeaker": "(স্পিকার প্রতি)",
     "paused": "(বিরতি)",
-    "pauseReason": "বিরতি: {কারণ}",
+    "pauseReason": "বিরতি: {reason}",
     "dash": "-",
     "activeTimers": "সক্রিয় টাইমার",
     "activeTimersAria": "সেশন ও ফ্লোর টাইমার",
@@ -1605,7 +1606,7 @@
     "daisListed": "ডাইস (তালিকাভুক্ত)",
     "committeeCodeSecondGate": "কমিটি/রুম কোড (দ্বিতীয় গেট)",
     "seats": "আসন",
-    "seatsFilledAllocated": "{পূর্ণ} ভরা · {মোট} বরাদ্দ",
+    "seatsFilledAllocated": "{filled} ভরা · {total} বরাদ্দ",
     "resolutions": "রেজুলেশন",
     "openVotes": "খোলা ভোট",
     "editMetadataIntro": "কমিটির অধিবেশন মেটাডেটা এবং চেয়ারের নাম সম্পাদনা করুন",
@@ -1694,10 +1695,10 @@
     "clearAllConfirm": "প্রতিটি প্ল্যাকার্ডের জন্য সাফ প্রশংসা, উদ্বেগ, এবং অনুস্মারক নোট? এটি ভাগ করা কমিটির অনুলিপি আপডেট করে।",
     "addedToSpeakerList": "স্পিকার তালিকায় {country} যোগ করা হয়েছে।",
     "searchCountry": "দেশ অনুসন্ধান করুন...",
-    "roomStats": "{প্ল্যাকার্ড} প্ল্যাকার্ড · {পতাকা লাগানো} চেয়ার নোট সহ · রোল রেকর্ড করা হয়েছে {count}",
+    "roomStats": "{placards} প্ল্যাকার্ড · {flagged} চেয়ার নোট সহ · রোল রেকর্ড করা হয়েছে {count}",
     "loading": "লোড হচ্ছে...",
     "noDelegationsMatch": "কোনো প্রতিনিধি আপনার অনুসন্ধানের সাথে মেলে না।",
-    "rollPrefix": "রোল {লেবেল}",
+    "rollPrefix": "রোল {label}",
     "linkedAccount": "লিঙ্ক করা অ্যাকাউন্ট",
     "vacantPlacard": "খালি প্ল্যাকার্ড",
     "delegateProfile": "প্রতিনিধি প্রোফাইল ->",
@@ -2086,7 +2087,7 @@
       "couldNotParseCsv": "CSV পার্স করা যায়নি।",
       "noDataRowsFound": "কোনো ডেটা সারি পাওয়া যায়নি (প্রতি লাইনে অন্তত একটি দেশ/অবস্থান প্রয়োজন)।",
       "importLimitedRows": "আমদানি সীমাবদ্ধ {max} সারিতে। আপনার ফাইল বিভক্ত.",
-      "rowTooLong": "সারি অনেক লম্বা: {সারি}…",
+      "rowTooLong": "সারি অনেক লম্বা: {row}…",
       "codeTooLongOnRow": "সারিতে অনেক বড় কোড: {row}",
       "chairSeatsCannotBeDeleted": "প্রতিটি কমিটিতে হেড চেয়ার ও কো-চেয়ারের আসন থাকে।"
     },
@@ -2110,7 +2111,7 @@
       "missingServiceRoleKey": "সার্ভারে SUPABASE_SERVICE_ROLE_KEY অনুপস্থিত৷ এটিকে ডিপ্লয়মেন্ট env এ যুক্ত করুন (ব্রাউজারে কখনই প্রকাশ করবেন না)।",
       "missingPublicAppUrl": "আপনার সর্বজনীন সাইটের URL এ NEXT_PUBLIC_APP_URL সেট করুন (যেমন https://your-app.vercel.app) তাই সঠিকভাবে লিঙ্কগুলিকে পুনঃনির্দেশে আমন্ত্রণ জানান৷",
       "emailAlreadyHasAccount": "সেই ইমেলটির ইতিমধ্যেই একটি অ্যাকাউন্ট রয়েছে৷ অন্য আমন্ত্রণ পাঠানোর পরিবর্তে নীচে \"অনুদান চেয়ার রোল\" ব্যবহার করুন।",
-      "inviteSentButRoleSetFailed": "আমন্ত্রণ পাঠানো হয়েছে, কিন্তু প্রোফাইলে চেয়ারের ভূমিকা সেট করা যায়নি: {ত্রুটি}৷ তারা গ্রহণ করার পরে \"অনুদান চেয়ার ভূমিকা\" ব্যবহার করুন।",
+      "inviteSentButRoleSetFailed": "আমন্ত্রণ পাঠানো হয়েছে, কিন্তু প্রোফাইলে চেয়ারের ভূমিকা সেট করা যায়নি: {error}৷ তারা গ্রহণ করার পরে \"অনুদান চেয়ার ভূমিকা\" ব্যবহার করুন।",
       "inviteSentButAllocationFailed": "আমন্ত্রণ পাঠানো হয়েছে এবং চেয়ারের ভূমিকা সেট করা হয়েছে, কিন্তু মঞ্চের আসনটি লিঙ্ক করা যায়নি: {error}। বরাদ্দ ম্যাট্রিক্স বা যোগাযোগ সমর্থন ঠিক করুন.",
       "inviteSentSuccess": "আমন্ত্রণ ইমেল পাঠানো হয়েছে {email} এ। তারা তাদের পাসওয়ার্ড সেট করার পরে তারা একটি চেয়ার হবে.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
@@ -2166,7 +2167,7 @@
       "welcomeLine3": "মেঝেতে দেখা হবে।",
       "chairReminderSubject": "প্রতিনিধি বরাদ্দের অনুরোধ মুলতুবি অনুমোদন",
       "chairReminderLine1": "একজন প্রতিনিধি একটি বরাদ্দের অনুরোধ করেছেন এবং চেয়ার পর্যালোচনার প্রয়োজন।",
-      "chairReminderConference": "সম্মেলন: {সম্মেলন}",
+      "chairReminderConference": "সম্মেলন: {conference}",
       "chairReminderAllocation": "অনুরোধ করা বরাদ্দ: {country}",
       "chairReminderDelegate": "প্রতিনিধি: {name}",
       "chairReminderEmail": "অ্যাকাউন্ট ইমেল: {email}",
@@ -2369,7 +2370,7 @@
     "committeeFallback": "কমিটি",
     "showingOneCommitteeAtATime": "একবারে একটি কমিটি দেখাচ্ছে। নীচের ট্যাবগুলি ব্যবহার করে কমিটি পরিবর্তন করুন।",
     "editPlacardCodesSheet": "প্ল্যাকার্ড কোড শীট সম্পাদনা করুন ->",
-    "rosterHeading": "তালিকা · {শিরোনাম}",
+    "rosterHeading": "তালিকা · {heading}",
     "seatsSummary": "{count}টি আসন(গুলি)।",
     "linkedDelegatesCannotBeDeleted": "লিঙ্ক করা প্রতিনিধিদের এখানে মুছে ফেলা যাবে না.",
     "secretariatParliamentarianSeat": "সংসদ সদস্য · আসন {seat}",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "কমিটি",
     "intro": {
-      "scoringMatches": "স্কোরিং <dashboard>SEAMUNs ড্যাশবোর্ড</dashboard>-এর সাথে মেলে: প্রতিটি মানদণ্ডের জন্য <beginning>Beginning</beginning>, <developing>developing</developing>, <proficient>দক্ষ</proficient>, অথবা <exemplary>Exemplary</emplary> বেছে নিন। প্রমাণ সহ শীর্ষ 2 জমা দিন; SMT চূড়ান্ত পুরস্কার নিশ্চিত করে।",
+      "scoringMatches": "স্কোরিং <dashboard>SEAMUNs ড্যাশবোর্ড</dashboard>-এর সাথে মেলে: প্রতিটি মানদণ্ডের জন্য <beginning>Beginning</beginning>, <developing>developing</developing>, <proficient>দক্ষ</proficient>, অথবা <exemplary>Exemplary</exemplary> বেছে নিন। প্রমাণ সহ শীর্ষ 2 জমা দিন; SMT চূড়ান্ত পুরস্কার নিশ্চিত করে।",
       "submissionRulePrefix": "এসএমটি জমা দেওয়া ম্যানুয়াল (নীচের বোতাম) বা পরে স্বয়ংক্রিয়",
       "submissionRuleSuffix": "আপনি পরবর্তীতে এই পৃষ্ঠাটি খুললে UTC (যদি সমস্ত প্রয়োজনীয় স্লট সম্পূর্ণ হয়)।",
       "steps": {
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "আপনার কমিটি",
     "fallbackCommittee": "কমিটি",
-    "welcome": "স্বাগতম, {কমিটির} সভাপতি",
+    "welcome": "স্বাগতম, {committee} সভাপতি",
     "featureStrip": "ডিজিটাল রুম · গতি · ভোট প্রদান · স্পিকার",
     "activeCommitteeLine": "সক্রিয় কমিটি: <line></line>। আপনার অ্যাকাউন্টের মাধ্যমে সেশন ডেটা সিঙ্ক হয়; এই কমিটির জন্য প্রিপ/ফ্লো চেকলিস্ট এবং গতি ও পয়েন্টগুলি এই ব্রাউজারে সংরক্ষিত আছে - <seamuns>SEAMUNs চেয়ার রুম</seamuns> এর মতই।",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "সর্বোচ্চ {পয়েন্ট} পয়েন্ট",
+    "maxPoints": "সর্বোচ্চ {points} পয়েন্ট",
     "reference": {
       "title": "SEAMUN I অফিসিয়াল অ্যাওয়ার্ড রুব্রিক",
       "description": "রেফারেন্স কপি: পুরস্কারের ধরন, মূল্যায়ন প্রক্রিয়া এবং সম্পূর্ণ 1-8 ব্যান্ড ম্যাট্রিক্স (কনফারেন্স রুব্রিক থেকে)। InterMUN-এ স্কোরিং একই মানদণ্ড কী ব্যবহার করে যেখানে মনোনয়ন জমা দেওয়া হয়।"
@@ -2802,7 +2803,7 @@
     "tierLow": "কম",
     "tierHigh": "উচ্চ",
     "tierPromptLocked": "লক ইন: {band} - {tier} ({score})",
-    "tierPromptPick": "{ব্যান্ড} এর মধ্যে কম বা উচ্চ বাছাই করুন (১-৮ স্কেলে পয়েন্ট)।",
+    "tierPromptPick": "{band} এর মধ্যে কম বা উচ্চ বাছাই করুন (১-৮ স্কেলে পয়েন্ট)।",
     "criteria": {
       "creativity": {
         "label": "সৃজনশীলতা",
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "কোন Google ডক লিঙ্ক নেই",
     "clauseEditor": "ধারা সম্পাদক",
     "noClausesYet": "এখনও কোন ধারা.",
-    "clauseNumber": "ধারা {সংখ্যা}",
+    "clauseNumber": "ধারা {number}",
     "saveClause": "ধারা সংরক্ষণ করুন",
     "delete": "মুছুন",
     "addClausePlaceholder": "একটি নতুন ধারা যোগ করুন...",
@@ -3384,7 +3385,7 @@
       "settings": "প্রোফাইল সেটিংস"
     },
     "delegateWelcome": {
-      "title": "স্বাগত প্রতিনিধি {পতাকা} {দেশ}",
+      "title": "স্বাগত প্রতিনিধি {flag} {country}",
       "subtitle": "আপনি কি দিয়ে শুরু করতে চান?",
       "links": {
         "documents": "নথিপত্র",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "আপনার প্রোফাইলে পুরস্কার",
-      "rank": "পদ {র্যাঙ্ক}",
+      "rank": "পদ {rank}",
       "pending": {
         "tab": "মুলতুবি মনোনয়ন",
         "title": "মুলতুবি চেয়ার মনোনয়ন",
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "শৃঙ্খলামূলক অবস্থা (ব্যক্তিগত)",
-      "statusLine": "সতর্কতা: {সতর্কতা} · স্ট্রাইক: {স্ট্রাইক}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "statusLine": "সতর্কতা: {warnings} · স্ট্রাইক: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "ভোট প্রদান নিষ্ক্রিয়",
       "speakingSuspended": "কথা বলা স্থগিত",
       "removedFromCommittee": "কমিটি থেকে অপসারিত",
@@ -4281,9 +4282,9 @@
     "add": "যোগ করুন",
     "noIdeasYet": "এখনও কোন ধারণা.",
     "ideaLabel": "আইডিয়া",
-    "ideaFallback": "ধারণা {সংখ্যা}",
+    "ideaFallback": "ধারণা {number}",
     "linkedDoc": "লিঙ্কড ডক",
-    "addedOn": "যোগ করা হয়েছে {তারিখ}",
+    "addedOn": "যোগ করা হয়েছে {date}",
     "edit": "সম্পাদনা করুন",
     "delete": "মুছুন",
     "ideaDocument": "ধারণা দলিল",
@@ -4363,7 +4364,7 @@
     "searchHint": "রুমে মিলগুলি হাইলাইট করতে একটি দেশ, প্রতিনিধির নাম, স্কুল, সর্বনাম বা \"খালি\" টাইপ করুন। প্রথম ম্যাচে ঝাঁপ দিতে এন্টার টিপুন; Esc পরিষ্কার করে। খালি আসনে ঝাঁপ দিতে খালিতে ক্লিক করুন।",
     "findLabel": "একটি প্রতিনিধি দল বা মঞ্চ সদস্য খুঁজুন",
     "searchPlaceholder": "দেশ, নাম, স্কুল...",
-    "matchesCount": "{total}টি আসনের মধ্যে {match} মিলছে",
+    "matchesCount": "{total}টি আসনের মধ্যে {matches}টি মিলছে",
     "enterScrolls": "স্ক্রোল লিখুন",
     "typeToFilterHint": "ফিল্টার করতে টাইপ করুন - প্রথম মিলের জন্য স্ক্রোল লিখুন",
     "noMatches": "কোন মিলিত প্রতিনিধি দল বা মঞ্চ আসন.",
@@ -4374,7 +4375,7 @@
     "virtualRoomVacant": "খালি",
     "profileAria": "প্রোফাইল দেখুন: {country}",
     "vacantSeatAria": "খালি আসন",
-    "placardAria": "প্ল্যাকার্ড {দেশ}",
+    "placardAria": "প্ল্যাকার্ড {country}",
     "gavelAria": "গেভেল",
     "viewProfileAria": "প্রোফাইল দেখুন: {title}",
     "noProfileLinkAria": "{title} (কোন প্রোফাইল লিঙ্ক নেই)",
@@ -4416,7 +4417,7 @@
       "motioner": "আন্দোলনকারী",
       "majority": "সংখ্যাগরিষ্ঠ",
       "majoritySimple": "সরল",
-      "tally": "হ্যাঁ {হ্যাঁ} - না {না} - মোট {মোট}",
+      "tally": "হ্যাঁ {yes} - না {no} - মোট {total}",
       "help": "মঞ্চটি সেশনে প্রতিটি প্রতিনিধি দলের ভোট রেকর্ড করে। মোশন ভোট শুধুমাত্র হ্যাঁ বা না ব্যবহার করে (কোন বিরত থাকুন)। মোট শুধুমাত্র প্ল্যাকার্ড গণনা করা হয় যেখানে হ্যাঁ বা না রেকর্ড করা হয়েছে; অনুপস্থিত প্রতিনিধিদের এড়িয়ে যাওয়া হয়।"
     },
     "activeMotion": {
@@ -4433,14 +4434,14 @@
       "speakerTimeLeftTotal": "স্পিকারের সময় (বাম / মোট)",
       "perSpeaker": "(স্পিকার প্রতি)",
       "paused": "(বিরতি)",
-      "pauseReason": "বিরতি: {কারণ}"
+      "pauseReason": "বিরতি: {reason}"
     },
     "floorStatus": {
       "sessionTime": "সেশনের সময়",
       "sessionNotStarted": "সেশন শুরু হয়নি",
       "limit": "সীমা",
-      "limitRemaining": "{মান} বাকি",
-      "limitOverBy": "{মান} দ্বারা বেশি",
+      "limitRemaining": "{value} বাকি",
+      "limitOverBy": "{value} দ্বারা বেশি",
       "quickLinkSession": "অধিবেশন",
       "quickLinkRoll": "রোল",
       "quickLinkAgenda": "এজেন্ডা",
@@ -4476,7 +4477,7 @@
       "startedLabel": "শুরু হয়েছে:",
       "timeInLabel": "সময়:",
       "timeUntilEndLabel": "শেষ পর্যন্ত সময়:",
-      "overByValue": "{মান} দ্বারা বেশি",
+      "overByValue": "{value} দ্বারা বেশি",
       "modeLabel": "মোড:",
       "modeStopwatchNoLimit": "স্টপওয়াচ (কোন সময় সীমা নেই)",
       "sessionNotRunning": "সেশন চলছে না।",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(সর্বনিম্ন 1 মিনিট)",
       "endAtLocalTime": "শেষ হবে (স্থানীয় সময়)",
       "stopSession": "সেশন বন্ধ করুন",
+      "smtProgressReminderTitle": "এই সেশনে SMT আপডেট করুন",
+      "smtProgressReminderBody": "একটি সংক্ষিপ্ত অগ্রগতি নোট পাঠান যাতে সচিবালয় জানতে পারে কমিটি কীভাবে গেছে এবং কী অনুসরণ করতে হবে।",
+      "smtProgressReminderWrite": "একটি নোট লিখুন",
+      "smtProgressReminderDismiss": "পরে",
       "saveLimit": "সীমা সংরক্ষণ করুন",
       "saveLimitHelp": "সেশন বন্ধ না করেই সেশন চলাকালীন আপডেট করা সীমা সেটিংস প্রয়োগ করে।",
       "startSession": "সেশন শুরু করুন",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "জন্য সাইডবার ব্যবহার করুন",
       "rollCall": "রোল কল",
       "agenda": "এজেন্ডা",
@@ -4509,11 +4518,7 @@
       "timer": "টাইমার",
       "sidebarAnd": "এবং",
       "announcements": "ঘোষণা",
-      "sidebarUseSuffix": "- প্রতি ট্যাবে একটি টুল।",
-      "smtProgressReminderTitle": "এই সেশনে SMT আপডেট করুন",
-      "smtProgressReminderBody": "একটি সংক্ষিপ্ত অগ্রগতি নোট পাঠান যাতে সচিবালয় জানতে পারে কমিটি কীভাবে গেছে এবং কী অনুসরণ করতে হবে।",
-      "smtProgressReminderWrite": "একটি নোট লিখুন",
-      "smtProgressReminderDismiss": "পরে"
+      "sidebarUseSuffix": "- প্রতি ট্যাবে একটি টুল।"
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "মুছুন",
       "deleteConfirm": "ইতিহাস থেকে এই অধিবেশন মুছে ফেলবেন?",
       "sessionNamePrompt": "সেশনের নাম",
-      "rangeClosed": "{পরিসীমা}",
-      "rangeOngoing": "{পরিসীমা} -> চলমান"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> চলমান"
     },
     "timerPage": {
       "title": "টাইমার",

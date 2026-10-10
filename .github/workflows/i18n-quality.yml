@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check locale parity
+      - name: Validate locale catalogs (JSON, ICU, key parity)
         run: npm run i18n:check
 
       - name: Run i18n audit

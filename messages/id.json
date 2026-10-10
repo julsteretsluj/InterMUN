@@ -187,7 +187,7 @@
     "rollPresentVoting": "Hadir dan memberikan suara",
     "rollPresentVotingTitle": "Hadir dan memberikan suara — harus memilih, tidak boleh abstain",
     "rollAbsent": "Absen",
-    "rollCallForCountry": "Abaikan panggilan untuk {negara}",
+    "rollCallForCountry": "Abaikan panggilan untuk {country}",
     "presetCustom": "Kebiasaan",
     "presetSetAgenda": "Gerakan untuk Menetapkan Agenda",
     "presetExtendOpeningSpeech": "Gerakan untuk Memperpanjang Waktu Pidato Pembukaan",
@@ -407,7 +407,7 @@
     "saveEdits": "Simpan hasil edit",
     "deleteMotionConfirm": "Hapus gerakan ini secara permanen? Semua suara yang tercatat untuk usulan tersebut akan dihapus dan mosi tersebut akan hilang dari catatan.",
     "deleteMotion": "Hapus gerakan",
-    "tallyLine": "Penghitungan: Ya {ya} | Tidak {tidak} | Surat suara {total}",
+    "tallyLine": "Penghitungan: Ya {yes} | Tidak {no} | Surat suara {total}",
     "ballotsHelp": "Surat Suara = plakat dengan tulisan Ya atau Tidak (abstain dilacak secara terpisah dan tidak dihitung dalam penyebut ini). Clear menghapus suara yang direkam. Untuk mosi prosedural, hasil membandingkan Ya dengan anggota yang hadir dalam daftar (lihat bagian panggilan).",
     "recordVotesLabel": "Rekam suara",
     "currentMotion": "gerak saat ini",
@@ -798,7 +798,7 @@
     "emptyStateGuidance": "Kursi menyimpan setiap slot sebagai draf di halaman Skor. Draf tersebut tidak ditampilkan di sini. Setelah setiap slot yang diperlukan sudah lengkap, ketua harus mengklik Kirim nominasi ke SMT — lalu baris muncul di tabel ini sebagai menunggu peninjauan.",
     "noRowsForCommittee": "Tidak ada baris yang tertunda untuk komite ini. Memilih",
     "orAnotherTab": "atau tab lain.",
-    "topRank": "{peringkat} teratas",
+    "topRank": "{rank} teratas",
     "bandInitialsTitle": "Inisial band: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Delegasi Terbaik (panitia)",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Masukkan kode konferensi dari penyelenggara Anda (minimal 4 karakter).",
     "eventCodeMissing": "Tidak ada konferensi yang cocok dengan kode tersebut. Periksa ejaan dengan penyelenggara Anda.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Anda harus masuk.",
     "committeeCodeInvalid": "Masukkan kode panitia 6 karakter (hanya huruf dan angka, misal ECO741). Tanyakan kursi Anda atau periksa SMT -> Kode kamar.",
     "enterConferenceFirst": "Masukkan kode konferensi Anda terlebih dahulu (kembali ke langkah sebelumnya).",
@@ -913,7 +914,7 @@
     "allocationTakenBody": "{country} telah diklaim oleh akun lain. Silakan pilih alokasi lain.",
     "submitFailedTitle": "Tidak dapat mengirimkan permintaan",
     "requestSubmittedTitle": "Permintaan pendaftaran telah dikirimkan",
-    "requestSubmittedBody": "Permintaan Anda untuk {negara} telah dikirim ke ketua komite untuk disetujui.",
+    "requestSubmittedBody": "Permintaan Anda untuk {country} telah dikirim ke ketua komite untuk disetujui.",
     "requestSubmittedHint": "Setelah disetujui, buka kembali tautan ini atau lanjutkan ke proses masuk komite untuk melanjutkan.",
     "continueCommitteeSignIn": "Lanjutkan ke proses masuk panitia"
   },
@@ -1114,7 +1115,7 @@
     "advisorFallback": "Penasihat"
   },
   "delegateDashboard": {
-    "welcome": "Selamat datang, Delegasi {flag} {negara}",
+    "welcome": "Selamat datang, Delegasi {flag} {country}",
     "activeCommitteeIntro": "Panitia aktif: {line}.",
     "activeCommitteeBody": "Tanggal hitung mundur dibagikan kepada semua orang di komite ini. Persiapan, pendirian, dan dokumen Anda tetap ada di akun Anda.",
     "tabs": {
@@ -1337,7 +1338,7 @@
     "sessionsCount": "{count, plural, other {# sesi}}",
     "topicLabel": "Topik:",
     "chairsLabel": "Kursi:",
-    "committeeLogoAlt": "logo {nama}",
+    "committeeLogoAlt": "logo {name}",
     "eslFriendly": "Ramah ESL",
     "difficultyOther": "Other committees"
   },
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Waktu pembicara (kiri / total)",
     "perSpeaker": "(per pembicara)",
     "paused": "(dijeda)",
-    "pauseReason": "Jeda: {alasan}",
+    "pauseReason": "Jeda: {reason}",
     "dash": "—",
     "activeTimers": "Timer aktif",
     "activeTimersAria": "Timer sesi dan lantai",
@@ -1605,7 +1606,7 @@
     "daisListed": "Dais (terdaftar)",
     "committeeCodeSecondGate": "Kode panitia/ruangan (gerbang kedua)",
     "seats": "Kursi",
-    "seatsFilledAllocated": "{terisi} terisi · {total} dialokasikan",
+    "seatsFilledAllocated": "{filled} terisi · {total} dialokasikan",
     "resolutions": "Resolusi",
     "openVotes": "Pemungutan suara terbuka",
     "editMetadataIntro": "Edit metadata sesi komite dan nama ketua di bawah",
@@ -1694,7 +1695,7 @@
     "clearAllConfirm": "Catatan pujian, perhatian, dan pengingat yang jelas untuk setiap plakat? Ini memperbarui salinan komite bersama.",
     "addedToSpeakerList": "{country} ditambahkan ke daftar pembicara.",
     "searchCountry": "Telusuri negara...",
-    "roomStats": "{plakat} plakat · {ditandai} dengan catatan kursi · Gulungan direkam untuk {count}",
+    "roomStats": "{placards} plakat · {flagged} dengan catatan kursi · Gulungan direkam untuk {count}",
     "loading": "Memuat...",
     "noDelegationsMatch": "Tidak ada delegasi yang cocok dengan penelusuran Anda.",
     "rollPrefix": "Gulung {label}",
@@ -2086,7 +2087,7 @@
       "couldNotParseCsv": "Tidak dapat menguraikan CSV.",
       "noDataRowsFound": "Tidak ada baris data yang ditemukan (membutuhkan setidaknya satu negara/posisi per baris).",
       "importLimitedRows": "Impor dibatasi hingga {max} baris. Pisahkan file Anda.",
-      "rowTooLong": "Baris terlalu panjang: {baris}…",
+      "rowTooLong": "Baris terlalu panjang: {row}…",
       "codeTooLongOnRow": "Kode terlalu panjang pada baris: {row}",
       "chairSeatsCannotBeDeleted": "Kursi Ketua dan Ketua Bersama tetap berada di setiap komite."
     },
@@ -2161,14 +2162,14 @@
       "signature": "antarMUN",
       "welcomeSubject": "Selamat datang di InterMUN",
       "welcomeLine1": "Selamat datang di InterMUN.",
-      "welcomeConfirmedFor": "Akun delegasi Anda telah dikonfirmasi untuk: {negara}.",
+      "welcomeConfirmedFor": "Akun delegasi Anda telah dikonfirmasi untuk: {country}.",
       "welcomeLine2": "Anda sekarang dapat melanjutkan ke proses masuk komite dan bergabung dalam sesi langsung.",
       "welcomeLine3": "Sampai jumpa di lantai.",
       "chairReminderSubject": "Delegasikan permintaan alokasi menunggu persetujuan",
       "chairReminderLine1": "Seorang delegasi telah meminta alokasi dan memerlukan peninjauan ketua.",
-      "chairReminderConference": "Konferensi: {konferensi}",
+      "chairReminderConference": "Konferensi: {conference}",
       "chairReminderAllocation": "Alokasi yang diminta: {country}",
-      "chairReminderDelegate": "Delegasi: {nama}",
+      "chairReminderDelegate": "Delegasi: {name}",
       "chairReminderEmail": "Email akun: {email}",
       "chairReminderLine2": "Harap setujui atau tolak permintaan ini dalam matriks alokasi kursi:"
     }
@@ -2563,7 +2564,7 @@
     "saveThisDelegate": "Simpan delegasi ini",
     "autosaved": "Disimpan otomatis",
     "autosaveFailed": "Penyimpanan otomatis gagal",
-    "autosavedWithCountry": "Tersimpan otomatis — {negara}",
+    "autosavedWithCountry": "Tersimpan otomatis — {country}",
     "delegateFallback": "melimpahkan",
     "modeSwitchLabel": "Scoring layout",
     "modeList": "List",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "komite Anda",
     "fallbackCommittee": "Komite",
-    "welcome": "Selamat datang, Ketua {komite}",
+    "welcome": "Selamat datang, Ketua {committee}",
     "featureStrip": "Ruang Digital · Gerakan · Voting · Pembicara",
     "activeCommitteeLine": "Panitia aktif: <line></line>. Data sesi disinkronkan melalui akun Anda; daftar periksa persiapan/aliran dan Gerakan & Poin disimpan di browser ini untuk komite ini - ide yang sama seperti <seamuns>Ruang Ketua SEAMUN</seamuns>.",
     "tiles": {
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "Maksimum {poin} poin",
+    "maxPoints": "Maksimum {points} poin",
     "reference": {
       "title": "Rubrik penghargaan resmi SEAMUN I",
       "description": "Salinan referensi: jenis penghargaan, proses evaluasi, dan matriks pita 1-8 lengkap (dari rubrik konferensi). Penilaian di InterMUN menggunakan kunci kriteria yang sama dengan pengajuan nominasi."
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Tidak ada tautan Google Dokumen",
     "clauseEditor": "Editor klausa",
     "noClausesYet": "Belum ada klausul.",
-    "clauseNumber": "Klausul {angka}",
+    "clauseNumber": "Klausul {number}",
     "saveClause": "Simpan klausa",
     "delete": "Menghapus",
     "addClausePlaceholder": "Tambahkan klausa baru...",
@@ -3384,7 +3385,7 @@
       "settings": "Pengaturan profil"
     },
     "delegateWelcome": {
-      "title": "Selamat datang delegasi {flag} {negara}",
+      "title": "Selamat datang delegasi {flag} {country}",
       "subtitle": "Anda ingin memulai dengan apa?",
       "links": {
         "documents": "Dokumen",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Penghargaan di profil Anda",
-      "rank": "peringkat {peringkat}",
+      "rank": "peringkat {rank}",
       "pending": {
         "tab": "Nominasi yang tertunda",
         "title": "Nominasi kursi yang tertunda",
@@ -3433,18 +3434,18 @@
     },
     "discipline": {
       "title": "Status disiplin (pribadi)",
-      "statusLine": "Peringatan: {warnings} · Teguran: {strikes}{votingDisabled}{speakSuspended}{removedFromCommittee}",
+      "statusLine": "Peringatan: {warnings} · Teguran: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "pemungutan suara dinonaktifkan",
       "speakingSuspended": "berbicara ditangguhkan",
       "removedFromCommittee": "dikeluarkan dari panitia",
-      "updated": "Diperbarui: {nilai}"
+      "updated": "Diperbarui: {value}"
     },
     "preview": {
       "ariaLabel": "Pratinjau profil",
       "title": "Pratinjau",
       "yourName": "Namamu",
       "usernameNotSet": "Nama pengguna tidak disetel",
-      "gradeValue": "Kelas {kelas}",
+      "gradeValue": "Kelas {grade}",
       "awards": "Penghargaan"
     },
     "profilePicture": "Foto profil",
@@ -3751,7 +3752,7 @@
           "definition": "Kapasitas masyarakat dan lembaga untuk menyerap guncangan dan melakukan pemulihan secara efektif."
         }
       },
-      "topicLine": "Topik: {topik}"
+      "topicLine": "Topik: {topic}"
     },
     "layers": {
       "howTo": "How to use InterMUN",
@@ -4281,9 +4282,9 @@
     "add": "Menambahkan",
     "noIdeasYet": "Belum ada ide.",
     "ideaLabel": "Ide",
-    "ideaFallback": "Ide {angka}",
+    "ideaFallback": "Ide {number}",
     "linkedDoc": "Dokumen tertaut",
-    "addedOn": "Ditambahkan pada tanggal {tanggal}",
+    "addedOn": "Ditambahkan pada tanggal {date}",
     "edit": "Sunting",
     "delete": "Menghapus",
     "ideaDocument": "Dokumen ide",
@@ -4372,9 +4373,9 @@
     "staffSeatsHeading": "Staf - kursi",
     "searchAria": "Delegasi pencarian",
     "virtualRoomVacant": "Kosong",
-    "profileAria": "Lihat profil: {negara}",
+    "profileAria": "Lihat profil: {country}",
     "vacantSeatAria": "Kursi kosong",
-    "placardAria": "Plakat {negara}",
+    "placardAria": "Plakat {country}",
     "gavelAria": "Palu",
     "viewProfileAria": "Lihat profil: {title}",
     "noProfileLinkAria": "{title} (tidak ada tautan profil)",
@@ -4416,7 +4417,7 @@
       "motioner": "Penggerak",
       "majority": "Mayoritas",
       "majoritySimple": "Sederhana",
-      "tally": "Ya {ya} - Tidak {tidak} - Total {total}",
+      "tally": "Ya {yes} - Tidak {no} - Total {total}",
       "help": "Panggung mencatat suara setiap delegasi dalam sesi. Pemungutan suara mosi hanya menggunakan Ya atau Tidak (tidak abstain). Jumlah total hanya dihitung pada plakat yang mencatat Ya atau Tidak; delegasi yang tidak hadir dilewati."
     },
     "activeMotion": {
@@ -4433,13 +4434,13 @@
       "speakerTimeLeftTotal": "Waktu pembicara (kiri / total)",
       "perSpeaker": "(per pembicara)",
       "paused": "(dijeda)",
-      "pauseReason": "Jeda: {alasan}"
+      "pauseReason": "Jeda: {reason}"
     },
     "floorStatus": {
       "sessionTime": "Waktu sesi",
       "sessionNotStarted": "Sesi belum dimulai",
       "limit": "Membatasi",
-      "limitRemaining": "{nilai} tersisa",
+      "limitRemaining": "{value} tersisa",
       "limitOverBy": "berakhir sebesar {value}",
       "quickLinkSession": "Sidang",
       "quickLinkRoll": "Gulungan",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(minimal 1 menit)",
       "endAtLocalTime": "Berakhir pada (waktu setempat)",
       "stopSession": "Hentikan sesi",
+      "smtProgressReminderTitle": "Perbarui SMT pada sesi ini",
+      "smtProgressReminderBody": "Kirimkan catatan kemajuan singkat agar sekretariat mengetahui perkembangan komite dan apa yang harus ditindaklanjuti.",
+      "smtProgressReminderWrite": "Tulis catatan",
+      "smtProgressReminderDismiss": "Nanti",
       "saveLimit": "Simpan batas",
       "saveLimitHelp": "Menerapkan pengaturan batas yang diperbarui saat sesi sedang berjalan, tanpa menghentikan sesi.",
       "startSession": "Mulai sesi",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Gunakan bilah sisi untuk",
       "rollCall": "Panggilan absensi",
       "agenda": "Agenda",
@@ -4509,11 +4518,7 @@
       "timer": "pengatur waktu",
       "sidebarAnd": "Dan",
       "announcements": "Pengumuman",
-      "sidebarUseSuffix": "— satu alat per tab.",
-      "smtProgressReminderTitle": "Perbarui SMT pada sesi ini",
-      "smtProgressReminderBody": "Kirimkan catatan kemajuan singkat agar sekretariat mengetahui perkembangan komite dan apa yang harus ditindaklanjuti.",
-      "smtProgressReminderWrite": "Tulis catatan",
-      "smtProgressReminderDismiss": "Nanti"
+      "sidebarUseSuffix": "— satu alat per tab."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "Menghapus",
       "deleteConfirm": "Hapus sesi ini dari riwayat?",
       "sessionNamePrompt": "Nama sesi",
-      "rangeClosed": "{jangkauan}",
-      "rangeOngoing": "{rentang} -> Sedang berlangsung"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Sedang berlangsung"
     },
     "timerPage": {
       "title": "pengatur waktu",

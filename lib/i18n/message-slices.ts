@@ -141,6 +141,20 @@ export function publicMessageNamespaces(): string[] {
   return [...new Set([...CORE_MESSAGE_NAMESPACES, ...MARKETING_MESSAGE_NAMESPACES])];
 }
 
+/**
+ * Client payload for the root provider: public routes get core + marketing
+ * namespaces, everything else gets the app catalog. Server components always
+ * read the full catalog from `i18n/request.ts`.
+ */
+export function clientMessagesForPath(
+  all: Record<string, unknown>,
+  pathname: string | null | undefined
+): Record<string, unknown> {
+  return isPublicMarketingPath(pathname)
+    ? pickMessageNamespaces(all, publicMessageNamespaces())
+    : omitDeferredAppNamespaces(all);
+}
+
 /** Drop deferred namespaces from the full catalog for authenticated app routes. */
 export function omitDeferredAppNamespaces(
   all: Record<string, unknown>

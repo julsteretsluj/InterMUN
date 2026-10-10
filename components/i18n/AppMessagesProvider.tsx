@@ -3,6 +3,7 @@
 
 import { getLocale, getMessages } from "next-intl/server";
 import { IntlProvider } from "@/components/i18n/IntlProvider";
+import { omitDeferredAppNamespaces } from "@/lib/i18n/message-slices";
 
 /**
  * Re-provides locale messages for authenticated app shells.
@@ -17,7 +18,7 @@ import { IntlProvider } from "@/components/i18n/IntlProvider";
 export async function AppMessagesProvider({ children }: { children: React.ReactNode }) {
   const [locale, messages] = await Promise.all([getLocale(), getMessages()]);
   return (
-    <IntlProvider locale={locale} messages={messages}>
+    <IntlProvider locale={locale} messages={omitDeferredAppNamespaces(messages)}>
       {children}
     </IntlProvider>
   );

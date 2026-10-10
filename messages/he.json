@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "הזן את קוד הוועידה מהמארגנים שלך (לפחות 4 תווים).",
     "eventCodeMissing": "אין ועידה שתואמת את הקוד הזה. בדוק איות עם המארגנים שלך.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "אתה חייב להיות מחובר.",
     "committeeCodeInvalid": "הזן את קוד הוועדה בן 6 התווים (אותיות וספרות בלבד, למשל ECO741). שאל את הכיסא שלך או בדוק SMT -> קודי חדרים.",
     "enterConferenceFirst": "הזן תחילה את קוד הוועידה שלך (חזור לשלב הקודם).",
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "זמן רמקול (שמאל / סה\"כ)",
     "perSpeaker": "(לכל דובר)",
     "paused": "(מושהה)",
-    "pauseReason": "השהייה: {סיבה}",
+    "pauseReason": "השהייה: {reason}",
     "dash": "—",
     "activeTimers": "שעונים פעילים",
     "activeTimersAria": "שעוני מושב ואולם",
@@ -2763,7 +2764,7 @@
     }
   },
   "awardsRubric": {
-    "maxPoints": "מקסימום {נקודות} נקודות",
+    "maxPoints": "מקסימום {points} נקודות",
     "reference": {
       "title": "רובריקות הפרס הרשמי של SEAMUN I",
       "description": "עותק עזר: סוגי פרסים, תהליך הערכה ומטריצות מלאות של 1-8 להקות (מתוך רובריקת הכנס). ניקוד ב-InterMUN משתמש באותם מפתחות קריטריונים שבהם מוגשות מועמדויות."
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "פרסים בפרופיל שלך",
-      "rank": "דרגה {דרגה}",
+      "rank": "דרגה {rank}",
       "pending": {
         "tab": "מועמדויות ממתינות",
         "title": "ממתינים למועמדויות לכסא",
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "מעמד משמעתי (פרטי)",
-      "statusLine": "אזהרות: {אזהרות} · התראות: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "statusLine": "אזהרות: {warnings} · התראות: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "ההצבעה מושבתת",
       "speakingSuspended": "דיבור מושעה",
       "removedFromCommittee": "הוצא מהוועדה",
@@ -3444,7 +3445,7 @@
       "title": "תצוגה מקדימה",
       "yourName": "השם שלך",
       "usernameNotSet": "שם משתמש לא מוגדר",
-      "gradeValue": "כיתה {כיתה}",
+      "gradeValue": "כיתה {grade}",
       "awards": "פרסים"
     },
     "profilePicture": "תמונת פרופיל",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(מינימום דקה אחת)",
       "endAtLocalTime": "סיים בשעה (זמן מקומי)",
       "stopSession": "עצור את הפגישה",
+      "smtProgressReminderTitle": "עדכן SMT בהפעלה זו",
+      "smtProgressReminderBody": "שלח הערת התקדמות קצרה כדי שהמזכירות תדע איך התנהלה הוועדה ועל מה לעקוב.",
+      "smtProgressReminderWrite": "כתוב הערה",
+      "smtProgressReminderDismiss": "מְאוּחָר יוֹתֵר",
       "saveLimit": "שמור מגבלה",
       "saveLimitHelp": "מחיל הגדרות מגבלה מעודכנות בזמן שההפעלה כבר פועלת, מבלי להפסיק את ההפעלה.",
       "startSession": "התחל הפעלה",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "השתמש בסרגל הצד עבור",
       "rollCall": "מפקד",
       "agenda": "סֵדֶר הַיוֹם",
@@ -4509,11 +4518,7 @@
       "timer": "שָׁעוֹן עֶצֶר",
       "sidebarAnd": "ו",
       "announcements": "הכרזות",
-      "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה.",
-      "smtProgressReminderTitle": "עדכן SMT בהפעלה זו",
-      "smtProgressReminderBody": "שלח הערת התקדמות קצרה כדי שהמזכירות תדע איך התנהלה הוועדה ועל מה לעקוב.",
-      "smtProgressReminderWrite": "כתוב הערה",
-      "smtProgressReminderDismiss": "מְאוּחָר יוֹתֵר"
+      "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

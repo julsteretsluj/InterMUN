@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Weka msimbo wa mkutano kutoka kwa waandaaji wako (angalau vibambo 4).",
     "eventCodeMissing": "Hakuna mkutano unaolingana na msimbo huo. Angalia tahajia na waandaaji wako.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Lazima uwe umeingia.",
     "committeeCodeInvalid": "Weka msimbo wa kamati ya wahusika 6 (herufi na tarakimu pekee, k.m. ECO741). Uliza mwenyekiti wako au angalia SMT -> Misimbo ya vyumba.",
     "enterConferenceFirst": "Weka msimbo wako wa mkutano kwanza (rudi kwenye hatua iliyotangulia).",
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Muda wa mzungumzaji (kushoto / jumla)",
     "perSpeaker": "(kwa mzungumzaji)",
     "paused": "(imesitishwa)",
-    "pauseReason": "Sitisha: {sababu}",
+    "pauseReason": "Sitisha: {reason}",
     "dash": "-",
     "activeTimers": "Vipima muda vinavyotumika",
     "activeTimersAria": "Vipima muda vya kikao na ukumbi",
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "Kamati",
     "intro": {
-      "scoringMatches": "Alama zinalingana na <dashibodi>dashibodi ya SEAMUN</dashibodi>: kwa kila kigezo chagua <beginning>Mwanzo</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, au <exemplary>Mfano</emplary>. Peana 2 Bora na ushahidi; SMT inathibitisha tuzo za mwisho.",
+      "scoringMatches": "Alama zinalingana na <dashboard>dashibodi ya SEAMUN</dashboard>: kwa kila kigezo chagua <beginning>Mwanzo</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, au <exemplary>Mfano</exemplary>. Peana 2 Bora na ushahidi; SMT inathibitisha tuzo za mwisho.",
       "submissionRulePrefix": "Kuwasilisha kwa SMT ni kwa mikono (kitufe hapa chini) au kiotomatiki baada ya hapo",
       "submissionRuleSuffix": "UTC unapofungua ukurasa huu tena (ikiwa nafasi zote zinazohitajika zimekamilika).",
       "steps": {
@@ -2801,7 +2802,7 @@
     },
     "tierLow": "Chini",
     "tierHigh": "Juu",
-    "tierPromptLocked": "Imefungwa ndani: {band} - {tier} ({alama})",
+    "tierPromptLocked": "Imefungwa ndani: {band} - {tier} ({score})",
     "tierPromptPick": "Chagua chini au juu ndani ya {band} (pointi kwenye mizani 1-8).",
     "criteria": {
       "creativity": {
@@ -3433,7 +3434,7 @@
     },
     "discipline": {
       "title": "Hali ya nidhamu (binafsi)",
-      "statusLine": "Maonyo: {maonyo} · Maonyo: {mgomo}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "statusLine": "Maonyo: {warnings} · Maonyo: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
       "votingDisabled": "upigaji kura umezimwa",
       "speakingSuspended": "kuzungumza kusimamishwa",
       "removedFromCommittee": "kuondolewa kwenye kamati",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(angalau dakika 1)",
       "endAtLocalTime": "Mwisho saa (saa za ndani)",
       "stopSession": "Acha kikao",
+      "smtProgressReminderTitle": "Sasisha SMT kwenye kipindi hiki",
+      "smtProgressReminderBody": "Tuma maelezo mafupi ya maendeleo ili sekretarieti ijue kamati iliendaje na nini cha kufuatilia.",
+      "smtProgressReminderWrite": "Andika dokezo",
+      "smtProgressReminderDismiss": "Baadaye",
       "saveLimit": "Hifadhi kikomo",
       "saveLimitHelp": "Hutumia mipangilio iliyosasishwa ya kikomo wakati kipindi tayari kinaendelea, bila kusimamisha kipindi.",
       "startSession": "Anza kipindi",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Tumia utepe kwa",
       "rollCall": "Piga simu",
       "agenda": "Ajenda",
@@ -4509,11 +4518,7 @@
       "timer": "Kipima muda",
       "sidebarAnd": "na",
       "announcements": "Matangazo",
-      "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo.",
-      "smtProgressReminderTitle": "Sasisha SMT kwenye kipindi hiki",
-      "smtProgressReminderBody": "Tuma maelezo mafupi ya maendeleo ili sekretarieti ijue kamati iliendaje na nini cha kufuatilia.",
-      "smtProgressReminderWrite": "Andika dokezo",
-      "smtProgressReminderDismiss": "Baadaye"
+      "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

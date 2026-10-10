@@ -138,7 +138,7 @@ InterMUN replaces ad-hoc spreadsheets and messaging threads with a single web ap
 |---------|---------|
 | `npm run dev` | Local development server |
 | `npm run build` | Production build |
-| `npm run i18n:check` | Locale key parity (CI) |
+| `npm run i18n:check` | Validate every locale: JSON, duplicate keys, ICU syntax, placeholders/tags and key parity vs `en` (CI) |
 | `npm run i18n:audit` | Full i18n audit |
 | `npm run seed:allocations` | Regenerate allocation SQL from local XLSX |
 

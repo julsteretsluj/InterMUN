@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "ໃສ່ລະຫັດກອງປະຊຸມຈາກຜູ້ຈັດງານຂອງທ່ານ (ຢ່າງໜ້ອຍ 4 ຕົວອັກສອນ).",
     "eventCodeMissing": "ບໍ່ມີກອງປະຊຸມກົງກັບລະຫັດນັ້ນ. ກວດເບິ່ງການສະກົດຄໍາກັບຜູ້ຈັດຕັ້ງຂອງທ່ານ.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "ທ່ານຕ້ອງໄດ້ເຂົ້າສູ່ລະບົບ.",
     "committeeCodeInvalid": "ໃສ່ລະຫັດຄະນະກໍາມະການ 6 ຕົວອັກສອນ (ຕົວອັກສອນ ແລະຕົວເລກເທົ່ານັ້ນ, ເຊັ່ນ: ECO741). ຖາມເກົ້າອີ້ຂອງເຈົ້າຫຼືກວດເບິ່ງ SMT -> ລະຫັດຫ້ອງ.",
     "enterConferenceFirst": "ໃສ່ລະຫັດກອງປະຊຸມຂອງທ່ານກ່ອນ (ກັບຄືນໄປຫາຂັ້ນຕອນທີ່ຜ່ານມາ).",
@@ -1272,7 +1273,7 @@
   },
   "eventGatePage": {
     "title": "ເຂົ້າຮ່ວມກອງປະຊຸມຂອງທ່ານ",
-    "description": "ໃສ່ <conf>ລະຫັດກອງປະຊຸມ</conf> ຈາກຜູ້ຈັດງານຂອງທ່ານ. ໃນຫນ້າຈໍຕໍ່ໄປທ່ານຈະໃສ່ <comm>ລະຫັດຄະນະກໍາມະການ</com> ຂອງທ່ານສໍາລັບກອງປະຊຸມສະເພາະຂອງທ່ານ.",
+    "description": "ໃສ່ <conf>ລະຫັດກອງປະຊຸມ</conf> ຈາກຜູ້ຈັດງານຂອງທ່ານ. ໃນຫນ້າຈໍຕໍ່ໄປທ່ານຈະໃສ່ <comm>ລະຫັດຄະນະກໍາມະການ</comm> ຂອງທ່ານສໍາລັບກອງປະຊຸມສະເພາະຂອງທ່ານ.",
     "alreadyEnteredCommittee": "ປ້ອນລະຫັດກອງປະຊຸມແລ້ວບໍ? ຂັ້ນ​ຕອນ​ຂອງ​ຄະ​ນະ​ກໍາ​ມະ →​"
   },
   "smtLayout": {
@@ -2490,7 +2491,7 @@
   "chairAwardsPage": {
     "committeeLabel": "ຄະນະກໍາມະການ",
     "intro": {
-      "scoringMatches": "ການໃຫ້ຄະແນນກົງກັບ <dashboard>SEAMUNs dashboard</dashboard>: ສໍາລັບແຕ່ລະເງື່ອນໄຂເລືອກ <beginning>Beginning</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, ຫຼື <exemplary>Exemplary>Exemplary>. ຍື່ນສະເຫນີເທິງ 2 ມີຫຼັກຖານ; SMT ຢືນຢັນລາງວັນສຸດທ້າຍ.",
+      "scoringMatches": "ການໃຫ້ຄະແນນກົງກັບ <dashboard>SEAMUNs dashboard</dashboard>: ສໍາລັບແຕ່ລະເງື່ອນໄຂເລືອກ <beginning>Beginning</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, ຫຼື <exemplary>Exemplary</exemplary>. ຍື່ນສະເຫນີເທິງ 2 ມີຫຼັກຖານ; SMT ຢືນຢັນລາງວັນສຸດທ້າຍ.",
       "submissionRulePrefix": "ການຍື່ນສະເຫນີ SMT ແມ່ນຄູ່ມື (ປຸ່ມຂ້າງລຸ່ມນີ້) ຫຼືອັດຕະໂນມັດຫຼັງຈາກນັ້ນ",
       "submissionRuleSuffix": "UTC ເມື່ອທ່ານເປີດຫນ້ານີ້ຕໍ່ໄປ (ຖ້າຊ່ອງທີ່ຕ້ອງການທັງຫມົດແມ່ນສໍາເລັດ).",
       "steps": {
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(ຂັ້ນຕ່ຳ 1 ນາທີ)",
       "endAtLocalTime": "ສິ້ນສຸດ (ເວລາທ້ອງຖິ່ນ)",
       "stopSession": "ຢຸດເຊດຊັນ",
+      "smtProgressReminderTitle": "ອັບເດດ SMT ໃນເຊດຊັນນີ້",
+      "smtProgressReminderBody": "ສົ່ງບົດບັນທຶກຄວາມຄືບໜ້າສັ້ນໆ ເພື່ອໃຫ້ກອງເລຂາຮູ້ວ່າຄະນະກຳມາທິການໄປແນວໃດ ແລະຈະຕິດຕາມອັນໃດແດ່.",
+      "smtProgressReminderWrite": "ຂຽນບັນທຶກ",
+      "smtProgressReminderDismiss": "ຕໍ່ມາ",
       "saveLimit": "ປະຢັດຂີດຈຳກັດ",
       "saveLimitHelp": "ນຳໃຊ້ການຕັ້ງຄ່າຈຳກັດທີ່ອັບເດດແລ້ວ ໃນຂະນະທີ່ເຊດຊັນກຳລັງແລ່ນຢູ່, ໂດຍບໍ່ຕ້ອງຢຸດເຊດຊັນ.",
       "startSession": "ເລີ່ມເຊດຊັນ",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "ໃຊ້ແຖບດ້ານຂ້າງສໍາລັບ",
       "rollCall": "ໂທມ້ວນ",
       "agenda": "ວາລະ",
@@ -4509,11 +4518,7 @@
       "timer": "ໂມງຈັບເວລາ",
       "sidebarAnd": "ແລະ",
       "announcements": "ປະກາດ",
-      "sidebarUseSuffix": "— ຫນຶ່ງ​ເຄື່ອງ​ມື​ຕໍ່​ແຖບ​.",
-      "smtProgressReminderTitle": "ອັບເດດ SMT ໃນເຊດຊັນນີ້",
-      "smtProgressReminderBody": "ສົ່ງບົດບັນທຶກຄວາມຄືບໜ້າສັ້ນໆ ເພື່ອໃຫ້ກອງເລຂາຮູ້ວ່າຄະນະກຳມາທິການໄປແນວໃດ ແລະຈະຕິດຕາມອັນໃດແດ່.",
-      "smtProgressReminderWrite": "ຂຽນບັນທຶກ",
-      "smtProgressReminderDismiss": "ຕໍ່ມາ"
+      "sidebarUseSuffix": "— ຫນຶ່ງ​ເຄື່ອງ​ມື​ຕໍ່​ແຖບ​."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",

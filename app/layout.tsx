@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Merriweather } from "next/font/google";
+import { headers } from "next/headers";
 import Script from "next/script";
 import { getLocale, getMessages } from "next-intl/server";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import { buildThemeInitScript } from "@/lib/theme-init-script";
 import { localeDirection } from "@/lib/i18n/locales";
+import { clientMessagesForPath } from "@/lib/i18n/message-slices";
 import { IntlProvider } from "@/components/i18n/IntlProvider";
 import { DyslexicFontLoader } from "@/components/i18n/DyslexicFontLoader";
 import { AppleAppProviders } from "@/components/ui/AppleAppShell";
@@ -43,8 +45,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
+  const [locale, allMessages, hdrs] = await Promise.all([getLocale(), getMessages(), headers()]);
+  const messages = clientMessagesForPath(allMessages, hdrs.get("x-pathname"));
   const themeInit = buildThemeInitScript();
 
   return (

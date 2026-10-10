@@ -4,16 +4,7 @@
 "use client";
 
 import { NextIntlClientProvider } from "next-intl";
-
-function humanizeI18nKey(path: string): string {
-  const leaf = path.split(".").pop() ?? path;
-  const spaced = leaf
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/[_-]+/g, " ")
-    .trim();
-  if (!spaced) return "Missing translation";
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
-}
+import { getIntlMessageFallback, onIntlError } from "@/lib/i18n/intl-error-handling";
 
 export function IntlProvider({
   locale,
@@ -28,12 +19,8 @@ export function IntlProvider({
     <NextIntlClientProvider
       locale={locale}
       messages={messages}
-      onError={() => {
-        // Avoid noisy UI fallbacks while locale files are being updated.
-      }}
-      getMessageFallback={({ namespace, key }) =>
-        humanizeI18nKey(namespace ? `${namespace}.${key}` : key)
-      }
+      onError={onIntlError}
+      getMessageFallback={getIntlMessageFallback}
     >
       {children}
     </NextIntlClientProvider>

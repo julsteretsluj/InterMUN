@@ -407,7 +407,7 @@
     "saveEdits": "Зберегти зміни",
     "deleteMotionConfirm": "Видалити цей рух назавжди? Усі зареєстровані голоси за нього буде видалено, а пропозиція зникне із запису.",
     "deleteMotion": "Видалити рух",
-    "tallyLine": "Tally: Так {так} | Ні {ні} | Бюлетені {всього}",
+    "tallyLine": "Tally: Так {yes} | Ні {no} | Бюлетені {total}",
     "ballotsHelp": "Бюлетені = плакати із записом «Так» або «Ні» (утримався відстежується окремо та не враховується в цьому знаменнику). Очистити видаляє записане голосування. Для процедурних клопотань результат порівнює «Так» з членами, присутніми на списку (див. розділ «Поіменне голосування»).",
     "recordVotesLabel": "Рекордні голоси",
     "currentMotion": "поточний рух",
@@ -831,6 +831,7 @@
   "server": {
     "eventCodeMin": "Введіть код конференції від ваших організаторів (мінімум 4 символи).",
     "eventCodeMissing": "Жодна конференція не відповідає цьому коду. Перевірте правопис у своїх організаторів.",
+    "requestTimedOut": "That check took too long. Please try again.",
     "mustBeSignedIn": "Ви повинні увійти в систему.",
     "committeeCodeInvalid": "Введіть 6-значний код комітету (лише літери та цифри, наприклад, ECO741). Запитайте у свого крісла або перевірте SMT -> Коди кімнат.",
     "enterConferenceFirst": "Спочатку введіть свій код конференції (поверніться до попереднього кроку).",
@@ -1576,7 +1577,7 @@
     "speakerTimeTotal": "Час доповідача (лівий / загальний)",
     "perSpeaker": "(на динаміка)",
     "paused": "(пауза)",
-    "pauseReason": "Пауза: {причина}",
+    "pauseReason": "Пауза: {reason}",
     "dash": "—",
     "activeTimers": "Активні таймери",
     "activeTimersAria": "Таймери сесії та зали",
@@ -2166,7 +2167,7 @@
       "welcomeLine3": "До зустрічі на паркеті.",
       "chairReminderSubject": "Запит на розподіл делегатів очікує на схвалення",
       "chairReminderLine1": "Делегат подав запит на розподіл і потребує перегляду голови.",
-      "chairReminderConference": "Конференція: {конференція}",
+      "chairReminderConference": "Конференція: {conference}",
       "chairReminderAllocation": "Запитане виділення: {country}",
       "chairReminderDelegate": "Представник: {name}",
       "chairReminderEmail": "Електронна адреса облікового запису: {email}",
@@ -2641,7 +2642,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "ваш комітет",
     "fallbackCommittee": "Комітет",
-    "welcome": "Ласкаво просимо, Голово {комітету}",
+    "welcome": "Ласкаво просимо, Голово {committee}",
     "featureStrip": "Цифрова кімната · Пропозиції · Голосування · Доповідачі",
     "activeCommitteeLine": "Активний комітет: <line></line>. Дані сеансу синхронізуються через ваш обліковий запис; Контрольні списки підготовки/потоку та пропозиції та точки зберігаються в цьому браузері для цього комітету – така ж ідея, як <seamuns>Кімната голови SEAMUNs</seamuns>.",
     "tiles": {
@@ -3220,7 +3221,7 @@
     "noGoogleDocLink": "Немає посилання на документ Google",
     "clauseEditor": "Редактор пунктів",
     "noClausesYet": "Поки немає пунктів.",
-    "clauseNumber": "Пункт {номер}",
+    "clauseNumber": "Пункт {number}",
     "saveClause": "Речення Save",
     "delete": "Видалити",
     "addClausePlaceholder": "Додайте новий пункт...",
@@ -3405,7 +3406,7 @@
     },
     "awards": {
       "tabsAriaLabel": "Нагороди у вашому профілі",
-      "rank": "ранг {ранг}",
+      "rank": "ранг {rank}",
       "pending": {
         "tab": "Номінації в очікуванні",
         "title": "Очікуються кандидатури голови",
@@ -3529,7 +3530,7 @@
     "glossary": {
       "title": "Глосарій порядку денного MUN",
       "subtitle": "Унікальна термінологія, яка відповідає коду вашого комітету та поточним темам порядку денного.",
-      "committeeCode": "Код комітету: {код}",
+      "committeeCode": "Код комітету: {code}",
       "sources": {
         "core": "ядро",
         "committee": "комітет",
@@ -4281,9 +4282,9 @@
     "add": "додати",
     "noIdeasYet": "Ідей ще немає.",
     "ideaLabel": "Ідея",
-    "ideaFallback": "Ідея {номер}",
+    "ideaFallback": "Ідея {number}",
     "linkedDoc": "Пов’язаний документ",
-    "addedOn": "Додано {дата}",
+    "addedOn": "Додано {date}",
     "edit": "Редагувати",
     "delete": "Видалити",
     "ideaDocument": "Ідейний документ",
@@ -4374,7 +4375,7 @@
     "virtualRoomVacant": "Вакантний",
     "profileAria": "Переглянути профіль: {country}",
     "vacantSeatAria": "Вільне місце",
-    "placardAria": "Плакат {країна}",
+    "placardAria": "Плакат {country}",
     "gavelAria": "Молоток",
     "viewProfileAria": "Переглянути профіль: {title}",
     "noProfileLinkAria": "{title} (немає посилання на профіль)",
@@ -4416,7 +4417,7 @@
       "motioner": "Motioner",
       "majority": "більшість",
       "majoritySimple": "просто",
-      "tally": "Так {так} - Ні {ні} - Усього {усього}",
+      "tally": "Так {yes} - Ні {no} - Усього {total}",
       "help": "На трибуні фіксується голосування кожної делегації на сесії. При голосуванні за пропозицію використовується лише «так» або «ні» (без утримання). Підсумки враховують лише таблички, де було записано «Так» або «Ні»; відсутні делегації пропускаються."
     },
     "activeMotion": {
@@ -4433,7 +4434,7 @@
       "speakerTimeLeftTotal": "Час доповідача (лівий / загальний)",
       "perSpeaker": "(на динаміка)",
       "paused": "(пауза)",
-      "pauseReason": "Пауза: {причина}"
+      "pauseReason": "Пауза: {reason}"
     },
     "floorStatus": {
       "sessionTime": "Час сеансу",
@@ -4498,9 +4499,17 @@
       "minimumOneMinute": "(мінімум 1 хвилина)",
       "endAtLocalTime": "Кінець о (місцевий час)",
       "stopSession": "Зупинити сеанс",
+      "smtProgressReminderTitle": "Оновіть SMT на цьому сеансі",
+      "smtProgressReminderBody": "Надішліть коротку доповідь про хід роботи, щоб секретаріат знав, як пройшов комітет і що потрібно зробити далі.",
+      "smtProgressReminderWrite": "Напишіть записку",
+      "smtProgressReminderDismiss": "Пізніше",
       "saveLimit": "Зберегти ліміт",
       "saveLimitHelp": "Застосовує оновлені параметри обмежень, коли сеанс уже запущено, не припиняючи сеанс.",
       "startSession": "Розпочати сеанс",
+      "actionFailed": "Could not update the session. Please try again.",
+      "starting": "Starting…",
+      "stopping": "Stopping…",
+      "staleSessionOpen": "This session is still open from an earlier start. Stop it before you start the next one.",
       "sidebarUsePrefix": "Використовуйте бічну панель для",
       "rollCall": "Перекличка",
       "agenda": "Порядок денний",
@@ -4509,11 +4518,7 @@
       "timer": "Таймер",
       "sidebarAnd": "і",
       "announcements": "Оголошення",
-      "sidebarUseSuffix": "— один інструмент на вкладку.",
-      "smtProgressReminderTitle": "Оновіть SMT на цьому сеансі",
-      "smtProgressReminderBody": "Надішліть коротку доповідь про хід роботи, щоб секретаріат знав, як пройшов комітет і що потрібно зробити далі.",
-      "smtProgressReminderWrite": "Напишіть записку",
-      "smtProgressReminderDismiss": "Пізніше"
+      "sidebarUseSuffix": "— один інструмент на вкладку."
     },
     "scheduledSessions": {
       "title": "Scheduled sessions",
@@ -4559,8 +4564,8 @@
       "delete": "Видалити",
       "deleteConfirm": "Видалити цей сеанс з історії?",
       "sessionNamePrompt": "Назва сеансу",
-      "rangeClosed": "{діапазон}",
-      "rangeOngoing": "{діапазон} -> Триває"
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Триває"
     },
     "timerPage": {
       "title": "Таймер",
