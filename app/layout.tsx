@@ -8,6 +8,7 @@ import { localeDirection } from "@/lib/i18n/locales";
 import { IntlProvider } from "@/components/i18n/IntlProvider";
 import { DyslexicFontLoader } from "@/components/i18n/DyslexicFontLoader";
 import { AppleAppProviders } from "@/components/ui/AppleAppShell";
+import { StaleDeploymentReloader } from "@/components/StaleDeploymentReloader";
 import "./globals.css";
 
 /**
@@ -117,6 +118,7 @@ export default async function RootLayout({
           <DyslexicFontLoader />
           <AppleAppProviders>{children}</AppleAppProviders>
         </IntlProvider>
+        <StaleDeploymentReloader />
       </body>
     </html>
   );
