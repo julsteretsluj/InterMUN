@@ -655,6 +655,8 @@
     "signUp": "Inscribirse",
     "dontHaveAccount": "¿No tienes una cuenta?",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "termsConsent": "I agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>. If I cannot agree myself, a parent, guardian, or organiser has authorised this account.",
+    "termsRequired": "Agree to the Terms of Service and Privacy Policy to create an account.",
     "chair": "Silla",
     "chairHint": "(el estrado)",
     "delegate": "Delegar",

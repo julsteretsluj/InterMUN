@@ -655,6 +655,8 @@
     "signUp": "サインアップ",
     "dontHaveAccount": "アカウントをお持ちでない場合は、",
     "alreadyHaveAccount": "すでにアカウントをお持ちですか?",
+    "termsConsent": "I agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>. If I cannot agree myself, a parent, guardian, or organiser has authorised this account.",
+    "termsRequired": "Agree to the Terms of Service and Privacy Policy to create an account.",
     "chair": "椅子",
     "chairHint": "（壇上）",
     "delegate": "代表者",

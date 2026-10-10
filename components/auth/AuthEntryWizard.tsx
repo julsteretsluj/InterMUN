@@ -98,6 +98,7 @@ export function AuthEntryWizard({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [conferenceError, setConferenceError] = useState<string | null>(null);
@@ -250,6 +251,10 @@ export function AuthEntryWizard({
   async function handleSignupSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    if (!acceptedTerms) {
+      setError(t("termsRequired"));
+      return;
+    }
     setLoading(true);
     let supabase;
     try {
@@ -636,6 +641,31 @@ export function AuthEntryWizard({
                 minLength={mode === "signup" ? 6 : undefined}
               />
             </div>
+            {mode === "signup" ? (
+              <label className="case-preserve flex items-start gap-2.5 text-sm leading-relaxed text-brand-muted">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  required
+                  className="mt-1 size-4 shrink-0 accent-[#007AFF]"
+                />
+                <span>
+                  {t.rich("termsConsent", {
+                    terms: (chunks) => (
+                      <Link href="/terms" className="font-semibold text-[#007AFF] hover:underline">
+                        {chunks}
+                      </Link>
+                    ),
+                    privacy: (chunks) => (
+                      <Link href="/privacy" className="font-semibold text-[#007AFF] hover:underline">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
+                </span>
+              </label>
+            ) : null}
             {error && (
               <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
                 {error}

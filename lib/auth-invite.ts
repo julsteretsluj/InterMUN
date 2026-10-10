@@ -78,6 +78,37 @@ function isAlreadyRegisteredError(error: unknown): boolean {
   );
 }
 
+function withLinkRetry<T>(run: () => Promise<T>) {
+  return withAuthRetry(run, {
+    // generateLink shares the overloaded Auth plane — wait longer between tries.
+    attempts: 8,
+    baseDelayMs: 2500,
+    maxDelayMs: 25_000,
+    isRetryable: (error) => isRetryableAuthError(error) && !isAlreadyRegisteredError(error),
+  });
+}
+
+function requireHashedLinkData<
+  T extends { properties?: { hashed_token?: string | null } | null },
+>(
+  linkData: T | null,
+  error: { message?: string; name?: string; status?: number } | null
+) {
+  if (error) {
+    throw Object.assign(new Error(error.message || "generateLink failed"), {
+      name: error.name || "AuthError",
+      status: error.status,
+    });
+  }
+  if (!linkData?.properties?.hashed_token) {
+    throw Object.assign(new Error("Invite link missing hashed_token."), {
+      name: "AuthRetryableFetchError",
+      status: 504,
+    });
+  }
+  return linkData;
+}
+
 /**
  * Prefer invite for brand-new pre-provisioned emails.
  * If Auth says the user is already registered (common after a prior invite),
@@ -89,32 +120,6 @@ async function generateInviteLink(
   redirectTo: string,
   data?: Record<string, unknown>
 ) {
-  const withLinkRetry = <T,>(run: () => Promise<T>) =>
-    withAuthRetry(run, {
-      attempts: 6,
-      baseDelayMs: 2000,
-      isRetryable: (error) => isRetryableAuthError(error) && !isAlreadyRegisteredError(error),
-    });
-
-  const requireHashed = <T extends { properties?: { hashed_token?: string | null } | null }>(
-    linkData: T | null,
-    error: { message?: string; name?: string; status?: number } | null
-  ) => {
-    if (error) {
-      throw Object.assign(new Error(error.message || "generateLink failed"), {
-        name: error.name || "AuthError",
-        status: error.status,
-      });
-    }
-    if (!linkData?.properties?.hashed_token) {
-      throw Object.assign(new Error("Invite link missing hashed_token."), {
-        name: "AuthRetryableFetchError",
-        status: 504,
-      });
-    }
-    return linkData;
-  };
-
   try {
     return await withLinkRetry(async () => {
       const { data: linkData, error } = await admin.auth.admin.generateLink({
@@ -122,7 +127,7 @@ async function generateInviteLink(
         email,
         options: { redirectTo, data },
       });
-      return requireHashed(linkData, error);
+      return requireHashedLinkData(linkData, error);
     });
   } catch (error) {
     if (!isAlreadyRegisteredError(error)) throw error;
@@ -132,9 +137,25 @@ async function generateInviteLink(
         email,
         options: { redirectTo },
       });
-      return requireHashed(linkData, recoveryError);
+      return requireHashedLinkData(linkData, recoveryError);
     });
   }
+}
+
+/** Recovery-only link for already-registered accounts (never creates a new Auth user). */
+async function generateRecoveryLink(
+  admin: SupabaseClient,
+  email: string,
+  redirectTo: string
+) {
+  return withLinkRetry(async () => {
+    const { data: linkData, error } = await admin.auth.admin.generateLink({
+      type: "recovery",
+      email,
+      options: { redirectTo },
+    });
+    return requireHashedLinkData(linkData, error);
+  });
 }
 
 /**
@@ -250,4 +271,99 @@ export async function inviteUserByEmailWithArchive(
         "Invite email is not configured (SMTP). Refusing stock Supabase invite mail so the SEAMUN template is preserved.",
     },
   };
+}
+
+/**
+ * Public /auth/confirm escape hatch: recovery link only (no invite / no new Auth user).
+ * Same SEAMUN SMTP template + archive BCC as invites.
+ */
+export async function sendRecoverySetPasswordEmailWithArchive(
+  admin: SupabaseClient,
+  args: {
+    email: string;
+    redirectTo: string;
+    recipient?: {
+      name?: string;
+      email?: string;
+      allocation?: string;
+    };
+  }
+): Promise<{ user: User | null; error: { message: string } | null }> {
+  const email = args.email.trim();
+  const bcc = inviteBccFor(email);
+  const appName = getAppName();
+  const recipient = {
+    name: args.recipient?.name?.trim() || "",
+    email: args.recipient?.email?.trim() || email,
+    allocation: args.recipient?.allocation?.trim() || "",
+  };
+
+  if (!getSmtpConfig()) {
+    return {
+      user: null,
+      error: {
+        message:
+          "Invite email is not configured (SMTP). Refusing stock Supabase recovery mail so the SEAMUN template is preserved.",
+      },
+    };
+  }
+
+  let linkData;
+  try {
+    linkData = await generateRecoveryLink(admin, email, args.redirectTo);
+  } catch (error) {
+    const message = isRetryableAuthError(error)
+      ? "Supabase Auth timed out creating the recovery link. Try again in a moment."
+      : error instanceof Error
+        ? error.message
+        : "Recovery link was not created.";
+    return { user: null, error: { message } };
+  }
+
+  const hashedToken = linkData?.properties?.hashed_token;
+  const verificationType = linkData?.properties?.verification_type || "recovery";
+  const user = linkData?.user ?? null;
+  let actionLink: string;
+  try {
+    actionLink = resolveInviteEmailActionLink({
+      redirectTo: args.redirectTo,
+      hashedToken,
+      verificationType,
+    });
+  } catch (e) {
+    return {
+      user,
+      error: { message: e instanceof Error ? e.message : String(e) },
+    };
+  }
+  if (/supabase\.co$/i.test(new URL(actionLink).host) || actionLink.includes("/auth/v1/verify")) {
+    return {
+      user,
+      error: { message: "Refusing to send recovery with Supabase /verify CTA." },
+    };
+  }
+
+  const mail = buildSeamunIntermunInviteEmail({ actionLink, appName, recipient });
+  const sent = await sendTransactionalEmail({
+    to: email,
+    bcc,
+    from: getInviteFromAddress(),
+    subject: mail.subject,
+    text: mail.text,
+    html: mail.html,
+  });
+
+  if (!sent.ok) {
+    return {
+      user,
+      error: {
+        message:
+          sent.reason === "send_failed"
+            ? "Account was found but the recovery email could not be sent."
+            : "Invite email is not configured (SMTP).",
+      },
+    };
+  }
+
+  return { user, error: null };
 }

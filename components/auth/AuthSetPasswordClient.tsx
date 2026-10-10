@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { formatAuthError } from "@/lib/auth-error-message";
+import { authRetryDelayMs, isRetryableAuthError } from "@/lib/auth-retry";
 import { markNavigationLoading } from "@/lib/navigation-loading";
 
 /** After password is set, send invitees into the existing conference-code gate. */
@@ -71,7 +72,17 @@ export function AuthSetPasswordClient() {
         setError("Your invite session expired. Open the invite link again.");
         return;
       }
-      const { error: updateError } = await supabase.auth.updateUser({ password });
+      let updateError: unknown = null;
+      for (let i = 0; i < 5; i++) {
+        const result = await supabase.auth.updateUser({ password });
+        updateError = result.error;
+        if (!result.error) {
+          updateError = null;
+          break;
+        }
+        if (!isRetryableAuthError(result.error) || i >= 4) break;
+        await new Promise((r) => setTimeout(r, authRetryDelayMs(i, 1500, 12_000)));
+      }
       if (updateError) {
         setError(
           formatAuthError(
