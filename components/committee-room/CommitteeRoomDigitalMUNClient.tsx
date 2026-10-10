@@ -169,10 +169,15 @@ export function CommitteeRoomDigitalMUNClient({
           filter: `conference_id=eq.${floorConferenceId}`,
         },
         (payload) => {
+          if (payload.eventType === "DELETE") {
+            setProcedureState("debate_open");
+            setCurrentVoteItemId(null);
+            return;
+          }
           const row = payload.new as {
-            state: "debate_open" | "voting_procedure";
-            current_vote_item_id: string | null;
-          };
+            state?: "debate_open" | "voting_procedure";
+            current_vote_item_id?: string | null;
+          } | null;
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
         }
@@ -213,7 +218,19 @@ export function CommitteeRoomDigitalMUNClient({
           table: "procedure_states",
           filter: `conference_id=eq.${canonicalConferenceId}`,
         },
-        () => void loadSession()
+        (payload) => {
+          // Apply from realtime payload — avoid REST refetch on every session update.
+          if (payload.eventType === "DELETE") {
+            setSessionStartedAt(null);
+            return;
+          }
+          const row = payload.new as { committee_session_started_at?: string | null } | null;
+          if (!row || !("committee_session_started_at" in row)) {
+            void loadSession();
+            return;
+          }
+          setSessionStartedAt(row.committee_session_started_at ?? null);
+        }
       )
       .subscribe();
 

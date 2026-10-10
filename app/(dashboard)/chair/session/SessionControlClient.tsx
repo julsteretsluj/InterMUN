@@ -510,6 +510,7 @@ export function SessionControlClient({
   const [openVotingMotions, setOpenVotingMotions] = useState<MotionRow[]>([]);
   /** Stable fallbacks for partial refresh slices (avoid re-creating refresh every state tick). */
   const allocationsRef = useRef<Alloc[]>([]);
+  const timerFloorLabelRef = useRef("");
   const caucusPrecedenceRef = useRef<CaucusDisruptivenessPrecedence>("consultation_first");
   const procedureProfileRef = useRef<"default" | "eu_parliament" | "press_corps">("default");
   const openVotingMotionsRef = useRef<MotionRow[]>([]);
@@ -595,6 +596,7 @@ export function SessionControlClient({
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
 
   allocationsRef.current = allocations;
+  timerFloorLabelRef.current = timer.floorLabel;
   caucusPrecedenceRef.current = caucusPrecedence;
   procedureProfileRef.current = procedureProfile;
   openVotingMotionsRef.current = openVotingMotions;
@@ -1237,7 +1239,7 @@ export function SessionControlClient({
       { data: disciplinaryRows },
     ] =
       await Promise.all([
-        want("core")
+        want("procedure")
           ? supabase
               .from("procedure_states")
               .select("state, current_vote_item_id, debate_closed, motion_floor_open, eu_session_phase")
@@ -1276,7 +1278,7 @@ export function SessionControlClient({
               .order("created_at", { ascending: false })
               .limit(24)
           : skip(),
-        want("core")
+        want("timer")
           ? supabase.from("timers").select("*").eq("conference_id", floorConferenceId).maybeSingle()
           : skip(),
         want("voteItems")
@@ -1401,9 +1403,11 @@ export function SessionControlClient({
       {
         const currents =
           (sqCurrentRows as (CurrentSpeakerQueueRow & { list_kind?: string | null })[] | null) ?? [];
-        const activeKind = resolveSpeakerQueueListKind(
-          (timerRow as { floor_label?: string | null } | null)?.floor_label
-        );
+        const floorLabelForQueue =
+          (timerRow as { floor_label?: string | null } | null)?.floor_label ??
+          timerFloorLabelRef.current ??
+          null;
+        const activeKind = resolveSpeakerQueueListKind(floorLabelForQueue);
         const picked =
           currents.find((r) => (r.list_kind ?? "gsl") === activeKind) ??
           currents.find((r) => (r.list_kind ?? "gsl") === "gsl") ??
@@ -1411,16 +1415,6 @@ export function SessionControlClient({
           null;
         setCurrentSpeakerQueueRow(picked);
       }
-
-      const ps = psRow as {
-        motion_floor_open?: boolean;
-        debate_closed?: boolean;
-        state?: string;
-        current_vote_item_id?: string | null;
-        eu_session_phase?: string | null;
-      } | null;
-      setMotionFloorOpen(!!ps?.motion_floor_open);
-      setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
 
       const confList = (confRows as Array<{
         id?: string | null;
@@ -1468,6 +1462,18 @@ export function SessionControlClient({
           committee: confForAgenda.committee,
         };
       }
+    }
+
+    if (want("procedure")) {
+      const ps = psRow as {
+        motion_floor_open?: boolean;
+        debate_closed?: boolean;
+        state?: string;
+        current_vote_item_id?: string | null;
+        eu_session_phase?: string | null;
+      } | null;
+      setMotionFloorOpen(!!ps?.motion_floor_open);
+      setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
     }
 
     if (want("roll")) {
@@ -1648,7 +1654,7 @@ export function SessionControlClient({
       }
     }
 
-    if (want("core")) {
+    if (want("timer")) {
       if (timerRow) {
         const tl = timerRow.time_left_seconds ?? 0;
         const tt = timerRow.total_time_seconds ?? 0;
@@ -1661,8 +1667,10 @@ export function SessionControlClient({
         // Timer may still point at a closed/previous motion. A stale bind must not
         // hide Motions → Votes recording (activeMotionForRecordedVotes).
         const vidRaw = tr.vote_item_id ?? null;
+        const openList =
+          openForVotingList.length > 0 ? openForVotingList : openVotingMotionsRef.current;
         const vid =
-          vidRaw && openForVotingList.some((m) => m.id === vidRaw) ? vidRaw : null;
+          vidRaw && openList.some((m) => m.id === vidRaw) ? vidRaw : null;
         const floorLabel = (timerRow as { floor_label?: string | null }).floor_label ?? "";
         setTimer({
           current: timerRow.current_speaker ?? "",
@@ -1742,7 +1750,12 @@ export function SessionControlClient({
       )
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "timers" },
+        {
+          event: "*",
+          schema: "public",
+          table: "timers",
+          filter: `conference_id=eq.${floorConferenceId}`,
+        },
         () => onRealtime("timers")
       )
       .on(

@@ -5,10 +5,16 @@
  * Session floor refresh is expensive (~15 parallel queries + follow-ups).
  * Scope fetches to the active chair tool so Speakers/Timer don't wait on
  * resolutions/votes, and realtime pings for unrelated tables can no-op.
+ *
+ * `procedure` / `timer` are split out of `core` so a timers postgres_changes
+ * event does not re-fetch procedure_states (and vice versa). That stampede was
+ * saturating PostgREST’s small connection pool (504 / PGRST003 in prod logs).
  */
 
 export type SessionRefreshSlice =
   | "core"
+  | "procedure"
+  | "timer"
   | "roll"
   | "announcements"
   | "voteItems"
@@ -31,6 +37,8 @@ export type SessionFloorSectionForRefresh =
 
 const ALL_SLICES: SessionRefreshSlice[] = [
   "core",
+  "procedure",
+  "timer",
   "roll",
   "announcements",
   "voteItems",
@@ -40,6 +48,9 @@ const ALL_SLICES: SessionRefreshSlice[] = [
   "points",
   "discipline",
 ];
+
+/** Roster + speaker-queue floor — not procedure_states / timers. */
+const CORE_WITH_LIVE: SessionRefreshSlice[] = ["core", "procedure", "timer"];
 
 export function allSessionRefreshSlices(): SessionRefreshSlice[] {
   return [...ALL_SLICES];
@@ -52,20 +63,28 @@ export function slicesForSessionSection(
     case "speakers":
     case "opening-speech":
       // Queue + timer floor_label ownership; roll/discipline for speaking eligibility.
-      return ["core", "roll", "discipline"];
+      return [...CORE_WITH_LIVE, "roll", "discipline"];
     case "timer":
       // Bind-to-motion needs open vote_items; pause log for Timer → Log.
-      return ["core", "voteItems", "timerLog"];
+      return [...CORE_WITH_LIVE, "voteItems", "timerLog"];
     case "motions":
-      return ["core", "roll", "voteItems", "resolutions", "voteBallots", "discipline", "points"];
+      return [
+        ...CORE_WITH_LIVE,
+        "roll",
+        "voteItems",
+        "resolutions",
+        "voteBallots",
+        "discipline",
+        "points",
+      ];
     case "agenda":
-      return ["core", "voteItems"];
+      return [...CORE_WITH_LIVE, "voteItems"];
     case "roll-call":
-      return ["core", "roll", "discipline"];
+      return [...CORE_WITH_LIVE, "roll", "discipline"];
     case "announcements":
-      return ["core", "announcements"];
+      return [...CORE_WITH_LIVE, "announcements"];
     case "discipline":
-      return ["core", "roll", "discipline", "points"];
+      return [...CORE_WITH_LIVE, "roll", "discipline", "points"];
     case "all":
     default:
       return allSessionRefreshSlices();
@@ -78,8 +97,10 @@ export function slicesForRealtimeTable(table: string): SessionRefreshSlice[] {
     case "roll_call_entries":
       return ["roll"];
     case "timers":
-    case "speaker_queue_entries":
+      return ["timer"];
     case "procedure_states":
+      return ["procedure"];
+    case "speaker_queue_entries":
     case "conferences":
       return ["core"];
     case "dais_announcements":
