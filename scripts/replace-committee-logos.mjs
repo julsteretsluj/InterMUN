@@ -10,6 +10,7 @@
  * Apply (all):          node scripts/replace-committee-logos.mjs --apply
  * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply DISEC
  *   (any non-flag args are treated as committee labels to limit the run to)
+ * Options:              --no-knockout (sources already transparent)  --max-size=512 (0 = keep size)
  *
  * Requires: .env.local with NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
  * Requires: python3 + Pillow (pip install pillow)
@@ -32,6 +33,9 @@ const APPLY = process.argv.includes("--apply");
 /** Skip the dark-pixel knockout for sources that already have transparency
  * and contain intentional black artwork (which the flood fill would erase). */
 const NO_KNOCKOUT = process.argv.includes("--no-knockout");
+/** Downscale to fit within N×N px (default 512); `--max-size=0` keeps the source size. */
+const MAX_SIZE_ARG = process.argv.find((a) => a.startsWith("--max-size="));
+const MAX_SIZE = MAX_SIZE_ARG ? Number(MAX_SIZE_ARG.split("=")[1]) : 512;
 /** Any non-flag args limit the run to those committee labels. */
 const FILTER_LABELS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
@@ -142,16 +146,25 @@ def flood_knockout(img):
             q.append((x, y + 1))
 
 path_in, path_out = sys.argv[1], sys.argv[2]
+knockout = sys.argv[3] == "1"
+max_size = int(sys.argv[4])
 img = Image.open(path_in).convert("RGBA")
-flood_knockout(img)
-img.save(path_out, "PNG")
+if knockout:
+    flood_knockout(img)
+if max_size > 0 and max(img.size) > max_size:
+    img.thumbnail((max_size, max_size), Image.LANCZOS)
+img.save(path_out, "PNG", optimize=True)
 `;
 
-function knockoutWithPython(inputPath, outputPath) {
+function processWithPython(inputPath, outputPath) {
   const scriptPath = path.join(os.tmpdir(), `intermun-logo-replace-${process.pid}.py`);
   fs.writeFileSync(scriptPath, PYTHON);
   try {
-    execFileSync("python3", [scriptPath, inputPath, outputPath], { stdio: "pipe" });
+    execFileSync(
+      "python3",
+      [scriptPath, inputPath, outputPath, NO_KNOCKOUT ? "0" : "1", String(MAX_SIZE || 0)],
+      { stdio: "pipe" }
+    );
   } finally {
     fs.unlinkSync(scriptPath);
   }
@@ -236,11 +249,7 @@ async function main() {
     const srcPath = path.join(SOURCE_DIR, sourceFile);
     const tmpOut = path.join(os.tmpdir(), `logo-out-${process.pid}-${code}.png`);
     try {
-      if (NO_KNOCKOUT) {
-        fs.copyFileSync(srcPath, tmpOut);
-      } else {
-        knockoutWithPython(srcPath, tmpOut);
-      }
+      processWithPython(srcPath, tmpOut);
       const body = fs.readFileSync(tmpOut);
 
       const { error: uploadErr } = await supabase.storage.from(BUCKET).upload(objectPath, body, {

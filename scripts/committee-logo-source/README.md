@@ -22,6 +22,12 @@ PNG files and `manifest.json` in this folder are **gitignored**. The open-source
    node scripts/replace-committee-logos.mjs --apply DISEC
    ```
 
+SEAMUN I 2027 sources are already transparent; use `--no-knockout` so dark artwork survives. Uploads are downscaled to 512px by default (`--max-size=0` keeps the source size).
+
+## Restoring after a Supabase project move
+
+Storage objects do not follow a database restore, so `committee_logo_url` ends up null or pointing at the old project. Re-run `node scripts/replace-committee-logos.mjs --apply --no-knockout` against the new project's `.env.local`; it re-uploads every committee and rewrites the URLs. If the local PNGs are gone, the same emblems are published at `https://seamun.com/assets/committee-logos/<name>.png`.
+
 ## Example manifest (`manifest.example.json`)
 
 ```json
