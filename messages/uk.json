@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Увімкнути запрошення електронною поштою",
     "inviteSetupStep1": "У Supabase → Параметри проекту → API скопіюйте секретний ключ service_role.",
     "inviteSetupStep2": "Додайте SUPABASE_SERVICE_ROLE_KEY до свого хост-окруження (Render/Vercel), а не NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Додайте NEXT_PUBLIC_APP_URL до URL-адреси свого активного сайту (наприклад, https://your-app.onrender.com).",
+    "inviteSetupStep3": "Додайте NEXT_PUBLIC_APP_URL до URL-адреси свого активного сайту (наприклад, https://intermun.site).",
     "inviteSetupStep4": "Повторно розгорніть (виробничий) або додайте обидва до .env.local і перезапустіть npm run dev (локальний).",
     "emailLabel": "Електронна пошта",
     "emailPlaceholder": "advisor@school.edu",

@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "E-posta davetlerini etkinleştir",
     "inviteSetupStep1": "Supabase → Proje Ayarları → API'de service_role gizli anahtarını kopyalayın.",
     "inviteSetupStep2": "Ana makine ortamınıza (Render/Vercel) SUPABASE_SERVICE_ROLE_KEY ekleyin - NEXT_PUBLIC_ değil.",
-    "inviteSetupStep3": "Yayındaki sitenizin URL'sine NEXT_PUBLIC_APP_URL ekleyin (ör. https://your-app.onrender.com).",
+    "inviteSetupStep3": "Yayındaki sitenizin URL'sine NEXT_PUBLIC_APP_URL ekleyin (ör. https://intermun.site).",
     "inviteSetupStep4": ".env.local dosyasını yeniden konuşlandırın (üretim) veya her ikisini de ekleyin ve npm run dev'i (local) yeniden başlatın.",
     "emailLabel": "E-posta",
     "emailPlaceholder": "danışman@okul.edu",

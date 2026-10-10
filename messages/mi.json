@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Whakahohehia nga tono imeera",
     "inviteSetupStep1": "I roto i te Supabase → Tautuhinga Kaupapa → API, kape i te taviri huna service_role.",
     "inviteSetupStep2": "Tāpiri SUPABASE_SERVICE_ROLE_KEY ki tō kaihautū env (Render/Vercel) — kaua NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Tāpiri NEXT_PUBLIC_APP_URL ki to URL pae ora (hei tauira https://your-app.onrender.com).",
+    "inviteSetupStep3": "Tāpiri NEXT_PUBLIC_APP_URL ki to URL pae ora (hei tauira https://intermun.site).",
     "inviteSetupStep4": "Tukuna ano (whakaputa) taapirihia nga mea e rua ki te .env.local ka whakaara ano i te npm run dev (local).",
     "emailLabel": "Īmēra",
     "emailPlaceholder": "advisor@school.edu",

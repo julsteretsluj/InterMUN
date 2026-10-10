@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "启用电子邮件邀请",
     "inviteSetupStep1": "在 Supabase → 项目设置 → API 中，复制 service_role 密钥。",
     "inviteSetupStep2": "将 SUPABASE_SERVICE_ROLE_KEY 添加到您的主机环境 (Render/Vercel) — 而不是 NEXT_PUBLIC_。",
-    "inviteSetupStep3": "将 NEXT_PUBLIC_APP_URL 添加到您的实时站点 URL（例如 https://your-app.onrender.com）。",
+    "inviteSetupStep3": "将 NEXT_PUBLIC_APP_URL 添加到您的实时站点 URL（例如 https://intermun.site）。",
     "inviteSetupStep4": "重新部署（生产）或将两者添加到 .env.local 并重新启动 npm run dev（本地）。",
     "emailLabel": "电子邮件",
     "emailPlaceholder": "顾问@school.edu",

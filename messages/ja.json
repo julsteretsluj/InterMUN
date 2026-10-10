@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "電子メールによる招待を有効にする",
     "inviteSetupStep1": "Supabase → プロジェクト設定 → API で、service_role 秘密キーをコピーします。",
     "inviteSetupStep2": "NEXT_PUBLIC_ ではなく、SUPABASE_SERVICE_ROLE_KEY をホスト環境 (Render/Vercel) に追加します。",
-    "inviteSetupStep3": "NEXT_PUBLIC_APP_URL をライブサイト URL に追加します (例: https://your-app.onrender.com)。",
+    "inviteSetupStep3": "NEXT_PUBLIC_APP_URL をライブサイト URL に追加します (例: https://intermun.site)。",
     "inviteSetupStep4": "再デプロイ (実稼働) するか、両方を .env.local に追加して、npm run dev (ローカル) を再起動します。",
     "emailLabel": "電子メール",
     "emailPlaceholder": "アドバイザー@school.edu",

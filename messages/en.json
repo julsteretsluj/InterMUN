@@ -1144,7 +1144,7 @@
     "inviteSetupTitle": "Enable email invites",
     "inviteSetupStep1": "In Supabase → Project Settings → API, copy the service_role secret key.",
     "inviteSetupStep2": "Add SUPABASE_SERVICE_ROLE_KEY to your host env (Render/Vercel) — not NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://your-app.onrender.com).",
+    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://intermun.site).",
     "inviteSetupStep4": "Redeploy (production) or add both to .env.local and restart npm run dev (local).",
     "emailLabel": "Email",
     "emailPlaceholder": "advisor@school.edu",

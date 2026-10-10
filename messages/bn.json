@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "ইমেল আমন্ত্রণগুলি সক্ষম করুন৷",
     "inviteSetupStep1": "সুপাবেস → প্রজেক্ট সেটিংস → API-এ, service_role গোপন কীটি অনুলিপি করুন।",
     "inviteSetupStep2": "আপনার হোস্ট env (রেন্ডার/ভার্সেল) এ SUPABASE_SERVICE_ROLE_KEY যোগ করুন - NEXT_PUBLIC_ নয়।",
-    "inviteSetupStep3": "আপনার লাইভ সাইটের URL-এ NEXT_PUBLIC_APP_URL যোগ করুন (যেমন https://your-app.onrender.com)।",
+    "inviteSetupStep3": "আপনার লাইভ সাইটের URL-এ NEXT_PUBLIC_APP_URL যোগ করুন (যেমন https://intermun.site)।",
     "inviteSetupStep4": "পুনঃনিয়োগ (উৎপাদন) অথবা উভয়ই .env.local-এ যোগ করুন এবং npm run dev (স্থানীয়) পুনরায় চালু করুন।",
     "emailLabel": "ইমেইল",
     "emailPlaceholder": "advisor@school.edu",

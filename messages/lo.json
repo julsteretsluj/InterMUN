@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "ເປີດໃຊ້ອີເມວເຊີນ",
     "inviteSetupStep1": "ໃນ Supabase → ການຕັ້ງຄ່າໂຄງການ → API, ຄັດລອກລະຫັດລັບຂອງ service_role.",
     "inviteSetupStep2": "ເພີ່ມ SUPABASE_SERVICE_ROLE_KEY ໃສ່ host env ຂອງທ່ານ (Render/Vercel) — ບໍ່ແມ່ນ NEXT_PUBLIC_.",
-    "inviteSetupStep3": "ເພີ່ມ NEXT_PUBLIC_APP_URL ໃສ່ URL ເວັບໄຊສົດຂອງເຈົ້າ (ເຊັ່ນ: https://your-app.onrender.com).",
+    "inviteSetupStep3": "ເພີ່ມ NEXT_PUBLIC_APP_URL ໃສ່ URL ເວັບໄຊສົດຂອງເຈົ້າ (ເຊັ່ນ: https://intermun.site).",
     "inviteSetupStep4": "Redeploy (ການຜະລິດ) ຫຼືເພີ່ມທັງສອງໃສ່ .env.local ແລະ restart npm run dev (local).",
     "emailLabel": "ອີເມວ",
     "emailPlaceholder": "advisor@school.edu",

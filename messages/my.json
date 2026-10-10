@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "အီးမေးလ် ဖိတ်ကြားမှုများကို ဖွင့်ပါ။",
     "inviteSetupStep1": "Supabase → ပရောဂျက်ဆက်တင်များ → API တွင်၊ service_role လျှို့ဝှက်သော့ကို ကူးယူပါ။",
     "inviteSetupStep2": "SUPABASE_SERVICE_ROLE_KEY ကို သင့်အိမ်ရှင် env (Render/Vercel) သို့ ထည့်ပါ — NEXT_PUBLIC_ မဟုတ်ပါ။",
-    "inviteSetupStep3": "သင်၏ တိုက်ရိုက်ဆိုက် URL တွင် NEXT_PUBLIC_APP_URL ကို ထည့်ပါ (ဥပမာ https://your-app.onrender.com)။",
+    "inviteSetupStep3": "သင်၏ တိုက်ရိုက်ဆိုက် URL တွင် NEXT_PUBLIC_APP_URL ကို ထည့်ပါ (ဥပမာ https://intermun.site)။",
     "inviteSetupStep4": "ပြန်လည်အသုံးပြုခြင်း (ထုတ်လုပ်ရေး) သို့မဟုတ် .env.local တွင် နှစ်ခုလုံးကို ပေါင်းထည့်ကာ npm run dev (local) ကို ပြန်လည်စတင်ပါ။",
     "emailLabel": "အီးမေးလ်",
     "emailPlaceholder": "advisor@school.edu",

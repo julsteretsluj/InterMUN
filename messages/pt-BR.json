@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Ativar convites por e-mail",
     "inviteSetupStep1": "Em Supabase → Configurações do projeto → API, copie a chave secreta service_role.",
     "inviteSetupStep2": "Adicione SUPABASE_SERVICE_ROLE_KEY ao seu ambiente de host (Render/Vercel) - não NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Adicione NEXT_PUBLIC_APP_URL ao URL do seu site ativo (por exemplo, https://your-app.onrender.com).",
+    "inviteSetupStep3": "Adicione NEXT_PUBLIC_APP_URL ao URL do seu site ativo (por exemplo, https://intermun.site).",
     "inviteSetupStep4": "Reimplante (produção) ou adicione ambos a .env.local e reinicie npm run dev (local).",
     "emailLabel": "E-mail",
     "emailPlaceholder": "conselheiro@school.edu",

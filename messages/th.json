@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "เปิดใช้งานคำเชิญทางอีเมล",
     "inviteSetupStep1": "ใน Supabase → การตั้งค่าโครงการ → API ให้คัดลอกรหัสลับ service_role",
     "inviteSetupStep2": "เพิ่ม SUPABASE_SERVICE_ROLE_KEY ไปยังโฮสต์ env ของคุณ (Render/Vercel) — ไม่ใช่ NEXT_PUBLIC_",
-    "inviteSetupStep3": "เพิ่ม NEXT_PUBLIC_APP_URL ไปยัง URL ไซต์ที่ใช้งานอยู่ของคุณ (เช่น https://your-app.onrender.com)",
+    "inviteSetupStep3": "เพิ่ม NEXT_PUBLIC_APP_URL ไปยัง URL ไซต์ที่ใช้งานอยู่ของคุณ (เช่น https://intermun.site)",
     "inviteSetupStep4": "ปรับใช้ใหม่ (การผลิต) หรือเพิ่มทั้งสองอย่างใน .env.local และรีสตาร์ท npm run dev (ในเครื่อง)",
     "emailLabel": "อีเมล",
     "emailPlaceholder": "ที่ปรึกษา@school.edu",

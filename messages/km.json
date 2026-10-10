@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "បើកការអញ្ជើញតាមអ៊ីមែល",
     "inviteSetupStep1": "នៅក្នុង Supabase → Project Settings → API សូមចម្លងសោសម្ងាត់ service_role ។",
     "inviteSetupStep2": "បន្ថែម SUPABASE_SERVICE_ROLE_KEY ទៅក្នុងម៉ាស៊ីនមេរបស់អ្នក (Render/Vercel) — មិនមែន NEXT_PUBLIC_ ទេ។",
-    "inviteSetupStep3": "បន្ថែម NEXT_PUBLIC_APP_URL ទៅ URL គេហទំព័រផ្ទាល់របស់អ្នក (ឧ. https://your-app.onrender.com)។",
+    "inviteSetupStep3": "បន្ថែម NEXT_PUBLIC_APP_URL ទៅ URL គេហទំព័រផ្ទាល់របស់អ្នក (ឧ. https://intermun.site)។",
     "inviteSetupStep4": "ដាក់ឡើងវិញ (ការផលិត) ឬបន្ថែមទាំងពីរទៅ .env.local ហើយចាប់ផ្តើម npm ដំណើរការ dev (local) ឡើងវិញ។",
     "emailLabel": "អ៊ីមែល",
     "emailPlaceholder": "advisor@school.edu",

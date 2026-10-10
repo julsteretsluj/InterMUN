@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Schakel e-mailuitnodigingen in",
     "inviteSetupStep1": "Kopieer in Supabase → Projectinstellingen → API de geheime sleutel service_role.",
     "inviteSetupStep2": "Voeg SUPABASE_SERVICE_ROLE_KEY toe aan uw hostomgeving (Render/Vercel) — niet NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Voeg NEXT_PUBLIC_APP_URL toe aan de URL van uw live site (bijvoorbeeld https://uw-app.onrender.com).",
+    "inviteSetupStep3": "Voeg NEXT_PUBLIC_APP_URL toe aan de URL van uw live site (bijvoorbeeld https://intermun.site).",
     "inviteSetupStep4": "Implementeer opnieuw (productie) of voeg beide toe aan .env.local en start npm run dev (lokaal) opnieuw.",
     "emailLabel": "E-mail",
     "emailPlaceholder": "adviseur@school.edu",

@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "ईमेल आमंत्रण सक्षम करें",
     "inviteSetupStep1": "सुपाबेस → प्रोजेक्ट सेटिंग्स → एपीआई में, service_role गुप्त कुंजी की प्रतिलिपि बनाएँ।",
     "inviteSetupStep2": "अपने होस्ट env (रेंडर/वर्सेल) में SUPABASE_SERVICE_ROLE_KEY जोड़ें - NEXT_PUBLIC_ नहीं।",
-    "inviteSetupStep3": "अपने लाइव साइट URL में NEXT_PUBLIC_APP_URL जोड़ें (उदा. https://your-app.onrender.com)।",
+    "inviteSetupStep3": "अपने लाइव साइट URL में NEXT_PUBLIC_APP_URL जोड़ें (उदा. https://intermun.site)।",
     "inviteSetupStep4": "पुनः तैनात करें (उत्पादन करें) या दोनों को .env.local में जोड़ें और npm run dev (स्थानीय) को पुनरारंभ करें।",
     "emailLabel": "ईमेल",
     "emailPlaceholder": "सलाहकार@school.edu",

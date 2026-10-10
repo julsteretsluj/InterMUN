@@ -11,7 +11,8 @@ BEGIN
   LIMIT 1;
 
   IF v_uid IS NULL THEN
-    RAISE EXCEPTION 'No auth user found for email: %', v_email;
+    RAISE NOTICE 'No auth user found for email: %, skipping', v_email;
+    RETURN;
   END IF;
 
   UPDATE public.profiles

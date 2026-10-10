@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "אפשר הזמנות באימייל",
     "inviteSetupStep1": "ב-Supabase → Project Settings → API, העתק את המפתח הסודי service_role.",
     "inviteSetupStep2": "הוסף את SUPABASE_SERVICE_ROLE_KEY ל-Env המארח שלך (Render/Vercel) - לא NEXT_PUBLIC_.",
-    "inviteSetupStep3": "הוסף את NEXT_PUBLIC_APP_URL לכתובת האתר החיה שלך (למשל https://your-app.onrender.com).",
+    "inviteSetupStep3": "הוסף את NEXT_PUBLIC_APP_URL לכתובת האתר החיה שלך (למשל https://intermun.site).",
     "inviteSetupStep4": "פריס מחדש (ייצור) או הוסף את שניהם ל-.env.local והפעל מחדש את npm run dev (local).",
     "emailLabel": "אֶלֶקטרוֹנִי",
     "emailPlaceholder": "advisor@school.edu",

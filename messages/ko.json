@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "이메일 초대 활성화",
     "inviteSetupStep1": "Supabase → 프로젝트 설정 → API에서 service_role 비밀 키를 복사합니다.",
     "inviteSetupStep2": "NEXT_PUBLIC_이 아닌 호스트 환경(Render/Vercel)에 SUPABASE_SERVICE_ROLE_KEY를 추가하세요.",
-    "inviteSetupStep3": "라이브 사이트 URL(예: https://your-app.onrender.com)에 NEXT_PUBLIC_APP_URL을 추가하세요.",
+    "inviteSetupStep3": "라이브 사이트 URL(예: https://intermun.site)에 NEXT_PUBLIC_APP_URL을 추가하세요.",
     "inviteSetupStep4": "재배포(프로덕션)하거나 둘 다 .env.local에 추가하고 npm run dev(로컬)를 다시 시작합니다.",
     "emailLabel": "이메일",
     "emailPlaceholder": "Advisor@school.edu",

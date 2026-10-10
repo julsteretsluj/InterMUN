@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Aktifkan undangan email",
     "inviteSetupStep1": "Di Supabase → Pengaturan Proyek → API, salin kunci rahasia service_role.",
     "inviteSetupStep2": "Tambahkan SUPABASE_SERVICE_ROLE_KEY ke env host Anda (Render/Vercel) — bukan NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Tambahkan NEXT_PUBLIC_APP_URL ke URL situs aktif Anda (misalnya https://your-app.onrender.com).",
+    "inviteSetupStep3": "Tambahkan NEXT_PUBLIC_APP_URL ke URL situs aktif Anda (misalnya https://intermun.site).",
     "inviteSetupStep4": "Terapkan ulang (produksi) atau tambahkan keduanya ke .env.local dan mulai ulang npm run dev (lokal).",
     "emailLabel": "E-mail",
     "emailPlaceholder": "penasihat@sekolah.edu",

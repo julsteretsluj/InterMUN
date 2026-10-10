@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "تمكين دعوات البريد الإلكتروني",
     "inviteSetupStep1": "في Supabase → إعدادات المشروع → API، انسخ المفتاح السري لـservice_role.",
     "inviteSetupStep2": "أضف SUPABASE_SERVICE_ROLE_KEY إلى بيئة مضيفك (Render/Vercel) - وليس NEXT_PUBLIC_.",
-    "inviteSetupStep3": "أضف NEXT_PUBLIC_APP_URL إلى عنوان URL لموقعك المباشر (على سبيل المثال https://your-app.onrender.com).",
+    "inviteSetupStep3": "أضف NEXT_PUBLIC_APP_URL إلى عنوان URL لموقعك المباشر (على سبيل المثال https://intermun.site).",
     "inviteSetupStep4": "أعد النشر (الإنتاج) أو أضف كليهما إلى .env.local وأعد تشغيل npm run dev (محلي).",
     "emailLabel": "بريد إلكتروني",
     "emailPlaceholder": "مستشار@school.edu",

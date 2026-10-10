@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Bật lời mời qua email",
     "inviteSetupStep1": "Trong Supabase → Cài đặt dự án → API, sao chép khóa bí mật service_role.",
     "inviteSetupStep2": "Thêm SUPABASE_SERVICE_ROLE_KEY vào env máy chủ của bạn (Render/Vercel) — không phải NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Thêm NEXT_PUBLIC_APP_URL vào URL trang web trực tiếp của bạn (ví dụ: https://your-app.onrender.com).",
+    "inviteSetupStep3": "Thêm NEXT_PUBLIC_APP_URL vào URL trang web trực tiếp của bạn (ví dụ: https://intermun.site).",
     "inviteSetupStep4": "Triển khai lại (sản xuất) hoặc thêm cả hai vào .env.local và khởi động lại npm run dev (cục bộ).",
     "emailLabel": "E-mail",
     "emailPlaceholder": "cố vấn@school.edu",

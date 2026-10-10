@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Washa mialiko ya barua pepe",
     "inviteSetupStep1": "Katika Supabase → Mipangilio ya Mradi → API, nakili ufunguo wa siri wa service_role.",
     "inviteSetupStep2": "Ongeza SUPABASE_SERVICE_ROLE_KEY kwa mwenyeji wako env (Render/Vercel) - sio NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Ongeza NEXT_PUBLIC_APP_URL kwenye URL ya tovuti yako ya moja kwa moja (k.m. https://your-app.onrender.com).",
+    "inviteSetupStep3": "Ongeza NEXT_PUBLIC_APP_URL kwenye URL ya tovuti yako ya moja kwa moja (k.m. https://intermun.site).",
     "inviteSetupStep4": "Sambaza upya (uzalishaji) au ongeza zote mbili kwa .env.local na uanze upya npm run dev (ya ndani).",
     "emailLabel": "Barua pepe",
     "emailPlaceholder": "mshauri@school.edu",

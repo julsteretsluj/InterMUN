@@ -1087,7 +1087,7 @@
     "inviteSetupTitle": "Włącz zaproszenia e-mailowe",
     "inviteSetupStep1": "W Supabase → Ustawienia projektu → API skopiuj tajny klucz service_role.",
     "inviteSetupStep2": "Dodaj SUPABASE_SERVICE_ROLE_KEY do środowiska hosta (Render/Vercel) — nie NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Dodaj NEXT_PUBLIC_APP_URL do adresu URL swojej aktywnej witryny (np. https://your-app.onrender.com).",
+    "inviteSetupStep3": "Dodaj NEXT_PUBLIC_APP_URL do adresu URL swojej aktywnej witryny (np. https://intermun.site).",
     "inviteSetupStep4": "Wdróż ponownie (produkcja) lub dodaj oba do .env.local i zrestartuj npm run dev (lokalnie).",
     "emailLabel": "E-mail",
     "emailPlaceholder": "doradca@szkola.edu",
