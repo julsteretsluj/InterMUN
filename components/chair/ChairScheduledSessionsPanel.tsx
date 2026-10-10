@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
 import { syncLiveTopicToScheduleDayAction } from "@/app/actions/activeDebateTopic";
 import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
+import { applyOptimisticProcedurePatch } from "@/lib/hooks/useCommitteeLiveStore";
 import { HelpButton } from "@/components/HelpButton";
 import {
   playTimerExpiryAlarm,
@@ -85,22 +86,36 @@ export function ChairScheduledSessionsPanel({
       });
       setStartingKey(key);
       startTransition(async () => {
-        await syncLiveTopicToScheduleDayAction(preset.day);
-        const res = await startScheduledCommitteeSessionAction({
-          conferenceId,
-          title: preset.title,
-          durationSeconds: preset.durationSeconds,
-        });
-        setStartingKey(null);
-        if (res.error) {
-          setErrorByKey((prev) => ({ ...prev, [key]: res.error! }));
-          return;
+        try {
+          await syncLiveTopicToScheduleDayAction(preset.day);
+          const res = await startScheduledCommitteeSessionAction({
+            conferenceId,
+            title: preset.title,
+            durationSeconds: preset.durationSeconds,
+          });
+          if (!res || res.error) {
+            setErrorByKey((prev) => ({ ...prev, [key]: res?.error || t("startFailed") }));
+            return;
+          }
+          const scopeId = res.canonicalConferenceId ?? conferenceId;
+          const started = res.startedAt ?? new Date().toISOString();
+          applyOptimisticProcedurePatch(scopeId, {
+            committee_session_started_at: started,
+            committee_session_duration_seconds: preset.durationSeconds,
+            committee_session_ends_at: null,
+            updated_at: started,
+          });
+          dispatchCommitteeSessionUpdated(scopeId);
+          router.refresh();
+        } catch (err) {
+          const message = err instanceof Error && err.message.trim() ? err.message : t("startFailed");
+          setErrorByKey((prev) => ({ ...prev, [key]: message }));
+        } finally {
+          setStartingKey(null);
         }
-        dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
-        router.refresh();
       });
     },
-    [conferenceId, router]
+    [conferenceId, router, t]
   );
 
   if (presets.length === 0 && milestones.length === 0) return null;

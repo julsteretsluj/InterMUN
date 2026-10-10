@@ -214,7 +214,12 @@ export async function startCommitteeSessionAction(input: {
   title?: string | null;
   durationSeconds?: number | null;
   endsAt?: string | null;
-}): Promise<{ error?: string; success?: boolean; canonicalConferenceId?: string }> {
+}): Promise<{
+  error?: string;
+  success?: boolean;
+  canonicalConferenceId?: string;
+  startedAt?: string | null;
+}> {
   const auth = await requireChairForCommittee(input.conferenceId);
   if ("error" in auth) return { error: auth.error };
 
@@ -264,13 +269,18 @@ export async function startCommitteeSessionAction(input: {
   }
 
   revalidateCommitteeSessionSurfaces();
-  return { success: true, canonicalConferenceId: canonicalId };
+  return { success: true, canonicalConferenceId: canonicalId, startedAt: now };
 }
 
 /** Stop the committee session timer and close the open history row (via DB trigger). */
 export async function stopCommitteeSessionAction(input: {
   conferenceId: string;
-}): Promise<{ error?: string; success?: boolean; canonicalConferenceId?: string }> {
+}): Promise<{
+  error?: string;
+  success?: boolean;
+  canonicalConferenceId?: string;
+  startedAt?: string | null;
+}> {
   const auth = await requireChairForCommittee(input.conferenceId);
   if ("error" in auth) return { error: auth.error };
 
@@ -288,7 +298,7 @@ export async function stopCommitteeSessionAction(input: {
   if (writeResult.error) return writeResult;
 
   revalidateCommitteeSessionSurfaces();
-  return { success: true, canonicalConferenceId: canonicalId };
+  return { success: true, canonicalConferenceId: canonicalId, startedAt: null };
 }
 
 /** Update duration/end limit while a session is already running. */
@@ -337,7 +347,12 @@ export async function startScheduledCommitteeSessionAction(input: {
   conferenceId: string;
   title: string;
   durationSeconds: number;
-}): Promise<{ error?: string; success?: boolean; canonicalConferenceId?: string }> {
+}): Promise<{
+  error?: string;
+  success?: boolean;
+  canonicalConferenceId?: string;
+  startedAt?: string | null;
+}> {
   const title = input.title?.trim();
   if (!title) return { error: "Missing session title." };
 

@@ -14,6 +14,11 @@ import {
   updateCommitteeSessionLimitAction,
 } from "@/app/actions/committee-session";
 import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
+import {
+  applyOptimisticProcedurePatch,
+  seedSharedProcedureSession,
+  useSharedProcedureState,
+} from "@/lib/hooks/useCommitteeLiveStore";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import { HelpButton } from "@/components/HelpButton";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
@@ -43,6 +48,25 @@ function modeFromRow(durationSeconds: number | null, endsAt: string | null): End
   if (endsAt) return "until";
   if (durationSeconds != null && durationSeconds > 0) return "duration";
   return "none";
+}
+
+function durationFields(seconds: number | null | undefined): { hours: number; minutes: number } {
+  if (seconds == null || seconds <= 0) return { hours: 3, minutes: 0 };
+  return {
+    hours: Math.floor(seconds / 3600),
+    minutes: Math.floor((seconds % 3600) / 60),
+  };
+}
+
+function isPreviousLocalDay(iso: string, nowMs: number): boolean {
+  const start = new Date(iso);
+  const now = new Date(nowMs);
+  if (Number.isNaN(start.getTime()) || Number.isNaN(now.getTime())) return false;
+  return (
+    start.getFullYear() !== now.getFullYear() ||
+    start.getMonth() !== now.getMonth() ||
+    start.getDate() !== now.getDate()
+  );
 }
 
 function formatSessionElapsed(startIso: string, nowMs: number): string {
@@ -75,6 +99,9 @@ export function ChairCommitteeSessionControl({
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [startedAt, setStartedAt] = useState<string | null>(initialStartedAt);
+  const sharedProcedure = useSharedProcedureState(conferenceId);
+  const localStartedAtRef = useRef<string | null>(initialStartedAt);
+  const ignoreRemoteUntilRef = useRef(0);
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
   const [sessionTitle, setSessionTitle] = useState(() => initialSessionTitle ?? "");
@@ -87,8 +114,9 @@ export function ChairCommitteeSessionControl({
   const [endMode, setEndMode] = useState<EndMode>(() =>
     modeFromRow(initialDurationSeconds, initialEndsAt)
   );
-  const [durHours, setDurHours] = useState(3);
-  const [durMinutes, setDurMinutes] = useState(0);
+  const initialDurationFields = durationFields(initialDurationSeconds);
+  const [durHours, setDurHours] = useState(initialDurationFields.hours);
+  const [durMinutes, setDurMinutes] = useState(initialDurationFields.minutes);
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
   const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
@@ -121,6 +149,27 @@ export function ChairCommitteeSessionControl({
     [t]
   );
 
+  const rememberStartedAt = useCallback((next: string | null, holdMs = 0) => {
+    localStartedAtRef.current = next;
+    if (holdMs > 0) ignoreRemoteUntilRef.current = Date.now() + holdMs;
+    setStartedAt(next);
+  }, []);
+
+  const acceptRemoteStartedAt = useCallback((next: string | null) => {
+    const local = localStartedAtRef.current;
+    if (Date.now() < ignoreRemoteUntilRef.current) {
+      if (local && next) {
+        const localMs = Date.parse(local);
+        const nextMs = Date.parse(next);
+        if (!Number.isNaN(localMs) && !Number.isNaN(nextMs) && nextMs < localMs) return;
+      } else if ((local && !next) || (!local && next)) {
+        return;
+      }
+    }
+    localStartedAtRef.current = next;
+    setStartedAt(next);
+  }, []);
+
   const refresh = useCallback(async () => {
     const { data, error } = await supabase
       .from("procedure_states")
@@ -134,10 +183,10 @@ export function ChairCommitteeSessionControl({
       const message = String(error?.message ?? "");
       setSupportsSessionStartColumn(!/committee_session_started_at/i.test(message));
       setSupportsSessionEndOptions(!isSessionEndColumnCacheError(message));
-      setStartedAt(null);
       return;
     }
     const missingEndColumns = isSessionEndColumnCacheError(error?.message);
+    if (error && !missingEndColumns) return;
     if (missingEndColumns) {
       setSupportsSessionEndOptions(false);
       const fallback = await supabase
@@ -145,12 +194,13 @@ export function ChairCommitteeSessionControl({
         .select("committee_session_started_at, committee_session_title")
         .eq("conference_id", conferenceId)
         .maybeSingle();
+      if (fallback.error) return;
       const fb = fallback.data as {
         committee_session_started_at?: string | null;
         committee_session_title?: string | null;
       } | null;
       const s = fb?.committee_session_started_at ?? null;
-      setStartedAt(s);
+      acceptRemoteStartedAt(s);
       if (!sessionTitleDirtyRef.current) {
         setSessionTitle(fb?.committee_session_title ?? "");
       }
@@ -168,18 +218,20 @@ export function ChairCommitteeSessionControl({
     const s = row?.committee_session_started_at ?? null;
     const d = row?.committee_session_duration_seconds ?? null;
     const e = row?.committee_session_ends_at ?? null;
-    setStartedAt(s);
+    if (!data && localStartedAtRef.current) return;
+    acceptRemoteStartedAt(s);
     if (!sessionTitleDirtyRef.current) {
       setSessionTitle(row?.committee_session_title ?? "");
     }
     const m = modeFromRow(d, e);
     setEndMode(m);
     if (m === "duration" && d != null && d > 0) {
-      setDurHours(Math.floor(d / 3600));
-      setDurMinutes(Math.floor((d % 3600) / 60));
+      const fields = durationFields(d);
+      setDurHours(fields.hours);
+      setDurMinutes(fields.minutes);
     }
     if (m === "until" && e) setEndsAtLocal(isoToDatetimeLocalValue(e));
-  }, [supabase, conferenceId]);
+  }, [supabase, conferenceId, acceptRemoteStartedAt]);
 
   const persistSessionTitle = useCallback(
     async (raw: string) => {
@@ -228,12 +280,13 @@ export function ChairCommitteeSessionControl({
   const [prevTimingKey, setPrevTimingKey] = useState(initialTimingKey);
   if (initialTimingKey !== prevTimingKey) {
     setPrevTimingKey(initialTimingKey);
-    setStartedAt(initialStartedAt);
+    acceptRemoteStartedAt(initialStartedAt);
     const m = modeFromRow(initialDurationSeconds, initialEndsAt);
     setEndMode(m);
     if (m === "duration" && initialDurationSeconds != null && initialDurationSeconds > 0) {
-      setDurHours(Math.floor(initialDurationSeconds / 3600));
-      setDurMinutes(Math.floor((initialDurationSeconds % 3600) / 60));
+      const fields = durationFields(initialDurationSeconds);
+      setDurHours(fields.hours);
+      setDurMinutes(fields.minutes);
     } else {
       setDurHours(3);
       setDurMinutes(0);
@@ -250,11 +303,51 @@ export function ChairCommitteeSessionControl({
     }
   }
 
+  const sharedStamp = sharedProcedure
+    ? `${sharedProcedure.committee_session_started_at ?? ""}\u0000${sharedProcedure.updated_at ?? ""}\u0000${sharedProcedure.committee_session_duration_seconds ?? ""}\u0000${sharedProcedure.committee_session_ends_at ?? ""}`
+    : "";
+  const [appliedSharedStamp, setAppliedSharedStamp] = useState("");
+  if (sharedStamp && sharedStamp !== appliedSharedStamp) {
+    setAppliedSharedStamp(sharedStamp);
+    const nextStarted = sharedProcedure?.committee_session_started_at ?? null;
+    const prevLocal = localStartedAtRef.current;
+    acceptRemoteStartedAt(nextStarted);
+    const nextMs = nextStarted ? Date.parse(nextStarted) : NaN;
+    const prevMs = prevLocal ? Date.parse(prevLocal) : NaN;
+    const startedAdvanced =
+      Boolean(nextStarted) && (Number.isNaN(prevMs) || (!Number.isNaN(nextMs) && nextMs > prevMs));
+    if (startedAdvanced && sharedProcedure) {
+      const m = modeFromRow(
+        sharedProcedure.committee_session_duration_seconds ?? null,
+        sharedProcedure.committee_session_ends_at ?? null
+      );
+      setEndMode(m);
+      if (m === "duration") {
+        const fields = durationFields(sharedProcedure.committee_session_duration_seconds);
+        setDurHours(fields.hours);
+        setDurMinutes(fields.minutes);
+      }
+      if (m === "until" && sharedProcedure.committee_session_ends_at) {
+        setEndsAtLocal(isoToDatetimeLocalValue(sharedProcedure.committee_session_ends_at));
+      }
+    }
+  }
+
   useEffect(() => {
     return () => {
       if (titleDebounceRef.current) window.clearTimeout(titleDebounceRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!initialStartedAt) return;
+    seedSharedProcedureSession(conferenceId, {
+      committee_session_started_at: initialStartedAt,
+      committee_session_duration_seconds: initialDurationSeconds,
+      committee_session_ends_at: initialEndsAt,
+      updated_at: initialStartedAt,
+    });
+  }, [conferenceId, initialStartedAt, initialDurationSeconds, initialEndsAt]);
 
   useEffect(() => {
     const ch = supabase
@@ -267,13 +360,43 @@ export function ChairCommitteeSessionControl({
           table: "procedure_states",
           filter: `conference_id=eq.${conferenceId}`,
         },
-        () => void refresh()
+        (payload) => {
+          // Prefer the realtime row — avoid a REST refetch stampede (prod 504s on procedure_states).
+          if (payload.eventType === "DELETE") {
+            acceptRemoteStartedAt(null);
+            return;
+          }
+          const row = payload.new as {
+            committee_session_started_at?: string | null;
+            committee_session_duration_seconds?: number | null;
+            committee_session_ends_at?: string | null;
+            committee_session_title?: string | null;
+          } | null;
+          if (!row) {
+            void refresh();
+            return;
+          }
+          const s = row.committee_session_started_at ?? null;
+          const d = row.committee_session_duration_seconds ?? null;
+          const e = row.committee_session_ends_at ?? null;
+          acceptRemoteStartedAt(s);
+          if (!sessionTitleDirtyRef.current) {
+            setSessionTitle(row.committee_session_title ?? "");
+          }
+          const m = modeFromRow(d, e);
+          setEndMode(m);
+          if (m === "duration" && d != null && d > 0) {
+            setDurHours(Math.floor(d / 3600));
+            setDurMinutes(Math.floor((d % 3600) / 60));
+          }
+          if (m === "until" && e) setEndsAtLocal(isoToDatetimeLocalValue(e));
+        }
       )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId, refresh]);
+  }, [supabase, conferenceId, refresh, acceptRemoteStartedAt]);
 
   function buildTimingPayload(): {
     committee_session_duration_seconds: number | null;
@@ -296,64 +419,98 @@ export function ChairCommitteeSessionControl({
     return { committee_session_duration_seconds: null, committee_session_ends_at: iso };
   }
 
+  function actionFailureMessage(err: unknown): string {
+    const raw = err instanceof Error ? err.message.trim() : "";
+    if (raw && !/digest|server components/i.test(raw)) return raw;
+    return t("actionFailed");
+  }
+
   function startSession() {
     setMsg(null);
     startTransition(async () => {
-      const timing = buildTimingPayload();
-      if (endMode === "until" && timing.committee_session_ends_at) {
-        const endMs = new Date(timing.committee_session_ends_at).getTime();
-        if (!Number.isNaN(endMs) && endMs <= Date.now()) {
-          setMsg(t("endTimeInFuture"));
+      try {
+        const timing = buildTimingPayload();
+        if (endMode === "until" && timing.committee_session_ends_at) {
+          const endMs = new Date(timing.committee_session_ends_at).getTime();
+          if (!Number.isNaN(endMs) && endMs <= Date.now()) {
+            setMsg(t("endTimeInFuture"));
+            return;
+          }
+        }
+        if (!supportsSessionStartColumn) {
+          setMsg(t("sessionStartUnavailable"));
           return;
         }
+        const res = await startCommitteeSessionAction({
+          conferenceId,
+          title: sessionTitle,
+          durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
+          endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+        });
+        if (!res || res.error) {
+          setMsg(res?.error || t("actionFailed"));
+          return;
+        }
+        const scopeId = res.canonicalConferenceId ?? conferenceId;
+        const started = res.startedAt ?? new Date().toISOString();
+        rememberStartedAt(started, 4000);
+        applyOptimisticProcedurePatch(scopeId, {
+          committee_session_started_at: started,
+          committee_session_duration_seconds: supportsSessionEndOptions
+            ? timing.committee_session_duration_seconds
+            : null,
+          committee_session_ends_at: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+          updated_at: started,
+        });
+        dispatchCommitteeSessionUpdated(scopeId);
+        router.refresh();
+        void refresh();
+      } catch (err) {
+        setMsg(actionFailureMessage(err));
       }
-      if (!supportsSessionStartColumn) {
-        setMsg(t("sessionStartUnavailable"));
-        return;
-      }
-      const res = await startCommitteeSessionAction({
-        conferenceId,
-        title: sessionTitle,
-        durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
-        endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
-      });
-      if (res.error) {
-        setMsg(res.error);
-        return;
-      }
-      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
-      router.refresh();
-      void refresh();
     });
   }
 
   function stopSession() {
     setMsg(null);
     startTransition(async () => {
-      if (!supportsSessionStartColumn) {
-        setMsg(t("sessionStartUnavailable"));
-        return;
-      }
-      if (titleDebounceRef.current) {
-        window.clearTimeout(titleDebounceRef.current);
-        titleDebounceRef.current = null;
-      }
-      sessionTitleDirtyRef.current = false;
-      setSessionTitleDirty(false);
-      const res = await stopCommitteeSessionAction({ conferenceId });
-      if (res.error) {
-        setMsg(res.error);
-        return;
-      }
-      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
       try {
-        sessionStorage.setItem(smtProgressReminderStorageKey(conferenceId), "1");
-      } catch {
-        /* ignore */
+        if (!supportsSessionStartColumn) {
+          setMsg(t("sessionStartUnavailable"));
+          return;
+        }
+        if (titleDebounceRef.current) {
+          window.clearTimeout(titleDebounceRef.current);
+          titleDebounceRef.current = null;
+        }
+        sessionTitleDirtyRef.current = false;
+        setSessionTitleDirty(false);
+        const res = await stopCommitteeSessionAction({ conferenceId });
+        if (!res || res.error) {
+          setMsg(res?.error || t("actionFailed"));
+          return;
+        }
+        const scopeId = res.canonicalConferenceId ?? conferenceId;
+        const stoppedAt = new Date().toISOString();
+        rememberStartedAt(null, 4000);
+        applyOptimisticProcedurePatch(scopeId, {
+          committee_session_started_at: null,
+          committee_session_duration_seconds: null,
+          committee_session_ends_at: null,
+          updated_at: stoppedAt,
+        });
+        dispatchCommitteeSessionUpdated(scopeId);
+        try {
+          sessionStorage.setItem(smtProgressReminderStorageKey(conferenceId), "1");
+        } catch {
+          /* ignore */
+        }
+        setShowSmtProgressReminder(true);
+        router.refresh();
+        void refresh();
+      } catch (err) {
+        setMsg(actionFailureMessage(err));
       }
-      setShowSmtProgressReminder(true);
-      router.refresh();
-      void refresh();
     });
   }
 
@@ -369,17 +526,30 @@ export function ChairCommitteeSessionControl({
           return;
         }
       }
-      const res = await updateCommitteeSessionLimitAction({
-        conferenceId,
-        durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
-        endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
-      });
-      if (res.error) {
-        setMsg(res.error);
+      let res: Awaited<ReturnType<typeof updateCommitteeSessionLimitAction>>;
+      try {
+        res = await updateCommitteeSessionLimitAction({
+          conferenceId,
+          durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
+          endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+        });
+      } catch (err) {
+        setMsg(actionFailureMessage(err));
+        return;
+      }
+      if (!res || res.error) {
+        setMsg(res?.error || t("actionFailed"));
         return;
       }
       setMsg(`ok:${t("sessionLimitUpdated")}`);
-      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
+      const scopeId = res.canonicalConferenceId ?? conferenceId;
+      applyOptimisticProcedurePatch(scopeId, {
+        committee_session_duration_seconds: supportsSessionEndOptions
+          ? timing.committee_session_duration_seconds
+          : null,
+        committee_session_ends_at: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+      });
+      dispatchCommitteeSessionUpdated(scopeId);
       router.refresh();
       void refresh();
     });
@@ -402,6 +572,7 @@ export function ChairCommitteeSessionControl({
   });
 
   const sessionOverdue = Boolean(live && endMs != null && nowMs > 0 && nowMs >= endMs);
+  const staleOpen = Boolean(live && startedAt && nowMs > 0 && isPreviousLocalDay(startedAt, nowMs));
 
   useEffect(() => {
     try {
@@ -538,6 +709,64 @@ export function ChairCommitteeSessionControl({
           <p className="mt-4 text-sm text-brand-muted">{t("sessionNotRunning")}</p>
         )}
 
+        {staleOpen ? (
+          <p className="mt-3 text-sm text-brand-navy" role="status">
+            {t("staleSessionOpen")}
+          </p>
+        ) : null}
+
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          {live ? (
+            <>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={stopSession}
+                aria-busy={pending}
+                className="inline-flex items-center gap-2 rounded-xl border border-rose-400/60 bg-rose-500/10 px-5 py-3 text-sm font-semibold text-rose-800 hover:bg-rose-500/20 disabled:opacity-50 dark:border-rose-400/50 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25"
+              >
+                <span aria-hidden>⏹️</span>
+                {pending ? t("stopping") : t("stopSession")}
+              </button>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={saveScheduleWhileLive}
+                className="inline-flex items-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-5 py-3 text-sm font-semibold text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15 disabled:opacity-50"
+              >
+                {t("saveLimit")}
+              </button>
+              <HelpButton title={t("saveLimit")}>
+                {t("saveLimitHelp")}
+              </HelpButton>
+            </>
+          ) : (
+            <button
+              type="button"
+              disabled={pending}
+              onClick={startSession}
+              aria-busy={pending}
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
+            >
+              <span aria-hidden>▶️</span>
+              {pending ? t("starting") : t("startSession")}
+            </button>
+          )}
+        </div>
+
+        {msg ? (
+          <p
+            className={`mt-3 text-sm ${
+              msg.startsWith("ok:")
+                ? "text-brand-diplomatic dark:text-brand-accent-bright"
+                : "text-rose-700 dark:text-rose-300"
+            }`}
+            role="alert"
+          >
+            {msg.startsWith("ok:") ? msg.slice(3) : msg}
+          </p>
+        ) : null}
+
         <div className="mt-6 space-y-4 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] p-4">
           <div className="flex items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{t("sessionLimit")}</p>
@@ -627,53 +856,6 @@ export function ChairCommitteeSessionControl({
             </span>
           </label>
         </div>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          {live ? (
-            <>
-              <button
-                type="button"
-                disabled={pending}
-                onClick={stopSession}
-                className="inline-flex items-center gap-2 rounded-xl border border-rose-400/60 bg-rose-500/10 px-5 py-3 text-sm font-semibold text-rose-800 hover:bg-rose-500/20 disabled:opacity-50 dark:border-rose-400/50 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25"
-              >
-                <span aria-hidden>⏹️</span>
-                {t("stopSession")}
-              </button>
-              <button
-                type="button"
-                disabled={pending}
-                onClick={saveScheduleWhileLive}
-                className="inline-flex items-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-5 py-3 text-sm font-semibold text-brand-navy hover:bg-brand-navy/5 dark:hover:bg-white/15 disabled:opacity-50"
-              >
-                {t("saveLimit")}
-              </button>
-              <HelpButton title={t("saveLimit")}>
-                {t("saveLimitHelp")}
-              </HelpButton>
-            </>
-          ) : (
-            <button
-              type="button"
-              disabled={pending}
-              onClick={startSession}
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
-            >
-              <span aria-hidden>▶️</span>
-              {t("startSession")}
-            </button>
-          )}
-        </div>
-
-        {msg ? (
-          <p
-            className={`mt-3 text-sm ${
-              msg.startsWith("ok:") ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-rose-300"
-            }`}
-          >
-            {msg.startsWith("ok:") ? msg.slice(3) : msg}
-          </p>
-        ) : null}
       </div>
 
       <p className="text-sm text-brand-muted">
