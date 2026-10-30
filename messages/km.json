@@ -1596,6 +1596,14 @@
     "aria": "ស្វែងរក",
     "placeholder": "ស្វែងរកមគ្គុទ្ទេសក៍ ឯកសារ កំណត់ចំណាំ..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "ទិដ្ឋភាពពេញលេញ",
     "allCommittees": "គណៈកម្មាធិការទាំងអស់។",

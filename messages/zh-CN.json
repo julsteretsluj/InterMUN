@@ -1596,6 +1596,14 @@
     "aria": "搜索",
     "placeholder": "搜索指南、文档、注释..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "全视图",
     "allCommittees": "所有委员会",

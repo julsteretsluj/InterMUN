@@ -1596,6 +1596,14 @@
     "aria": "ရှာရန်",
     "placeholder": "ရှာဖွေရေးလမ်းညွှန်များ၊ စာရွက်စာတမ်းများ၊ မှတ်စုများ..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "မြင်ကွင်းအပြည့်အစုံ",
     "allCommittees": "ကော်မတီအားလုံး",

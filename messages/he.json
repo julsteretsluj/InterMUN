@@ -1596,6 +1596,14 @@
     "aria": "לְחַפֵּשׂ",
     "placeholder": "חיפוש מדריכים, מסמכים, הערות..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "תצוגה מלאה",
     "allCommittees": "כל הוועדות",

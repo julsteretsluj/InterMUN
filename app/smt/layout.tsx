@@ -13,6 +13,7 @@ import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDa
 import { AppleAppFrame, AppleLayoutWrapper } from "@/components/ui/AppleAppShell";
 import { TourShell } from "@/components/tour/TourShell";
 import { AppMessagesProvider } from "@/components/i18n/AppMessagesProvider";
+import { CommandPaletteProvider } from "@/components/workspace/CommandPalette";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -55,6 +56,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
     <AppMessagesProvider>
     <AppleAppFrame appName={appName}>
     <TourShell view="smt">
+    <CommandPaletteProvider role="smt">
     <div className="mun-clicky-site min-h-screen bg-[var(--clicky-paper)] text-[var(--clicky-ink)] lg:p-3">
       <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--clicky-window)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:flex-row lg:overflow-hidden lg:rounded-[22px] lg:border lg:border-[var(--clicky-line)]">
       <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] shrink-0 flex-col overflow-hidden border-r border-[var(--clicky-line)] bg-[color:color-mix(in_srgb,var(--clicky-paper)_82%,var(--clicky-window))] transition-[width] duration-500 ease-[var(--ease-apple)] hover:w-[236px] lg:flex">
@@ -102,6 +104,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
       <PaperSavedWidget />
     </div>
+    </CommandPaletteProvider>
     </TourShell>
     </AppleAppFrame>
     </AppMessagesProvider>

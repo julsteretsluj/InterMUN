@@ -1660,6 +1660,14 @@
     "aria": "Search",
     "placeholder": "Search guides, documents, notes..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "Full view",
     "allCommittees": "All committees",

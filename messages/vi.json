@@ -1596,6 +1596,14 @@
     "aria": "Tìm kiếm",
     "placeholder": "Hướng dẫn tìm kiếm, tài liệu, ghi chú..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "Xem toàn bộ",
     "allCommittees": "Tất cả các ủy ban",

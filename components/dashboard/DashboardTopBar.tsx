@@ -8,7 +8,7 @@ import { useTransition } from "react";
 import Link from "next/link";
 import { ChromePreferencesMenu } from "@/components/ChromePreferencesMenu";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
-import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
+import { CommandPaletteTrigger } from "@/components/workspace/CommandPalette";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { useTranslations } from "next-intl";
 import { switchSmtToSecretariatAction } from "@/app/actions/smtDashboardSurface";
@@ -65,7 +65,7 @@ export function DashboardTopBar({
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="topbar" />
         </Link>
         <div className="min-w-0 flex-1">
-          <DashboardSearch />
+          <CommandPaletteTrigger />
         </div>
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           {showExitSmtPreview ? (

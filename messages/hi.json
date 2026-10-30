@@ -1596,6 +1596,14 @@
     "aria": "खोज",
     "placeholder": "गाइड, दस्तावेज़, नोट्स खोजें..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "पूर्ण दृश्य",
     "allCommittees": "सभी समितियाँ",

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 import type { UserRole } from "@/types/database";
+import { DASHBOARD_ROLE_HOME } from "@/lib/workspace/role-homes";
 
 function normalizeRole(role: string | null | undefined): string | undefined {
   return role?.toString().trim().toLowerCase() || undefined;
@@ -15,6 +16,16 @@ export const SMT_APP_HOME = "/smt";
 
 /** Post-login home for school advisor accounts (event-level, no committee). */
 export const ADVISOR_APP_HOME = "/advisor";
+
+/**
+ * Canonical workspace maps under `/dashboard/[role]`.
+ * Feature hubs (`/delegate`, `/chair`, `/smt`, …) remain as deep destinations.
+ */
+export const DELEGATE_APP_HOME = DASHBOARD_ROLE_HOME.delegate;
+export const CHAIR_APP_HOME = DASHBOARD_ROLE_HOME.chair;
+export const ADVISOR_WORKSPACE_HOME = DASHBOARD_ROLE_HOME.advisor;
+export const SMT_WORKSPACE_HOME = DASHBOARD_ROLE_HOME.smt;
+export const ADMIN_WORKSPACE_HOME = DASHBOARD_ROLE_HOME.admin;
 
 export function isChairRole(role: string | null | undefined): role is "chair" {
   const r = normalizeRole(role);

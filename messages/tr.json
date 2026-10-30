@@ -1596,6 +1596,14 @@
     "aria": "Aramak",
     "placeholder": "Kılavuzlarda, belgelerde, notlarda arama yapın..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "Tam görünüm",
     "allCommittees": "Tüm komiteler",

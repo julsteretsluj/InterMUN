@@ -1596,6 +1596,14 @@
     "aria": "Cari",
     "placeholder": "Cari panduan, dokumen, nota..."
   },
+  "commandPalette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a page, tool, or workspace…",
+    "empty": "No matching commands",
+    "hintNavigate": "↑↓ to navigate · Enter to open",
+    "hintOpen": "Esc to close",
+    "shortcut": "⌘K"
+  },
   "smtCards": {
     "fullView": "Pandangan penuh",
     "allCommittees": "Semua jawatankuasa",
